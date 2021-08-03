@@ -1,0 +1,441 @@
+@page
+@model InboxGeneralModel
+@{ 
+	ViewData["Title"] = "Inbox";
+	ViewData["PageName"] = "page_inbox_general";
+	ViewData["Heading"] = "inbox";
+	ViewData["Category1"] = "Page Views";
+	ViewData["PreemptiveClass"] = "nav-function-minify layout-composed";
+}
+@section HeadBlock {
+<link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+<link rel="stylesheet" media="screen, print" href="~/css/fa-brands.css">
+}
+<div class="d-flex flex-grow-1 p-0">
+	<partial name="_Menu"/>
+	<div class="d-flex flex-column flex-grow-1 bg-white">
+		<div class="flex-grow-0">
+			<div class="d-flex align-items-center pl-2 pr-3 py-3 pl-sm-3 pr-sm-4 py-sm-4 px-lg-5 py-lg-4  border-faded border-top-0 border-left-0 border-right-0 flex-shrink-0">
+				<a href="javascript:void(0);" class="pl-3 pr-3 py-2 d-flex d-lg-none align-items-center justify-content-center mr-2 btn" data-action="toggle" data-class="slide-on-mobile-left-show" data-target="#js-inbox-menu">
+				<i class="@(Settings.Theme.IconPrefix) fa-ellipsis-v h1 mb-0 "></i>
+				</a>
+				<h1 class="subheader-title ml-1 ml-lg-0">
+					<i class="fas fa-folder-open mr-2 hidden-lg-down"></i> 
+					Inbox
+				</h1>
+				<div class="d-flex position-relative ml-auto" style="max-width: 23rem;">
+					<i class="fas fa-search position-absolute pos-left fs-lg px-3 py-2 mt-1"></i>
+					<input type="text" class="form-control bg-subtlelight pl-6" placeholder="Filter emails">
+				</div>
+			</div>
+			<div class="d-flex flex-wrap align-items-center pl-3 pr-1 py-2 px-sm-4 px-lg-5 border-faded border-top-0 border-left-0 border-right-0">
+				<div class="flex-1 d-flex align-items-center">
+					<div class="custom-control custom-checkbox mr-2 mr-lg-2 d-inline-block">
+						<input type="checkbox" class="custom-control-input" id="js-msg-select-all">
+						<label class="custom-control-label bolder" for="js-msg-select-all"></label>
+					</div>
+					<a href="javascript:void(0);" class="btn btn-icon rounded-circle mr-1">
+					<i class="fas fa-redo fs-md"></i>
+					</a>
+					<a href="javascript:void(0);" class="btn btn-icon rounded-circle mr-1">
+					<i class="fas fa-exclamation-circle fs-md"></i>
+					</a>
+					<a href="javascript:void(0);" id="js-delete-selected" class="btn btn-icon rounded-circle mr-1">
+					<i class="fas fa-trash fs-md"></i>
+					</a>
+				</div>
+				<div class="text-muted mr-1 mr-lg-3 ml-auto">
+					1 - 50 <span class="hidden-lg-down"> of 135 </span>
+				</div>
+				<div class="d-flex flex-wrap">
+					<button class="btn btn-icon rounded-circle"><i class="@(Settings.Theme.IconPrefix) fa-chevron-left fs-md"></i></button>
+					<button class="btn btn-icon rounded-circle"><i class="@(Settings.Theme.IconPrefix) fa-chevron-right fs-md"></i></button>
+				</div>
+			</div>
+		</div>
+		<div class="flex-wrap align-items-center flex-grow-1 position-relative bg-gray-50">
+			<div class="position-absolute pos-top pos-bottom w-100 custom-scroll">
+				<div class="d-flex h-100 flex-column">
+					<ul id="js-emails" class="notification notification-layout-2">
+						<li class="unread">
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-1">
+									<label class="custom-control-label" for="msg-1"></label>
+								</div>
+								<a href="#" title="starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg color-warning-500 order-3 order-lg-2"><i class="fas fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Melissa Ayre</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">Re: New security codes (2)</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">8:31PM</div>
+							</div>
+						</li>
+						<li class="unread">
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-2">
+									<label class="custom-control-label" for="msg-2"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Adison Le</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">Welcome to the new portal, here is what you need to do</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">6:22PM</div>
+							</div>
+						</li>
+						<li>
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-3">
+									<label class="custom-control-label" for="msg-3"></label>
+								</div>
+								<a href="#" title="starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg color-warning-500 order-3 order-lg-2"><i class="fas fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Oliver Kopyuv</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">Transformer Combustion Defuser is ready</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">5:12PM</div>
+							</div>
+						</li>
+						<li>
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-4">
+									<label class="custom-control-label" for="msg-4"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Dr. John Cook PhD</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">PWS facts for patient #3245</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">4:31PM</div>
+							</div>
+						</li>
+						<li>
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-5">
+									<label class="custom-control-label" for="msg-5"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Sarah McBrook</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">Are you coming to the after party?</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">3:43PM</div>
+							</div>
+						</li>
+						<li>
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-6">
+									<label class="custom-control-label" for="msg-6"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Lisa Hatchensen</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">The results for bloodwork</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">2:00PM</div>
+							</div>
+						</li>
+						<li>
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-7">
+									<label class="custom-control-label" for="msg-7"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Anothony Bezyeth</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">Questions regarding accesskey</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">1:35PM</div>
+							</div>
+						</li>
+						<li>
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-8">
+									<label class="custom-control-label" for="msg-8"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Wrapbootstrap</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">Your registration is complete</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">12:59PM</div>
+							</div>
+						</li>
+						<li>
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-9">
+									<label class="custom-control-label" for="msg-9"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Oliver Kopyuv</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">Transformer Combustion Defuser is ready</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">12:12PM</div>
+							</div>
+						</li>
+						<li>
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-10">
+									<label class="custom-control-label" for="msg-10"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Dr. John Cook PhD</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">PWS facts for patient #3245</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">Yesterday</div>
+							</div>
+						</li>
+						<li>
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-11">
+									<label class="custom-control-label" for="msg-11"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Sarah McBrook</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">Are you coming to the after party?</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">Yesterday</div>
+							</div>
+						</li>
+						<li>
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-12">
+									<label class="custom-control-label" for="msg-12"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Lisa Hatchensen</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">The results for bloodwork</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">Yesterday</div>
+							</div>
+						</li>
+						<li>
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-13">
+									<label class="custom-control-label" for="msg-13"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Anothony Bezyeth</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">Questions regarding accesskey</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">Mar 12</div>
+							</div>
+						</li>
+						<li class="unread">
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-14">
+									<label class="custom-control-label" for="msg-14"></label>
+								</div>
+								<a href="#" title="starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg color-warning-500 order-3 order-lg-2"><i class="fas fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Bloodworks Inc.</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">Your results are here</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">Mar 3</div>
+							</div>
+						</li>
+						<li>
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-15">
+									<label class="custom-control-label" for="msg-15"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Oliver Kopyuv</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">Transformer Combustion Defuser is ready</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">Feb 28</div>
+							</div>
+						</li>
+						<li>
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-16">
+									<label class="custom-control-label" for="msg-16"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Dr. John Cook PhD</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">PWS facts for patient #3245</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">Feb 18</div>
+							</div>
+						</li>
+						<li>
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-17">
+									<label class="custom-control-label" for="msg-17"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Sarah McBrook</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">Are you coming to the after party?</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">Feb 12</div>
+							</div>
+						</li>
+						<li>
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-18">
+									<label class="custom-control-label" for="msg-18"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Lisa Hatchensen</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">The results for bloodwork</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">Feb 8</div>
+							</div>
+						</li>
+						<li>
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-19">
+									<label class="custom-control-label" for="msg-19"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Anothony Bezyeth</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">Questions regarding accesskey</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">Feb 5</div>
+							</div>
+						</li>
+						<li class="unread">
+							<div class="d-flex align-items-center px-3 px-sm-4 px-lg-5 py-1 py-lg-0 height-4 height-mobile-auto">
+								<div class="custom-control custom-checkbox mr-3 order-1">
+									<input type="checkbox" class="custom-control-input" id="msg-20">
+									<label class="custom-control-label" for="msg-20"></label>
+								</div>
+								<a href="#" title="Not starred" class="d-flex align-items-center py-1 ml-2 mt-4 mt-lg-0 ml-lg-0 mr-lg-4 fs-lg text-muted order-3 order-lg-2"><i class="@(Settings.Theme.IconPrefix) fa-star"></i></a>
+								<div class="d-flex flex-row flex-wrap flex-1 align-items-stretch align-self-stretch order-2 order-lg-3">
+									<div class="row w-100">
+										<a href="/page/inboxread" class="name d-flex width-sm align-items-center pt-1 pb-0 py-lg-1 col-12 col-lg-auto">Password reset</a>
+										<a href="/page/inboxread" class="name d-flex align-items-center pt-0 pb-1 py-lg-1 flex-1 col-12 col-lg-auto">Your password was changed</a>
+									</div>
+								</div>
+								<div class="fs-sm text-muted ml-auto hide-on-hover-parent order-4 position-on-mobile-absolute pos-top pos-right mt-2 mr-3 mr-sm-4 mt-lg-0 mr-lg-0">Jan 1</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<partial name="_Compose"/>
+</div>
+@section ScriptsBlock {
+<script type="text/javascript">
+	// push settings with "false" save to local
+	initApp.pushSettings("nav-function-minify layout-composed", false);
+	// the codes below are just for example use, you may need to change the scripts according to your requirement
+	// select all checkbox function
+	var title = document.title,
+		newEmailDisplayTab = function() {
+			var count = $('#js-emails .unread').length
+			var newTitle = title + ' (' + count + ')';
+			document.title = newTitle;
+			$(".js-unread-emails-count").text(' (' + count + ')');
+		},
+		deleteEmail = function(threadID){
+			// delete after animation is complete
+			threadID.animate({ height: 'toggle', opacity: 'toggle' }, '200', 'easeOutExpo', function(){
+				//remove email after animation is complete
+			 	$(this).remove();
+				//update unread email count
+				newEmailDisplayTab();
+			});
+			//we remove any tooltips (this is a bug with bootstrap where the tooltip stays on screen after removing parent)
+			$('.tooltip').tooltip('dispose');
+			//uncheck master select all
+			if( $("#js-msg-select-all").is(":checked") ) {
+				$("#js-msg-select-all").prop('checked',false);
+			}
+			return this;
+		}
+	// select all component demo
+	$("#js-msg-select-all").on("change", function (e) {
+    	if(this.checked) {
+        	$('#js-emails :checkbox').prop("checked",$(this).is(":checked")).closest("li").addClass("state-selected"); 
+    	} else {
+    		$('#js-emails :checkbox').prop("checked",$(this).is(":checked")).closest("li").removeClass("state-selected"); 
+    	}
+	});
+	// add or remove state-selected class to emails when they are checked
+	$('#js-emails :checkbox').on("change" , function () {
+		if ($("#js-msg-select-all").is(":checked")) {
+			$('#js-msg-select-all').prop('indeterminate', true);
+		}
+		if(this.checked) {
+			$(this).closest("li").addClass("state-selected");
+		} else {
+			$(this).closest("li").removeClass("state-selected");
+		}
+	});
+	// email delete button triggers
+	$(".js-delete-email").on('click', function()   {	 deleteEmail( $(this).closest("li") );	                    })
+	$("#js-delete-selected").on('click', function(){	 deleteEmail( $("#js-emails input:checked").closest("li") ) });
+	// show unread email count (once)
+	newEmailDisplayTab();
+</script>
+}

@@ -1,0 +1,16 @@
+@if (Settings.Features.AppFooter)
+{
+<footer class="page-footer" role="contentinfo">
+	<div class="d-flex align-items-center flex-1 text-muted">
+		<span class="hidden-md-down fw-700">2020 &copy; @Settings.App for @Settings.AppFlavor by&nbsp;<a href="https://wrapbootstrap.com/theme/smartadmin-asp.net-core-responsive-webapp-WB073L89G?ref=Walapa" class="text-primary fw-500" title="Walapa" target="_blank">Walapa</a></span>
+	</div>
+	<div>
+		<ul class="list-table m-0">
+			<li><a href="/intel/introduction" class="text-secondary fw-700">About</a></li>
+			<li class="pl-3"><a href="/info/applicensing" class="text-secondary fw-700">License</a></li>
+			<li class="pl-3"><a href="/info/appdocs" class="text-secondary fw-700">Documentation</a></li>
+			<li class="pl-3 fs-xl"><a href="https://wrapbootstrap.com/user/Walapa" class="text-secondary" target="_blank"><i class="@(Settings.Theme.IconPrefix) fa-question-circle" aria-hidden="true"></i></a></li>
+		</ul>
+	</div>
+</footer>
+}

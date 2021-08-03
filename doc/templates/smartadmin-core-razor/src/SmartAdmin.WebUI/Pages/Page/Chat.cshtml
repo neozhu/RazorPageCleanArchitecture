@@ -1,0 +1,65 @@
+@page
+@model ChatModel
+@{ 
+	ViewData["Title"] = "Chat";
+	ViewData["PageName"] = "page_chat";
+	ViewData["Heading"] = "<i class='subheader-icon fal fa-plus-circle'></i>  Chat";
+	ViewData["PageDescription"] = "A robust and simple chat component that is flexible, intuitive, easy to use and customize";
+	ViewData["Category1"] = "Page Views";
+}
+@section HeadBlock {}
+<div class="d-flex flex-grow-1 p-0 border-faded shadow-4" style="max-height:800px;">
+	<partial name="_Contact"/>
+	<div class="d-flex flex-column flex-grow-1 bg-white">
+		<div class="flex-grow-0">
+			<div class="d-flex align-items-center p-0 border-faded border-top-0 border-left-0 border-right-0 flex-shrink-0">
+				<div class="d-flex align-items-center w-100 pl-3 px-lg-4 py-2 position-relative">
+					<div class="d-flex flex-row align-items-center mt-1 mb-1">
+						<div class="mr-2 d-inline-block">
+							<span class="rounded-circle profile-image d-block" style="background-image:url('/img/demo/avatars/avatar-b.png'); background-size: cover;"></span>
+						</div>
+						<div class="info-card-text">
+							<a href="javascript:void(0);" class="fs-lg text-truncate text-truncate-lg" data-toggle="dropdown" aria-expanded="false">
+								Oliver Kopyov
+								<i class="@(Settings.Theme.IconPrefix) fa-angle-down d-inline-block ml-1 fs-md"></i>
+							</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item px-3 py-2" href="#">Send Email</a>
+								<a class="dropdown-item px-3 py-2" href="#">Create Appointment</a>
+								<a class="dropdown-item px-3 py-2" href="#">Block User</a>
+							</div>
+							<span class="text-truncate text-truncate-md opacity-80">Online Strategist</span>
+						</div>
+					</div>
+					<div class="ml-auto">
+						<a href="javascript:void(0);" data-toggle="button" class="btn btn-outline-danger btn-icon rounded-circle">
+							<i class="@(Settings.Theme.IconPrefix) fa-volume-mute fs-md"></i>
+						</a>
+						<a href="javascript:void(0);" class="btn btn-outline-info btn-icon rounded-circle ml-1">
+							<i class="@(Settings.Theme.IconPrefix) fa-phone fs-md"></i>
+						</a>
+						<a href="javascript:void(0);" class="btn btn-outline-info btn-icon rounded-circle ml-1">
+							<i class="@(Settings.Theme.IconPrefix) fa-video fs-md"></i>
+						</a>
+					</div>
+				</div>
+				<a href="javascript:void(0);" class="px-3 py-2 d-flex d-lg-none align-items-center justify-content-center mr-2 btn" data-action="toggle" data-class="slide-on-mobile-left-show" data-target="#js-chat-contact">
+					<i class="@(Settings.Theme.IconPrefix) fa-ellipsis-v h1 mb-0 "></i>
+				</a>
+			</div>
+		</div>
+		<div class="flex-wrap align-items-center flex-grow-1 position-relative bg-gray-50">
+			<div class="position-absolute pos-top pos-bottom w-100 overflow-hidden">
+				<div class="d-flex h-100 flex-column">
+					<partial name="_TabMsgr"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@section ScriptsBlock {
+<script type="text/javascript">
+	// push settings with "false" save to local
+	initApp.pushSettings("layout-composed-mobile", false);
+</script>
+}

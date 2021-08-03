@@ -1,0 +1,50 @@
+﻿@page
+@model LockoutModel
+@{
+    ViewData["PageName"] = "lockout";
+}
+
+<div class="container py-4 py-lg-5 my-lg-5 px-4 px-sm-0 text-white d-flex align-items-center justify-content-center">
+    <form id="js-login" role="form" class="text-center text-white mb-5 pb-5" method="post">
+        <div class="py-3">
+            <img src="~/img/demo/avatars/avatar-admin-lg.png" class="img-responsive rounded-circle img-thumbnail" alt="thumbnail">
+        </div>
+        <div class="form-group">
+            <h3>
+                @ViewBag.User
+                <small>
+                    @ViewBag.Email
+                </small>
+            </h3>
+            <p class="text-white opacity-50">Enter password to unlock screen</p>
+            <div class="input-group input-group-lg">
+                <input type="password" asp-for="Input.Password" class="form-control" value="Password123!" required="required" />
+                <span class="invalid-feedback" asp-validation-for="Input.Password">Sorry, you missed this one.</span>
+                <div class="input-group-append">
+                    <button class="btn btn-success shadow-0" type="submit" id="button-addon5"><i class="fal fa-key"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <a asp-page="Login" class="text-white opacity-90">Not <span class="text-secondary">@ViewBag.User</span>?</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $("#js-login-btn").click(function (event) {
+            // Fetch form to apply custom Bootstrap validation
+            var form = $("#js-login");
+
+            if (form[0].checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            form.addClass('was-validated');
+            // Perform ajax submit here...
+        });
+    </script>
+}

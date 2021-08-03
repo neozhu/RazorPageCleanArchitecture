@@ -1,0 +1,235 @@
+@page
+@model EditionsModel
+@using Microsoft.AspNetCore.Html
+@{
+    ViewData["Title"] = "Editions";
+    ViewData["PageName"] = "aspnetcore_editions";
+    ViewData["Heading"] = "<i class='fal fa-folder-open'></i> Editions: <span class='fw-300'>Choose your variation</span>";
+    ViewData["Category1"] = "Solution Overview";
+}
+@{
+    var included = new HtmlString("<i class=\"fas fa-check-circle fa-2x color-success-800\"></i>");
+    var excluded = new HtmlString("<i class=\"fas fa-times-circle fa-2x color-danger-800\"></i>");
+    var lite = new HtmlString("<i class=\"fal fa-check-circle fa-2x color-success-800\"></i>");
+}
+@section HeadBlock {
+    <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Feature Comparison
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="panel-tag">
+                        Use the overview below to help guide you to determine which Edition of @Settings.App for @Settings.AppFlavor might be best suited for you.
+                    </div>
+                    <div class="frame-wrap">
+                        <table class="table table-bordered table-hover table-striped m-0">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th class="text-center"><span class="badge badge-danger width-5 fs-lg">Slim</span></th>
+                                    <th class="text-center"><span class="badge badge-success width-5 fs-lg">Bare</span></th>
+                                    <th class="text-center"><span class="badge badge-warning width-5 fs-lg">Seed</span></th>
+                                    <th class="text-center"><span class="badge badge-info width-5 fs-lg">Full</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Core Plugins</td>
+                                    <td class="text-center">@lite</td>
+                                    <td class="text-center">@included</td>
+                                    <td class="text-center">@included</td>
+                                    <td class="text-center">@included</td>
+                                </tr>
+                                <tr>
+                                    <td>Form Plugins</td>
+                                    <td class="text-center">@excluded</td>
+                                    <td class="text-center">@included</td>
+                                    <td class="text-center">@included</td>
+                                    <td class="text-center">@included</td>
+                                </tr>
+                                <tr>
+                                    <td>Authentication</td>
+                                    <td class="text-center">@excluded</td>
+                                    <td class="text-center">@included</td>
+                                    <td class="text-center">@included</td>
+                                    <td class="text-center">@included</td>
+                                </tr>
+                                <tr>
+                                    <td>Database</td>
+                                    <td class="text-center">@excluded</td>
+                                    <td class="text-center">@included</td>
+                                    <td class="text-center">@included</td>
+                                    <td class="text-center">@included</td>
+                                </tr>
+                                <tr>
+                                    <td>Sample Pages</td>
+                                    <td class="text-center">@excluded</td>
+                                    <td class="text-center">@excluded</td>
+                                    <td class="text-center">@included</td>
+                                    <td class="text-center">@included</td>
+                                </tr>
+                                <tr>
+                                    <td>Datatables</td>
+                                    <td class="text-center">@excluded</td>
+                                    <td class="text-center">@excluded</td>
+                                    <td class="text-center">@excluded</td>
+                                    <td class="text-center">@included</td>
+                                </tr>
+                                <tr>
+                                    <td>Charts &amp; Statistics</td>
+                                    <td class="text-center">@excluded</td>
+                                    <td class="text-center">@excluded</td>
+                                    <td class="text-center">@excluded</td>
+                                    <td class="text-center">@included</td>
+                                </tr>
+                                <tr>
+                                    <td>Notifications</td>
+                                    <td class="text-center">@excluded</td>
+                                    <td class="text-center">@excluded</td>
+                                    <td class="text-center">@excluded</td>
+                                    <td class="text-center">@included</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    @Settings.App for @Settings.AppFlavor <span class="badge badge-info ml-2 width-5">Full</span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <p>
+                        This Edition includes the full spectrum of what @Settings.App has to offer.
+                        Planning on building a fully fledged out Management Portal with Dashboards and database driven logic combined with other cool features?
+                        Then <strong>Full</strong> will ensure that you will have all the necessary examples to start building your next big project, including a well adopted architecture and trusted design patterns to guide your every step!
+                    </p>
+                    <p class="fw-500">Highlights</p>
+                    <ul class="list-unstyled d-flex row m-3">
+                        <li class="list-group-item col-sm-6">ASP.NET Core MVC</li>
+                        <li class="list-group-item col-sm-6">ASP.NET Core RazorPages</li>
+                        <li class="list-group-item col-sm-6">ASP.NET Core Identity</li>
+                        <li class="list-group-item col-sm-6">ASP.NET EntityFramework Core</li>
+                        <li class="list-group-item col-sm-6">SQL Lite Database</li>
+                        <li class="list-group-item col-sm-6">ViewComponents</li>
+                        <li class="list-group-item col-sm-6">Example Pages</li>
+                        <li class="list-group-item col-sm-6">Settings Manager</li>
+                        <li class="list-group-item col-sm-6">Core Plugins</li>
+                        <li class="list-group-item col-sm-6">Form Plugins</li>
+                        <li class="list-group-item col-sm-6">Charts &amp; Statistics</li>
+                        <li class="list-group-item col-sm-6">Forum</li>
+                        <li class="list-group-item col-sm-6">Inbox</li>
+                        <li class="list-group-item col-sm-6">Chat</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    @Settings.App for @Settings.AppFlavor <span class="badge badge-warning ml-2 width-5">Seed</span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <p>
+                        This Edition includes the basis of what @Settings.App has to offer.
+                        Planning on using just the basic features of @Settings.App and prefer to add-on to a solid basis over time?
+                        Then <strong>Seed</strong> will ensure that you will have that blazing start that you require while still enabling you to grow towards that ideal balance between performance and features!
+                    </p>
+                    <p class="fw-500">Highlights</p>
+                    <ul class="list-unstyled d-flex row m-3">
+                        <li class="list-group-item col-sm-6">ASP.NET Core MVC</li>
+                        <li class="list-group-item col-sm-6">ASP.NET Core RazorPages</li>
+                        <li class="list-group-item col-sm-6">ASP.NET Core Identity</li>
+                        <li class="list-group-item col-sm-6">ASP.NET EntityFramework Core</li>
+                        <li class="list-group-item col-sm-6">SQL Lite Database</li>
+                        <li class="list-group-item col-sm-6">ViewComponents</li>
+                        <li class="list-group-item col-sm-6">Example Pages</li>
+                        <li class="list-group-item col-sm-6">Settings Manager</li>
+                        <li class="list-group-item col-sm-6">Core Plugins</li>
+                        <li class="list-group-item col-sm-6">Form Plugins</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    @Settings.App for @Settings.AppFlavor <span class="badge badge-success ml-2 width-5">Bare</span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <p>
+                        This Edition includes the bare minimum of what @Settings.App has to offer.
+                        All the features of <strong>Seed</strong> but with a stripped Navigation?
+                        Then <strong>Bare</strong> will ensure that you will have everything you need, but don't want just yet! Grow your application based on requirements and expand the feature set as you go.
+                    </p>
+                    <p class="fw-500">Highlights</p>
+                    <ul class="list-unstyled d-flex row m-3">
+                        <li class="list-group-item col-sm-6">ASP.NET Core MVC</li>
+                        <li class="list-group-item col-sm-6">ASP.NET Core RazorPages</li>
+                        <li class="list-group-item col-sm-6">ASP.NET Core Identity</li>
+                        <li class="list-group-item col-sm-6">ASP.NET EntityFramework Core</li>
+                        <li class="list-group-item col-sm-6">SQL Lite Database</li>
+                        <li class="list-group-item col-sm-6">ViewComponents</li>
+                        <li class="list-group-item col-sm-6">Core Plugins</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    @Settings.App for @Settings.AppFlavor <span class="badge badge-danger ml-2 width-5">Slim</span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <p>
+                        This Edition includes a <em>slimmed</em> down version of what @Settings.App has to offer.
+                        Planning on starting from scratch and only add what you really need to the project?
+                        Then <strong>Slim</strong> will ensure that you will have what you need to get your project rolling. Expand your application based on actual requirements and only expand the feature set when you need to.
+                    </p>
+                    <p class="fw-500">Highlights</p>
+                    <ul class="list-unstyled d-flex row m-3">
+                        <li class="list-group-item col-sm-6">ASP.NET Core MVC</li>
+                        <li class="list-group-item col-sm-6">ASP.NET Core RazorPages</li>
+                        <li class="list-group-item col-sm-6">ViewComponents</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

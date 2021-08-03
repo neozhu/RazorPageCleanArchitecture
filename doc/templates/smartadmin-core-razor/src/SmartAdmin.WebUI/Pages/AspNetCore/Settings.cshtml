@@ -1,0 +1,144 @@
+@page
+@model SettingsModel
+@{
+    ViewData["Title"] = "Settings";
+    ViewData["PageName"] = "aspnetcore_settings";
+    ViewData["Heading"] = "<i class='fal fa-folder-open'></i> Settings: <span class='fw-300'>What can be changed</span>";
+    ViewData["Category1"] = "Solution Overview";
+}
+
+<div class="alert alert-primary alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">
+            <i class="fal fa-times"></i>
+        </span>
+    </button>
+    <div class="d-flex flex-start w-100">
+        <div class="mr-2 hidden-sm-down">
+            <span class="icon-stack icon-stack-lg">
+                <i class="base-14 icon-stack-3x color-primary-400"></i>
+                <i class="base-14 icon-stack-2x color-primary-600 opacity-70"></i>
+                <i class="fal fa-cog icon-stack-1x text-white opacity-90"></i>
+            </span>
+        </div>
+        <div class="d-flex flex-fill">
+            <div class="flex-fill">
+                <span class="h5">Settings Panel</span>
+                <br>
+                <strong>Note:</strong> if you disable certain layout features through the use of the <code>ViewBagilter</code> class then using the <span class="fw-500 color-info-700">Settings Panel</span> widget will <ins>not</ins> have any effect on the sections that have been <strong>disabled</strong>.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    @Settings.App Features
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <p>
+                        @Settings.App for @Settings.AppFlavor supports the ability to either <strong>enable</strong> or <strong>disable</strong> certain features of @Settings.App.
+                        This effectively allows you to influence which visual components you want to include or exclude.
+                    </p>
+                    <p>
+                        Don't want a Footer? <strong>Disable</strong> it!<br />
+                        Chat getting in the way? <strong>Disable</strong> it!<br />
+                        Don't want to expose the Settings? <strong>Disable</strong> it!
+                    </p>
+                    <p>
+                        By choosing the features you want to use @Settings.App for @Settings.AppFlavor will ensure that the HTML for those components are rendered.
+                        Each corresponding setting is read by the associated <strong>partial</strong> and will determine if it should be shown.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="panel">
+            <div class="panel-hdr bg-fusion-200">
+                <h2>
+                    <i class="fal fa-file fs-xl mr-2"></i> ../Models/Settings.ilter.cs
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <pre class="prettyprint lang-js mb-0">
+    // SmartAdmin Toggle Features
+    controller.Settings.AppSidebar = Enabled;
+    controller.Settings.AppHeader = Enabled;
+    controller.Settings.AppLayoutShortcut = Enabled;
+    controller.Settings.AppFooter = Enabled;
+    controller.Settings.ShortcutMenu = Enabled;
+    controller.Settings.ChatInterface = Enabled;
+    controller.Settings.LayoutSettings = Enabled;</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Modifying Features
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <p>
+                        Simply replace the <code>Enabled</code> statement with a <code>Disabled</code> statement and the partial output will not be rendered.
+                    </p>
+                    <p>
+                        <strong>Example:</strong> Turn off the <span class="color-info-400">ShortcutMenu</span>.
+                    </p>
+                    <p>
+                        <pre class="prettyprint lang-js mb-0">
+    // SmartAdmin Toggle Features
+    controller.Settings.ShortcutMenu = Disabled;</pre>
+                    </p>
+                    <p>
+                        <strong>Example:</strong> Changing the name of the Application.
+                    </p>
+                    <p>
+                        <pre class="prettyprint lang-js mb-0">
+    // SmartAdmin Default Settings
+    controller.Settings.App = "ACME";
+    controller.Settings.AppName = "ACME WebApp";
+    controller.Settings.AppFlavor = "Management Portal";
+    controller.Settings.AppFlavorSubscript = "BETA";</pre>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">
+            <i class="fal fa-times"></i>
+        </span>
+    </button>
+    <div class="d-flex flex-start w-100">
+        <div class="d-flex flex-fill">
+            <div class="flex-fill">
+                <span class="h5">Note:</span>
+                For more information about the Layout Options that @Settings.App supports, please visit the <a href="https://smartadmin-core.azurewebsites.net/settings/layoutoptions">Layout Options</a> page.
+            </div>
+        </div>
+    </div>
+</div>
+
+@section ScriptsBlock {
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+}

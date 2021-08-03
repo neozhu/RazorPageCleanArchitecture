@@ -1,0 +1,455 @@
+.toast-title {
+  font-weight: bold; }
+
+.toast-message {
+  -ms-word-wrap: break-word;
+  word-wrap: break-word; }
+
+.toast-message a,
+.toast-message label {
+  color: #ffffff; }
+
+.toast-message a:hover {
+  color: #cccccc;
+  text-decoration: none; }
+
+.toast-close-button {
+  position: relative;
+  right: -0.3em;
+  top: -0.3em;
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+  -webkit-text-shadow: 0 1px 0 #ffffff;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.8;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  filter: alpha(opacity=80); }
+
+.toast-close-button:hover,
+.toast-close-button:focus {
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.4;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+  filter: alpha(opacity=40); }
+
+/*Additional properties for button version
+ iOS requires the button element instead of an anchor tag.
+ If you want the anchor version, it requires `href="#"`.*/
+button.toast-close-button {
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none; }
+
+.toast-top-center {
+  top: 0;
+  right: 0;
+  width: 100%; }
+
+.toast-bottom-center {
+  bottom: 0;
+  right: 0;
+  width: 100%; }
+
+.toast-top-full-width {
+  top: 0;
+  right: 0;
+  width: 100%; }
+
+.toast-bottom-full-width {
+  bottom: 0;
+  right: 0;
+  width: 100%; }
+
+.toast-top-left {
+  top: 12px;
+  left: 12px; }
+
+.toast-top-right {
+  top: 12px;
+  right: 12px; }
+
+.toast-bottom-right {
+  right: 12px;
+  bottom: 12px; }
+
+.toast-bottom-left {
+  bottom: 12px;
+  left: 12px; }
+
+#toast-container {
+  position: fixed;
+  z-index: 999999;
+  /*overrides*/ }
+
+#toast-container * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+#toast-container > div {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 6px;
+  padding: 15px 15px 15px 50px;
+  width: 300px;
+  border-radius: 3px 3px 3px 3px;
+  background-position: 15px center;
+  background-repeat: no-repeat;
+  -webkit-box-shadow: 0 0 12px #999999;
+  box-shadow: 0 0 12px #999999;
+  color: #ffffff;
+  opacity: 0.8;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  filter: alpha(opacity=80); }
+
+#toast-container > div:hover {
+  -webkit-box-shadow: 0 0 12px #000000;
+  box-shadow: 0 0 12px #000000;
+  opacity: 1;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  filter: alpha(opacity=100);
+  cursor: pointer; }
+
+#toast-container > .toast-info {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGwSURBVEhLtZa9SgNBEMc9sUxxRcoUKSzSWIhXpFMhhYWFhaBg4yPYiWCXZxBLERsLRS3EQkEfwCKdjWJAwSKCgoKCcudv4O5YLrt7EzgXhiU3/4+b2ckmwVjJSpKkQ6wAi4gwhT+z3wRBcEz0yjSseUTrcRyfsHsXmD0AmbHOC9Ii8VImnuXBPglHpQ5wwSVM7sNnTG7Za4JwDdCjxyAiH3nyA2mtaTJufiDZ5dCaqlItILh1NHatfN5skvjx9Z38m69CgzuXmZgVrPIGE763Jx9qKsRozWYw6xOHdER+nn2KkO+Bb+UV5CBN6WC6QtBgbRVozrahAbmm6HtUsgtPC19tFdxXZYBOfkbmFJ1VaHA1VAHjd0pp70oTZzvR+EVrx2Ygfdsq6eu55BHYR8hlcki+n+kERUFG8BrA0BwjeAv2M8WLQBtcy+SD6fNsmnB3AlBLrgTtVW1c2QN4bVWLATaIS60J2Du5y1TiJgjSBvFVZgTmwCU+dAZFoPxGEEs8nyHC9Bwe2GvEJv2WXZb0vjdyFT4Cxk3e/kIqlOGoVLwwPevpYHT+00T+hWwXDf4AJAOUqWcDhbwAAAAASUVORK5CYII=") !important; }
+
+#toast-container > .toast-error {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHOSURBVEhLrZa/SgNBEMZzh0WKCClSCKaIYOED+AAKeQQLG8HWztLCImBrYadgIdY+gIKNYkBFSwu7CAoqCgkkoGBI/E28PdbLZmeDLgzZzcx83/zZ2SSXC1j9fr+I1Hq93g2yxH4iwM1vkoBWAdxCmpzTxfkN2RcyZNaHFIkSo10+8kgxkXIURV5HGxTmFuc75B2RfQkpxHG8aAgaAFa0tAHqYFfQ7Iwe2yhODk8+J4C7yAoRTWI3w/4klGRgR4lO7Rpn9+gvMyWp+uxFh8+H+ARlgN1nJuJuQAYvNkEnwGFck18Er4q3egEc/oO+mhLdKgRyhdNFiacC0rlOCbhNVz4H9FnAYgDBvU3QIioZlJFLJtsoHYRDfiZoUyIxqCtRpVlANq0EU4dApjrtgezPFad5S19Wgjkc0hNVnuF4HjVA6C7QrSIbylB+oZe3aHgBsqlNqKYH48jXyJKMuAbiyVJ8KzaB3eRc0pg9VwQ4niFryI68qiOi3AbjwdsfnAtk0bCjTLJKr6mrD9g8iq/S/B81hguOMlQTnVyG40wAcjnmgsCNESDrjme7wfftP4P7SP4N3CJZdvzoNyGq2c/HWOXJGsvVg+RA/k2MC/wN6I2YA2Pt8GkAAAAASUVORK5CYII=") !important; }
+
+#toast-container > .toast-success {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADsSURBVEhLY2AYBfQMgf///3P8+/evAIgvA/FsIF+BavYDDWMBGroaSMMBiE8VC7AZDrIFaMFnii3AZTjUgsUUWUDA8OdAH6iQbQEhw4HyGsPEcKBXBIC4ARhex4G4BsjmweU1soIFaGg/WtoFZRIZdEvIMhxkCCjXIVsATV6gFGACs4Rsw0EGgIIH3QJYJgHSARQZDrWAB+jawzgs+Q2UO49D7jnRSRGoEFRILcdmEMWGI0cm0JJ2QpYA1RDvcmzJEWhABhD/pqrL0S0CWuABKgnRki9lLseS7g2AlqwHWQSKH4oKLrILpRGhEQCw2LiRUIa4lwAAAABJRU5ErkJggg==") !important; }
+
+#toast-container > .toast-warning {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGYSURBVEhL5ZSvTsNQFMbXZGICMYGYmJhAQIJAICYQPAACiSDB8AiICQQJT4CqQEwgJvYASAQCiZiYmJhAIBATCARJy+9rTsldd8sKu1M0+dLb057v6/lbq/2rK0mS/TRNj9cWNAKPYIJII7gIxCcQ51cvqID+GIEX8ASG4B1bK5gIZFeQfoJdEXOfgX4QAQg7kH2A65yQ87lyxb27sggkAzAuFhbbg1K2kgCkB1bVwyIR9m2L7PRPIhDUIXgGtyKw575yz3lTNs6X4JXnjV+LKM/m3MydnTbtOKIjtz6VhCBq4vSm3ncdrD2lk0VgUXSVKjVDJXJzijW1RQdsU7F77He8u68koNZTz8Oz5yGa6J3H3lZ0xYgXBK2QymlWWA+RWnYhskLBv2vmE+hBMCtbA7KX5drWyRT/2JsqZ2IvfB9Y4bWDNMFbJRFmC9E74SoS0CqulwjkC0+5bpcV1CZ8NMej4pjy0U+doDQsGyo1hzVJttIjhQ7GnBtRFN1UarUlH8F3xict+HY07rEzoUGPlWcjRFRr4/gChZgc3ZL2d8oAAAAASUVORK5CYII=") !important; }
+
+#toast-container.toast-top-center > div,
+#toast-container.toast-bottom-center > div {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto; }
+
+#toast-container.toast-top-full-width > div,
+#toast-container.toast-bottom-full-width > div {
+  width: 96%;
+  margin-left: auto;
+  margin-right: auto; }
+
+.toast {
+  background-color: #030303; }
+
+.toast-success {
+  background-color: #51a351; }
+
+.toast-error {
+  background-color: #bd362f; }
+
+.toast-info {
+  background-color: #2f96b4; }
+
+.toast-warning {
+  background-color: #f89406; }
+
+.toast-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  background-color: #000000;
+  opacity: 0.4;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+  filter: alpha(opacity=40); }
+
+/*Responsive Design*/
+@media all and (max-width: 240px) {
+  #toast-container > div {
+    padding: 8px 8px 8px 50px;
+    width: 11em; }
+  #toast-container .toast-close-button {
+    right: -0.2em;
+    top: -0.2em; } }
+
+@media all and (min-width: 241px) and (max-width: 480px) {
+  #toast-container > div {
+    padding: 8px 8px 8px 50px;
+    width: 18em; }
+  #toast-container .toast-close-button {
+    right: -0.2em;
+    top: -0.2em; } }
+
+@media all and (min-width: 481px) and (max-width: 768px) {
+  #toast-container > div {
+    padding: 15px 15px 15px 50px;
+    width: 25em; } }
+
+/*  THEME COLORs
+========================================================================== */
+/* Looks good on chrome default color profile */
+/* We will manually convert these primary colors to rgb for the dark mode option of the theme */
+/* looks good in sRGB but washed up on chrome default 
+$color-primary:						#826bb0;
+$color-success:						#31cb55;
+$color-info:						#5e93ec;
+$color-warning:						#eec559;
+$color-danger:						#dc4b92;
+$color-fusion:						darken(desaturate(adjust-hue($color-primary, 5), 80%), 25%); */
+/*  Color Polarity
+========================================================================== */
+/*  PAINTBUCKET MIXER
+========================================================================== */
+/* the grays */
+/* the sapphires */
+/* the emeralds */
+/* the amethyths */
+/* the topaz */
+/* the rubies */
+/* the graphites */
+/*  Define universal border difition (div outlines, etc)
+========================================================================== */
+/*  MOBILE BREAKPOINT & GUTTERS (contains some bootstrap responsive overrides)
+========================================================================== */
+/* define when mobile menu activates, here we are declearing (lg) so it targets the one after it */
+/* bootstrap reference xs: 0,  sm: 544px, md: 768px, lg: 992px, xl: 1200px*/
+/* global var used for spacing*/
+/* Uniform Padding variable */
+/* Heads up! This is a global scoped variable - changing may impact the whole template */
+/*   BOOTSTRAP OVERRIDES (bootstrap variables)
+========================================================================== */
+/* usage: theme-colors("primary"); */
+/* forms */
+/*$input-height:							calc(2.25rem + 1px); //I had to add this because the input gruops was having improper height for some reason... */
+/* links */
+/* checkbox */
+/*$custom-file-height-inner:				calc(2.25rem - 1px);*/
+/* not part of bootstrap variable */
+/* custom checkbox */
+/* custom range */
+/* custom file */
+/* badge */
+/* cards */
+/*border radius*/
+/* alert */
+/* toast */
+/* breadcrumb */
+/* input button */
+/* nav link */
+/* nav, tabs, pills */
+/* tables */
+/* dropdowns */
+/* dropdowns sizes */
+/* popovers */
+/* tooltips */
+/* modal */
+/* reference guide
+http://www.standardista.com/px-to-rem-conversion-if-root-font-size-is-16px/
+8px = 0.5rem
+9px = 0.5625rem
+10px = 0.625rem
+11px = 0.6875rem
+12px = 0.75rem
+13px = 0.8125rem
+14px = 0.875rem
+15px = 0.9375rem
+16px = 1rem (base)
+17px = 1.0625rem
+18px = 1.125rem
+19px = 1.1875rem
+20px = 1.25rem
+21px = 1.3125rem
+22px = 1.375rem
+24px = 1.5rem
+25px = 1.5625rem
+26px = 1.625rem
+28px = 1.75rem
+30px = 1.875rem
+32px = 2rem
+34px = 2.125rem
+36px = 2.25rem
+38px = 2.375rem
+40px = 2.5rem
+*/
+/* Fonts */
+/* carousel */
+/*  BASE VARS
+========================================================================== */
+/* font vars below will auto change to rem values using function rem($value)*/
+/* 11px   */
+/* 12px   */
+/* 12.5px */
+/* 14px   */
+/* 15px   */
+/* 16px   */
+/* 28px   */
+/*  Font Family
+========================================================================== */
+/*hint: you can also try the font called 'Poppins' by replacing the font 'Roboto' */
+/*  ANIMATIONS
+========================================================================== */
+/* this addresses all animation related to nav hide to nav minify */
+/*  Z-INDEX declearation
+========================================================================== */
+/* we adjust bootstrap z-index to be higher than our higest z-index*/
+/*  CUSTOM ICON PREFIX 
+========================================================================== */
+/*  PRINT CSS (landscape or portrait)
+========================================================================== */
+/* landscape or portrait */
+/* auto, letter */
+/*  Common Element Variables
+========================================================================== */
+/* Z-index decleartion "birds eye view"
+========================================================================== */
+/*  Components
+========================================================================== */
+/*  PAGE HEADER STUFF
+========================================================================== */
+/* colors */
+/* height */
+/* logo */
+/* try not to go beywond the width of $main_nav_width value */
+/* you may need to change this depending on your logo design */
+/* adjust this as you see fit : left, right, center */
+/* icon font size (not button) */
+/* search input box */
+/* suggestion: #ccced0*/
+/* btn */
+/* dropdown: app list */
+/* badge */
+/* COMPONENTS & MODS */
+/*  NAVIGATION STUFF
+
+Guide:
+
+aside.page-sidebar ($nav-width, $nav-background)
+	.page-logo
+	.primary-nav
+		.info-card
+		ul.nav-menu
+			li
+				a (parent level-0..., $nav-link-color, $nav-link-hover-color, $nav-link-hover-bg-color, $nav-link-hover-left-border-color)
+					icon 
+					span
+					collapse-sign 
+					
+				ul.nav-menu-sub-one  
+					li
+						a ($nav-level-1... $nav-sub-link-height)
+							span
+							collapse-sign
+
+						ul.nav-menu-sub-two
+							li
+								a ($nav-level-2... $nav-sub-link-height)
+									span
+
+		p.nav-title ($nav-title-*...)
+
+
+========================================================================== */
+/* main navigation */
+/* left panel */
+/* nav footer */
+/* nav parent level-0 */
+/* nav link level-1 */
+/* nav level-1 bg */
+/* nav icon sizes */
+/* badge default */
+/* all child */
+/* nav title */
+/* nav Minify */
+/* when the menu pops on hover */
+/* navigation Width */
+/* partial visibility of the menu */
+/* top navigation */
+/* nav Info Card (appears below the logo) */
+/* width is auto */
+/* nav DL labels for all child */
+/* will be pulled to left as a negative value */
+/*   MISC Settings
+========================================================================== */
+/* List Table */
+/*   PAGE SETTINGS
+========================================================================== */
+/*   PAGE BREADCRUMB 
+========================================================================== */
+/*   PAGE COMPONENT PANELS 
+========================================================================== */
+/*   PAGE COMPONENT PROGRESSBARS 
+========================================================================== */
+/*   PAGE COMPONENT MESSENGER 
+========================================================================== */
+/*   FOOTER
+========================================================================== */
+/*   GLOBALS
+========================================================================== */
+/* ACCESSIBILITIES */
+/* SHORTCUT BUTTON (appears on bottom right of the page) */
+/* GULP WARNINGS */
+.toast {
+  background-color: #886ab5;
+  background-image: none !important; }
+  .toast:before {
+    content: "\f05a";
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-family: 'Font Awesome 5 Pro';
+    font-size: 1.8rem;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+
+.toast-success {
+  background-color: #1ab3a3; }
+  .toast-success:before {
+    content: "\f2f7"; }
+
+.toast-error {
+  background-color: #fd3995; }
+  .toast-error:before {
+    content: "\f2f0"; }
+
+.toast-info {
+  background-color: #2196F3; }
+  .toast-info:before {
+    content: "\f05a"; }
+
+.toast-warning {
+  background-color: #ffb20e; }
+  .toast-warning > div,
+  .toast-warning .toast-close-button {
+    color: #000; }
+  .toast-warning:before {
+    content: "\f071";
+    color: #000; }
+
+#toast-container > .toast {
+  padding: 1rem 1rem 1rem 3.5rem;
+  border-radius: 4px;
+  background-image: none !important;
+  width: 22rem;
+  opacity: 0.9;
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); }
+  #toast-container > .toast:hover {
+    -webkit-box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175); }
+
+.toast-close-button {
+  top: -0.7em; }
+
+@media all and (min-width: 241px) and (max-width: 480px) {
+  #toast-container > .toast {
+    width: 18rem; }
+  #toast-container .toast-close-button {
+    top: -0.7em; } }
+
+/*# sourceMappingURL=toastr.css.map */

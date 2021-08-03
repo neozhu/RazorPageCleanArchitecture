@@ -1,0 +1,32 @@
+﻿@page
+@using System.Web
+@model LogoutModel
+@{
+    ViewData["PageName"] = "logout";
+    ViewData["Title"] = "Log out";
+    var action = HttpUtility.UrlDecode(Request.Query["returnUrl"].FirstOrDefault()) ?? "/";
+}
+
+<div class="col-xl-6 ml-auto mr-auto">
+    <div class="p-4 text-center text-white">
+        <h3>You have successfully logged out of the application.</h3>
+        <p>You are advised to close your browser for security purposes.</p>
+    </div>
+    <div class="row no-gutters">
+        <div class="col-md-4 ml-auto text-left pr-1">
+            <a class="btn btn-block btn-primary mt-3 btn-link text-white ml-auto border-0" asp-area="Identity" asp-page="/account/login">
+                <i class="fal fa-shield-check fs-lg mr-1"></i> Secure Login
+            </a>
+        </div>
+        <div class="col-md-4 ml-auto text-right pl-1 pr-1">
+            <a class="btn btn-block btn-success bg-success-700 mt-3 btn-link text-white ml-auto border-0" asp-area="Identity" asp-page="/account/register">
+                <i class="fal fa-user fs-lg mr-1"></i> Register account
+            </a>
+        </div>
+        <div class="col-md-4 ml-auto text-right pl-1">
+            <a class="btn btn-block btn-danger bg-danger-700 mt-3 btn-link text-white ml-auto border-0" href="@action">
+                <i class="fal fa-arrow-alt-left fs-lg mr-1"></i> Return to Previous
+            </a>
+        </div>
+    </div>
+</div>

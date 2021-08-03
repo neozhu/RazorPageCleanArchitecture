@@ -1,0 +1,47 @@
+@page
+@model InboxWriteModel
+@{ 
+	ViewData["Title"] = "Inbox Write";
+	ViewData["PageName"] = "page_inbox_write";
+	ViewData["Heading"] = "inbox";
+	ViewData["Category1"] = "Page Views";
+	ViewData["PreemptiveClass"] = "nav-function-minify layout-composed";
+}
+@section HeadBlock {
+<link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+<link rel="stylesheet" media="screen, print" href="~/css/fa-brands.css">
+}
+<div class="d-flex flex-grow-1 p-0">
+	<partial name="_Menu"/>
+	<div class="d-flex flex-column flex-grow-1 bg-white">
+		<div class="flex-grow-0">
+			<div class="d-flex align-items-center pl-2 pr-3 py-3 pl-sm-3 pr-sm-4 py-sm-4 px-lg-5 py-lg-4  border-faded border-top-0 border-left-0 border-right-0 flex-shrink-0">
+				<a href="javascript:void(0);" class="pl-3 pr-3 py-2 d-flex d-lg-none align-items-center justify-content-center mr-2 btn" data-action="toggle" data-class="slide-on-mobile-left-show" data-target="#js-inbox-menu">
+				<i class="@(Settings.Theme.IconPrefix) fa-ellipsis-v h1 mb-0 "></i>
+				</a>
+				<h1 class="subheader-title"> 
+					New message
+				</h1>
+				<div class="d-flex position-relative ml-auto hidden-lg-down" style="max-width: 23rem;">
+					<i class="fas fa-search position-absolute pos-left fs-lg px-3 py-2 mt-1"></i>
+					<input type="text" class="form-control bg-subtlelight pl-6" placeholder="Filter emails">
+				</div>
+			</div>
+		</div>
+		<div class="flex-wrap align-items-center flex-grow-1 position-relative bg-white mx-lg-3">
+			<div class=" position-absolute pos-top pos-bottom w-100">
+				<div class="d-flex h-100 flex-column">
+					<partial name="_ComposeLayout"/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<partial name="_Compose"/>
+</div>
+@section ScriptsBlock {
+<script type="text/javascript">
+	// push settings with "false" save to local
+	initApp.pushSettings("nav-function-minify layout-composed", false);
+	$('.shortcut-menu').addClass('d-none');
+</script>
+}

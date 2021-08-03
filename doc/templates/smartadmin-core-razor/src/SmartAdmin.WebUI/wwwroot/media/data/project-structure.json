@@ -1,0 +1,1237 @@
+{
+	"smartadmin-html-full": {
+		"build.json": "/build.json",
+		"devnotes.txt": "/devnotes.txt",
+		"gulpfile.js": "/gulpfile.js",
+		"package-lock.json": "/package-lock.json",
+		"package.json": "/package.json",
+		"README.md": "/README.md",
+		"build": {
+			"build-bundle.js": "/build/build-bundle.js",
+			"build-dist.js": "/build/build-dist.js",
+			"build-html.js": "/build/build-html.js",
+			"build-lang-template.js": "/build/build-lang-template.js",
+			"build-navigation.js": "/build/build-navigation.js",
+			"build-rtlcss.js": "/build/build-rtlcss.js",
+			"build-tree.js": "/build/build-tree.js",
+			"build.js": "/build/build.js",
+			"compile.js": "/build/compile.js",
+			"connect.js": "/build/connect.js",
+			"watch.js": "/build/watch.js"
+		},
+		"src": {
+			"favicon.ico": "/src/favicon.ico",
+			"nav.json": "/src/nav.json",
+			"content": {
+				"blank.hbs": "/src/content/blank.hbs",
+				"datatables": {
+					"datatables_alteditor": {
+						"datatables_alteditor.hbs": "/src/content/datatables/datatables_alteditor/datatables_alteditor.hbs"
+					},
+					"datatables_autofill": {
+						"datatables_autofill.hbs": "/src/content/datatables/datatables_autofill/datatables_autofill.hbs"
+					},
+					"datatables_basic": {
+						"datatables_basic.hbs": "/src/content/datatables/datatables_basic/datatables_basic.hbs"
+					},
+					"datatables_buttons": {
+						"datatables_buttons.hbs": "/src/content/datatables/datatables_buttons/datatables_buttons.hbs"
+					},
+					"datatables_colreorder": {
+						"datatables_colreorder.hbs": "/src/content/datatables/datatables_colreorder/datatables_colreorder.hbs"
+					},
+					"datatables_export": {
+						"datatables_export.hbs": "/src/content/datatables/datatables_export/datatables_export.hbs"
+					},
+					"datatables_columnfilter": {
+						"datatables_columnfilter.hbs": "/src/content/datatables/datatables_columnfilter/datatables_columnfilter.hbs"
+					},
+					"datatables_fixedcolumns": {
+						"datatables_fixedcolumns.hbs": "/src/content/datatables/datatables_fixedcolumns/datatables_fixedcolumns.hbs"
+					},
+					"datatables_fixedheader": {
+						"datatables_fixedheader.hbs": "/src/content/datatables/datatables_fixedheader/datatables_fixedheader.hbs"
+					},
+					"datatables_keytable": {
+						"datatables_keytable.hbs": "/src/content/datatables/datatables_keytable/datatables_keytable.hbs"
+					},
+					"datatables_responsive": {
+						"datatables_responsive.hbs": "/src/content/datatables/datatables_responsive/datatables_responsive.hbs"
+					},
+					"datatables_responsive_alt": {
+						"datatables_responsive_alt.hbs": "/src/content/datatables/datatables_responsive_alt/datatables_responsive_alt.hbs"
+					},
+					"datatables_rowgroup": {
+						"datatables_rowgroup.hbs": "/src/content/datatables/datatables_rowgroup/datatables_rowgroup.hbs"
+					},
+					"datatables_rowreorder": {
+						"datatables_rowreorder.hbs": "/src/content/datatables/datatables_rowreorder/datatables_rowreorder.hbs"
+					},
+					"datatables_scroller": {
+						"datatables_scroller.hbs": "/src/content/datatables/datatables_scroller/datatables_scroller.hbs"
+					},
+					"datatables_select": {
+						"datatables_select.hbs": "/src/content/datatables/datatables_select/datatables_select.hbs"
+					}
+				},
+				"docs": {
+					"docs_buildnotes": {
+						"docs_buildnotes.hbs": "/src/content/docs/docs_buildnotes/docs_buildnotes.hbs"
+					},
+					"docs_community_support": {
+						"docs_community_support.hbs": "/src/content/docs/docs_community_support/docs_community_support.hbs"
+					},
+					"docs_flavors_editions": {
+						"docs_flavors_editions.hbs": "/src/content/docs/docs_flavors_editions/docs_flavors_editions.hbs"
+					},
+					"docs_general": {
+						"docs_general.hbs": "/src/content/docs/docs_general/docs_general.hbs"
+					},
+					"docs_premium_support": {
+						"docs_premium_support.hbs": "/src/content/docs/docs_premium_support/docs_premium_support.hbs"
+					},
+					"docs_licensing": {
+						"docs_licensing.hbs": "/src/content/docs/docs_licensing/docs_licensing.hbs"
+					},
+					"docs_site_structure": {
+						"docs_site_structure.hbs": "/src/content/docs/docs_site_structure/docs_site_structure.hbs"
+					}
+				},
+				"forms": {
+					"form_basic_inputs": {
+						"form_basic_inputs.hbs": "/src/content/forms/form_basic_inputs/form_basic_inputs.hbs"
+					},
+					"form_input_groups": {
+						"form_input_groups.hbs": "/src/content/forms/form_input_groups/form_input_groups.hbs"
+					},
+					"form_checkbox_radio": {
+						"form_checkbox_radio.hbs": "/src/content/forms/form_checkbox_radio/form_checkbox_radio.hbs"
+					},
+					"form_validation": {
+						"form_validation.hbs": "/src/content/forms/form_validation/form_validation.hbs"
+					}
+				},
+				"form_plugins": {
+					"form_plugins_datepicker": {
+						"form_plugins_datepicker.hbs": "/src/content/form_plugins/form_plugins_datepicker/form_plugins_datepicker.hbs"
+					},
+					"form_plugins_colorpicker": {
+						"form_plugins_colorpicker.hbs": "/src/content/form_plugins/form_plugins_colorpicker/form_plugins_colorpicker.hbs"
+					},
+					"form_plugins_daterange_picker": {
+						"form_plugins_daterange_picker.hbs": "/src/content/form_plugins/form_plugins_daterange_picker/form_plugins_daterange_picker.hbs"
+					},
+					"form_plugins_inputmask": {
+						"form_plugins_inputmask.hbs": "/src/content/form_plugins/form_plugins_inputmask/form_plugins_inputmask.hbs"
+					},
+					"form_plugins_dropzone": {
+						"form_plugins_dropzone.hbs": "/src/content/form_plugins/form_plugins_dropzone/form_plugins_dropzone.hbs"
+					},
+					"form_plugin_imagecropper": {
+						"form_plugin_imagecropper.hbs": "/src/content/form_plugins/form_plugin_imagecropper/form_plugin_imagecropper.hbs"
+					},
+					"form_plugins_ionrangeslider": {
+						"form_plugins_ionrangeslider.hbs": "/src/content/form_plugins/form_plugins_ionrangeslider/form_plugins_ionrangeslider.hbs"
+					},
+					"form_plugin_markdown": {
+						"form_plugin_markdown.hbs": "/src/content/form_plugins/form_plugin_markdown/form_plugin_markdown.hbs"
+					},
+					"form_plugin_nouislider": {
+						"form_plugin_nouislider.hbs": "/src/content/form_plugins/form_plugin_nouislider/form_plugin_nouislider.hbs"
+					},
+					"form_plugin_select2": {
+						"form_plugin_select2.hbs": "/src/content/form_plugins/form_plugin_select2/form_plugin_select2.hbs"
+					},
+					"form_plugin_summernote": {
+						"form_plugin_summernote.hbs": "/src/content/form_plugins/form_plugin_summernote/form_plugin_summernote.hbs"
+					},
+					"form_plugin_wizard": {
+						"form_plugin_wizard.hbs": "/src/content/form_plugins/form_plugin_wizard/form_plugin_wizard.hbs"
+					}
+				},
+				"icons": {
+					"icons_fontawesome_brand": {
+						"icons_fontawesome_brand.hbs": "/src/content/icons/icons_fontawesome_brand/icons_fontawesome_brand.hbs"
+					},
+					"icons_fontawesome_duotone": {
+						"icons_fontawesome_duotone.hbs": "/src/content/icons/icons_fontawesome_duotone/icons_fontawesome_duotone.hbs"
+					},
+					"icons_fontawesome_light": {
+						"icons_fontawesome_light.hbs": "/src/content/icons/icons_fontawesome_light/icons_fontawesome_light.hbs"
+					},
+					"icons_fontawesome_solid": {
+						"icons_fontawesome_solid.hbs": "/src/content/icons/icons_fontawesome_solid/icons_fontawesome_solid.hbs"
+					},
+					"icons_fontawesome_regular": {
+						"icons_fontawesome_regular.hbs": "/src/content/icons/icons_fontawesome_regular/icons_fontawesome_regular.hbs"
+					},
+					"icons_nextgen_base": {
+						"icons_nextgen_base.hbs": "/src/content/icons/icons_nextgen_base/icons_nextgen_base.hbs"
+					},
+					"icons_nextgen_general": {
+						"icons_nextgen_general.hbs": "/src/content/icons/icons_nextgen_general/icons_nextgen_general.hbs"
+					},
+					"icons_stack_generate": {
+						"icons_stack_generate.hbs": "/src/content/icons/icons_stack_generate/icons_stack_generate.hbs"
+					},
+					"icons_stack_showcase": {
+						"icons_stack_showcase.hbs": "/src/content/icons/icons_stack_showcase/icons_stack_showcase.hbs"
+					},
+					"icons_webfonts_faq": {
+						"icons_webfonts_faq.hbs": "/src/content/icons/icons_webfonts_faq/icons_webfonts_faq.hbs"
+					}
+				},
+				"intel": {
+					"intel_analytics_dashboard": {
+						"intel_analytics_dashboard.hbs": "/src/content/intel/intel_analytics_dashboard/intel_analytics_dashboard.hbs"
+					},
+					"intel_build_notes": {
+						"intel_build_notes.hbs": "/src/content/intel/intel_build_notes/intel_build_notes.hbs"
+					},
+					"intel_privacy": {
+						"intel_privacy.hbs": "/src/content/intel/intel_privacy/intel_privacy.hbs"
+					},
+					"intel_introduction": {
+						"intel_introduction.hbs": "/src/content/intel/intel_introduction/intel_introduction.hbs"
+					},
+					"intel_marketing_dashboard": {
+						"intel_marketing_dashboard.hbs": "/src/content/intel/intel_marketing_dashboard/intel_marketing_dashboard.hbs"
+					}
+				},
+				"landing": {
+					"landing-page": {
+						"landing-page.hbs": "/src/content/landing/landing-page/landing-page.hbs"
+					}
+				},
+				"miscellaneous": {
+					"miscellaneous_fullcalendar": {
+						"miscellaneous_fullcalendar.hbs": "/src/content/miscellaneous/miscellaneous_fullcalendar/miscellaneous_fullcalendar.hbs"
+					},
+					"miscellaneous_lightgallery": {
+						"miscellaneous_lightgallery.hbs": "/src/content/miscellaneous/miscellaneous_lightgallery/miscellaneous_lightgallery.hbs"
+					},
+					"miscellaneous_treeview": {
+						"miscellaneous_treeview.hbs": "/src/content/miscellaneous/miscellaneous_treeview/miscellaneous_treeview.hbs"
+					}
+				},
+				"notifications": {
+					"notifications_sweetalert2": {
+						"notifications_sweetalert2.hbs": "/src/content/notifications/notifications_sweetalert2/notifications_sweetalert2.hbs"
+					},
+					"notifications_toastr": {
+						"notifications_toastr.hbs": "/src/content/notifications/notifications_toastr/notifications_toastr.hbs"
+					}
+				},
+				"pages": {
+					"page_chat": {
+						"page_chat.hbs": "/src/content/pages/page_chat/page_chat.hbs"
+					},
+					"page_confirmation": {
+						"page_confirmation.hbs": "/src/content/pages/page_confirmation/page_confirmation.hbs"
+					},
+					"page_contacts": {
+						"page_contacts.hbs": "/src/content/pages/page_contacts/page_contacts.hbs"
+					},
+					"page_forum_layouts": {
+						"page_forum_discussion.hbs": "/src/content/pages/page_forum_layouts/page_forum_discussion.hbs",
+						"page_forum_list.hbs": "/src/content/pages/page_forum_layouts/page_forum_list.hbs",
+						"page_forum_threads.hbs": "/src/content/pages/page_forum_layouts/page_forum_threads.hbs"
+					},
+					"page_forget": {
+						"page_forget.hbs": "/src/content/pages/page_forget/page_forget.hbs"
+					},
+					"page_error": {
+						"page_error.hbs": "/src/content/pages/page_error/page_error.hbs",
+						"page_error_404.hbs": "/src/content/pages/page_error/page_error_404.hbs",
+						"page_error_announced.hbs": "/src/content/pages/page_error/page_error_announced.hbs"
+					},
+					"page_inbox": {
+						"page_inbox_general.hbs": "/src/content/pages/page_inbox/page_inbox_general.hbs",
+						"page_inbox_read.hbs": "/src/content/pages/page_inbox/page_inbox_read.hbs",
+						"page_inbox_write.hbs": "/src/content/pages/page_inbox/page_inbox_write.hbs"
+					},
+					"page_invoice": {
+						"page-invoice.scss": "/src/content/pages/page_invoice/page-invoice.scss",
+						"page_invoice.hbs": "/src/content/pages/page_invoice/page_invoice.hbs"
+					},
+					"page_locked": {
+						"page_locked.hbs": "/src/content/pages/page_locked/page_locked.hbs"
+					},
+					"page_profile": {
+						"page_profile.hbs": "/src/content/pages/page_profile/page_profile.hbs"
+					},
+					"page_login": {
+						"page_login.hbs": "/src/content/pages/page_login/page_login.hbs"
+					},
+					"page_login_alt": {
+						"page-login-alt.scss": "/src/content/pages/page_login_alt/page-login-alt.scss",
+						"page_login_alt.hbs": "/src/content/pages/page_login_alt/page_login_alt.hbs"
+					},
+					"page_register": {
+						"page_register.hbs": "/src/content/pages/page_register/page_register.hbs"
+					},
+					"page_search": {
+						"page_search.hbs": "/src/content/pages/page_search/page_search.hbs"
+					}
+				},
+				"plugins": {
+					"plugin_appcore": {
+						"plugin_appcore.hbs": "/src/content/plugins/plugin_appcore/plugin_appcore.hbs"
+					},
+					"plugin_bootbox": {
+						"plugin_bootbox.hbs": "/src/content/plugins/plugin_bootbox/plugin_bootbox.hbs"
+					},
+					"plugin_faq": {
+						"plugin_faq.hbs": "/src/content/plugins/plugin_faq/plugin_faq.hbs"
+					},
+					"plugin_i18next": {
+						"plugin_i18next.hbs": "/src/content/plugins/plugin_i18next/plugin_i18next.hbs"
+					},
+					"plugin_navigation": {
+						"plugin_navigation.hbs": "/src/content/plugins/plugin_navigation/plugin_navigation.hbs"
+					},
+					"plugin_pacejs": {
+						"plugin_pacejs.hbs": "/src/content/plugins/plugin_pacejs/plugin_pacejs.hbs"
+					},
+					"plugin_slimscroll": {
+						"plugin_slimscroll.hbs": "/src/content/plugins/plugin_slimscroll/plugin_slimscroll.hbs"
+					},
+					"plugin_smartpanels": {
+						"plugin_smartpanels.hbs": "/src/content/plugins/plugin_smartpanels/plugin_smartpanels.hbs"
+					},
+					"plugin_throttle": {
+						"plugin_throttle.hbs": "/src/content/plugins/plugin_throttle/plugin_throttle.hbs"
+					},
+					"plugin_waves": {
+						"plugin_waves.hbs": "/src/content/plugins/plugin_waves/plugin_waves.hbs"
+					}
+				},
+				"settings": {
+					"settings_how_it_works": {
+						"settings_how_it_works.hbs": "/src/content/settings/settings_how_it_works/settings_how_it_works.hbs"
+					},
+					"settings_layout_options": {
+						"settings_layout_options.hbs": "/src/content/settings/settings_layout_options/settings_layout_options.hbs"
+					},
+					"settings_saving_db": {
+						"settings_saving_db.hbs": "/src/content/settings/settings_saving_db/settings_saving_db.hbs"
+					},
+					"settings_skin_options": {
+						"settings_skin_options.hbs": "/src/content/settings/settings_skin_options/settings_skin_options.hbs"
+					}
+				},
+				"statistics": {
+					"statistics_c3": {
+						"statistics_c3.hbs": "/src/content/statistics/statistics_c3/statistics_c3.hbs"
+					},
+					"statistics_chartist": {
+						"statistics_chartist.hbs": "/src/content/statistics/statistics_chartist/statistics_chartist.hbs"
+					},
+					"statistics_chartjs": {
+						"statistics_chartjs.hbs": "/src/content/statistics/statistics_chartjs/statistics_chartjs.hbs"
+					},
+					"statistics_dygraph": {
+						"statistics_dygraph.hbs": "/src/content/statistics/statistics_dygraph/statistics_dygraph.hbs"
+					},
+					"statistics_easypiechart": {
+						"statistics_easypiechart.hbs": "/src/content/statistics/statistics_easypiechart/statistics_easypiechart.hbs"
+					},
+					"statistics_flot": {
+						"statistics_flot.hbs": "/src/content/statistics/statistics_flot/statistics_flot.hbs"
+					},
+					"statistics_sparkline": {
+						"statistics_sparkline.hbs": "/src/content/statistics/statistics_sparkline/statistics_sparkline.hbs"
+					},
+					"statistics_peity": {
+						"statistics_peity.hbs": "/src/content/statistics/statistics_peity/statistics_peity.hbs"
+					}
+				},
+				"tables": {
+					"tables_basic": {
+						"tables_basic.hbs": "/src/content/tables/tables_basic/tables_basic.hbs"
+					},
+					"tables_generate_style": {
+						"tables_generate_style.hbs": "/src/content/tables/tables_generate_style/tables_generate_style.hbs"
+					}
+				},
+				"ui": {
+					"ui_accordion": {
+						"ui_accordion.hbs": "/src/content/ui/ui_accordion/ui_accordion.hbs"
+					},
+					"ui_alerts": {
+						"ui_alerts.hbs": "/src/content/ui/ui_alerts/ui_alerts.hbs"
+					},
+					"ui_breadcrumbs": {
+						"ui_breadcrumbs.hbs": "/src/content/ui/ui_breadcrumbs/ui_breadcrumbs.hbs"
+					},
+					"ui_badges": {
+						"ui_badges.hbs": "/src/content/ui/ui_badges/ui_badges.hbs"
+					},
+					"ui_buttons": {
+						"ui_buttons.hbs": "/src/content/ui/ui_buttons/ui_buttons.hbs"
+					},
+					"ui_button_group": {
+						"ui_button_group.hbs": "/src/content/ui/ui_button_group/ui_button_group.hbs"
+					},
+					"ui_cards": {
+						"ui_cards.hbs": "/src/content/ui/ui_cards/ui_cards.hbs"
+					},
+					"ui_carousel": {
+						"ui_carousel.hbs": "/src/content/ui/ui_carousel/ui_carousel.hbs"
+					},
+					"ui_collapse": {
+						"ui_collapse.hbs": "/src/content/ui/ui_collapse/ui_collapse.hbs"
+					},
+					"ui_list_filter": {
+						"ui_list_filter.hbs": "/src/content/ui/ui_list_filter/ui_list_filter.hbs"
+					},
+					"ui_dropdowns": {
+						"ui_dropdowns.hbs": "/src/content/ui/ui_dropdowns/ui_dropdowns.hbs"
+					},
+					"ui_modal": {
+						"ui_modal.hbs": "/src/content/ui/ui_modal/ui_modal.hbs"
+					},
+					"ui_navbars": {
+						"ui_navbars.hbs": "/src/content/ui/ui_navbars/ui_navbars.hbs"
+					},
+					"ui_pagination": {
+						"ui_pagination.hbs": "/src/content/ui/ui_pagination/ui_pagination.hbs"
+					},
+					"ui_panels": {
+						"ui_panels.hbs": "/src/content/ui/ui_panels/ui_panels.hbs"
+					},
+					"ui_popovers": {
+						"ui_popovers.hbs": "/src/content/ui/ui_popovers/ui_popovers.hbs"
+					},
+					"ui_scrollspy": {
+						"ui_scrollspy.hbs": "/src/content/ui/ui_scrollspy/ui_scrollspy.hbs"
+					},
+					"ui_progress_bars": {
+						"ui_progress_bars.hbs": "/src/content/ui/ui_progress_bars/ui_progress_bars.hbs"
+					},
+					"ui_side_panel": {
+						"ui_side_panel.hbs": "/src/content/ui/ui_side_panel/ui_side_panel.hbs"
+					},
+					"ui_spinners": {
+						"ui_spinners.hbs": "/src/content/ui/ui_spinners/ui_spinners.hbs"
+					},
+					"ui_tabs_pills": {
+						"ui_tabs_pills.hbs": "/src/content/ui/ui_tabs_pills/ui_tabs_pills.hbs"
+					},
+					"ui_tabs_accordions": {
+						"ui_tabs_accordions.hbs": "/src/content/ui/ui_tabs_accordions/ui_tabs_accordions.hbs"
+					},
+					"ui_tooltips": {
+						"ui_tooltips.hbs": "/src/content/ui/ui_tooltips/ui_tooltips.hbs"
+					},
+					"ui_toasts": {
+						"ui_toasts.hbs": "/src/content/ui/ui_toasts/ui_toasts.hbs"
+					},
+					"ui_tooltips_popovers": {
+						"ui_tooltips_popovers.hbs": "/src/content/ui/ui_tooltips_popovers/ui_tooltips_popovers.hbs"
+					}
+				},
+				"utilities": {
+					"utilities_borders": {
+						"utilities_borders.hbs": "/src/content/utilities/utilities_borders/utilities_borders.hbs"
+					},
+					"utilities_clearfix": {
+						"utilities_clearfix.hbs": "/src/content/utilities/utilities_clearfix/utilities_clearfix.hbs"
+					},
+					"utilities_color_pallet": {
+						"utilities_color_pallet.hbs": "/src/content/utilities/utilities_color_pallet/utilities_color_pallet.hbs"
+					},
+					"utilities_display_property": {
+						"utilities_display_property.hbs": "/src/content/utilities/utilities_display_property/utilities_display_property.hbs"
+					},
+					"utilities_flexbox": {
+						"utilities_flexbox.hbs": "/src/content/utilities/utilities_flexbox/utilities_flexbox.hbs"
+					},
+					"utilities_fonts": {
+						"utilities_fonts.hbs": "/src/content/utilities/utilities_fonts/utilities_fonts.hbs"
+					},
+					"utilities_helpers": {
+						"utilities_helpers.hbs": "/src/content/utilities/utilities_helpers/utilities_helpers.hbs"
+					},
+					"utilities_position": {
+						"utilities_position.hbs": "/src/content/utilities/utilities_position/utilities_position.hbs"
+					},
+					"utilities_responsive_grid": {
+						"utilities_responsive_grid.hbs": "/src/content/utilities/utilities_responsive_grid/utilities_responsive_grid.hbs"
+					},
+					"utilities_spacing": {
+						"utilities_spacing.hbs": "/src/content/utilities/utilities_spacing/utilities_spacing.hbs"
+					},
+					"utilities_sizing": {
+						"utilities_sizing.hbs": "/src/content/utilities/utilities_sizing/utilities_sizing.hbs"
+					},
+					"utilities_typography": {
+						"utilities_typography.hbs": "/src/content/utilities/utilities_typography/utilities_typography.hbs"
+					}
+				}
+			},
+			"img": {
+				"bitbucket-logo.png": "/src/img/bitbucket-logo.png",
+				"loading.gif": "/src/img/loading.gif",
+				"logo-flat.svg": "/src/img/logo-flat.svg",
+				"logo-gradient.svg": "/src/img/logo-gradient.svg",
+				"logo.png": "/src/img/logo.png",
+				"logo.svg": "/src/img/logo.svg",
+				"backgrounds": {
+					"bg-1.png": "/src/img/backgrounds/bg-1.png",
+					"bg-2.png": "/src/img/backgrounds/bg-2.png",
+					"bg-3.png": "/src/img/backgrounds/bg-3.png",
+					"bg-4.png": "/src/img/backgrounds/bg-4.png",
+					"bg-5.png": "/src/img/backgrounds/bg-5.png",
+					"clouds.png": "/src/img/backgrounds/clouds.png",
+					"credit.txt": "/src/img/backgrounds/credit.txt",
+					"page-bg.png": "/src/img/backgrounds/page-bg.png",
+					"prev-bg-1.png": "/src/img/backgrounds/prev-bg-1.png",
+					"prev-bg-2.png": "/src/img/backgrounds/prev-bg-2.png",
+					"prev-bg-3.png": "/src/img/backgrounds/prev-bg-3.png",
+					"prev-bg-4.png": "/src/img/backgrounds/prev-bg-4.png"
+				},
+				"card-backgrounds": {
+					"cover-1-lg.png": "/src/img/card-backgrounds/cover-1-lg.png",
+					"cover-2-lg.png": "/src/img/card-backgrounds/cover-2-lg.png",
+					"cover-3-lg.png": "/src/img/card-backgrounds/cover-3-lg.png",
+					"cover-4-lg.png": "/src/img/card-backgrounds/cover-4-lg.png",
+					"cover-5-lg.png": "/src/img/card-backgrounds/cover-5-lg.png",
+					"cover-6-lg.png": "/src/img/card-backgrounds/cover-6-lg.png"
+				},
+				"demo": {
+					"ajax.png": "/src/img/demo/ajax.png",
+					"angular.png": "/src/img/demo/angular.png",
+					"chromedevtools-1.png": "/src/img/demo/chromedevtools-1.png",
+					"chromedevtools-2.png": "/src/img/demo/chromedevtools-2.png",
+					"chromedevtools-3.png": "/src/img/demo/chromedevtools-3.png",
+					"chromedevtools-4.png": "/src/img/demo/chromedevtools-4.png",
+					"debounce-at_begin.png": "/src/img/demo/debounce-at_begin.png",
+					"debounce.png": "/src/img/demo/debounce.png",
+					"demo-panel.png": "/src/img/demo/demo-panel.png",
+					"grid-options.png": "/src/img/demo/grid-options.png",
+					"html5.png": "/src/img/demo/html5.png",
+					"laravel.png": "/src/img/demo/laravel.png",
+					"mvc.png": "/src/img/demo/mvc.png",
+					"peace-full.jpg": "/src/img/demo/peace-full.jpg",
+					"php.png": "/src/img/demo/php.png",
+					"position-absolute.gif": "/src/img/demo/position-absolute.gif",
+					"position-fixed.gif": "/src/img/demo/position-fixed.gif",
+					"position-sticky.gif": "/src/img/demo/position-sticky.gif",
+					"rails.png": "/src/img/demo/rails.png",
+					"react.png": "/src/img/demo/react.png",
+					"relax-full.jpg": "/src/img/demo/relax-full.jpg",
+					"s-1.png": "/src/img/demo/s-1.png",
+					"sea-full.jpg": "/src/img/demo/sea-full.jpg",
+					"side-panel-demo.gif": "/src/img/demo/side-panel-demo.gif",
+					"throttle-no_trailing.png": "/src/img/demo/throttle-no_trailing.png",
+					"throttle.png": "/src/img/demo/throttle.png",
+					"vuejs.png": "/src/img/demo/vuejs.png",
+					"authors": {
+						"josh.png": "/src/img/demo/authors/josh.png",
+						"jovanni.png": "/src/img/demo/authors/jovanni.png",
+						"roberto.png": "/src/img/demo/authors/roberto.png",
+						"sunny.png": "/src/img/demo/authors/sunny.png"
+					},
+					"avatars": {
+						"avatar-a.png": "/src/img/demo/avatars/avatar-a.png",
+						"avatar-admin-lg.png": "/src/img/demo/avatars/avatar-admin-lg.png",
+						"avatar-admin.png": "/src/img/demo/avatars/avatar-admin.png",
+						"avatar-admin.txt": "/src/img/demo/avatars/avatar-admin.txt",
+						"avatar-b.png": "/src/img/demo/avatars/avatar-b.png",
+						"avatar-c.png": "/src/img/demo/avatars/avatar-c.png",
+						"avatar-d.png": "/src/img/demo/avatars/avatar-d.png",
+						"avatar-e.png": "/src/img/demo/avatars/avatar-e.png",
+						"avatar-f.png": "/src/img/demo/avatars/avatar-f.png",
+						"avatar-g.png": "/src/img/demo/avatars/avatar-g.png",
+						"avatar-h.png": "/src/img/demo/avatars/avatar-h.png",
+						"avatar-i.png": "/src/img/demo/avatars/avatar-i.png",
+						"avatar-j.png": "/src/img/demo/avatars/avatar-j.png",
+						"avatar-k.png": "/src/img/demo/avatars/avatar-k.png",
+						"avatar-m.png": "/src/img/demo/avatars/avatar-m.png",
+						"cc.txt": "/src/img/demo/avatars/cc.txt",
+						"ng.jpg": "/src/img/demo/avatars/ng.jpg"
+					},
+					"gallery": {
+						"1.jpg": "/src/img/demo/gallery/1.jpg",
+						"10.jpg": "/src/img/demo/gallery/10.jpg",
+						"11.jpg": "/src/img/demo/gallery/11.jpg",
+						"12.jpg": "/src/img/demo/gallery/12.jpg",
+						"13.jpg": "/src/img/demo/gallery/13.jpg",
+						"14.jpg": "/src/img/demo/gallery/14.jpg",
+						"15.jpg": "/src/img/demo/gallery/15.jpg",
+						"16.jpg": "/src/img/demo/gallery/16.jpg",
+						"17.jpg": "/src/img/demo/gallery/17.jpg",
+						"18.jpg": "/src/img/demo/gallery/18.jpg",
+						"19.jpg": "/src/img/demo/gallery/19.jpg",
+						"2.jpg": "/src/img/demo/gallery/2.jpg",
+						"20.jpg": "/src/img/demo/gallery/20.jpg",
+						"21.jpg": "/src/img/demo/gallery/21.jpg",
+						"22.jpg": "/src/img/demo/gallery/22.jpg",
+						"23.jpg": "/src/img/demo/gallery/23.jpg",
+						"24.jpg": "/src/img/demo/gallery/24.jpg",
+						"25.jpg": "/src/img/demo/gallery/25.jpg",
+						"26.jpg": "/src/img/demo/gallery/26.jpg",
+						"27.jpg": "/src/img/demo/gallery/27.jpg",
+						"28.jpg": "/src/img/demo/gallery/28.jpg",
+						"29.jpg": "/src/img/demo/gallery/29.jpg",
+						"3.jpg": "/src/img/demo/gallery/3.jpg",
+						"30.jpg": "/src/img/demo/gallery/30.jpg",
+						"31.jpg": "/src/img/demo/gallery/31.jpg",
+						"32.jpg": "/src/img/demo/gallery/32.jpg",
+						"33.jpg": "/src/img/demo/gallery/33.jpg",
+						"34.jpg": "/src/img/demo/gallery/34.jpg",
+						"35.jpg": "/src/img/demo/gallery/35.jpg",
+						"36.jpg": "/src/img/demo/gallery/36.jpg",
+						"37.jpg": "/src/img/demo/gallery/37.jpg",
+						"38.jpg": "/src/img/demo/gallery/38.jpg",
+						"39.jpg": "/src/img/demo/gallery/39.jpg",
+						"4.jpg": "/src/img/demo/gallery/4.jpg",
+						"40.jpg": "/src/img/demo/gallery/40.jpg",
+						"41.jpg": "/src/img/demo/gallery/41.jpg",
+						"42.jpg": "/src/img/demo/gallery/42.jpg",
+						"43.jpg": "/src/img/demo/gallery/43.jpg",
+						"44.jpg": "/src/img/demo/gallery/44.jpg",
+						"45.jpg": "/src/img/demo/gallery/45.jpg",
+						"46.jpg": "/src/img/demo/gallery/46.jpg",
+						"47.jpg": "/src/img/demo/gallery/47.jpg",
+						"48.jpg": "/src/img/demo/gallery/48.jpg",
+						"49.jpg": "/src/img/demo/gallery/49.jpg",
+						"5.jpg": "/src/img/demo/gallery/5.jpg",
+						"50.jpg": "/src/img/demo/gallery/50.jpg",
+						"51.jpg": "/src/img/demo/gallery/51.jpg",
+						"52.jpg": "/src/img/demo/gallery/52.jpg",
+						"53.jpg": "/src/img/demo/gallery/53.jpg",
+						"54.jpg": "/src/img/demo/gallery/54.jpg",
+						"55.jpg": "/src/img/demo/gallery/55.jpg",
+						"56.jpg": "/src/img/demo/gallery/56.jpg",
+						"57.jpg": "/src/img/demo/gallery/57.jpg",
+						"58.jpg": "/src/img/demo/gallery/58.jpg",
+						"59.jpg": "/src/img/demo/gallery/59.jpg",
+						"6.jpg": "/src/img/demo/gallery/6.jpg",
+						"7.jpg": "/src/img/demo/gallery/7.jpg",
+						"8.jpg": "/src/img/demo/gallery/8.jpg",
+						"9.jpg": "/src/img/demo/gallery/9.jpg",
+						"source.txt": "/src/img/demo/gallery/source.txt",
+						"thumb": {
+							"1.jpg": "/src/img/demo/gallery/thumb/1.jpg",
+							"10.jpg": "/src/img/demo/gallery/thumb/10.jpg",
+							"11.jpg": "/src/img/demo/gallery/thumb/11.jpg",
+							"12.jpg": "/src/img/demo/gallery/thumb/12.jpg",
+							"13.jpg": "/src/img/demo/gallery/thumb/13.jpg",
+							"14.jpg": "/src/img/demo/gallery/thumb/14.jpg",
+							"15.jpg": "/src/img/demo/gallery/thumb/15.jpg",
+							"16.jpg": "/src/img/demo/gallery/thumb/16.jpg",
+							"17.jpg": "/src/img/demo/gallery/thumb/17.jpg",
+							"18.jpg": "/src/img/demo/gallery/thumb/18.jpg",
+							"19.jpg": "/src/img/demo/gallery/thumb/19.jpg",
+							"2.jpg": "/src/img/demo/gallery/thumb/2.jpg",
+							"20.jpg": "/src/img/demo/gallery/thumb/20.jpg",
+							"21.jpg": "/src/img/demo/gallery/thumb/21.jpg",
+							"22.jpg": "/src/img/demo/gallery/thumb/22.jpg",
+							"23.jpg": "/src/img/demo/gallery/thumb/23.jpg",
+							"24.jpg": "/src/img/demo/gallery/thumb/24.jpg",
+							"25.jpg": "/src/img/demo/gallery/thumb/25.jpg",
+							"26.jpg": "/src/img/demo/gallery/thumb/26.jpg",
+							"27.jpg": "/src/img/demo/gallery/thumb/27.jpg",
+							"28.jpg": "/src/img/demo/gallery/thumb/28.jpg",
+							"29.jpg": "/src/img/demo/gallery/thumb/29.jpg",
+							"3.jpg": "/src/img/demo/gallery/thumb/3.jpg",
+							"30.jpg": "/src/img/demo/gallery/thumb/30.jpg",
+							"31.jpg": "/src/img/demo/gallery/thumb/31.jpg",
+							"32.jpg": "/src/img/demo/gallery/thumb/32.jpg",
+							"33.jpg": "/src/img/demo/gallery/thumb/33.jpg",
+							"34.jpg": "/src/img/demo/gallery/thumb/34.jpg",
+							"35.jpg": "/src/img/demo/gallery/thumb/35.jpg",
+							"36.jpg": "/src/img/demo/gallery/thumb/36.jpg",
+							"37.jpg": "/src/img/demo/gallery/thumb/37.jpg",
+							"38.jpg": "/src/img/demo/gallery/thumb/38.jpg",
+							"39.jpg": "/src/img/demo/gallery/thumb/39.jpg",
+							"4.jpg": "/src/img/demo/gallery/thumb/4.jpg",
+							"40.jpg": "/src/img/demo/gallery/thumb/40.jpg",
+							"41.jpg": "/src/img/demo/gallery/thumb/41.jpg",
+							"42.jpg": "/src/img/demo/gallery/thumb/42.jpg",
+							"43.jpg": "/src/img/demo/gallery/thumb/43.jpg",
+							"44.jpg": "/src/img/demo/gallery/thumb/44.jpg",
+							"45.jpg": "/src/img/demo/gallery/thumb/45.jpg",
+							"46.jpg": "/src/img/demo/gallery/thumb/46.jpg",
+							"47.jpg": "/src/img/demo/gallery/thumb/47.jpg",
+							"48.jpg": "/src/img/demo/gallery/thumb/48.jpg",
+							"49.jpg": "/src/img/demo/gallery/thumb/49.jpg",
+							"5.jpg": "/src/img/demo/gallery/thumb/5.jpg",
+							"50.jpg": "/src/img/demo/gallery/thumb/50.jpg",
+							"51.jpg": "/src/img/demo/gallery/thumb/51.jpg",
+							"52.jpg": "/src/img/demo/gallery/thumb/52.jpg",
+							"53.jpg": "/src/img/demo/gallery/thumb/53.jpg",
+							"54.jpg": "/src/img/demo/gallery/thumb/54.jpg",
+							"55.jpg": "/src/img/demo/gallery/thumb/55.jpg",
+							"56.jpg": "/src/img/demo/gallery/thumb/56.jpg",
+							"57.jpg": "/src/img/demo/gallery/thumb/57.jpg",
+							"58.jpg": "/src/img/demo/gallery/thumb/58.jpg",
+							"59.jpg": "/src/img/demo/gallery/thumb/59.jpg",
+							"6.jpg": "/src/img/demo/gallery/thumb/6.jpg",
+							"7.jpg": "/src/img/demo/gallery/thumb/7.jpg",
+							"8.jpg": "/src/img/demo/gallery/thumb/8.jpg",
+							"9.jpg": "/src/img/demo/gallery/thumb/9.jpg"
+						}
+					},
+					"profile": {
+						"article-healthyfood.png": "/src/img/demo/profile/article-healthyfood.png",
+						"cc.txt": "/src/img/demo/profile/cc.txt"
+					},
+					"search": {
+						"1.png": "/src/img/demo/search/1.png",
+						"10.png": "/src/img/demo/search/10.png",
+						"11.png": "/src/img/demo/search/11.png",
+						"12.png": "/src/img/demo/search/12.png",
+						"13.png": "/src/img/demo/search/13.png",
+						"14.png": "/src/img/demo/search/14.png",
+						"15.png": "/src/img/demo/search/15.png",
+						"2.png": "/src/img/demo/search/2.png",
+						"3.png": "/src/img/demo/search/3.png",
+						"4.png": "/src/img/demo/search/4.png",
+						"5.png": "/src/img/demo/search/5.png",
+						"6.png": "/src/img/demo/search/6.png"
+					},
+					"skins": {
+						"black.png": "/src/img/demo/skins/black.png",
+						"blue.png": "/src/img/demo/skins/blue.png",
+						"green.png": "/src/img/demo/skins/green.png",
+						"pink.png": "/src/img/demo/skins/pink.png"
+					}
+				},
+				"svg": {
+					"pattern-1.svg": "/src/img/svg/pattern-1.svg",
+					"pattern-2.svg": "/src/img/svg/pattern-2.svg",
+					"pattern-3.svg": "/src/img/svg/pattern-3.svg",
+					"pattern-4.svg": "/src/img/svg/pattern-4.svg"
+				},
+				"favicon": {
+					"android-chrome-144x144.png": "/src/img/favicon/android-chrome-144x144.png",
+					"apple-touch-icon.png": "/src/img/favicon/apple-touch-icon.png",
+					"browserconfig.xml": "/src/img/favicon/browserconfig.xml",
+					"favicon-16x16.png": "/src/img/favicon/favicon-16x16.png",
+					"favicon-32x32.png": "/src/img/favicon/favicon-32x32.png",
+					"favicon-generator.txt": "/src/img/favicon/favicon-generator.txt",
+					"favicon.ico": "/src/img/favicon/favicon.ico",
+					"mstile-150x150.png": "/src/img/favicon/mstile-150x150.png",
+					"safari-pinned-tab.svg": "/src/img/favicon/safari-pinned-tab.svg",
+					"site.webmanifest": "/src/img/favicon/site.webmanifest"
+				},
+				"thumbs": {
+					"ng-thumb-1.png": "/src/img/thumbs/ng-thumb-1.png",
+					"ng-thumb-2.png": "/src/img/thumbs/ng-thumb-2.png",
+					"ng-thumb-3.png": "/src/img/thumbs/ng-thumb-3.png",
+					"ng-thumb-4.png": "/src/img/thumbs/ng-thumb-4.png",
+					"ng-thumb-video-1.png": "/src/img/thumbs/ng-thumb-video-1.png",
+					"ng-thumb-video-2.png": "/src/img/thumbs/ng-thumb-video-2.png",
+					"pic-1.png": "/src/img/thumbs/pic-1.png",
+					"pic-10.png": "/src/img/thumbs/pic-10.png",
+					"pic-11.png": "/src/img/thumbs/pic-11.png",
+					"pic-12.png": "/src/img/thumbs/pic-12.png",
+					"pic-3.png": "/src/img/thumbs/pic-3.png",
+					"pic-4.png": "/src/img/thumbs/pic-4.png",
+					"pic-5.png": "/src/img/thumbs/pic-5.png",
+					"pic-6.png": "/src/img/thumbs/pic-6.png",
+					"pic-7.png": "/src/img/thumbs/pic-7.png",
+					"pic-8.png": "/src/img/thumbs/pic-8.png",
+					"pic-9.png": "/src/img/thumbs/pic-9.png"
+				}
+			},
+			"js": {
+				"manifest.json": "/src/js/manifest.json",
+				"_config": {
+					"app.colors.js": "/src/js/_config/app.colors.js",
+					"app.config.js": "/src/js/_config/app.config.js"
+				},
+				"_modules": {
+					"app.ajaxbehaviour.js": "/src/js/_modules/app.ajaxbehaviour.js",
+					"app.domReady.js": "/src/js/_modules/app.domReady.js",
+					"app.init.js": "/src/js/_modules/app.init.js",
+					"app.menu.slider.js": "/src/js/_modules/app.menu.slider.js",
+					"app.navigation.js": "/src/js/_modules/app.navigation.js",
+					"app.orientationchange.js": "/src/js/_modules/app.orientationchange.js",
+					"app.resize.trigger.js": "/src/js/_modules/app.resize.trigger.js",
+					"app.scroll.trigger.js": "/src/js/_modules/app.scroll.trigger.js",
+					"app.window.load.js": "/src/js/_modules/app.window.load.js"
+				}
+			},
+			"template": {
+				"resources.txt": "/src/template/resources.txt",
+				"layouts": {
+					"ajax.hbs": "/src/template/layouts/ajax.hbs",
+					"alt.hbs": "/src/template/layouts/alt.hbs",
+					"auth.hbs": "/src/template/layouts/auth.hbs",
+					"blank-main.hbs": "/src/template/layouts/blank-main.hbs",
+					"main.hbs": "/src/template/layouts/main.hbs"
+				},
+				"include": {
+					"_blank-left-panel.hbs": "/src/template/include/_blank-left-panel.hbs",
+					"_blank-nav.hbs": "/src/template/include/_blank-nav.hbs",
+					"_color-profile-reference.hbs": "/src/template/include/_color-profile-reference.hbs",
+					"_copyright-header.hbs": "/src/template/include/_copyright-header.hbs",
+					"_dropdown-app.hbs": "/src/template/include/_dropdown-app.hbs",
+					"_dropdown-menu.hbs": "/src/template/include/_dropdown-menu.hbs",
+					"_dropdown-notification.hbs": "/src/template/include/_dropdown-notification.hbs",
+					"_favicon.hbs": "/src/template/include/_favicon.hbs",
+					"_google_analytics.hbs": "/src/template/include/_google_analytics.hbs",
+					"_head.hbs": "/src/template/include/_head.hbs",
+					"_left-panel.hbs": "/src/template/include/_left-panel.hbs",
+					"_logo.hbs": "/src/template/include/_logo.hbs",
+					"_nav-filter-msg.hbs": "/src/template/include/_nav-filter-msg.hbs",
+					"_nav-filter.hbs": "/src/template/include/_nav-filter.hbs",
+					"_nav-footer.hbs": "/src/template/include/_nav-footer.hbs",
+					"_nav-info-card.hbs": "/src/template/include/_nav-info-card.hbs",
+					"_nav.hbs": "/src/template/include/_nav.hbs",
+					"_page-breadcrumb.hbs": "/src/template/include/_page-breadcrumb.hbs",
+					"_page-content-overlay.hbs": "/src/template/include/_page-content-overlay.hbs",
+					"_page-footer.hbs": "/src/template/include/_page-footer.hbs",
+					"_page-header.hbs": "/src/template/include/_page-header.hbs",
+					"_page-heading.hbs": "/src/template/include/_page-heading.hbs",
+					"_page-settings.hbs": "/src/template/include/_page-settings.hbs",
+					"_scripts-base-plugins.hbs": "/src/template/include/_scripts-base-plugins.hbs",
+					"_scripts-loading-saving.hbs": "/src/template/include/_scripts-loading-saving.hbs",
+					"_shortcut-menu.hbs": "/src/template/include/_shortcut-menu.hbs",
+					"_shortcut-messenger.hbs": "/src/template/include/_shortcut-messenger.hbs",
+					"_shortcut-modal.hbs": "/src/template/include/_shortcut-modal.hbs",
+					"_tab-msgr.hbs": "/src/template/include/_tab-msgr.hbs",
+					"_tab-settings.hbs": "/src/template/include/_tab-settings.hbs",
+					"pages": {
+						"chat": {
+							"_contact.hbs": "/src/template/include/pages/chat/_contact.hbs"
+						},
+						"inbox": {
+							"_compose.hbs": "/src/template/include/pages/inbox/_compose.hbs",
+							"_compose_layout.hbs": "/src/template/include/pages/inbox/_compose_layout.hbs",
+							"_menu.hbs": "/src/template/include/pages/inbox/_menu.hbs",
+							"_signature.hbs": "/src/template/include/pages/inbox/_signature.hbs"
+						}
+					}
+				},
+				"_helpers": {
+					"code-helper.js": "/src/template/_helpers/code-helper.js",
+					"for-helper.js": "/src/template/_helpers/for-helper.js",
+					"is-helper.js": "/src/template/_helpers/is-helper.js",
+					"lower.js": "/src/template/_helpers/lower.js",
+					"times-helper.js": "/src/template/_helpers/times-helper.js"
+				}
+			},
+			"scss": {
+				"app.core-rtl.scss": "/src/scss/app.core-rtl.scss",
+				"app.core.scss": "/src/scss/app.core.scss",
+				"app.icons.scss": "/src/scss/app.icons.scss",
+				"bootstrap.scss": "/src/scss/bootstrap.scss",
+				"theme-demo.scss": "/src/scss/theme-demo.scss",
+				"_extensions": {
+					"_extension-pace.scss": "/src/scss/_extensions/_extension-pace.scss",
+					"_extension-slimscroll.scss": "/src/scss/_extensions/_extension-slimscroll.scss",
+					"_extension-waves.scss": "/src/scss/_extensions/_extension-waves.scss"
+				},
+				"_imports": {
+					"_global-import.scss": "/src/scss/_imports/_global-import.scss",
+					"_theme-modules-import.scss": "/src/scss/_imports/_theme-modules-import.scss"
+				},
+				"_mixins": {
+					"mixins.scss": "/src/scss/_mixins/mixins.scss"
+				},
+				"_themes": {
+					"cust-theme-1.scss": "/src/scss/_themes/cust-theme-1.scss",
+					"cust-theme-10.scss": "/src/scss/_themes/cust-theme-10.scss",
+					"cust-theme-11.scss": "/src/scss/_themes/cust-theme-11.scss",
+					"cust-theme-12.scss": "/src/scss/_themes/cust-theme-12.scss",
+					"cust-theme-13.scss": "/src/scss/_themes/cust-theme-13.scss",
+					"cust-theme-2.scss": "/src/scss/_themes/cust-theme-2.scss",
+					"cust-theme-3.scss": "/src/scss/_themes/cust-theme-3.scss",
+					"cust-theme-4.scss": "/src/scss/_themes/cust-theme-4.scss",
+					"cust-theme-5.scss": "/src/scss/_themes/cust-theme-5.scss",
+					"cust-theme-6.scss": "/src/scss/_themes/cust-theme-6.scss",
+					"cust-theme-7.scss": "/src/scss/_themes/cust-theme-7.scss",
+					"cust-theme-8.scss": "/src/scss/_themes/cust-theme-8.scss",
+					"cust-theme-9.scss": "/src/scss/_themes/cust-theme-9.scss",
+					"_modules": {
+						"variables.scss": "/src/scss/_themes/_modules/variables.scss",
+						"_body.scss": "/src/scss/_themes/_modules/_body.scss",
+						"_colors.scss": "/src/scss/_themes/_modules/_colors.scss",
+						"_custom-bootstrap-varients.scss": "/src/scss/_themes/_modules/_custom-bootstrap-varients.scss",
+						"_custom.scss": "/src/scss/_themes/_modules/_custom.scss",
+						"_demo-only.scss": "/src/scss/_themes/_modules/_demo-only.scss",
+						"_dropdown-app-list.scss": "/src/scss/_themes/_modules/_dropdown-app-list.scss",
+						"_dropdown-icon-menu.scss": "/src/scss/_themes/_modules/_dropdown-icon-menu.scss",
+						"_dropdown-notification.scss": "/src/scss/_themes/_modules/_dropdown-notification.scss",
+						"_fonts.scss": "/src/scss/_themes/_modules/_fonts.scss",
+						"_forms.scss": "/src/scss/_themes/_modules/_forms.scss",
+						"_hack.scss": "/src/scss/_themes/_modules/_hack.scss",
+						"_header-function-fixed.scss": "/src/scss/_themes/_modules/_header-function-fixed.scss",
+						"_helpers.scss": "/src/scss/_themes/_modules/_helpers.scss",
+						"_keyframes-highlight.scss": "/src/scss/_themes/_modules/_keyframes-highlight.scss",
+						"_left-panel.scss": "/src/scss/_themes/_modules/_left-panel.scss",
+						"_misc.scss": "/src/scss/_themes/_modules/_misc.scss",
+						"_mod-clear-bg.scss": "/src/scss/_themes/_modules/_mod-clear-bg.scss",
+						"_mod-nav-accessibility.scss": "/src/scss/_themes/_modules/_mod-nav-accessibility.scss",
+						"_nav-footer.scss": "/src/scss/_themes/_modules/_nav-footer.scss",
+						"_nav-function-minify.scss": "/src/scss/_themes/_modules/_nav-function-minify.scss",
+						"_nav-function-top.scss": "/src/scss/_themes/_modules/_nav-function-top.scss",
+						"_nav-info-card.scss": "/src/scss/_themes/_modules/_nav-info-card.scss",
+						"_nav-listfilter.scss": "/src/scss/_themes/_modules/_nav-listfilter.scss",
+						"_nav.scss": "/src/scss/_themes/_modules/_nav.scss",
+						"_page-components-accordion.scss": "/src/scss/_themes/_modules/_page-components-accordion.scss",
+						"_page-components-alerts.scss": "/src/scss/_themes/_modules/_page-components-alerts.scss",
+						"_page-components-badge.scss": "/src/scss/_themes/_modules/_page-components-badge.scss",
+						"_page-components-breadcrumb.scss": "/src/scss/_themes/_modules/_page-components-breadcrumb.scss",
+						"_page-components-buttons.scss": "/src/scss/_themes/_modules/_page-components-buttons.scss",
+						"_page-components-cards.scss": "/src/scss/_themes/_modules/_page-components-cards.scss",
+						"_page-components-carousel.scss": "/src/scss/_themes/_modules/_page-components-carousel.scss",
+						"_page-components-dropdowns.scss": "/src/scss/_themes/_modules/_page-components-dropdowns.scss",
+						"_page-components-messanger.scss": "/src/scss/_themes/_modules/_page-components-messanger.scss",
+						"_page-components-modal.scss": "/src/scss/_themes/_modules/_page-components-modal.scss",
+						"_page-components-panels.scss": "/src/scss/_themes/_modules/_page-components-panels.scss",
+						"_page-components-popovers.scss": "/src/scss/_themes/_modules/_page-components-popovers.scss",
+						"_page-components-shortcut.scss": "/src/scss/_themes/_modules/_page-components-shortcut.scss",
+						"_page-footer.scss": "/src/scss/_themes/_modules/_page-footer.scss",
+						"_page-header.scss": "/src/scss/_themes/_modules/_page-header.scss",
+						"_page-heading.scss": "/src/scss/_themes/_modules/_page-heading.scss",
+						"_page-left-panel.scss": "/src/scss/_themes/_modules/_page-left-panel.scss",
+						"_page-logo.scss": "/src/scss/_themes/_modules/_page-logo.scss",
+						"_page-search.scss": "/src/scss/_themes/_modules/_page-search.scss",
+						"_page-wrapper.scss": "/src/scss/_themes/_modules/_page-wrapper.scss",
+						"_placeholders.scss": "/src/scss/_themes/_modules/_placeholders.scss",
+						"_responsive.scss": "/src/scss/_themes/_modules/_responsive.scss",
+						"_root.scss": "/src/scss/_themes/_modules/_root.scss",
+						"_settings-demo-incompatiblity-list.scss": "/src/scss/_themes/_modules/_settings-demo-incompatiblity-list.scss",
+						"_settings-demo-theme-colors.scss": "/src/scss/_themes/_modules/_settings-demo-theme-colors.scss",
+						"_settings-demo.scss": "/src/scss/_themes/_modules/_settings-demo.scss"
+					},
+					"_plugins": {
+						"_plugins-chartist.scss": "/src/scss/_themes/_plugins/_plugins-chartist.scss"
+					}
+				},
+				"_modules": {
+					"variables.scss": "/src/scss/_modules/variables.scss",
+					"_app-custom-scrollbar.scss": "/src/scss/_modules/_app-custom-scrollbar.scss",
+					"_app-fullscreen.scss": "/src/scss/_modules/_app-fullscreen.scss",
+					"_app-print.scss": "/src/scss/_modules/_app-print.scss",
+					"_body.scss": "/src/scss/_modules/_body.scss",
+					"_colors.scss": "/src/scss/_modules/_colors.scss",
+					"_custom.scss": "/src/scss/_modules/_custom.scss",
+					"_demo-only.scss": "/src/scss/_modules/_demo-only.scss",
+					"_dropdown-app-list.scss": "/src/scss/_modules/_dropdown-app-list.scss",
+					"_dropdown-icon-menu.scss": "/src/scss/_modules/_dropdown-icon-menu.scss",
+					"_dropdown-notification.scss": "/src/scss/_modules/_dropdown-notification.scss",
+					"_effects.scss": "/src/scss/_modules/_effects.scss",
+					"_fonts.scss": "/src/scss/_modules/_fonts.scss",
+					"_form-switches.scss": "/src/scss/_modules/_form-switches.scss",
+					"_forms.scss": "/src/scss/_modules/_forms.scss",
+					"_hack-ie.scss": "/src/scss/_modules/_hack-ie.scss",
+					"_hack.scss": "/src/scss/_modules/_hack.scss",
+					"_header-function-fixed.scss": "/src/scss/_modules/_header-function-fixed.scss",
+					"_helpers.scss": "/src/scss/_modules/_helpers.scss",
+					"_keyframes-general.scss": "/src/scss/_modules/_keyframes-general.scss",
+					"_keyframes-highlight.scss": "/src/scss/_modules/_keyframes-highlight.scss",
+					"_keyframes-spinner.scss": "/src/scss/_modules/_keyframes-spinner.scss",
+					"_keyframes-transition.scss": "/src/scss/_modules/_keyframes-transition.scss",
+					"_left-panel.scss": "/src/scss/_modules/_left-panel.scss",
+					"_light-levels.scss": "/src/scss/_modules/_light-levels.scss",
+					"_misc.scss": "/src/scss/_modules/_misc.scss",
+					"_mod-bg.scss": "/src/scss/_modules/_mod-bg.scss",
+					"_mod-clean-page-bg.scss": "/src/scss/_modules/_mod-clean-page-bg.scss",
+					"_mod-colorblind.scss": "/src/scss/_modules/_mod-colorblind.scss",
+					"_mod-disable-animation.scss": "/src/scss/_modules/_mod-disable-animation.scss",
+					"_mod-hide-info-card.scss": "/src/scss/_modules/_mod-hide-info-card.scss",
+					"_mod-hide-nav-icons.scss": "/src/scss/_modules/_mod-hide-nav-icons.scss",
+					"_mod-high-contrast.scss": "/src/scss/_modules/_mod-high-contrast.scss",
+					"_mod-lean-page-header.scss": "/src/scss/_modules/_mod-lean-page-header.scss",
+					"_mod-main-boxed.scss": "/src/scss/_modules/_mod-main-boxed.scss",
+					"_mod-nav-accessibility.scss": "/src/scss/_modules/_mod-nav-accessibility.scss",
+					"_mod-text-size.scss": "/src/scss/_modules/_mod-text-size.scss",
+					"_nav-footer.scss": "/src/scss/_modules/_nav-footer.scss",
+					"_nav-function-fixed.scss": "/src/scss/_modules/_nav-function-fixed.scss",
+					"_nav-function-hidden.scss": "/src/scss/_modules/_nav-function-hidden.scss",
+					"_nav-function-minify.scss": "/src/scss/_modules/_nav-function-minify.scss",
+					"_nav-function-top.scss": "/src/scss/_modules/_nav-function-top.scss",
+					"_nav-info-card.scss": "/src/scss/_modules/_nav-info-card.scss",
+					"_nav-listfilter.scss": "/src/scss/_modules/_nav-listfilter.scss",
+					"_nav.scss": "/src/scss/_modules/_nav.scss",
+					"_overrides.scss": "/src/scss/_modules/_overrides.scss",
+					"_page-components-accordion.scss": "/src/scss/_modules/_page-components-accordion.scss",
+					"_page-components-alerts.scss": "/src/scss/_modules/_page-components-alerts.scss",
+					"_page-components-badge.scss": "/src/scss/_modules/_page-components-badge.scss",
+					"_page-components-breadcrumb.scss": "/src/scss/_modules/_page-components-breadcrumb.scss",
+					"_page-components-buttons.scss": "/src/scss/_modules/_page-components-buttons.scss",
+					"_page-components-cards.scss": "/src/scss/_modules/_page-components-cards.scss",
+					"_page-components-carousel.scss": "/src/scss/_modules/_page-components-carousel.scss",
+					"_page-components-dropdowns.scss": "/src/scss/_modules/_page-components-dropdowns.scss",
+					"_page-components-icon-stack.scss": "/src/scss/_modules/_page-components-icon-stack.scss",
+					"_page-components-listfilter.scss": "/src/scss/_modules/_page-components-listfilter.scss",
+					"_page-components-loader.scss": "/src/scss/_modules/_page-components-loader.scss",
+					"_page-components-messanger.scss": "/src/scss/_modules/_page-components-messanger.scss",
+					"_page-components-modal.scss": "/src/scss/_modules/_page-components-modal.scss",
+					"_page-components-pagination.scss": "/src/scss/_modules/_page-components-pagination.scss",
+					"_page-components-panels.scss": "/src/scss/_modules/_page-components-panels.scss",
+					"_page-components-popovers.scss": "/src/scss/_modules/_page-components-popovers.scss",
+					"_page-components-progressbar.scss": "/src/scss/_modules/_page-components-progressbar.scss",
+					"_page-components-shortcut.scss": "/src/scss/_modules/_page-components-shortcut.scss",
+					"_page-components-side-panels.scss": "/src/scss/_modules/_page-components-side-panels.scss",
+					"_page-components-tables.scss": "/src/scss/_modules/_page-components-tables.scss",
+					"_page-components-tabs.scss": "/src/scss/_modules/_page-components-tabs.scss",
+					"_page-components-tooltips.scss": "/src/scss/_modules/_page-components-tooltips.scss",
+					"_page-content.scss": "/src/scss/_modules/_page-content.scss",
+					"_page-error.scss": "/src/scss/_modules/_page-error.scss",
+					"_page-footer.scss": "/src/scss/_modules/_page-footer.scss",
+					"_page-header.scss": "/src/scss/_modules/_page-header.scss",
+					"_page-heading.scss": "/src/scss/_modules/_page-heading.scss",
+					"_page-left-panel.scss": "/src/scss/_modules/_page-left-panel.scss",
+					"_page-logo.scss": "/src/scss/_modules/_page-logo.scss",
+					"_page-search.scss": "/src/scss/_modules/_page-search.scss",
+					"_page-wrapper.scss": "/src/scss/_modules/_page-wrapper.scss",
+					"_placeholders.scss": "/src/scss/_modules/_placeholders.scss",
+					"_reset.scss": "/src/scss/_modules/_reset.scss",
+					"_responsive.scss": "/src/scss/_modules/_responsive.scss",
+					"_root.scss": "/src/scss/_modules/_root.scss",
+					"_settings-demo-incompatiblity-list.scss": "/src/scss/_modules/_settings-demo-incompatiblity-list.scss",
+					"_settings-demo-theme-colors.scss": "/src/scss/_modules/_settings-demo-theme-colors.scss",
+					"_settings-demo.scss": "/src/scss/_modules/_settings-demo.scss",
+					"_translate-3d.scss": "/src/scss/_modules/_translate-3d.scss"
+				}
+			},
+			"custom": {
+				"demo-data": {
+					"demo-c3.js": "/src/custom/demo-data/demo-c3.js",
+					"demo-data-dygraph.js": "/src/custom/demo-data/demo-data-dygraph.js"
+				},
+				"docs-data": {
+					"plugin-reference.json": "/src/custom/docs-data/plugin-reference.json"
+				},
+				"lang": {
+					"ch.json": "/src/custom/lang/ch.json",
+					"en.json": "/src/custom/lang/en.json",
+					"es.json": "/src/custom/lang/es.json"
+				},
+				"media": {
+					"video": {
+						"36150715-heavenly-clouds-v2-license.txt": "/src/custom/media/video/36150715-heavenly-clouds-v2-license.txt",
+						"cc.mp4": "/src/custom/media/video/cc.mp4",
+						"cc.webm": "/src/custom/media/video/cc.webm"
+					},
+					"sound": {
+						"bigbox.mp3": "/src/custom/media/sound/bigbox.mp3",
+						"bigbox.ogg": "/src/custom/media/sound/bigbox.ogg",
+						"license.txt": "/src/custom/media/sound/license.txt",
+						"messagebox.mp3": "/src/custom/media/sound/messagebox.mp3",
+						"messagebox.ogg": "/src/custom/media/sound/messagebox.ogg",
+						"smallbox.mp3": "/src/custom/media/sound/smallbox.mp3",
+						"smallbox.ogg": "/src/custom/media/sound/smallbox.ogg",
+						"voice_alert.mp3": "/src/custom/media/sound/voice_alert.mp3",
+						"voice_alert.ogg": "/src/custom/media/sound/voice_alert.ogg",
+						"voice_off.mp3": "/src/custom/media/sound/voice_off.mp3",
+						"voice_off.ogg": "/src/custom/media/sound/voice_off.ogg",
+						"voice_on.mp3": "/src/custom/media/sound/voice_on.mp3",
+						"voice_on.ogg": "/src/custom/media/sound/voice_on.ogg"
+					}
+				},
+				"webfonts": {
+					"fontawesome-pro-master": {
+						"license.txt": "/src/custom/webfonts/fontawesome-pro-master/license.txt",
+						"sprites": {
+							"brands.svg": "/src/custom/webfonts/fontawesome-pro-master/sprites/brands.svg",
+							"duotone.svg": "/src/custom/webfonts/fontawesome-pro-master/sprites/duotone.svg",
+							"light.svg": "/src/custom/webfonts/fontawesome-pro-master/sprites/light.svg",
+							"regular.svg": "/src/custom/webfonts/fontawesome-pro-master/sprites/regular.svg",
+							"solid.svg": "/src/custom/webfonts/fontawesome-pro-master/sprites/solid.svg"
+						},
+						"scss": {
+							"brands.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/brands.scss",
+							"duotone.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/duotone.scss",
+							"fa-brands.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/fa-brands.scss",
+							"fa-light.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/fa-light.scss",
+							"fa-regular.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/fa-regular.scss",
+							"fa-solid.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/fa-solid.scss",
+							"fontawesome.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/fontawesome.scss",
+							"light.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/light.scss",
+							"regular.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/regular.scss",
+							"solid.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/solid.scss",
+							"v4-shims.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/v4-shims.scss",
+							"_animated.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/_animated.scss",
+							"_bordered-pulled.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/_bordered-pulled.scss",
+							"_core.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/_core.scss",
+							"_fixed-width.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/_fixed-width.scss",
+							"_icons.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/_icons.scss",
+							"_larger.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/_larger.scss",
+							"_list.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/_list.scss",
+							"_mixins.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/_mixins.scss",
+							"_rotated-flipped.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/_rotated-flipped.scss",
+							"_screen-reader.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/_screen-reader.scss",
+							"_shims.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/_shims.scss",
+							"_stacked.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/_stacked.scss",
+							"_variables.scss": "/src/custom/webfonts/fontawesome-pro-master/scss/_variables.scss"
+						},
+						"used-for-demo-pages": {
+							"extract-brands.html": "/src/custom/webfonts/fontawesome-pro-master/used-for-demo-pages/extract-brands.html",
+							"extract-duotones.html": "/src/custom/webfonts/fontawesome-pro-master/used-for-demo-pages/extract-duotones.html",
+							"extract-icons-json.html": "/src/custom/webfonts/fontawesome-pro-master/used-for-demo-pages/extract-icons-json.html",
+							"fa-brand-list.json": "/src/custom/webfonts/fontawesome-pro-master/used-for-demo-pages/fa-brand-list.json",
+							"fa-duotone.json": "/src/custom/webfonts/fontawesome-pro-master/used-for-demo-pages/fa-duotone.json",
+							"fa-icon-list.json": "/src/custom/webfonts/fontawesome-pro-master/used-for-demo-pages/fa-icon-list.json"
+						},
+						"webfonts": {
+							"fa-brands-400.eot": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-brands-400.eot",
+							"fa-brands-400.svg": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-brands-400.svg",
+							"fa-brands-400.ttf": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-brands-400.ttf",
+							"fa-brands-400.woff": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-brands-400.woff",
+							"fa-brands-400.woff2": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-brands-400.woff2",
+							"fa-duotone-900.eot": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-duotone-900.eot",
+							"fa-duotone-900.svg": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-duotone-900.svg",
+							"fa-duotone-900.ttf": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-duotone-900.ttf",
+							"fa-duotone-900.woff": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-duotone-900.woff",
+							"fa-duotone-900.woff2": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-duotone-900.woff2",
+							"fa-light-300.eot": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-light-300.eot",
+							"fa-light-300.svg": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-light-300.svg",
+							"fa-light-300.ttf": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-light-300.ttf",
+							"fa-light-300.woff": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-light-300.woff",
+							"fa-light-300.woff2": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-light-300.woff2",
+							"fa-regular-400.eot": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-regular-400.eot",
+							"fa-regular-400.svg": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-regular-400.svg",
+							"fa-regular-400.ttf": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-regular-400.ttf",
+							"fa-regular-400.woff": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-regular-400.woff",
+							"fa-regular-400.woff2": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-regular-400.woff2",
+							"fa-solid-900.eot": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-solid-900.eot",
+							"fa-solid-900.svg": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-solid-900.svg",
+							"fa-solid-900.ttf": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-solid-900.ttf",
+							"fa-solid-900.woff": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-solid-900.woff",
+							"fa-solid-900.woff2": "/src/custom/webfonts/fontawesome-pro-master/webfonts/fa-solid-900.woff2"
+						}
+					},
+					"nextgen-fonts-master": {
+						"scss": {
+							"ng-icons.scss": "/src/custom/webfonts/nextgen-fonts-master/scss/ng-icons.scss",
+							"_core.scss": "/src/custom/webfonts/nextgen-fonts-master/scss/_core.scss",
+							"_variables.scss": "/src/custom/webfonts/nextgen-fonts-master/scss/_variables.scss"
+						},
+						"used-for-demo-pages": {
+							"extract-base-json.html": "/src/custom/webfonts/nextgen-fonts-master/used-for-demo-pages/extract-base-json.html",
+							"extract-bg-colors.html": "/src/custom/webfonts/nextgen-fonts-master/used-for-demo-pages/extract-bg-colors.html",
+							"extract-icons-json.html": "/src/custom/webfonts/nextgen-fonts-master/used-for-demo-pages/extract-icons-json.html",
+							"extract-text-colors.html": "/src/custom/webfonts/nextgen-fonts-master/used-for-demo-pages/extract-text-colors.html",
+							"ng-bg-colors.json": "/src/custom/webfonts/nextgen-fonts-master/used-for-demo-pages/ng-bg-colors.json",
+							"ng-icon-base.json": "/src/custom/webfonts/nextgen-fonts-master/used-for-demo-pages/ng-icon-base.json",
+							"ng-icon-list.json": "/src/custom/webfonts/nextgen-fonts-master/used-for-demo-pages/ng-icon-list.json",
+							"ng-text-colors.json": "/src/custom/webfonts/nextgen-fonts-master/used-for-demo-pages/ng-text-colors.json"
+						},
+						"webfonts": {
+							"nextgen-icons.eot": "/src/custom/webfonts/nextgen-fonts-master/webfonts/nextgen-icons.eot",
+							"nextgen-icons.svg": "/src/custom/webfonts/nextgen-fonts-master/webfonts/nextgen-icons.svg",
+							"nextgen-icons.ttf": "/src/custom/webfonts/nextgen-fonts-master/webfonts/nextgen-icons.ttf",
+							"nextgen-icons.woff": "/src/custom/webfonts/nextgen-fonts-master/webfonts/nextgen-icons.woff",
+							"nextgen-icons.woff2": "/src/custom/webfonts/nextgen-fonts-master/webfonts/nextgen-icons.woff2"
+						}
+					},
+					"plugins": {
+						"summernote": {
+							"summernote.eot": "/src/custom/webfonts/plugins/summernote/summernote.eot",
+							"summernote.ttf": "/src/custom/webfonts/plugins/summernote/summernote.ttf",
+							"summernote.woff": "/src/custom/webfonts/plugins/summernote/summernote.woff"
+						}
+					}
+				},
+				"plugins": {
+					"@fullcalendar": {
+						"bootstrap-main-cust.js": "/src/custom/plugins/@fullcalendar/bootstrap-main-cust.js",
+						"core-main-override.scss": "/src/custom/plugins/@fullcalendar/core-main-override.scss"
+					},
+					"datatables": {
+						"datatables.styles.app.js": "/src/custom/plugins/datatables/datatables.styles.app.js",
+						"datatables.styles.app.scss": "/src/custom/plugins/datatables/datatables.styles.app.scss",
+						"datatables.styles.buttons.app.js": "/src/custom/plugins/datatables/datatables.styles.buttons.app.js",
+						"demo-data": {
+							"2500.json": "/src/custom/plugins/datatables/demo-data/2500.json",
+							"server-demo.json": "/src/custom/plugins/datatables/demo-data/server-demo.json"
+						}
+					},
+					"bootbox": {
+						"bootbox-config.js": "/src/custom/plugins/bootbox/bootbox-config.js",
+						"bootbox-cust.js": "/src/custom/plugins/bootbox/bootbox-cust.js",
+						"whats-changed.txt": "/src/custom/plugins/bootbox/whats-changed.txt"
+					},
+					"chartist": {
+						"chartist.scss": "/src/custom/plugins/chartist/chartist.scss",
+						"_chartist-settings-custom.scss": "/src/custom/plugins/chartist/_chartist-settings-custom.scss"
+					},
+					"cropperjs": {
+						"cropper-demo.scss": "/src/custom/plugins/cropperjs/cropper-demo.scss"
+					},
+					"datatables-alteditor": {
+						"datatables-alteditor.js": "/src/custom/plugins/datatables-alteditor/datatables-alteditor.js"
+					},
+					"datepicker": {
+						"datepicker-custom.scss": "/src/custom/plugins/datepicker/datepicker-custom.scss"
+					},
+					"daterangepicker": {
+						"daterangepicker-custom.scss": "/src/custom/plugins/daterangepicker/daterangepicker-custom.scss"
+					},
+					"dropzone": {
+						"dropzone-custom.scss": "/src/custom/plugins/dropzone/dropzone-custom.scss"
+					},
+					"easy-pie-chart": {
+						"jquery.easypiechart.config.js": "/src/custom/plugins/easy-pie-chart/jquery.easypiechart.config.js"
+					},
+					"ion-rangeslider": {
+						"ion.rangeslider-custom.scss": "/src/custom/plugins/ion-rangeslider/ion.rangeslider-custom.scss"
+					},
+					"jquery-snippets": {
+						"jquery-snippets.js": "/src/custom/plugins/jquery-snippets/jquery-snippets.js"
+					},
+					"jquery-sparkline": {
+						"jquery-sparkline.config.js": "/src/custom/plugins/jquery-sparkline/jquery-sparkline.config.js"
+					},
+					"jquery-ui-cust": {
+						"jquery-ui-cust.js": "/src/custom/plugins/jquery-ui-cust/jquery-ui-cust.js"
+					},
+					"jqvmap": {
+						"jqvmap-cust.scss": "/src/custom/plugins/jqvmap/jqvmap-cust.scss"
+					},
+					"lightgallery": {
+						"custom-styles.scss": "/src/custom/plugins/lightgallery/custom-styles.scss",
+						"lightgallery.scss": "/src/custom/plugins/lightgallery/lightgallery.scss",
+						"_variables.scss": "/src/custom/plugins/lightgallery/_variables.scss"
+					},
+					"markdown": {
+						"markdown.config.js": "/src/custom/plugins/markdown/markdown.config.js"
+					},
+					"nestable": {
+						"nestable.scss": "/src/custom/plugins/nestable/nestable.scss"
+					},
+					"peity": {
+						"jquery.peity.config.js": "/src/custom/plugins/peity/jquery.peity.config.js"
+					},
+					"reactions": {
+						"html.txt": "/src/custom/plugins/reactions/html.txt",
+						"reactions.scss": "/src/custom/plugins/reactions/reactions.scss"
+					},
+					"select2": {
+						"select2-cust.scss": "/src/custom/plugins/select2/select2-cust.scss"
+					},
+					"smartpanels": {
+						"smartpanels.js": "/src/custom/plugins/smartpanels/smartpanels.js"
+					},
+					"smartvoice": {
+						"smartvoice-config.js": "/src/custom/plugins/smartvoice/smartvoice-config.js",
+						"smartvoice.js": "/src/custom/plugins/smartvoice/smartvoice.js"
+					},
+					"summernote": {
+						"summernote-custom.scss": "/src/custom/plugins/summernote/summernote-custom.scss"
+					},
+					"sweetalert2": {
+						"sweetalert2.scss": "/src/custom/plugins/sweetalert2/sweetalert2.scss",
+						"_variables.scss": "/src/custom/plugins/sweetalert2/_variables.scss"
+					},
+					"toastr": {
+						"toastr-custom.scss": "/src/custom/plugins/toastr/toastr-custom.scss"
+					},
+					"treeview": {
+						"treeview.js": "/src/custom/plugins/treeview/treeview.js",
+						"treeview.scss": "/src/custom/plugins/treeview/treeview.scss"
+					}
+				}
+			}
+		}
+	}
+}

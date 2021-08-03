@@ -1,0 +1,121 @@
+@page
+@model FaqModel
+@{
+    ViewData["Title"] = "FAQ";
+    ViewData["PageName"] = "aspnetcore_faq";
+    ViewData["Heading"] = "<i class='fal fa-folder-open'></i> FAQ: <span class='fw-300'>Common issues</span>";
+    ViewData["Category1"] = "Solution Overview";
+}
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Frequently Asked Questions for @Settings.AppFlavor
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="accordion accordion-hover" id="js_demo_accordion-5">
+                            <div class="card">
+                                <div class="card-header">
+                                    <a href="javascript:void(0);" class="card-title pb-2 pt-2 bg-white text-primary fs-lg border-bottom border-dashed border-faded">
+                                        <i class="fal fa-cog width-2 fs-xl"></i>
+                                        Installation: I am getting a message stating that <code class="bg-transparent mx-1">dotnet</code> is not a valid command?
+                                    </a>
+                                </div>
+                                <div class="collapse show">
+                                    <div class="card-body">
+                                        This happens when <code>cmd.exe</code> is running as a 32-bit process. You can install the 32-bit version of the ASP.NET Core 3.1 SDK in order to use the <code>dotnet</code> command in your command line tool of choice.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <a href="javascript:void(0);" class="card-title pb-2 pt-2 bg-white text-primary fs-lg border-bottom border-dashed border-faded">
+                                        <i class="fal fa-shield width-2 fs-xl"></i>
+                                        I am getting a browser warning about an insecure website?
+                                    </a>
+                                </div>
+                                <div class="collapse show">
+                                    <div class="card-body">
+                                        This is most likely because there is no localhost certificate available on your computer or the one installed has not been marked trusted yet.
+                                        You can run <code>dotnet dev-certs https --trust</code> in an elevated command prompt to enable trust on the development certificate.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <a href="javascript:void(0);" class="card-title pb-2 pt-2 bg-white text-primary fs-lg border-bottom border-dashed border-faded">
+                                        <i class="fal fa-database width-2 fs-xl"></i>
+                                        I am getting an error that the application cannot start because of missing database migrations?
+                                    </a>
+                                </div>
+                                <div class="collapse show">
+                                    <div class="card-body">
+                                        You can follow the instructions shown on the page and click the big <strong>blue</strong> button that says: <code>Apply migration</code>.
+                                        This will initialize your database platform with the necessary tables to allow you to create and authenticate users.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <a href="javascript:void(0);" class="card-title pb-2 pt-2 bg-white text-primary fs-lg border-bottom border-dashed border-faded">
+                                        <i class="fal fa-lock width-2 fs-xl"></i>
+                                        I am getting an error similar to: 'Invalid login attempt'?
+                                    </a>
+                                </div>
+                                <div class="collapse show">
+                                    <div class="card-body">
+                                        This means that the preconfigured user does not exist (yet) in your local database.
+                                        You can go ahead to the Register page to create the user and afterwards you should be able to login with the <strong>pre-filled credentials</strong> to enter the main website.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <a href="javascript:void(0);" class="card-title pb-2 pt-2 bg-white text-primary fs-lg border-bottom border-dashed border-faded">
+                                        <i class="fal fa-lock width-2 fs-xl"></i>
+                                        Why is the <code class="bg-transparent mx-1">nav.json</code> file served from the root of the project?
+                                    </a>
+                                </div>
+                                <div class="collapse show">
+                                    <div class="card-body">
+                                        Typically most websites will have <strong>StaticFiles</strong> enabled and this would allow the files to be downloaded.
+                                        All files that should be accesible by your visitors is served from the <strong>wwwroot</strong> directory; the navigation sources do not qualify for this as the file is assumed to be of temporary nature.
+                                        Furthermore it exists mainly for demo purposes as the assumption is made that you would most likely add the ability to generate a dynamic menu from other data sources, such as a database.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <a href="javascript:void(0);" class="card-title pb-2 pt-2 bg-white text-primary fs-lg border-bottom border-dashed border-faded">
+                                        <i class="fal fa-lock width-2 fs-xl"></i>
+                                        Why is feature <code class="bg-transparent mx-1">Xyz</code> or functionality <code class="bg-transparent mx-1">Acme</code> not included in the project by default?
+                                    </a>
+                                </div>
+                                <div class="collapse show">
+                                    <div class="card-body">
+                                        <p>
+                                            First and foremost, this project is not meant to serve as a <strong>1-in-all</strong> solution for your project start to finish.
+                                            It was built and structured in such a way that it can be used as a starting point based on the set of features that speak the most to your intent and purpose (Please see the <a asp-controller="AspNetCore" asp-action="Editions">Editions</a> page to help you decide).
+                                        </p>
+                                        <p>
+                                            While we certainly understand your frustration when a specific feature you were looking forward to is not included, we also assume you yourself are perfectly capable of expanding the features of your project over time.
+                                            <br/>
+                                            If and when a new update happens to include the feature you were (patiently) waiting for, great!
+                                            <br/>
+                                            Still not added to the project? What?! Don't worry :-) Feel free to let us know on the <a href="https://support.gotbootstrap.com/t/asp-net-core" target="_blank">Supports Forum</a> so we track the interest and see about getting it added in the next version of the template.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
