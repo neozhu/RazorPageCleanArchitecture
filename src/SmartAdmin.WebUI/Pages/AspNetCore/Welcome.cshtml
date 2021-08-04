@@ -126,3 +126,11 @@
         </div>
     </div>
 </div>
+
+@section ScriptsBlock{
+<script>
+    $.get('@Url.Page("/AspNetCore/Welcome")?handler=Filter&input=HellWord').done(res=>{
+      console.log(res);
+        })
+</script>
+}

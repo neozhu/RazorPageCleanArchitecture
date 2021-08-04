@@ -20,5 +20,10 @@ namespace SmartAdmin.WebUI.Pages.AspNetCore
         public void OnGet()
         {
         }
+    public async Task<JsonResult> OnGetFilter(string input)
+    {
+      return new JsonResult(input);
     }
+
+  }
 }

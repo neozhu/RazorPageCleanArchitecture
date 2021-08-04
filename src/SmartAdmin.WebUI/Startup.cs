@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SmartAdmin.WebUI.Models;
+using static IdentityModel.ClaimComparer;
 
 namespace SmartAdmin.WebUI
 {
@@ -47,7 +48,9 @@ namespace SmartAdmin.WebUI
       services.AddDatabaseDeveloperPageExceptionFilter();
       services.AddSingleton<ICurrentUserService, CurrentUserService>();
       services.AddTransient<IEmailSender, EmailSender>();
-
+      services.AddAntiforgery(options => {
+        options.Cookie.Name = "AntiforgeryCookie";
+        });
       services.AddControllers();
       services
           .AddRazorPages()
