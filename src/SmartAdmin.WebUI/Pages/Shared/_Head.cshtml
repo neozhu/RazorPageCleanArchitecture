@@ -1,0 +1,21 @@
+<meta charset="utf-8">
+<title>
+@if (ViewBag.Title?.Length > 0)
+{
+	<text>@ViewData["Title"] - @ViewData["Category1"] - @Settings.App v@(Settings.Version)</text>
+} else {
+	@Settings.App
+}
+</title>
+<base href="~/"/>
+<meta name="description" content="@ViewBag.Title">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="msapplication-tap-highlight" content="no">
+<link id="vendorsbundle" rel="stylesheet" media="screen, print" href="~/css/vendors.bundle.css">
+<link id="appbundle" rel="stylesheet" media="screen, print" href="~/css/app.bundle.css">
+<link id="mytheme" rel="stylesheet" media="screen, print" href="~/css/themes/cust-theme-3.css">
+<link id="myskin" rel="stylesheet" media="screen, print" href="~/css/skins/skin-master.css">
+<link rel="stylesheet" media="screen, print" href="~/css/site.css">
+<partial name="_Favicon"/>

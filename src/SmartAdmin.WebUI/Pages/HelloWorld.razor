@@ -1,0 +1,27 @@
+@page "/Hello"
+@inject Microsoft.JSInterop.IJSRuntime Runtime
+@{
+    // Helper code just for demonstration purposes
+    var isRazorEnabled = Runtime.GetType().Name != "UnsupportedJavaScriptRuntime";
+}
+@if (isRazorEnabled)
+{
+    <li>
+        <div class="alert alert-success mb-0 mt-1 p-1">
+            <strong>Message:</strong> Hello @Name!
+            <button class="btn btn-sm btn-primary" @onclick="@Toggle">Click Me!</button>
+        </div>
+    </li>
+}
+else
+{
+    <li>
+        <div class="alert alert-danger mb-0 mt-1 p-1">
+            <strong>Hi!</strong> It seems Blazor is not fully enabled yet! Please follow the instructions and reload this page!
+        </div>
+    </li>
+}
+@code {
+    string Name { get; set; } = "SmartAdmin Blazor";
+    void Toggle() => Name = Name == "SmartAdmin Blazor" ? "SmartAdmin" : "SmartAdmin Blazor";
+}

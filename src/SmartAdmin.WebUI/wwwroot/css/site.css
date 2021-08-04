@@ -1,0 +1,121 @@
+﻿/* Bootstrap Validation Summary Override */
+/* Bootstrap Validation Summary Override */
+.validation-summary-valid {
+    display: none;
+}
+
+.validation-summary-errors ul {
+    margin-bottom: 0;
+    padding-left: 1rem;
+}
+
+.alert.validation-summary-errors {
+    margin-bottom: 1rem;
+}
+
+.col-0 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 4.166665%;
+    flex: 0 0 4.166665%;
+    max-width: 4.166665%;
+    width: 4.166665%;
+}
+
+.col-1 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 8.33333%;
+    flex: 0 0 8.33333%;
+    max-width: 8.33333%;
+    width: 8.33333%;
+}
+
+.col-2 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 16.66666%;
+    flex: 0 0 16.66666%;
+    max-width: 16.66666%;
+    width: 16.66666%;
+}
+
+.dataTables_empty {
+    font-size: 1.5rem !important;
+}
+
+/* Reference classes, no implementation */
+.base,
+.needs-validation,
+.flex-start,
+.text-faded,
+.app-container-demo,
+.lang-js,
+.lang-csharp,
+.has-tooltip,
+.has-popover {
+}
+
+/* Keeps analyzers happy */
+.js-waves-off,
+.js-waves-on,
+.js-get-date,
+.js-collapse,
+.js-modal-settings,
+.js-filter-message,
+.js-buttons,
+.js-icon-class,
+.js-icon-copy,
+.js-bg-color,
+.js-bg-gradient,
+.js-bg-gradient-demo,
+.js-bg-target {
+}
+
+/* Small word wrap correction */
+section > ol > li {
+    word-break: break-all;
+}
+
+code {
+    border: 1px solid silver;
+    padding: 0.03rem 0.2rem !important;
+}
+
+pre.prettyprint {
+    border-radius: 0.2rem;
+    padding-left: 0.4rem !important;
+    padding-right: 0.4rem !important;
+}
+
+.documentation h2 {
+    color: var(--primary);
+}
+
+.documentation th:first-child,
+.documentation th:nth-child(3) {
+    width: 16%;
+}
+
+.documentation blockquote {
+    margin-left: 1rem;
+    padding: 1rem 1rem 0.01rem 1rem;
+    font-weight: 400;
+    border-radius: 0 4px 4px 0;
+    background: #edf2f9;
+    border-left: 3px solid var(--primary);
+}
+
+    .documentation blockquote.info {
+        background: #edf2f9;
+        border-left: 3px solid var(--info);
+    }
+
+    .documentation blockquote.warning {
+        background: #fff4db;
+        border-left: 3px solid var(--warning);
+    }
+
+    .documentation blockquote.danger {
+        background: #fadeeb;
+        border-left: 3px solid var(--danger);
+    }
+
+/* Enter custom CSS rules for your application here */

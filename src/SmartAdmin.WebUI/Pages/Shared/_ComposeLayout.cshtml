@@ -1,0 +1,33 @@
+<div class="px-3">
+	<input id="message-to" type="text" placeholder="Recipients" class="form-control border-top-0 border-left-0 border-right-0 px-0 rounded-0 fs-md mt-2 pr-5" tabindex="2">
+	<a href="javascript:void(0)" class="position-absolute pos-right pos-top mt-3 mr-4" data-action="toggle" data-class="d-block" data-target="#message-to-cc" data-focus="message-to-cc" data-toggle="tooltip" data-original-title="Add Cc recipients" data-placement="bottom">Cc</a>
+	<input id="message-to-cc" type="text" placeholder="Cc" class="form-control border-top-0 border-left-0 border-right-0 px-0 rounded-0 fs-md mt-2 d-none" tabindex="3">
+	<input type="text" placeholder="Subject" class="form-control border-top-0 border-left-0 border-right-0 px-0 rounded-0 fs-md mt-2" tabindex="4">
+</div>
+<div class="flex-1" style="overflow-y: auto;">
+	<div id='fake_textarea' class="form-control rounded-0 w-100 h-100 border-0 py-3" contenteditable tabindex="5">
+		<br>
+		<br>
+		<partial name="_Signature"/>
+	</div>
+</div>
+<div class="px-3 py-4 d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+	<a href="javascript:void(0);" class="btn btn-info mr-3">Send</a>
+	<a href="javascript:void(0);" class="btn btn-icon fs-xl mr-1" data-toggle="tooltip" data-original-title="Formatting options" data-placement="top">
+		<i class="fas fa-font color-fusion-300"></i>
+	</a>
+	<a href="javascript:void(0);" class="btn btn-icon fs-xl mr-1" data-toggle="tooltip" data-original-title="Attach files" data-placement="top">
+		<i class="fas fa-paperclip color-fusion-300"></i>
+	</a>
+	<a href="javascript:void(0);" class="btn btn-icon fs-xl mr-1" data-toggle="tooltip" data-original-title="Insert photo" data-placement="top">
+		<i class="fas fa-camera color-fusion-300"></i>
+	</a>
+	<div class="ml-auto">
+		<a href="javascript:void(0);" class="btn btn-icon fs-xl" data-toggle="tooltip" data-original-title="Disregard draft" data-placement="top">
+			<i class="fas fa-trash color-fusion-300"></i>
+		</a>
+		<a href="javascript:void(0);" class="btn btn-icon fs-xl width-1" data-toggle="tooltip" data-original-title="More options" data-placement="top">
+			<i class="fas fa-ellipsis-v-alt color-fusion-300"></i>
+		</a>						
+	</div>
+</div>

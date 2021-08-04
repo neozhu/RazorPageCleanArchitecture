@@ -1,0 +1,40 @@
+@page
+@model ClearfixModel
+@{ 
+	ViewData["Title"] = "Clearfix";
+	ViewData["PageName"] = "utilities_clearfix";
+	ViewData["Heading"] = "<i class='subheader-icon fal fa-window'></i>  Clearfix";
+	ViewData["Category1"] = "Utilities";
+	ViewData["PageDescription"] = "Quickly and easily clear floated content within a container by adding a clearfix utility.";
+}
+@section HeadBlock {
+<link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">
+}
+<div class="row">
+	<div class="col-xl-12">
+		<div id="panel-1" class="panel">
+			<div class="panel-hdr">	
+				<h2>
+					Clearfix <span class="fw-300"><i>example</i></span> 
+				</h2>
+				<div class="panel-toolbar">
+					<button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+					<button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+					<button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+				</div>
+			</div>
+			<div class="panel-container show">
+				<div class="panel-content">									
+					<div class="panel-tag">
+						Easily clear <code>float</code>s by adding <code>.clearfix</code> <strong>to the parent element</strong>. Can also be used as a mixin.
+					</div>
+					<div class="bg-info clearfix">
+						<button type="button" class="btn btn-secondary float-left">Example Button floated left</button>
+						<button type="button" class="btn btn-secondary float-right">Example Button floated right</button>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+</div>
+@section ScriptsBlock {}

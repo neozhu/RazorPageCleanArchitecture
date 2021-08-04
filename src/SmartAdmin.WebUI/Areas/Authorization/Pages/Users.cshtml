@@ -1,0 +1,76 @@
+﻿@page
+@model UserModel
+@{
+    ViewData["Title"] = "Users";
+    ViewData["PageName"] = "authorization_users";
+    ViewData["Heading"] = "<i class='fal fa-shield-alt'></i> Authorization: <span class='fw-300'>Users</span>";
+    ViewData["Category1"] = "Authorization";
+    ViewData["PageIcon"] = "fa-shield-alt";
+}
+
+@section HeadBlock {
+    <link rel="stylesheet" media="screen, print" href="~/css/datagrid/datatables/datatables.bundle.css">
+    <link rel="stylesheet" media="screen, print" href="~/css/formplugins/select2/select2.bundle.css">
+}
+
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <table id="dt-list" class="table table-bordered table-hover table-striped w-100"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section ScriptsBlock {
+    <script src="~/js/datagrid/datatables/datatables.bundle.js"></script>
+    <script src="~/js/formplugins/select2/select2.bundle.js"></script>
+    <script>
+        $(function () {
+            const endpoint = "/api/users";
+            const trueFalseOptions = ["false", "true"];
+            $('#dt-list').DataTableEdit({
+                ajax: endpoint,
+                columns: [
+                    { title: "Id", data: "id", type: "readonly", visible: false, searchable: false },
+                    { title: "ConcurrencyStamp", data: "concurrencyStamp", type: "readonly", visible: false, searchable: false },
+                    { title: "UserName", data: "userName", type: "readonly" },
+                    { title: "Email", data: "email" },
+                    {
+                        title: "Confirmed",
+                        data: "emailConfirmed",
+                        className: "text-center col-1",
+                        type: "select",
+                        options: trueFalseOptions,
+                        render: function (data) {
+                            return `<input type="checkbox" name="lockoutEnabled" disabled ${data ? "checked" : ""}>`;
+                        }
+                    },
+                    { title: "PhoneNumber", data: "phoneNumber" },
+                    {
+                        title: "LockOut",
+                        data: "lockoutEnabled",
+                        className: "text-center col-1",
+                        type: "select",
+                        options: trueFalseOptions,
+                        render: function (data) {
+                            return `<input type="checkbox" name="lockoutEnabled" disabled ${data ? "checked" : ""}>`;
+                        }
+                    }
+                ],
+                onAddRow: function (table, rowdata, success, error) {
+                    $.ajax({ url: endpoint, type: 'POST', data: rowdata, success: success, error: error });
+                },
+                onDeleteRow: function (table, rowdata, success, error) {
+                    $.ajax({ url: endpoint, type: 'DELETE', data: rowdata, success: success, error: error });
+                },
+                onEditRow: function (table, rowdata, success, error) {
+                    $.ajax({ url: endpoint, type: 'PUT', data: rowdata, success: success, error: error });
+                }
+            });
+        });
+    </script>
+}
