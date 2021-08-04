@@ -24,6 +24,9 @@ namespace SmartAdmin.WebUI.Pages.AspNetCore
     {
       return new JsonResult(input);
     }
-
+    public async Task<JsonResult> OnPost(string input)
+    {
+      return new JsonResult("");
+    }
   }
 }
