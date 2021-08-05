@@ -26,6 +26,11 @@
                 <span class="invalid-feedback" asp-validation-for="Input.Site">Sorry, you missed this one.</span>
             </div>
             <div class="form-group">
+                <label class="col-xl-12 form-label">Login user name</label>
+                <input type="text" asp-for="Input.UserName" class="form-control" placeholder="User name" />
+                <span class="invalid-feedback" asp-validation-for="Input.UserName">Sorry, you missed this one.</span>
+            </div>
+            <div class="form-group">
                 <label class="col-xl-12 form-label">Your display name</label>
                 <input type="text" asp-for="Input.DisplayName" class="form-control" placeholder="Display name" />
                 <span class="invalid-feedback" asp-validation-for="Input.DisplayName">Sorry, you missed this one.</span>
@@ -33,19 +38,19 @@
             </div>
             <div class="form-group">
                 <label class="form-label" asp-for="Input.Email">Email will be needed for verification and account recovery</label>
-                <input type="email" asp-for="Input.Email" class="form-control" placeholder="Email for verification" value="drlantern@gotbootstrap.com" required="required" />
+                <input type="email" asp-for="Input.Email" class="form-control" placeholder="Email for verification" value="" required="required" />
                 <span class="invalid-feedback" asp-validation-for="Input.Email">Sorry, you missed this one.</span>
                 <div class="help-block">Your email will also be your username</div>
             </div>
             <div class="form-group">
                 <label class="form-label" asp-for="Input.Password">Please pick a password</label>
-                <input type="password" asp-for="Input.Password" class="form-control" placeholder="Email for verification (minimum 6 characters)" value="Password123!" required="required" />
+                <input type="password" asp-for="Input.Password" class="form-control" placeholder="Email for verification (minimum 6 characters)" value="" required="required" />
                 <span class="invalid-feedback" asp-validation-for="Input.Password">Sorry, you missed this one.</span>
                 <div class="help-block">Your password must be 6-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emojis.</div>
             </div>
             <div class="form-group">
                 <label class="form-label" asp-for="Input.ConfirmPassword">Please confirm your password</label>
-                <input type="password" asp-for="Input.ConfirmPassword" class="form-control" placeholder="Email for verification (minimum 6 characters)" value="Password123!" required="required" />
+                <input type="password" asp-for="Input.ConfirmPassword" class="form-control" placeholder="Email for verification (minimum 6 characters)" value="" required="required" />
                 <span class="invalid-feedback" asp-validation-for="Input.ConfirmPassword">Sorry, you missed this one.</span>
             </div>
             <div class="form-group demo">
