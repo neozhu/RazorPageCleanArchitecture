@@ -43,4 +43,6 @@
 
         public static SmartError Failed(params string[] errors) => new SmartError { Errors = new[] { errors } };
     }
+
+
 }

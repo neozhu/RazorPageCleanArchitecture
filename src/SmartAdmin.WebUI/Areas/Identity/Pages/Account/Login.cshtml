@@ -47,10 +47,10 @@
         <form id="js-login" method="post">
             <div asp-validation-summary="All" class="alert alert-primary text-dark"></div>
             <div class="form-group">
-                <label class="form-label" asp-for="Input.Email">Username</label>
-                <input type="email" asp-for="Input.Email" class="form-control" placeholder="Email for verification" value="drlantern@gotbootstrap.com" required="required" />
-                <span class="invalid-feedback" asp-validation-for="Input.Email">Sorry, you missed this one.</span>
-                <div class="help-block">The email address you registered with</div>
+                <label class="form-label" asp-for="Input.UserName">Username</label>
+                <input type="text" asp-for="Input.UserName" class="form-control" placeholder="Email for verification" value="drlantern@gotbootstrap.com" required="required" />
+                <span class="invalid-feedback" asp-validation-for="Input.UserName">Sorry, you missed this one.</span>
+                <div class="help-block">The user name you registered with</div>
             </div>
             <div class="form-group">
                 <label class="form-label" asp-for="Input.Password">Password</label>

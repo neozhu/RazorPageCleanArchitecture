@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using CleanArchitecture.Razor.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
     public class LockoutModel : PageModel
     {
         private readonly ILogger<LogoutModel> _logger;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -24,7 +25,7 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
             public string Password { get; set; }
         }
 
-        public LockoutModel(SignInManager<IdentityUser> signInManager, ILogger<LogoutModel> logger)
+        public LockoutModel(SignInManager<ApplicationUser> signInManager, ILogger<LogoutModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;
