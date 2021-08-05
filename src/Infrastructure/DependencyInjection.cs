@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Persistence;
 using CleanArchitecture.Razor.Infrastructure.Services;
@@ -17,7 +17,7 @@ namespace CleanArchitecture.Razor.Infrastructure
       if (configuration.GetValue<bool>("UseInMemoryDatabase"))
       {
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseInMemoryDatabase("CleanArchitectureRazorDb"));
+            options.UseInMemoryDatabase("CleanArchitecture.RazorDb"));
       }
       else
       {

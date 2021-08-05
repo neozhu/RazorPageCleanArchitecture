@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CleanArchitecture.Razor.Infrastructure.Migrations
+namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
 {
     public partial class InitialCreate : Migration
     {
