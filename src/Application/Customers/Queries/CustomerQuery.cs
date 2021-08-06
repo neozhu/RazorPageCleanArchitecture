@@ -20,6 +20,8 @@ namespace CleanArchitecture.Razor.Application.Customers.Queries
         public FilterRule[] filterRules { get; set; }
         public int page { get; set; } = 1;
         public int rows { get; set; } = 15;
+        public string sort { get; set; } = "Id";
+        public string order { get; set; } = "desc";
     }
     public class CustomersQueryHandler : IRequestHandler<CustomersWithPaginationQuery, PaginatedData<CustomerDto>>
     {
