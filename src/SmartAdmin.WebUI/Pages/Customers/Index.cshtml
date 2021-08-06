@@ -1,0 +1,96 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@model SmartAdmin.WebUI.Pages.Customers.IndexModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
+@{
+    ViewData["Title"] = _localizer["Customers"].Value;
+    ViewData["PageName"] = "customer_index";
+    ViewData["Category1"] = _localizer["Customers"].Value;
+    ViewData["Heading"] = _localizer["Customers"].Value;
+    ViewData["PageDescription"] = _localizer["See all available options"].Value;
+    ViewData["PreemptiveClass"] = "layout-composed";
+}
+@section HeadBlock {
+<link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+<link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">
+<link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/default/easyui.css">
+}
+<div id="js-page-content-demopanels" class="card mb-g">
+    <div class="card-header bg-white d-flex align-items-center">
+        <h4 class="m-0">
+            @_localizer["Customers"]
+            <small>@_localizer["See all available options"]</small>
+        </h4>
+        <div class="ml-auto">
+            <button class="btn btn-sm btn-outline-primary " id="addbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
+                @_localizer["Add"]
+            </button>
+            <button class="btn btn-sm btn-outline-danger " id="deletebutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-minus mr-1"></span>
+                @_localizer["Delete"]
+            </button>
+            <button class="btn btn-sm btn-outline-primary " id="searchbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
+                @_localizer["Search"]
+            </button>
+            <div class="btn-group" role="group">
+                <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @_localizer["Import"]
+                </button>
+                <div class="dropdown-menu" aria-labelledby="importbutton">
+                    <a class="dropdown-item" href="#">@_localizer["Download Template"]</a>
+                </div>
+            </div>
+            <button class="btn btn-sm btn-outline-primary " id="exportbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                @_localizer["Export"]
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered  m-0">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>Username</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">1</th>
+									<td>Mark</td>
+									<td>Otto</td>
+									<td>@@mdo</td>
+								</tr>
+								<tr>
+									<th scope="row">2</th>
+									<td>Jacob</td>
+									<td>Thornton</td>
+									<td>@@fat</td>
+								</tr>
+								<tr>
+									<th scope="row">3</th>
+									<td>Larry</td>
+									<td>the Bird</td>
+									<td>@@twitter</td>
+								</tr>
+								<tr>
+									<th scope="row">4</th>
+									<td colspan="2">Larry the Bird</td>
+									<td>@@twitter</td>
+								</tr>
+							</tbody>
+						</table>
+            </div>
+        </div>
+    </div>
+</div>
+@section ScriptsBlock {
+
+}

@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\easyui\" />
+  </ItemGroup>
+
 </Project>

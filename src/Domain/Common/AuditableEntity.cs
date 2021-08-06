@@ -1,8 +1,11 @@
-﻿using System;
+using System;
 
 namespace CleanArchitecture.Razor.Domain.Common
 {
-    public abstract class AuditableEntity
+    public interface IEntity {
+       
+     }
+    public abstract class AuditableEntity:IEntity
     {
         public DateTime Created { get; set; }
 

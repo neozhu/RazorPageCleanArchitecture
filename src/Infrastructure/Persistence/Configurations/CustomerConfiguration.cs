@@ -8,6 +8,7 @@ namespace CleanArchitecture.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
+            builder.Ignore(e => e.DomainEvents);
             builder.Property(t => t.PartnerType)
                 .HasConversion<string>();
         }

@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Razor.Application;
+using CleanArchitecture.Razor.Application;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Infrastructure;
 using CleanArchitecture.Razor.Infrastructure.Identity;
@@ -33,9 +33,10 @@ namespace SmartAdmin.WebUI
     {
       services.Configure<SmartSettings>(Configuration.GetSection(SmartSettings.SectionName));
 
-      // Note: This line is for demonstration purposes only, I would not recommend using this as a shorthand approach for accessing settings
-      // While having to type '.Value' everywhere is driving me nuts (>_<), using this method means reloaded appSettings.json from disk will not work
-      services.AddSingleton(s => s.GetRequiredService<IOptions<SmartSettings>>().Value);
+     services.AddLocalization(options => options.ResourcesPath = "Resources");
+            // Note: This line is for demonstration purposes only, I would not recommend using this as a shorthand approach for accessing settings
+            // While having to type '.Value' everywhere is driving me nuts (>_<), using this method means reloaded appSettings.json from disk will not work
+            services.AddSingleton(s => s.GetRequiredService<IOptions<SmartSettings>>().Value);
 
       services.Configure<CookiePolicyOptions>(options =>
       {

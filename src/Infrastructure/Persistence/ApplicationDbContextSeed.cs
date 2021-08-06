@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CleanArchitecture.Infrastructure.Persistence
+namespace CleanArchitecture.Razor.Infrastructure.Persistence
 {
     public static class ApplicationDbContextSeed
     {
