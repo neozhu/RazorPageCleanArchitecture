@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Infrastructure.Identity;
@@ -57,14 +57,26 @@ namespace SmartAdmin.WebUI.EndPoints
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Update([FromForm]ApplicationRole model)
         {
-            var result = await _manager.UpdateAsync(model);
-
-            if (result.Succeeded)
+            var role= await _manager.FindByIdAsync(model.Id);
+            if (role != null)
             {
-                return NoContent();
-            }
+                role.Name = model.Name;
+                role.Description = model.Description;
 
-            return BadRequest(result);
+                var result = await _manager.UpdateAsync(role);
+
+                if (result.Succeeded)
+                {
+                    return NoContent();
+                }
+                else
+                {
+                    return BadRequest(result);
+                }
+            }
+            
+
+            return BadRequest(IdentityResult.Failed());
         }
 
         [HttpDelete]

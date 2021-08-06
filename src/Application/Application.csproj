@@ -20,4 +20,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Extensions\" />
+    <Folder Include="Customers\Commands\" />
+    <Folder Include="Customers\EventHandlers\" />
+  </ItemGroup>
+
 </Project>

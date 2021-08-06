@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Infrastructure.Identity;
@@ -45,7 +45,7 @@ namespace SmartAdmin.WebUI.EndPoints
         public async Task<IActionResult> Create([FromForm]ApplicationUser model)
         {
             model.Id = Guid.NewGuid().ToString();
-            model.UserName = model.Email;
+            model.UserName = model.UserName??model.Email.Split('@')[0];
 
             var result = await _manager.CreateAsync(model);
 
@@ -68,14 +68,30 @@ namespace SmartAdmin.WebUI.EndPoints
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Update([FromForm]ApplicationUser model)
         {
-            var result = await _context.UpdateAsync(model, model.Id);
-
-            if (result.Succeeded)
+            var user =await this._manager.FindByIdAsync(model.Id);
+            if (user != null)
             {
-                return NoContent();
+                user.Site = model.Site;
+                user.UserName = model.UserName;
+                user.Email = model.Email;
+                user.DisplayName = model.DisplayName;
+                user.EmailConfirmed = model.EmailConfirmed;
+                user.PhoneNumber=model.PhoneNumber;
+                user.LockoutEnabled = model.LockoutEnabled;
+                var result = await this._manager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    return NoContent();
+                }
+                else
+                {
+                    return BadRequest(result);
+                }
+               
             }
+            
 
-            return BadRequest(result);
+            return BadRequest(IdentityResult.Failed());
         }
 
         [HttpDelete]

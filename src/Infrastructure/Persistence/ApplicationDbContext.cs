@@ -1,5 +1,6 @@
-﻿using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Domain.Common;
+using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -28,6 +29,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
             _dateTime = dateTime;
         }
 
+        public DbSet<Customer> Customers { get; set; }
   
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

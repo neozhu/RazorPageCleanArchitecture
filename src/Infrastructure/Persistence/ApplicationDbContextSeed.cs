@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Razor.Infrastructure.Identity;
+using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
@@ -10,19 +10,24 @@ namespace CleanArchitecture.Infrastructure.Persistence
     {
         public static async Task SeedDefaultUserAsync(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
-            var administratorRole = new ApplicationRole("Administrator");
+            var administratorRole = new ApplicationRole("Administrator") { Description= "Administrator" };
+            var userRole = new ApplicationRole("Users") { Description = "Users" };
 
             if (roleManager.Roles.All(r => r.Name != administratorRole.Name))
             {
                 await roleManager.CreateAsync(administratorRole);
+                await roleManager.CreateAsync(userRole);
             }
 
             var administrator = new ApplicationUser { UserName = "administrator" , IsActive=true,Site="Razor",DisplayName="Administrator", Email = "administrator@localhost" };
+            var demo = new ApplicationUser { UserName = "Demo", IsActive = true, Site = "Razor", DisplayName = "Demo", Email = "demo@localhost" };
 
             if (userManager.Users.All(u => u.UserName != administrator.UserName))
             {
-                await userManager.CreateAsync(administrator, "Administrator1!");
+                await userManager.CreateAsync(administrator, "Password123!");
                 await userManager.AddToRolesAsync(administrator, new[] { administratorRole.Name });
+                await userManager.CreateAsync(demo, "Password123!");
+                await userManager.AddToRolesAsync(demo, new[] { userRole.Name });
             }
         }
 

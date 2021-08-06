@@ -37,7 +37,8 @@
                     { title: "Id", data: "id", type: "readonly", visible: false, searchable: false },
                     { title: "ConcurrencyStamp", data: "concurrencyStamp", type: "readonly", visible: false, searchable: false },
                     { title: "Name", data: "name", type: "text" },
-                    { title: "Normalized", data: "normalizedName", type: "readonly" }
+                    { title: "Description", data: "description", type: "text" }
+                  
                 ],
                 onAddRow: function (table, rowdata, success, error) {
                     $.ajax({ url: endpoint, type: 'POST', data: rowdata, success: success, error: error });

@@ -36,8 +36,9 @@
                 ajax: endpoint,
                 columns: [
                     { title: "Id", data: "id", type: "readonly", visible: false, searchable: false },
-                    { title: "ConcurrencyStamp", data: "concurrencyStamp", type: "readonly", visible: false, searchable: false },
                     { title: "UserName", data: "userName", type: "readonly" },
+                    { title: "Site", data: "site", type: "text" },
+                    { title: "DisplayName", data: "displayName", type: "text" },
                     { title: "Email", data: "email" },
                     {
                         title: "Confirmed",
@@ -49,7 +50,7 @@
                             return `<input type="checkbox" name="lockoutEnabled" disabled ${data ? "checked" : ""}>`;
                         }
                     },
-                    { title: "PhoneNumber", data: "phoneNumber" },
+                    { title: "PhoneNumber", data: "phoneNumber",type: "text" },
                     {
                         title: "LockOut",
                         data: "lockoutEnabled",
