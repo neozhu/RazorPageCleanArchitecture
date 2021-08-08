@@ -1,5 +1,5 @@
 /**
- * EasyUI for jQuery 1.9.15
+ * EasyUI for jQuery 1.9.14
  * 
  * Copyright (c) 2009-2021 www.jeasyui.com. All rights reserved.
  *
@@ -212,7 +212,7 @@
 		var opts = state.options;
 		
 		state.window.draggable({
-			handle: '>.panel-header>.panel-title',
+			handle: '>div.panel-header>div.panel-title',
 			disabled: state.options.draggable == false,
 			onBeforeDrag: function(e){
 				if (state.mask) state.mask.css('z-index', $.fn.window.defaults.zIndex++);
@@ -306,12 +306,12 @@
 	$(function(){
 		if (!$._positionFixed){
 			$(window).resize(function(){
-				$('body>.window-mask:visible').css({
+				$('body>div.window-mask:visible').css({
 					width: '',
 					height: ''
 				});
 				setTimeout(function(){
-					$('body>.window-mask:visible').css($.fn.window.getMaskSize());
+					$('body>div.window-mask:visible').css($.fn.window.getMaskSize());
 				}, 50);
 			});
 		}

@@ -1,5 +1,5 @@
 /**
- * EasyUI for jQuery 1.9.15
+ * EasyUI for jQuery 1.9.14
  * 
  * Copyright (c) 2009-2021 www.jeasyui.com. All rights reserved.
  *
@@ -201,7 +201,7 @@
 		initValue: function(jq, value){
 			return jq.each(function(){
 				var opts = $(this).datebox('options');
-				// var value = opts.value;
+				var value = opts.value;
 				if (value){
 					var date = opts.parser.call(this, value);
 					value = opts.formatter.call(this, date);

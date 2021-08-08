@@ -1,5 +1,5 @@
 /**
- * EasyUI for jQuery 1.9.15
+ * EasyUI for jQuery 1.9.14
  * 
  * Copyright (c) 2009-2021 www.jeasyui.com. All rights reserved.
  *
@@ -151,27 +151,28 @@ return $.data(jq[0],"datebox").calendar;
 },initValue:function(jq,_2a){
 return jq.each(function(){
 var _2b=$(this).datebox("options");
-if(_2a){
-var _2c=_2b.parser.call(this,_2a);
-_2a=_2b.formatter.call(this,_2c);
-$(this).datebox("calendar").calendar("moveTo",_2c);
+var _2c=_2b.value;
+if(_2c){
+var _2d=_2b.parser.call(this,_2c);
+_2c=_2b.formatter.call(this,_2d);
+$(this).datebox("calendar").calendar("moveTo",_2d);
 }
-$(this).combo("initValue",_2a).combo("setText",_2a);
+$(this).combo("initValue",_2c).combo("setText",_2c);
 });
-},setValue:function(jq,_2d){
+},setValue:function(jq,_2e){
 return jq.each(function(){
-_18(this,_2d);
+_18(this,_2e);
 });
 },reset:function(jq){
 return jq.each(function(){
-var _2e=$(this).datebox("options");
-$(this).datebox("setValue",_2e.originalValue);
+var _2f=$(this).datebox("options");
+$(this).datebox("setValue",_2f.originalValue);
 });
-},setDate:function(jq,_2f){
+},setDate:function(jq,_30){
 return jq.each(function(){
-var _30=$(this).datebox("options");
-$(this).datebox("calendar").calendar("moveTo",_2f);
-_18(this,_2f?_30.formatter.call(this,_2f):"");
+var _31=$(this).datebox("options");
+$(this).datebox("calendar").calendar("moveTo",_30);
+_18(this,_30?_31.formatter.call(this,_30):"");
 });
 },getDate:function(jq){
 if(jq.datebox("getValue")){
@@ -180,8 +181,8 @@ return jq.datebox("calendar").calendar("options").current;
 return null;
 }
 }};
-$.fn.datebox.parseOptions=function(_31){
-return $.extend({},$.fn.combo.parseOptions(_31),$.parser.parseOptions(_31,["sharedCalendar"]));
+$.fn.datebox.parseOptions=function(_32){
+return $.extend({},$.fn.combo.parseOptions(_32),$.parser.parseOptions(_32,["sharedCalendar"]));
 };
 $.fn.datebox.defaults=$.extend({},$.fn.combo.defaults,{panelWidth:250,panelHeight:"auto",sharedCalendar:null,keyHandler:{up:function(e){
 },down:function(e){
@@ -191,42 +192,42 @@ $.fn.datebox.defaults=$.extend({},$.fn.combo.defaults,{panelWidth:250,panelHeigh
 _19(this);
 },query:function(q,e){
 _16(this,q);
-}},currentText:"Today",closeText:"Close",okText:"Ok",buttons:[{text:function(_32){
-return $(_32).datebox("options").currentText;
-},handler:function(_33){
-var _34=$(_33).datebox("options");
+}},currentText:"Today",closeText:"Close",okText:"Ok",buttons:[{text:function(_33){
+return $(_33).datebox("options").currentText;
+},handler:function(_34){
+var _35=$(_34).datebox("options");
 var now=new Date();
-var _35=new Date(now.getFullYear(),now.getMonth(),now.getDate());
-$(_33).datebox("calendar").calendar({year:_35.getFullYear(),month:_35.getMonth()+1,current:_35});
-_34.onSelect.call(_33,_35);
-_19(_33);
-}},{text:function(_36){
-return $(_36).datebox("options").closeText;
-},handler:function(_37){
+var _36=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+$(_34).datebox("calendar").calendar({year:_36.getFullYear(),month:_36.getMonth()+1,current:_36});
+_35.onSelect.call(_34,_36);
+_19(_34);
+}},{text:function(_37){
+return $(_37).datebox("options").closeText;
+},handler:function(_38){
 $(this).closest("div.combo-panel").panel("close");
-}}],formatter:function(_38){
-var y=_38.getFullYear();
-var m=_38.getMonth()+1;
-var d=_38.getDate();
+}}],formatter:function(_39){
+var y=_39.getFullYear();
+var m=_39.getMonth()+1;
+var d=_39.getDate();
 return (m<10?("0"+m):m)+"/"+(d<10?("0"+d):d)+"/"+y;
 },parser:function(s){
-var _39=$.fn.calendar.defaults.Date;
+var _3a=$.fn.calendar.defaults.Date;
 if($(this).data("datebox")){
-_39=$(this).datebox("calendar").calendar("options").Date;
+_3a=$(this).datebox("calendar").calendar("options").Date;
 }
 if(!s){
-return new _39();
+return new _3a();
 }
 var ss=s.split("/");
 var m=parseInt(ss[0],10);
 var d=parseInt(ss[1],10);
 var y=parseInt(ss[2],10);
 if(!isNaN(y)&&!isNaN(m)&&!isNaN(d)){
-return new _39(y,m-1,d);
+return new _3a(y,m-1,d);
 }else{
-return new _39();
+return new _3a();
 }
-},onSelect:function(_3a){
+},onSelect:function(_3b){
 }});
 })(jQuery);
 

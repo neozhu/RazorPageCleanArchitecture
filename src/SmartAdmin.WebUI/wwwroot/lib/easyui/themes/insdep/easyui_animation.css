@@ -1,0 +1,130 @@
+/*
+    JQuery EasyUI 1.5.x of Insdep Theme 1.0.0
+    演示地址：https://www.insdep.com/example/
+    下载地址：https://www.insdep.com
+    问答地址：https://bbs.insdep.com
+
+    项目地址：http://git.oschina.net/weavors/JQuery-EasyUI-1.5.x-Of-Insdep-Theme
+
+    QQ交流群：184075694 （优先发布更新主题及内测包）
+*/
+
+@keyframes window-mask-fadeIn {
+  0% {
+    filter: alpha(opacity=0);
+    opacity: 0; 
+  }
+  100% {
+    filter: alpha(opacity=3);
+    opacity: 0.3;
+  }
+}
+@keyframes window-fadeIn {
+  0% {
+    filter: alpha(opacity=0);
+    opacity: 0; 
+  }
+  100% {
+    filter: alpha(opacity=100);
+    opacity: 1;
+  }
+}
+
+.window {
+  animation-name: window-fadeIn; /*动画名称*/
+  animation-duration: 0.3s; /*动画持续时间*/
+  animation-iteration-count: 1; /*动画次数*/
+  animation-delay: 0s; /*延迟时间*/
+}
+.window-proxy-mask,.window-mask {
+  animation-name: window-mask-fadeIn; /*动画名称*/
+  animation-duration: 0.5s; /*动画持续时间*/
+  animation-iteration-count: 1; /*动画次数*/
+  animation-delay: 0s; /*延迟时间*/
+}
+
+/*进度条动画*/
+@keyframes animation-progressbar {
+  0% {
+    opacity: 0.3;
+    width: 0;
+  }
+  100% {
+    opacity: 0;
+    width: 100%;
+  }
+}
+.progressbar-animation .progressbar-value:after{
+    content: '';
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #FFF;
+    animation: animation-progressbar 2s ease infinite;
+}
+
+/*加载按钮动画*/
+@keyframes animation-loading {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.button-loading .l-btn-text{
+  position: relative;
+  color: transparent !important;
+  opacity: 1;
+  margin: 2px 10px 4px 6px;
+}
+.button-loading .l-btn-text:before,.button-loading .l-btn-text:after{
+  position: absolute;
+  content: '';
+  top: 50%;
+  left: 50%;
+  margin: -0.64285714em 0em 0em -0.64285714em;
+  width: 1.28571429em;
+  height: 1.28571429em;
+  border-style: solid;
+  border-width: 0.2em;
+  border-radius: 500rem;
+}
+.button-loading .l-btn-text:before{
+  border-color:rgba(0, 0, 0, 0.15);
+}
+.button-loading .l-btn-text:after{
+  animation:animation-loading 0.6s linear;
+  animation-iteration-count:infinite;
+  border-color: #ffffff transparent transparent;
+}
+
+.combo-loading + .combo .combo-arrow:before ,.combo-loading + .combo .combo-arrow:after,
+.combo-loading + .combo:before ,.combo-loading + .combo:after
+{
+  position: absolute;
+  content: '';
+  top: 50%;
+  right: 0%;
+  width: 1em;
+  height: 1em;
+  margin: -0.64285714em 0.6em 0em -0.64285714em;
+}
+.combo-loading + .combo:before ,.combo-loading + .combo:after{margin: -0.64285714em 0.4em 0em -0.64285714em;}
+.combo-loading + .combo .combo-arrow:before,.combo-loading + .combo:before {
+  border-radius: 500rem;
+  border: 0.2em solid rgba(0, 0, 0, 0.1);
+}
+.combo-loading + .combo .combo-arrow:after,.combo-loading + .combo:after {
+  box-shadow: 0px 0px 0px 1px transparent;
+          animation: animation-loading 0.6s linear;
+          animation-iteration-count: infinite;
+  border-radius: 500rem;
+  border-color: #767676 transparent transparent;
+  border-style: solid;
+  border-width: 0.2em;
+}
+.combo-loading + .combo .combo-arrow{ background:none; }

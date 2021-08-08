@@ -650,17 +650,6 @@
   border-right: transparent;
   border-bottom: transparent;
 }
-.drawer.window-shadow {
-  box-shadow: 0 4px 12px #ccc;
-  border-radius: 0;
-  position: fixed;
-}
-.drawer.layout-collapsed {
-  box-shadow: none;
-}
-.drawer-mask.window-mask {
-  position: fixed;
-}
 .l-btn {
   text-decoration: none;
   display: inline-block;

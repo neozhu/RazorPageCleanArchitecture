@@ -1,5 +1,5 @@
 /**
- * EasyUI for jQuery 1.9.15
+ * EasyUI for jQuery 1.9.14
  * 
  * Copyright (c) 2009-2021 www.jeasyui.com. All rights reserved.
  *
@@ -302,7 +302,7 @@ return len>=_45[0]&&len<=_45[1];
 var _48={};
 _48[_47[1]]=_46;
 var _49=$.ajax({url:_47[0],dataType:"json",data:_48,async:false,cache:false,type:"post"}).responseText;
-return _49.replace(/\s/g,"")=="true";
+return _49=="true";
 },message:"Please fix this field."}},onBeforeValidate:function(){
 },onValidate:function(_4a){
 }};
