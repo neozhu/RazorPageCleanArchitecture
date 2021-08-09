@@ -284,9 +284,9 @@
             }
         }
 
-    var onEdit=(index)=>{
-        var customer=$dg.datagrid('getRows')[index];
-        popupmodal(customer);
+        var onEdit = (index) => {
+            var customer = $dg.datagrid('getRows')[index];
+            popupmodal(customer);
         }
         var onDelete = (id) => {
             bootbox.confirm({
