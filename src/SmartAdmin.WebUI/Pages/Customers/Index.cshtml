@@ -37,7 +37,7 @@
                 @_localizer["Add"]
             </button>
             <button class="btn btn-sm btn-outline-danger " id="deletebutton">
-                <span class="@(Settings.Theme.IconPrefix) fa-minus mr-1"></span>
+                <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
                 @_localizer["Delete"]
             </button>
             <button class="btn btn-sm btn-outline-primary " id="searchbutton">
@@ -134,6 +134,11 @@
 							<span class="invalid-feedback" asp-validation-for="Input.Contract">Sorry, you missed this one.</span>
 						</div>
                         <div class="col-md-6">
+							<label class="form-label" for="Email">@_localizer["Email"] </label>
+							<input type="text" asp-for="Input.Email" class="form-control" placeholder="Email" />
+							<span class="invalid-feedback" asp-validation-for="Input.Email">Sorry, you missed this one.</span>
+						</div>
+                        <div class="col-md-6">
 							<label class="form-label" for="PhoneNumber">@_localizer["Phone Number"] </label>
 							<input type="text" asp-for="Input.PhoneNumber" class="form-control" placeholder="Phone Number" />
 							<span class="invalid-feedback" asp-validation-for="Input.PhoneNumber">Sorry, you missed this one.</span>
@@ -166,48 +171,8 @@
      <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true" ></script>
      <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
      <script src="~/lib/axios/dist/axios.js"></script>
-     <script src="~/lib/loadJSON/jquery.loadJSON.js"></script>
-     <script>
-         $.fn.jsonToForm = function (data, callbacks) {
-  var formInstance = this;
-
-  var options = {
-    data: data || null,
-    callbacks: callbacks,
-  };
-
-  if (options.data != null) {
-      
-    $.each(options.data, function (k, v) {
-      var elements = $('[name*="' + k + '"]', formInstance);
-      if (options.callbacks != null && options.callbacks.hasOwnProperty(k)) {
-        options.callbacks[k](v);
-        return;
-      }
-
-      $(elements).each(function (index, element) {
-             debugger
-        if (Array.isArray(v)) {
-          v.forEach(function (val) {
-            $(element).is("select")
-              ? $(element)
-                  .find("[value='" + val + "']")
-                  .prop("selected", true)
-              : $(element).val() == val
-              ? $(element).prop("checked", true)
-              : "";
-          });
-        } else if ($(element).is(":checkbox") || $(element).is(":radio")) {
-          // checkbox group or radio group
-          $(element).val() == v ? $(element).prop("checked", true) : "";
-        } else {
-          $('[name*="' + k + '"]', formInstance).val(v);
-        }
-      });
-    });
-  }
-};
-     </script>
+     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+     
      <script type="text/javascript">
      $('#searchbutton').click(function(){
          console.log('reloaddata')
@@ -301,13 +266,20 @@
          $('#customer_modal .modal-title').html('@_localizer["Add Customer"]');
          $('#customer_form')[0].reset();
          if(customer){
-             $('#customer_form').jsonToForm(customer)
-              //$('#customer_form').loadJSON({Input:customer});
-             //const { elements } = document.querySelector('#customer_form');
-             //for (const [ key, value ] of Object.entries(customer) ) {
-             //   const field = elements.namedItem('Input.' + key)
-             //   field && (field.value = value)
-             //}
+             console.log(customer)
+             console.log({Input:customer})
+             $('#customer_form').jsonToForm(customer,{
+                 PartnerType:function(value){
+                     if(value=='TP'){
+                         $('#customer_form [name*="PartnerType"]').val(0);
+                     }else{
+                          $('#customer_form [name*="PartnerType"]').val(1);
+                     }
+                 }
+                 })
+           }else{
+               $('#customer_form #Input_Id').val(0)
+
            }
         }
        
