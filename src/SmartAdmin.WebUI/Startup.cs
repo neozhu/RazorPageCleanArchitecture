@@ -3,6 +3,7 @@ using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Infrastructure;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Persistence;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,7 +15,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Serialization;
 using SmartAdmin.WebUI.Models;
+using System.Text.Json;
 using static IdentityModel.ClaimComparer;
 
 namespace SmartAdmin.WebUI
@@ -53,14 +56,21 @@ namespace SmartAdmin.WebUI
         options.Cookie.Name = "AntiforgeryCookie";
         });
       services.AddControllers();
+      services.AddMvc().AddFluentValidation(fv => {
+          fv.DisableDataAnnotationsValidation = true;
+          fv.ImplicitlyValidateChildProperties = true;
+            });
       services
           .AddRazorPages()
+          .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy=null)
+          .AddRazorRuntimeCompilation()
           .AddRazorPagesOptions(options =>
           {
+           
             options.Conventions.AddPageRoute("/AspNetCore/Welcome", "");
           });
-
-      services.ConfigureApplicationCookie(options =>
+   
+            services.ConfigureApplicationCookie(options =>
       {
         options.LoginPath = "/Identity/Account/Login";
         options.LogoutPath = "/Identity/Account/Logout";

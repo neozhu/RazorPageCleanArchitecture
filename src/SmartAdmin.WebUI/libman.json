@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "axios@0.21.1",
+      "destination": "wwwroot/lib/axios/",
+      "files": [
+        "dist/axios.js",
+        "dist/axios.map",
+        "dist/axios.min.js",
+        "dist/axios.min.map"
+      ]
+    }
+  ]
+}

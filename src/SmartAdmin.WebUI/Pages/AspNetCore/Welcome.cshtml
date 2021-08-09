@@ -1,4 +1,4 @@
-@page
+﻿@page
 @model WelcomeModel
 @{
     ViewData["Title"] = "Welcome";
@@ -140,8 +140,6 @@
     success: function (response) {
         }
         });
-    $.post('@Url.Page("/AspNetCore/Welcome")',{input:'helloworld'}).done(res=>{
-        console.log(res);
-        })
+  
 </script>
 }

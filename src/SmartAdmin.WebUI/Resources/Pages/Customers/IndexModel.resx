@@ -132,6 +132,12 @@
   <data name="Cancel" xml:space="preserve">
     <value>取消</value>
   </data>
+  <data name="Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Command" xml:space="preserve">
+    <value>操作</value>
+  </data>
   <data name="Comments" xml:space="preserve">
     <value>备注</value>
   </data>
@@ -146,6 +152,9 @@
   </data>
   <data name="Download Template" xml:space="preserve">
     <value>下载模板</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>编辑</value>
   </data>
   <data name="Edit Customer" xml:space="preserve">
     <value>编辑客户</value>

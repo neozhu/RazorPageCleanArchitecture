@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Customers\Commands\" />
     <Folder Include="Customers\EventHandlers\" />
   </ItemGroup>
 

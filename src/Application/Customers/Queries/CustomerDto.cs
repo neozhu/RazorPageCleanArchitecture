@@ -18,7 +18,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Queries
         public string Name { get; set; }
         public string NameOfEnglish { get; set; }
         public string GroupName { get; set; }
-        public PartnerType PartnerType { get; set; }
+        public string PartnerType { get; set; }
         public string Region { get; set; }
         public string Sales { get; set; }
         public string RegionSalesDirector { get; set; }

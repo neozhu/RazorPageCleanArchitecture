@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
   function getPluginName(target) {
     if ($(target).data('treegrid')) {
       return 'treegrid';
@@ -276,11 +276,12 @@
         var filterOpts = this.filterOptions;
         var field = $(this).attr('name');
         var input = $(this);
-        //console.log($(this).is("select"), field,this);
+        
         if (input.data('textbox') && !$(this).is('select') && !$(this).hasClass('combogrid-f')) {
           input = input.textbox('textbox');
         }
-        input.unbind('.filter').bind('keydown.filter blur.filter', function (e) {
+            input.unbind('.filter').bind('keydown.filter blur.filter', function (e) {
+ 
           var t = $(this);
           if (this.timer) {
             clearTimeout(this.timer);
