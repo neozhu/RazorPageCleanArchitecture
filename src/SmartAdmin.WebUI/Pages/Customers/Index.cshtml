@@ -10,10 +10,10 @@
     ViewData["Category1"] = _localizer["Customers"].Value;
     ViewData["Heading"] = _localizer["Customers"].Value;
     ViewData["PageDescription"] = _localizer["See all available options"].Value;
-    ViewData["PreemptiveClass"] = "layout-composed";
+    ViewData["PreemptiveClass"] = "ALL";
 }
 @section HeadBlock {
-  <link rel="stylesheet" media="screen, print" href="~/css/notifications/toastr/toastr.css">
+  
   <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
 <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
 <link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">
@@ -165,7 +165,7 @@
 </div>
 @section ScriptsBlock {
      <partial name="_ValidationScriptsPartial" />
-     <script type="text/javascript" src="~/js/notifications/toastr/toastr.js" asp-append-version="true" ></script>
+    
      <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true" ></script>
      <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true" ></script>
      <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true" ></script>
@@ -181,14 +181,16 @@
      $('#addbutton').click(function(){
          popupmodal(null);
          });
-
+     $('#deletebutton').click(function(){
+         onDeleteChecked();
+         });
      $('#customer_form :submit').click(function(e){
          console.log('submmit')
          var valid= $('#customer_form').valid();
          console.log(valid)
          var request=$('#customer_form').serialize();
          axios.post('/Customers/Index',request).then(res=>{
-             //toastr.success('@_localizer["Save Success"]');
+             toastr["info"]('@_localizer["Save Success"]');
              $('#customer_modal').modal('toggle');
              reload();
          })
@@ -227,7 +229,7 @@
 							</button>
 							<div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
 								<button class="dropdown-item" onclick="onEdit(${index})" >@_localizer["Edit"]</button>
-								<button class="dropdown-item">@_localizer["Delete"]</button>
+								<button class="dropdown-item" onclick="onDelete(${row.Id})">@_localizer["Delete"]</button>
 							</div>
 						</div>
                          `;
@@ -287,6 +289,65 @@
          var customer=$dg.datagrid('getRows')[index];
          popupmodal(customer);
          }
-       
+      var onDelete=(id)=>{
+           bootbox.confirm({
+                  message:"@_localizer["Are you sure delete a row?"]",
+                  buttons: {
+                    confirm: {
+                      label: '@_localizer["Yes"]',
+                      className: 'btn-success'
+                   },
+                   cancel: {
+                    label: '@_localizer["No"]',
+                    className: 'btn-danger'
+                   }
+                  },
+                  callback:function(result) {
+                  if(result) {
+          axios.get('@Url.Page("/Customers/Index")?handler=Delete&id=' + id).then(res=>{
+                 toastr["info"]('@_localizer["Delete Success"]');
+                 reload();
+              })
+              .catch((error)=> {
+                 var msg=error.response.data;
+                 $.messager.alert('@_localizer["Error"]',msg)
+              });
+              }
+              }
+              })
+          }
+      var onDeleteChecked=()=>{
+          var checkedId=$dg.datagrid('getChecked').map(x=>x.Id);
+          if(checkedId.length>0) {
+              bootbox.confirm({
+                  message:"@_localizer["Are you sure delete checked rows?"]",
+                  buttons: {
+                    confirm: {
+                      label: '@_localizer["Yes"]',
+                      className: 'btn-success'
+                   },
+                   cancel: {
+                    label: '@_localizer["No"]',
+                    className: 'btn-danger'
+                   }
+                  },
+                  callback:function(result) {
+                  if(result){
+                       var paras=new URLSearchParams(checkedId.map(s=>['id',s]));
+                       console.log(paras.toString())
+                       axios.get('@Url.Page("/Customers/Index")?handler=DeleteChecked&'+paras.toString()).then(res=>{
+                          toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
+                          reload();
+                      })
+                      .catch((error)=> {
+                         var msg=error.response.data;
+                         $.messager.alert('@_localizer["Error"]',msg)
+                       });
+                  }
+                 }
+                });
+             
+           }
+          }
      </script>
 }

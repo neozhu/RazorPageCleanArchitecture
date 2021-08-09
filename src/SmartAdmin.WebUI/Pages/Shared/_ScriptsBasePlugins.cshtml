@@ -1,4 +1,24 @@
 ﻿<script src="~/js/vendors.bundle.js"></script>
 <script src="~/js/app.bundle.js"></script>
 <script src="~/js/site.js"></script>
-<script>var bootstrapTooltip = jQuery.fn.tooltip;</script>
+<script type="text/javascript" src="~/js/notifications/toastr/toastr.js" asp-append-version="true" ></script>
+<script>
+    var bootstrapTooltip = jQuery.fn.tooltip;
+    toastr.options = {
+  "closeButton": false,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": true,
+  "positionClass": "toast-bottom-right",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "500",
+  "timeOut": "2000",
+  "extendedTimeOut": "500",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+</script>

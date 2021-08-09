@@ -20,13 +20,13 @@ namespace SmartAdmin.WebUI.Pages.Customers
     {
         [BindProperty]
         public AddEditCustomerCommand Input { get; set; }
-        private readonly ISender mediator;
+        private readonly ISender _mediator;
 
         public IndexModel(
-                ISender _mediator
+                ISender mediator
             )
         {
-            mediator = _mediator;
+            _mediator = mediator;
         }
         public async Task OnGetAsync()
         {
@@ -34,14 +34,14 @@ namespace SmartAdmin.WebUI.Pages.Customers
         }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] CustomersWithPaginationQuery command)
         {
-            var result = await mediator.Send(command);
+            var result = await _mediator.Send(command);
             return new JsonResult(result);
         }
         public async Task<IActionResult> OnPostAsync()
         {
             try
             {
-                var result = await mediator.Send(Input);
+                var result = await _mediator.Send(Input);
                 return new JsonResult(result);
             }
             catch(ValidationException ex)
@@ -55,6 +55,19 @@ namespace SmartAdmin.WebUI.Pages.Customers
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return new JsonResult(ex.Message);
             }
+        }
+
+        public async Task<IActionResult> OnGetDeleteCheckedAsync([FromQuery]int[] id)
+        {
+            var command = new DeleteCheckedCommersCommand() { Id=id};
+            var result= await _mediator.Send(command);
+            return new JsonResult("");
+        }
+        public async Task<IActionResult> OnGetDeleteAsync([FromQuery]int id)
+        {
+            var command = new DeleteCommerCommand() { Id = id };
+            var result = await _mediator.Send(command);
+            return new JsonResult("");
         }
     }
 }
