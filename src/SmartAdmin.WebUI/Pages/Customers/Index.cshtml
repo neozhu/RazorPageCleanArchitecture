@@ -13,17 +13,17 @@
     ViewData["PreemptiveClass"] = "ALL";
 }
 @section HeadBlock {
-  
-  <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
-<link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
-<link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">
-<link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
-<style>
 
-    .customer_dg_datagrid-cell-c1-_action {
-        overflow:visible !important
-    }
-</style>
+    <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+    <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+    <link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">
+    <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+    <style>
+
+        .customer_dg_datagrid-cell-c1-_action {
+            overflow: visible !important
+        }
+    </style>
 }
 <div id="js-page-content-demopanels" class="card mb-g">
     <div class="card-header bg-white d-flex align-items-center">
@@ -62,292 +62,291 @@
         <div class="row">
             <div class="col-md-12">
                 <table id="customer_dg">
-						 
-		        </table>
+                </table>
             </div>
         </div>
     </div>
 </div>
 <div class="modal fade" id="customer_modal" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Modal title</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					   <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
-					</button>
-			</div>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                </button>
+            </div>
             <form id="customer_form">
-		    <div class="modal-body">
-                 @Html.AntiForgeryToken()
-                 <input type="hidden" asp-for="Input.Id" />
-                 <div class="form-row">
-						<div class="col-md-6">
-							<label class="form-label" for="name">@_localizer["Name"] <span class="text-danger">*</span></label>
-							<input type="text" asp-for="Input.Name" class="form-control" placeholder="Customer Name" />
-							<span class="invalid-feedback" asp-validation-for="Input.Name">Sorry, you missed this one.</span>
-						</div>
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="Input.Id" />
+                    <div class="form-row">
                         <div class="col-md-6">
-							<label class="form-label" for="nameOfEnglish">@_localizer["Name Of English"] </label>
-							<input type="text" asp-for="Input.NameOfEnglish" class="form-control" placeholder="Customer Name of English" />
-							<span class="invalid-feedback" asp-validation-for="Input.NameOfEnglish">Sorry, you missed this one.</span>
-						</div>
+                            <label class="form-label" for="name">@_localizer["Name"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.Name" class="form-control" placeholder="Customer Name" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Name">Sorry, you missed this one.</span>
+                        </div>
                         <div class="col-md-6">
-							<label class="form-label" for="GroupName">@_localizer["Group Name"] <span class="text-danger">*</span></label>
-							<input type="text" asp-for="Input.GroupName" class="form-control" placeholder="Group Name" />
-							<span class="invalid-feedback" asp-validation-for="Input.GroupName">Sorry, you missed this one.</span>
-						</div>
+                            <label class="form-label" for="nameOfEnglish">@_localizer["Name Of English"] </label>
+                            <input type="text" asp-for="Input.NameOfEnglish" class="form-control" placeholder="Customer Name of English" />
+                            <span class="invalid-feedback" asp-validation-for="Input.NameOfEnglish">Sorry, you missed this one.</span>
+                        </div>
                         <div class="col-md-6">
-							<label class="form-label" for="PartnerType">@_localizer["Partner Type"] <span class="text-danger">*</span></label>
-							<select type="text" asp-for="Input.PartnerType" class="form-control"  asp-items="Html.GetEnumSelectList<PartnerType>()">
+                            <label class="form-label" for="GroupName">@_localizer["Group Name"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.GroupName" class="form-control" placeholder="Group Name" />
+                            <span class="invalid-feedback" asp-validation-for="Input.GroupName">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="PartnerType">@_localizer["Partner Type"] <span class="text-danger">*</span></label>
+                            <select type="text" asp-for="Input.PartnerType" class="form-control" asp-items="Html.GetEnumSelectList<PartnerType>()">
                             </select>
-							<span class="invalid-feedback" asp-validation-for="Input.PartnerType">Sorry, you missed this one.</span>
-						</div>
+                            <span class="invalid-feedback" asp-validation-for="Input.PartnerType">Sorry, you missed this one.</span>
+                        </div>
                         <div class="col-md-6">
-							<label class="form-label" for="GroupName">@_localizer["Region"] <span class="text-danger">*</span></label>
-							<input type="text" asp-for="Input.Region" class="form-control" placeholder="Region" />
-							<span class="invalid-feedback" asp-validation-for="Input.Region">Sorry, you missed this one.</span>
-						</div>
+                            <label class="form-label" for="GroupName">@_localizer["Region"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.Region" class="form-control" placeholder="Region" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Region">Sorry, you missed this one.</span>
+                        </div>
                         <div class="col-md-6">
-							<label class="form-label" for="Sales">@_localizer["Sales"] <span class="text-danger">*</span></label>
-							<input type="text" asp-for="Input.Sales" class="form-control" placeholder="Sales" />
-							<span class="invalid-feedback" asp-validation-for="Input.Sales">Sorry, you missed this one.</span>
-						</div>
-						<div class="col-md-6">
-							<label class="form-label" for="RegionSalesDirector">@_localizer["Region Sales Director"] <span class="text-danger">*</span></label>
-							<input type="text" asp-for="Input.RegionSalesDirector" class="form-control" placeholder="Region Sales Director" />
-							<span class="invalid-feedback" asp-validation-for="Input.RegionSalesDirector">Sorry, you missed this one.</span>
-						</div>
+                            <label class="form-label" for="Sales">@_localizer["Sales"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.Sales" class="form-control" placeholder="Sales" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Sales">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="RegionSalesDirector">@_localizer["Region Sales Director"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.RegionSalesDirector" class="form-control" placeholder="Region Sales Director" />
+                            <span class="invalid-feedback" asp-validation-for="Input.RegionSalesDirector">Sorry, you missed this one.</span>
+                        </div>
                         <div class="col-md-12">
-							<label class="form-label" for="Address">@_localizer["Address"] </label>
-							<input type="text" asp-for="Input.Address" class="form-control" placeholder="Address" />
-							<span class="invalid-feedback" asp-validation-for="Input.Address">Sorry, you missed this one.</span>
-						</div>
+                            <label class="form-label" for="Address">@_localizer["Address"] </label>
+                            <input type="text" asp-for="Input.Address" class="form-control" placeholder="Address" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Address">Sorry, you missed this one.</span>
+                        </div>
                         <div class="col-md-12">
-							<label class="form-label" for="Sales">@_localizer["Address Of English"] </label>
-							<input type="text" asp-for="Input.AddressOfEnglish" class="form-control" placeholder="Address Of English" />
-							<span class="invalid-feedback" asp-validation-for="Input.AddressOfEnglish">Sorry, you missed this one.</span>
-						</div>
+                            <label class="form-label" for="Sales">@_localizer["Address Of English"] </label>
+                            <input type="text" asp-for="Input.AddressOfEnglish" class="form-control" placeholder="Address Of English" />
+                            <span class="invalid-feedback" asp-validation-for="Input.AddressOfEnglish">Sorry, you missed this one.</span>
+                        </div>
                         <div class="col-md-6">
-							<label class="form-label" for="Contract">@_localizer["Contract"] </label>
-							<input type="text" asp-for="Input.Contract" class="form-control" placeholder="Contract" />
-							<span class="invalid-feedback" asp-validation-for="Input.Contract">Sorry, you missed this one.</span>
-						</div>
+                            <label class="form-label" for="Contract">@_localizer["Contract"] </label>
+                            <input type="text" asp-for="Input.Contract" class="form-control" placeholder="Contract" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Contract">Sorry, you missed this one.</span>
+                        </div>
                         <div class="col-md-6">
-							<label class="form-label" for="Email">@_localizer["Email"] </label>
-							<input type="text" asp-for="Input.Email" class="form-control" placeholder="Email" />
-							<span class="invalid-feedback" asp-validation-for="Input.Email">Sorry, you missed this one.</span>
-						</div>
+                            <label class="form-label" for="Email">@_localizer["Email"] </label>
+                            <input type="text" asp-for="Input.Email" class="form-control" placeholder="Email" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Email">Sorry, you missed this one.</span>
+                        </div>
                         <div class="col-md-6">
-							<label class="form-label" for="PhoneNumber">@_localizer["Phone Number"] </label>
-							<input type="text" asp-for="Input.PhoneNumber" class="form-control" placeholder="Phone Number" />
-							<span class="invalid-feedback" asp-validation-for="Input.PhoneNumber">Sorry, you missed this one.</span>
-						</div>
+                            <label class="form-label" for="PhoneNumber">@_localizer["Phone Number"] </label>
+                            <input type="text" asp-for="Input.PhoneNumber" class="form-control" placeholder="Phone Number" />
+                            <span class="invalid-feedback" asp-validation-for="Input.PhoneNumber">Sorry, you missed this one.</span>
+                        </div>
                         <div class="col-md-6">
-							<label class="form-label" for="Fax">@_localizer["Fax"] </label>
-							<input type="text" asp-for="Input.Fax" class="form-control" placeholder="Fax" />
-							<span class="invalid-feedback" asp-validation-for="Input.Fax">Sorry, you missed this one.</span>
-						</div>
+                            <label class="form-label" for="Fax">@_localizer["Fax"] </label>
+                            <input type="text" asp-for="Input.Fax" class="form-control" placeholder="Fax" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Fax">Sorry, you missed this one.</span>
+                        </div>
                         <div class="col-md-12">
-							<label class="form-label" for="Comments">@_localizer["Comments"] </label>
-							<input type="text" asp-for="Input.Comments" class="form-control" placeholder="Comments" />
-							<span class="invalid-feedback" asp-validation-for="Input.Comments">Sorry, you missed this one.</span>
-						</div>
-			    </div>       
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
-				<button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
-			</div>
-           </form>
-		</div>
-	</div>
+                            <label class="form-label" for="Comments">@_localizer["Comments"] </label>
+                            <input type="text" asp-for="Input.Comments" class="form-control" placeholder="Comments" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Comments">Sorry, you missed this one.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
+                    <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 @section ScriptsBlock {
-     <partial name="_ValidationScriptsPartial" />
-    
-     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true" ></script>
-     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true" ></script>
-     <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true" ></script>
-     <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
-     <script src="~/lib/axios/dist/axios.js"></script>
-     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
-     
-     <script type="text/javascript">
-     $('#searchbutton').click(function(){
-         console.log('reloaddata')
-         reload();
-         });
-     $('#addbutton').click(function(){
-         popupmodal(null);
-         });
-     $('#deletebutton').click(function(){
-         onDeleteChecked();
-         });
-     $('#customer_form :submit').click(function(e){
-         console.log('submmit')
-         var valid= $('#customer_form').valid();
-         console.log(valid)
-         var request=$('#customer_form').serialize();
-         axios.post('/Customers/Index',request).then(res=>{
-             toastr["info"]('@_localizer["Save Success"]');
-             $('#customer_modal').modal('toggle');
-             reload();
-         })
-         .catch((error)=> {
-             var msg=error.response.data;
-             $.messager.alert('@_localizer["Error"]',msg)
-         });
+    <partial name="_ValidationScriptsPartial" />
 
-         e.preventDefault();
-         })
-     var $dg={};
-     var initdatagrid=()=>{
-         $dg = $('#customer_dg').datagrid({
-             height:700,
-             method:'GET',
-             rownumbers:false,
-             singleSelect:true,
-             selectOnCheck:false,
-             checkOnSelect:false,
-             pagination:true,
-             clientPaging:false,
-             remoteFilter:true,
-             pageSize:15,
-             pageList:[15,30,50,100,1000],
-             columns:[[
-                 {field:'ck',checkbox:true},
-                 {
-                     field:'_action',
-                     title:'@_localizer["Command"]',
-                     width:100,
-                     align:'center',
-                     formatter:function(value,row,index){
-                         return `<div class="btn-group" role="group">
-							<button id="commandbtngroup" type="button"  class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="@(Settings.Theme.IconPrefix) fa-edit"></i> 
-							</button>
-							<div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
-								<button class="dropdown-item" onclick="onEdit(${index})" >@_localizer["Edit"]</button>
-								<button class="dropdown-item" onclick="onDelete(${row.Id})">@_localizer["Delete"]</button>
-							</div>
-						</div>
-                         `;
-                     }
-                 },
-                 {field:'Name',title:'@_localizer["Name"]',sortable:true,width:180},
-                 {field:'NameOfEnglish',title:'@_localizer["Name Of English"]',sortable:true,width:180},
-                 {field:'GroupName',title:'@_localizer["Group Name"]',sortable:true,width:180},
-                 {field:'PartnerType',title:'@_localizer["Partner Type"]',sortable:true,width:100,align:'right'},
-                 {field:'Region',title:'@_localizer["Region"]',sortable:true,width:120},
-                 {field:'Sales',title:'@_localizer["Sales"]',sortable:true,width:120},
-                 {field:'RegionSalesDirector',title:'@_localizer["Region Sales Director"]',sortable:true,width:140},
-                 {field:'Address',title:'@_localizer["Address"]',sortable:true,width:180},
-                 {field:'AddressOfEnglish',title:'@_localizer["Address Of English"]',sortable:true,width:180},
-                 {field:'Contract',title:'@_localizer["Contract"]',sortable:true,width:120},
-                 {field:'Email',title:'Email',sortable:true,width:130},
-                 {field:'PhoneNumber',title:'@_localizer["Phone Number"]',sortable:true,width:120},
-                 {field:'Fax',title:'@_localizer["Fax"]',sortable:true,width:120},
-                 {field:'Comments',title:'@_localizer["Comments"]',sortable:true,width:180}
-              
-              ]]
-             })
-             .datagrid('enableFilter',{})
-             .datagrid('load','@Url.Page("/Customers/Index")?handler=Data');
-             
-         }
-     var reload=()=>{
-        $dg.datagrid('load','@Url.Page("/Customers/Index")?handler=Data');
-        }
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+    <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
+    <script src="~/lib/axios/dist/axios.js"></script>
+    <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
 
-         $(()=>{
-             initdatagrid();
-             })
-     var popupmodal = (customer)=>{
-         $('#customer_modal').modal('toggle');
-         $('#customer_modal .modal-title').html('@_localizer["Add Customer"]');
-         $('#customer_form')[0].reset();
-         if(customer){
-             console.log(customer)
-             console.log({Input:customer})
-             $('#customer_form').jsonToForm(customer,{
-                 PartnerType:function(value){
-                     if(value=='TP'){
-                         $('#customer_form [name*="PartnerType"]').val(0);
-                     }else{
-                          $('#customer_form [name*="PartnerType"]').val(1);
-                     }
-                 }
-                 })
-           }else{
-               $('#customer_form #Input_Id').val(0)
-
-           }
-        }
-       
-     var onEdit=(index)=>{
-         var customer=$dg.datagrid('getRows')[index];
-         popupmodal(customer);
-         }
-      var onDelete=(id)=>{
-           bootbox.confirm({
-                  message:"@_localizer["Are you sure delete a row?"]",
-                  buttons: {
-                    confirm: {
-                      label: '@_localizer["Yes"]',
-                      className: 'btn-success'
-                   },
-                   cancel: {
-                    label: '@_localizer["No"]',
-                    className: 'btn-danger'
-                   }
-                  },
-                  callback:function(result) {
-                  if(result) {
-          axios.get('@Url.Page("/Customers/Index")?handler=Delete&id=' + id).then(res=>{
-                 toastr["info"]('@_localizer["Delete Success"]');
-                 reload();
-              })
-              .catch((error)=> {
-                 var msg=error.response.data;
-                 $.messager.alert('@_localizer["Error"]',msg)
-              });
-              }
-              }
-              })
-          }
-      var onDeleteChecked=()=>{
-          var checkedId=$dg.datagrid('getChecked').map(x=>x.Id);
-          if(checkedId.length>0) {
-              bootbox.confirm({
-                  message:"@_localizer["Are you sure delete checked rows?"]",
-                  buttons: {
-                    confirm: {
-                      label: '@_localizer["Yes"]',
-                      className: 'btn-success'
-                   },
-                   cancel: {
-                    label: '@_localizer["No"]',
-                    className: 'btn-danger'
-                   }
-                  },
-                  callback:function(result) {
-                  if(result){
-                       var paras=new URLSearchParams(checkedId.map(s=>['id',s]));
-                       console.log(paras.toString())
-                       axios.get('@Url.Page("/Customers/Index")?handler=DeleteChecked&'+paras.toString()).then(res=>{
-                          toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
-                          reload();
-                      })
-                      .catch((error)=> {
-                         var msg=error.response.data;
-                         $.messager.alert('@_localizer["Error"]',msg)
-                       });
-                  }
-                 }
+    <script type="text/javascript">
+        $('#searchbutton').click(function () {
+            console.log('reloaddata')
+            reload();
+        });
+        $('#addbutton').click(function () {
+            popupmodal(null);
+        });
+        $('#deletebutton').click(function () {
+            onDeleteChecked();
+        });
+        $('#customer_form :submit').click(function (e) {
+            console.log('submmit')
+            var valid = $('#customer_form').valid();
+            console.log(valid)
+            var request = $('#customer_form').serialize();
+            axios.post('/Customers/Index', request).then(res => {
+                toastr["info"]('@_localizer["Save Success"]');
+                $('#customer_modal').modal('toggle');
+                reload();
+            })
+                .catch((error) => {
+                    var msg = error.response.data;
+                    $.messager.alert('@_localizer["Error"]', msg)
                 });
-             
-           }
-          }
-     </script>
+
+            e.preventDefault();
+        })
+        var $dg={};
+        var initdatagrid = () => {
+            $dg = $('#customer_dg').datagrid({
+                height: 700,
+                method: 'GET',
+                rownumbers: false,
+                singleSelect: true,
+                selectOnCheck: false,
+                checkOnSelect: false,
+                pagination: true,
+                clientPaging: false,
+                remoteFilter: true,
+                pageSize: 15,
+                pageList: [15, 30, 50, 100, 1000],
+                columns: [[
+                    { field: 'ck', checkbox: true },
+                    {
+                        field: '_action',
+                        title: '@_localizer["Command"]',
+                        width: 100,
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            return `<div class="btn-group" role="group">
+                           <button id="commandbtngroup" type="button"  class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           <i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
+                           </button>
+                           <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
+                               <button class="dropdown-item" onclick="onEdit(${index})" >@_localizer["Edit"]</button>
+                               <button class="dropdown-item" onclick="onDelete(${row.Id})">@_localizer["Delete"]</button>
+                           </div>
+                       </div>
+                        `;
+                        }
+                    },
+                    { field: 'Name', title: '@_localizer["Name"]', sortable: true, width: 180 },
+                    { field: 'NameOfEnglish', title: '@_localizer["Name Of English"]', sortable: true, width: 180 },
+                    { field: 'GroupName', title: '@_localizer["Group Name"]', sortable: true, width: 180 },
+                    { field: 'PartnerType', title: '@_localizer["Partner Type"]', sortable: true, width: 100, align: 'right' },
+                    { field: 'Region', title: '@_localizer["Region"]', sortable: true, width: 120 },
+                    { field: 'Sales', title: '@_localizer["Sales"]', sortable: true, width: 120 },
+                    { field: 'RegionSalesDirector', title: '@_localizer["Region Sales Director"]', sortable: true, width: 140 },
+                    { field: 'Address', title: '@_localizer["Address"]', sortable: true, width: 180 },
+                    { field: 'AddressOfEnglish', title: '@_localizer["Address Of English"]', sortable: true, width: 180 },
+                    { field: 'Contract', title: '@_localizer["Contract"]', sortable: true, width: 120 },
+                    { field: 'Email', title: 'Email', sortable: true, width: 130 },
+                    { field: 'PhoneNumber', title: '@_localizer["Phone Number"]', sortable: true, width: 120 },
+                    { field: 'Fax', title: '@_localizer["Fax"]', sortable: true, width: 120 },
+                    { field: 'Comments', title: '@_localizer["Comments"]', sortable: true, width: 180 }
+
+                ]]
+            })
+                .datagrid('enableFilter', {})
+                .datagrid('load', '@Url.Page("/Customers/Index")?handler=Data');
+
+        }
+        var reload = () => {
+            $dg.datagrid('load', '@Url.Page("/Customers/Index")?handler=Data');
+        }
+
+        $(() => {
+            initdatagrid();
+        })
+        var popupmodal = (customer) => {
+            $('#customer_modal').modal('toggle');
+            $('#customer_modal .modal-title').html('@_localizer["Add Customer"]');
+            $('#customer_form')[0].reset();
+            if (customer) {
+                console.log(customer)
+                console.log({ Input: customer })
+                $('#customer_form').jsonToForm(customer, {
+                    PartnerType: function (value) {
+                        if (value == 'TP') {
+                            $('#customer_form [name*="PartnerType"]').val(0);
+                        } else {
+                            $('#customer_form [name*="PartnerType"]').val(1);
+                        }
+                    }
+                })
+            } else {
+                $('#customer_form #Input_Id').val(0)
+
+            }
+        }
+
+    var onEdit=(index)=>{
+        var customer=$dg.datagrid('getRows')[index];
+        popupmodal(customer);
+        }
+        var onDelete = (id) => {
+            bootbox.confirm({
+                message: "@_localizer["Are you sure delete a row?"]",
+                buttons: {
+                    confirm: {
+                        label: '@_localizer["Yes"]',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: '@_localizer["No"]',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        axios.get('@Url.Page("/Customers/Index")?handler=Delete&id=' + id).then(res => {
+                            toastr["info"]('@_localizer["Delete Success"]');
+                            reload();
+                        })
+                            .catch((error) => {
+                                var msg = error.response.data;
+                                $.messager.alert('@_localizer["Error"]', msg)
+                            });
+                    }
+                }
+            })
+        }
+        var onDeleteChecked = () => {
+            var checkedId = $dg.datagrid('getChecked').map(x => x.Id);
+            if (checkedId.length > 0) {
+                bootbox.confirm({
+                    message: "@_localizer["Are you sure delete checked rows?"]",
+                    buttons: {
+                        confirm: {
+                            label: '@_localizer["Yes"]',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: '@_localizer["No"]',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
+                            console.log(paras.toString())
+                            axios.get('@Url.Page("/Customers/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
+                                toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
+                                reload();
+                            })
+                                .catch((error) => {
+                                    var msg = error.response.data;
+                                    $.messager.alert('@_localizer["Error"]', msg)
+                                });
+                        }
+                    }
+                });
+
+            }
+        }
+    </script>
 }
