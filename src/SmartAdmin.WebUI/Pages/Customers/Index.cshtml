@@ -76,45 +76,45 @@
                     <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
                 </button>
             </div>
-            <form id="customer_form">
+            <form id="customer_form" class="needs-validation" novalidate="novalidate">
                 <div class="modal-body">
                     @Html.AntiForgeryToken()
                     <input type="hidden" asp-for="Input.Id" />
-                    <div class="form-row">
+                    <div class="form-row" >
                         <div class="col-md-6">
                             <label class="form-label" for="name">@_localizer["Name"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.Name" class="form-control" placeholder="Customer Name" />
+                            <input type="text" asp-for="Input.Name" class="form-control" placeholder="Customer Name" required />
                             <span class="invalid-feedback" asp-validation-for="Input.Name">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="nameOfEnglish">@_localizer["Name Of English"] </label>
-                            <input type="text" asp-for="Input.NameOfEnglish" class="form-control" placeholder="Customer Name of English" />
+                            <input type="text" asp-for="Input.NameOfEnglish" class="form-control" placeholder="Customer Name of English" formnovalidate="" />
                             <span class="invalid-feedback" asp-validation-for="Input.NameOfEnglish">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="GroupName">@_localizer["Group Name"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.GroupName" class="form-control" placeholder="Group Name" />
+                            <input type="text" asp-for="Input.GroupName" class="form-control" placeholder="Group Name" required/>
                             <span class="invalid-feedback" asp-validation-for="Input.GroupName">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="PartnerType">@_localizer["Partner Type"] <span class="text-danger">*</span></label>
-                            <select type="text" asp-for="Input.PartnerType" class="form-control" asp-items="Html.GetEnumSelectList<PartnerType>()">
+                            <select type="text" asp-for="Input.PartnerType" class="custom-select" asp-items="Html.GetEnumSelectList<PartnerType>()" required>
                             </select>
                             <span class="invalid-feedback" asp-validation-for="Input.PartnerType">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="GroupName">@_localizer["Region"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.Region" class="form-control" placeholder="Region" />
+                            <input type="text" asp-for="Input.Region" class="form-control" placeholder="Region" required/>
                             <span class="invalid-feedback" asp-validation-for="Input.Region">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="Sales">@_localizer["Sales"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.Sales" class="form-control" placeholder="Sales" />
+                            <input type="text" asp-for="Input.Sales" class="form-control" placeholder="Sales" required />
                             <span class="invalid-feedback" asp-validation-for="Input.Sales">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="RegionSalesDirector">@_localizer["Region Sales Director"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.RegionSalesDirector" class="form-control" placeholder="Region Sales Director" />
+                            <input type="text" asp-for="Input.RegionSalesDirector" class="form-control" placeholder="Region Sales Director" required />
                             <span class="invalid-feedback" asp-validation-for="Input.RegionSalesDirector">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-12">
@@ -185,20 +185,23 @@
         });
         $('#customer_form :submit').click(function (e) {
             console.log('submmit')
-            var valid = $('#customer_form').valid();
-            console.log(valid)
-            var request = $('#customer_form').serialize();
-            axios.post('/Customers/Index', request).then(res => {
-                toastr["info"]('@_localizer["Save Success"]');
-                $('#customer_modal').modal('toggle');
-                reload();
-            })
-                .catch((error) => {
+            var form = document.getElementsByClassName('needs-validation')[0];
+            $(form).find(":valid").parent().removeClass("was-validated");
+            if (form.checkValidity() === false) {
+                form.classList.add('was-validated');
+            } else {
+                var request = $('#customer_form').serialize();
+                axios.post('/Customers/Index', request).then(res => {
+                    toastr["info"]('@_localizer["Save Success"]');
+                    $('#customer_modal').modal('toggle');
+                    reload();
+                }).catch((error) => {
                     var msg = error.response.data;
                     $.messager.alert('@_localizer["Error"]', msg)
                 });
-
-            e.preventDefault();
+            }
+            event.preventDefault();
+            event.stopPropagation();
         })
         var $dg={};
         var initdatagrid = () => {
@@ -255,6 +258,7 @@
                 .datagrid('load', '@Url.Page("/Customers/Index")?handler=Data');
 
         }
+
         var reload = () => {
             $dg.datagrid('load', '@Url.Page("/Customers/Index")?handler=Data');
         }

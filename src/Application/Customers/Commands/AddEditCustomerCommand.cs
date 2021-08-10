@@ -25,7 +25,6 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands
             profile.CreateMap<Customer, AddEditCustomerCommand>().ReverseMap();
     
         }
-
         public int Id { get; set; }
         public string Name { get; set; }
         public string NameOfEnglish { get; set; }

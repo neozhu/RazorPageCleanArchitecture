@@ -2158,7 +2158,7 @@ textarea.form-control {
   background-color: #1dc9b7;
   border-radius: 5px; }
 
-.was-validated :valid ~ .valid-feedback,
+/*.was-validated :valid ~ .valid-feedback,
 .was-validated :valid ~ .valid-tooltip,
 .is-valid ~ .valid-feedback,
 .is-valid ~ .valid-tooltip {
@@ -2219,7 +2219,7 @@ textarea.form-control {
 .was-validated .custom-file-input:valid:focus ~ .custom-file-label, .custom-file-input.is-valid:focus ~ .custom-file-label {
   border-color: #1dc9b7;
   -webkit-box-shadow: 0 0 0 0.2rem rgba(29, 201, 183, 0.25);
-          box-shadow: 0 0 0 0.2rem rgba(29, 201, 183, 0.25); }
+          box-shadow: 0 0 0 0.2rem rgba(29, 201, 183, 0.25); }*/
 
 .invalid-feedback {
   display: none;

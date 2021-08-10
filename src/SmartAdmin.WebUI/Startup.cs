@@ -56,10 +56,10 @@ namespace SmartAdmin.WebUI
         options.Cookie.Name = "AntiforgeryCookie";
         });
       services.AddControllers();
-      services.AddMvc().AddFluentValidation(fv => {
-          fv.DisableDataAnnotationsValidation = true;
-          fv.ImplicitlyValidateChildProperties = true;
-            });
+      //services.AddMvc().AddFluentValidation(fv => {
+      //    fv.DisableDataAnnotationsValidation = false;
+      //    fv.ImplicitlyValidateChildProperties = true;
+      //      });
       services
           .AddRazorPages()
           .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy=null)
