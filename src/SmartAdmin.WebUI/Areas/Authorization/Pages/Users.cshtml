@@ -35,14 +35,14 @@
             $('#dt-list').DataTableEdit({
                 ajax: endpoint,
                 columns: [
-                    { title: "Id", data: "id", type: "readonly", visible: false, searchable: false },
-                    { title: "UserName", data: "userName", type: "readonly" },
-                    { title: "Site", data: "site", type: "text" },
-                    { title: "DisplayName", data: "displayName", type: "text" },
-                    { title: "Email", data: "email" },
+                    { title: "Id", data: "Id", type: "readonly", visible: false, searchable: false },
+                    { title: "UserName", data: "UserName", type: "readonly" },
+                    { title: "Site", data: "Site", type: "text" },
+                    { title: "DisplayName", data: "DisplayName", type: "text" },
+                    { title: "Email", data: "Email" },
                     {
                         title: "Confirmed",
-                        data: "emailConfirmed",
+                        data: "EmailConfirmed",
                         className: "text-center col-1",
                         type: "select",
                         options: trueFalseOptions,
@@ -50,10 +50,10 @@
                             return `<input type="checkbox" name="lockoutEnabled" disabled ${data ? "checked" : ""}>`;
                         }
                     },
-                    { title: "PhoneNumber", data: "phoneNumber",type: "text" },
+                    { title: "PhoneNumber", data: "PhoneNumber",type: "text" },
                     {
                         title: "LockOut",
-                        data: "lockoutEnabled",
+                        data: "LockoutEnabled",
                         className: "text-center col-1",
                         type: "select",
                         options: trueFalseOptions,
