@@ -1,4 +1,5 @@
-﻿using CleanArchitecture.Razor.Application.Common.Models;
+using CleanArchitecture.Razor.Application.Common.Models;
+using CleanArchitecture.Razor.Domain.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,11 +10,11 @@ namespace CleanArchitecture.Razor.Application.Common.Interfaces
 {
     public interface IExcelService
     {
-        Task<Stream> ExportAsync<TData>(IEnumerable<TData> data
+        Task<byte[]> ExportAsync<TData>(IEnumerable<TData> data
             , Dictionary<string, Func<TData, object>> mappers
-            , string sheetName = "Sheet1");
+, string sheetName = "Sheet1");
 
-        Task<Result> ImportAsync<TEntity>(Stream data
+        Task<IResult<IEnumerable<TEntity>>> ImportAsync<TEntity>(byte[] data
             , Dictionary<string, Func<DataRow, TEntity, object>> mappers
             , string sheetName = "Sheet1");
     }

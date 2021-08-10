@@ -19,7 +19,7 @@ using CleanArchitecture.Razor.Application.Common.Mappings;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanArchitecture.Razor.Application.Customers.Queries
+namespace CleanArchitecture.Razor.Application.Customers.Queries.PaginationQuery
 {
     public class CustomersWithPaginationQuery : IRequest<PaginatedData<CustomerDto>>
     {

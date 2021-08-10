@@ -14,7 +14,7 @@ using CleanArchitecture.Razor.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanArchitecture.Razor.Application.Customers.Commands
+namespace CleanArchitecture.Razor.Application.Customers.Commands.Delete
 {
    public class DeleteCommerCommand: IRequest<Result>
     {

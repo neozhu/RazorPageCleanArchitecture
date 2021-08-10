@@ -45,8 +45,11 @@
                 @_localizer["Search"]
             </button>
             <div class="btn-group" role="group">
-                <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
                     @_localizer["Import"]
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="importbutton">
                     <a class="dropdown-item" href="#">@_localizer["Download Template"]</a>
@@ -80,7 +83,7 @@
                 <div class="modal-body">
                     @Html.AntiForgeryToken()
                     <input type="hidden" asp-for="Input.Id" />
-                    <div class="form-row" >
+                    <div class="form-row">
                         <div class="col-md-6">
                             <label class="form-label" for="name">@_localizer["Name"] <span class="text-danger">*</span></label>
                             <input type="text" asp-for="Input.Name" class="form-control" placeholder="Customer Name" required />
@@ -88,12 +91,12 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="nameOfEnglish">@_localizer["Name Of English"] </label>
-                            <input type="text" asp-for="Input.NameOfEnglish" class="form-control" placeholder="Customer Name of English" formnovalidate="" />
+                            <input type="text" asp-for="Input.NameOfEnglish" class="form-control" placeholder="Customer Name of English" />
                             <span class="invalid-feedback" asp-validation-for="Input.NameOfEnglish">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="GroupName">@_localizer["Group Name"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.GroupName" class="form-control" placeholder="Group Name" required/>
+                            <input type="text" asp-for="Input.GroupName" class="form-control" placeholder="Group Name" required />
                             <span class="invalid-feedback" asp-validation-for="Input.GroupName">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
@@ -104,7 +107,7 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="GroupName">@_localizer["Region"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.Region" class="form-control" placeholder="Region" required/>
+                            <input type="text" asp-for="Input.Region" class="form-control" placeholder="Region" required />
                             <span class="invalid-feedback" asp-validation-for="Input.Region">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
@@ -162,6 +165,7 @@
         </div>
     </div>
 </div>
+@await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/Customers/Index") + "?handler=Import" })
 @section ScriptsBlock {
     <partial name="_ValidationScriptsPartial" />
 
@@ -182,6 +186,12 @@
         });
         $('#deletebutton').click(function () {
             onDeleteChecked();
+        });
+        $('#exportbutton').click(function () {
+            onExport();
+        });
+        $('#importbutton').click(function () {
+            $('#default-import-modal').modal('toggle')
         });
         $('#customer_form :submit').click(function (e) {
             console.log('submmit')
@@ -215,6 +225,8 @@
                 pagination: true,
                 clientPaging: false,
                 remoteFilter: true,
+                sortName: 'Id',
+                sortOrder:'desc',
                 pageSize: 15,
                 pageList: [15, 30, 50, 100, 1000],
                 columns: [[
@@ -351,6 +363,40 @@
                 });
 
             }
+        }
+        var onExport = () => {
+            var options = $dg.datagrid('options');
+            var data = {
+                filterRules: JSON.stringify(options.filterRules),
+                sort: options.sortName,
+                order: options.sortOrder,
+            }
+            console.log(options,data)
+            var headers = {
+                "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+            }
+            axios.post('@Url.Page("/Customers/Index")?handler=Export',
+                data,
+                {
+                    headers: headers,
+                    responseType: "blob"
+                })
+                .then(response => {
+                    console.log(response);
+                    const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', "@(_localizer["Customers"]).xlsx" );
+                    document.body.appendChild(link);
+                    link.click();
+                }).catch(error => {
+                    console.log(error)
+                })
+
+
+        }
+        var onImportProcess = (data) => {
+            console.log(data);
         }
     </script>
 }

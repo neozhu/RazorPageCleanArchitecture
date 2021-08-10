@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
 
-namespace CleanArchitecture.Razor.Application.Customers.Commands
+namespace CleanArchitecture.Razor.Application.Customers.Commands.AddEdit
 {
     public class AddEditCustomerCommandValidator : AbstractValidator<AddEditCustomerCommand>
     {

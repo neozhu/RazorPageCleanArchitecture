@@ -1,5 +1,6 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Behaviours;
+using CleanArchitecture.Razor.Application.Common.Interfaces;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +19,7 @@ namespace CleanArchitecture.Razor.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
-
+          
             return services;
         }
     }

@@ -16,7 +16,7 @@ using CleanArchitecture.Razor.Domain.Enums;
 using CleanArchitecture.Razor.Domain.Events;
 using MediatR;
 
-namespace CleanArchitecture.Razor.Application.Customers.Commands
+namespace CleanArchitecture.Razor.Application.Customers.Commands.AddEdit
 {
     public class AddEditCustomerCommand:IRequest<Result>, IMapFrom<Customer>
     {

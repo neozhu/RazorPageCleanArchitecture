@@ -1,0 +1,83 @@
+﻿@model SmartAdmin.WebUI.Pages.Shared.Components.ImportExcel.DefaultModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<DefaultModel> _localizer
+@{
+
+}
+<div class="modal fade" id="default-import-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@_localizer["Import Excel"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <button name="uploadfilebutton" type="button" class="btn btn-primary mb-4">
+                    <span class="@(Settings.Theme.IconPrefix) fa-paperclip mr-1"></span>
+                    @_localizer["Upload"]
+                </button>
+                @Html.AntiForgeryToken()
+                <input asp-for="UploadedFile" class="form-control" style="display:none">
+                <div id="uploadfilealert">
+                    <div class="alert alert-secondary alert-dismissible fade show mb-0" role="alert">
+                        @_localizer["Please upload excel file!"]
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
+                <button name="importbutton" type="button" class="btn btn-primary">@_localizer["Import"]</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var uploadfileinput = document.getElementById("UploadedFile");
+    var filenamespan = document.getElementById("filenamespan");
+    var uploadfilealert = document.getElementById("uploadfilealert");
+    var importbutton = document.getElementsByName("importbutton")[0];
+    importbutton.disabled = true;
+    var fileName = '';
+    importbutton.addEventListener('click', (e)=> {
+        let formData = new FormData()
+        formData.append('UploadedFile', uploadfileinput.files[0])
+        formData.append('__RequestVerificationToken', $('input[name="__RequestVerificationToken"]').val())
+        axios({
+            url: '@Html.Raw(Model.ImportUri)',
+            method: 'post',
+            data: formData,
+            processData: false,// 告诉axios不要去处理发送的数据(重要参数)
+            contentType: false,   // 告诉axios不要去设置Content-Type请求头
+        }).then((res) => {
+            console.log(res)
+        })
+
+    })
+    document.getElementsByName("uploadfilebutton")[0].addEventListener("click", (e) => {
+        uploadfileinput.click();
+    });
+    uploadfileinput.onchange =  () => {
+        fileName = uploadfileinput.value.split('\\')[uploadfileinput.value.split('\\').length - 1];
+        uploadfilealert.innerHTML = `
+              <div class="alert alert-info alert-dismissible fade show mb-0" role="alert">
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                      </button>
+                      <div class="d-flex align-items-center">
+							<div class="alert-icon">
+									<i class="@(Settings.Theme.IconPrefix) fa-upload fs-xl"></i>
+							</div>
+							<div class="flex-1">
+	    							${fileName}
+							</div>
+					</div>
+             </div>
+        `
+        importbutton.disabled = false;
+        $('.alert').on('closed.bs.alert', (e) => {
+            uploadfileinput.value = null;
+            importbutton.disabled = true;
+        })
+    };
+</script>

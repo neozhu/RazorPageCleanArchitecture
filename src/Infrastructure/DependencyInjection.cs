@@ -40,9 +40,9 @@ namespace CleanArchitecture.Razor.Infrastructure
 
       services.AddTransient<IDateTime, DateTimeService>();
       services.AddTransient<IIdentityService, IdentityService>();
+            services.AddTransient<IExcelService, ExcelService>();
 
-
-      services.AddAuthentication();
+            services.AddAuthentication();
 
 
       services.AddAuthorization(options =>
