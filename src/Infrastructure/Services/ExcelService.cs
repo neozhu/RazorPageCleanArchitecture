@@ -80,11 +80,11 @@ namespace CleanArchitecture.Razor.Infrastructure.Services
          
             using (var workbook = new XLWorkbook(new MemoryStream(data)))
             {
-                var ws = workbook.Worksheet(sheetName);
-                if (ws == null)
+                if (!workbook.Worksheets.Contains(sheetName))
                 {
                     return await Result<IEnumerable<TEntity>>.FailureAsync(new string[] { string.Format(_localizer["Sheet with name {0} does not exist!"], sheetName) });
                 }
+                var ws = workbook.Worksheet(sheetName);
                 var dt = new DataTable();
                 var titlesInFirstRow = true;
 

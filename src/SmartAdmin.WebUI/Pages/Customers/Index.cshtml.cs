@@ -69,6 +69,7 @@ namespace SmartAdmin.WebUI.Pages.Customers
         {
             var command = new DeleteCheckedCommersCommand() { Id = id };
             var result = await _mediator.Send(command);
+            throw new Exception();
             return new JsonResult("");
         }
         public async Task<IActionResult> OnGetDeleteAsync([FromQuery] int id)

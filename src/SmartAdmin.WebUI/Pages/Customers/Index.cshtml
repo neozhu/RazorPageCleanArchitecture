@@ -36,7 +36,7 @@
                 <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
                 @_localizer["Add"]
             </button>
-            <button class="btn btn-sm btn-outline-danger " id="deletebutton">
+            <button class="btn btn-sm btn-outline-danger" disabled id="deletebutton">
                 <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
                 @_localizer["Delete"]
             </button>
@@ -165,7 +165,7 @@
         </div>
     </div>
 </div>
-@await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/Customers/Index") + "?handler=Import" })
+@await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/Customers/Index") + "?handler=Import", onImportedSucceeded="reload()" })
 @section ScriptsBlock {
     <partial name="_ValidationScriptsPartial" />
 
@@ -178,7 +178,6 @@
 
     <script type="text/javascript">
         $('#searchbutton').click(function () {
-            console.log('reloaddata')
             reload();
         });
         $('#addbutton').click(function () {
@@ -191,7 +190,7 @@
             onExport();
         });
         $('#importbutton').click(function () {
-            $('#default-import-modal').modal('toggle')
+            showImportModal();
         });
         $('#customer_form :submit').click(function (e) {
             console.log('submmit')
@@ -207,7 +206,13 @@
                     reload();
                 }).catch((error) => {
                     var msg = error.response.data;
-                    $.messager.alert('@_localizer["Error"]', msg)
+                    bootbox.alert({
+                        size: "small",
+                        title: "@_localizer["Error"]",
+                        message: msg,
+                        callback: function () { /* your callback code */ }
+                    })
+
                 });
             }
             event.preventDefault();
@@ -229,6 +234,20 @@
                 sortOrder:'desc',
                 pageSize: 15,
                 pageList: [15, 30, 50, 100, 1000],
+                onCheckAll: function (rows) {
+                    const checked = $(this).datagrid('getChecked').length > 0;
+                    $('#deletebutton').prop('disabled', !checked);
+                },
+                onUncheckAll: function () {
+                    $('#deletebutton').prop('disabled', true);
+                },
+                onCheck: function () {
+                    $('#deletebutton').prop('disabled', false);
+                },
+                onUncheck: function () {
+                    const checked = $(this).datagrid('getChecked').length > 0;
+                    $('#deletebutton').prop('disabled', !checked);
+                },
                 columns: [[
                     { field: 'ck', checkbox: true },
                     {
@@ -325,7 +344,12 @@
                         })
                             .catch((error) => {
                                 var msg = error.response.data;
-                                $.messager.alert('@_localizer["Error"]', msg)
+                                bootbox.alert({
+                                    size: "small",
+                                    title: "@_localizer["Error"]",
+                                    message: msg,
+                                    callback: function () { /* your callback code */ }
+                                })
                             });
                     }
                 }
@@ -356,7 +380,12 @@
                             })
                                 .catch((error) => {
                                     var msg = error.response.data;
-                                    $.messager.alert('@_localizer["Error"]', msg)
+                                    bootbox.alert({
+                                        size: "small",
+                                        title: "@_localizer["Error"]",
+                                        message: msg,
+                                        callback: function () { /* your callback code */ }
+                                    })
                                 });
                         }
                     }

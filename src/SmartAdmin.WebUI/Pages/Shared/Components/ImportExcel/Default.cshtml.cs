@@ -16,5 +16,6 @@ namespace SmartAdmin.WebUI.Pages.Shared.Components.ImportExcel
         public IFormFile UploadedFile { get; set; }
         public string ImportUri { get; set; }
         public string AntiForgeryToken { get; set; }
+        public string OnImportedSucceeded { get; set; }
     }
 }

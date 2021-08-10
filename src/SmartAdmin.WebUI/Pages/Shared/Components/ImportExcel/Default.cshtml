@@ -6,6 +6,7 @@
 <div class="modal fade" id="default-import-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
+            <div class="loader"><i class="fal fa-spinner-third fa-spin-4x fs-xxl"></i></div>
             <div class="modal-header">
                 <h5 class="modal-title">@_localizer["Import Excel"]</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -34,12 +35,13 @@
 </div>
 <script>
     var uploadfileinput = document.getElementById("UploadedFile");
-    var filenamespan = document.getElementById("filenamespan");
     var uploadfilealert = document.getElementById("uploadfilealert");
-    var importbutton = document.getElementsByName("importbutton")[0];
+    var importbutton = document.querySelector("#default-import-modal button[name='importbutton']");
+    var modalcontent = document.querySelector("#default-import-modal > div > .modal-content");
     importbutton.disabled = true;
     var fileName = '';
-    importbutton.addEventListener('click', (e)=> {
+    importbutton.addEventListener('click', (e) => {
+        modalcontent.classList.add("enable-loader");
         let formData = new FormData()
         formData.append('UploadedFile', uploadfileinput.files[0])
         formData.append('__RequestVerificationToken', $('input[name="__RequestVerificationToken"]').val())
@@ -49,8 +51,22 @@
             data: formData,
             processData: false,// 告诉axios不要去处理发送的数据(重要参数)
             contentType: false,   // 告诉axios不要去设置Content-Type请求头
-        }).then((res) => {
-            console.log(res)
+        }).then((response) => {
+            modalcontent.classList.remove("enable-loader");
+            if (response.data.Succeeded) {
+                toastr["info"](`@_localizer["Import data success."]`);
+                $('#default-import-modal').modal('toggle');
+                @Html.Raw(Model.OnImportedSucceeded)
+            } else {
+                var errors = response.data.Errors;
+                errors.forEach(item => {
+                    toastr["error"](item);
+                })
+
+            }
+        }).catch(error => {
+            modalcontent.classList.remove("enable-loader");
+            toastr["error"](`@_localizer["Import fail."]`);
         })
 
     })
@@ -58,7 +74,7 @@
         uploadfileinput.click();
     });
     uploadfileinput.onchange =  () => {
-        fileName = uploadfileinput.value.split('\\')[uploadfileinput.value.split('\\').length - 1];
+        fileName = uploadfileinput.value.split('\\').pop();
         uploadfilealert.innerHTML = `
               <div class="alert alert-info alert-dismissible fade show mb-0" role="alert">
                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -80,4 +96,7 @@
             importbutton.disabled = true;
         })
     };
+    var showImportModal = () => {
+        $('#default-import-modal').modal('toggle');
+    }
 </script>

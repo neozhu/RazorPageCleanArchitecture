@@ -57,7 +57,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
                 { _localizer["Name"], (row,item) => item.Name = row[_localizer["Name"]]?.ToString() },
                 { _localizer["Name Of English"], (row,item) => item.NameOfEnglish = row[_localizer["Name Of English"]]?.ToString() },
                 { _localizer["Group Name"], (row,item) => item.GroupName =  row[_localizer["Group Name"]]?.ToString() },
-                { _localizer["Partner Type"], (row,item) => item.PartnerType = (PartnerType) Enum.Parse(typeof(PartnerType), row[_localizer["Partner Type"]]==null?"TP":"IC", true)  },
+                { _localizer["Partner Type"], (row,item) => item.PartnerType = (PartnerType) Enum.Parse(typeof(PartnerType), row[_localizer["Partner Type"]]==null?"TP":row[_localizer["Partner Type"]].ToString(), true)  },
                 { _localizer["Region"], (row,item) => item.Region =  row[_localizer["Region"]]?.ToString() },
                 { _localizer["Sales"], (row,item) => item.Sales =  row[_localizer["Sales"]]?.ToString() },
                 { _localizer["Region Sales Director"], (row,item) => item.RegionSalesDirector =  row[_localizer["Region Sales Director"]]?.ToString() },
