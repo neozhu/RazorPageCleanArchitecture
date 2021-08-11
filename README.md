@@ -13,7 +13,7 @@ This is a solution template for creating a Razor Page App with ASP.NET Core foll
 
 ## Demonstration
 
-[![Clean Architecture Solution For Razor Page Development](https://img.youtube.com/vi/NcMd5W3C63A/1.jpg)](https://www.youtube.com/watch?v=NcMd5W3C63A)
+[![Clean Architecture Solution For Razor Page Development](https://github.com/neozhu/RazorPageCleanArchitecture/blob/main/doc/screenshot/2021-08-11_19-28-59.png?raw=true)](https://www.youtube.com/watch?v=NcMd5W3C63A)
 
 ## Technologies
 
