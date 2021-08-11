@@ -32,7 +32,6 @@ namespace SmartAdmin.WebUI.EndPoints
         public async Task<ActionResult<IEnumerable<ApplicationUser>>> Get()
         {
             var users = await _manager.Users.AsNoTracking().ToListAsync();
-
             return Ok(new { data = users, recordsTotal = users.Count, recordsFiltered = users.Count });
         }
 

@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -16,7 +15,6 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper.QueryableExtensions;
 using Microsoft.Extensions.Localization;
-using System.IO;
 
 namespace CleanArchitecture.Razor.Application.Customers.Queries.Export
 {

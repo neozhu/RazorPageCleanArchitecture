@@ -115,7 +115,20 @@
           "href": "customers_index.html",
           "roles": []
         }
-
+      ]
+    },
+    {
+      "title": "Documents",
+      "icon": "fal fa-paperclip",
+      "roles": [
+        "Administrator"
+      ],
+      "items": [
+        {
+          "title": "Document Type",
+          "href": "documentTypes_index.html",
+          "roles": []
+        }
       ]
     },
     {

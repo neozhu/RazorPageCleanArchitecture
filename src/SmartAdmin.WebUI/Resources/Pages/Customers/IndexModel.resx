@@ -162,7 +162,7 @@
   <data name="Email" xml:space="preserve">
     <value>电子邮件</value>
   </data>
-  <data name="Export" xml:space="preserve">
+  <data name="Export Excel" xml:space="preserve">
     <value>导出Excel</value>
   </data>
   <data name="Fax" xml:space="preserve">
@@ -174,7 +174,7 @@
   <data name="Id" xml:space="preserve">
     <value>系统编号</value>
   </data>
-  <data name="Import" xml:space="preserve">
+  <data name="Import Excel" xml:space="preserve">
     <value>导入Excel</value>
   </data>
   <data name="Name" xml:space="preserve">

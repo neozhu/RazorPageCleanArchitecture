@@ -4,16 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Models;
 using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
-using CleanArchitecture.Razor.Application.Customers.Queries.Export;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Enums;
 using FluentValidation;
@@ -40,14 +37,14 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
         private readonly IExcelService _excelService;
-        private readonly IStringLocalizer<ExportCustomersQueryHandler> _localizer;
+        private readonly IStringLocalizer<ImportCustomersCommandHandler> _localizer;
         private readonly IValidator<AddEditCustomerCommand> _addValidator;
 
         public ImportCustomersCommandHandler(
             IApplicationDbContext context,
             IMapper mapper,
             IExcelService excelService,
-            IStringLocalizer<ExportCustomersQueryHandler> localizer,
+            IStringLocalizer<ImportCustomersCommandHandler> localizer,
             IValidator<AddEditCustomerCommand> addValidator
             )
         {

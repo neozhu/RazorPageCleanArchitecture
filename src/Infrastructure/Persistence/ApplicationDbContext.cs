@@ -30,7 +30,8 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
         }
 
         public DbSet<Customer> Customers { get; set; }
-  
+        public DbSet<DocumentType> DocumentTypes { get; set; }
+        public DbSet<Document> Documents { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

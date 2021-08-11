@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <Folder Include="Customers\Queries\DTOs\" />
+    <Folder Include="Documents\" />
   </ItemGroup>
 
 </Project>

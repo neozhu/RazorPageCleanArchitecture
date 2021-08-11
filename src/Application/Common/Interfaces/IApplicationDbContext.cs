@@ -8,6 +8,8 @@ namespace CleanArchitecture.Razor.Application.Common.Interfaces
     public interface IApplicationDbContext
     {
         DbSet<Customer> Customers { get; set; }
+        DbSet<DocumentType> DocumentTypes { get; set; }
+        DbSet<Document> Documents { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }
