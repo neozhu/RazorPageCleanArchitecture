@@ -13,6 +13,7 @@ using System.Linq.Dynamic.Core;
 using MediatR;
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using AutoMapper.QueryableExtensions;
+using CleanArchitecture.Razor.Application.Customers.DTOs;
 
 namespace CleanArchitecture.Razor.Application.Customers.Queries.PaginationQuery
 {

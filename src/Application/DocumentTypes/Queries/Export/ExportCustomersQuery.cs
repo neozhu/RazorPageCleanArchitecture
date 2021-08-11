@@ -17,6 +17,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper.QueryableExtensions;
 using Microsoft.Extensions.Localization;
 using System.IO;
+using CleanArchitecture.Razor.Application.DocumentTypes.DTOs;
 
 namespace CleanArchitecture.Razor.Application.DocumentTypes.Queries.Export
 {

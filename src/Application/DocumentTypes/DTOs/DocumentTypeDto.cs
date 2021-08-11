@@ -10,7 +10,7 @@ using CleanArchitecture.Razor.Application.Common.Mappings;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Enums;
 
-namespace CleanArchitecture.Razor.Application.DocumentTypes.Queries
+namespace CleanArchitecture.Razor.Application.DocumentTypes.DTOs
 {
     public partial class DocumentTypeDto : IMapFrom<DocumentType>
     {

@@ -18,6 +18,7 @@ using MediatR;
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using CleanArchitecture.Razor.Application.DocumentTypes.DTOs;
 
 namespace CleanArchitecture.Razor.Application.DocumentTypes.Queries.PaginationQuery
 {

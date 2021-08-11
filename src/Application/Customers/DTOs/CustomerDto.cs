@@ -4,7 +4,7 @@
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using CleanArchitecture.Razor.Domain.Entities;
 
-namespace CleanArchitecture.Razor.Application.Customers.Queries
+namespace CleanArchitecture.Razor.Application.Customers.DTOs
 {
     public partial class CustomerDto:IMapFrom<Customer>
     {
