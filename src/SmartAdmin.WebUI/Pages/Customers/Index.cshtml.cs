@@ -9,7 +9,6 @@ using CleanArchitecture.Razor.Application.Customers.Commands.Delete;
 using CleanArchitecture.Razor.Application.Customers.Commands.Import;
 using CleanArchitecture.Razor.Application.Customers.Queries.Export;
 using CleanArchitecture.Razor.Application.Customers.Queries.PaginationQuery;
-using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -38,7 +37,7 @@ namespace SmartAdmin.WebUI.Pages.Customers
         }
         public async Task OnGetAsync()
         {
-            PageContext.SetRulesetForClientsideMessages("MyRuleset");
+            
         }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] CustomersWithPaginationQuery command)
         {
