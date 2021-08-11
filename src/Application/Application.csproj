@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="KeyValues\Queries\DTOs\" />
     <Folder Include="Customers\Queries\DTOs\" />
     <Folder Include="Documents\" />
   </ItemGroup>

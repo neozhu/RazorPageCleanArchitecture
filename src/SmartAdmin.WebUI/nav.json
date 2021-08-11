@@ -114,6 +114,11 @@
           "title": "Customers",
           "href": "customers_index.html",
           "roles": []
+        },
+        {
+          "title": "Dictionaries",
+          "href": "keyValues_index.html",
+          "roles": []
         }
       ]
     },

@@ -33,6 +33,8 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
         public DbSet<DocumentType> DocumentTypes { get; set; }
         public DbSet<Document> Documents { get; set; }
 
+        public DbSet<KeyValue> KeyValues { get; set; }
+
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
