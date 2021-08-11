@@ -52,7 +52,7 @@
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="importbutton">
-                    <a class="dropdown-item" href="#">@_localizer["Download Template"]</a>
+                    <button id="gettemplatebutton" class="dropdown-item" >@_localizer["Download Template"]</button>
                 </div>
             </div>
             <button class="btn btn-sm btn-outline-primary " id="exportbutton">
@@ -165,7 +165,9 @@
         </div>
     </div>
 </div>
-@await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/Customers/Index") + "?handler=Import", onImportedSucceeded="reload()" })
+@await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/Customers/Index") + "?handler=Import",
+    getTemplateUri = @Url.Page("/Customers/Index") + "?handler=CreateTemplate",
+    onImportedSucceeded = "reload()" })
 @section ScriptsBlock {
     <partial name="_ValidationScriptsPartial" />
 
@@ -191,6 +193,9 @@
         });
         $('#importbutton').click(function () {
             showImportModal();
+        });
+        $('#gettemplatebutton').click(function () {
+            onGetTemplate();
         });
         $('#customer_form :submit').click(function (e) {
             console.log('submmit')
@@ -411,11 +416,11 @@
                     responseType: "blob"
                 })
                 .then(response => {
-                    console.log(response);
+                    const filename = getFileName(response.headers['content-disposition']);
                     const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
                     const link = document.createElement('a');
                     link.href = url;
-                    link.setAttribute('download', "@(_localizer["Customers"]).xlsx" );
+                    link.setAttribute('download', filename);
                     document.body.appendChild(link);
                     link.click();
                 }).catch(error => {
@@ -424,8 +429,7 @@
 
 
         }
-        var onImportProcess = (data) => {
-            console.log(data);
-        }
+
+
     </script>
 }

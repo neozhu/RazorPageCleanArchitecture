@@ -10,9 +10,11 @@ namespace SmartAdmin.WebUI.ViewComponents
 {
     public class ImportExcelViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke(string importUri,string onImportedSucceeded)
+        public IViewComponentResult Invoke(string importUri,string getTemplateUri,string onImportedSucceeded)
         {
-            return View(new DefaultModel() { ImportUri = importUri , OnImportedSucceeded= onImportedSucceeded });
+            return View(new DefaultModel() { ImportUri = importUri ,
+                GetTemplateUri = getTemplateUri,
+                OnImportedSucceeded= onImportedSucceeded });
         }
     }
 }

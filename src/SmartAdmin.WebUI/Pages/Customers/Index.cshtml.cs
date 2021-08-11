@@ -82,6 +82,12 @@ namespace SmartAdmin.WebUI.Pages.Customers
             var result =await _mediator.Send(command);
             return  File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["Customers"]+".xlsx");
         }
+        public async Task<FileResult> OnGetCreateTemplate()
+        {
+            var command = new CreateCustomerTemplateCommand();
+            var result = await _mediator.Send(command);
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["Customers"] + ".xlsx");
+        }
         public async Task<IActionResult> OnPostImportAsync()
         {
             var stream=new MemoryStream();

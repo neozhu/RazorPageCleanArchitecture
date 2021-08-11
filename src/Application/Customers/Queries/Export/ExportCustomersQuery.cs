@@ -26,7 +26,9 @@ namespace CleanArchitecture.Razor.Application.Customers.Queries.Export
         public string sort { get; set; } = "Id";
         public string order { get; set; } = "desc";
     }
-    public class ExportCustomersQueryHandler : IRequestHandler<ExportCustomersQuery, byte[]>
+    
+    public class ExportCustomersQueryHandler :
+         IRequestHandler<ExportCustomersQuery, byte[]>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -75,5 +77,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Queries.Export
                 );
             return result;
         }
+
+        
     }
 }

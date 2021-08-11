@@ -28,7 +28,14 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
         public string FileName { get; set; }
         public byte[] Data { get; set; }
     }
-    public class ImportCustomersCommandHandler : IRequestHandler<ImportCustomersCommand, Result>
+    public class CreateCustomerTemplateCommand : IRequest<byte[]>
+    {
+        public IEnumerable<string> Fields { get; set; }
+        public string SheetName  { get;set; }
+    }
+    public class ImportCustomersCommandHandler :
+        IRequestHandler<CreateCustomerTemplateCommand, byte[]>,
+        IRequestHandler<ImportCustomersCommand, Result>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -104,6 +111,27 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
             {
                 return await Result.FailureAsync(result.Errors);
             }
+        }
+
+        public async Task<byte[]> Handle(CreateCustomerTemplateCommand request, CancellationToken cancellationToken)
+        {
+            var fields = new string[] {
+                _localizer["Name"],
+                _localizer["Name Of English"],
+                _localizer["Group Name"],
+                _localizer["Partner Type"],
+                _localizer["Region"],
+                _localizer["Sales"],
+                _localizer["Region Sales Director"],
+                _localizer["Address"],
+                _localizer["Address Of English"],
+                _localizer["Contract"],
+                _localizer["Phone Number"],
+                _localizer["Fax"],
+                _localizer["Comments"],
+                };
+            var result = await _excelService.CreateTemplateAsync(fields, _localizer["Customers"]);
+            return result;
         }
     }
 }

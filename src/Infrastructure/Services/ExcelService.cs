@@ -25,6 +25,40 @@ namespace CleanArchitecture.Razor.Infrastructure.Services
             _localizer = localizer;
         }
 
+        public async Task<byte[]> CreateTemplateAsync(IEnumerable<string> fields, string sheetName = "Sheet1")
+        {
+            using (var workbook = new XLWorkbook())
+            {
+                workbook.Properties.Author = "";
+                var ws = workbook.Worksheets.Add(sheetName);
+                var colIndex = 1;
+                var rowIndex = 1;
+                foreach (var header in fields)
+                {
+                    var cell = ws.Cell(rowIndex, colIndex);
+                    var fill = cell.Style.Fill;
+                    fill.PatternType = XLFillPatternValues.Solid;
+                    fill.SetBackgroundColor(XLColor.LightBlue);
+                    var border = cell.Style.Border;
+                    border.BottomBorder =
+                        border.BottomBorder =
+                            border.BottomBorder =
+                                border.BottomBorder = XLBorderStyleValues.Thin;
+
+                    cell.Value = header;
+
+                    colIndex++;
+                }
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    //var base64 = Convert.ToBase64String(stream.ToArray());
+                    stream.Seek(0, SeekOrigin.Begin);
+                    return await Task.FromResult(stream.ToArray());
+                }
+            }
+        }
+
         public async Task<byte[]> ExportAsync<TData>(IEnumerable<TData> data
             , Dictionary<string, Func<TData, object>> mappers
             , string sheetName = "Sheet1")
@@ -116,13 +150,13 @@ namespace CleanArchitecture.Razor.Infrastructure.Services
                         var item = (TEntity)Activator.CreateInstance(typeof(TEntity));
                         foreach (IXLCell cell in row.Cells())
                         {
-                            if (cell.Value != null)
+                            if (cell.DataType == XLDataType.DateTime)
                             {
-                                datarow[cell.Address.ColumnNumber - 1] = cell.Value.ToString();
+                                datarow[cell.Address.ColumnNumber - 1] = cell.GetDateTime().ToString("yyyy-MM-dd HH:mm:ss");
                             }
                             else
                             {
-                                datarow[cell.Address.ColumnNumber - 1] ="";
+                                datarow[cell.Address.ColumnNumber - 1] = cell.Value.ToString();
                             }
                         }
                         headers.ForEach(x => mappers[x](datarow, item));
