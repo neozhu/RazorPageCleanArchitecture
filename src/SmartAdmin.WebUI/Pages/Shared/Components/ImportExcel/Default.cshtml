@@ -91,7 +91,7 @@
              </div>
         `
         importbutton.disabled = false;
-        $('.alert').on('closed.bs.alert', (e) => {
+        $('#default-import-modal .alert').on('closed.bs.alert', (e) => {
             uploadfileinput.value = null;
             importbutton.disabled = true;
         })
