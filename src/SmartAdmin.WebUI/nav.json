@@ -104,6 +104,25 @@
       "roles": []
     },
     {
+      "title": "Workflow",
+      "icon": "fal fa-clipboard-check",
+      "roles": [
+        "Administrator"
+      ],
+      "items": [
+        {
+          "title": "Approval",
+          "href": "",
+          "roles": []
+        },
+        {
+          "title": "Histories",
+          "href": "",
+          "roles": []
+        }
+      ]
+    },
+    {
       "title": "Master Data",
       "icon": "fal fa-cubes",
       "roles": [
