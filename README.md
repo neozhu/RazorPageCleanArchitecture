@@ -11,7 +11,7 @@ This is a solution template for creating a Razor Page App with ASP.NET Core foll
 
 [![Clean Architecture with ASP.NET Core 3.0 • Jason Taylor • GOTO 2019](https://img.youtube.com/vi/dK4Yb6-LxAk/0.jpg)](https://www.youtube.com/watch?v=dK4Yb6-LxAk)
 
-## Demonstration
+## Demonstration(http://razor.i247365.net/)
 
 [![Clean Architecture Solution For Razor Page Development](https://github.com/neozhu/RazorPageCleanArchitecture/blob/main/doc/screenshot/2021-08-11_19-28-59.png?raw=true)](https://www.youtube.com/watch?v=NcMd5W3C63A)
 
@@ -19,7 +19,8 @@ This is a solution template for creating a Razor Page App with ASP.NET Core foll
 
 * [ASP.NET Core 5](https://devblogs.microsoft.com/aspnet/announcing-asp-net-core-in-net-5/)
 * [Entity Framework Core 5](https://docs.microsoft.com/en-us/ef/core/)
-* [Razor Pages](https://angular.io/)
+* [SmartAdmin - Responsive WebApp](https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0/)
+* [Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-5.0&tabs=visual-studio)
 * [MediatR](https://github.com/jbogard/MediatR)
 * [AutoMapper](https://automapper.org/)
 * [FluentValidation](https://fluentvalidation.net/)
