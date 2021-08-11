@@ -21,6 +21,7 @@ This is a solution template for creating a Razor Page App with ASP.NET Core foll
 * [Entity Framework Core 5](https://docs.microsoft.com/en-us/ef/core/)
 * [SmartAdmin - Responsive WebApp](https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0/)
 * [Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-5.0&tabs=visual-studio)
+* [Jquery EasyUI](https://www.jeasyui.com/)
 * [MediatR](https://github.com/jbogard/MediatR)
 * [AutoMapper](https://automapper.org/)
 * [FluentValidation](https://fluentvalidation.net/)
