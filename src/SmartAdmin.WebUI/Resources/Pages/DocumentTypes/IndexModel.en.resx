@@ -120,15 +120,6 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="Add Customer" xml:space="preserve">
-    <value>Add Customer</value>
-  </data>
-  <data name="Address" xml:space="preserve">
-    <value>Address</value>
-  </data>
-  <data name="Address Of English" xml:space="preserve">
-    <value>Address Of English</value>
-  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -137,15 +128,6 @@
   </data>
   <data name="Command" xml:space="preserve">
     <value>Command</value>
-  </data>
-  <data name="Comments" xml:space="preserve">
-    <value>Comments</value>
-  </data>
-  <data name="Contract" xml:space="preserve">
-    <value>Contract</value>
-  </data>
-  <data name="Customers" xml:space="preserve">
-    <value>Customers</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
@@ -156,47 +138,11 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="Edit Customer" xml:space="preserve">
-    <value>Edit Customer</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>Email</value>
-  </data>
   <data name="Export Excel" xml:space="preserve">
     <value>Export Excel</value>
   </data>
-  <data name="Fax" xml:space="preserve">
-    <value>Fax</value>
-  </data>
-  <data name="Group Name" xml:space="preserve">
-    <value>Group Name</value>
-  </data>
-  <data name="Id" xml:space="preserve">
-    <value>Id</value>
-  </data>
   <data name="Import Excel" xml:space="preserve">
     <value>Import Excel</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="Name Of English" xml:space="preserve">
-    <value>Name Of English</value>
-  </data>
-  <data name="Partner Type" xml:space="preserve">
-    <value>Partner Type</value>
-  </data>
-  <data name="Phone Number" xml:space="preserve">
-    <value>Phone Number</value>
-  </data>
-  <data name="Region" xml:space="preserve">
-    <value>Region</value>
-  </data>
-  <data name="Region Sales Director" xml:space="preserve">
-    <value>Region Sales Director</value>
-  </data>
-  <data name="Sales" xml:space="preserve">
-    <value>Sales</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
@@ -206,5 +152,20 @@
   </data>
   <data name="See all available options" xml:space="preserve">
     <value>See all available options</value>
+  </data>
+  <data name="Add Document Type" xml:space="preserve">
+    <value>Add Document Type</value>
+  </data>
+  <data name="Document Types" xml:space="preserve">
+    <value>Document Types</value>
+  </data>
+  <data name="Edit Document Type" xml:space="preserve">
+    <value>Edit Document Type</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
   </data>
 </root>

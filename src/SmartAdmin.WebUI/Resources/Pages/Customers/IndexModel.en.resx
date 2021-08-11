@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Edit Customer" xml:space="preserve">
+    <value>Edit Customer</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -138,9 +150,6 @@
   <data name="Command" xml:space="preserve">
     <value>Command</value>
   </data>
-  <data name="Comments" xml:space="preserve">
-    <value>Comments</value>
-  </data>
   <data name="Contract" xml:space="preserve">
     <value>Contract</value>
   </data>
@@ -152,12 +161,6 @@
   </data>
   <data name="Download Template" xml:space="preserve">
     <value>Download Template</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="Edit Customer" xml:space="preserve">
-    <value>Edit Customer</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -197,9 +200,6 @@
   </data>
   <data name="Sales" xml:space="preserve">
     <value>Sales</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
