@@ -106,9 +106,9 @@ This layer contains all application logic. It is dependent on the domain layer, 
 
 This layer contains classes for accessing external resources such as file systems, web services, smtp, and so on. These classes should be based on interfaces defined within the application layer.
 
-### WebUI
+### [SmartAdmin - Responsive WebApp](https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0)
 
-This layer is a single page application based on Angular 10 and ASP.NET Core 5. This layer depends on both the Application and Infrastructure layers, however, the dependency on Infrastructure is only to support dependency injection. Therefore only *Startup.cs* should reference Infrastructure.
+– an advanced UI Bootstrap 4 Admin and Dashboard – is built for the next generation. Its’ exceptional design contains vast collection of assorted reusable UI components integrated with latest jQuery plugins optimized to suit every modern web application project worldwide.
 
 ## Support
 
