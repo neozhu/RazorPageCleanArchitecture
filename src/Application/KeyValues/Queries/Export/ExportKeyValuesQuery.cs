@@ -15,6 +15,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper.QueryableExtensions;
 using Microsoft.Extensions.Localization;
+using CleanArchitecture.Razor.Application.KeyValues.DTOs;
 
 namespace CleanArchitecture.Razor.Application.KeyValues.Queries.Export
 {

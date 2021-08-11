@@ -7,7 +7,7 @@ using CleanArchitecture.Razor.Application.KeyValues.Commands.AddEdit;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Enums;
 
-namespace CleanArchitecture.Razor.Application.KeyValues.Queries
+namespace CleanArchitecture.Razor.Application.KeyValues.DTOs
 {
     public partial class KeyValueDto:IMapFrom<KeyValue>
     {
