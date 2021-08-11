@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Application.Common.Exceptions;
-using CleanArchitecture.Razor.Application.KeyValues.Commands.AddEdit;
 using CleanArchitecture.Razor.Application.KeyValues.Commands.Delete;
 using CleanArchitecture.Razor.Application.KeyValues.Commands.Import;
+using CleanArchitecture.Razor.Application.KeyValues.Commands.SaveChanged;
 using CleanArchitecture.Razor.Application.KeyValues.Queries.Export;
 using CleanArchitecture.Razor.Application.KeyValues.Queries.PaginationQuery;
 using FluentValidation.AspNetCore;
@@ -20,8 +20,7 @@ namespace SmartAdmin.WebUI.Pages.KeyValues
 {
     public class IndexModel : PageModel
     {
-        [BindProperty]
-        public AddEditKeyValueCommand Input { get; set; }
+        
         [BindProperty]
         public IFormFile UploadedFile { get; set; }
 
@@ -45,11 +44,11 @@ namespace SmartAdmin.WebUI.Pages.KeyValues
             var result = await _mediator.Send(command);
             return new JsonResult(result);
         }
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync([FromBody] SaveChangedKeyValuesCommand command)
         {
             try
             {
-                var result = await _mediator.Send(Input);
+                var result = await _mediator.Send(command);
                 return new JsonResult(result);
             }
             catch (ValidationException ex)

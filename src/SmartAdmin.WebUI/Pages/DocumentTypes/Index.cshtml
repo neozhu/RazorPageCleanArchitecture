@@ -46,7 +46,7 @@
             </button>
             <div class="btn-group" role="group">
                 <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
-                    @_localizer["Import Excel"]
+                    <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span> @_localizer["Import Excel"]
                 </button>
                 <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="sr-only">Toggle Dropdown</span>
@@ -179,6 +179,9 @@
                 sortOrder:'desc',
                 pageSize: 15,
                 pageList: [15, 30, 50, 100, 1000],
+                onBeforeLoad: function () {
+                    $('#deletebutton').prop('disabled', true);
+                },
                 onCheckAll: function (rows) {
                     const checked = $(this).datagrid('getChecked').length > 0;
                     $('#deletebutton').prop('disabled', !checked);

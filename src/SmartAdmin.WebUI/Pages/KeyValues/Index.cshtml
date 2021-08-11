@@ -40,8 +40,12 @@
                 <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
                 @_localizer["Delete"]
             </button>
+            <button class="btn btn-sm btn-outline-secondary" disabled id="cancelbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-stop mr-1"></span>
+                @_localizer["Cancel"]
+            </button>
             <button class="btn btn-sm btn-outline-primary" disabled id="savebutton">
-                <span class="@(Settings.Theme.IconPrefix) fa-save-alt mr-1"></span>
+                <span class="@(Settings.Theme.IconPrefix) fa-save mr-1"></span>
                 @_localizer["Save"]
             </button>
             <button class="btn btn-sm btn-outline-primary " id="searchbutton">
@@ -50,7 +54,7 @@
             </button>
             <div class="btn-group" role="group">
                 <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
-                    @_localizer["Import Excel"]
+                    <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span> @_localizer["Import Excel"]
                 </button>
                 <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="sr-only">Toggle Dropdown</span>
@@ -68,6 +72,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-12">
+                @Html.AntiForgeryToken()
                 <table id="keyValues_dg">
                 </table>
             </div>
@@ -84,7 +89,7 @@
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
-    <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
+    <script>//jQuery.fn.tooltip = bootstrapTooltip;</script>
     <script src="~/lib/axios/dist/axios.js"></script>
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
 
@@ -93,10 +98,16 @@
             reload();
         });
         $('#addbutton').click(function () {
-            popupmodal(null);
+            onAddRow(null);
         });
         $('#deletebutton').click(function () {
             onDeleteChecked();
+        });
+        $('#cancelbutton').click(function () {
+            onReject();
+        });
+        $('#savebutton').click(function () {
+            onSaveChanged();
         });
         $('#exportbutton').click(function () {
             onExport();
@@ -149,6 +160,10 @@
                 sortOrder:'desc',
                 pageSize: 15,
                 pageList: [15, 30, 50, 100, 1000],
+                onBeforeLoad: function () {
+                    editIndex = undefined;
+                    $('#deletebutton').prop('disabled', true);
+                },
                 onCheckAll: function (rows) {
                     const checked = $(this).datagrid('getChecked').length > 0;
                     $('#deletebutton').prop('disabled', !checked);
@@ -163,12 +178,44 @@
                     const checked = $(this).datagrid('getChecked').length > 0;
                     $('#deletebutton').prop('disabled', !checked);
                 },
+                onClickRow: function (index, row) {
+                    console.log('onClickRow')
+                    currentItem = row;
+                    onBeginEdit(index, row);
+                },
+                onEndEdit: function (index, row) {
+                    onEndEdit(index,row)
+                },
                 columns: [[
                     { field: 'ck', checkbox: true },
-                    { field: 'Name', title: '@_localizer["Name"]', sortable: true, width: 150 },
-                    { field: 'Value', title: '@_localizer["Value"]', sortable: true, width: 130 },
-                    { field: 'Text', title: '@_localizer["Text"]', sortable: true, width: 150 },
-                    { field: 'Description', title: '@_localizer["Description"]', sortable: true, width: 180 }
+                    {
+                        field: 'Name',
+                        title: '@_localizer["Name"]',
+                        sortable: true,
+                        width: 150,
+                        editor: { type: 'textbox', options: { required: true} }
+                    },
+                    {
+                        field: 'Value',
+                        title: '@_localizer["Value"]',
+                        sortable: true,
+                        width: 130,
+                        editor: { type: 'textbox', options: { required: true } }
+                    },
+                    {
+                        field: 'Text',
+                        title: '@_localizer["Text"]',
+                        sortable: true,
+                        width: 150,
+                        editor: { type: 'textbox', options: { required: true } }
+                    },
+                    {
+                        field: 'Description',
+                        title: '@_localizer["Description"]',
+                        sortable: true,
+                        width: 180,
+                        editor: { type: 'textbox', options: { required: false } }
+                    }
 
                 ]]
             })
@@ -184,64 +231,108 @@
         $(() => {
             initdatagrid();
         })
-        var popupmodal = (keyValues) => {
-            $('#keyValues_modal').modal('toggle');
-            $('#keyValues_modal .modal-title').html('@_localizer["Add KeyValues"]');
-            $('#keyValues_form')[0].reset();
-            if (keyValues) {
-                console.log(keyValues)
-                console.log({ Input: keyValues })
-                $('#keyValues_form').jsonToForm(keyValues, {
-                    PartnerType: function (value) {
-                        if (value == 'TP') {
-                            $('#keyValues_form [name*="PartnerType"]').val(0);
-                        } else {
-                            $('#keyValues_form [name*="PartnerType"]').val(1);
-                        }
-                    }
-                })
+        var editIndex = undefined;
+        var currentItem = {};
+        var onEndEditing = () => {
+            if (editIndex == undefined) {
+                return true
+            }
+            if ($dg.datagrid('validateRow', editIndex)) {
+                $dg.datagrid('endEdit', editIndex);
+                editIndex = undefined;
+                return true;
             } else {
-                $('#keyValues_form #Input_Id').val(0)
+                return false;
+            }
+        }
+        var onAddRow = () => {
+            if (onEndEditing()) {
+                $dg.datagrid('insertRow', { index: 0,
+                    row:{ Name: currentItem.Name, Description: currentItem.Description }
+                    });
+                editIndex =0 ;
+                $dg.datagrid('selectRow', editIndex)
+                    .datagrid('beginEdit', editIndex);
+                $('#savebutton').prop('disabled', false);
+                $('#cancelbutton').prop('disabled', false);
+            }
+        }
+        var onBeginEdit = (index, field)=> {
+            if (editIndex != index) {
+                if (onEndEditing()) {
+                    $dg.datagrid('selectRow', index)
+                        .datagrid('beginEdit', index);
+                    var ed = $dg.datagrid('getEditor', { index: index, field: field });
+                    if (ed) {
+                        ($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
+                    }
+                    editIndex = index;
+                } else {
+                    setTimeout(function () {
+                        $dg.datagrid('selectRow', editIndex);
+                    }, 1);
+                }
+                $('#savebutton').prop('disabled', false);
+                $('#cancelbutton').prop('disabled', false);
+            }
+        }
+        var onEndEdit = (index, row)=> {
+            var ed = $dg.datagrid('getEditor', {
+                index: index,
+                field: 'Name'
+            });
+            row.Name = $(ed.target).textbox('getValue');
+            currentItem = row;
+        }
 
+        var onReject = () => {
+            $dg.datagrid('rejectChanges');
+            editIndex = undefined;
+            $('#savebutton').prop('disabled', true);
+            $('#cancelbutton').prop('disabled', true);
+        }
+        var onSaveChanged = () => {
+            if (onEndEditing()) {
+                if ($dg.datagrid("getChanges").length) {
+                    const inserted = $dg.datagrid('getChanges', 'inserted').map(item => {
+                        item.TrackingState = 1;
+                        return item;
+                    });
+                    const updated = $dg.datagrid('getChanges', 'updated').map(item => {
+                        item.TrackingState = 2
+                        return item;
+                    });
+                    const deleted = $dg.datagrid('getChanges', 'deleted').map(item => {
+                        item.TrackingState = 3
+                        return item;
+                    });
+                    //Deleting duplicate items
+                    const changed = inserted.concat(updated.filter(item => {
+                        return !deleted.includes(item);
+                    })).concat(deleted);
+                    axios.post('@Url.Page("/KeyValues/Index")', { Items: changed }, {
+                        headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() }
+                    })
+                        .then(response => {
+                            toastr["info"]('@_localizer["Save Success"]');
+                            $dg.datagrid('acceptChanges');
+                            reload();
+                        }).catch(error => {
+                            var msg = error.response.data;
+                            bootbox.alert({
+                                size: "small",
+                                title: "@_localizer["Error"]",
+                                message: msg,
+                                callback: function () { /* your callback code */ }
+                            })
+
+                        });
+
+                }
             }
         }
 
-        var onEdit = (index) => {
-            var keyValues = $dg.datagrid('getRows')[index];
-            popupmodal(keyValues);
-        }
-        var onDelete = (id) => {
-            bootbox.confirm({
-                message: "@_localizer["Are you sure delete a row?"]",
-                buttons: {
-                    confirm: {
-                        label: '@_localizer["Yes"]',
-                        className: 'btn-success'
-                    },
-                    cancel: {
-                        label: '@_localizer["No"]',
-                        className: 'btn-danger'
-                    }
-                },
-                callback: function (result) {
-                    if (result) {
-                        axios.get('@Url.Page("/KeyValues/Index")?handler=Delete&id=' + id).then(res => {
-                            toastr["info"]('@_localizer["Delete Success"]');
-                            reload();
-                        })
-                            .catch((error) => {
-                                var msg = error.response.data;
-                                bootbox.alert({
-                                    size: "small",
-                                    title: "@_localizer["Error"]",
-                                    message: msg,
-                                    callback: function () { /* your callback code */ }
-                                })
-                            });
-                    }
-                }
-            })
-        }
+
         var onDeleteChecked = () => {
             var checkedId = $dg.datagrid('getChecked').map(x => x.Id);
             if (checkedId.length > 0) {
