@@ -11,7 +11,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Identity
   {
     public string Description { get; set; }
     public string Group { get; set; }
-    public virtual ApplicationRoleClaim Role { get; set; }
+    public virtual ApplicationRole Role { get; set; }
 
     public ApplicationRoleClaim() : base()
     {

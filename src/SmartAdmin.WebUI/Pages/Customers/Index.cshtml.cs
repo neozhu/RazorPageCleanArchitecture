@@ -4,19 +4,23 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Application.Common.Exceptions;
+using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
 using CleanArchitecture.Razor.Application.Customers.Commands.Delete;
 using CleanArchitecture.Razor.Application.Customers.Commands.Import;
 using CleanArchitecture.Razor.Application.Customers.Queries.Export;
 using CleanArchitecture.Razor.Application.Customers.Queries.PaginationQuery;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
+using SmartAdmin.WebUI.Extensions;
 
 namespace SmartAdmin.WebUI.Pages.Customers
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         [BindProperty]
@@ -24,16 +28,20 @@ namespace SmartAdmin.WebUI.Pages.Customers
         [BindProperty]
         public IFormFile UploadedFile { get; set; }
 
+        private readonly ICurrentUserService _currentUserService;
         private readonly ISender _mediator;
         private readonly IStringLocalizer<IndexModel> _localizer;
 
         public IndexModel(
+            ICurrentUserService currentUserService,
                 ISender mediator,
             IStringLocalizer<IndexModel> localizer
             )
         {
+            _currentUserService = currentUserService;
             _mediator = mediator;
             _localizer = localizer;
+            var email = _currentUserService.UserId;
         }
         public async Task OnGetAsync()
         {
