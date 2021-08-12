@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Identity
   {
     public string Description { get; set; }
     public string Group { get; set; }
+        [ForeignKey("RoleId")]
     public virtual ApplicationRole Role { get; set; }
 
     public ApplicationRoleClaim() : base()
