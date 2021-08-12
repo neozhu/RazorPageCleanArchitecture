@@ -12,7 +12,6 @@ namespace CleanArchitecture.Razor.Infrastructure.Identity
   {
     public string Description { get; set; }
     public string Group { get; set; }
-        [ForeignKey("RoleId")]
     public virtual ApplicationRole Role { get; set; }
 
     public ApplicationRoleClaim() : base()

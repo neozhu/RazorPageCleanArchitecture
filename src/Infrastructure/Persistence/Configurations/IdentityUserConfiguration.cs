@@ -34,4 +34,11 @@ namespace CleanArchitecture.Infrastructure.Persistence.Configurations
                 .IsRequired();
         }
     }
+    public class ApplicationRoleClaimConfiguration : IEntityTypeConfiguration<ApplicationRoleClaim>
+    {
+        public void Configure(EntityTypeBuilder<ApplicationRoleClaim> builder)
+        {
+            
+        }
+    }
 }
