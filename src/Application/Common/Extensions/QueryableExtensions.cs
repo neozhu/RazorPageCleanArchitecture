@@ -15,11 +15,11 @@ namespace CleanArchitecture.Razor.Application.Common.Extensions
 {
     public static class QueryableExtensions
 {
-        public static IQueryable<T> Query<T>(this IQueryable<T> query, IQueryObject<T> spec) where T : class, IEntity
+        public static IQueryable<T> Specify<T>(this IQueryable<T> query, ISpecification<T> spec) where T : class, IEntity
         {
             var queryableResultWithIncludes = spec.Includes
-                .Aggregate(query,
-                    (current, include) => current.Include(include));
+               .Aggregate(query,
+                   (current, include) => current.Include(include));
             var secondaryResult = spec.IncludeStrings
                 .Aggregate(queryableResultWithIncludes,
                     (current, include) => current.Include(include));
