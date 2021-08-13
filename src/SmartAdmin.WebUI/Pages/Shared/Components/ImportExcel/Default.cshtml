@@ -34,6 +34,7 @@
     </div>
 </div>
 <script>
+    var uploadfilebutton = document.getElementsByName("uploadfilebutton")[0];
     var uploadfileinput = document.getElementById("UploadedFile");
     var uploadfilealert = document.querySelector("#default-import-modal .uploadfilealert");
     var importbutton = document.querySelector("#default-import-modal button[name='importbutton']");
@@ -70,7 +71,7 @@
         })
 
     })
-    document.getElementsByName("uploadfilebutton")[0].addEventListener("click", (e) => {
+    uploadfilebutton.addEventListener("click", (e) => {
         uploadfileinput.click();
     });
     uploadfileinput.onchange =  () => {

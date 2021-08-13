@@ -1,6 +1,3 @@
-
-
-
 //extend validatebox regex
 $.extend($.fn.validatebox.defaults.rules, {
   regex: {//正则表达验证

@@ -24,7 +24,7 @@ namespace CleanArchitecture.Razor.Application.DocumentTypes.Queries.PaginationQu
 {
     public class DocumentTypesGetAllQuery : IRequest<IEnumerable<DocumentTypeDto>>
     {
-       public string Key { get; set; }
+        public string Key { get; set; } = "";
         
     }
     public class DocumentTypesGetAllQueryHandler : IRequestHandler<DocumentTypesGetAllQuery, IEnumerable<DocumentTypeDto>>

@@ -310,8 +310,7 @@
             $('#customer_modal .modal-title').html('@_localizer["Add Customer"]');
             $('#customer_form')[0].reset();
             if (customer) {
-                console.log(customer)
-                console.log({ Input: customer })
+                $('#customer_modal .modal-title').html('@_localizer["Edit Customer"]');
                 $('#customer_form').jsonToForm(customer, {
                     PartnerType: function (value) {
                         if (value == 'TP') {

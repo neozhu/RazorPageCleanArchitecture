@@ -14,8 +14,8 @@ namespace CleanArchitecture.Razor.Application.Documents.Commands.AddEdit
                 .NotEmpty();
             RuleFor(v => v.DocumentTypeId)
                 .GreaterThan(0);
-            RuleFor(v => v.UploadRequest)
-                .NotNull();
+            //RuleFor(v => v.UploadRequest)
+            //    .NotNull();
 
 
         }

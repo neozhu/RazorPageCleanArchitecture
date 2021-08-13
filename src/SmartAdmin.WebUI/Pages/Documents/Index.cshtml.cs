@@ -8,12 +8,14 @@ using CleanArchitecture.Razor.Application.Documents.Commands.AddEdit;
 using CleanArchitecture.Razor.Application.Documents.Commands.Delete;
 using CleanArchitecture.Razor.Application.Documents.Queries.Export;
 using CleanArchitecture.Razor.Application.Documents.Queries.PaginationQuery;
-using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
+using System.Collections.Generic;
+using CleanArchitecture.Razor.Application.DocumentTypes.DTOs;
+using CleanArchitecture.Razor.Application.DocumentTypes.Queries.PaginationQuery;
 
 namespace SmartAdmin.WebUI.Pages.Documents
 {
@@ -23,6 +25,7 @@ namespace SmartAdmin.WebUI.Pages.Documents
         public AddEditDocumentCommand Input { get; set; }
         [BindProperty]
         public IFormFile UploadedFile { get; set; }
+        public IEnumerable<DocumentTypeDto> DocumentTypeDtos { get; set; }
 
         private readonly ISender _mediator;
         private readonly IStringLocalizer<IndexModel> _localizer;
@@ -37,7 +40,8 @@ namespace SmartAdmin.WebUI.Pages.Documents
         }
         public async Task OnGetAsync()
         {
-            PageContext.SetRulesetForClientsideMessages("MyRuleset");
+            var request = new DocumentTypesGetAllQuery();
+            DocumentTypeDtos = await _mediator.Send(request);
         }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] DocumentsWithPaginationQuery command)
         {
@@ -48,6 +52,15 @@ namespace SmartAdmin.WebUI.Pages.Documents
         {
             try
             {
+                if (UploadedFile != null)
+                {
+                    Input.UploadRequest = new CleanArchitecture.Razor.Application.Models.UploadRequest();
+                    Input.UploadRequest.FileName = UploadedFile.FileName;
+                    Input.UploadRequest.UploadType = CleanArchitecture.Razor.Domain.Enums.UploadType.Document;
+                    var stream = new MemoryStream();
+                    UploadedFile.CopyTo(stream);
+                    Input.UploadRequest.Data = stream.ToArray();
+                }
                 var result = await _mediator.Send(Input);
                 return new JsonResult(result);
             }

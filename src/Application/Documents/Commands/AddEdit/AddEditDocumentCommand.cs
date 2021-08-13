@@ -39,14 +39,17 @@ namespace CleanArchitecture.Razor.Application.Documents.Commands.AddEdit
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IUploadService _uploadService;
 
         public AddEditDocumentCommandHandler(
             IApplicationDbContext context,
-             IMapper mapper
+             IMapper mapper,
+             IUploadService uploadService
             )
         {
             _context = context;
             _mapper = mapper;
+            _uploadService = uploadService;
         }
         public async Task<Result> Handle(AddEditDocumentCommand request, CancellationToken cancellationToken)
         {
@@ -54,13 +57,17 @@ namespace CleanArchitecture.Razor.Application.Documents.Commands.AddEdit
            
             if (request.Id > 0)
             {
-                var Document = await _context.Documents.FindAsync(request.Id);
-                Document=_mapper.Map(request, Document);
+                var document = await _context.Documents.FindAsync(request.Id);
+                document.Title = request.Title;
+                document.Description = request.Description;
+                document.IsPublic = request.IsPublic;
             }
             else
             {
-                var Document = _mapper.Map<Document>(request);
-                _context.Documents.Add(Document);
+                var result = _uploadService.UploadAsync(request.UploadRequest);
+                var document = _mapper.Map<Document>(request);
+                document.URL = result;
+                _context.Documents.Add(document);
             }
             await _context.SaveChangesAsync(cancellationToken);
             return Result.Success();

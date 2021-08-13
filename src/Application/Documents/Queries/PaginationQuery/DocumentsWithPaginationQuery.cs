@@ -19,6 +19,7 @@ using CleanArchitecture.Razor.Application.Common.Mappings;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using CleanArchitecture.Razor.Application.Documents.DTOs;
+using CleanArchitecture.Razor.Application.Common.Specification;
 
 namespace CleanArchitecture.Razor.Application.Documents.Queries.PaginationQuery
 {
@@ -33,29 +34,39 @@ namespace CleanArchitecture.Razor.Application.Documents.Queries.PaginationQuery
     }
     public class DocumentsQueryHandler : IRequestHandler<DocumentsWithPaginationQuery, PaginatedData<DocumentDto>>
     {
-
+        private readonly ICurrentUserService _currentUserService;
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
 
         public DocumentsQueryHandler(
-        
+            ICurrentUserService currentUserService,
             IApplicationDbContext context,
             IMapper mapper
             )
         {
-    
+            _currentUserService = currentUserService;
             _context = context;
             _mapper = mapper;
         }
         public async Task<PaginatedData<DocumentDto>> Handle(DocumentsWithPaginationQuery request, CancellationToken cancellationToken)
         {
             var filters = PredicateBuilder.FromFilter<Document>(request.filterRules);
-            var data = await _context.Documents.Where(filters)
+            var data = await _context.Documents.Specify(new DocumentsQuery(_currentUserService.UserId))
+                .Where(filters)
                 .OrderBy($"{request.sort} {request.order}")
                 .ProjectTo<DocumentDto>(_mapper.ConfigurationProvider)
                 .PaginatedDataAsync(request.page, request.rows);
 
             return data;
+        }
+
+        internal class DocumentsQuery: QuerySpecification<Document>
+        {
+            public DocumentsQuery(string userId)
+            {
+
+                this.Criteria = p => (p.CreatedBy == userId && p.IsPublic == false) || p.IsPublic == true;
+            }
         }
     }
 }

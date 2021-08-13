@@ -20,6 +20,7 @@ namespace CleanArchitecture.Razor.Application.Documents.DTOs
         public bool IsPublic { get; set; } = false;
         public string URL { get; set; }
         public string CreatedBy { get; set; }
+        public DateTime Created { get; set; }
         public int DocumentTypeId { get; set; }
         public string DocumentTypeName { get; set; }
     }

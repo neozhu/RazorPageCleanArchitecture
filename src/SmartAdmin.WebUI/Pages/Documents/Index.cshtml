@@ -80,28 +80,41 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="DocumentTypeId">@_localizer["Document Type"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.DocumentTypeId" class="form-control" placeholder="Document Type" required />
+                            <select type="text" asp-for="Input.DocumentTypeId" class="custom-select" placeholder="Document Type" required>
+                                @if (Model.DocumentTypeDtos != null)
+                                {
+                                    @foreach (var item in Model.DocumentTypeDtos)
+                                    {
+                                        <option value="@item.Id">@item.Name </option>
+                                    }
+                                }
+                            </select>
                             <span class="invalid-feedback" asp-validation-for="Input.DocumentTypeId">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="IsPublic"> </label>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" asp-for="Input.IsPublic" class="custom-control-input" id="defaultUnchecked">
-                                <label class="custom-control-label" for="defaultUnchecked">@_localizer["Is Public"]</label>
+                                <input type="checkbox" asp-for="Input.IsPublic" class="custom-control-input" value="true" >
+                                <label class="custom-control-label" for="Input_IsPublic">@_localizer["Is Public"]</label>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <label class="form-label" for=""></label>
+
+                            <input type="file" asp-for="UploadedFile" style="display:none" required />
                             <div class="">
-                                <input type="file" asp-for="UploadedFile" style="display:none" />
-                                <button class="btn btn-primary btn-icon waves-effect waves-themed">
+
+                                <button name="uploadbutton" class="btn btn-primary btn-icon waves-effect waves-themed mr-2">
                                     <i class="fal fa-paperclip"></i>
-                                </button>
-                                <div class="alert alert-secondary mt-2 mb-2" role="alert">
-                                    <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a file"].
+                                </button><span class="text-danger">*</span>
+                                <div id="uploadfilename">
+                                    <div class="alert alert-danger mt-2 mb-2" role="alert">
+                                        <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a file"].
+                                    </div>
                                 </div>
+
                             </div>
-                            
+
 
                         </div>
                         <div class="col-md-12">
@@ -113,15 +126,18 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
-                    <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
+                    <button type="submit" name="savebutton" class="btn btn-primary">@_localizer["Save"]</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-@await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/Documents/Index") + "?handler=Import",
+@await Component.InvokeAsync("ImportExcel", new
+{
+    importUri = Url.Page("/Documents/Index") + "?handler=Import",
     getTemplateUri = @Url.Page("/Documents/Index") + "?handler=CreateTemplate",
-    onImportedSucceeded = "reload()" })
+    onImportedSucceeded = "reload()"
+})
 @section ScriptsBlock {
     <partial name="_ValidationScriptsPartial" />
 
@@ -146,18 +162,36 @@
             onExport();
         });
         $('#document_form :submit').click(function (e) {
-            console.log('submmit')
+
             var form = document.getElementsByClassName('needs-validation')[0];
-            $(form).find(":valid").parent().removeClass("was-validated");
+            console.log(form.checkValidity())
             if (form.checkValidity() === false) {
                 form.classList.add('was-validated');
             } else {
+                event.preventDefault();
+                event.stopPropagation();
                 var request = $('#document_form').serialize();
-                axios.post('/Documents/Index', request).then(res => {
-                    toastr["info"]('@_localizer["Save Success"]');
-                    $('#document_modal').modal('toggle');
-                    reload();
-                }).catch((error) => {
+                var formData = new FormData(form);
+                formData.append("UploadedFile", uploadfileinput.files[0]);
+                axios({
+                    url: '@Url.Page("/Documents/Index")',
+                    method: 'post',
+                    data: formData,
+                    processData: false,// 告诉axios不要去处理发送的数据(重要参数)
+                    contentType: false,   // 告诉axios不要去设置Content-Type请求头
+                }).then((response) => {
+                    if (response.data.Succeeded) {
+                        toastr["info"]('@_localizer["Save Success"]');
+                        $('#document_modal').modal('toggle');
+                        reload();
+                    } else {
+                        var errors = response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        })
+
+                    }
+                }).catch(error => {
                     var msg = error.response.data;
                     bootbox.alert({
                         size: "small",
@@ -165,12 +199,42 @@
                         message: msg,
                         callback: function () { /* your callback code */ }
                     })
+                })
 
-                });
             }
             event.preventDefault();
             event.stopPropagation();
         })
+        var uploadfilename = document.querySelector("#uploadfilename");
+        var uploadbutton = document.querySelector("button[name='uploadbutton']");
+        var uploadfileinput = document.getElementById("UploadedFile");
+        var savebutton = document.querySelector("button[name='savebutton']");
+        uploadbutton.addEventListener('click', (e) => {
+            uploadfileinput.click();
+        })
+        uploadfileinput.onchange = () => {
+            fileName = uploadfileinput.value.split('\\').pop();
+            uploadfilename.innerHTML = `
+              <div class="alert alert-info alert-dismissible fadeup show mb-2 mt-2" role="alert">
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                      </button>
+                      <div class="d-flex align-items-center">
+							<div class="alert-icon">
+									<i class="@(Settings.Theme.IconPrefix) fa-upload fs-xl"></i>
+							</div>
+							<div class="flex-1">
+	    							${fileName}
+							</div>
+					</div>
+             </div>
+        `
+            savebutton.disabled = false;
+            $('#uploadfilename .alert').on('closed.bs.alert', (e) => {
+                uploadfileinput.value = null;
+                savebutton.disabled = true;
+            })
+        };
         var $dg={};
         var initdatagrid = () => {
             $dg = $('#document_dg').datagrid({
@@ -227,8 +291,9 @@
                     { field: 'Title', title: '@_localizer["Title"]', sortable: true, width: 180 },
                     { field: 'DocumentTypeName', title: '@_localizer["Document Type"]', sortable: true, width: 150 },
                     { field: 'IsPublic', title: '@_localizer["Is Public"]', sortable: true, width: 120 },
+                    { field: 'Description', title: '@_localizer["Description"]', sortable: true, width: 280 },
                     { field: 'CreatedBy', title: '@_localizer["Created By"]', sortable: true, width: 160 },
-                    { field: 'Description', title: '@_localizer["Description"]', sortable: true, width: 280 }
+                    { field: 'Created', title: '@_localizer["Created Time"]', formatter: dateformatter, sortable: true, width: 160 },
 
                 ]]
             })
@@ -249,20 +314,37 @@
             $('#document_modal .modal-title').html('@_localizer["Add Document"]');
             $('#document_form')[0].reset();
             if (document) {
-                console.log(document)
-                console.log({ Input: document })
+                uploadbutton.disabled = true;
+                uploadfileinput.required = false;
+                $('#document_modal .modal-title').html('@_localizer["Edit Document"]');
+                uploadfilename.innerHTML = `
+                  <div class="alert alert-info alert-dismissible fadeup show mb-2 mt-2" role="alert">
+                         <div class="d-flex align-items-center">
+							<div class="alert-icon">
+									<i class="@(Settings.Theme.IconPrefix) fa-upload fs-xl"></i>
+							</div>
+							<div class="flex-1">
+	    							${document.URL}
+							</div>
+					</div>
+                </div>
+                `
                 $('#document_form').jsonToForm(document, {
-                    PartnerType: function (value) {
-                        if (value == 'TP') {
-                            $('#document_form [name*="PartnerType"]').val(0);
+                    IsPublic: function (value) {
+                        if (value == true) {
+                            $('#document_form [name*="IsPublic"]').prop('checked', true);
                         } else {
-                            $('#document_form [name*="PartnerType"]').val(1);
+                            $('#document_form [name*="IsPublic"]').prop('checked', false);
                         }
                     }
                 })
             } else {
-                $('#document_form #Input_Id').val(0)
-
+                uploadbutton.disabled = false;
+                uploadfileinput.required = true;
+                $('#document_form #Input_Id').val(0);
+                uploadfilename.innerHTML =`<div class="alert alert-danger mt-2 mb-2" role="alert">
+                                        <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a file"].
+                             </div>`
             }
         }
 
