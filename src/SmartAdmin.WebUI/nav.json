@@ -149,6 +149,11 @@
       ],
       "items": [
         {
+          "title": "Documents",
+          "href": "documents_index.html",
+          "roles": []
+        },
+        {
           "title": "Document Type",
           "href": "documentTypes_index.html",
           "roles": []

@@ -1,23 +1,28 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Extensions;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.Common.Models;
 using CleanArchitecture.Razor.Application.Models;
 using CleanArchitecture.Razor.Domain.Entities;
 using System.Linq.Dynamic.Core;
 using MediatR;
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using AutoMapper.QueryableExtensions;
-using CleanArchitecture.Razor.Application.Customers.DTOs;
+using Microsoft.EntityFrameworkCore;
+using CleanArchitecture.Razor.Application.Documents.DTOs;
 
-namespace CleanArchitecture.Razor.Application.Customers.Queries.PaginationQuery
+namespace CleanArchitecture.Razor.Application.Documents.Queries.PaginationQuery
 {
-    public class CustomersWithPaginationQuery : IRequest<PaginatedData<CustomerDto>>
+    public class DocumentsWithPaginationQuery : IRequest<PaginatedData<DocumentDto>>
     {
         public string filterRules { get; set; }
         public int page { get; set; } = 1;
@@ -26,13 +31,13 @@ namespace CleanArchitecture.Razor.Application.Customers.Queries.PaginationQuery
         public string order { get; set; } = "desc";
         
     }
-    public class CustomersQueryHandler : IRequestHandler<CustomersWithPaginationQuery, PaginatedData<CustomerDto>>
+    public class DocumentsQueryHandler : IRequestHandler<DocumentsWithPaginationQuery, PaginatedData<DocumentDto>>
     {
 
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public CustomersQueryHandler(
+        public DocumentsQueryHandler(
         
             IApplicationDbContext context,
             IMapper mapper
@@ -42,12 +47,12 @@ namespace CleanArchitecture.Razor.Application.Customers.Queries.PaginationQuery
             _context = context;
             _mapper = mapper;
         }
-        public async Task<PaginatedData<CustomerDto>> Handle(CustomersWithPaginationQuery request, CancellationToken cancellationToken)
+        public async Task<PaginatedData<DocumentDto>> Handle(DocumentsWithPaginationQuery request, CancellationToken cancellationToken)
         {
-            var filters = PredicateBuilder.FromFilter<Customer>(request.filterRules);
-            var data = await _context.Customers.Where(filters)
+            var filters = PredicateBuilder.FromFilter<Document>(request.filterRules);
+            var data = await _context.Documents.Where(filters)
                 .OrderBy($"{request.sort} {request.order}")
-                .ProjectTo<CustomerDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<DocumentDto>(_mapper.ConfigurationProvider)
                 .PaginatedDataAsync(request.page, request.rows);
 
             return data;
