@@ -19,8 +19,8 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
                 await roleManager.CreateAsync(userRole);
             }
 
-            var administrator = new ApplicationUser { UserName = "administrator" , IsActive=true,Site="Razor",DisplayName="Administrator", Email = "administrator@localhost" };
-            var demo = new ApplicationUser { UserName = "Demo", IsActive = true, Site = "Razor", DisplayName = "Demo", Email = "demo@localhost" };
+            var administrator = new ApplicationUser { UserName = "administrator" , IsActive=true,Site="Razor",DisplayName="Administrator", Email = "administrator@localhost" , EmailConfirmed=true};
+            var demo = new ApplicationUser { UserName = "Demo", IsActive = true, Site = "Razor", DisplayName = "Demo", Email = "demo@localhost", EmailConfirmed = true };
 
             if (userManager.Users.All(u => u.UserName != administrator.UserName))
             {

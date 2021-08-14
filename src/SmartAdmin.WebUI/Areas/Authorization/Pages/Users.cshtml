@@ -173,7 +173,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label" asp-for="EditFormModel.PhoneNumber">@_localizer["Phone Number"]</label>
-                        <input type="email" asp-for="EditFormModel.PhoneNumber" class="form-control" placeholder="PhoneNumber for verification" value="" />
+                        <input type="text" asp-for="EditFormModel.PhoneNumber" class="form-control" placeholder="PhoneNumber for verification" value="" />
                         <span class="invalid-feedback" asp-validation-for="EditFormModel.PhoneNumber">Sorry, you missed this one.</span>
 
                     </div>
@@ -225,6 +225,12 @@
         </div>
     </div>
 </div>
+@await Component.InvokeAsync("ImportExcel", new
+{
+    importUri = "/authorization/users?handler=Import",
+    getTemplateUri = "/authorization/users?handler=CreateTemplate",
+    onImportedSucceeded = "reload()"
+})
 @section ScriptsBlock {
     <partial name="_ValidationScriptsPartial" />
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
@@ -243,6 +249,18 @@
         });
         $('#deletebutton').click(function () {
             onDeleteChecked();
+        });
+        $('#activebutton').click(function () {
+            onActiveChecked();
+        });
+        $('#exportbutton').click(function () {
+            onExport();
+        });
+        $('#importbutton').click(function () {
+            showImportModal();
+        });
+        $('#gettemplatebutton').click(function () {
+            onGetTemplate();
         });
         var reload = () => {
             $dg.datagrid('load', '/authorization/users?handler=Data');
@@ -265,20 +283,25 @@
                 pageList: [10, 15, 30, 50, 100, 1000],
                 onBeforeLoad: function () {
                     $('#deletebutton').prop('disabled', true);
+                    $('#activebutton').prop('disabled', true);
                 },
                 onCheckAll: function (rows) {
                     const checked = $(this).datagrid('getChecked').length > 0;
                     $('#deletebutton').prop('disabled', !checked);
+                    $('#activebutton').prop('disabled', !checked);
                 },
                 onUncheckAll: function () {
                     $('#deletebutton').prop('disabled', true);
+                    $('#activebutton').prop('disabled', true);
                 },
                 onCheck: function () {
                     $('#deletebutton').prop('disabled', false);
+                    $('#activebutton').prop('disabled', false);
                 },
                 onUncheck: function () {
                     const checked = $(this).datagrid('getChecked').length > 0;
                     $('#deletebutton').prop('disabled', !checked);
+                    $('#activebutton').prop('disabled', !checked);
                 },
                 columns: [[
                     { field: 'ck', checkbox: true },
@@ -294,7 +317,6 @@
                            </button>
                            <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
                                <button class="dropdown-item" onclick="onResetPassword(${index})"><i class="fal fa-key mr-1"></i> @_localizer["Reset Password"]</button>
-                               <button class="dropdown-item" onclick="onUnlocked('${row.Id}')"><i class="fal fa-user-lock mr-1"></i> @_localizer["Lock/Unlock"]</button>
                                <button class="dropdown-item" onclick="onEdit(${index})" ><i class="fal fa-edit mr-1"></i> @_localizer["Edit"]</button>
                                <button class="dropdown-item" onclick="onDelete('${row.Id}')"><i class="fal fa-trash-alt mr-1"></i> @_localizer["Delete"]</button>
                            </div>
@@ -305,11 +327,38 @@
                     { field: 'Site', title: '@_localizer["Site"]', sortable: true, width: 130 },
                     { field: 'UserName', title: '@_localizer["User Name"]', sortable: true, width: 150 },
                     { field: 'DisplayName', title: '@_localizer["Display Name"]', sortable: true, width: 160 },
-                    { field: 'Email', title: '@_localizer["Email"]', sortable: true, width: 150 },
+                    { field: 'Email', title: '@_localizer["Email"]', sortable: true, width: 190 },
                     { field: 'PhoneNumber', title: '@_localizer["Phone Number"]', sortable: true, width: 150 },
-                    { field: 'IsActive', title: '@_localizer["Is Active"]', sortable: true, width: 150 },
-                    { field: 'EmailConfirmed', title: '@_localizer["Email Confirmed"]', sortable: true, width: 150 },
-                    { field: 'LockoutEnabled', title: '@_localizer["Lockout Enabled"]', sortable: true, width: 150 },
+                    {
+                        field: 'IsActive', title: '@_localizer["Is Active"]',
+                        align: 'center',
+                        formatter: checkboxformatter,
+                        sortable: true, width: 150
+                    },
+                    {
+                        field: 'EmailConfirmed', title: '@_localizer["Email Confirmed"]',
+                        align: 'center',
+                        formatter: checkboxformatter,
+                        sortable: true, width: 150
+                    },
+                    {
+                        field: 'LockoutEnd',
+                        title: '@_localizer["Lock Status"]',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (value != null && moment(value) <= moment().utc()) {
+                                return `<a href="javascript:onUnlock('${row.Id}');" class="btn btn-outline-danger btn-sm btn-icon rounded-circle waves-effect waves-themed">
+                                         <i class="fal fa-lock"></i>
+							           </a>`;
+                            } else {
+                                return `<a href="javascript:onLock('${row.Id}');" class="btn btn-outline-info btn-sm btn-icon rounded-circle waves-effect waves-themed">
+                                         <i class="fal fa-lock-open"></i>
+							           </a>`;
+                            }
+                        },
+                        sortable: false,
+                        width: 150
+                    },
                 ]]
             })
                 .datagrid('enableFilter', {})
@@ -326,9 +375,25 @@
             var user = $dg.datagrid('getRows')[index];
             popupresetpasswordmodal(user);
         }
-        var onUnlocked = (id) => {
-
-            axios.get('/authorization/users?handler=Unlocked&id=' + id).then(res => {
+        var onLock = (id) => {
+            axios.get('/authorization/users?handler=Lock&id=' + id).then(res => {
+                //console.log(res);
+                toastr["error"]('@_localizer["Locked Success"]');
+                reload();
+            })
+                .catch((error) => {
+                    var msg = error.response.data;
+                    bootbox.alert({
+                        size: "small",
+                        title: "@_localizer["Error"]",
+                        message: msg,
+                        callback: function () { /* your callback code */ }
+                    })
+                });
+        }
+        var onUnlock = (id) => {
+            axios.get('/authorization/users?handler=UnLock&id=' + id).then(res => {
+                //console.log(res);
                 toastr["info"]('@_localizer["Unlocked Success"]');
                 reload();
             })
@@ -342,9 +407,8 @@
                     })
                 });
         }
-               
-          
-    
+
+
         var onDelete = (id) => {
             bootbox.confirm({
                 message: "@_localizer["Are you sure delete a user?"]",
@@ -376,6 +440,44 @@
                     }
                 }
             })
+        }
+        var onActiveChecked = () => {
+            var checkedId = $dg.datagrid('getChecked').map(x => x.Id);
+            if (checkedId.length > 0) {
+                bootbox.confirm({
+                    message: "@_localizer["Are you sure active checked users?"]",
+                    buttons: {
+                        confirm: {
+                            label: '@_localizer["Yes"]',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: '@_localizer["No"]',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
+                            console.log(paras.toString())
+                            axios.get('/authorization/users?handler=ActiveChecked&' + paras.toString()).then(res => {
+                                toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
+                                reload();
+                            })
+                                .catch((error) => {
+                                    var msg = error.response.data;
+                                    bootbox.alert({
+                                        size: "small",
+                                        title: "@_localizer["Error"]",
+                                        message: msg,
+                                        callback: function () { /* your callback code */ }
+                                    })
+                                });
+                        }
+                    }
+                });
+
+            }
         }
         var onDeleteChecked = () => {
             var checkedId = $dg.datagrid('getChecked').map(x => x.Id);
@@ -414,6 +516,37 @@
                 });
 
             }
+        }
+        var onExport = () => {
+            var options = $dg.datagrid('options');
+            var data = {
+                filterRules: JSON.stringify(options.filterRules),
+                sort: options.sortName,
+                order: options.sortOrder,
+            }
+            console.log(options,data)
+            var headers = {
+                "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+            }
+            axios.post('/authorization/users?handler=Export',
+                data,
+                {
+                    headers: headers,
+                    responseType: "blob"
+                })
+                .then(response => {
+                    const filename = getFileName(response.headers['content-disposition']);
+                    const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', filename);
+                    document.body.appendChild(link);
+                    link.click();
+                }).catch(error => {
+                    console.log(error)
+                })
+
+
         }
         $('#register_form :submit').click(function (e) {
             console.log('submmit')
