@@ -34,7 +34,7 @@ namespace SmartAdmin.WebUI.Pages.Customers
 
         public IndexModel(
             ICurrentUserService currentUserService,
-                ISender mediator,
+            ISender mediator,
             IStringLocalizer<IndexModel> localizer
             )
         {

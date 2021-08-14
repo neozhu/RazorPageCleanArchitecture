@@ -1,77 +1,253 @@
 ﻿@page
 @model UserModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<UserModel> _localizer
 @{
     ViewData["Title"] = "Users";
     ViewData["PageName"] = "authorization_users";
     ViewData["Heading"] = "<i class='fal fa-shield-alt'></i> Authorization: <span class='fw-300'>Users</span>";
     ViewData["Category1"] = "Authorization";
     ViewData["PageIcon"] = "fa-shield-alt";
+    ViewData["PreemptiveClass"] = "Default";
 }
 
 @section HeadBlock {
     <link rel="stylesheet" media="screen, print" href="~/css/datagrid/datatables/datatables.bundle.css">
     <link rel="stylesheet" media="screen, print" href="~/css/formplugins/select2/select2.bundle.css">
+    <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+    <style>
+
+        .user_dg_datagrid-cell-c1-_action {
+            overflow: visible !important
+        }
+    </style>
 }
 
-<div class="row">
-    <div class="col-xl-12">
-        <div id="panel-1" class="panel">
-            <div class="panel-container show">
-                <div class="panel-content">
-                    <table id="dt-list" class="table table-bordered table-hover table-striped w-100"></table>
+<div id="js-page-content-demopanels" class="card mb-g">
+    <div class="card-header bg-white d-flex align-items-center">
+        <h4 class="m-0">
+            @_localizer["Application Users"]
+            <small>@_localizer["See all available options"]</small>
+        </h4>
+        <div class="ml-auto">
+            <button class="btn btn-sm btn-outline-primary " id="activebutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-magic mr-1"></span>
+                @_localizer["Active"]
+            </button>
+            <button class="btn btn-sm btn-outline-primary " id="addbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
+                @_localizer["Add"]
+            </button>
+            <button class="btn btn-sm btn-outline-danger" disabled id="deletebutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
+                @_localizer["Delete"]
+            </button>
+            <button class="btn btn-sm btn-outline-primary " id="searchbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
+                @_localizer["Search"]
+            </button>
+            <div class="btn-group" role="group">
+                <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
+                    <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>   @_localizer["Import Excel"]
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="importbutton">
+                    <button id="gettemplatebutton" class="dropdown-item">@_localizer["Download Template"]</button>
                 </div>
             </div>
+            <button class="btn btn-sm btn-outline-primary " id="exportbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                @_localizer["Export Excel"]
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table id="user_dg">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="register_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@_localizer["Create a user"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                </button>
+            </div>
+            <form id="register_form" class="needs-validation" novalidate="novalidate">
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="col-xl-12 form-label"> @_localizer["Your site name"]</label>
+                        <input type="text" asp-for="RegisterFormModel.Site" class="form-control" placeholder="Site name" required="required"/>
+                        <span class="invalid-feedback" asp-validation-for="RegisterFormModel.Site">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xl-12 form-label">@_localizer["Login user name"]</label>
+                        <input type="text" asp-for="RegisterFormModel.UserName" class="form-control" placeholder="User name" required="required"/>
+                        <span class="invalid-feedback" asp-validation-for="RegisterFormModel.UserName">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xl-12 form-label">@_localizer["Your display name"]</label>
+                        <input type="text" asp-for="RegisterFormModel.DisplayName" class="form-control" placeholder="Display name" required="required"/>
+                        <span class="invalid-feedback" asp-validation-for="RegisterFormModel.DisplayName">Sorry, you missed this one.</span>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="RegisterFormModel.Email">@_localizer["Email will be needed for verification and account recovery"]</label>
+                        <input type="email" asp-for="RegisterFormModel.Email" class="form-control" placeholder="Email for verification" value="" required="required" />
+                        <span class="invalid-feedback" asp-validation-for="RegisterFormModel.Email">Sorry, you missed this one.</span>
+          
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="RegisterFormModel.Password">@_localizer["Please pick a password"]</label>
+                        <input type="password" asp-for="RegisterFormModel.Password" class="form-control" placeholder="Email for verification (minimum 6 characters)" value="" required="required" pattern="^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{6,}$" />
+                        <span class="invalid-feedback" asp-validation-for="RegisterFormModel.Password">Sorry, you missed this one.</span>
+                        <div class="help-block">Your password must be 6-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emojis.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="RegisterFormModel.ConfirmPassword">@_localizer["Please confirm your password"]</label>
+                        <input type="password" asp-for="RegisterFormModel.ConfirmPassword" class="form-control" placeholder="Email for verification (minimum 6 characters)" value="" required="required" pattern="^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{6,}$" />
+                        <span class="invalid-feedback" asp-validation-for="RegisterFormModel.ConfirmPassword">Sorry, you missed this one.</span>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
+                    <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 @section ScriptsBlock {
-    <script src="~/js/datagrid/datatables/datatables.bundle.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+    <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
+    <script src="~/lib/axios/dist/axios.js"></script>
+    <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
     <script src="~/js/formplugins/select2/select2.bundle.js"></script>
     <script>
-        $(function () {
-            const endpoint = "/api/users";
-            const trueFalseOptions = ["false", "true"];
-            $('#dt-list').DataTableEdit({
-                ajax: endpoint,
-                columns: [
-                    { title: "Id", data: "Id", type: "readonly", visible: false, searchable: false },
-                    { title: "UserName", data: "UserName", type: "readonly" },
-                    { title: "Site", data: "Site", type: "text" },
-                    { title: "DisplayName", data: "DisplayName", type: "text" },
-                    { title: "Email", data: "Email" },
+        $('#searchbutton').click(function () {
+            reload();
+        });
+        $('#addbutton').click(function () {
+            popupregistermodal();
+        });
+        var reload = () => {
+            $dg.datagrid('load', '/authorization/users?handler=Data');
+        }
+      var $dg={};
+        var initdatagrid = () => {
+            $dg = $('#user_dg').datagrid({
+                height: (window.innerHeight-320),
+                method: 'GET',
+                rownumbers: false,
+                singleSelect: true,
+                selectOnCheck: false,
+                checkOnSelect: false,
+                pagination: true,
+                clientPaging: false,
+                remoteFilter: true,
+                sortName: 'UserName',
+                sortOrder:'asc',
+                pageSize: 15,
+                pageList: [10, 15, 30, 50, 100, 1000],
+                onBeforeLoad: function () {
+                    $('#deletebutton').prop('disabled', true);
+                },
+                onCheckAll: function (rows) {
+                    const checked = $(this).datagrid('getChecked').length > 0;
+                    $('#deletebutton').prop('disabled', !checked);
+                },
+                onUncheckAll: function () {
+                    $('#deletebutton').prop('disabled', true);
+                },
+                onCheck: function () {
+                    $('#deletebutton').prop('disabled', false);
+                },
+                onUncheck: function () {
+                    const checked = $(this).datagrid('getChecked').length > 0;
+                    $('#deletebutton').prop('disabled', !checked);
+                },
+                columns: [[
+                    { field: 'ck', checkbox: true },
                     {
-                        title: "Confirmed",
-                        data: "EmailConfirmed",
-                        className: "text-center col-1",
-                        type: "select",
-                        options: trueFalseOptions,
-                        render: function (data) {
-                            return `<input type="checkbox" name="lockoutEnabled" disabled ${data ? "checked" : ""}>`;
+                        field: '_action',
+                        title: '@_localizer["Command"]',
+                        width: 100,
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            return `<div class="btn-group" role="group">
+                           <button id="commandbtngroup" type="button"  class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           <i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
+                           </button>
+                           <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
+                               <button class="dropdown-item" onclick="onResetPassword(${index})"><i class="fal fa-key mr-1"></i> @_localizer["Reset Password"]</button>
+                               <button class="dropdown-item" onclick="onLocked(${index})"><i class="fal fa-user-lock mr-1"></i> @_localizer["Lock/Unlock"]</button>
+                               <button class="dropdown-item" onclick="onEdit(${index})" ><i class="fal fa-edit mr-1"></i> @_localizer["Edit"]</button>
+                               <button class="dropdown-item" onclick="onDelete(${row.Id})"><i class="fal fa-trash-alt mr-1"></i> @_localizer["Delete"]</button>
+                           </div>
+                       </div>
+                        `;
                         }
                     },
-                    { title: "PhoneNumber", data: "PhoneNumber",type: "text" },
-                    {
-                        title: "LockOut",
-                        data: "LockoutEnabled",
-                        className: "text-center col-1",
-                        type: "select",
-                        options: trueFalseOptions,
-                        render: function (data) {
-                            return `<input type="checkbox" name="lockoutEnabled" disabled ${data ? "checked" : ""}>`;
-                        }
-                    }
-                ],
-                onAddRow: function (table, rowdata, success, error) {
-                    $.ajax({ url: endpoint, type: 'POST', data: rowdata, success: success, error: error });
-                },
-                onDeleteRow: function (table, rowdata, success, error) {
-                    $.ajax({ url: endpoint, type: 'DELETE', data: rowdata, success: success, error: error });
-                },
-                onEditRow: function (table, rowdata, success, error) {
-                    $.ajax({ url: endpoint, type: 'PUT', data: rowdata, success: success, error: error });
-                }
-            });
-        });
+                    { field: 'Site', title: '@_localizer["Site"]', sortable: true, width: 130 },
+                    { field: 'UserName', title: '@_localizer["User Name"]', sortable: true, width: 150 },
+                    { field: 'DisplayName', title: '@_localizer["Display Name"]', sortable: true, width: 160 },
+                    { field: 'Email', title: '@_localizer["Email"]', sortable: true, width: 150 },
+                    { field: 'PhoneNumber', title: '@_localizer["Phone Number"]', sortable: true, width: 150 },
+                    { field: 'IsActive', title: '@_localizer["Is Active"]', sortable: true, width: 150 },
+                    { field: 'EmailConfirmed', title: '@_localizer["Email Confirmed"]', sortable: true, width: 150 },
+                    { field: 'LockoutEnabled', title: '@_localizer["Lockout Enabled"]', sortable: true, width: 150 },
+                ]]
+            })
+                .datagrid('enableFilter', {})
+                .datagrid('load', '/authorization/users?handler=Data');
+
+        }
+        $('#register_form :submit').click(function (e) {
+            console.log('submmit')
+            var form = document.getElementsByClassName('needs-validation')[0];
+            $(form).find(":valid").parent().removeClass("was-validated");
+            if (form.checkValidity() === false) {
+                form.classList.add('was-validated');
+            } else {
+                var request = $('#register_form').serialize();
+                axios.post('/authorization/users?handler=Register', request).then(res => {
+                    toastr["info"]('@_localizer["Save Success"]');
+                    $('#register_modal').modal('toggle');
+                    reload();
+                }).catch((error) => {
+                    var msg = error.response.data;
+                    bootbox.alert({
+                        size: "small",
+                        title: "@_localizer["Error"]",
+                        message: msg,
+                        callback: function () { /* your callback code */ }
+                    })
+
+                });
+            }
+            event.preventDefault();
+            event.stopPropagation();
+        })
+         var popupregistermodal = () => {
+            $('#register_modal').modal('toggle');
+            $('#register_form')[0].reset();
+
+        }
+        $(() => {
+            initdatagrid()
+        })
     </script>
 }

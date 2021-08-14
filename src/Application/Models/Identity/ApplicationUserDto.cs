@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CleanArchitecture.Razor.Application.Common.Mappings;
 
 namespace CleanArchitecture.Razor.Application.Models.Identity
 {
@@ -16,6 +17,7 @@ namespace CleanArchitecture.Razor.Application.Models.Identity
         public string Email { get; set; }
         public bool IsActive { get; set; } = true;
         public bool EmailConfirmed { get; set; }
+        public bool LockoutEnabled { get; set; }
         public string PhoneNumber { get; set; }
         public string ProfilePictureDataUrl { get; set; }
         public string Site { get; set; }
