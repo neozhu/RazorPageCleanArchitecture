@@ -1,6 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.Settings;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -17,14 +19,19 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IEmailSender _emailSender;
+        private readonly IMailService _mailService;
+  
 
-        public ForgotPasswordModel(SignInManager<ApplicationUser> signInManager, ILogger<LogoutModel> logger, UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(SignInManager<ApplicationUser> signInManager,
+            ILogger<LogoutModel> logger,
+            UserManager<ApplicationUser> userManager,
+            IMailService mailService  )
         {
             _signInManager = signInManager;
             _logger = logger;
             _userManager = userManager;
-            _emailSender = emailSender;
+            _mailService = mailService;
+         
         }
 
         [BindProperty]
@@ -63,11 +70,11 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
                     pageHandler: null,
                     values: new { code },
                     protocol: Request.Scheme);
-
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                var request=new MailRequest();
+                request.Subject = "Reset Password";
+                request.To = Input.Email;
+                request.Body = $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
+                await _mailService.SendAsync(request);
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

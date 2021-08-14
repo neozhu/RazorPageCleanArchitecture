@@ -1,9 +1,12 @@
+using System;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
+using CleanArchitecture.Razor.Application.Settings;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Persistence;
 using CleanArchitecture.Razor.Infrastructure.Services;
 using CleanArchitecture.Razor.Infrastructure.Services.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,8 +45,19 @@ namespace CleanArchitecture.Razor.Infrastructure
             services.AddTransient<IExcelService, ExcelService>();
             services.AddTransient<IUploadService, UploadService>();
             services.AddTransient<IIdentityService, IdentityService>();
+            services.Configure<MailSettings>(configuration.GetSection("MailSettings"));
+            services.AddTransient<IMailService, SMTPMailService>();
             services.AddAuthentication();
-
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default SignIn settings.
+                options.SignIn.RequireConfirmedEmail = true;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+                // Default Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+            });
 
             services.AddAuthorization(options =>
             {

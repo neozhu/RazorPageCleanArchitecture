@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Settings;
 using MailKit.Net.Smtp;
 using MailKit.Security;
@@ -32,7 +32,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Services
                 builder.HtmlBody = request.Body;
                 email.Body = builder.ToMessageBody();
                 using var smtp = new SmtpClient();
-                smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
+                 smtp.Connect(_mailSettings.Host, _mailSettings.Port, true);
                 smtp.Authenticate(_mailSettings.UserName, _mailSettings.Password);
                 await smtp.SendAsync(email);
                 smtp.Disconnect(true);
