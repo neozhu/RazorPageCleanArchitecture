@@ -105,7 +105,7 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
         public async Task<IActionResult> OnGetLockAsync(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
-            var result = await _userManager.SetLockoutEndDateAsync(user, System.DateTimeOffset.Now);
+            var result = await _userManager.SetLockoutEndDateAsync(user, System.DateTimeOffset.Now.AddMinutes(-30));
             return new JsonResult(result.ToApplicationResult());
         }
         public async Task<IActionResult> OnGetDeleteAsync(string id)
