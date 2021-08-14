@@ -21,7 +21,6 @@
         }
     </style>
 }
-
 <div id="js-page-content-demopanels" class="card mb-g">
     <div class="card-header bg-white d-flex align-items-center">
         <h4 class="m-0">
@@ -71,6 +70,8 @@
         </div>
     </div>
 </div>
+
+<!--register a user-->
 <div class="modal fade" id="register_modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
@@ -85,17 +86,17 @@
                     @Html.AntiForgeryToken()
                     <div class="form-group">
                         <label class="col-xl-12 form-label"> @_localizer["Your site name"]</label>
-                        <input type="text" asp-for="RegisterFormModel.Site" class="form-control" placeholder="Site name" required="required"/>
+                        <input type="text" asp-for="RegisterFormModel.Site" class="form-control" placeholder="Site name" required="required" />
                         <span class="invalid-feedback" asp-validation-for="RegisterFormModel.Site">Sorry, you missed this one.</span>
                     </div>
                     <div class="form-group">
                         <label class="col-xl-12 form-label">@_localizer["Login user name"]</label>
-                        <input type="text" asp-for="RegisterFormModel.UserName" class="form-control" placeholder="User name" required="required"/>
+                        <input type="text" asp-for="RegisterFormModel.UserName" class="form-control" placeholder="User name" required="required" />
                         <span class="invalid-feedback" asp-validation-for="RegisterFormModel.UserName">Sorry, you missed this one.</span>
                     </div>
                     <div class="form-group">
                         <label class="col-xl-12 form-label">@_localizer["Your display name"]</label>
-                        <input type="text" asp-for="RegisterFormModel.DisplayName" class="form-control" placeholder="Display name" required="required"/>
+                        <input type="text" asp-for="RegisterFormModel.DisplayName" class="form-control" placeholder="Display name" required="required" />
                         <span class="invalid-feedback" asp-validation-for="RegisterFormModel.DisplayName">Sorry, you missed this one.</span>
 
                     </div>
@@ -103,7 +104,13 @@
                         <label class="form-label" asp-for="RegisterFormModel.Email">@_localizer["Email will be needed for verification and account recovery"]</label>
                         <input type="email" asp-for="RegisterFormModel.Email" class="form-control" placeholder="Email for verification" value="" required="required" />
                         <span class="invalid-feedback" asp-validation-for="RegisterFormModel.Email">Sorry, you missed this one.</span>
-          
+
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="RegisterFormModel.PhoneNumber">@_localizer["Phone Number"]</label>
+                        <input type="text" asp-for="RegisterFormModel.PhoneNumber" class="form-control" placeholder="PhoneNumber for verification" value="" />
+                        <span class="invalid-feedback" asp-validation-for="RegisterFormModel.PhoneNumber">Sorry, you missed this one.</span>
+
                     </div>
                     <div class="form-group">
                         <label class="form-label" asp-for="RegisterFormModel.Password">@_localizer["Please pick a password"]</label>
@@ -127,6 +134,97 @@
     </div>
 </div>
 
+
+<!--Edit a user-->
+<div class="modal fade" id="edituser_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@_localizer["Edit user"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                </button>
+            </div>
+            <form id="edituser_form" class="needs-validation" novalidate="novalidate">
+                <div class="modal-body">
+                    <input type="hidden" asp-for="EditFormModel.Id" />
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="col-xl-12 form-label">@_localizer["User name"]</label>
+                        <input type="text" asp-for="EditFormModel.UserName" class="form-control" placeholder="User name" readonly="readonly" />
+                        <span class="invalid-feedback" asp-validation-for="RegisterFormModel.UserName">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xl-12 form-label"> @_localizer["Your site name"]</label>
+                        <input type="text" asp-for="EditFormModel.Site" class="form-control" placeholder="Site name" required="required" />
+                        <span class="invalid-feedback" asp-validation-for="EditFormModel.Site">Sorry, you missed this one.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xl-12 form-label">@_localizer["Your display name"]</label>
+                        <input type="text" asp-for="EditFormModel.DisplayName" class="form-control" placeholder="Display name" required="required" />
+                        <span class="invalid-feedback" asp-validation-for="EditFormModel.DisplayName">Sorry, you missed this one.</span>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="EditFormModel.Email">@_localizer["Email"]</label>
+                        <input type="email" asp-for="EditFormModel.Email" class="form-control" placeholder="Email for verification" value="" required="required" />
+                        <span class="invalid-feedback" asp-validation-for="EditFormModel.Email">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="EditFormModel.PhoneNumber">@_localizer["Phone Number"]</label>
+                        <input type="email" asp-for="EditFormModel.PhoneNumber" class="form-control" placeholder="PhoneNumber for verification" value="" />
+                        <span class="invalid-feedback" asp-validation-for="EditFormModel.PhoneNumber">Sorry, you missed this one.</span>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
+                    <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--reset password-->
+<div class="modal fade" id="resetpassword_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@_localizer["Reset password"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                </button>
+            </div>
+            <form id="resetpassword_form" class="needs-validation" novalidate="novalidate">
+                <div class="modal-body">
+                    <input type="hidden" asp-for="ResetFormModel.Id" />
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="col-xl-12 form-label">@_localizer["User name"]</label>
+                        <input type="text" asp-for="ResetFormModel.UserName" class="form-control" placeholder="User name" readonly="readonly" />
+                        <span class="invalid-feedback" asp-validation-for="ResetFormModel.UserName">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="ResetFormModel.Password">@_localizer["New password"]</label>
+                        <input type="password" asp-for="ResetFormModel.Password" class="form-control" placeholder="Password (minimum 6 characters)" value="" required="required" pattern="^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{6,}$" />
+                        <span class="invalid-feedback" asp-validation-for="ResetFormModel.Password">Sorry, you missed this one.</span>
+                        <div class="help-block">Your password must be 6-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emojis.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="ResetFormModel.ConfirmPassword">@_localizer["Confirm your password"]</label>
+                        <input type="password" asp-for="ResetFormModel.ConfirmPassword" class="form-control" placeholder="Confirm password (minimum 6 characters)" value="" required="required" pattern="^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{6,}$" />
+                        <span class="invalid-feedback" asp-validation-for="RegisterFormModel.ConfirmPassword">Sorry, you missed this one.</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
+                    <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @section ScriptsBlock {
     <partial name="_ValidationScriptsPartial" />
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
@@ -142,6 +240,9 @@
         });
         $('#addbutton').click(function () {
             popupregistermodal();
+        });
+        $('#deletebutton').click(function () {
+            onDeleteChecked();
         });
         var reload = () => {
             $dg.datagrid('load', '/authorization/users?handler=Data');
@@ -193,9 +294,9 @@
                            </button>
                            <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
                                <button class="dropdown-item" onclick="onResetPassword(${index})"><i class="fal fa-key mr-1"></i> @_localizer["Reset Password"]</button>
-                               <button class="dropdown-item" onclick="onLocked(${index})"><i class="fal fa-user-lock mr-1"></i> @_localizer["Lock/Unlock"]</button>
+                               <button class="dropdown-item" onclick="onUnlocked('${row.Id}')"><i class="fal fa-user-lock mr-1"></i> @_localizer["Lock/Unlock"]</button>
                                <button class="dropdown-item" onclick="onEdit(${index})" ><i class="fal fa-edit mr-1"></i> @_localizer["Edit"]</button>
-                               <button class="dropdown-item" onclick="onDelete(${row.Id})"><i class="fal fa-trash-alt mr-1"></i> @_localizer["Delete"]</button>
+                               <button class="dropdown-item" onclick="onDelete('${row.Id}')"><i class="fal fa-trash-alt mr-1"></i> @_localizer["Delete"]</button>
                            </div>
                        </div>
                         `;
@@ -215,9 +316,108 @@
                 .datagrid('load', '/authorization/users?handler=Data');
 
         }
+        var onEdit = (index) => {
+
+            var user = $dg.datagrid('getRows')[index];
+            popupeditmodal(user);
+        }
+        var onResetPassword = (index) => {
+
+            var user = $dg.datagrid('getRows')[index];
+            popupresetpasswordmodal(user);
+        }
+        var onUnlocked = (id) => {
+
+            axios.get('/authorization/users?handler=Unlocked&id=' + id).then(res => {
+                toastr["info"]('@_localizer["Unlocked Success"]');
+                reload();
+            })
+                .catch((error) => {
+                    var msg = error.response.data;
+                    bootbox.alert({
+                        size: "small",
+                        title: "@_localizer["Error"]",
+                        message: msg,
+                        callback: function () { /* your callback code */ }
+                    })
+                });
+        }
+               
+          
+    
+        var onDelete = (id) => {
+            bootbox.confirm({
+                message: "@_localizer["Are you sure delete a user?"]",
+                buttons: {
+                    confirm: {
+                        label: '@_localizer["Yes"]',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: '@_localizer["No"]',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        axios.get('/authorization/users?handler=Delete&id=' + id).then(res => {
+                            toastr["info"]('@_localizer["Delete Success"]');
+                            reload();
+                        })
+                            .catch((error) => {
+                                var msg = error.response.data;
+                                bootbox.alert({
+                                    size: "small",
+                                    title: "@_localizer["Error"]",
+                                    message: msg,
+                                    callback: function () { /* your callback code */ }
+                                })
+                            });
+                    }
+                }
+            })
+        }
+        var onDeleteChecked = () => {
+            var checkedId = $dg.datagrid('getChecked').map(x => x.Id);
+            if (checkedId.length > 0) {
+                bootbox.confirm({
+                    message: "@_localizer["Are you sure delete checked users?"]",
+                    buttons: {
+                        confirm: {
+                            label: '@_localizer["Yes"]',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: '@_localizer["No"]',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
+                            console.log(paras.toString())
+                            axios.get('/authorization/users?handler=DeleteChecked&' + paras.toString()).then(res => {
+                                toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
+                                reload();
+                            })
+                                .catch((error) => {
+                                    var msg = error.response.data;
+                                    bootbox.alert({
+                                        size: "small",
+                                        title: "@_localizer["Error"]",
+                                        message: msg,
+                                        callback: function () { /* your callback code */ }
+                                    })
+                                });
+                        }
+                    }
+                });
+
+            }
+        }
         $('#register_form :submit').click(function (e) {
             console.log('submmit')
-            var form = document.getElementsByClassName('needs-validation')[0];
+            var form = document.querySelector('#register_form');
             $(form).find(":valid").parent().removeClass("was-validated");
             if (form.checkValidity() === false) {
                 form.classList.add('was-validated');
@@ -241,10 +441,72 @@
             event.preventDefault();
             event.stopPropagation();
         })
+        $('#edituser_form :submit').click(function (e) {
+            console.log('submmit')
+            var form = document.querySelector('#edituser_form');
+            $(form).find(":valid").parent().removeClass("was-validated");
+            if (form.checkValidity() === false) {
+                form.classList.add('was-validated');
+            } else {
+                var request = $('#edituser_form').serialize();
+                axios.post('/authorization/users?handler=Edit', request).then(res => {
+                    toastr["info"]('@_localizer["Save Success"]');
+                    $('#edituser_modal').modal('toggle');
+                    reload();
+                }).catch((error) => {
+                    var msg = error.response.data;
+                    bootbox.alert({
+                        size: "small",
+                        title: "@_localizer["Error"]",
+                        message: msg,
+                        callback: function () { /* your callback code */ }
+                    })
+
+                });
+            }
+            event.preventDefault();
+            event.stopPropagation();
+        })
+        $('#resetpassword_form :submit').click(function (e) {
+            console.log('submmit')
+            var form = document.querySelector('#resetpassword_form');
+            $(form).find(":valid").parent().removeClass("was-validated");
+            if (form.checkValidity() === false) {
+                form.classList.add('was-validated');
+            } else {
+                var request = $('#resetpassword_form').serialize();
+                axios.post('/authorization/users?handler=ResetPassword', request).then(res => {
+                    toastr["info"]('@_localizer["Save Success"]');
+                    $('#resetpassword_modal').modal('toggle');
+                    reload();
+                }).catch((error) => {
+                    var msg = error.response.data;
+                    bootbox.alert({
+                        size: "small",
+                        title: "@_localizer["Error"]",
+                        message: msg,
+                        callback: function () { /* your callback code */ }
+                    })
+
+                });
+            }
+            event.preventDefault();
+            event.stopPropagation();
+        })
          var popupregistermodal = () => {
             $('#register_modal').modal('toggle');
             $('#register_form')[0].reset();
 
+        }
+        var popupeditmodal = (user) => {
+            $('#edituser_modal').modal('toggle');
+            $('#edituser_form')[0].reset();
+            $('#edituser_form').jsonToForm(user)
+        }
+        var popupresetpasswordmodal = (user) => {
+            $('#resetpassword_modal').modal('toggle');
+            $('#resetpassword_form')[0].reset();
+            $('#resetpassword_form').jsonToForm(user)
         }
         $(() => {
             initdatagrid()

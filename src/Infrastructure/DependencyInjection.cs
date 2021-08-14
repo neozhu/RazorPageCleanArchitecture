@@ -42,7 +42,6 @@ namespace CleanArchitecture.Razor.Infrastructure
             services.AddTransient<IExcelService, ExcelService>();
             services.AddTransient<IUploadService, UploadService>();
             services.AddTransient<IIdentityService, IdentityService>();
-            services.AddTransient<IAccountService, AccountService>();
             services.AddAuthentication();
 
 
