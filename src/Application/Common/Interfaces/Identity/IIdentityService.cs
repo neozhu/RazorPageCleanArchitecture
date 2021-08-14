@@ -1,9 +1,9 @@
-﻿using CleanArchitecture.Razor.Application.Common.Models;
+using CleanArchitecture.Razor.Application.Common.Models;
 using System.Threading.Tasks;
 
-namespace CleanArchitecture.Razor.Application.Common.Interfaces
+namespace CleanArchitecture.Razor.Application.Common.Interfaces.Identity
 {
-    public interface IIdentityService
+    public interface IIdentityService:IService
     {
         Task<string> GetUserNameAsync(string userId);
 

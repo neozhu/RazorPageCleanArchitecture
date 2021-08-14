@@ -1,11 +1,9 @@
-using System;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Persistence;
 using CleanArchitecture.Razor.Infrastructure.Services;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity;
+using CleanArchitecture.Razor.Infrastructure.Services.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,10 +39,10 @@ namespace CleanArchitecture.Razor.Infrastructure
 
 
             services.AddTransient<IDateTime, DateTimeService>();
-            services.AddTransient<IIdentityService, IdentityService>();
             services.AddTransient<IExcelService, ExcelService>();
             services.AddTransient<IUploadService, UploadService>();
-
+            services.AddTransient<IIdentityService, IdentityService>();
+            services.AddTransient<IAccountService, AccountService>();
             services.AddAuthentication();
 
 

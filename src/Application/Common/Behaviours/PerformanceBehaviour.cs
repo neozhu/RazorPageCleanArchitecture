@@ -1,4 +1,5 @@
-﻿using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
