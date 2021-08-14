@@ -96,16 +96,16 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
             
             return new JsonResult(result.ToApplicationResult());
         }
-        public async Task<IActionResult> OnGetUnLockAsync(string id)
+        public async Task<IActionResult> OnGetLockAsync(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
             var result = await _userManager.SetLockoutEndDateAsync(user, System.DateTimeOffset.MaxValue);
             return new JsonResult(result.ToApplicationResult());
         }
-        public async Task<IActionResult> OnGetLockAsync(string id)
+        public async Task<IActionResult> OnGetUnlockAsync(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
-            var result = await _userManager.SetLockoutEndDateAsync(user, System.DateTimeOffset.Now.AddMinutes(-30));
+            var result = await _userManager.SetLockoutEndDateAsync(user, System.DateTimeOffset.Now.AddMinutes(-1));
             return new JsonResult(result.ToApplicationResult());
         }
         public async Task<IActionResult> OnGetDeleteAsync(string id)

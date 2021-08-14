@@ -346,7 +346,7 @@
                         title: '@_localizer["Lock Status"]',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            if (value != null && moment(value) <= moment().utc()) {
+                            if (value != null && moment(value) > moment().utc()) {
                                 return `<a href="javascript:onUnlock('${row.Id}');" class="btn btn-outline-danger btn-sm btn-icon rounded-circle waves-effect waves-themed">
                                          <i class="fal fa-lock"></i>
 							           </a>`;
