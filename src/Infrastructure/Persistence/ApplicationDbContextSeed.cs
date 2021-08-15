@@ -29,32 +29,28 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
                 await userManager.CreateAsync(demo, "Password123!");
                 await userManager.AddToRolesAsync(demo, new[] { userRole.Name });
             }
+
         }
 
         public static async Task SeedSampleDataAsync(ApplicationDbContext context)
         {
-            // Seed, if necessary
-            //if (!context.TodoLists.Any())
-            //{
-            //    context.TodoLists.Add(new TodoList
-            //    {
-            //        Title = "Shopping",
-            //        Colour = Colour.Blue,
-            //        Items =
-            //        {
-            //            new TodoItem { Title = "Apples", Done = true },
-            //            new TodoItem { Title = "Milk", Done = true },
-            //            new TodoItem { Title = "Bread", Done = true },
-            //            new TodoItem { Title = "Toilet paper" },
-            //            new TodoItem { Title = "Pasta" },
-            //            new TodoItem { Title = "Tissues" },
-            //            new TodoItem { Title = "Tuna" },
-            //            new TodoItem { Title = "Water" }
-            //        }
-            //    });
-
-            //    await context.SaveChangesAsync();
-            //}
+            //Seed, if necessary
+            if (!context.DocumentTypes.Any())
+                {
+                context.DocumentTypes.Add(new Domain.Entities.DocumentType() { Name = "Document", Description = "Document" });
+                context.DocumentTypes.Add(new Domain.Entities.DocumentType() { Name = "PDF", Description = "PDF" });
+                context.DocumentTypes.Add(new Domain.Entities.DocumentType() { Name = "Image", Description = "Image" });
+                context.DocumentTypes.Add(new Domain.Entities.DocumentType() { Name = "Other", Description = "Other" });
+                await context.SaveChangesAsync();
+                }
+            if (!context.KeyValues.Any())
+            {
+                context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Status", Value= "initialization",Text= "initialization", Description = "Status of workflow" });
+                context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Status", Value = "processing", Text = "processing", Description = "Status of workflow"  });
+                context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Status", Value = "pending", Text = "pending", Description = "Status of workflow"  });
+                context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Status", Value = "finished", Text = "finished", Description = "Status of workflow"  });
+                await context.SaveChangesAsync();
+            }
         }
     }
 }

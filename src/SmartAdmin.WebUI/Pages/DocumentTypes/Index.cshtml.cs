@@ -11,6 +11,7 @@ using CleanArchitecture.Razor.Application.DocumentTypes.Queries.Export;
 using CleanArchitecture.Razor.Application.DocumentTypes.Queries.PaginationQuery;
 using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -18,6 +19,7 @@ using Microsoft.Extensions.Localization;
 
 namespace SmartAdmin.WebUI.Pages.DocumentTypes
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         [BindProperty]

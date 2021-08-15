@@ -281,8 +281,8 @@
                            <i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
                            </button>
                            <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
-                               <button class="dropdown-item" onclick="onEdit(${index})" >@_localizer["Edit"]</button>
-                               <button class="dropdown-item" onclick="onDelete(${row.Id})">@_localizer["Delete"]</button>
+                               <button class="dropdown-item" onclick="onEdit(${index})" ><i class="fal fa-edit mr-1"></i> @_localizer["Edit"]</button>
+                               <button class="dropdown-item" onclick="onDelete('${row.Id}')"><i class="fal fa-trash-alt mr-1"></i> @_localizer["Delete"]</button>
                            </div>
                        </div>
                         `;
