@@ -20,6 +20,9 @@ using Microsoft.AspNetCore.Http;
 using System.Data;
 using System;
 using System.Net;
+using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace SmartAdmin.WebUI.Areas.Authorization.Pages
 {
@@ -32,6 +35,12 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
         private readonly IStringLocalizer<RoleModel> _localizer;
         [BindProperty]
         public EditRoleModel Input { get; set; } = new();
+        [BindProperty]
+        public IEnumerable<string> Permissions { get; set; }
+        [BindProperty]
+        public string RoleId { get; set; }
+        [BindProperty]
+        public Dictionary<string, IEnumerable<PermissionModel>> GroupedPermissions { get; set; }=new ();
         [BindProperty]
         public IFormFile UploadedFile { get; set; }
 
@@ -49,7 +58,11 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
         }
         public async Task OnGetAsync()
         {
-
+            var allPermissions = GetAllPermissions();
+            foreach(var group in allPermissions.GroupBy(x => x.Group))
+            {
+                GroupedPermissions.Add(group.Key, group.ToArray());
+            }
         }
         public async Task<IActionResult> OnPostAsync()
         {
@@ -163,6 +176,60 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
                 return new JsonResult(Result.Failure(new string[] { e.Message }));
             }
         }
+
+        public async Task<IActionResult> OnGetAssignedPermissionsAsync(string id)
+        {
+            var role = await _roleManager.FindByIdAsync(id);
+            var claims = await _roleManager.GetClaimsAsync(role);
+            return new JsonResult(claims.Select(x=>x.Value));
+        }
+        public async Task<IActionResult> OnPostAssignPermissionsAsync()
+        {
+            var role = await _roleManager.FindByIdAsync(RoleId);
+            var claims = await _roleManager.GetClaimsAsync(role);
+            foreach (var claim in claims)
+            {
+               await  _roleManager.RemoveClaimAsync(role, claim);
+            }
+            foreach(var name in Permissions)
+            {
+                await _roleManager.AddClaimAsync(role, new System.Security.Claims.Claim(ApplicationClaimTypes.Permission, name));
+            }
+           
+            return new JsonResult(Result.Success());
+        }
+
+        private IEnumerable<PermissionModel> GetAllPermissions()
+        {
+            var allPermissions = new List<PermissionModel>();
+            var modules = typeof(Permissions).GetNestedTypes();
+
+            foreach (var module in modules)
+            {
+                var moduleName = string.Empty;
+                var moduleDescription = string.Empty;
+
+                if (module.GetCustomAttributes(typeof(DisplayNameAttribute), true)
+                    .FirstOrDefault() is DisplayNameAttribute displayNameAttribute)
+                    moduleName = displayNameAttribute.DisplayName;
+
+                if (module.GetCustomAttributes(typeof(DescriptionAttribute), true)
+                    .FirstOrDefault() is DescriptionAttribute descriptionAttribute)
+                    moduleDescription = descriptionAttribute.Description;
+
+                var fields = module.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+
+                foreach (var fi in fields)
+                {
+                    var propertyValue = fi.GetValue(null);
+
+                    if (propertyValue is not null)
+                        allPermissions.Add(new PermissionModel { ClaimValue = propertyValue.ToString(), ClaimType = ApplicationClaimTypes.Permission, Group = moduleName, Description = moduleDescription });
+                }
+            }
+
+            return allPermissions;
+        }
         public class EditRoleModel
         {
             public string Id { get; set; }
@@ -171,6 +238,12 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
             public string Name { get; set; }
             [Display(Name = "Description")]
             public string Description { get; set; }
+        }
+        public class PermissionModel {
+            public string Description { get; set; }
+            public string Group { get; set; }
+            public string ClaimType { get; set; }
+            public string ClaimValue { get; set; }
         }
     }
 }

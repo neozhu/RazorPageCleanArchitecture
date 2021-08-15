@@ -19,6 +19,7 @@ using Newtonsoft.Json.Serialization;
 using SmartAdmin.WebUI.Models;
 using SmartAdmin.WebUI.Services;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using static IdentityModel.ClaimComparer;
 
 namespace SmartAdmin.WebUI
@@ -61,7 +62,11 @@ namespace SmartAdmin.WebUI
             //      });
             services
                 .AddRazorPages()
-                .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null)
+                .AddJsonOptions(options =>
+                  {
+                      options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                      
+                    })
                 .AddRazorRuntimeCompilation()
                 .AddRazorPagesOptions(options =>
                 {

@@ -599,16 +599,15 @@
                 })
                 $('#manageroles_form #UserId').val(user.Id)
                 $('#manageroles_modal').modal('toggle');
-            })
-             .catch((error) => {
-                 var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
-                });
+            }).catch((error) => {
+                var msg = error.response.data;
+                bootbox.alert({
+                    size: "small",
+                    title: "@_localizer["Error"]",
+                    message: msg,
+                    callback: function () { /* your callback code */ }
+                })
+            });
 
         }
         $('#register_form :submit').click(function (e) {
