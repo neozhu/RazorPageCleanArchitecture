@@ -19,10 +19,11 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System;
 using System.Data;
+using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 
 namespace SmartAdmin.WebUI.Areas.Authorization.Pages
 {
-    [Authorize]
+    [Authorize(policy: Permissions.Users.View)]
     public class UserModel : PageModel
     {
         [BindProperty]

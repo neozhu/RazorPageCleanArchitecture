@@ -9,6 +9,7 @@ using CleanArchitecture.Razor.Application.DocumentTypes.Commands.Delete;
 using CleanArchitecture.Razor.Application.DocumentTypes.Commands.Import;
 using CleanArchitecture.Razor.Application.DocumentTypes.Queries.Export;
 using CleanArchitecture.Razor.Application.DocumentTypes.Queries.PaginationQuery;
+using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -19,7 +20,7 @@ using Microsoft.Extensions.Localization;
 
 namespace SmartAdmin.WebUI.Pages.DocumentTypes
 {
-    [Authorize]
+    [Authorize(policy: Permissions.DocumentTypes.View)]
     public class IndexModel : PageModel
     {
         [BindProperty]

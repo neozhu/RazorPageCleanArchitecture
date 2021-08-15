@@ -1,7 +1,10 @@
+using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace CleanArchitecture.Razor.Infrastructure.Persistence
@@ -17,6 +20,11 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
             {
                 await roleManager.CreateAsync(administratorRole);
                 await roleManager.CreateAsync(userRole);
+                var Permissions = GetAllPermissions();
+                foreach(var permission in Permissions)
+                {
+                    await roleManager.AddClaimAsync(administratorRole, new System.Security.Claims.Claim(ApplicationClaimTypes.Permission, permission));
+                }
             }
 
             var administrator = new ApplicationUser { UserName = "administrator" , IsActive=true,Site="Razor",DisplayName="Administrator", Email = "new163@163.com" , EmailConfirmed=true};
@@ -30,6 +38,29 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
                 await userManager.AddToRolesAsync(demo, new[] { userRole.Name });
             }
 
+        }
+        private static IEnumerable<string> GetAllPermissions()
+        {
+            var allPermissions = new List<string>();
+            var modules = typeof(Permissions).GetNestedTypes();
+
+            foreach (var module in modules)
+            {
+                var moduleName = string.Empty;
+                var moduleDescription = string.Empty;
+
+                var fields = module.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+
+                foreach (var fi in fields)
+                {
+                    var propertyValue = fi.GetValue(null);
+
+                    if (propertyValue is not null)
+                        allPermissions.Add( propertyValue.ToString() );
+                }
+            }
+
+            return allPermissions;
         }
 
         public static async Task SeedSampleDataAsync(ApplicationDbContext context)

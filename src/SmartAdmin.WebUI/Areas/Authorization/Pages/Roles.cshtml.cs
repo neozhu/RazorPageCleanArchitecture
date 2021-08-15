@@ -26,7 +26,7 @@ using System.Reflection;
 
 namespace SmartAdmin.WebUI.Areas.Authorization.Pages
 {
-    [Authorize]
+    [Authorize(policy: Permissions.Roles.View)]
     public class RoleModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
@@ -36,7 +36,7 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
         [BindProperty]
         public EditRoleModel Input { get; set; } = new();
         [BindProperty]
-        public IEnumerable<string> Permissions { get; set; }
+        public IEnumerable<string> AssignedPermissions { get; set; }
         [BindProperty]
         public string RoleId { get; set; }
         [BindProperty]
@@ -191,7 +191,7 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
             {
                await  _roleManager.RemoveClaimAsync(role, claim);
             }
-            foreach(var name in Permissions)
+            foreach(var name in AssignedPermissions)
             {
                 await _roleManager.AddClaimAsync(role, new System.Security.Claims.Claim(ApplicationClaimTypes.Permission, name));
             }

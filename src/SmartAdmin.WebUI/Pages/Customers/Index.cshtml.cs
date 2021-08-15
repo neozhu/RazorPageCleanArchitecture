@@ -10,6 +10,7 @@ using CleanArchitecture.Razor.Application.Customers.Commands.Delete;
 using CleanArchitecture.Razor.Application.Customers.Commands.Import;
 using CleanArchitecture.Razor.Application.Customers.Queries.Export;
 using CleanArchitecture.Razor.Application.Customers.Queries.PaginationQuery;
+using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -20,7 +21,7 @@ using SmartAdmin.WebUI.Extensions;
 
 namespace SmartAdmin.WebUI.Pages.Customers
 {
-    [Authorize]
+    [Authorize(policy: Permissions.Customers.View)]
     public class IndexModel : PageModel
     {
         [BindProperty]
@@ -28,24 +29,28 @@ namespace SmartAdmin.WebUI.Pages.Customers
         [BindProperty]
         public IFormFile UploadedFile { get; set; }
 
+        private readonly IAuthorizationService _authorizationService;
         private readonly ICurrentUserService _currentUserService;
         private readonly ISender _mediator;
         private readonly IStringLocalizer<IndexModel> _localizer;
 
         public IndexModel(
+            IAuthorizationService authorizationService,
             ICurrentUserService currentUserService,
             ISender mediator,
             IStringLocalizer<IndexModel> localizer
             )
         {
+            _authorizationService = authorizationService;
             _currentUserService = currentUserService;
             _mediator = mediator;
             _localizer = localizer;
             var email = _currentUserService.UserId;
         }
+        
         public async Task OnGetAsync()
         {
-            
+            var _cancreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Customers.Create);
         }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] CustomersWithPaginationQuery command)
         {

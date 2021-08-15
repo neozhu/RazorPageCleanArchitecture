@@ -17,10 +17,11 @@ using System.Collections.Generic;
 using CleanArchitecture.Razor.Application.DocumentTypes.DTOs;
 using CleanArchitecture.Razor.Application.DocumentTypes.Queries.PaginationQuery;
 using Microsoft.AspNetCore.Authorization;
+using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 
 namespace SmartAdmin.WebUI.Pages.Documents
 {
-    [Authorize]
+    [Authorize(policy: Permissions.Documents.View)]
     public class IndexModel : PageModel
     {
         [BindProperty]

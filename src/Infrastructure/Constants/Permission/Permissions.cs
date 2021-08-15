@@ -55,6 +55,8 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Permission
             public const string Edit = "Permissions.Documents.Edit";
             public const string Delete = "Permissions.Documents.Delete";
             public const string Search = "Permissions.Documents.Search";
+            public const string Export = "Permissions.Documents.Export";
+            public const string Import = "Permissions.Categories.Import";
         }
         [DisplayName("DocumentTypes")]
         [Description("DocumentTypes Permissions")]
@@ -65,8 +67,21 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Permission
             public const string Edit = "Permissions.DocumentTypes.Edit";
             public const string Delete = "Permissions.DocumentTypes.Delete";
             public const string Search = "Permissions.DocumentTypes.Search";
+            public const string Export = "Permissions.Documents.Export";
+            public const string Import = "Permissions.Categories.Import";
         }
-
+        [DisplayName("Dictionaries")]
+        [Description("Dictionaries Permissions")]
+        public static class Dictionaries
+        {
+            public const string View = "Permissions.Dictionaries.View";
+            public const string Create = "Permissions.Dictionaries.Create";
+            public const string Edit = "Permissions.Dictionaries.Edit";
+            public const string Delete = "Permissions.Dictionaries.Delete";
+            public const string Search = "Permissions.Dictionaries.Search";
+            public const string Export = "Permissions.Dictionaries.Export";
+            public const string Import = "Permissions.Dictionaries.Import";
+        }
 
         [DisplayName("Users")]
         [Description("Users Permissions")]
@@ -78,7 +93,10 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Permission
             public const string Delete = "Permissions.Users.Delete";
             public const string Search = "Permissions.Users.Search";
             public const string Import = "Permissions.Users.Import";
+            public const string Export = "Permissions.Dictionaries.Export";
             public const string ManageRoles = "Permissions.Users.ManageRoles";
+            public const string RestPassword = "Permissions.Users.RestPassword";
+            public const string Active = "Permissions.Users.Active";
         }
 
         [DisplayName("Roles")]

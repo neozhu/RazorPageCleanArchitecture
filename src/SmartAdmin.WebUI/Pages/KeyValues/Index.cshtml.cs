@@ -9,8 +9,10 @@ using CleanArchitecture.Razor.Application.KeyValues.Commands.Import;
 using CleanArchitecture.Razor.Application.KeyValues.Commands.SaveChanged;
 using CleanArchitecture.Razor.Application.KeyValues.Queries.Export;
 using CleanArchitecture.Razor.Application.KeyValues.Queries.PaginationQuery;
+using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -18,6 +20,7 @@ using Microsoft.Extensions.Localization;
 
 namespace SmartAdmin.WebUI.Pages.KeyValues
 {
+    [Authorize(policy: Permissions.Dictionaries.View)]
     public class IndexModel : PageModel
     {
         

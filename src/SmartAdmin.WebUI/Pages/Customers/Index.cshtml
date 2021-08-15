@@ -1,14 +1,23 @@
 ﻿@page
 @using CleanArchitecture.Razor.Domain.Enums
+@using CleanArchitecture.Razor.Infrastructure.Constants.Permission
 @model SmartAdmin.WebUI.Pages.Customers.IndexModel
 @inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
+@inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
-    ViewData["Title"] = _localizer["Customers"].Value;
-    ViewData["PageName"] = "customers_index";
-    ViewData["Category1"] = _localizer["Customers"].Value;
-    ViewData["Heading"] = _localizer["Customers"].Value;
-    ViewData["PageDescription"] = _localizer["See all available options"].Value;
-    ViewData["PreemptiveClass"] = "Default";
+  ViewData["Title"] = _localizer["Customers"].Value;
+  ViewData["PageName"] = "customers_index";
+  ViewData["Category1"] = _localizer["Customers"].Value;
+  ViewData["Heading"] = _localizer["Customers"].Value;
+  ViewData["PageDescription"] = _localizer["See all available options"].Value;
+  ViewData["PreemptiveClass"] = "Default";
+  var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Customers.Create);
+  var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.Customers.Edit);
+  var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.Customers.Delete);
+  var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.Customers.Search);
+  var _canImport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Customers.Import);
+  var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Customers.Export);
+
 }
 @section HeadBlock {
 
@@ -26,38 +35,53 @@
 <div id="js-page-content-demopanels" class="card mb-g">
     <div class="card-header bg-white d-flex align-items-center">
         <h4 class="m-0">
-            @_localizer["Customers"]
+            @_localizer["Customers"] 
             <small>@_localizer["See all available options"]</small>
         </h4>
         <div class="ml-auto">
-            <button class="btn btn-sm btn-outline-primary " id="addbutton">
-                <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
-                @_localizer["Add"]
-            </button>
-            <button class="btn btn-sm btn-outline-danger" disabled id="deletebutton">
-                <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
-                @_localizer["Delete"]
-            </button>
-            <button class="btn btn-sm btn-outline-primary " id="searchbutton">
-                <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
-                @_localizer["Search"]
-            </button>
-            <div class="btn-group" role="group">
-                <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
-                    <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>   @_localizer["Import Excel"]
+            @if (_canCreate.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="addbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
+                    @_localizer["Add"]
                 </button>
-                <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
+            }
+            @if (_canDelete.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-danger" disabled id="deletebutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
+                    @_localizer["Delete"]
                 </button>
-                <div class="dropdown-menu" aria-labelledby="importbutton">
-                    <button id="gettemplatebutton" class="dropdown-item" >@_localizer["Download Template"]</button>
+            }
+            @if (_canSearch.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="searchbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
+                    @_localizer["Search"]
+                </button>
+            }
+            @if (_canImport.Succeeded)
+            {
+                <div class="btn-group" role="group">
+                    <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
+                        <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>   @_localizer["Import Excel"]
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="importbutton">
+                        <button id="gettemplatebutton" class="dropdown-item">@_localizer["Download Template"]</button>
+                    </div>
                 </div>
+            }
+            @if (_canExport.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="exportbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                    @_localizer["Export Excel"]
+                </button>
+            }
             </div>
-            <button class="btn btn-sm btn-outline-primary " id="exportbutton">
-                <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
-                @_localizer["Export Excel"]
-            </button>
-        </div>
     </div>
     <div class="card-body">
         <div class="row">
@@ -263,15 +287,14 @@
                         align: 'center',
                         formatter: function (value, row, index) {
                             return `<div class="btn-group" role="group">
-                           <button id="commandbtngroup" type="button"  class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           <i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
-                           </button>
-                           <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
-                               <button class="dropdown-item" onclick="onEdit(${index})" ><i class="fal fa-edit mr-1"></i> @_localizer["Edit"]</button>
-                               <button class="dropdown-item" onclick="onDelete('${row.Id}')"><i class="fal fa-trash-alt mr-1"></i> @_localizer["Delete"]</button>
-                           </div>
-                       </div>
-                        `;
+                                      <button id="commandbtngroup" type="button" @(_canEdit.Succeeded? "":"disabled")  class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
+                                     </button>
+                                     <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
+                                       <button class="dropdown-item" onclick="onEdit(${index})" @(_canEdit.Succeeded? "":"disabled")><i class="fal fa-edit mr-1"></i> @_localizer["Edit"]</button>
+                                       <button class="dropdown-item" onclick="onDelete('${row.Id}')" @(_canDelete.Succeeded? "":"disabled") ><i class="fal fa-trash-alt mr-1"></i> @_localizer["Delete"]</button>
+                                     </div>
+                                  </div>`;
                         }
                     },
                     { field: 'Name', title: '@_localizer["Name"]', sortable: true, width: 180 },

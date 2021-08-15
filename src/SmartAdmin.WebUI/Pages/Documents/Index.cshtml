@@ -1,16 +1,22 @@
 ﻿@page
 @using CleanArchitecture.Razor.Domain.Enums
 @using Microsoft.AspNetCore.Mvc.Localization
-@using Microsoft.Extensions.Localization
+@using CleanArchitecture.Razor.Infrastructure.Constants.Permission
 @model SmartAdmin.WebUI.Pages.Documents.IndexModel
 @inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
+@inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
-    ViewData["Title"] = _localizer["Documents"].Value;
-    ViewData["PageName"] = "documents_index";
-    ViewData["Category1"] = _localizer["Documents"].Value;
-    ViewData["Heading"] = _localizer["Documents"].Value;
-    ViewData["PageDescription"] = _localizer["See all available options"].Value;
-    ViewData["PreemptiveClass"] = "Default";
+  ViewData["Title"] = _localizer["Documents"].Value;
+  ViewData["PageName"] = "documents_index";
+  ViewData["Category1"] = _localizer["Documents"].Value;
+  ViewData["Heading"] = _localizer["Documents"].Value;
+  ViewData["PageDescription"] = _localizer["See all available options"].Value;
+  ViewData["PreemptiveClass"] = "Default";
+  var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Create);
+  var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Edit);
+  var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Delete);
+  var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Search);
+  var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Export);
 }
 @section HeadBlock {
 
@@ -32,22 +38,34 @@
             <small>@_localizer["See all available options"]</small>
         </h4>
         <div class="ml-auto">
-            <button class="btn btn-sm btn-outline-primary " id="addbutton">
-                <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
-                @_localizer["Add"]
-            </button>
-            <button class="btn btn-sm btn-outline-danger" disabled id="deletebutton">
-                <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
-                @_localizer["Delete"]
-            </button>
-            <button class="btn btn-sm btn-outline-primary " id="searchbutton">
-                <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
-                @_localizer["Search"]
-            </button>
-            <button class="btn btn-sm btn-outline-primary " id="exportbutton">
-                <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
-                @_localizer["Export Excel"]
-            </button>
+            @if (_canCreate.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="addbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
+                    @_localizer["Add"]
+                </button>
+            }
+            @if (_canDelete.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-danger" disabled id="deletebutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
+                    @_localizer["Delete"]
+                </button>
+            }
+            @if (_canSearch.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="searchbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
+                    @_localizer["Search"]
+                </button>
+            }
+            @if (_canExport.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="exportbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                    @_localizer["Export Excel"]
+                </button>
+            }
         </div>
     </div>
     <div class="card-body">
@@ -94,7 +112,7 @@
                         <div class="col-md-6">
                             <label class="form-label" for="IsPublic"> </label>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" asp-for="Input.IsPublic" class="custom-control-input" value="true" >
+                                <input type="checkbox" asp-for="Input.IsPublic" class="custom-control-input" value="true">
                                 <label class="custom-control-label" for="Input_IsPublic">@_localizer["Is Public"]</label>
                             </div>
                         </div>
@@ -277,15 +295,14 @@
                         align: 'center',
                         formatter: function (value, row, index) {
                             return `<div class="btn-group" role="group">
-                           <button id="commandbtngroup" type="button"  class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           <i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
-                           </button>
-                           <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
-                               <button class="dropdown-item" onclick="onEdit(${index})" ><i class="fal fa-edit mr-1"></i> @_localizer["Edit"]</button>
-                               <button class="dropdown-item" onclick="onDelete('${row.Id}')"><i class="fal fa-trash-alt mr-1"></i> @_localizer["Delete"]</button>
-                           </div>
-                       </div>
-                        `;
+                                      <button id="commandbtngroup" type="button" @(_canEdit.Succeeded? "":"disabled")  class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
+                                     </button>
+                                     <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
+                                       <button class="dropdown-item" onclick="onEdit(${index})" @(_canEdit.Succeeded? "":"disabled")><i class="fal fa-edit mr-1"></i> @_localizer["Edit"]</button>
+                                       <button class="dropdown-item" onclick="onDelete('${row.Id}')" @(_canDelete.Succeeded? "":"disabled") ><i class="fal fa-trash-alt mr-1"></i> @_localizer["Delete"]</button>
+                                     </div>
+                                  </div>`;
                         }
                     },
                     { field: 'Title', title: '@_localizer["Title"]', sortable: true, width: 180 },
