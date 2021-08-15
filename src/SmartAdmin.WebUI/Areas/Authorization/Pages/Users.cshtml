@@ -225,6 +225,45 @@
         </div>
     </div>
 </div>
+<!--Manage roles-->
+<div class="modal fade" id="manageroles_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-right modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4">Manage Roles</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                </button>
+            </div>
+            <form id="manageroles_form" class="needs-validation" novalidate="novalidate">
+                <input type="hidden" asp-for="UserId" />
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div class="card mb-g">
+                        <div class="card-body p-3">
+                            <h5 class="frame-heading">@_localizer["Assign roles"]</h5>
+                            <div class="frame-wrap">
+                                <div class="demo">
+                                    @foreach (var role in Model.Roles)
+                                    {
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" value="@role" name="Roles" id="@role">
+                                            <label class="custom-control-label" for="@role">@role</label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
+                    <button type="submit" class="btn btn-primary">@_localizer["Update roles"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @await Component.InvokeAsync("ImportExcel", new
 {
     importUri = "/authorization/users?handler=Import",
@@ -317,6 +356,7 @@
                            </button>
                            <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
                                <button class="dropdown-item" onclick="onResetPassword(${index})"><i class="fal fa-key mr-1"></i> @_localizer["Reset Password"]</button>
+                               <button class="dropdown-item" onclick="onRoleManage(${index})"><i class="fal fa-users-medical mr-1"></i> @_localizer["Manage Roles"]</button>
                                <button class="dropdown-item" onclick="onEdit(${index})" ><i class="fal fa-edit mr-1"></i> @_localizer["Edit"]</button>
                                <button class="dropdown-item" onclick="onDelete('${row.Id}')"><i class="fal fa-trash-alt mr-1"></i> @_localizer["Delete"]</button>
                            </div>
@@ -548,6 +588,29 @@
 
 
         }
+        var onRoleManage = (index) => {
+            var user = $dg.datagrid('getRows')[index];
+            axios.get('/authorization/users?handler=AssignedRoles&id=' + user.Id).then(res => {
+                console.log(res);
+                var roles = res.data;
+                $("#manageroles_form input:checkbox").prop('checked', false);
+                roles.forEach(role => {
+                    $(`#manageroles_form #${role}`).prop('checked', true);
+                })
+                $('#manageroles_form #UserId').val(user.Id)
+                $('#manageroles_modal').modal('toggle');
+            })
+             .catch((error) => {
+                 var msg = error.response.data;
+                    bootbox.alert({
+                        size: "small",
+                        title: "@_localizer["Error"]",
+                        message: msg,
+                        callback: function () { /* your callback code */ }
+                    })
+                });
+
+        }
         $('#register_form :submit').click(function (e) {
             console.log('submmit')
             var form = document.querySelector('#register_form');
@@ -557,9 +620,16 @@
             } else {
                 var request = $('#register_form').serialize();
                 axios.post('/authorization/users?handler=Register', request).then(res => {
-                    toastr["info"]('@_localizer["Save Success"]');
-                    $('#register_modal').modal('toggle');
-                    reload();
+                    if (res.data.Succeeded) {
+                        toastr["info"]('@_localizer["Save Success"]');
+                        $('#register_modal').modal('toggle');
+                        reload();
+                    } else {
+                        res.data.Errors.forEach(error => {
+                            toastr["error"](error);
+                        })
+
+                    }
                 }).catch((error) => {
                     var msg = error.response.data;
                     bootbox.alert({
@@ -583,9 +653,16 @@
             } else {
                 var request = $('#edituser_form').serialize();
                 axios.post('/authorization/users?handler=Edit', request).then(res => {
-                    toastr["info"]('@_localizer["Save Success"]');
-                    $('#edituser_modal').modal('toggle');
-                    reload();
+                    if (res.data.Succeeded) {
+                        toastr["info"]('@_localizer["Save Success"]');
+                        $('#edituser_modal').modal('toggle');
+                        reload();
+                    } else {
+                        res.data.Errors.forEach(error => {
+                            toastr["error"](error);
+                        })
+
+                    }
                 }).catch((error) => {
                     var msg = error.response.data;
                     bootbox.alert({
@@ -611,6 +688,32 @@
                 axios.post('/authorization/users?handler=ResetPassword', request).then(res => {
                     toastr["info"]('@_localizer["Save Success"]');
                     $('#resetpassword_modal').modal('toggle');
+                    reload();
+                }).catch((error) => {
+                    var msg = error.response.data;
+                    bootbox.alert({
+                        size: "small",
+                        title: "@_localizer["Error"]",
+                        message: msg,
+                        callback: function () { /* your callback code */ }
+                    })
+
+                });
+            }
+            event.preventDefault();
+            event.stopPropagation();
+        })
+        $('#manageroles_form :submit').click(function (e) {
+            var form = document.querySelector('#manageroles_form');
+            $(form).find(":valid").parent().removeClass("was-validated");
+            if (form.checkValidity() === false) {
+                form.classList.add('was-validated');
+            } else {
+                var request = $('#manageroles_form').serialize();
+                console.log(request)
+                axios.post('/authorization/users?handler=AssignRoles', request).then(res => {
+                    toastr["info"]('@_localizer["Assign Success"]');
+                    $('#manageroles_modal').modal('toggle');
                     reload();
                 }).catch((error) => {
                     var msg = error.response.data;

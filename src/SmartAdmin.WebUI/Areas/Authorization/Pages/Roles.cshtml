@@ -1,55 +1,361 @@
 ﻿@page
 @model RoleModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<UserModel> _localizer
 @{
     ViewData["Title"] = "Role";
     ViewData["PageName"] = "authorization_roles";
     ViewData["Heading"] = "<i class='fal fa-shield-alt'></i> Authorization: <span class='fw-300'>Roles</span>";
     ViewData["Category1"] = "Authorization";
     ViewData["PageIcon"] = "fa-shield-alt";
+    ViewData["PreemptiveClass"] = "Default";
 }
 
 @section HeadBlock {
     <link rel="stylesheet" media="screen, print" href="~/css/datagrid/datatables/datatables.bundle.css">
     <link rel="stylesheet" media="screen, print" href="~/css/formplugins/select2/select2.bundle.css">
+    <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+    <style>
+
+        .role_dg_datagrid-cell-c1-_action {
+            overflow: visible !important
+        }
+    </style>
 }
 
-<div class="row">
-    <div class="col-xl-12">
-        <div id="panel-1" class="panel">
-            <div class="panel-container show">
-                <div class="panel-content">
-                    <table id="dt-list" class="table table-bordered table-hover table-striped w-100"></table>
+<div id="js-page-content-demopanels" class="card mb-g">
+    <div class="card-header bg-white d-flex align-items-center">
+        <h4 class="m-0">
+            @_localizer["Application Roles"]
+            <small>@_localizer["See all available options"]</small>
+        </h4>
+        <div class="ml-auto">
+            <button class="btn btn-sm btn-outline-primary " id="addbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
+                @_localizer["Add"]
+            </button>
+            <button class="btn btn-sm btn-outline-danger" disabled id="deletebutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
+                @_localizer["Delete"]
+            </button>
+            <button class="btn btn-sm btn-outline-primary " id="searchbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
+                @_localizer["Search"]
+            </button>
+            <div class="btn-group" role="group">
+                <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
+                    <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>   @_localizer["Import Excel"]
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="importbutton">
+                    <button id="gettemplatebutton" class="dropdown-item">@_localizer["Download Template"]</button>
                 </div>
+            </div>
+            <button class="btn btn-sm btn-outline-primary " id="exportbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                @_localizer["Export Excel"]
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table id="role_dg">
+                </table>
             </div>
         </div>
     </div>
 </div>
 
+<!--Edit a user-->
+<div class="modal fade" id="editrole_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@_localizer["Create a role"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                </button>
+            </div>
+            <form id="editrole_form" class="needs-validation" novalidate="novalidate">
+                <div class="modal-body">
+                    <input type="hidden" asp-for="Input.Id" />
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="col-xl-12 form-label">@_localizer["Name"]</label>
+                        <input type="text" asp-for="Input.Name" class="form-control" placeholder="Role name"  required="required"/>
+                        <span class="invalid-feedback" asp-validation-for="Input.Name">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xl-12 form-label"> @_localizer["Description"]</label>
+                        <input type="text" asp-for="Input.Description" class="form-control" placeholder="Description" />
+                        <span class="invalid-feedback" asp-validation-for="Input.Description">Sorry, you missed this one.</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
+                    <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@await Component.InvokeAsync("ImportExcel", new
+{
+    importUri = "/authorization/roles?handler=Import",
+    getTemplateUri = "/authorization/roles?handler=CreateTemplate",
+    onImportedSucceeded = "reload()"
+})
 @section ScriptsBlock {
-    <script src="~/js/datagrid/datatables/datatables.bundle.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+    <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
+    <script src="~/lib/axios/dist/axios.js"></script>
+    <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
     <script src="~/js/formplugins/select2/select2.bundle.js"></script>
     <script>
-        $(function () {
-            const endpoint = "/api/roles";
-            $('#dt-list').DataTableEdit({
-                ajax: endpoint,
-                columns: [
-                    { title: "Id", data: "Id", type: "readonly", visible: false, searchable: false },
-                    { title: "ConcurrencyStamp", data: "ConcurrencyStamp", type: "readonly", visible: false, searchable: false },
-                    { title: "Name", data: "Name", type: "text" },
-                    { title: "Description", data: "Description", type: "text" }
-                  
-                ],
-                onAddRow: function (table, rowdata, success, error) {
-                    $.ajax({ url: endpoint, type: 'POST', data: rowdata, success: success, error: error });
-                },
-                onDeleteRow: function (table, rowdata, success, error) {
-                    $.ajax({ url: endpoint, type: 'DELETE', data: rowdata, success: success, error: error });
-                },
-                onEditRow: function (table, rowdata, success, error) {
-                    $.ajax({ url: endpoint, type: 'PUT', data: rowdata, success: success, error: error });
-                }
-            });
+        $('#searchbutton').click(function () {
+            reload();
         });
+        $('#addbutton').click(function () {
+            popupmodal();
+        });
+        $('#deletebutton').click(function () {
+            onDeleteChecked();
+        });
+        $('#activebutton').click(function () {
+            onActiveChecked();
+        });
+        $('#exportbutton').click(function () {
+            onExport();
+        });
+        $('#importbutton').click(function () {
+            showImportModal();
+        });
+        $('#gettemplatebutton').click(function () {
+            onGetTemplate();
+        });
+        var reload = () => {
+            $dg.datagrid('load', '/authorization/roles?handler=Data');
+        }
+        var $dg = {};
+        var initdatagrid = () => {
+            $dg = $('#role_dg').datagrid({
+                height: (window.innerHeight-320),
+                method: 'GET',
+                rownumbers: false,
+                singleSelect: true,
+                selectOnCheck: false,
+                checkOnSelect: false,
+                pagination: true,
+                clientPaging: false,
+                remoteFilter: true,
+                sortName: 'Name',
+                sortOrder:'asc',
+                pageSize: 15,
+                pageList: [10, 15, 30, 50, 100, 1000],
+                onBeforeLoad: function () {
+                    $('#deletebutton').prop('disabled', true);
+                },
+                onCheckAll: function (rows) {
+                    const checked = $(this).datagrid('getChecked').length > 0;
+                    $('#deletebutton').prop('disabled', !checked);
+                },
+                onUncheckAll: function () {
+                    $('#deletebutton').prop('disabled', true);
+                },
+                onCheck: function () {
+                    $('#deletebutton').prop('disabled', false);
+                },
+                onUncheck: function () {
+                    const checked = $(this).datagrid('getChecked').length > 0;
+                    $('#deletebutton').prop('disabled', !checked);
+                },
+                columns: [[
+                    { field: 'ck', checkbox: true },
+                    {
+                        field: '_action',
+                        title: '@_localizer["Command"]',
+                        width: 100,
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            return `<div class="btn-group" role="group">
+                           <button id="commandbtngroup" type="button"  class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           <i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
+                           </button>
+                           <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
+                               <button class="dropdown-item" onclick="onPermission(${index})"><i class="fal fa-bolt mr-1"></i> @_localizer["Permission"]</button>
+                               <button class="dropdown-item" onclick="onEdit(${index})" ><i class="fal fa-edit mr-1"></i> @_localizer["Edit"]</button>
+                               <button class="dropdown-item" onclick="onDelete('${row.Id}')"><i class="fal fa-trash-alt mr-1"></i> @_localizer["Delete"]</button>
+                           </div>
+                       </div>
+                        `;
+                        }
+                    },
+                    { field: 'Name', title: '@_localizer["Name"]', sortable: true, width: 180 },
+                    { field: 'Description', title: '@_localizer["Description"]', sortable: true, width: 230 },
+                ]]
+            })
+                .datagrid('enableFilter', {})
+                .datagrid('load', '/authorization/roles?handler=Data');
+
+        }
+        var onEdit = (index) => {
+            var role = $dg.datagrid('getRows')[index];
+            popupmodal(role);
+        }
+        var onDelete = (id) => {
+            bootbox.confirm({
+                message: "@_localizer["Are you sure delete a role?"]",
+                buttons: {
+                    confirm: {
+                        label: '@_localizer["Yes"]',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: '@_localizer["No"]',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        axios.get('/authorization/roles?handler=Delete&id=' + id).then(res => {
+                            toastr["info"]('@_localizer["Delete Success"]');
+                            reload();
+                        })
+                            .catch((error) => {
+                                var msg = error.response.data;
+                                bootbox.alert({
+                                    size: "small",
+                                    title: "@_localizer["Error"]",
+                                    message: msg,
+                                    callback: function () { /* your callback code */ }
+                                })
+                            });
+                    }
+                }
+            })
+        }
+        var onDeleteChecked = () => {
+            var checkedId = $dg.datagrid('getChecked').map(x => x.Id);
+            if (checkedId.length > 0) {
+                bootbox.confirm({
+                    message: "@_localizer["Are you sure delete checked roles?"]",
+                    buttons: {
+                        confirm: {
+                            label: '@_localizer["Yes"]',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: '@_localizer["No"]',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
+                            axios.get('/authorization/roles?handler=DeleteChecked&' + paras.toString()).then(res => {
+                                toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
+                                reload();
+                            })
+                                .catch((error) => {
+                                    var msg = error.response.data;
+                                    bootbox.alert({
+                                        size: "small",
+                                        title: "@_localizer["Error"]",
+                                        message: msg,
+                                        callback: function () { /* your callback code */ }
+                                    })
+                                });
+                        }
+                    }
+                });
+
+            }
+        }
+        var onExport = () => {
+            var options = $dg.datagrid('options');
+            var data = {
+                filterRules: JSON.stringify(options.filterRules),
+                sort: options.sortName,
+                order: options.sortOrder,
+            }
+            var headers = {
+                "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+            }
+            axios.post('/authorization/roles?handler=Export',
+                data,
+                {
+                    headers: headers,
+                    responseType: "blob"
+                })
+                .then(response => {
+                    const filename = getFileName(response.headers['content-disposition']);
+                    const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', filename);
+                    document.body.appendChild(link);
+                    link.click();
+                }).catch(error => {
+                    console.log(error)
+                })
+
+
+        }
+        var onPermission = (index) => {
+            var role = $dg.datagrid('getRows')[index];
+        }
+        var popupmodal = (role) => {
+            $('#editrole_modal').modal('toggle');
+            $('#editrole_form')[0].reset();
+            $('#editrole_modal .modal-title').html('@_localizer["Create a role"]');
+            if (role) {
+                $('#customer_modal .modal-title').html('@_localizer["Edit role"]');
+                $('#editrole_form').jsonToForm(role)
+            } else {
+                $('#editrole_form #Input_Id').val(0)
+
+            }
+
+        }
+        $('#editrole_form :submit').click(function (e) {
+            var form = document.querySelector('#editrole_form');
+            $(form).find(":valid").parent().removeClass("was-validated");
+            if (form.checkValidity() === false) {
+                form.classList.add('was-validated');
+            } else {
+                var request = $('#editrole_form').serialize();
+                axios.post('/authorization/roles', request).then(res => {
+                    if (res.data.Succeeded) {
+                        toastr["info"]('@_localizer["Save Success"]');
+                        $('#editrole_modal').modal('toggle');
+                        reload();
+                    } else {
+                        res.data.Errors.forEach(error => {
+                            toastr["error"](error);
+                        })
+
+                    }
+                }).catch((error) => {
+                    var msg = error.response.data;
+                    bootbox.alert({
+                        size: "small",
+                        title: "@_localizer["Error"]",
+                        message: msg,
+                        callback: function () { /* your callback code */ }
+                    })
+
+                });
+            }
+            event.preventDefault();
+            event.stopPropagation();
+        })
+        $(() => {
+            initdatagrid();
+        })
     </script>
 }

@@ -33,18 +33,27 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
         public ResetPasswordModel ResetFormModel { get; set; } = new();
         [BindProperty]
         public IFormFile UploadedFile { get; set; }
+        [BindProperty]
+        public string[] Roles { get; set; }
+        [BindProperty]
+        public string UserId { get; set; }
+
+        private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
         private readonly IExcelService _excelService;
         private readonly IStringLocalizer<UserModel> _localizer;
 
+
         public UserModel(
+            RoleManager<ApplicationRole> roleManager,
             UserManager<ApplicationUser> userManager,
             IMapper mapper,
             IExcelService excelService,
             IStringLocalizer<UserModel> localizer
             )
         {
+            _roleManager = roleManager;
             _userManager = userManager;
             _mapper = mapper;
             _excelService = excelService;
@@ -53,7 +62,7 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
 
         public async Task OnGetAsync()
         {
-
+           Roles = await _roleManager.Roles.Select(x => x.Name).ToArrayAsync();
         }
         public async Task<IActionResult> OnGetDataAsync(int page=1,int rows=15,string sort="UserName",string order="asc",string filterRules="") {
             var filters = PredicateBuilder.FromFilter<ApplicationUser>(filterRules);
@@ -193,11 +202,15 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
                             Email = item.Email,
                             PhoneNumber = item.PhoneNumber
                         };
-                        var iresult = await _userManager.CreateAsync(user, item.Password);
-                        if (iresult.Succeeded == false)
+                        if((await _userManager.FindByNameAsync(user.UserName)) is null)
                         {
-                            return new JsonResult(Result.FailureAsync(iresult.Errors.Select(x=>x.Description)));
+                            var iresult = await _userManager.CreateAsync(user, item.Password);
+                            if (iresult.Succeeded == false)
+                            {
+                                return new JsonResult(Result.FailureAsync(iresult.Errors.Select(x => x.Description)));
+                            }
                         }
+                        
                     }
                 }
                 return new JsonResult(Result.Success());
@@ -205,6 +218,21 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
             {
                 return new JsonResult(Result.Failure(new string[]{ e.Message}));
             }
+        }
+
+        public async Task<IActionResult> OnGetAssignedRolesAsync(string id)
+        {
+            var user=await _userManager.FindByIdAsync(id);
+            var roles=await _userManager.GetRolesAsync(user);
+            return new JsonResult(roles);
+        }
+        public async Task<IActionResult> OnPostAssignRolesAsync()
+        {
+            var user = await _userManager.FindByIdAsync(this.UserId);
+            var roles = await _userManager.GetRolesAsync(user);
+            await _userManager.RemoveFromRolesAsync(user, roles);
+            var result = await _userManager.AddToRolesAsync(user, Roles);
+            return new JsonResult(result.ToApplicationResult());
         }
         public class RegisterModel
         {
