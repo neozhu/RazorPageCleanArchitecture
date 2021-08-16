@@ -377,12 +377,12 @@
         var onPermission = (index) => {
             var role = $dg.datagrid('getRows')[index];
             axios.get('/authorization/roles?handler=AssignedPermissions&id=' + role.Id).then(res => {
-                console.log(res);
+                //console.log(res);
                 var permissions = res.data;
                 $("#managepermissions_form input:checkbox").prop('checked', false);
                 permissions.forEach(permission => {
-                    console.log(`#managepermissions_form #${permission.replace('.', '_').replace('.', '_')}`)
-                    $(`#managepermissions_form #${permission.replace('.', '_').replace('.', '_')}`).prop('checked', true);
+                    //console.log(`#managepermissions_form #${permission.replace(/\./g, '_')}`)
+                    $(`#managepermissions_form #${permission.replace(/\./g, '_')}`).prop('checked', true);
                 })
                 $('#managepermissions_form #RoleId').val(role.Id)
                 $('#managepermissions_modal').modal('toggle');
