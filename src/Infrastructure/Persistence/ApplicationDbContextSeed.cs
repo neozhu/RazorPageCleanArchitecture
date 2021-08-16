@@ -82,6 +82,11 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
                 context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Status", Value = "finished", Text = "finished", Description = "Status of workflow"  });
                 await context.SaveChangesAsync();
             }
+            if (!context.Customers.Any())
+            {
+                context.Customers.Add(new Domain.Entities.Customer() { Name = "SmartAdmin", AddressOfEnglish= "https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0", GroupName= "SmartAdmin", Address= "https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0", Sales= "GotBootstrap",RegionSalesDirector= "GotBootstrap",Region= "all over the world", NameOfEnglish="SmartAdmin", PartnerType= Domain.Enums.PartnerType.TP,Contract= "GotBootstrap", Email= "drlantern@gotbootstrap.com" });
+                await context.SaveChangesAsync();
+            }
         }
     }
 }

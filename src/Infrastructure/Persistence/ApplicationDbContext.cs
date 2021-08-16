@@ -54,6 +54,15 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
                         entry.Entity.LastModifiedBy = _currentUserService.UserId;
                         entry.Entity.LastModified = _dateTime.Now;
                         break;
+                    case EntityState.Deleted:
+                        if (entry.Entity is ISoftDelete softDelete)
+                        {
+                            softDelete.DeletedBy = _currentUserService.UserId;
+                            softDelete.Deleted = _dateTime.Now;
+
+                            entry.State = EntityState.Modified;
+                        }
+                        break;
                 }
             }
 

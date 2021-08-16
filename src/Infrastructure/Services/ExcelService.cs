@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Localization;
@@ -9,10 +8,6 @@ using System.Data;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using ClosedXML.Excel;
 using CleanArchitecture.Razor.Application.Common.Models;
-using Microsoft.AspNetCore.Mvc;
-using DocumentFormat.OpenXml.Spreadsheet;
-using System.Collections;
-using DocumentFormat.OpenXml.Packaging;
 
 namespace CleanArchitecture.Razor.Infrastructure.Services
 {

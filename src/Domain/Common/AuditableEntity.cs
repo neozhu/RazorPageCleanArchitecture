@@ -15,4 +15,16 @@ namespace CleanArchitecture.Razor.Domain.Common
 
         public string LastModifiedBy { get; set; }
     }
+
+    public interface ISoftDelete
+    {
+        DateTime? Deleted { get; set; }
+        string DeletedBy { get; set; }
+    }
+    public class AuditableSoftDeleteEntity : AuditableEntity,  ISoftDelete
+    {
+        public DateTime? Deleted { get;set; }
+        public string DeletedBy { get; set; }
+        
+    }
 }

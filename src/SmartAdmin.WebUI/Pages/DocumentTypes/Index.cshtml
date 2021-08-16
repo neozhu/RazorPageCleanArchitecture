@@ -227,7 +227,8 @@
                         title: '@_localizer["Command"]',
                         width: 100,
                         align: 'center',
-                        return `<div class="btn-group" role="group">
+                        formatter: function (value, row, index) {
+                            return `<div class="btn-group" role="group">
                                       <button id="commandbtngroup" type="button" @(_canEdit.Succeeded? "":"disabled")  class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
                                      </button>
