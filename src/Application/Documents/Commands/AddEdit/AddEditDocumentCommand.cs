@@ -22,7 +22,7 @@ namespace CleanArchitecture.Razor.Application.Documents.Commands.AddEdit
 {
     public class AddEditDocumentCommand: DocumentDto,IRequest<Result>, IMapFrom<Document>
     {
-
+        public UploadRequest UploadRequest { get; set; }
     }
 
     public class AddEditDocumentCommandHandler : IRequestHandler<AddEditDocumentCommand, Result>

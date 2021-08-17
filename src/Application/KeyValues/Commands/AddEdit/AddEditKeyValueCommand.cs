@@ -7,6 +7,7 @@ using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using CleanArchitecture.Razor.Application.Common.Models;
+using CleanArchitecture.Razor.Application.KeyValues.DTOs;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Enums;
 using CleanArchitecture.Razor.Domain.Events;
@@ -14,18 +15,10 @@ using MediatR;
 
 namespace CleanArchitecture.Razor.Application.KeyValues.Commands.AddEdit
 {
-    public class AddEditKeyValueCommand:IRequest<Result>, IMapFrom<KeyValue>
+    public class AddEditKeyValueCommand:KeyValueDto,IRequest<Result>, IMapFrom<KeyValue>
     {
-        public void Mapping(Profile profile)
-        {
-            profile.CreateMap<KeyValue, AddEditKeyValueCommand>().ReverseMap();
-    
-        }
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Value { get; set; }
-        public string Text { get; set; }
-        public string Description { get; set; }
+       
+         
     }
 
     public class AddEditKeyValueCommandHandler : IRequestHandler<AddEditKeyValueCommand, Result>

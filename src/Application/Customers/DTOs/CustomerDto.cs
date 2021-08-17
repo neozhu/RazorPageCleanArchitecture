@@ -11,7 +11,7 @@ namespace CleanArchitecture.Razor.Application.Customers.DTOs
     {
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Customer, Customer>().ReverseMap();
+            profile.CreateMap< Customer, CustomerDto>().ReverseMap();
 
         }
         public int Id { get; set; }
