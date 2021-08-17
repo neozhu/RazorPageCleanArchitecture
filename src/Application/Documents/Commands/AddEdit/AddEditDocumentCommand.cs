@@ -11,6 +11,7 @@ using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using CleanArchitecture.Razor.Application.Common.Models;
+using CleanArchitecture.Razor.Application.Documents.DTOs;
 using CleanArchitecture.Razor.Application.Models;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Enums;
@@ -19,20 +20,9 @@ using MediatR;
 
 namespace CleanArchitecture.Razor.Application.Documents.Commands.AddEdit
 {
-    public class AddEditDocumentCommand:IRequest<Result>, IMapFrom<Document>
+    public class AddEditDocumentCommand: DocumentDto,IRequest<Result>, IMapFrom<Document>
     {
-        public void Mapping(Profile profile)
-        {
-            profile.CreateMap<Document, AddEditDocumentCommand>().ReverseMap();
-    
-        }
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public bool IsPublic { get; set; } = false;
-        public string URL { get; set; }
-        public int DocumentTypeId { get; set; }
-        public UploadRequest UploadRequest { get; set; }
+
     }
 
     public class AddEditDocumentCommandHandler : IRequestHandler<AddEditDocumentCommand, Result>

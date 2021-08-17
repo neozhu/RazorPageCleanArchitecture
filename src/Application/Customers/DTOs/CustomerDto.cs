@@ -1,6 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using CleanArchitecture.Razor.Domain.Entities;
 
@@ -8,6 +9,11 @@ namespace CleanArchitecture.Razor.Application.Customers.DTOs
 {
     public partial class CustomerDto:IMapFrom<Customer>
     {
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<Customer, Customer>().ReverseMap();
+
+        }
         public int Id { get; set; }
         public string Name { get; set; }
         public string NameOfEnglish { get; set; }

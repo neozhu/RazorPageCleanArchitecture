@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Enums;
@@ -14,6 +15,11 @@ namespace CleanArchitecture.Razor.Application.DocumentTypes.DTOs
 {
     public partial class DocumentTypeDto : IMapFrom<DocumentType>
     {
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<DocumentType, DocumentTypeDto>().ReverseMap();
+
+        }
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
