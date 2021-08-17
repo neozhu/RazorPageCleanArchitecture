@@ -9,7 +9,6 @@ using CleanArchitecture.Razor.Application.Common.Mappings;
 using CleanArchitecture.Razor.Application.Common.Models;
 using CleanArchitecture.Razor.Application.Customers.DTOs;
 using CleanArchitecture.Razor.Domain.Entities;
-using CleanArchitecture.Razor.Domain.Enums;
 using CleanArchitecture.Razor.Domain.Events;
 using MediatR;
 
@@ -35,7 +34,6 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.AddEdit
         }
         public async Task<Result> Handle(AddEditCustomerCommand request, CancellationToken cancellationToken)
         {
-
            
             if (request.Id > 0)
             {
