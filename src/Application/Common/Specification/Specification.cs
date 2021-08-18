@@ -13,7 +13,7 @@ using CleanArchitecture.Razor.Domain.Common;
 
 namespace CleanArchitecture.Razor.Application.Common.Specification
 {
-    public abstract class QuerySpecification<T> : ISpecification<T> where T : class, IEntity
+    public abstract class Specification<T> : ISpecification<T> where T : class, IEntity
     {
         public Expression<Func<T, bool>> Criteria { get; set; }
         public List<Expression<Func<T, object>>> Includes { get; } = new();

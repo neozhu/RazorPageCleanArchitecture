@@ -20,7 +20,7 @@ using CleanArchitecture.Razor.Application.Common.Specification;
 
 namespace CleanArchitecture.Razor.Application.Customers.Queries.PaginationQuery
 {
-    public class ByMeCustomersQuery : IRequest<PaginatedData<CustomerDto>>
+    public class CustomersByMeQueryQuery : IRequest<PaginatedData<CustomerDto>>
     {
         public string UserId { get; set; }
         public string filterRules { get; set; }
@@ -30,7 +30,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Queries.PaginationQuery
         public string order { get; set; } = "desc";
         
     }
-    public class ByMeCustomersQueryHandler : IRequestHandler<ByMeCustomersQuery, PaginatedData<CustomerDto>>
+    public class ByMeCustomersQueryHandler : IRequestHandler<CustomersByMeQueryQuery, PaginatedData<CustomerDto>>
     {
 
         private readonly IApplicationDbContext _context;
@@ -46,10 +46,10 @@ namespace CleanArchitecture.Razor.Application.Customers.Queries.PaginationQuery
             _context = context;
             _mapper = mapper;
         }
-        public async Task<PaginatedData<CustomerDto>> Handle(ByMeCustomersQuery request, CancellationToken cancellationToken)
+        public async Task<PaginatedData<CustomerDto>> Handle(CustomersByMeQueryQuery request, CancellationToken cancellationToken)
         {
             var filters = PredicateBuilder.FromFilter<Customer>(request.filterRules);
-            var data = await _context.Customers.Specify(new CustomerByMeQuerySpecification(request.UserId))
+            var data = await _context.Customers.Specify(new CustomerByMeQuerySpec(request.UserId))
                 .Where(filters)
                 .OrderBy($"{request.sort} {request.order}")
                 .ProjectTo<CustomerDto>(_mapper.ConfigurationProvider)
@@ -58,9 +58,9 @@ namespace CleanArchitecture.Razor.Application.Customers.Queries.PaginationQuery
             return data;
         }
 
-        public class CustomerByMeQuerySpecification : QuerySpecification<Customer>
+        public class CustomerByMeQuerySpec : Specification<Customer>
         {
-            public CustomerByMeQuerySpecification(string userId)
+            public CustomerByMeQuerySpec(string userId)
             {
                 Criteria = p => p.CreatedBy == userId;
             }

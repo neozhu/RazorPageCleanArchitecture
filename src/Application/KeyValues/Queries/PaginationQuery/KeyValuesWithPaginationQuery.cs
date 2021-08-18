@@ -17,13 +17,9 @@ using CleanArchitecture.Razor.Application.KeyValues.DTOs;
 
 namespace CleanArchitecture.Razor.Application.KeyValues.Queries.PaginationQuery
 {
-    public class KeyValuesWithPaginationQuery : IRequest<PaginatedData<KeyValueDto>>
+    public class KeyValuesWithPaginationQuery : PaginationRequest, IRequest<PaginatedData<KeyValueDto>>
     {
-        public string filterRules { get; set; }
-        public int page { get; set; } = 1;
-        public int rows { get; set; } = 15;
-        public string sort { get; set; } = "Id";
-        public string order { get; set; } = "desc";
+       
         
     }
     public class KeyValuesQueryHandler : IRequestHandler<KeyValuesWithPaginationQuery, PaginatedData<KeyValueDto>>
@@ -44,11 +40,11 @@ namespace CleanArchitecture.Razor.Application.KeyValues.Queries.PaginationQuery
         }
         public async Task<PaginatedData<KeyValueDto>> Handle(KeyValuesWithPaginationQuery request, CancellationToken cancellationToken)
         {
-            var filters = PredicateBuilder.FromFilter<KeyValue>(request.filterRules);
+            var filters = PredicateBuilder.FromFilter<KeyValue>(request.FilterRules);
             var data = await _context.KeyValues.Where(filters)
-                .OrderBy($"{request.sort} {request.order}")
+                .OrderBy($"{request.Sort} {request.Order}")
                 .ProjectTo<KeyValueDto>(_mapper.ConfigurationProvider)
-                .PaginatedDataAsync(request.page, request.rows);
+                .PaginatedDataAsync(request.Page, request.Rows);
 
             return data;
         }

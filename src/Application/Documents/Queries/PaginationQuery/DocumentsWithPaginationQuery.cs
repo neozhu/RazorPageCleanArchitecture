@@ -23,13 +23,9 @@ using CleanArchitecture.Razor.Application.Common.Specification;
 
 namespace CleanArchitecture.Razor.Application.Documents.Queries.PaginationQuery
 {
-    public class DocumentsWithPaginationQuery : IRequest<PaginatedData<DocumentDto>>
+    public class DocumentsWithPaginationQuery : PaginationRequest, IRequest<PaginatedData<DocumentDto>>
     {
-        public string filterRules { get; set; }
-        public int page { get; set; } = 1;
-        public int rows { get; set; } = 15;
-        public string sort { get; set; } = "Id";
-        public string order { get; set; } = "desc";
+       
         
     }
     public class DocumentsQueryHandler : IRequestHandler<DocumentsWithPaginationQuery, PaginatedData<DocumentDto>>
@@ -50,17 +46,18 @@ namespace CleanArchitecture.Razor.Application.Documents.Queries.PaginationQuery
         }
         public async Task<PaginatedData<DocumentDto>> Handle(DocumentsWithPaginationQuery request, CancellationToken cancellationToken)
         {
-            var filters = PredicateBuilder.FromFilter<Document>(request.filterRules);
-            var data = await _context.Documents.Specify(new DocumentsQuery(_currentUserService.UserId))
+            var filters = PredicateBuilder.FromFilter<Document>(request.FilterRules);
+            var data = await _context.Documents
+                .Specify(new DocumentsQuery(_currentUserService.UserId))
                 .Where(filters)
-                .OrderBy($"{request.sort} {request.order}")
+                .OrderBy($"{request.Sort} {request.Order}")
                 .ProjectTo<DocumentDto>(_mapper.ConfigurationProvider)
-                .PaginatedDataAsync(request.page, request.rows);
+                .PaginatedDataAsync(request.Page, request.Rows);
 
             return data;
         }
 
-        internal class DocumentsQuery: QuerySpecification<Document>
+        internal class DocumentsQuery:Specification<Document>
         {
             public DocumentsQuery(string userId)
             {

@@ -22,13 +22,9 @@ using CleanArchitecture.Razor.Application.DocumentTypes.DTOs;
 
 namespace CleanArchitecture.Razor.Application.DocumentTypes.Queries.PaginationQuery
 {
-    public class DocumentTypesWithPaginationQuery : IRequest<PaginatedData<DocumentTypeDto>>
+    public class DocumentTypesWithPaginationQuery : PaginationRequest, IRequest<PaginatedData<DocumentTypeDto>>
     {
-        public string filterRules { get; set; }
-        public int page { get; set; } = 1;
-        public int rows { get; set; } = 15;
-        public string sort { get; set; } = "Id";
-        public string order { get; set; } = "desc";
+        
         
     }
     public class DocumentTypesQueryHandler : IRequestHandler<DocumentTypesWithPaginationQuery, PaginatedData<DocumentTypeDto>>
@@ -49,11 +45,11 @@ namespace CleanArchitecture.Razor.Application.DocumentTypes.Queries.PaginationQu
         }
         public async Task<PaginatedData<DocumentTypeDto>> Handle(DocumentTypesWithPaginationQuery request, CancellationToken cancellationToken)
         {
-            var filters = PredicateBuilder.FromFilter<DocumentType>(request.filterRules);
+            var filters = PredicateBuilder.FromFilter<DocumentType>(request.FilterRules);
             var data = await _context.DocumentTypes.Where(filters)
-                .OrderBy($"{request.sort} {request.order}")
+                .OrderBy($"{request.Sort} {request.Order}")
                 .ProjectTo<DocumentTypeDto>(_mapper.ConfigurationProvider)
-                .PaginatedDataAsync(request.page, request.rows);
+                .PaginatedDataAsync(request.Page, request.Rows);
 
             return data;
         }

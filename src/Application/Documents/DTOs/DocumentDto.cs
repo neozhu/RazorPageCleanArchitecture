@@ -17,7 +17,7 @@ namespace CleanArchitecture.Razor.Application.Documents.DTOs
     {
         public void Mapping(Profile profile)
         {
-            profile.CreateMap< Document, DocumentDto>().ReverseMap();
+            profile.CreateMap<Document, DocumentDto>().ReverseMap();
 
         }
         public int Id { get; set; }
