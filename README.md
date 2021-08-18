@@ -28,6 +28,10 @@ This is a solution template for creating a Razor Page App with ASP.NET Core foll
 * [NUnit](https://nunit.org/), [FluentAssertions](https://fluentassertions.com/), [Moq](https://github.com/moq) & [Respawn](https://github.com/jbogard/Respawn)
 * [Docker](https://www.docker.com/)
 
+## Code Generator tools
+[![How to](https://i9.ytimg.com/vi/Hp6cjdfgMT8/mq2.jpg?sqp=CNSu8ogG&rs=AOn4CLDcYRu3HEChyr5fZu3wAL2_n_50Ag)](https://www.youtube.com/watch?v=Hp6cjdfgMT8)
+
+Github Sourcecode: https://github.com/neozhu/CleanArchitectureCodeGenerator
 ## Getting Started
 
 The easiest way to get started is to install the [NuGet package](https://www.nuget.org/packages/Clean.Architecture.Solution.Template) and run `dotnet new ca-sln`:
