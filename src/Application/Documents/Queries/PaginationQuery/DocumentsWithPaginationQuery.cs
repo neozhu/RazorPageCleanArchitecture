@@ -50,6 +50,7 @@ namespace CleanArchitecture.Razor.Application.Documents.Queries.PaginationQuery
             var data = await _context.Documents
                 .Specify(new DocumentsQuery(_currentUserService.UserId))
                 .Where(filters)
+                .Include(x=>x.DocumentType)
                 .OrderBy($"{request.Sort} {request.Order}")
                 .ProjectTo<DocumentDto>(_mapper.ConfigurationProvider)
                 .PaginatedDataAsync(request.Page, request.Rows);
@@ -61,7 +62,7 @@ namespace CleanArchitecture.Razor.Application.Documents.Queries.PaginationQuery
         {
             public DocumentsQuery(string userId)
             {
-
+                this.AddInclude(x => x.DocumentType);
                 this.Criteria = p => (p.CreatedBy == userId && p.IsPublic == false) || p.IsPublic == true;
             }
         }
