@@ -47,10 +47,10 @@ namespace CleanArchitecture.Razor.Application.Documents.Queries.PaginationQuery
         public async Task<PaginatedData<DocumentDto>> Handle(DocumentsWithPaginationQuery request, CancellationToken cancellationToken)
         {
             var filters = PredicateBuilder.FromFilter<Document>(request.FilterRules);
+  
             var data = await _context.Documents
                 .Specify(new DocumentsQuery(_currentUserService.UserId))
                 .Where(filters)
-                .Include(x=>x.DocumentType)
                 .OrderBy($"{request.Sort} {request.Order}")
                 .ProjectTo<DocumentDto>(_mapper.ConfigurationProvider)
                 .PaginatedDataAsync(request.Page, request.Rows);
