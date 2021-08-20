@@ -59,7 +59,6 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
                         {
                             softDelete.DeletedBy = _currentUserService.UserId;
                             softDelete.Deleted = _dateTime.Now;
-
                             entry.State = EntityState.Modified;
                         }
                         break;
