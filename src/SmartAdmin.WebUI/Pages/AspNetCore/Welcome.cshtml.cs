@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitecture.Razor.Application.Common.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -26,6 +27,7 @@ namespace SmartAdmin.WebUI.Pages.AspNetCore
 
         public void OnGet()
         {
+            _logger.LogInformation("new163@163.com".ToMD5());
             _logger.LogInformation("Welcome.");
             _diagnosticContext.Set("IndexCallCount", Interlocked.Increment(ref _callCount));
         }

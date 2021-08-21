@@ -31,6 +31,7 @@
   <ItemGroup>
     <Folder Include="Documents\Commands\Import\" />
     <Folder Include="Features\" />
+    <Folder Include="Features\" />
   </ItemGroup>
 
 </Project>
