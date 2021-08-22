@@ -83,7 +83,7 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
                 UserName = RegisterFormModel.UserName,
                 Email = RegisterFormModel.Email,
                 PhoneNumber = RegisterFormModel.PhoneNumber,
-                ProfilePictureDataUrl = $"https://www.gravatar.com/avatar/{ RegisterFormModel.Email.ToMD5() }?s=200&d=retro"
+                ProfilePictureDataUrl = $"https://www.gravatar.com/avatar/{ RegisterFormModel.Email.ToMD5() }?s=120&d=retro"
             };
             var result = await _userManager.CreateAsync(user, RegisterFormModel.Password);
             return new JsonResult(result.ToApplicationResult());

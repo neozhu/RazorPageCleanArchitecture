@@ -235,3 +235,5 @@ _Pvt_Extensions
 /NDependOut
 /CleanArchitecture.ndproj
 /.mfractor
+**/Files/*
+**/logs/*

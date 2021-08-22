@@ -28,5 +28,9 @@ namespace SmartAdmin.WebUI.Extensions
              => claimsPrincipal.FindFirstValue(ClaimTypes.GivenName);
         public static string GetProfilePictureDataUrl(this ClaimsPrincipal claimsPrincipal)
             => claimsPrincipal.FindFirstValue(ApplicationClaimTypes.ProfilePictureDataUrl);
+        
+
+        public static string[] GetRoles(this ClaimsPrincipal claimsPrincipal)
+            => claimsPrincipal.Claims.Where(x => x.Type == ClaimTypes.Role).Select(x => x.Value).ToArray();
     }
 }

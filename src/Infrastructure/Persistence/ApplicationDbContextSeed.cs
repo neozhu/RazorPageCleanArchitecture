@@ -29,8 +29,8 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
                 }
             }
 
-            var administrator = new ApplicationUser { UserName = "administrator" , IsActive=true,Site="Razor",DisplayName="Administrator", Email = "new163@163.com" , EmailConfirmed=true, ProfilePictureDataUrl=$"https://www.gravatar.com/avatar/{"new163@163.com".ToMD5()}?s=200&d=retro" };
-            var demo = new ApplicationUser { UserName = "Demo", IsActive = true, Site = "Razor", DisplayName = "Demo", Email = "neozhu@126.com", EmailConfirmed = true, ProfilePictureDataUrl = $"https://www.gravatar.com/avatar/{"neozhu@126.com".ToMD5()}?s=200&d=retro" };
+            var administrator = new ApplicationUser { UserName = "administrator" , IsActive=true,Site="Razor",DisplayName="Administrator", Email = "new163@163.com" , EmailConfirmed=true, ProfilePictureDataUrl=$"https://www.gravatar.com/avatar/{"new163@163.com".ToMD5()}?s=120&d=retro" };
+            var demo = new ApplicationUser { UserName = "Demo", IsActive = true, Site = "Razor", DisplayName = "Demo", Email = "neozhu@126.com", EmailConfirmed = true, ProfilePictureDataUrl = $"https://www.gravatar.com/avatar/{"neozhu@126.com".ToMD5()}?s=120&d=retro" };
 
             if (userManager.Users.All(u => u.UserName != administrator.UserName))
             {

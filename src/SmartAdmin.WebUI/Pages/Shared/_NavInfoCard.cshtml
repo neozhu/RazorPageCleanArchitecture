@@ -21,7 +21,7 @@ else
     <div class="info-card">
         <img src="@(User.GetProfilePictureDataUrl())" class="profile-image rounded-circle" alt="@(User.Identity.Name)">
         <div class="info-card-text">
-            <a href="#" class="d-flex align-items-center text-white">
+            <a href="/authorization/profile" class="d-flex align-items-center text-white">
                 <span class="text-truncate text-truncate-sm d-inline-block">
                     @(User.GetDisplayName())
                 </span>

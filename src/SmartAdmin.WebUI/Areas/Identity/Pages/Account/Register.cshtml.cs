@@ -46,7 +46,7 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
             DisplayName=Input.DisplayName,
             UserName = Input.UserName,
             Email = Input.Email,
-            ProfilePictureDataUrl = $"https://www.gravatar.com/avatar/{ Input.Email.ToMD5() }?s=200&d=retro"
+            ProfilePictureDataUrl = $"https://www.gravatar.com/avatar/{ Input.Email.ToMD5() }?s=120&d=retro"
         };
         var result = await _userManager.CreateAsync(user, Input.Password);
         if (result.Succeeded)

@@ -12,12 +12,14 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
 using SmartAdmin.WebUI.Models;
 using SmartAdmin.WebUI.Services;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using static IdentityModel.ClaimComparer;
@@ -99,6 +101,11 @@ namespace SmartAdmin.WebUI
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Files")),
+                RequestPath = new PathString("/Files")
+            });
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
