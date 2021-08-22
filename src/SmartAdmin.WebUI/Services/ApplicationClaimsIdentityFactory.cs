@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CleanArchitecture.Razor.Infrastructure.Constants.ClaimTypes;
+using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -31,6 +33,12 @@ namespace SmartAdmin.WebUI.Services
             {
                 ((ClaimsIdentity)principal.Identity).AddClaims(new[] {
                 new Claim(ClaimTypes.Locality, user.Site)
+            });
+            }
+            if (!string.IsNullOrEmpty(user.ProfilePictureDataUrl))
+            {
+                ((ClaimsIdentity)principal.Identity).AddClaims(new[] {
+                new Claim(ApplicationClaimTypes.ProfilePictureDataUrl, user.ProfilePictureDataUrl)
             });
             }
             if (!string.IsNullOrEmpty(user.DisplayName))

@@ -1,11 +1,11 @@
-<div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
+﻿<div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
 	<div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
 		<span class="mr-2">
-			<img src="~/img/demo/avatars/@(Settings.Theme.Avatar)" class="rounded-circle profile-image" alt="@(Settings.Theme.User)">
+			<img src="@(User.GetProfilePictureDataUrl())" class="rounded-circle profile-image" alt="@(User.GetDisplayName())">
 		</span>
 		<div class="info-card-text">
-			<div class="fs-lg text-truncate text-truncate-lg">@(Settings.Theme.User)</div>
-			<span class="text-truncate text-truncate-md opacity-80">@(Settings.Theme.Email)</span>
+			<div class="fs-lg text-truncate text-truncate-lg">@(User.GetDisplayName())</div>
+			<span class="text-truncate text-truncate-md opacity-80">@(User.GetEmail())</span>
 		</div>
 	</div>
 </div>
@@ -41,5 +41,5 @@
 <div class="dropdown-divider m-0"></div>
 <a class="dropdown-item fw-500 pt-3 pb-3" asp-area="Identity" asp-page="/account/logout">
 	<span data-i18n="drpdwn.page-logout">Logout</span> 
-	<span class="float-right fw-n">&commat;@(Settings.Theme.Twitter)</span>
+	<span class="float-right fw-n">@(User.Identity.Name)</span>
 </a>

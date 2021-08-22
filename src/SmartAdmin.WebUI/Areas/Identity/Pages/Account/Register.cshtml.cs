@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using CleanArchitecture.Razor.Application.Common.Extensions;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -39,7 +40,14 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
       returnUrl = returnUrl ?? Url.Content("~/");
       if (ModelState.IsValid)
       {
-        var user = new ApplicationUser { EmailConfirmed=true, IsActive=true, Site=Input.Site,DisplayName=Input.DisplayName, UserName = Input.UserName, Email = Input.Email };
+        var user = new ApplicationUser { EmailConfirmed=true,
+            IsActive=true,
+            Site=Input.Site,
+            DisplayName=Input.DisplayName,
+            UserName = Input.UserName,
+            Email = Input.Email,
+            ProfilePictureDataUrl = $"https://www.gravatar.com/avatar/{ Input.Email.ToMD5() }?s=200&d=retro"
+        };
         var result = await _userManager.CreateAsync(user, Input.Password);
         if (result.Succeeded)
         {

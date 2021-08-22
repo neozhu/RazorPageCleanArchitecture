@@ -1,4 +1,4 @@
-@page
+﻿@page
 @model LockedModel
 @{ 
 	ViewData["Title"] = "Login";
@@ -27,13 +27,13 @@
 				<div class="container py-4 py-lg-5 my-lg-5 px-4 px-sm-0 text-white d-flex align-items-center justify-content-center">
 					<form id="js-login" role="form" class="text-center text-white mb-5 pb-5" {{#if app-flavor-subscript}} action="intel_introduction.html" } else { } action="intel_analytics_dashboard.html">
 						<div class="py-3">
-							<img src="~/img/demo/avatars/avatar-admin-lg.png" class="img-responsive rounded-circle img-thumbnail" alt="thumbnail">
+							<img src="@(User.GetProfilePictureDataUrl())" class="img-responsive rounded-circle img-thumbnail" alt="thumbnail">
 						</div>
 						<div class="form-group">
 							<h3>
-								@(Settings.Theme.User)
+								@(User.GetDisplayName())
 								<small>
-									@(Settings.Theme.Email)
+									@(User.GetEmail())
 								</small>
 							</h3>
 							<p class="text-white opacity-50">Enter password to unlock screen</p>
@@ -45,7 +45,7 @@
 							</div>
 						</div>
 						<div class="text-center">
-							<a href="/page/login-alt" class="text-white opacity-90">Not @(Settings.Theme.User) ?</a>
+							<a href="/page/login-alt" class="text-white opacity-90">Not @(User.GetDisplayName()) ?</a>
 						</div>
 					</form>
 					<div class="position-absolute pos-bottom pos-left pos-right p-3 text-center text-white">

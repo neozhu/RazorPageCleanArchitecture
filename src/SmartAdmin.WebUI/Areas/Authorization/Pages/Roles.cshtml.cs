@@ -23,6 +23,7 @@ using System.Net;
 using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 using System.ComponentModel;
 using System.Reflection;
+using CleanArchitecture.Razor.Infrastructure.Constants.ClaimTypes;
 
 namespace SmartAdmin.WebUI.Areas.Authorization.Pages
 {

@@ -1,0 +1,58 @@
+2021-08-22 08:36:43.952 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-08-22 08:36:44.010 +08:00 [INF] Hosting environment: Development
+2021-08-22 08:36:44.011 +08:00 [INF] Content root path: D:\github\RazorPageCleanArchitecture\src\SmartAdmin.WebUI
+2021-08-22 08:36:44.109 +08:00 [INF] ea753b0b0f357a41491408307ade445e
+2021-08-22 08:36:44.110 +08:00 [INF] Welcome.
+2021-08-22 08:36:47.998 +08:00 [INF] User logged out.
+2021-08-22 08:47:38.274 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-08-22 08:47:38.326 +08:00 [INF] Hosting environment: Development
+2021-08-22 08:47:38.326 +08:00 [INF] Content root path: D:\github\RazorPageCleanArchitecture\src\SmartAdmin.WebUI
+2021-08-22 08:47:38.408 +08:00 [INF] ea753b0b0f357a41491408307ade445e
+2021-08-22 08:47:38.409 +08:00 [INF] Welcome.
+2021-08-22 08:47:49.320 +08:00 [INF] User logged out.
+2021-08-22 08:51:24.481 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-08-22 08:51:24.545 +08:00 [INF] Hosting environment: Development
+2021-08-22 08:51:24.546 +08:00 [INF] Content root path: D:\github\RazorPageCleanArchitecture\src\SmartAdmin.WebUI
+2021-08-22 08:51:24.625 +08:00 [INF] ea753b0b0f357a41491408307ade445e
+2021-08-22 08:51:24.626 +08:00 [INF] Welcome.
+2021-08-22 08:51:43.546 +08:00 [INF] User logged out.
+2021-08-22 08:51:49.010 +08:00 [INF] User logged in.
+2021-08-22 08:51:49.018 +08:00 [INF] ea753b0b0f357a41491408307ade445e
+2021-08-22 08:51:49.018 +08:00 [INF] Welcome.
+2021-08-22 09:18:55.694 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-08-22 09:18:55.743 +08:00 [INF] Hosting environment: Development
+2021-08-22 09:18:55.744 +08:00 [INF] Content root path: D:\github\RazorPageCleanArchitecture\src\SmartAdmin.WebUI
+2021-08-22 09:18:55.836 +08:00 [INF] ea753b0b0f357a41491408307ade445e
+2021-08-22 09:18:55.837 +08:00 [INF] Welcome.
+2021-08-22 09:19:05.478 +08:00 [INF] User logged out.
+2021-08-22 09:19:11.057 +08:00 [INF] User logged in.
+2021-08-22 09:19:11.063 +08:00 [INF] ea753b0b0f357a41491408307ade445e
+2021-08-22 09:19:11.063 +08:00 [INF] Welcome.
+2021-08-22 09:25:04.428 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-08-22 09:25:04.479 +08:00 [INF] Hosting environment: Development
+2021-08-22 09:25:04.480 +08:00 [INF] Content root path: D:\github\RazorPageCleanArchitecture\src\SmartAdmin.WebUI
+2021-08-22 09:25:04.570 +08:00 [INF] ea753b0b0f357a41491408307ade445e
+2021-08-22 09:25:04.571 +08:00 [INF] Welcome.
+2021-08-22 09:26:29.010 +08:00 [INF] User logged out.
+2021-08-22 09:26:37.572 +08:00 [INF] User logged in.
+2021-08-22 09:26:37.577 +08:00 [INF] ea753b0b0f357a41491408307ade445e
+2021-08-22 09:26:37.578 +08:00 [INF] Welcome.
+2021-08-22 09:31:48.765 +08:00 [INF] User logged out.
+2021-08-22 09:32:02.706 +08:00 [INF] User logged in.
+2021-08-22 09:32:02.706 +08:00 [INF] User logged in.
+2021-08-22 09:32:02.711 +08:00 [INF] ea753b0b0f357a41491408307ade445e
+2021-08-22 09:32:02.711 +08:00 [INF] Welcome.
+2021-08-22 09:37:50.155 +08:00 [INF] ea753b0b0f357a41491408307ade445e
+2021-08-22 09:37:50.155 +08:00 [INF] Welcome.
+2021-08-22 09:39:15.692 +08:00 [INF] ea753b0b0f357a41491408307ade445e
+2021-08-22 09:39:15.692 +08:00 [INF] Welcome.
+2021-08-22 09:39:43.805 +08:00 [INF] ea753b0b0f357a41491408307ade445e
+2021-08-22 09:39:43.805 +08:00 [INF] Welcome.
+2021-08-22 09:40:04.452 +08:00 [INF] ea753b0b0f357a41491408307ade445e
+2021-08-22 09:40:04.452 +08:00 [INF] Welcome.
+2021-08-22 09:42:40.392 +08:00 [INF] ea753b0b0f357a41491408307ade445e
+2021-08-22 09:42:40.392 +08:00 [INF] Welcome.
+2021-08-22 09:42:59.687 +08:00 [INF] User logged out.
+2021-08-22 09:43:12.758 +08:00 [INF] User logged in.
+2021-08-22 09:43:12.763 +08:00 [INF] ea753b0b0f357a41491408307ade445e
+2021-08-22 09:43:12.763 +08:00 [INF] Welcome.
