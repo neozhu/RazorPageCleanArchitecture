@@ -103,6 +103,7 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
                 var result = await _userManager.ChangePasswordAsync(user, CurrentPassword, NewPassword);
                 if (result.Succeeded)
                 {
+                    await _signInManager.RefreshSignInAsync(user);
                     return RedirectToPage("./profile");
                 }
                 else
@@ -129,6 +130,7 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
                 var result = await _userManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {
+                    await _signInManager.RefreshSignInAsync(user);
                     return RedirectToPage("./profile");
                 }
                 else
