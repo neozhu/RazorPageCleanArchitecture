@@ -51,8 +51,8 @@
             text-align: center;
         }
 
-        img {
-            display: block !important;
+        #upload_avatar_image {
+            display: block ;
             /* This rule is very important, please don't ignore this */
             max-width: 100%;
         }
@@ -473,7 +473,7 @@
             $modal.on('shown.bs.modal', function () {
                 cropper = new Cropper(image, {
                     aspectRatio: 1,
-                    viewMode: 1,
+                    viewMode:1,
                     preview: '.img-preview',
                     width: 120,
                     height: 120,
