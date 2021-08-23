@@ -11,7 +11,7 @@
             <span class="d-inline-block text-truncate text-truncate-sm">Toronto, Canada</span>
         </div>
         <img src="~/img/card-backgrounds/cover-5-lg.png" class="cover" alt="cover">
-        <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
+        <a href="/authorization/profile" onclick="return false;" class="pull-trigger-btn" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
             <i class="@(Settings.Theme.IconPrefix) fa-angle-down"></i>
         </a>
     </div>
@@ -26,7 +26,7 @@ else
                     @(User.GetDisplayName())
                 </span>
             </a>
-            <span class="d-inline-block text-truncate text-truncate-sm">@(User.GetEmail())</span>
+            <span class="d-inline-block text-truncate text-truncate-sm">@(string.Join(",",User.GetRoles()))</span>
         </div>
         <img src="~/img/card-backgrounds/cover-5-lg.png" class="cover" alt="cover">
         <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">

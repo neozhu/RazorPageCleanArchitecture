@@ -57,6 +57,8 @@ namespace SmartAdmin.WebUI.Services
                 {
                     ((ClaimsIdentity)principal.Identity).AddClaim(claim);
                 }
+                ((ClaimsIdentity)principal.Identity).AddClaims(new[] {
+                new Claim(ClaimTypes.Role, rolename) });
 
             }
             return principal;

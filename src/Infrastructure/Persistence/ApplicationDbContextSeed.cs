@@ -15,8 +15,8 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
     {
         public static async Task SeedDefaultUserAsync(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
-            var administratorRole = new ApplicationRole("Administrator") { Description= "Administrator" };
-            var userRole = new ApplicationRole("Users") { Description = "Users" };
+            var administratorRole = new ApplicationRole("Admin") { Description= "Admin Group" };
+            var userRole = new ApplicationRole("Basic") { Description = "Basic Group" };
 
             if (roleManager.Roles.All(r => r.Name != administratorRole.Name))
             {
@@ -29,8 +29,8 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
                 }
             }
 
-            var administrator = new ApplicationUser { UserName = "administrator" , IsActive=true,Site="Razor",DisplayName="Administrator", Email = "new163@163.com" , EmailConfirmed=true, ProfilePictureDataUrl=$"https://www.gravatar.com/avatar/{"new163@163.com".ToMD5()}?s=120&d=retro" };
-            var demo = new ApplicationUser { UserName = "Demo", IsActive = true, Site = "Razor", DisplayName = "Demo", Email = "neozhu@126.com", EmailConfirmed = true, ProfilePictureDataUrl = $"https://www.gravatar.com/avatar/{"neozhu@126.com".ToMD5()}?s=120&d=retro" };
+            var administrator = new ApplicationUser { UserName = "administrator" , IsActive=true,Site="Razor",DisplayName="Administrator", Email = "new163@163.com" , EmailConfirmed=true, ProfilePictureDataUrl=$"https://cdn.v2ex.com/gravatar/{"new163@163.com".ToMD5()}?s=120&d=retro" };
+            var demo = new ApplicationUser { UserName = "Demo", IsActive = true, Site = "Razor", DisplayName = "Demo", Email = "neozhu@126.com", EmailConfirmed = true, ProfilePictureDataUrl = $"https://cdn.v2ex.com/gravatar/{"neozhu@126.com".ToMD5()}?s=120&d=retro" };
 
             if (userManager.Users.All(u => u.UserName != administrator.UserName))
             {
