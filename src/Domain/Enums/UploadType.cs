@@ -9,10 +9,8 @@ namespace CleanArchitecture.Razor.Domain.Enums
     {
         [Description(@"Products")]
         Product,
-
         [Description(@"ProfilePictures")]
         ProfilePicture,
-
         [Description(@"Documents")]
         Document
     }
