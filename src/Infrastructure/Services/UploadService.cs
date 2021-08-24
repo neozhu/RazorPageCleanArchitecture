@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.IO;
+using System.Threading.Tasks;
 using CleanArchitecture.Razor.Application.Common.Extensions;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Models;
@@ -10,7 +11,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Services
 {
     public class UploadService : IUploadService
     {
-        public string UploadAsync(UploadRequest request)
+        public async Task<string> UploadAsync(UploadRequest request)
         {
             if (request.Data == null) return string.Empty;
             var streamData = new MemoryStream(request.Data);
@@ -32,7 +33,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Services
                 }
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
-                    streamData.CopyTo(stream);
+                   await streamData.CopyToAsync(stream);
                 }
                 return dbPath;
             }

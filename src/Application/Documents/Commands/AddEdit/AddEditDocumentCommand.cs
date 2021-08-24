@@ -54,7 +54,7 @@ namespace CleanArchitecture.Razor.Application.Documents.Commands.AddEdit
             }
             else
             {
-                var result = _uploadService.UploadAsync(request.UploadRequest);
+                var result = await _uploadService.UploadAsync(request.UploadRequest);
                 var document = _mapper.Map<Document>(request);
                 document.URL = result;
                 _context.Documents.Add(document);

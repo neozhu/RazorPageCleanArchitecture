@@ -87,7 +87,7 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
                 FileName = Guid.NewGuid().ToString() + ".png",
                 UploadType = CleanArchitecture.Razor.Domain.Enums.UploadType.ProfilePicture
             };
-            var result = _uploadService.UploadAsync(uploadrequet);
+            var result =await  _uploadService.UploadAsync(uploadrequet);
             var user = await _userManager.FindByIdAsync(UserId);
             user.ProfilePictureDataUrl = result.Replace(@"\", @"/");
             await _userManager.UpdateAsync(user);
