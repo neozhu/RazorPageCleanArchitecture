@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
@@ -40,7 +40,7 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
             public string Code { get; set; }
         }
 
-        public IActionResult OnGet(string code = null)
+        public IActionResult OnGet(string code = null,string email=null)
         {
             if (code == null)
             {
@@ -50,7 +50,9 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
             {
                 Input = new InputModel
                 {
-                    Code = code
+                    Code = code,
+                    Email=email
+                    
                 };
                 return Page();
             }

@@ -68,7 +68,7 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
                 var callbackUrl = Url.Page(
                     "/Account/ResetPassword",
                     pageHandler: null,
-                    values: new { code },
+                    values: new { code,user.Email },
                     protocol: Request.Scheme);
                 var request=new MailRequest();
                 request.Subject = "Reset Password";
