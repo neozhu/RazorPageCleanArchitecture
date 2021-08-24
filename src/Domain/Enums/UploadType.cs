@@ -7,10 +7,10 @@ namespace CleanArchitecture.Razor.Domain.Enums
 {
     public enum UploadType : byte
     {
-        [Description(@"Images\Products")]
+        [Description(@"Products")]
         Product,
 
-        [Description(@"Images\ProfilePictures")]
+        [Description(@"ProfilePictures")]
         ProfilePicture,
 
         [Description(@"Documents")]
