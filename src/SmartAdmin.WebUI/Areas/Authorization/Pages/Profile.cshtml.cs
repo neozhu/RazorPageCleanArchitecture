@@ -89,7 +89,7 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
             };
             var result = _uploadService.UploadAsync(uploadrequet);
             var user = await _userManager.FindByIdAsync(UserId);
-            user.ProfilePictureDataUrl = result.Replace("\\", "/");
+            user.ProfilePictureDataUrl = result.Replace(@"\", @"/");
             await _userManager.UpdateAsync(user);
             await _signInManager.RefreshSignInAsync(user);
             return RedirectToPage("./profile"); ;
