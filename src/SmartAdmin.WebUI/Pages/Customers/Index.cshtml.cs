@@ -50,7 +50,7 @@ namespace SmartAdmin.WebUI.Pages.Customers
         
         public async Task OnGetAsync()
         {
-            var _cancreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Customers.Create);
+                  var _cancreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Customers.Create);
         }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] CustomersWithPaginationQuery command)
         {

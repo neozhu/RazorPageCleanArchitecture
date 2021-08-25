@@ -10,7 +10,6 @@ using CleanArchitecture.Razor.Application.KeyValues.Commands.SaveChanged;
 using CleanArchitecture.Razor.Application.KeyValues.Queries.Export;
 using CleanArchitecture.Razor.Application.KeyValues.Queries.PaginationQuery;
 using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
-using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -40,7 +39,6 @@ namespace SmartAdmin.WebUI.Pages.KeyValues
         }
         public async Task OnGetAsync()
         {
-            PageContext.SetRulesetForClientsideMessages("MyRuleset");
         }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] KeyValuesWithPaginationQuery command)
         {

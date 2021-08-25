@@ -2,8 +2,6 @@ using CleanArchitecture.Razor.Application;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Infrastructure;
 using CleanArchitecture.Razor.Infrastructure.Identity;
-using CleanArchitecture.Razor.Infrastructure.Persistence;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -58,10 +56,12 @@ namespace SmartAdmin.WebUI
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationClaimsIdentityFactory>();
             services.AddControllers();
-            //services.AddMvc().AddFluentValidation(fv => {
+            //services.AddMvc().AddFluentValidation(fv =>
+            //{
             //    fv.DisableDataAnnotationsValidation = false;
             //    fv.ImplicitlyValidateChildProperties = true;
-            //      });
+            //});
+            
             services
                 .AddRazorPages()
                 .AddJsonOptions(options =>

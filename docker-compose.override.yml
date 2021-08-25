@@ -4,7 +4,6 @@ services:
   webui:
     environment:
       - "ASPNETCORE_ENVIRONMENT=Development"
-      - "SpaBaseUrl=http://clientapp:4200"
   db:
     ports:
       - "1433:1433"
