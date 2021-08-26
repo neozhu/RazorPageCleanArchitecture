@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
@@ -29,5 +29,7 @@
     <Folder Include="wwwroot\lib\easyui\" />
     <Folder Include="wwwroot\lib\jquery-form\" />
   </ItemGroup>
-
+  <Target Name="CreateFilesFolder" AfterTargets="AfterPublish">
+    <MakeDir Directories="$(PublishUrl)Files" Condition="!Exists('$(PublishUrl)Files')" />
+  </Target>
 </Project>

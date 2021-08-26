@@ -17,14 +17,7 @@ namespace SmartAdmin.WebUI
     {
         public async static Task Main(string[] args)
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Files");
-            if (!Directory.Exists(filePath))
-            {
-                Directory.CreateDirectory(filePath);
-            }
             var host = CreateHostBuilder(args).Build();
-           
-            
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;

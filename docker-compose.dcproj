@@ -13,4 +13,13 @@
     <None Include="docker-compose.override.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="launchSettings.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="launchSettings.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="launchSettings.json" />
+  </ItemGroup>
 </Project>
