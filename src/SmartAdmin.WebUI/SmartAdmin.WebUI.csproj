@@ -28,9 +28,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\lib\easyui\" />
     <Folder Include="wwwroot\lib\jquery-form\" />
-    <Content Include="Files\**">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Update="Files\**"  CopyToOutputDirectory="PreserveNewest"  />
   </ItemGroup>
   <Target Name="CreateFilesFolder" AfterTargets="AfterPublish">
     <MakeDir Directories="$(PublishUrl)Files" Condition="!Exists('$(PublishUrl)Files')" />
