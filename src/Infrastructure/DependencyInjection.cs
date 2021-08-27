@@ -4,16 +4,21 @@ using System.Reflection;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
 using CleanArchitecture.Razor.Application.Settings;
+using CleanArchitecture.Razor.Application.Workflow.Approval;
+using CleanArchitecture.Razor.Application.Workflow.Approval.Data;
 using CleanArchitecture.Razor.Infrastructure.Constants.ClaimTypes;
 using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Persistence;
 using CleanArchitecture.Razor.Infrastructure.Services;
 using CleanArchitecture.Razor.Infrastructure.Services.Identity;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using WorkflowCore.Interface;
 
 namespace CleanArchitecture.Razor.Infrastructure
 {
@@ -85,6 +90,26 @@ namespace CleanArchitecture.Razor.Infrastructure
             });
 
             return services;
+        }
+
+        public static IServiceCollection AddWorkflow(this IServiceCollection services, IConfiguration configuration)
+        {
+            if (configuration.GetValue<bool>("UseInMemoryDatabase"))
+            {
+                services.AddWorkflow();
+            }
+            else
+            {
+                services.AddWorkflow(x => x.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), true, true));
+            }
+            return services;
+        }
+        public static IApplicationBuilder UseWorkflow(this IApplicationBuilder app)
+        {
+            var host = app.ApplicationServices.GetService<IWorkflowHost>();
+            host.RegisterWorkflow<DocmentApprovalWorkflow, ApprovalData>();
+            host.Start();
+            return app;
         }
     }
 }

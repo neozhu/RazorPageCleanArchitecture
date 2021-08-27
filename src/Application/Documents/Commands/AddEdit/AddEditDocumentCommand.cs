@@ -57,6 +57,8 @@ namespace CleanArchitecture.Razor.Application.Documents.Commands.AddEdit
                 var result = await _uploadService.UploadAsync(request.UploadRequest);
                 var document = _mapper.Map<Document>(request);
                 document.URL = result;
+                var createdevent = new DocumentCreatedEvent(document);
+                document.DomainEvents.Add(createdevent);
                 _context.Documents.Add(document);
             }
             await _context.SaveChangesAsync(cancellationToken);

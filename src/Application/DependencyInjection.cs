@@ -2,8 +2,10 @@ using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Behaviours;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
+using CleanArchitecture.Razor.Application.Workflow.Approval.Steps;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -20,7 +22,11 @@ namespace CleanArchitecture.Razor.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
- 
+
+            services.AddTransient<InitialStep>();
+            services.AddTransient<ApprovedStep>();
+            services.AddTransient<RejectedStep>();
+            services.AddTransient<NotificationStep>();
             return services;
         }
     }

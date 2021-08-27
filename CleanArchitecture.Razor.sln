@@ -24,6 +24,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartAdmin.WebUI", "src\Sma
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{6BD2EC46-FA8F-44F3-AF33-903BBB347116}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow", "src\Workflow\Workflow.csproj", "{A5A249F5-C62B-4F0E-9715-F8C65D37ACD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{6BD2EC46-FA8F-44F3-AF33-903BBB347116}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BD2EC46-FA8F-44F3-AF33-903BBB347116}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BD2EC46-FA8F-44F3-AF33-903BBB347116}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5A249F5-C62B-4F0E-9715-F8C65D37ACD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5A249F5-C62B-4F0E-9715-F8C65D37ACD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5A249F5-C62B-4F0E-9715-F8C65D37ACD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5A249F5-C62B-4F0E-9715-F8C65D37ACD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{930C88ED-E673-4A42-BCC2-A8450B013AC8} = {1C328BD6-EC70-47E3-8FFC-E97A9A191960}
 		{2C501A8E-4A08-4D7B-87E9-A4BFB4ED8160} = {1C328BD6-EC70-47E3-8FFC-E97A9A191960}
 		{3AEBA5A2-9ECF-4E08-8F52-56DBA1F42855} = {1C328BD6-EC70-47E3-8FFC-E97A9A191960}
+		{A5A249F5-C62B-4F0E-9715-F8C65D37ACD3} = {1C328BD6-EC70-47E3-8FFC-E97A9A191960}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2C89141F-8981-46D5-8FB2-82ABDFF349AD}

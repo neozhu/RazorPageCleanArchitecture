@@ -10,7 +10,7 @@ using CleanArchitecture.Razor.Domain.Common;
 
 namespace CleanArchitecture.Razor.Domain.Entities
 {
-    public  class Document: AuditableEntity
+    public  class Document: AuditableEntity,IHasDomainEvent
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -19,5 +19,6 @@ namespace CleanArchitecture.Razor.Domain.Entities
         public string URL { get; set; }
         public int DocumentTypeId { get; set; }
         public virtual DocumentType DocumentType { get; set; }
+        public List<DomainEvent> DomainEvents { get; set; } = new();
     }
 }
