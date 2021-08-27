@@ -7,7 +7,9 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 using System.Reflection;
+using WorkflowCore.Interface;
 
 namespace CleanArchitecture.Razor.Application
 {
@@ -23,10 +25,31 @@ namespace CleanArchitecture.Razor.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
 
-            services.AddTransient<InitialStep>();
-            services.AddTransient<ApprovedStep>();
-            services.AddTransient<RejectedStep>();
-            services.AddTransient<NotificationStep>();
+
+            services.AddWorkflowSteps();
+            return services;
+        }
+        public static IServiceCollection AddWorkflowSteps(this IServiceCollection services)
+        {
+            var steps = typeof(IStepBody);
+            var types = steps
+                .Assembly
+                .GetExportedTypes()
+                .Where(t => t.IsClass && !t.IsAbstract)
+                .Select(t => new
+                {
+                    Service = t.GetInterface($"I{t.Name}"),
+                    Implementation = t
+                })
+                .Where(t => t.Service != null);
+
+            foreach (var type in types)
+            {
+                if (steps.IsAssignableFrom(type.Service))
+                {
+                    services.AddTransient(type.Service, type.Implementation);
+                }
+            }
             return services;
         }
     }

@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CleanArchitecture.Razor.Application.Workflow.Approval.Data;
 using CleanArchitecture.Razor.Application.Workflow.Approval.Steps;
+using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
 
@@ -26,7 +26,7 @@ namespace CleanArchitecture.Razor.Application.Workflow.Approval
                         .Input(step=>step.To,data=>data.Approver)
                         .Input(step => step.DocumentName, data => data.DocumentName)
                         .Input(step => step.DocumentId, data => data.DocumentId)
-                        .Output(data=>data.WorkId,step=> step.WorkId)
+                        .Output(data=>data.WorkflowId,step=> step.WorkId)
                  .UserTask("Do you approve", data => data.Approver)
                      .WithOption("yes", "I approve").Do(then => then
                          .StartWith<ApprovedStep>()

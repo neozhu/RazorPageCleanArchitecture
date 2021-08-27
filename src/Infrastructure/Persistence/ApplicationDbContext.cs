@@ -1,6 +1,7 @@
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Domain.Common;
 using CleanArchitecture.Razor.Domain.Entities;
+using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -15,8 +16,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
     public class ApplicationDbContext : IdentityDbContext<
         ApplicationUser, ApplicationRole, string,
         ApplicationUserClaim, ApplicationUserRole, ApplicationUserLogin,
-        ApplicationRoleClaim, ApplicationUserToken
-        >, IApplicationDbContext
+        ApplicationRoleClaim, ApplicationUserToken>, IApplicationDbContext
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IDateTime _dateTime;
@@ -38,6 +38,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
         public DbSet<Document> Documents { get; set; }
 
         public DbSet<KeyValue> KeyValues { get; set; }
+        public DbSet<ApprovalData> ApprovalDatas { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

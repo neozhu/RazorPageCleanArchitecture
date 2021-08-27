@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanArchitecture.Razor.Application.Workflow.Approval.Data
+namespace CleanArchitecture.Razor.Domain.Entities.Worflow
 {
    public  class ApprovalData
     {
-        public string WorkId { get; set; }
+        public int Id {  get; set; }
+        public string WorkflowName { get; set; }
+        public string WorkflowId { get; set; }
         public string Status { get; set; }
         public string DocumentName { get; set; }
         public int DocumentId { get; set; }

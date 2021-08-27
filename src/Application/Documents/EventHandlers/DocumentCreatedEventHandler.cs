@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Application.Common.Models;
 using CleanArchitecture.Razor.Application.Workflow.Approval;
-using CleanArchitecture.Razor.Application.Workflow.Approval.Data;
+using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using CleanArchitecture.Razor.Domain.Events;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -39,7 +39,8 @@ namespace CleanArchitecture.Razor.Application.Documents.EventHandlers
                 DocumentName = notification.DomainEvent.Item.Title,
                 Status = "Pending",
                 Url = notification.DomainEvent.Item.URL,
-                RequestDateTime = DateTime.Now
+                RequestDateTime = DateTime.Now,
+                WorkflowName= nameof(DocmentApprovalWorkflow)
             };
             var workid = await _workflowHost.StartWorkflow(nameof(DocmentApprovalWorkflow), data);
             Thread.Sleep(1000);
