@@ -21,4 +21,9 @@
     <ProjectReference Include="..\Application\Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Approval\Data\" />
+    <Folder Include="Approval\Steps\" />
+  </ItemGroup>
+
 </Project>

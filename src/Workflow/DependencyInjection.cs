@@ -9,8 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WorkflowCore.Interface;
 using CleanArchitecture.Razor.Application.Settings;
-using CleanArchitecture.Razor.Workflow.Approval.Data;
-using CleanArchitecture.Razor.Workflow.Approval;
+
 
 namespace CleanArchitecture.Razor.Workflow
 {
@@ -32,7 +31,7 @@ namespace CleanArchitecture.Razor.Workflow
         public static IApplicationBuilder UseWorkflow(this IApplicationBuilder app)
         {
             var host = app.ApplicationServices.GetService<IWorkflowHost>();
-            host.RegisterWorkflow<DocmentApprovalWorkflow,ApprovalData>();
+            //host.RegisterWorkflow<DocmentApprovalWorkflow,ApprovalData>();
             host.Start();
 
             var appLifetime = app.ApplicationServices.GetService<IApplicationLifetime>();

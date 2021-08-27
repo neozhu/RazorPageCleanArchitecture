@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Models;
 using CleanArchitecture.Razor.Application.Workflow.Approval;
 using CleanArchitecture.Razor.Domain.Entities.Worflow;
@@ -19,14 +20,17 @@ namespace CleanArchitecture.Razor.Application.Documents.EventHandlers
 {
     public class DocumentCreatedEventHandler : INotificationHandler<DomainEventNotification<DocumentCreatedEvent>>
     {
+        private readonly IApplicationDbContext _context;
         private readonly ILogger<DocumentCreatedEventHandler> _logger;
         private readonly IWorkflowHost _workflowHost;
 
         public DocumentCreatedEventHandler(
+            IApplicationDbContext context,
             ILogger<DocumentCreatedEventHandler> logger,
             IWorkflowHost  workflowHost
             )
         {
+            _context = context;
             _logger = logger;
             _workflowHost = workflowHost;
         }
@@ -42,9 +46,11 @@ namespace CleanArchitecture.Razor.Application.Documents.EventHandlers
                 RequestDateTime = DateTime.Now,
                 WorkflowName= nameof(DocmentApprovalWorkflow)
             };
+          
             var workid = await _workflowHost.StartWorkflow(nameof(DocmentApprovalWorkflow), data);
-            Thread.Sleep(1000);
-            var openItems = _workflowHost.GetOpenUserActions(workid);
+            data.WorkflowId= workid;
+            _context.ApprovalDatas.Add(data);
+            await _context.SaveChangesAsync(cancellationToken);
             _logger.LogInformation($"start new workflow:{workid}");
         }
     }

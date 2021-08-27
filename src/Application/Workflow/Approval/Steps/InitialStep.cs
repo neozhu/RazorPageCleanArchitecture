@@ -16,6 +16,7 @@ namespace CleanArchitecture.Razor.Application.Workflow.Approval.Steps
 {
     public class InitialStep : StepBodyAsync
     {
+        private readonly IApplicationDbContext _context;
         private readonly IMailService _mailService;
         private readonly ILogger<InitialStep> _logger;
         public string WorkId { get; set; }
@@ -27,9 +28,11 @@ namespace CleanArchitecture.Razor.Application.Workflow.Approval.Steps
         public int DocumentId { get; set; }
              
         public InitialStep(
+            IApplicationDbContext context,
             IMailService mailService,
             ILogger<InitialStep> logger)
         {
+            _context = context;
             _mailService = mailService;
             _logger = logger;
         }
@@ -45,6 +48,13 @@ namespace CleanArchitecture.Razor.Application.Workflow.Approval.Steps
             await _mailService.SendAsync(request);
             Console.WriteLine($"Send Mail to {To},{Body}");
             _logger.LogInformation($"Send Mail to {To},{Body}");
+            var approval = _context.ApprovalDatas.FirstOrDefault(x => x.WorkflowId == WorkId);
+            if (approval != null)
+            {
+                approval.Status = "Pending";
+                approval.RequestDateTime = DateTime.Now;
+                await _context.SaveChangesAsync(default);
+            }
             return ExecutionResult.Next();
         }
     }

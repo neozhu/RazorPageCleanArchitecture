@@ -5,7 +5,7 @@ using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
 using CleanArchitecture.Razor.Application.Settings;
 using CleanArchitecture.Razor.Application.Workflow.Approval;
-using CleanArchitecture.Razor.Application.Workflow.Approval.Data;
+using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using CleanArchitecture.Razor.Infrastructure.Constants.ClaimTypes;
 using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 using CleanArchitecture.Razor.Infrastructure.Identity;
