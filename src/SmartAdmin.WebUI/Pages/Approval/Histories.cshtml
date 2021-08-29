@@ -1,0 +1,135 @@
+﻿@page
+@using CleanArchitecture.Razor.Infrastructure.Constants.Permission
+@model SmartAdmin.WebUI.Pages.Approval.Histories
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Histories> _localizer
+@inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
+@{
+  ViewData["Title"] = _localizer["Approval"].Value;
+  ViewData["PageName"] = "approval_index";
+  ViewData["Category1"] = _localizer["Workflow"].Value;
+  ViewData["Heading"] = _localizer["Approval"].Value;
+  ViewData["PageDescription"] = _localizer["See all available options"].Value;
+  ViewData["PreemptiveClass"] = "Default";
+  var _canApproval= true;
+  var _canSearch =true;
+
+}
+@section HeadBlock {
+
+    <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+    <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+    <link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">
+    <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+    <style>
+
+        .approval_dg_datagrid-cell-c1-_action {
+            overflow: visible !important
+        }
+    </style>
+}
+<div id="js-page-content-demopanels" class="card mb-g">
+    <div class="card-header bg-white d-flex align-items-center">
+        <h4 class="m-0">
+            @_localizer["Approval"]
+            <small>@_localizer["See all available options"]</small>
+        </h4>
+        <div class="ml-auto">
+            
+            
+            @if (_canSearch)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="searchbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
+                    @_localizer["Search"]
+                </button>
+            }
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table id="approval_dg">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section ScriptsBlock {
+
+
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+    <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
+    <script src="~/lib/axios/dist/axios.js"></script>
+    <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+
+    <script type="text/javascript">
+        $('#searchbutton').click(function () {
+            reload();
+        });
+        var $dg={};
+        var initdatagrid = () => {
+            $dg = $('#approval_dg').datagrid({
+                height: 700,
+                method: 'GET',
+                rownumbers: false,
+                singleSelect: true,
+                selectOnCheck: false,
+                checkOnSelect: false,
+                pagination: true,
+                clientPaging: false,
+                remoteFilter: true,
+                sortName: 'RequestDateTime',
+                sortOrder:'desc',
+                pageSize: 15,
+                pageList: [10, 15, 30, 50, 100, 1000],
+                onBeforeLoad: function () {
+                    $('#approvalbutton').prop('disabled', true);
+                },
+                onCheckAll: function (rows) {
+                    const checked = $(this).datagrid('getChecked').length > 0;
+                    $('#approvalbutton').prop('disabled', !checked);
+                },
+                onUncheckAll: function () {
+                    $('#approvalbutton').prop('disabled', true);
+                },
+                onCheck: function () {
+                    $('#approvalbutton').prop('disabled', false);
+                },
+                onUncheck: function () {
+                    const checked = $(this).datagrid('getChecked').length > 0;
+                    $('#approvalbutton').prop('disabled', !checked);
+                },
+                columns: [[
+                    { field: 'ck', checkbox: true },
+                    { field: 'WorkflowName', title: '@_localizer["Workflow Name"]', sortable: true, width:200 },
+                    { field: 'Status', title: '@_localizer["Status"]', sortable: true, width: 130 },
+                    { field: 'DocumentName', title: '@_localizer["Document Name"]', sortable: true, width: 180 },
+                    { field: 'Applicant', title: '@_localizer["Applicant"]', sortable: true, width: 130 },
+                    { field: 'Approver', title: '@_localizer["Approver"]', sortable: true, width: 130 },
+                    { field: 'Outcome', title: '@_localizer["Outcome"]', sortable: true, width: 130 },
+                    { field: 'Comments', title: '@_localizer["Comments"]', sortable: true, width: 160 },
+                    { field: 'RequestDateTime', title: '@_localizer["Request DateTime"]', formatter: dateformatter, sortable: true, width: 160 },
+                    { field: 'ApprovedDateTime', title: '@_localizer["Request DateTime"]', formatter: dateformatter, sortable: true, width: 160 },
+                ]]
+            })
+                .datagrid('enableFilter', {})
+                .datagrid('load', '@Url.Page("/Approval/Histories")?handler=Data');
+
+        }
+
+        var reload = () => {
+            $dg.datagrid('load', '@Url.Page("/Approval/Histories")?handler=Data');
+        }
+
+        $(() => {
+            initdatagrid();
+        })
+ 
+
+    </script>
+}

@@ -28,23 +28,20 @@ namespace CleanArchitecture.Razor.Application.Workflow.Approval
                         .Input(step => step.DocumentId, data => data.DocumentId)
                         .Output(data=>data.WorkflowId,step=> step.WorkId)
                  .UserTask("Do you approve", data => data.Approver)
-                     .WithOption("yes", "I approve").Do(then => then
+                     .WithOption("Approved", "I approve").Do(then => then
                          .StartWith<ApprovedStep>()
-                         .Input(step=>step.Approver,data=>data.Approver)
                          .Input(step => step.DocumentName, data => data.DocumentName)
                          .Input(step=>step.To,data=>data.Applicant)
                      )
-                     .WithOption("no", "I do not approve").Do(then => then
+                     .WithOption("Reject", "I do not approve").Do(then => then
                          .StartWith<RejectedStep>()
-                         .Input(step => step.Approver, data => data.Approver)
                          .Input(step => step.DocumentName, data => data.DocumentName)
                          .Input(step => step.To, data => data.Applicant)
                      )
                      .WithEscalation(x => TimeSpan.FromMinutes(1), x => x.Applicant, action => action
-                         .StartWith<NotificationStep>()
+                         .StartWith<CancelStep>()
                          .Input(step=>step.To,data=>data.Applicant)
-                         .Input(step=>step.Subject,data=>"Timeout,Cancel the request")
-                         .Input(step=>step.Body,data=>"Your request document approval has been timeout.")
+                         .Input(step => step.DocumentName, data => data.DocumentName)
                          )
                           
                  .Then(context => Console.WriteLine("end"));

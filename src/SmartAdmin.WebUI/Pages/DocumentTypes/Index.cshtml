@@ -163,7 +163,7 @@
         });
         $('#documentType_form :submit').click(function (e) {
             console.log('submmit')
-            var form = document.getElementsByClassName('needs-validation')[0];
+            var form = document.querySelector('#documentType_form');
             $(form).find(":valid").parent().removeClass("was-validated");
             if (form.checkValidity() === false) {
                 form.classList.add('was-validated');

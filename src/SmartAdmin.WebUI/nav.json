@@ -112,12 +112,12 @@
       "items": [
         {
           "title": "Approval",
-          "href": "",
+          "href": "approval_index.html",
           "roles": []
         },
         {
           "title": "Histories",
-          "href": "",
+          "href": "approval_histories.html",
           "roles": []
         }
       ]

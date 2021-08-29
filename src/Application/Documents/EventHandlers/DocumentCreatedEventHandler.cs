@@ -37,7 +37,7 @@ namespace CleanArchitecture.Razor.Application.Documents.EventHandlers
         public async Task Handle(DomainEventNotification<DocumentCreatedEvent> notification, CancellationToken cancellationToken)
         {
             var data = new ApprovalData() {
-                Applicant = "neozhu@126.net",
+                Applicant = "neozhu@126.com",
                 Approver = "new163@163.com",
                 DocumentId = notification.DomainEvent.Item.Id,
                 DocumentName = notification.DomainEvent.Item.Title,

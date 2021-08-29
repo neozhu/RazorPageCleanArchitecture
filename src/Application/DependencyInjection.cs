@@ -7,9 +7,11 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Linq;
 using System.Reflection;
 using WorkflowCore.Interface;
+using WorkflowCore.Models;
 
 namespace CleanArchitecture.Razor.Application
 {
@@ -26,31 +28,24 @@ namespace CleanArchitecture.Razor.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
 
 
-            services.AddWorkflowSteps();
+            services.AddWorkflowSteps(w => w.Name.EndsWith("Step"), Assembly.GetExecutingAssembly());
             return services;
         }
-        public static IServiceCollection AddWorkflowSteps(this IServiceCollection services)
+        public static void AddWorkflowSteps(this IServiceCollection services, Func<Type, bool> predicate, params Assembly[] assemblies)
         {
-            var steps = typeof(IStepBody);
-            var types = steps
-                .Assembly
-                .GetExportedTypes()
-                .Where(t => t.IsClass && !t.IsAbstract)
-                .Select(t => new
-                {
-                    Service = t.GetInterface($"I{t.Name}"),
-                    Implementation = t
-                })
-                .Where(t => t.Service != null);
-
-            foreach (var type in types)
+            if (assemblies.Length == 0)
             {
-                if (steps.IsAssignableFrom(type.Service))
-                {
-                    services.AddTransient(type.Service, type.Implementation);
-                }
+                assemblies = new[] { Assembly.GetCallingAssembly() };
             }
-            return services;
+            assemblies
+               .SelectMany(x => x.GetExportedTypes()
+               .Where(y => y.IsClass && !y.IsAbstract && !y.IsGenericType && !y.IsNested))
+               .Where(predicate)
+               .ToList()
+               .ForEach(type =>
+                        services.Add(new ServiceDescriptor(type, type, ServiceLifetime.Transient))
+               );
+
         }
     }
 }

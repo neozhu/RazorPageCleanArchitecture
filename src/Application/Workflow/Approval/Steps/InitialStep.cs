@@ -39,7 +39,7 @@ namespace CleanArchitecture.Razor.Application.Workflow.Approval.Steps
         public override async Task<ExecutionResult> RunAsync(IStepExecutionContext context)
         {
             WorkId = context.Workflow.Id;
-            Body = $"Please,Approval this document:{DocumentName},URL:http://....";
+            Body = $"Please,Approval this document:{DocumentName},workflowid:{WorkId},URL:http://....";
             Subject = $"a new document approval request";
             var request = new MailRequest();
             request.To = To;

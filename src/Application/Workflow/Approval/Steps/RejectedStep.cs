@@ -16,7 +16,7 @@ namespace CleanArchitecture.Razor.Application.Workflow.Approval.Steps
 {
     public class RejectedStep : StepBodyAsync
     {
-        private readonly IApplicationDbContext _context;
+        //private readonly IApplicationDbContext _context;
         private readonly IMailService _mailService;
         private readonly ILogger<RejectedStep> _logger;
         public string WorkId { get; set; }
@@ -29,11 +29,11 @@ namespace CleanArchitecture.Razor.Application.Workflow.Approval.Steps
         public string Outcome { get; set; }
         public string Comments { get; set; }
         public RejectedStep(
-            IApplicationDbContext context,
+            //IApplicationDbContext context,
             IMailService mailService,
             ILogger<RejectedStep> logger)
         {
-            _context = context;
+            //_context = context;
             _mailService = mailService;
             _logger = logger;
         }
@@ -50,15 +50,15 @@ namespace CleanArchitecture.Razor.Application.Workflow.Approval.Steps
             Console.WriteLine($"Your request document has been rejected by {Approver}! DocumentName:{DocumentName}");
             _logger.LogInformation($"Your request document has been rejected by {Approver}! DocumentName:{DocumentName}");
 
-            var approval = _context.ApprovalDatas.FirstOrDefault(x => x.WorkflowId == WorkId);
-            if (approval != null)
-            {
-                approval.Status = "Finished";
-                approval.Outcome = "Rejected";
-                approval.ApprovedDateTime=DateTime.Now;
-                approval.Comments = "";
-                await _context.SaveChangesAsync(default);
-            }
+            //var approval = _context.ApprovalDatas.FirstOrDefault(x => x.WorkflowId == WorkId);
+            //if (approval != null)
+            //{
+            //    approval.Status = "Finished";
+            //    approval.Outcome = "Rejected";
+            //    approval.ApprovedDateTime=DateTime.Now;
+            //    approval.Comments = "";
+            //    await _context.SaveChangesAsync(default);
+            //}
             return ExecutionResult.Next();
         }
     }
