@@ -33,7 +33,7 @@ namespace CleanArchitecture.Razor.Application.Workflow.Approval
                          .Input(step => step.DocumentName, data => data.DocumentName)
                          .Input(step=>step.To,data=>data.Applicant)
                      )
-                     .WithOption("Reject", "I do not approve").Do(then => then
+                     .WithOption("Rejected", "I do not approve").Do(then => then
                          .StartWith<RejectedStep>()
                          .Input(step => step.DocumentName, data => data.DocumentName)
                          .Input(step => step.To, data => data.Applicant)

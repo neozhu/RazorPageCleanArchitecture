@@ -39,7 +39,7 @@ namespace CleanArchitecture.Razor.Application.Workflow.Approval.Steps
         {
             WorkId = context.Workflow.Id;
             Body = $"Your request document has been cancel! DocumentName:{DocumentName}";
-            Subject = $"Cancel {DocumentName}";
+            Subject = $"Your request has been cancelled {DocumentName}";
             var request = new MailRequest();
             request.To = To;
             request.Subject = Subject;

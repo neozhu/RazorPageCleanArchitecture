@@ -79,7 +79,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         }
-
+        
         private async Task DispatchEvents()
         {
             while (true)
