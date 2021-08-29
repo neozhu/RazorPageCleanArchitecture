@@ -39,14 +39,14 @@ namespace CleanArchitecture.Razor.Application.Workflow.Approval.Steps
         {
             WorkId = context.Workflow.Id;
             Body = $"Your request document has been cancel! DocumentName:{DocumentName}";
-            Subject = $"Your request has been cancelled {DocumentName}";
+            Subject = $"Your request has been cancelled.";
             var request = new MailRequest();
             request.To = To;
             request.Subject = Subject;
             request.Body = Body;
             await _mailService.SendAsync(request);
-            Console.WriteLine($"Send cancel notfication:{Body}");
-            _logger.LogInformation($"Send notfication:{Body}");
+            Console.WriteLine($"Send cancel notfication:{Body},Send to {To}");
+            _logger.LogInformation($"Send notfication:{Body},Send to {To}");
 
             var approval = _context.ApprovalDatas.FirstOrDefault(x => x.WorkflowId == WorkId);
             if (approval != null)
