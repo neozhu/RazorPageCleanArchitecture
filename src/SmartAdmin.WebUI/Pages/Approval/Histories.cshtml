@@ -4,10 +4,10 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Histories> _localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
-  ViewData["Title"] = _localizer["Approval"].Value;
+  ViewData["Title"] = _localizer["Approval Histories"].Value;
   ViewData["PageName"] = "approval_index";
   ViewData["Category1"] = _localizer["Workflow"].Value;
-  ViewData["Heading"] = _localizer["Approval"].Value;
+  ViewData["Heading"] = _localizer["Approval Histories"].Value;
   ViewData["PageDescription"] = _localizer["See all available options"].Value;
   ViewData["PreemptiveClass"] = "Default";
   var _canApproval= true;
