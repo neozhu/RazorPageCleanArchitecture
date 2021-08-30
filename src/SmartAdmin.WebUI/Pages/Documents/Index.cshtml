@@ -180,9 +180,8 @@
             onExport();
         });
         $('#document_form :submit').click(function (e) {
-
-            var form = document.getElementsByClassName('needs-validation')[0];
-            console.log(form.checkValidity())
+            var form = document.querySelector('#document_form');
+            $(form).find(":valid").parent().removeClass("was-validated");
             if (form.checkValidity() === false) {
                 form.classList.add('was-validated');
             } else {
@@ -464,6 +463,7 @@
                     link.setAttribute('download', filename);
                     document.body.appendChild(link);
                     link.click();
+                    toastr["info"](`@_localizer["Export Success"]`);
                 }).catch(error => {
                     console.log(error)
                 })

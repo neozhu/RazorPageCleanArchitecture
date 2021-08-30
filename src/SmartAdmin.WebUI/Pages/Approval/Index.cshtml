@@ -209,7 +209,7 @@
             } else {
                 var request = $('#approval_form').serialize();
                 axios.post('/approval/index', request).then(res => {
-                    toastr["info"]('@_localizer["Save Success"]');
+                    toastr["error"]('@_localizer["Rejected"]');
                     $('#approval_modal').modal('toggle');
                     reload();
                 }).catch((error) => {
@@ -235,7 +235,7 @@
             } else {
                 var request = $('#approval_form').serialize();
                 axios.post('/approval/index', request).then(res => {
-                    toastr["info"]('@_localizer["Save Success"]');
+                    toastr["info"]('@_localizer["Approved"]');
                     $('#approval_modal').modal('toggle');
                     reload();
                 }).catch((error) => {

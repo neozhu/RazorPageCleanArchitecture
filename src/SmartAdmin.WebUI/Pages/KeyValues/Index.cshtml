@@ -145,14 +145,13 @@
             onGetTemplate();
         });
         $('#keyValues_form :submit').click(function (e) {
-            console.log('submmit')
-            var form = document.getElementsByClassName('needs-validation')[0];
+            var form = document.querySelector('#keyValues_form');
             $(form).find(":valid").parent().removeClass("was-validated");
             if (form.checkValidity() === false) {
                 form.classList.add('was-validated');
             } else {
                 var request = $('#keyValues_form').serialize();
-                axios.post('/KeyValues/Index', request).then(res => {
+                axios.post('@Url.Page("/KeyValues/Index")', request).then(res => {
                     toastr["info"]('@_localizer["Save Success"]');
                     $('#keyValues_modal').modal('toggle');
                     reload();
@@ -422,6 +421,7 @@
                     link.setAttribute('download', filename);
                     document.body.appendChild(link);
                     link.click();
+                    toastr["info"](`@_localizer["Export Success"]`);
                 }).catch(error => {
                     console.log(error)
                 })

@@ -124,7 +124,7 @@
                     { field: 'Outcome', title: '@_localizer["Outcome"]', sortable: true, width: 130 },
                     { field: 'Comments', title: '@_localizer["Comments"]', sortable: true, width: 230 },
                     { field: 'RequestDateTime', title: '@_localizer["Request DateTime"]', formatter: datetimeformatter, sortable: true, width: 160 },
-                    { field: 'ApprovedDateTime', title: '@_localizer["Request DateTime"]', formatter: datetimeformatter, sortable: true, width: 160 },
+                    { field: 'ApprovedDateTime', title: '@_localizer["Approved DateTime"]', formatter: datetimeformatter, sortable: true, width: 160 },
                 ]]
             })
                 .datagrid('enableFilter', {})
@@ -164,6 +164,7 @@
                     link.setAttribute('download', filename);
                     document.body.appendChild(link);
                     link.click();
+                    toastr["info"](`@_localizer["Export Success"]`);
                 }).catch(error => {
                     console.log(error)
                 })
