@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Authorization;
 using CleanArchitecture.Razor.Application.Features.ApprovalDatas.Queries.Pagination;
-using CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.AddEdit;
 using CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Approve;
+using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 
 namespace SmartAdmin.WebUI.Pages.Approval
 {
-    [Authorize()]
+    [Authorize(policy: Permissions.Approval.View)]
     public class IndexModel : PageModel
     {
         private readonly ISender _mediator;

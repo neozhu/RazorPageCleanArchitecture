@@ -10,8 +10,8 @@
   ViewData["Heading"] = _localizer["Approval"].Value;
   ViewData["PageDescription"] = _localizer["See all available options"].Value;
   ViewData["PreemptiveClass"] = "Default";
-  var _canApproval= true;
-  var _canSearch =true;
+  var _canApprove = await _authorizationService.AuthorizeAsync(User, null, Permissions.Approval.Approve); ;
+  var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.Approval.Search);
 
 }
 @section HeadBlock {
@@ -36,20 +36,20 @@
         <div class="ml-auto">
             
             
-            @if (_canSearch)
+            @if (_canSearch.Succeeded)
             {
                 <button class="btn btn-sm btn-outline-primary " id="searchbutton">
                     <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
                     @_localizer["Search"]
                 </button>
             }
-            @*@if (_canApproval)
+            @if (_canApprove.Succeeded)
             {
                 <button class="btn btn-sm btn-outline-primary " id="approvalbutton">
-                    <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                    <span class="@(Settings.Theme.IconPrefix) fa-file-signature mr-1"></span>
                     @_localizer["Approval"]
                 </button>
-            }*@
+            }
         </div>
     </div>
     <div class="card-body">
@@ -117,8 +117,8 @@
                 method: 'GET',
                 rownumbers: false,
                 singleSelect: true,
-                selectOnCheck: false,
-                checkOnSelect: false,
+                selectOnCheck: true,
+                checkOnSelect: true,
                 pagination: true,
                 clientPaging: false,
                 remoteFilter: true,
@@ -152,11 +152,11 @@
                         align: 'center',
                         formatter: function (value, row, index) {
                             return `<div class="btn-group" role="group">
-                                      <button id="commandbtngroup" type="button" class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
+                                      <button id="commandbtngroup" type="button" @(_canApprove.Succeeded? "":"disabled") class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="@(Settings.Theme.IconPrefix) fa-file-signature"></i>
                                      </button>
                                      <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
-                                       <button class="dropdown-item" onclick="onApproval(${index})"><i class="fal fa-edit mr-1"></i> @_localizer["Approval"]</button>
+                                       <button class="dropdown-item" onclick="onApproval(${index})" @(_canApprove.Succeeded? "":"disabled")><i class="fal fa-gavel mr-1"></i> @_localizer["Approval"]</button>
                                      </div>
                                   </div>`;
                         }
@@ -190,8 +190,10 @@
                 $('#WorkflowId').val(workid);
                 $('#approval_form').jsonToForm(approval);
             } else {
-                var selected = $dg.datagrid('getChecked').map(x => x.WorkflowId)
-                $('#WorkflowId').val(selected.toString());
+                var approval = $dg.datagrid('getChecked')[0]
+                var workid = approval.WorkflowId;
+                $('#WorkflowId').val(workid);
+                $('#approval_form').jsonToForm(approval);
             }
             $('#approval_modal').modal('toggle');
 

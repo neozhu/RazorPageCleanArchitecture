@@ -7,6 +7,16 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Permission
 {
     public static class Permissions
     {
+        [DisplayName("Workflow")]
+        [Description("Approval Permissions")]
+        public static class Approval
+        {
+            public const string View = "Permissions.Approval.View";
+            public const string Approve = "Permissions.Approval.Approve";
+            public const string Histories = "Permissions.Approval.Histories";
+            public const string Search = "Permissions.Approval.Search";
+            public const string Export = "Permissions.Approval.Export";
+        }
 
         [DisplayName("Products")]
         [Description("Products Permissions")]

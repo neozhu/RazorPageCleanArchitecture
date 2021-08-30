@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Authorization;
 using CleanArchitecture.Razor.Application.Features.ApprovalDatas.Queries.Pagination;
 using CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.AddEdit;
 using CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Approve;
+using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
+using CleanArchitecture.Razor.Application.Features.ApprovalDatas.Queries.Export;
 
 namespace SmartAdmin.WebUI.Pages.Approval
 {
-    [Authorize()]
+    [Authorize(policy: Permissions.Approval.View)]
     public class Histories : PageModel
     {
         private readonly ISender _mediator;
@@ -40,10 +42,14 @@ namespace SmartAdmin.WebUI.Pages.Approval
             var result = await _mediator.Send(command);
             return new JsonResult(result);
         }
-        
+        public async Task<FileResult> OnPostExportAsync([FromBody] ExportApprovalDatasQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["ApprovalHistories"] + ".xlsx");
+        }
 
-      
-        
+
+
 
     }
 }

@@ -10,8 +10,8 @@
   ViewData["Heading"] = _localizer["Approval Histories"].Value;
   ViewData["PageDescription"] = _localizer["See all available options"].Value;
   ViewData["PreemptiveClass"] = "Default";
-  var _canApproval= true;
-  var _canSearch =true;
+  var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.Approval.Search); 
+  var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Approval.Export);
 
 }
 @section HeadBlock {
@@ -34,13 +34,20 @@
             <small>@_localizer["See all available options"]</small>
         </h4>
         <div class="ml-auto">
-            
-            
-            @if (_canSearch)
+
+
+            @if (_canSearch.Succeeded)
             {
                 <button class="btn btn-sm btn-outline-primary " id="searchbutton">
                     <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
                     @_localizer["Search"]
+                </button>
+            }
+            @if (_canExport.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="exportbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                    @_localizer["Export Excel"]
                 </button>
             }
 
@@ -70,6 +77,9 @@
     <script type="text/javascript">
         $('#searchbutton').click(function () {
             reload();
+        });
+        $('#exportbutton').click(function () {
+            onExport();
         });
         var $dg={};
         var initdatagrid = () => {
@@ -129,7 +139,50 @@
         $(() => {
             initdatagrid();
         })
- 
+        var onExport = () => {
+            var options = $dg.datagrid('options');
+            var data = {
+                filterRules: JSON.stringify(options.filterRules),
+                sort: options.sortName,
+                order: options.sortOrder,
+            }
+            console.log(options, data)
+            var headers = {
+                "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+            }
+            axios.post('@Url.Page("/Approval/Histories")?handler=Export',
+                data,
+                {
+                    headers: headers,
+                    responseType: "blob"
+                })
+                .then(response => {
+                    const filename = getFileName(response.headers['content-disposition']);
+                    const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', filename);
+                    document.body.appendChild(link);
+                    link.click();
+                }).catch(error => {
+                    console.log(error)
+                })
 
+
+        }
+        var getFileName = (disposition) => {
+            const utf8FilenameRegex = /filename\*=UTF-8''([\w%\-\.]+)(?:; ?|$)/;
+            const asciiFilenameRegex = /filename=(["']?)(.*?[^\\])\1(?:; ?|$)/;
+            let fileName = '';
+            if (utf8FilenameRegex.test(disposition)) {
+                fileName = decodeURIComponent(utf8FilenameRegex.exec(disposition)[1]);
+            } else {
+                const matches = asciiFilenameRegex.exec(disposition);
+                if (matches != null && matches[2]) {
+                    fileName = matches[2];
+                }
+            }
+            return fileName;
+        }
     </script>
 }
