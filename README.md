@@ -29,7 +29,7 @@ This is a solution template for creating a Razor Page App with ASP.NET Core foll
 * [Docker](https://www.docker.com/)
 
 ## Code Generator tools
-[![How to](https://i9.ytimg.com/vi/Hp6cjdfgMT8/mq2.jpg?sqp=CNSu8ogG&rs=AOn4CLDcYRu3HEChyr5fZu3wAL2_n_50Ag)](https://www.youtube.com/watch?v=Hp6cjdfgMT8)
+[![How to](https://github.com/neozhu/CleanArchitectureCodeGenerator/raw/main/art/nuget.png)](https://www.youtube.com/watch?v=Hp6cjdfgMT8)
 
 Github Sourcecode: https://github.com/neozhu/CleanArchitectureCodeGenerator
 ## Getting Started
