@@ -1,13 +1,13 @@
 ﻿@page
 @model RoleModel
 @using CleanArchitecture.Razor.Infrastructure.Constants.Permission
-@inject Microsoft.Extensions.Localization.IStringLocalizer<UserModel> _localizer
+@inject Microsoft.Extensions.Localization.IStringLocalizer<RoleModel> _localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
-    ViewData["Title"] = "Role";
+    ViewData["Title"] = _localizer["Application Roles"].Value;
     ViewData["PageName"] = "authorization_roles";
-    ViewData["Heading"] = "<i class='fal fa-shield-alt'></i> Authorization: <span class='fw-300'>Roles</span>";
-    ViewData["Category1"] = "Authorization";
+    ViewData["Heading"] = _localizer["Application Roles"].Value;
+    ViewData["Category1"] = _localizer["Authorization"].Value;
     ViewData["PageIcon"] = "fa-shield-alt";
     ViewData["PreemptiveClass"] = "Default";
     var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Roles.Create);
@@ -141,10 +141,10 @@
                 <input type="hidden" asp-for="RoleId" />
                 @Html.AntiForgeryToken()
                 <div class="modal-body">
-                    <div class="card mb-g">
-                        <div class="card-body p-3">
-                            @foreach (var dic in Model.GroupedPermissions)
-                            {
+                    @foreach (var dic in Model.GroupedPermissions)
+                    {
+                        <div class="card mb-g">
+                            <div class="card-body p-3">
                                 <h5 class="frame-heading">@_localizer[dic.Key]</h5>
                                 <div class="frame-wrap">
                                     <div class="demo">
@@ -157,9 +157,9 @@
                                         }
                                     </div>
                                 </div>
-                            }
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>

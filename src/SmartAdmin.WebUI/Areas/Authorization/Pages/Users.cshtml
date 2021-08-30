@@ -4,10 +4,11 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<UserModel> _localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
-  ViewData["Title"] = "Users";
+  ViewData["Title"] = _localizer["Application Users"].Value;
   ViewData["PageName"] = "authorization_users";
-  ViewData["Heading"] = "<i class='fal fa-shield-alt'></i> Authorization: <span class='fw-300'>Users</span>";
-  ViewData["Category1"] = "Authorization";
+  ViewData["Heading"] = _localizer["Application Users"].Value;
+  ViewData["Category1"] = _localizer["Authorization"].Value;
+  ViewData["PageDescription"] = _localizer["See all available options"].Value;
   ViewData["PageIcon"] = "fa-shield-alt";
   ViewData["PreemptiveClass"] = "Default";
   var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.Create);
@@ -610,6 +611,7 @@
                     link.setAttribute('download', filename);
                     document.body.appendChild(link);
                     link.click();
+                    toastr["info"](`@_localizer["Export Success"]`);
                 }).catch(error => {
                     console.log(error)
                 })
