@@ -1,12 +1,14 @@
 ﻿@page
 @inject Microsoft.Extensions.Localization.IStringLocalizer<ProfileModel> _localizer
 @model ProfileModel
-@{ ViewData["Title"] = _localizer["Profile"].Value;
+@{
+    ViewData["Title"] = _localizer["Profile"].Value;
     ViewData["PageName"] = "authorization_profile";
     ViewData["Heading"] = _localizer["Profile"].Value;
-    ViewData["PageDescription"] = _localizer"Profile Information"].Value;
+    ViewData["PageDescription"] = _localizer["Profile Information"].Value;
     ViewData["Category1"] = _localizer["Authorization"].Value;
-    ViewData["PreemptiveClass"] = "Default"; }
+    ViewData["PreemptiveClass"] = "Default";
+ }
 @section HeadBlock {
     <link rel="stylesheet" media="screen, print" href="~/css/fa-brands.css">
     <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
