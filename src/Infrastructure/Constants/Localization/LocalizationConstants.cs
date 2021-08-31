@@ -17,7 +17,11 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Localization
                 Code = "en-US",
                 DisplayName= "English"
             },
-            
+            new LanguageCode
+            {
+                Code = "de-DE",
+                DisplayName = "Deutsch"
+            },
             new LanguageCode
             {
                 Code = "zh-CN",
