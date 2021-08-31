@@ -1,12 +1,14 @@
 using CleanArchitecture.Razor.Application;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Infrastructure;
+using CleanArchitecture.Razor.Infrastructure.Constants.Localization;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,9 +17,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
+using SmartAdmin.WebUI.Extensions;
 using SmartAdmin.WebUI.Models;
 using SmartAdmin.WebUI.Services;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using static IdentityModel.ClaimComparer;
@@ -63,9 +67,15 @@ namespace SmartAdmin.WebUI
             //    fv.DisableDataAnnotationsValidation = false;
             //    fv.ImplicitlyValidateChildProperties = true;
             //});
-            
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.AddSupportedUICultures(LocalizationConstants.SupportedLanguages.Select(x=>x.Code).ToArray());
+                options.FallBackToParentUICultures = true;
+               
+            });
             services
                 .AddRazorPages()
+                .AddViewLocalization()
                 .AddJsonOptions(options =>
                   {
                       options.JsonSerializerOptions.PropertyNamingPolicy = null;
@@ -84,6 +94,8 @@ namespace SmartAdmin.WebUI
           options.LogoutPath = "/Identity/Account/Logout";
           options.AccessDeniedPath = "/Identity/Account/AccessDenied";
       });
+
+            services.AddScoped<RequestLocalizationCookiesMiddleware>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -107,6 +119,8 @@ namespace SmartAdmin.WebUI
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Files")),
                 RequestPath = new PathString("/Files")
             });
+            app.UseRequestLocalization();
+            app.UseRequestLocalizationCookies();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
