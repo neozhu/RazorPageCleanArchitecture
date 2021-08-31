@@ -82,6 +82,11 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var userName = Input.UserName;
                 var user = await _userManager.FindByNameAsync(userName);
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Not found user.");
+                    return Page();
+                }
                 var lockoutresult = await _userManager.SetLockoutEndDateAsync(user, System.DateTimeOffset.Now.AddMinutes(-1));
                 if (lockoutresult.Succeeded)
                 {
@@ -89,6 +94,7 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
 
                     if (result.Succeeded)
                     {
+                        await _userManager.AddLoginAsync(user, new UserLoginInfo("UserNamePassword", user.Id, "Account/Lockout"));
                         _logger.LogInformation("User logged in.");
                         return LocalRedirect(returnUrl);
                     }
