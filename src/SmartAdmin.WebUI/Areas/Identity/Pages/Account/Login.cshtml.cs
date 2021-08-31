@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -91,7 +91,7 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
         if (result.IsLockedOut)
         {
           _logger.LogWarning("User account locked out.");
-          return RedirectToPage("./Lockout");
+          return RedirectToPage("./Lockout",new {userName= Input.UserName, ReturnUrl = returnUrl });
         }
         else
         {

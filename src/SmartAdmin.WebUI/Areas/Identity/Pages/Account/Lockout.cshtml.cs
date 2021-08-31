@@ -20,7 +20,11 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
 
         [BindProperty]
         public InputModel Input { get; set; }
-
+        [BindProperty]
+        [Required]
+        public string UserName { get; set; }
+        [BindProperty]
+        public string ReturnUrl { get; set; }
         public class InputModel
         {
             [Required]
@@ -43,12 +47,13 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
             _logger = logger;
         }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string userName="", string returnUrl="")
         {
-            var userId = _currentUserService.UserId;
-            if (!string.IsNullOrEmpty(userId))
+            UserName= userName;
+            ReturnUrl = returnUrl;
+            if (!string.IsNullOrEmpty(UserName))
             {
-                var user = await _userManager.FindByIdAsync(userId);
+                var user = await _userManager.FindByNameAsync(UserName);
                 if (user != null)
                 {
                     Input = new InputModel()
@@ -89,7 +94,7 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
+                    return RedirectToPage("./Lockout", new { userName = Input.UserName, ReturnUrl = returnUrl });
                 }
                 else
                 {

@@ -120,7 +120,7 @@
   <data name="Forgot your password?" xml:space="preserve">
     <value>忘记你的密码？</value>
   </data>
-  <data name="login" xml:space="preserve">
+  <data name="Login" xml:space="preserve">
     <value>登录</value>
   </data>
   <data name="Password" xml:space="preserve">

@@ -8,6 +8,9 @@
 
 <div class="container py-4 py-lg-5 my-lg-5 px-4 px-sm-0 text-white d-flex align-items-center justify-content-center">
     <form id="js-login" role="form" class="text-center text-white mb-5 pb-5" method="post">
+        <input type="hidden" asp-for="Input.UserName" />
+        <input type="hidden" asp-for="Input.Email" />
+        <input type="hidden" asp-for="ReturnUrl" />
         <div class="py-3">
             <img src="@Model.Input.ProfilePictureDataUrl" class="img-responsive rounded-circle img-thumbnail" alt="thumbnail">
         </div>
