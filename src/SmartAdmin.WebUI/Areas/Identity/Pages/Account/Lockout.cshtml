@@ -11,9 +11,11 @@
         <input type="hidden" asp-for="Input.UserName" />
         <input type="hidden" asp-for="Input.Email" />
         <input type="hidden" asp-for="ReturnUrl" />
+
         <div class="py-3">
             <img src="@Model.Input.ProfilePictureDataUrl" class="img-responsive rounded-circle img-thumbnail" alt="thumbnail">
         </div>
+
         <div class="form-group">
             <h3>
                 @Model.Input.UserName
@@ -33,6 +35,7 @@
         <div class="text-center">
             <a asp-page="Login" class="text-white opacity-90">Not <span class="text-secondary">@ViewBag.User</span>?</a>
         </div>
+        <div asp-validation-summary="All" class="alert alert-primary text-dark"></div>
     </form>
 </div>
 

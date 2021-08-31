@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Infrastructure.Identity;
@@ -80,25 +81,35 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var userName = Input.UserName;
-                var result = await _signInManager.PasswordSignInAsync(userName, Input.Password, true, lockoutOnFailure: true);
+                var user = await _userManager.FindByNameAsync(userName);
+                var lockoutresult = await _userManager.SetLockoutEndDateAsync(user, System.DateTimeOffset.Now.AddMinutes(-1));
+                if (lockoutresult.Succeeded)
+                {
+                    var result = await _signInManager.PasswordSignInAsync(userName, Input.Password, true, lockoutOnFailure: true);
 
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = true });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout", new { userName = Input.UserName, ReturnUrl = returnUrl });
+                    if (result.Succeeded)
+                    {
+                        _logger.LogInformation("User logged in.");
+                        return LocalRedirect(returnUrl);
+                    }
+                    if (result.RequiresTwoFactor)
+                    {
+                        return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = true });
+                    }
+                    if (result.IsLockedOut)
+                    {
+                        _logger.LogWarning("User account locked out.");
+                        return RedirectToPage("./Lockout", new { userName = Input.UserName, ReturnUrl = returnUrl });
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        return Page();
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, lockoutresult.Errors.First().Description);
                     return Page();
                 }
             }
