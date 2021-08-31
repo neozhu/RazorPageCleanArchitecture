@@ -1,22 +1,24 @@
 ﻿@page
+@inject Microsoft.Extensions.Localization.IStringLocalizer<LockoutModel> _localizer
 @model LockoutModel
 @{
-    ViewData["PageName"] = "lockout";
+  ViewData["PageName"] = "lockout";
+  ViewData["Title"] = _localizer["Lockout"].Value;
 }
 
 <div class="container py-4 py-lg-5 my-lg-5 px-4 px-sm-0 text-white d-flex align-items-center justify-content-center">
     <form id="js-login" role="form" class="text-center text-white mb-5 pb-5" method="post">
         <div class="py-3">
-            <img src="~/img/demo/avatars/avatar-admin-lg.png" class="img-responsive rounded-circle img-thumbnail" alt="thumbnail">
+            <img src="@Model.Input.ProfilePictureDataUrl" class="img-responsive rounded-circle img-thumbnail" alt="thumbnail">
         </div>
         <div class="form-group">
             <h3>
-                @ViewBag.User
+                @Model.Input.UserName
                 <small>
-                    @ViewBag.Email
+                    @Model.Input.Email
                 </small>
             </h3>
-            <p class="text-white opacity-50">Enter password to unlock screen</p>
+            <p class="text-white opacity-50">@_localizer["Enter password to unlock screen"]</p>
             <div class="input-group input-group-lg">
                 <input type="password" asp-for="Input.Password" class="form-control" value="Password123!" required="required" />
                 <span class="invalid-feedback" asp-validation-for="Input.Password">Sorry, you missed this one.</span>

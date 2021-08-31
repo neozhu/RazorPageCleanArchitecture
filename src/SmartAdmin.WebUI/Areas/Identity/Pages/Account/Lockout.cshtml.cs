@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,6 +14,8 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
     public class LockoutModel : PageModel
     {
         private readonly ILogger<LogoutModel> _logger;
+        private readonly ICurrentUserService _currentUserService;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
         [BindProperty]
@@ -23,16 +26,41 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
             [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }
+            public string Email { get; set; }
+            public string UserName { get; set; }
+            public string ProfilePictureDataUrl { get; set; }
         }
 
-        public LockoutModel(SignInManager<ApplicationUser> signInManager, ILogger<LogoutModel> logger)
+        public LockoutModel(
+            ICurrentUserService currentUserService,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            ILogger<LogoutModel> logger)
         {
+            _currentUserService = currentUserService;
+            _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
         }
 
         public async Task OnGetAsync()
         {
+            var userId = _currentUserService.UserId;
+            if (!string.IsNullOrEmpty(userId))
+            {
+                var user = await _userManager.FindByIdAsync(userId);
+                if (user != null)
+                {
+                    Input = new InputModel()
+                    {
+                        UserName = user.UserName,
+                        Email = user.Email,
+                        ProfilePictureDataUrl = user.ProfilePictureDataUrl,
+                    };
+                }
+            }
+
+
             await _signInManager.SignOutAsync();
 
             _logger.LogInformation("User logged out.");
@@ -46,7 +74,7 @@ namespace SmartAdmin.WebUI.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var userName = ViewData["Email"]?.ToString();
+                var userName = Input.UserName;
                 var result = await _signInManager.PasswordSignInAsync(userName, Input.Password, true, lockoutOnFailure: true);
 
                 if (result.Succeeded)

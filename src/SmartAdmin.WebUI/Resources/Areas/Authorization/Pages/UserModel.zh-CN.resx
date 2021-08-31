@@ -222,9 +222,6 @@
   <data name="Please pick a password" xml:space="preserve">
     <value>请输入密码</value>
   </data>
-  <data name="Reset password" xml:space="preserve">
-    <value>重置密码</value>
-  </data>
   <data name="Save" xml:space="preserve">
     <value>保存</value>
   </data>
@@ -254,5 +251,11 @@
   </data>
   <data name="Your site name" xml:space="preserve">
     <value>你的站点</value>
+  </data>
+  <data name="Reset Password" xml:space="preserve">
+    <value>重置密码</value>
+  </data>
+  <data name="Authorization" xml:space="preserve">
+    <value>系统授权</value>
   </data>
 </root>

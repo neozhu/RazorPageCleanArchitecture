@@ -222,9 +222,6 @@
   <data name="Please pick a password" xml:space="preserve">
     <value>Please pick a password</value>
   </data>
-  <data name="Reset password" xml:space="preserve">
-    <value>Reset password</value>
-  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
@@ -254,5 +251,11 @@
   </data>
   <data name="Your site name" xml:space="preserve">
     <value>Your site name</value>
+  </data>
+  <data name="Reset Password" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="Authorization" xml:space="preserve">
+    <value>Authorization</value>
   </data>
 </root>
