@@ -121,6 +121,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Permission
             public const string Export = "Permissions.Roles.Export";
             public const string Import = "Permissions.Roles.Import";
             public const string ManagePermissions = "Permissions.Roles.Permissions";
+            public const string ManageNavigation = "Permissions.Roles.Navigation";
         }
 
         [DisplayName("Role Claims")]

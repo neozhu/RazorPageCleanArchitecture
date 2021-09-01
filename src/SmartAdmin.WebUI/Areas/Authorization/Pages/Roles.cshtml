@@ -17,6 +17,7 @@
     var _canImport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Roles.Import);
     var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Roles.Export);
     var _canManagePermissions = await _authorizationService.AuthorizeAsync(User, null, Permissions.Roles.ManagePermissions);
+    var _canManageNavigation = await _authorizationService.AuthorizeAsync(User, null, Permissions.Roles.ManageNavigation);
 
 }
 
@@ -24,6 +25,8 @@
     <link rel="stylesheet" media="screen, print" href="~/css/datagrid/datatables/datatables.bundle.css">
     <link rel="stylesheet" media="screen, print" href="~/css/formplugins/select2/select2.bundle.css">
     <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+    <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.27.0/min/vs/editor/editor.main.min.css">
+
     <style>
 
         .role_dg_datagrid-cell-c1-_action {
@@ -39,6 +42,13 @@
             <small>@_localizer["See all available options"]</small>
         </h4>
         <div class="ml-auto">
+            @if (_canManageNavigation.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="managenavigationbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-folder-tree mr-1"></span>
+                    @_localizer["Manage Navigation"]
+                </button>
+            }
             @if (_canCreate.Succeeded)
             {
                 <button class="btn btn-sm btn-outline-primary " id="addbutton">
@@ -170,6 +180,39 @@
     </div>
 </div>
 
+<!--Manage Navigation-->
+<div class="modal fade" id="managenavigation_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-right">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4">Edit Navigation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                </button>
+            </div>
+            <form id="managenavigation_form" method="post" action="/authorization/roles?handler=UpdateNavgitation"  class="needs-validation" novalidate="novalidate">
+                <input type="hidden" asp-for="NavJsonStr" />
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div class="card mb-g">
+                        <div class="card-body p-3">
+                            <div class="frame-wrap">
+                                <div class="demo">
+                                    <div id="editor-container" style="width:100%;min-height:600px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
+                    <button type="submit" class="btn btn-primary">@_localizer["Update Navigation"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 @await Component.InvokeAsync("ImportExcel", new
 {
     importUri = "/authorization/roles?handler=Import",
@@ -178,6 +221,8 @@
 })
 @section ScriptsBlock {
     <partial name="_ValidationScriptsPartial" />
+
+
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
@@ -185,7 +230,70 @@
     <script src="~/lib/axios/dist/axios.js"></script>
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
     <script src="~/js/formplugins/select2/select2.bundle.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.27.0/min/vs/loader.min.js"></script>
     <script>
+        var containerheight = window.innerHeight - 250;
+        document.querySelector('#editor-container').setAttribute("style", `height:${containerheight}px`);
+        var editor = {};
+        // require is provided by loader.min.js.
+        require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.27.0/min/vs' } });
+        require(["vs/editor/editor.main"], () => {
+            axios.get('/authorization/roles?handler=Navgitation').then(res => {
+                $('#NavJsonStr').val(JSON.stringify(res.data));
+                editor = monaco.editor.create(document.getElementById('editor-container'), {
+                    autoSize:true,
+                    value: JSON.stringify(res.data,null,2),
+                    language: 'json',
+                    theme: 'vs-light',
+                });
+                $('#managenavigation_form :submit').prop('disabled', true);
+                editor.onDidChangeModelContent(function (e) {
+                    let decorations = editor.getModel().getAllDecorations();
+                    let error = decorations.filter(isError).map(e => e);
+                    if (error) {
+                        var str = editor.getValue();
+                        if (IsValidJSONString(str)) {
+                            $('#NavJsonStr').val(str);
+                            $('#managenavigation_form :submit').prop('disabled', false);
+                        }
+                        else {
+                            $('#managenavigation_form :submit').prop('disabled', true);
+                        }
+                        
+                    } else {
+                        $('#managenavigation_form :submit').prop('disabled', true);
+                    }
+                });
+            })
+            
+        });
+        
+        $('#managenavigation_modal').on('shown.bs.modal', function () {
+            editor.layout()
+        });
+
+        var  IsValidJSONString=(str)=> {
+            try {
+                JSON.parse(str);
+            } catch (e) {
+                return false;
+            }
+            return true;
+        }
+        var isError = (decorations)=> {
+            return decorations.options.className === "redsquiggly";
+        }
+    </script>
+
+    <script>
+
+
+
+        $('#managenavigationbutton').click(function () {
+            $('#managenavigation_modal').modal('toggle')
+         
+        });
         $('#searchbutton').click(function () {
             reload();
         });

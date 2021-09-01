@@ -37,6 +37,8 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
         [BindProperty]
         public EditRoleModel Input { get; set; } = new();
         [BindProperty]
+        public string NavJsonStr { get; set; }
+        [BindProperty]
         public IEnumerable<string> AssignedPermissions { get; set; }
         [BindProperty]
         public string RoleId { get; set; }
@@ -64,6 +66,28 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
             {
                 GroupedPermissions.Add(group.Key, group.ToArray());
             }
+        }
+        public IActionResult OnGetNavgitation()
+        {
+            var jsonText = System.IO.File.ReadAllText("nav.json");
+            return Content(jsonText);
+        }
+        public async Task<IActionResult> OnPostUpdateNavgitationAsync()
+        {
+            try
+            {
+                //using (var sw = new StreamWriter(@"nav.json", false))
+                //{
+                //  await sw.WriteAsync(this.NavJsonStr);
+                //  await  sw.FlushAsync();
+                //}
+
+            }
+            catch
+            {
+
+            }
+            return RedirectToPage();
         }
         public async Task<IActionResult> OnPostAsync()
         {
