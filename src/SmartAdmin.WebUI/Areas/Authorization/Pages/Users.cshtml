@@ -115,17 +115,17 @@
                 <div class="modal-body">
                     @Html.AntiForgeryToken()
                     <div class="form-group">
-                        <label class="col-xl-12 form-label"> @_localizer["Your site name"]</label>
+                        <label class="form-label"> @_localizer["Your site name"]</label>
                         <input type="text" asp-for="RegisterFormModel.Site" class="form-control" placeholder="Site name" required="required" />
                         <span class="invalid-feedback" asp-validation-for="RegisterFormModel.Site">Sorry, you missed this one.</span>
                     </div>
                     <div class="form-group">
-                        <label class="col-xl-12 form-label">@_localizer["Login user name"]</label>
+                        <label class="form-label">@_localizer["Login user name"]</label>
                         <input type="text" asp-for="RegisterFormModel.UserName" class="form-control" placeholder="User name" required="required" />
                         <span class="invalid-feedback" asp-validation-for="RegisterFormModel.UserName">Sorry, you missed this one.</span>
                     </div>
                     <div class="form-group">
-                        <label class="col-xl-12 form-label">@_localizer["Your display name"]</label>
+                        <label class="form-label">@_localizer["Your display name"]</label>
                         <input type="text" asp-for="RegisterFormModel.DisplayName" class="form-control" placeholder="Display name" required="required" />
                         <span class="invalid-feedback" asp-validation-for="RegisterFormModel.DisplayName">Sorry, you missed this one.</span>
 
@@ -180,18 +180,18 @@
                     <input type="hidden" asp-for="EditFormModel.Id" />
                     @Html.AntiForgeryToken()
                     <div class="form-group">
-                        <label class="col-xl-12 form-label">@_localizer["User name"]</label>
+                        <label class="form-label">@_localizer["User name"]</label>
                         <input type="text" asp-for="EditFormModel.UserName" class="form-control" placeholder="User name" readonly="readonly" />
                         <span class="invalid-feedback" asp-validation-for="RegisterFormModel.UserName">Sorry, you missed this one.</span>
                     </div>
                     <div class="form-group">
-                        <label class="col-xl-12 form-label"> @_localizer["Your site name"]</label>
+                        <label class="form-label"> @_localizer["Your site name"]</label>
                         <input type="text" asp-for="EditFormModel.Site" class="form-control" placeholder="Site name" required="required" />
                         <span class="invalid-feedback" asp-validation-for="EditFormModel.Site">Sorry, you missed this one.</span>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-xl-12 form-label">@_localizer["Your display name"]</label>
+                        <label class="form-label">@_localizer["Your display name"]</label>
                         <input type="text" asp-for="EditFormModel.DisplayName" class="form-control" placeholder="Display name" required="required" />
                         <span class="invalid-feedback" asp-validation-for="EditFormModel.DisplayName">Sorry, you missed this one.</span>
 
@@ -260,7 +260,7 @@
     <div class="modal-dialog modal-dialog-right modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title h4">Manage Roles</h5>
+                <h5 class="modal-title h4">@_localizer["Manage Roles"]</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
                 </button>

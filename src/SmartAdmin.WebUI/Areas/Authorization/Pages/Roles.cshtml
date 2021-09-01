@@ -142,7 +142,7 @@
     <div class="modal-dialog modal-dialog-right">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title h4">Manage Permissions</h5>
+                <h5 class="modal-title h4">@_localizer["Manage Permissions"]</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
                 </button>
@@ -185,7 +185,7 @@
     <div class="modal-dialog modal-lg modal-dialog-right">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title h4">Edit Navigation</h5>
+                <h5 class="modal-title h4">@_localizer["Edit Navigation"]</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
                 </button>
@@ -518,7 +518,7 @@
             $('#editrole_form')[0].reset();
             $('#editrole_modal .modal-title').html('@_localizer["Create a role"]');
             if (role) {
-                $('#customer_modal .modal-title').html('@_localizer["Edit role"]');
+                $('#editrole_modal .modal-title').html('@_localizer["Edit role"]');
                 $('#editrole_form').jsonToForm(role)
             } else {
                 $('#editrole_form #Input_Id').val(0)

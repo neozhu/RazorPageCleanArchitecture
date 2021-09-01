@@ -198,4 +198,13 @@
   <data name="Command" xml:space="preserve">
     <value>Command</value>
   </data>
+  <data name="Manage Navigation" xml:space="preserve">
+    <value>Manage Navigation</value>
+  </data>
+  <data name="Update Navigation" xml:space="preserve">
+    <value>Update Navigation</value>
+  </data>
+  <data name="Edit Navigation" xml:space="preserve">
+    <value>Edit Navigation</value>
+  </data>
 </root>

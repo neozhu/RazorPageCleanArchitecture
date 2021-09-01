@@ -198,4 +198,13 @@
   <data name="Command" xml:space="preserve">
     <value>操作</value>
   </data>
+  <data name="Manage Navigation" xml:space="preserve">
+    <value>管理导航栏</value>
+  </data>
+  <data name="Update Navigation" xml:space="preserve">
+    <value>更新导航栏</value>
+  </data>
+  <data name="Edit Navigation" xml:space="preserve">
+    <value>编辑导航栏</value>
+  </data>
 </root>

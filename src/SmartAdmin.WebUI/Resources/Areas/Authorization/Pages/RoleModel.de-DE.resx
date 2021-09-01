@@ -198,4 +198,13 @@
   <data name="Command" xml:space="preserve">
     <value>Befehl</value>
   </data>
+  <data name="Manage Navigation" xml:space="preserve">
+    <value>Navigation verwalten</value>
+  </data>
+  <data name="Update Navigation" xml:space="preserve">
+    <value>Navigation aktualisieren</value>
+  </data>
+  <data name="Edit Navigation" xml:space="preserve">
+    <value>Navigation bearbeiten</value>
+  </data>
 </root>

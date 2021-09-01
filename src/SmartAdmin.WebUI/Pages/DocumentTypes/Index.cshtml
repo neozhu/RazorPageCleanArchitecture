@@ -257,10 +257,10 @@
         })
         var popupmodal = (documentType) => {
             $('#documentType_modal').modal('toggle');
-            $('#documentType_modal .modal-title').html('@_localizer["Add DocumentType"]');
+            $('#documentType_modal .modal-title').html('@_localizer["Add Document Type"]');
             $('#documentType_form')[0].reset();
             if (documentType) {
-                $('#documentType_modal .modal-title').html('@_localizer["Edit DocumentType"]');
+                $('#documentType_modal .modal-title').html('@_localizer["Edit Document Type"]');
                 $('#documentType_form').jsonToForm(documentType, {
                     PartnerType: function (value) {
                         if (value == 'TP') {
