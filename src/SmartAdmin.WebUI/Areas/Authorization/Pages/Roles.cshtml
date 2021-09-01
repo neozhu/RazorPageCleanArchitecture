@@ -249,8 +249,16 @@
                 });
                 $('#managenavigation_form :submit').prop('disabled', true);
                 editor.onDidChangeModelContent(function (e) {
+                    const model = this.editor.getModel();
+                    if (model === null || model.getModeId() !== "json")
+                        return;
+
+                    const owner = model.getModeId();
+                    const markers = monaco.editor.getModelMarkers({ owner });
+                    console.log(owner,markers)
                     let decorations = editor.getModel().getAllDecorations();
                     let error = decorations.filter(isError).map(e => e);
+               
                     if (error) {
                         var str = editor.getValue();
                         if (IsValidJSONString(str)) {
@@ -281,7 +289,8 @@
             }
             return true;
         }
-        var isError = (decorations)=> {
+        var isError = (decorations) => {
+         
             return decorations.options.className === "redsquiggly";
         }
     </script>
