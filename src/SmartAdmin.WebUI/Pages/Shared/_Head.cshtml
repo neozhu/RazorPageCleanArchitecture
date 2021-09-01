@@ -2,7 +2,7 @@
 <title>
 @if (ViewBag.Title?.Length > 0)
 {
-	<text>@ViewData["Title"] - @ViewData["Category1"] - @Settings.App v@(Settings.Version)</text>
+	<text>@ViewData["Title"] @(ViewData["Category1"]!=null?(" - "  + ViewData["Category1"]):"") - @Settings.App v@(Settings.Version)</text>
 } else {
 	@Settings.App
 }
