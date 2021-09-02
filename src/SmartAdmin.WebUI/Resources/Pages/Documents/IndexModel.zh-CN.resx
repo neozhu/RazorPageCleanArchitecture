@@ -198,4 +198,7 @@
   <data name="Edit Document" xml:space="preserve">
     <value>编辑文档</value>
   </data>
+  <data name="Choose Document Type" xml:space="preserve">
+    <value>选择附件类型</value>
+  </data>
 </root>

@@ -207,4 +207,10 @@
   <data name="See all available options" xml:space="preserve">
     <value>Alle verfügbaren Optionen anzeigen</value>
   </data>
+  <data name="Choose Partner Type" xml:space="preserve">
+    <value>Partnertyp auswählen</value>
+  </data>
+  <data name="Choose Region" xml:space="preserve">
+    <value>Region auswählen</value>
+  </data>
 </root>

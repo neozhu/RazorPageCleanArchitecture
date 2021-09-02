@@ -18,6 +18,7 @@ using CleanArchitecture.Razor.Application.DocumentTypes.DTOs;
 using CleanArchitecture.Razor.Application.DocumentTypes.Queries.PaginationQuery;
 using Microsoft.AspNetCore.Authorization;
 using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SmartAdmin.WebUI.Pages.Documents
 {
@@ -28,7 +29,7 @@ namespace SmartAdmin.WebUI.Pages.Documents
         public AddEditDocumentCommand Input { get; set; }
         [BindProperty]
         public IFormFile UploadedFile { get; set; }
-        public IEnumerable<DocumentTypeDto> DocumentTypeDtos { get; set; }
+        public SelectList DocumentTypes { get; set; }
 
         private readonly ISender _mediator;
         private readonly IStringLocalizer<IndexModel> _localizer;
@@ -44,8 +45,9 @@ namespace SmartAdmin.WebUI.Pages.Documents
         public async Task OnGetAsync()
         {
             var request = new DocumentTypesGetAllQuery();
-            DocumentTypeDtos = await _mediator.Send(request);
-        }
+            var documentTypeDtos = await _mediator.Send(request);
+            DocumentTypes = new SelectList(documentTypeDtos, "Id", "Name");
+            }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] DocumentsWithPaginationQuery command)
         {
             var result = await _mediator.Send(command);

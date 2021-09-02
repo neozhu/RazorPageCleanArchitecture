@@ -207,4 +207,10 @@
   <data name="See all available options" xml:space="preserve">
     <value>所有功能</value>
   </data>
+  <data name="Choose Partner Type" xml:space="preserve">
+    <value>选择客户类型</value>
+  </data>
+  <data name="Choose Region" xml:space="preserve">
+    <value>选择区域</value>
+  </data>
 </root>

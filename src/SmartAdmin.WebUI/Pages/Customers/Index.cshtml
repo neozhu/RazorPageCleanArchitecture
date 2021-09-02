@@ -125,12 +125,15 @@
                         <div class="col-md-6">
                             <label class="form-label" for="PartnerType">@_localizer["Partner Type"] <span class="text-danger">*</span></label>
                             <select type="text" asp-for="Input.PartnerType" class="custom-select" asp-items="Html.GetEnumSelectList<PartnerType>()" required>
+                                <option value="">@_localizer["Choose Partner Type"]</option>
                             </select>
                             <span class="invalid-feedback" asp-validation-for="Input.PartnerType">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="GroupName">@_localizer["Region"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.Region" class="form-control" placeholder="Region" required />
+                            <select type="text" asp-for="Input.Region" class="custom-select" asp-dictionaries-for="Region" placeholder="Region" required>
+                                <option value="">@_localizer["Choose Region"]</option>
+                            </select>
                             <span class="invalid-feedback" asp-validation-for="Input.Region">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">

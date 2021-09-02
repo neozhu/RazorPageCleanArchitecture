@@ -60,6 +60,7 @@ namespace CleanArchitecture.Razor.Infrastructure
             services.AddTransient<IIdentityService, IdentityService>();
             services.Configure<MailSettings>(configuration.GetSection("MailSettings"));
             services.AddTransient<IMailService, SMTPMailService>();
+            services.AddTransient<IDictionaryService, DictionaryService>();
             services.AddAuthentication();
             services.Configure<IdentityOptions>(options =>
             {
