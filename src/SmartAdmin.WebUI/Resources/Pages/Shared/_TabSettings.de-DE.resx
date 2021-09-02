@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="4.5:1 text contrast ratio" xml:space="preserve">
+    <value>4,5:1 Textkontrastverhältnis</value>
+  </data>
+  <data name="Accessibility" xml:space="preserve">
+    <value>Barrierefreiheit</value>
+  </data>
+  <data name="adds more whitespace" xml:space="preserve">
+    <value>fügt mehr Leerzeichen hinzu</value>
+  </data>
+  <data name="App Layout" xml:space="preserve">
+    <value>App-Layout</value>
+  </data>
+  <data name="Bigger Content Font" xml:space="preserve">
+    <value>Schrift mit größerem Inhalt</value>
+  </data>
+  <data name="Boxed Layout" xml:space="preserve">
+    <value>Box-Layout</value>
+  </data>
+  <data name="Change &lt;strong&gt;root&lt;/strong&gt; font size to effect rem values (resets on page refresh)" xml:space="preserve">
+    <value>Ändern Sie die &lt;strong&gt;root&lt;/strong&gt;-Schriftgröße, um rem-Werte zu bewirken (wird bei der Seitenaktualisierung zurückgesetzt)</value>
+  </data>
+  <data name="Clean Page Background" xml:space="preserve">
+    <value>Seitenhintergrund reinigen</value>
+  </data>
+  <data name="Clear breakdown of nav links" xml:space="preserve">
+    <value>Übersichtliche Aufschlüsselung der Navigationslinks</value>
+  </data>
+  <data name="color vision deficiency" xml:space="preserve">
+    <value>Farbsehschwäche</value>
+  </data>
+  <data name="content fonts are bigger for readability" xml:space="preserve">
+    <value>Inhaltsschriften sind aus Gründen der Lesbarkeit größer</value>
+  </data>
+  <data name="Content overlaps menu" xml:space="preserve">
+    <value>Inhalt überlappt Menü</value>
+  </data>
+  <data name="Content pushed on menu reveal" xml:space="preserve">
+    <value>Inhalt auf Menü-Enthüllung verschoben</value>
+  </data>
+  <data name="Daltonism &lt;sup&gt;(beta)&lt;/sup&gt;" xml:space="preserve">
+    <value>Daltonismus &lt;sup&gt;(Beta)&lt;/sup&gt;</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Dunkel</value>
+  </data>
+  <data name="Dark Navigation" xml:space="preserve">
+    <value>Dunkle Navigation</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="Disable CSS Animation" xml:space="preserve">
+    <value>CSS-Animation deaktivieren</value>
+  </data>
+  <data name="Disables CSS based animations" xml:space="preserve">
+    <value>Deaktiviert CSS-basierte Animationen</value>
+  </data>
+  <data name="distinguished page header" xml:space="preserve">
+    <value>ausgezeichneter Seitenkopf</value>
+  </data>
+  <data name="Encapsulates to a container" xml:space="preserve">
+    <value>Kapselt in einen Container</value>
+  </data>
+  <data name="Factory Reset" xml:space="preserve">
+    <value>Werkseinstellungen zurückgesetzt</value>
+  </data>
+  <data name="Fixed Background" xml:space="preserve">
+    <value>Feststehender Hintergrund</value>
+  </data>
+  <data name="Fixed Footer" xml:space="preserve">
+    <value>Feste Fußzeile</value>
+  </data>
+  <data name="Fixed Header" xml:space="preserve">
+    <value>Fester Header</value>
+  </data>
+  <data name="Fixed Navigation" xml:space="preserve">
+    <value>Feste Navigation</value>
+  </data>
+  <data name="Global Font Size" xml:space="preserve">
+    <value>Globale Schriftgröße</value>
+  </data>
+  <data name="Global Modifications" xml:space="preserve">
+    <value>Globale Änderungen</value>
+  </data>
+  <data name="header is in a fixed at all times" xml:space="preserve">
+    <value>Header ist zu jeder Zeit fixiert</value>
+  </data>
+  <data name="Hide Info Card" xml:space="preserve">
+    <value>Infokarte ausblenden</value>
+  </data>
+  <data name="Hide Navigation" xml:space="preserve">
+    <value>Navigation ausblenden</value>
+  </data>
+  <data name="Hide Navigation Icons" xml:space="preserve">
+    <value>Navigationssymbole ausblenden</value>
+  </data>
+  <data name="Hides info card from left panel" xml:space="preserve">
+    <value>Blendet die Infokarte im linken Bereich aus</value>
+  </data>
+  <data name="Hierarchical Navigation" xml:space="preserve">
+    <value>Hierarchische Navigation</value>
+  </data>
+  <data name="High Contrast Text(WCAG 2 AA)" xml:space="preserve">
+    <value>Text mit hohem Kontrast (WCAG 2 AA)</value>
+  </data>
+  <data name="Internet Explorer Issue" xml:space="preserve">
+    <value>Problem mit dem Internet Explorer</value>
+  </data>
+  <data name="invisible navigation icons" xml:space="preserve">
+    <value>unsichtbare Navigationssymbole</value>
+  </data>
+  <data name="Lean Subheader" xml:space="preserve">
+    <value>Lean Subheader</value>
+  </data>
+  <data name="left panel is fixed" xml:space="preserve">
+    <value>linkes Panel ist repariert</value>
+  </data>
+  <data name="LG" xml:space="preserve">
+    <value>LG</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Hell</value>
+  </data>
+  <data name="MD" xml:space="preserve">
+    <value>MD</value>
+  </data>
+  <data name="Minify Navigation" xml:space="preserve">
+    <value>Navigation verkleinern</value>
+  </data>
+  <data name="Mobile Menu" xml:space="preserve">
+    <value>Mobiles Menü</value>
+  </data>
+  <data name="Navigation background is darkend" xml:space="preserve">
+    <value>Navigationshintergrund ist dunkel</value>
+  </data>
+  <data name="No Overlay" xml:space="preserve">
+    <value>Keine Überlagerung</value>
+  </data>
+  <data name="Off - Canvas &lt;sup&gt;(beta)&lt;/sup&gt;" xml:space="preserve">
+    <value>Aus – Canvas &lt;sup&gt;(Beta)&lt;/sup&gt;</value>
+  </data>
+  <data name="page footer is fixed" xml:space="preserve">
+    <value>Seitenfuß ist behoben</value>
+  </data>
+  <data name="Preloader Inside" xml:space="preserve">
+    <value>Preloader im Inneren</value>
+  </data>
+  <data name="preloader will be inside content" xml:space="preserve">
+    <value>Preloader wird im Inhalt sein</value>
+  </data>
+  <data name="Push Content" xml:space="preserve">
+    <value>Inhalte pushen</value>
+  </data>
+  <data name="Relocate left pane to top" xml:space="preserve">
+    <value>Linken Bereich nach oben verschieben</value>
+  </data>
+  <data name="Reset Settings" xml:space="preserve">
+    <value>Einstellungen zurücksetzen</value>
+  </data>
+  <data name="roll mouse on edge to reveal" xml:space="preserve">
+    <value>rollen Sie die Maus über die Kante, um sie zu enthüllen</value>
+  </data>
+  <data name="Skew nav to maximize space" xml:space="preserve">
+    <value>Neigen Sie das Navi, um den Platz zu maximieren</value>
+  </data>
+  <data name="SM" xml:space="preserve">
+    <value>SM</value>
+  </data>
+  <data name="smartpanel buttons will appear as icons" xml:space="preserve">
+    <value>Smartpanel-Schaltflächen werden als Symbole angezeigt</value>
+  </data>
+  <data name="SmartPanel Icons(not Panels)" xml:space="preserve">
+    <value>SmartPanel-Symbole (nicht Panels)</value>
+  </data>
+  <data name="Theme colors" xml:space="preserve">
+    <value>Themenfarben</value>
+  </data>
+  <data name="Theme Modes(beta)" xml:space="preserve">
+    <value>Themenmodi (Beta)</value>
+  </data>
+  <data name="This particular component may not work as expected in Internet Explorer.Please use with caution." xml:space="preserve">
+    <value>Diese spezielle Komponente funktioniert im Internet Explorer möglicherweise nicht wie erwartet. Bitte mit Vorsicht verwenden.</value>
+  </data>
+  <data name="Top Navigation" xml:space="preserve">
+    <value>Top-Navigation</value>
+  </data>
+  <data name="XL" xml:space="preserve">
+    <value>XL </value>
+  </data>
+</root>
