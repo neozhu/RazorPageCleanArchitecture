@@ -80,16 +80,13 @@ namespace CleanArchitecture.Razor.Infrastructure
                 // Here I stored necessary permissions/roles in a constant
                 foreach (var prop in typeof(Permissions).GetNestedTypes().SelectMany(c => c.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)))
                 {
-             
                     var propertyValue = prop.GetValue(null);
                     if (propertyValue is not null)
                     {
                         options.AddPolicy(propertyValue.ToString(), policy => policy.RequireClaim(ApplicationClaimTypes.Permission, propertyValue.ToString()));
                     }
-
                 }
             });
-
             return services;
         }
 

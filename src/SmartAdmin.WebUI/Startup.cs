@@ -42,8 +42,8 @@ namespace SmartAdmin.WebUI
 
             services.Configure<CookiePolicyOptions>(options =>
             {
-          // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-          options.CheckConsentNeeded = context => true;
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             services.AddWorkflow(Configuration);
@@ -64,7 +64,6 @@ namespace SmartAdmin.WebUI
             {
                 options.AddSupportedUICultures(LocalizationConstants.SupportedLanguages.Select(x=>x.Code).ToArray());
                 options.FallBackToParentUICultures = true;
-               
             });
             services
                 .AddRazorPages()
@@ -81,12 +80,11 @@ namespace SmartAdmin.WebUI
                     options.Conventions.AddPageRoute("/AspNetCore/Welcome", "");
                 });
 
-            services.ConfigureApplicationCookie(options =>
-      {
-          options.LoginPath = "/Identity/Account/Login";
-          options.LogoutPath = "/Identity/Account/Logout";
-          options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-      });
+            services.ConfigureApplicationCookie(options => {
+                        options.LoginPath = "/Identity/Account/Login";
+                        options.LogoutPath = "/Identity/Account/Logout";
+                        options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                  });
 
             services.AddScoped<RequestLocalizationCookiesMiddleware>();
         }
