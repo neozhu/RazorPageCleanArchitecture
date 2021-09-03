@@ -52,8 +52,6 @@ namespace CleanArchitecture.Razor.Infrastructure
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-
-
             services.AddTransient<IDateTime, DateTimeService>();
             services.AddTransient<IExcelService, ExcelService>();
             services.AddTransient<IUploadService, UploadService>();

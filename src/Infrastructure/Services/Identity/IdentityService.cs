@@ -4,6 +4,7 @@ using CleanArchitecture.Razor.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -81,5 +82,16 @@ namespace CleanArchitecture.Razor.Infrastructure.Services.Identity
 
             return result.ToApplicationResult();
         }
+
+        public async Task<IDictionary<string, string>> FetchUsers(string roleName)
+        {
+           var result = await _userManager.Users
+                .Where(x => x.UserRoles.Where(y => y.Role.Name == roleName).Any())
+                .Include(x=>x.UserRoles)
+                .ToDictionaryAsync(x => x.UserName, y => y.DisplayName);
+            return result;
+        }
+
+        
     }
 }

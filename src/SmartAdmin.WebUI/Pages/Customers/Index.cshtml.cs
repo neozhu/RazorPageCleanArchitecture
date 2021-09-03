@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Application.Common.Exceptions;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
 using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
 using CleanArchitecture.Razor.Application.Customers.Commands.Delete;
 using CleanArchitecture.Razor.Application.Customers.Commands.Import;
@@ -29,28 +30,31 @@ namespace SmartAdmin.WebUI.Pages.Customers
         [BindProperty]
         public IFormFile UploadedFile { get; set; }
 
+        private readonly IIdentityService _identityService;
         private readonly IAuthorizationService _authorizationService;
         private readonly ICurrentUserService _currentUserService;
         private readonly ISender _mediator;
         private readonly IStringLocalizer<IndexModel> _localizer;
 
         public IndexModel(
+           IIdentityService identityService,
             IAuthorizationService authorizationService,
             ICurrentUserService currentUserService,
             ISender mediator,
             IStringLocalizer<IndexModel> localizer
             )
         {
+            _identityService = identityService;
             _authorizationService = authorizationService;
             _currentUserService = currentUserService;
             _mediator = mediator;
             _localizer = localizer;
             var email = _currentUserService.UserId;
         }
-        
+
         public async Task OnGetAsync()
         {
-                  var _cancreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Customers.Create);
+            var result =await _identityService.FetchUsers("Admin");
         }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] CustomersWithPaginationQuery command)
         {
