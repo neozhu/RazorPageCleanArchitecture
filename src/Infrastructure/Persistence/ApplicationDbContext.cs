@@ -3,6 +3,7 @@ using CleanArchitecture.Razor.Domain.Common;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using CleanArchitecture.Razor.Infrastructure.Identity;
+using CleanArchitecture.Razor.Infrastructure.Persistence.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -77,7 +78,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
         {
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
+            builder.ApplyGlobalFilters<ISoftDelete>(s => s.Deleted == null);
         }
         
         private async Task DispatchEvents()
