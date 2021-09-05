@@ -4,7 +4,7 @@
     {
       "title": "Application Intel",
       "icon": "fal fa-info-circle",
-      "roles": [],
+      "roles": [ "Admin", "Basic" ],
       "items": [
         {
           "title": "Analytics Dashboard",
@@ -106,9 +106,7 @@
     {
       "title": "Workflow",
       "icon": "fal fa-clipboard-check",
-      "roles": [
-        "Administrator"
-      ],
+      "roles": [ "Admin", "Basic" ],
       "items": [
         {
           "title": "Approval",
@@ -125,9 +123,7 @@
     {
       "title": "Master Data",
       "icon": "fal fa-cubes",
-      "roles": [
-        "Administrator"
-      ],
+      "roles": [ "Admin", "Basic" ],
       "items": [
         {
           "title": "Customers",
@@ -144,9 +140,7 @@
     {
       "title": "Documents",
       "icon": "fal fa-paperclip",
-      "roles": [
-        "Administrator"
-      ],
+      "roles": [ "Admin", "Basic" ],
       "items": [
         {
           "title": "Documents",
@@ -173,9 +167,7 @@
     {
       "title": "Authorization",
       "icon": "fal fa-shield-alt",
-      "roles": [
-        "Administrator"
-      ],
+      "roles": [ "Admin" ],
       "items": [
         {
           "title": "Users",
