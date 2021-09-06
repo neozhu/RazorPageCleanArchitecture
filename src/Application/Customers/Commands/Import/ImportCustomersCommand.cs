@@ -122,6 +122,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
                 _localizer["Sales"],
                 _localizer["Address"],
                 _localizer["Contract"],
+                _localizer["Email"],
                 _localizer["Phone Number"],
                 _localizer["Email"],
                 _localizer["Contract2"],
