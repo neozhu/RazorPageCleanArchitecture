@@ -14,7 +14,10 @@ namespace CleanArchitecture.Razor.Application.Products.Commands.AddEdit
 {
     public class AddEditProductCommand: ProductDto,IRequest<Result>, IMapFrom<Product>
     {
-      
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<Product, AddEditProductCommand>().ReverseMap();
+        }
     }
 
     public class AddEditProductCommandHandler : IRequestHandler<AddEditProductCommand, Result>

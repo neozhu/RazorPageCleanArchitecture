@@ -56,6 +56,8 @@ namespace CleanArchitecture.Razor.Application.Products.Queries.Export
                 new Dictionary<string, Func<ProductDto, object>>()
                 {
                     //{ _localizer["Id"], item => item.Id },
+                    { _localizer["Name"], item => item.Name },
+                    { _localizer["Description"], item => item.Description }
                 }
                 , _localizer["Products"]);
             return result;
