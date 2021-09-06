@@ -258,4 +258,10 @@
   <data name="Projects" xml:space="preserve">
     <value>プロジェクト</value>
   </data>
+  <data name="Products" xml:space="preserve">
+    <value>プロダクツ</value>
+  </data>
+  <data name="Invoices" xml:space="preserve">
+    <value>請求 書</value>
+  </data>
 </root>

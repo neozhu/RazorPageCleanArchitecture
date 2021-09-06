@@ -40,6 +40,16 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
         public DbSet<KeyValue> KeyValues { get; set; }
         public DbSet<ApprovalData> ApprovalDatas { get; set; }
 
+
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<PurchaseContract> PurchaseContracts { get; set; }
+        public DbSet<PurchaseContractDetail> PurchaseContractDetails { get; set; }
+        public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+        public DbSet<SalesContract> SalesContracts { get; set; }
+        public DbSet<SalesContrcatDetail> SalesContrcatDetails { get; set; }
+        public DbSet<InvoiceDetail> InvoiceDetails { get; set; }
+
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
@@ -76,6 +86,14 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            foreach (var property in builder.Model.GetEntityTypes()
+                      .SelectMany(t => t.GetProperties())
+                      .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
+            {
+                // EF Core 5
+                property.SetPrecision(18);
+                property.SetScale(2);
+            }
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         }

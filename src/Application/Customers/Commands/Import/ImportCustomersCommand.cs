@@ -59,17 +59,20 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
             var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, Customer, object>>
             {
                 { _localizer["Name"], (row,item) => item.Name = row[_localizer["Name"]]?.ToString() },
-                { _localizer["Name Of English"], (row,item) => item.NameOfEnglish = row[_localizer["Name Of English"]]?.ToString() },
-                { _localizer["Group Name"], (row,item) => item.GroupName =  row[_localizer["Group Name"]]?.ToString() },
                 { _localizer["Partner Type"], (row,item) => item.PartnerType = (PartnerType) Enum.Parse(typeof(PartnerType), row[_localizer["Partner Type"]]==null?"TP":row[_localizer["Partner Type"]].ToString(), true)  },
                 { _localizer["Region"], (row,item) => item.Region =  row[_localizer["Region"]]?.ToString() },
                 { _localizer["Sales"], (row,item) => item.Sales =  row[_localizer["Sales"]]?.ToString() },
-                { _localizer["Region Sales Director"], (row,item) => item.RegionSalesDirector =  row[_localizer["Region Sales Director"]]?.ToString() },
                 { _localizer["Address"], (row,item) => item.Address =  row[_localizer["Address"]].ToString() },
-                { _localizer["Address Of English"], (row,item) => item.AddressOfEnglish =  row[_localizer["Address Of English"]]?.ToString() },
                 { _localizer["Contract"], (row,item) => item.Contract =  row[_localizer["Contract"]]?.ToString() },
+                { _localizer["Email"], (row,item) => item.Email =  row[_localizer["Email"]]?.ToString() },
                 { _localizer["Phone Number"], (row,item) => item.PhoneNumber =  row[_localizer["Phone Number"]]?.ToString() },
+                { _localizer["Contract2"], (row,item) => item.Contract2 =  row[_localizer["Contract2"]]?.ToString() },
+                { _localizer["Email2"], (row,item) => item.Email2 =  row[_localizer["Email2"]]?.ToString() },
+                { _localizer["Phone Number2"], (row,item) => item.PhoneNumber2 =  row[_localizer["Phone Number2"]]?.ToString() },
                 { _localizer["Fax"], (row,item) => item.Fax =  row[_localizer["Fax"]]?.ToString() },
+                { _localizer["Tax No"], (row,item) => item.TaxNo =  row[_localizer["Tax No"]]?.ToString() },
+                { _localizer["Bank"], (row,item) => item.Bank =  row[_localizer["Bank"]]?.ToString() },
+                { _localizer["Account No"], (row,item) => item.AccountNo =  row[_localizer["Account No"]]?.ToString() },
                 { _localizer["Comments"], (row,item) => item.Comments =  row[_localizer["Comments"]]?.ToString() }
             }, _localizer["Customers"]);
 
@@ -114,17 +117,20 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
         {
             var fields = new string[] {
                 _localizer["Name"],
-                _localizer["Name Of English"],
-                _localizer["Group Name"],
                 _localizer["Partner Type"],
                 _localizer["Region"],
                 _localizer["Sales"],
-                _localizer["Region Sales Director"],
                 _localizer["Address"],
-                _localizer["Address Of English"],
                 _localizer["Contract"],
                 _localizer["Phone Number"],
+                _localizer["Email"],
+                _localizer["Contract2"],
+                _localizer["Phone Number2"],
+                _localizer["Email2"],
                 _localizer["Fax"],
+                _localizer["Tax No"],
+                _localizer["Bank"],
+                _localizer["Account No"],
                 _localizer["Comments"],
                 };
             var result = await _excelService.CreateTemplateAsync(fields, _localizer["Customers"]);

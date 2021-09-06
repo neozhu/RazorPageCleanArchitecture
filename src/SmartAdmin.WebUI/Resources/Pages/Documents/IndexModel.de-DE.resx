@@ -204,4 +204,7 @@
   <data name="Download" xml:space="preserve">
     <value>Herunterladen</value>
   </data>
+  <data name="Invoices" xml:space="preserve">
+    <value>Rechnungen</value>
+  </data>
 </root>

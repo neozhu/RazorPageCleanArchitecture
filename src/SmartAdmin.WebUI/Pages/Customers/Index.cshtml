@@ -113,16 +113,6 @@
                             <span class="invalid-feedback" asp-validation-for="Input.Name">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label" for="nameOfEnglish">@_localizer["Name Of English"] </label>
-                            <input type="text" asp-for="Input.NameOfEnglish" class="form-control" placeholder="Customer Name of English" />
-                            <span class="invalid-feedback" asp-validation-for="Input.NameOfEnglish">Sorry, you missed this one.</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="GroupName">@_localizer["Group Name"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.GroupName" class="form-control" placeholder="Group Name" required />
-                            <span class="invalid-feedback" asp-validation-for="Input.GroupName">Sorry, you missed this one.</span>
-                        </div>
-                        <div class="col-md-6">
                             <label class="form-label" for="PartnerType">@_localizer["Partner Type"] <span class="text-danger">*</span></label>
                             <select type="text" asp-for="Input.PartnerType" class="custom-select" asp-items="Html.GetEnumSelectList<PartnerType>()" required>
                                 <option value="">@_localizer["Choose Partner Type"]</option>
@@ -141,41 +131,67 @@
                             <input type="text" asp-for="Input.Sales" class="form-control" placeholder="Sales" required />
                             <span class="invalid-feedback" asp-validation-for="Input.Sales">Sorry, you missed this one.</span>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="RegionSalesDirector">@_localizer["Region Sales Director"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.RegionSalesDirector" class="form-control" placeholder="Region Sales Director" required />
-                            <span class="invalid-feedback" asp-validation-for="Input.RegionSalesDirector">Sorry, you missed this one.</span>
-                        </div>
                         <div class="col-md-12">
                             <label class="form-label" for="Address">@_localizer["Address"] </label>
                             <input type="text" asp-for="Input.Address" class="form-control" placeholder="Address" />
                             <span class="invalid-feedback" asp-validation-for="Input.Address">Sorry, you missed this one.</span>
                         </div>
-                        <div class="col-md-12">
-                            <label class="form-label" for="Sales">@_localizer["Address Of English"] </label>
-                            <input type="text" asp-for="Input.AddressOfEnglish" class="form-control" placeholder="Address Of English" />
-                            <span class="invalid-feedback" asp-validation-for="Input.AddressOfEnglish">Sorry, you missed this one.</span>
-                        </div>
-                        <div class="col-md-6">
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4">
                             <label class="form-label" for="Contract">@_localizer["Contract"] </label>
                             <input type="text" asp-for="Input.Contract" class="form-control" placeholder="Contract" />
                             <span class="invalid-feedback" asp-validation-for="Input.Contract">Sorry, you missed this one.</span>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label class="form-label" for="Email">@_localizer["Email"] </label>
                             <input type="text" asp-for="Input.Email" class="form-control" placeholder="Email" />
                             <span class="invalid-feedback" asp-validation-for="Input.Email">Sorry, you missed this one.</span>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label class="form-label" for="PhoneNumber">@_localizer["Phone Number"] </label>
                             <input type="text" asp-for="Input.PhoneNumber" class="form-control" placeholder="Phone Number" />
                             <span class="invalid-feedback" asp-validation-for="Input.PhoneNumber">Sorry, you missed this one.</span>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <label class="form-label" for="Contract2">@_localizer["Contract2"] </label>
+                            <input type="text" asp-for="Input.Contract2" class="form-control" placeholder="Contract" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Contract2">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="Email">@_localizer["Email2"] </label>
+                            <input type="text" asp-for="Input.Email2" class="form-control" placeholder="Email" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Email2">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="PhoneNumber2">@_localizer["Phone Number2"] </label>
+                            <input type="text" asp-for="Input.PhoneNumber2" class="form-control" placeholder="Phone Number" />
+                            <span class="invalid-feedback" asp-validation-for="Input.PhoneNumber2">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4">
                             <label class="form-label" for="Fax">@_localizer["Fax"] </label>
                             <input type="text" asp-for="Input.Fax" class="form-control" placeholder="Fax" />
                             <span class="invalid-feedback" asp-validation-for="Input.Fax">Sorry, you missed this one.</span>
                         </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label class="form-label" for="TaxNo">@_localizer["Tax No"] </label>
+                            <input type="text" asp-for="Input.TaxNo" class="form-control" placeholder="Tax No" />
+                            <span class="invalid-feedback" asp-validation-for="Input.TaxNo">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="Bank">@_localizer["Bank"] </label>
+                            <input type="text" asp-for="Input.Bank" class="form-control" placeholder="Bank" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Bank">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="AccountNo">@_localizer["Account No"] </label>
+                            <input type="text" asp-for="Input.AccountNo" class="form-control" placeholder="Account No" />
+                            <span class="invalid-feedback" asp-validation-for="Input.AccountNo">Sorry, you missed this one.</span>
+                        </div>
+                    </div>
+                    <div class="form-row">
                         <div class="col-md-12">
                             <label class="form-label" for="Comments">@_localizer["Comments"] </label>
                             <input type="text" asp-for="Input.Comments" class="form-control" placeholder="Comments" />
@@ -302,19 +318,21 @@
                         }
                     },
                     { field: 'Name', title: '@_localizer["Name"]', sortable: true, width: 180 },
-                    { field: 'NameOfEnglish', title: '@_localizer["Name Of English"]', sortable: true, width: 180 },
-                    { field: 'GroupName', title: '@_localizer["Group Name"]', sortable: true, width: 180 },
                     { field: 'PartnerType', title: '@_localizer["Partner Type"]', sortable: true, width: 100, align: 'right' },
                     { field: 'Region', title: '@_localizer["Region"]', sortable: true, width: 120 },
                     { field: 'Sales', title: '@_localizer["Sales"]', sortable: true, width: 120 },
-                    { field: 'RegionSalesDirector', title: '@_localizer["Region Sales Director"]', sortable: true, width: 140 },
                     { field: 'Address', title: '@_localizer["Address"]', sortable: true, width: 180 },
-                    { field: 'AddressOfEnglish', title: '@_localizer["Address Of English"]', sortable: true, width: 180 },
                     { field: 'Contract', title: '@_localizer["Contract"]', sortable: true, width: 120 },
-                    { field: 'Email', title: 'Email', sortable: true, width: 130 },
+                    { field: 'Email', title: '@_localizer["Email"]', sortable: true, width: 130 },
                     { field: 'PhoneNumber', title: '@_localizer["Phone Number"]', sortable: true, width: 120 },
+                    { field: 'Contract2', title: '@_localizer["Contract2"]', sortable: true, width: 120 },
+                    { field: 'Email2', title: '@_localizer["Email2"]', sortable: true, width: 130 },
+                    { field: 'PhoneNumber2', title: '@_localizer["Phone Number2"]', sortable: true, width: 120 },
                     { field: 'Fax', title: '@_localizer["Fax"]', sortable: true, width: 120 },
-                    { field: 'Comments', title: '@_localizer["Comments"]', sortable: true, width: 180 }
+                    { field: 'TaxNo', title: '@_localizer["Tax No"]', sortable: true, width: 120 },
+                    { field: 'Bank', title: '@_localizer["Bank"]', sortable: true, width: 150 },
+                    { field: 'AccountNo', title: '@_localizer["Account No"]', sortable: true, width: 120 },
+                    { field: 'Comments', title: '@_localizer["Comments"]', sortable: true, width: 150 }
 
                 ]]
             })

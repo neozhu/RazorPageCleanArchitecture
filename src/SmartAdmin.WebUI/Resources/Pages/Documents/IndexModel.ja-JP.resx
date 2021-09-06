@@ -204,4 +204,7 @@
   <data name="Download" xml:space="preserve">
     <value>ダウンロード</value>
   </data>
+  <data name="Invoices" xml:space="preserve">
+    <value>請求 書</value>
+  </data>
 </root>

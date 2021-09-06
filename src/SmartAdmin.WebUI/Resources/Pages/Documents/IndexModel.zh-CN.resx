@@ -204,4 +204,7 @@
   <data name="Download" xml:space="preserve">
     <value>下载</value>
   </data>
+  <data name="Invoices" xml:space="preserve">
+    <value>开票情况</value>
+  </data>
 </root>

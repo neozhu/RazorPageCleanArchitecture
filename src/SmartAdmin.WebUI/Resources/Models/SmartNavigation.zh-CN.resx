@@ -258,4 +258,10 @@
   <data name="Projects" xml:space="preserve">
     <value>项目</value>
   </data>
+  <data name="Products" xml:space="preserve">
+    <value>原材料</value>
+  </data>
+  <data name="Invoices" xml:space="preserve">
+    <value>开票信息</value>
+  </data>
 </root>

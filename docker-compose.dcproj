@@ -16,10 +16,5 @@
   <ItemGroup>
     <None Remove="launchSettings.json" />
   </ItemGroup>
-  <ItemGroup>
-    <None Remove="launchSettings.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="launchSettings.json" />
-  </ItemGroup>
+
 </Project>

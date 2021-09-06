@@ -258,4 +258,10 @@
   <data name="Projects" xml:space="preserve">
     <value>Projects</value>
   </data>
+  <data name="Products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="Invoices" xml:space="preserve">
+    <value>Invoices</value>
+  </data>
 </root>
