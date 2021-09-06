@@ -62,6 +62,15 @@ namespace CleanArchitecture.Razor.Application.Resources.Customers.Commands.Impor
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account No.
+        /// </summary>
+        internal static string Account_No {
+            get {
+                return ResourceManager.GetString("Account No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         internal static string Address {
@@ -76,6 +85,15 @@ namespace CleanArchitecture.Razor.Application.Resources.Customers.Commands.Impor
         internal static string Address_Of_English {
             get {
                 return ResourceManager.GetString("Address Of English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank.
+        /// </summary>
+        internal static string Bank {
+            get {
+                return ResourceManager.GetString("Bank", resourceCulture);
             }
         }
         
@@ -98,6 +116,15 @@ namespace CleanArchitecture.Razor.Application.Resources.Customers.Commands.Impor
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contract2.
+        /// </summary>
+        internal static string Contract2 {
+            get {
+                return ResourceManager.GetString("Contract2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customers.
         /// </summary>
         internal static string Customers {
@@ -112,6 +139,15 @@ namespace CleanArchitecture.Razor.Application.Resources.Customers.Commands.Impor
         internal static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email2.
+        /// </summary>
+        internal static string Email2 {
+            get {
+                return ResourceManager.GetString("Email2", resourceCulture);
             }
         }
         
@@ -170,6 +206,15 @@ namespace CleanArchitecture.Razor.Application.Resources.Customers.Commands.Impor
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Phone Number2.
+        /// </summary>
+        internal static string Phone_Number2 {
+            get {
+                return ResourceManager.GetString("Phone Number2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Region.
         /// </summary>
         internal static string Region {
@@ -193,6 +238,15 @@ namespace CleanArchitecture.Razor.Application.Resources.Customers.Commands.Impor
         internal static string Sales {
             get {
                 return ResourceManager.GetString("Sales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tax No.
+        /// </summary>
+        internal static string Tax_No {
+            get {
+                return ResourceManager.GetString("Tax No", resourceCulture);
             }
         }
     }

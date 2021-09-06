@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Account No" xml:space="preserve">
+    <value>Account No</value>
+  </data>
   <data name="Address" xml:space="preserve">
     <value>Address</value>
   </data>
   <data name="Address Of English" xml:space="preserve">
     <value>Address Of English</value>
+  </data>
+  <data name="Bank" xml:space="preserve">
+    <value>Bank</value>
   </data>
   <data name="Comments" xml:space="preserve">
     <value>Comments</value>
@@ -129,11 +135,17 @@
   <data name="Contract" xml:space="preserve">
     <value>Contract</value>
   </data>
+  <data name="Contract2" xml:space="preserve">
+    <value>Contract2</value>
+  </data>
   <data name="Customers" xml:space="preserve">
     <value>Customers</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="Email2" xml:space="preserve">
+    <value>Email2</value>
   </data>
   <data name="Fax" xml:space="preserve">
     <value>Fax</value>
@@ -153,6 +165,9 @@
   <data name="Phone Number" xml:space="preserve">
     <value>Phone Number</value>
   </data>
+  <data name="Phone Number2" xml:space="preserve">
+    <value>Phone Number2</value>
+  </data>
   <data name="Region" xml:space="preserve">
     <value>Region</value>
   </data>
@@ -161,5 +176,8 @@
   </data>
   <data name="Sales" xml:space="preserve">
     <value>Sales</value>
+  </data>
+  <data name="Tax No" xml:space="preserve">
+    <value>Tax No</value>
   </data>
 </root>
