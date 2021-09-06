@@ -243,4 +243,19 @@
   <data name="Workflow" xml:space="preserve">
     <value>工作流</value>
   </data>
+  <data name="Contracts" xml:space="preserve">
+    <value>合同管理</value>
+  </data>
+  <data name="Sales Contracts" xml:space="preserve">
+    <value>销售合同</value>
+  </data>
+  <data name="Purchase Contracts" xml:space="preserve">
+    <value>采购合同</value>
+  </data>
+  <data name="Purchase Orders" xml:space="preserve">
+    <value>采购单</value>
+  </data>
+  <data name="Projects" xml:space="preserve">
+    <value>项目</value>
+  </data>
 </root>

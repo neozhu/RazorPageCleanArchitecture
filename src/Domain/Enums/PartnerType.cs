@@ -11,7 +11,7 @@ namespace CleanArchitecture.Razor.Domain.Enums
 {
     public enum PartnerType
     {
-        TP,
-        IC
+        Customer,
+        Supplier
     }
 }

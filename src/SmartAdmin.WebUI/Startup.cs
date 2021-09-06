@@ -46,7 +46,6 @@ namespace SmartAdmin.WebUI
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddWorkflow(Configuration);
             services.AddApplication();
             services.AddInfrastructure(Configuration);
          
@@ -115,7 +114,6 @@ namespace SmartAdmin.WebUI
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseWorkflow();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

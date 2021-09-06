@@ -26,6 +26,7 @@ namespace CleanArchitecture.Razor.Domain.Entities
         public DateTime? ReceiptDate { get; set; }
         public string InviceNo { get; set; }
         public decimal Balance { get; set; }
+        public DateTime? DueTime { get; set; }
         public string Comments { get; set; }
 
 

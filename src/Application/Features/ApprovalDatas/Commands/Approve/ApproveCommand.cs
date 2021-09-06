@@ -34,13 +34,13 @@ namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Ap
         public ApproveCommandHandler(
             IApplicationDbContext context,
             IStringLocalizer<ApproveCommandHandler> localizer,
-             IWorkflowHost workflowHost,
+             //IWorkflowHost workflowHost,
             IMapper mapper
             )
         {
             _context = context;
             _localizer = localizer;
-            _workflowHost = workflowHost;
+            //_workflowHost = workflowHost;
             _mapper = mapper;
         }
         public async Task<Result> Handle(ApproveCommand request, CancellationToken cancellationToken)

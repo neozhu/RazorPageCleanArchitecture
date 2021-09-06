@@ -25,6 +25,7 @@ namespace CleanArchitecture.Razor.Domain.Entities
         public decimal PaidRatio { get; set; }
         public DateTime? PaidDate { get; set; }
         public string InviceNo { get; set; }
+        public decimal? TaxRate { get; set; }
         public bool IsSpecial { get; set; }
         public decimal Balance { get; set; }
         public string Comments { get; set; }

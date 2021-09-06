@@ -18,6 +18,8 @@ namespace CleanArchitecture.Razor.Domain.Entities
         public string Description { get; set; }
         public int ProjectId { get; set; }
         public virtual Project Project { get; set; }
+        public int CustomerId { get; set; }
+        public virtual Customer Customer { get; set; }
         public DateTime ContractDate { get; set; }
         public DateTime? ClosedDate { get; set; }
         public string OrderNo { get; set; }

@@ -17,12 +17,16 @@ namespace CleanArchitecture.Razor.Domain.Entities
         public string PO { get; set; }
         public int ProductId {  get; set; }
         public virtual Product Product {  get; set; }
+        public int CustomerId { get; set; }
+        public virtual Customer Customer {  get; set; } 
         public string Description { get; set; }
         public DateTime OrderDate { get; set; }
         public int? Qty { get; set; }
         public decimal? Price { get; set; }
         public decimal Amount { get; set; }
         public string InviceNo { get; set; }
+        public decimal? TaxRate { get; set; }
+        public bool IsSpecial { get; set; }
 
 
         public List<DomainEvent> DomainEvents { get; set; }=new List<DomainEvent>();

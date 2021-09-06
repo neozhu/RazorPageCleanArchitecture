@@ -48,31 +48,11 @@
     </a>
 </div>
         }
-        <div>
-            <a href="#" class="header-icon" data-toggle="dropdown" title="My Apps">
-                <i class="@(Settings.Theme.IconPrefix) fa-cube"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-animated w-auto h-auto">
-                <partial name="_DropdownApp" />
-            </div>
-        </div>
+
         @if (User.Identity.IsAuthenticated)
         {
-@if (Settings.Features.ChatInterface)
-{
-<a href="#" class="header-icon" data-toggle="modal" data-target=".js-modal-messenger">
-    <i class="@(Settings.Theme.IconPrefix) fa-globe"></i>
-    <span class="badge badge-icon">!</span>
-</a>}
-                    <div>
-                        <a href="#" class="header-icon" data-toggle="dropdown" title="You got 11 notifications">
-                            <i class="@(Settings.Theme.IconPrefix) fa-bell"></i>
-                            <span class="badge badge-icon">11</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-animated dropdown-xl">
-                            <partial name="_DropdownNotification" />
-                        </div>
-                    </div>
+
+           
                                         <div>
                                             <a href="#" data-toggle="dropdown" title="@(User.GetEmail())" class="header-icon d-flex align-items-center justify-content-center ml-2">
                                                 <img src="@(User.GetProfilePictureDataUrl())" class="profile-image rounded-circle" alt="@(User.GetDisplayName())">
