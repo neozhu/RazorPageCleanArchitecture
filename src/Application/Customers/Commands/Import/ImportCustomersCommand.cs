@@ -68,6 +68,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
                 { _localizer["Address"], (row,item) => item.Address =  row[_localizer["Address"]].ToString() },
                 { _localizer["Address Of English"], (row,item) => item.AddressOfEnglish =  row[_localizer["Address Of English"]]?.ToString() },
                 { _localizer["Contract"], (row,item) => item.Contract =  row[_localizer["Contract"]]?.ToString() },
+                { _localizer["Email"], (row,item) => item.Email =  row[_localizer["Email"]]?.ToString() },
                 { _localizer["Phone Number"], (row,item) => item.PhoneNumber =  row[_localizer["Phone Number"]]?.ToString() },
                 { _localizer["Fax"], (row,item) => item.Fax =  row[_localizer["Fax"]]?.ToString() },
                 { _localizer["Comments"], (row,item) => item.Comments =  row[_localizer["Comments"]]?.ToString() }
@@ -123,6 +124,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
                 _localizer["Address"],
                 _localizer["Address Of English"],
                 _localizer["Contract"],
+                _localizer["Email"],
                 _localizer["Phone Number"],
                 _localizer["Fax"],
                 _localizer["Comments"],
