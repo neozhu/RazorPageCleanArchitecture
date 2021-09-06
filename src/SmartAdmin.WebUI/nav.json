@@ -251,8 +251,86 @@
           "roles": []
         }
       ]
+    },
+    {
+      "title": "Font Icons",
+      "icon": "fal fa-map-marker-alt",
+      "span": {
+        "class": "dl-ref bg-primary-500 hidden-nav-function-minify hidden-nav-function-top",
+        "text": "7,500+"
+      },
+      "roles": [],
+      "items": [
+        {
+          "title": "FontAwesome",
+          "text": "FontAwesome Pro",
+          "href": "javascript:void(0);",
+          "roles": [],
+          "items": [
+            {
+              "title": "Light",
+              "href": "icons_fontawesome_light.html",
+              "roles": []
+            },
+            {
+              "title": "Regular",
+              "href": "icons_fontawesome_regular.html",
+              "roles": []
+            },
+            {
+              "title": "Solid",
+              "href": "icons_fontawesome_solid.html",
+              "roles": []
+            },
+            {
+              "title": "Duotone",
+              "href": "icons_fontawesome_duotone.html",
+              "roles": []
+            },
+            {
+              "title": "Brand",
+              "href": "icons_fontawesome_brand.html",
+              "roles": []
+            }
+          ]
+        },
+        {
+          "title": "NextGen Icons",
+          "href": "javascript:void(0);",
+          "roles": [],
+          "items": [
+            {
+              "title": "General",
+              "href": "icons_nextgen_general.html",
+              "roles": []
+            },
+            {
+              "title": "Base",
+              "href": "icons_nextgen_base.html",
+              "roles": []
+            }
+          ]
+        },
+        {
+          "title": "Stack Icons",
+          "href": "javascript:void(0);",
+          "roles": [],
+          "items": [
+            {
+              "title": "Showcase",
+              "href": "icons_stack_showcase.html",
+              "roles": []
+            },
+            {
+              "title": "Generate Stack",
+              "href": "icons_stack_generate.html?layers=3",
+              "roles": []
+            }
+          ]
+        }
+      ]
     }
-     
-     
+
+
   ]
 }
