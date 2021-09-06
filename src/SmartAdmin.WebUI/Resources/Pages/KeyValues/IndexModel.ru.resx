@@ -156,4 +156,13 @@
   <data name="Are you sure delete checked rows?" xml:space="preserve">
     <value>Вы уверены, что удалите </value>
   </data>
+  <data name="Delete ${checkedId.length} Success" xml:space="preserve">
+    <value>Удалите ${checkedId.length} Успешно.</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="Dictionaries" xml:space="preserve">
+    <value>Словари</value>
+  </data>
 </root>

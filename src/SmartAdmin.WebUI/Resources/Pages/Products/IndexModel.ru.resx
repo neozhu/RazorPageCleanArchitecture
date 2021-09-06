@@ -118,51 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Export Excel" xml:space="preserve">
-    <value>Excelをエクスポートする</value>
+    <value>Экспорт в Excel</value>
   </data>
   <data name="Add" xml:space="preserve">
-    <value>追加</value>
+    <value>Добавлять</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>キャンセル</value>
+    <value>Отмена</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>選ぶ</value>
+    <value>Закрывать</value>
   </data>
   <data name="Command" xml:space="preserve">
-    <value>指示</value>
+    <value>Командование</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>消去</value>
+    <value>Удалить</value>
   </data>
   <data name="Download Template" xml:space="preserve">
-    <value>テンプレートをダウンロード</value>
+    <value>Скачать шаблон</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>編集</value>
+    <value>Редактировать</value>
   </data>
   <data name="Import Excel" xml:space="preserve">
-    <value>Excelをインポートする</value>
+    <value>Импортировать Excel</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>保存する</value>
+    <value>Сохранить</value>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>検索</value>
+    <value>Поиск</value>
   </data>
   <data name="See all available options" xml:space="preserve">
-    <value>利用可能なすべてのオプションを表示</value>
+    <value>Посмотреть все доступные варианты</value>
   </data>
   <data name="Are you sure delete checked rows?" xml:space="preserve">
-    <value>削除してもよろしいですか </value>
+    <value>Вы уверены, что удалите </value>
   </data>
-  <data name="Delete ${checkedId.length} Success" xml:space="preserve">
-    <value>${checkedId.length} 成功を削除します。</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>形容</value>
-  </data>
-  <data name="Dictionaries" xml:space="preserve">
-    <value>辞書</value>
+  <data name="Products" xml:space="preserve">
+    <value>Продукция</value>
   </data>
 </root>

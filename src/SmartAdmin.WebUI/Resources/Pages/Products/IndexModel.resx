@@ -117,52 +117,79 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Export Excel" xml:space="preserve">
-    <value>Excelをエクスポートする</value>
-  </data>
   <data name="Add" xml:space="preserve">
-    <value>追加</value>
-  </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>キャンセル</value>
-  </data>
-  <data name="Close" xml:space="preserve">
-    <value>選ぶ</value>
-  </data>
-  <data name="Command" xml:space="preserve">
-    <value>指示</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>消去</value>
-  </data>
-  <data name="Download Template" xml:space="preserve">
-    <value>テンプレートをダウンロード</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>編集</value>
-  </data>
-  <data name="Import Excel" xml:space="preserve">
-    <value>Excelをインポートする</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>保存する</value>
-  </data>
-  <data name="Search" xml:space="preserve">
-    <value>検索</value>
-  </data>
-  <data name="See all available options" xml:space="preserve">
-    <value>利用可能なすべてのオプションを表示</value>
+    <value>Add</value>
   </data>
   <data name="Are you sure delete checked rows?" xml:space="preserve">
-    <value>削除してもよろしいですか </value>
+    <value>Are you sure delete checked rows?</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Command" xml:space="preserve">
+    <value>Command</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
   <data name="Delete ${checkedId.length} Success" xml:space="preserve">
-    <value>${checkedId.length} 成功を削除します。</value>
+    <value>Delete ${checkedId.length} Success</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>形容</value>
+    <value>Description</value>
   </data>
-  <data name="Dictionaries" xml:space="preserve">
-    <value>辞書</value>
+  <data name="Download Template" xml:space="preserve">
+    <value>Download Template</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Export Excel" xml:space="preserve">
+    <value>Export Excel</value>
+  </data>
+  <data name="Export Success" xml:space="preserve">
+    <value>Export Success</value>
+  </data>
+  <data name="Import Excel" xml:space="preserve">
+    <value>Import Excel</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Please upload a file" xml:space="preserve">
+    <value>Please upload a file</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Save Success" xml:space="preserve">
+    <value>Save Success</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="See all available options" xml:space="preserve">
+    <value>See all available options</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

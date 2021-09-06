@@ -156,13 +156,7 @@
   <data name="Are you sure delete checked rows?" xml:space="preserve">
     <value>削除してもよろしいですか </value>
   </data>
-  <data name="Delete ${checkedId.length} Success" xml:space="preserve">
-    <value>${checkedId.length} 成功を削除します。</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>形容</value>
-  </data>
-  <data name="Dictionaries" xml:space="preserve">
-    <value>辞書</value>
+  <data name="Products" xml:space="preserve">
+    <value>プロダクツ</value>
   </data>
 </root>

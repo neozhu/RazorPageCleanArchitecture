@@ -36,6 +36,7 @@
   <ItemGroup>
     <Folder Include="Documents\Commands\Import\" />
     <Folder Include="Features\ApprovalDatas\EventHandlers\" />
+    <Folder Include="Products\EventHandlers\" />
     <Folder Include="Resources\Documents\Commands\Import\" />
     <Folder Include="Resources\Features\ApprovalDatas\Commands\Import\" />
     <Folder Include="Workflow\Approval\Data\" />
