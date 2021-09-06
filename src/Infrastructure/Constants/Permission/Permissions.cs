@@ -66,7 +66,8 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Permission
             public const string Delete = "Permissions.Documents.Delete";
             public const string Search = "Permissions.Documents.Search";
             public const string Export = "Permissions.Documents.Export";
-            public const string Import = "Permissions.Categories.Import";
+            public const string Import = "Permissions.Documents.Import";
+            public const string Download = "Permissions.Documents.Download";
         }
         [DisplayName("DocumentTypes")]
         [Description("DocumentTypes Permissions")]

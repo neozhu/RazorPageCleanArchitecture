@@ -201,4 +201,7 @@
   <data name="Choose Document Type" xml:space="preserve">
     <value>ドキュメントタイプを選択</value>
   </data>
+  <data name="Download" xml:space="preserve">
+    <value>ダウンロード</value>
+  </data>
 </root>
