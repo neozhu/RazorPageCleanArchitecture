@@ -1,0 +1,500 @@
+﻿@page
+@using CleanArchitecture.Razor.Infrastructure.Constants.Permission
+@model SmartAdmin.WebUI.Pages.Projects.IndexModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
+@inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
+@{
+    ViewData["Title"] = _localizer["Projects"].Value;
+    ViewData["PageName"] = "projects_index";
+    ViewData["Category1"] = _localizer["Master Data"].Value;
+    ViewData["Heading"] = _localizer["Projects"].Value;
+    ViewData["PageDescription"] = _localizer["See all available options"].Value;
+    ViewData["PreemptiveClass"] = "Default";
+    var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Projects.Create);
+    var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.Projects.Edit);
+    var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.Projects.Delete);
+    var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.Projects.Search);
+    var _canImport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Projects.Import);
+    var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Projects.Export);
+}
+@section HeadBlock {
+
+    <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+    <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+    <link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">
+    <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+    <style>
+
+        .projects_dg_datagrid-cell-c1-_action {
+            overflow: visible !important
+        }
+    </style>
+}
+<div id="js-page-content-demopanels" class="card mb-g">
+    <div class="card-header bg-white d-flex align-items-center">
+        <h4 class="m-0">
+            @_localizer["Projects"]
+            <small>@_localizer["See all available options"]</small>
+        </h4>
+        <div class="ml-auto">
+            @if (_canCreate.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="addbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
+                    @_localizer["Add"]
+                </button>
+            }
+            @if (_canDelete.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-danger" disabled id="deletebutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
+                    @_localizer["Delete"]
+                </button>
+            }
+            @if (_canEdit.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-secondary" disabled id="cancelbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-stop mr-1"></span>
+                    @_localizer["Cancel"]
+                </button>
+                <button class="btn btn-sm btn-outline-primary" disabled id="savebutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-save mr-1"></span>
+                    @_localizer["Save"]
+                </button>
+            }
+            @if (_canSearch.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="searchbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
+                    @_localizer["Search"]
+                </button>
+            }
+            @if (_canImport.Succeeded)
+            {
+                <div class="btn-group" role="group">
+                    <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
+                        <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>   @_localizer["Import Excel"]
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="importbutton">
+                        <button id="gettemplatebutton" class="dropdown-item">@_localizer["Download Template"]</button>
+                    </div>
+                </div>
+            }
+            @if (_canExport.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="exportbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                    @_localizer["Export Excel"]
+                </button>
+            }
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.AntiForgeryToken()
+                <table id="projects_dg">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Component.InvokeAsync("ImportExcel", new
+{
+    importUri = Url.Page("/Projects/Index") + "?handler=Import",
+    getTemplateUri = @Url.Page("/Projects/Index") + "?handler=CreateTemplate",
+    onImportedSucceeded = "reload()"
+})
+@section ScriptsBlock {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+    <script>//jQuery.fn.tooltip = bootstrapTooltip;</script>
+    <script src="~/lib/axios/dist/axios.js"></script>
+    <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+
+    <script type="text/javascript">
+        $('#searchbutton').click(function () {
+            reload();
+        });
+        $('#addbutton').click(function () {
+            onAddRow(null);
+        });
+        $('#deletebutton').click(function () {
+            onDeleteChecked();
+        });
+        $('#cancelbutton').click(function () {
+            onReject();
+        });
+        $('#savebutton').click(function () {
+            onAcceptChanges();
+        });
+        $('#exportbutton').click(function () {
+            onExport();
+        });
+        $('#importbutton').click(function () {
+            showImportModal();
+        });
+        $('#gettemplatebutton').click(function () {
+            onGetTemplate();
+        });
+        $('#projects_form :submit').click(function (e) {
+            var form = document.querySelector('#projects_form');
+            $(form).find(":valid").parent().removeClass("was-validated");
+            if (form.checkValidity() === false) {
+                form.classList.add('was-validated');
+            } else {
+                var request = $('#projects_form').serialize();
+                axios.post('@Url.Page("/Projects/Index")', request).then(res => {
+                    toastr["info"]('@_localizer["Save Success"]');
+                    $('#projects_modal').modal('toggle');
+                    reload();
+                }).catch((error) => {
+                    var msg = error.response.data;
+                    bootbox.alert({
+                        size: "small",
+                        title: "@_localizer["Error"]",
+                        message: msg,
+                        callback: function () { /* your callback code */ }
+                    })
+
+                });
+            }
+            event.preventDefault();
+            event.stopPropagation();
+        })
+        var $dg={};
+        var initdatagrid = () => {
+            $dg = $('#projects_dg').datagrid({
+                height: 700,
+                method: 'GET',
+                rownumbers: false,
+                singleSelect: true,
+                selectOnCheck: false,
+                checkOnSelect: false,
+                pagination: true,
+                clientPaging: false,
+                remoteFilter: true,
+                sortName: 'Id',
+                sortOrder:'desc',
+                pageSize: 15,
+                pageList: [10, 15, 30, 50, 100, 1000],
+                onBeforeLoad: function () {
+                    editIndex = undefined;
+                    $('#deletebutton').prop('disabled', true);
+                },
+                onCheckAll: function (rows) {
+                    const checked = $(this).datagrid('getChecked').length > 0;
+                    $('#deletebutton').prop('disabled', !checked);
+                },
+                onUncheckAll: function () {
+                    $('#deletebutton').prop('disabled', true);
+                },
+                onCheck: function () {
+                    $('#deletebutton').prop('disabled', false);
+                },
+                onUncheck: function () {
+                    const checked = $(this).datagrid('getChecked').length > 0;
+                    $('#deletebutton').prop('disabled', !checked);
+                },
+                onClickRow: function (index, row) {
+                    console.log('onClickRow')
+                    currentItem = row;
+                    onBeginEdit(index, row);
+                },
+                onEndEdit: function (index, row) {
+                    onEndEdit(index,row)
+                },
+                columns: [[
+                    { field: 'ck', checkbox: true },
+                    {
+                        field: 'Name',
+                        title: '@_localizer["Name"]',
+                        sortable: true,
+                        width: 190,
+                        editor: { type: 'textbox', options: { required: true} }
+                    },
+                    {
+                        field: 'Status',
+                        title: '@_localizer["Status"]',
+                        sortable: true,
+                        width: 130
+                    },
+                    {
+                        field: 'BeginDateTime',
+                        title: '@_localizer["Begin DateTime"]',
+                        sortable: true,
+                        width: 150,
+                        formatter:dateformatter,
+                        editor: { type: 'datebox', options: { required: true } }
+                    },
+                    {
+                        field: 'EndDateTime',
+                        title: '@_localizer["End DateTime"]',
+                        sortable: true,
+                        width: 150,
+                        formatter:dateformatter
+                     
+                    },
+                    {
+                        field: 'Description',
+                        title: '@_localizer["Description"]',
+                        sortable: true,
+                        width: 280,
+                        editor: { type: 'textbox', options: { required: false } }
+                    },
+                    {
+                        field: 'EstimatedCost',
+                        title: '@_localizer["Estimated Cost"]',
+                        sortable: true,
+                        width: 150,
+                        align: 'right',
+                        formatter:numberformatter,
+                        editor: { type: 'numberbox', options: { required: false, parser: parsernumber, formatter: numberformatter} }
+                    },
+                    {
+                        field: 'ActualCost',
+                        title: '@_localizer["Actual Cost"]',
+                        sortable: true,
+                        width: 150,
+                        align: 'right',
+                        formatter:numberformatter,
+                      
+                    },
+                     {
+                         field: 'ContractAmount',
+                        title: '@_localizer["Contract Amount"]',
+                        sortable: true,
+                        width: 150,
+                        align: 'right',
+                        formatter:numberformatter,
+                       
+                    },
+                     {
+                         field: 'ReceiptAmount',
+                        title: '@_localizer["Receipt Amount"]',
+                        sortable: true,
+                        width: 150,
+                        align: 'right',
+                        formatter:numberformatter
+
+                    },
+                     {
+                         field: 'GrossMargin',
+                        title: '@_localizer["Gross Margin"]',
+                        sortable: true,
+                        width: 150,
+                        align: 'right',
+                        formatter:numberformatter
+
+                    },
+
+
+                ]]
+            })
+                .datagrid('enableFilter', {})
+                .datagrid('load', '@Url.Page("/Projects/Index")?handler=Data');
+
+        }
+
+        var reload = () => {
+            $dg.datagrid('load', '@Url.Page("/Projects/Index")?handler=Data');
+        }
+
+        $(() => {
+            initdatagrid();
+        })
+        var editIndex = undefined;
+        var currentItem = {};
+        var onEndEditing = () => {
+            if (editIndex == undefined) {
+                return true
+            }
+            if ($dg.datagrid('validateRow', editIndex)) {
+                $dg.datagrid('endEdit', editIndex);
+                editIndex = undefined;
+                return true;
+            } else {
+                return false;
+            }
+        }
+        var onAddRow = () => {
+            if (onEndEditing()) {
+                $dg.datagrid('insertRow', { index: 0,
+                    row: {
+                        Name: '',
+                        Description: '',
+                        Status: 'Draft',
+                        BeginDateTime: moment(),
+                        EndDateTime: null,
+                        EstimatedCost: null,
+                        ActualCost: null,
+                        ContractAmount: null,
+                        ReceiptAmount: null,
+                        GrossMargin: null,
+
+                    }
+                    });
+                editIndex =0 ;
+                $dg.datagrid('selectRow', editIndex)
+                    .datagrid('beginEdit', editIndex);
+                $('#savebutton').prop('disabled', false);
+                $('#cancelbutton').prop('disabled', false);
+            }
+        }
+        var onBeginEdit = (index, field)=> {
+            if (editIndex != index) {
+                if (onEndEditing()) {
+                    $dg.datagrid('selectRow', index)
+                        .datagrid('beginEdit', index);
+                    var ed = $dg.datagrid('getEditor', { index: index, field: field });
+                    if (ed) {
+                        ($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
+                    }
+                    editIndex = index;
+                } else {
+                    setTimeout(function () {
+                        $dg.datagrid('selectRow', editIndex);
+                    }, 1);
+                }
+                $('#savebutton').prop('disabled', false);
+                $('#cancelbutton').prop('disabled', false);
+            }
+        }
+        var onEndEdit = (index, row)=> {
+            var ed = $dg.datagrid('getEditor', {
+                index: index,
+                field: 'Name'
+            });
+            row.Name = $(ed.target).textbox('getValue');
+            currentItem = row;
+        }
+
+        var onReject = () => {
+            $dg.datagrid('rejectChanges');
+            editIndex = undefined;
+            $('#savebutton').prop('disabled', true);
+            $('#cancelbutton').prop('disabled', true);
+        }
+        var onAcceptChanges = () => {
+            if (onEndEditing()) {
+                if ($dg.datagrid("getChanges").length) {
+                    const inserted = $dg.datagrid('getChanges', 'inserted').map(item => {
+                        item.TrackingState = 1;
+                        return item;
+                    });
+                    const updated = $dg.datagrid('getChanges', 'updated').map(item => {
+                        item.TrackingState = 2
+                        return item;
+                    });
+                    const deleted = $dg.datagrid('getChanges', 'deleted').map(item => {
+                        item.TrackingState = 3
+                        return item;
+                    });
+                    //Deleting duplicate items
+                    const changed = inserted.concat(updated.filter(item => {
+                        return !deleted.includes(item);
+                    })).concat(deleted);
+                    axios.post('@Url.Page("/Projects/Index")', { Items: changed }, {
+                        headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() }
+                    })
+                        .then(response => {
+                            toastr["info"]('@_localizer["Save Success"]');
+                            $dg.datagrid('acceptChanges');
+                            reload();
+                        }).catch(error => {
+                            var msg = error.response.data;
+                            bootbox.alert({
+                                size: "small",
+                                title: "@_localizer["Error"]",
+                                message: msg,
+                                callback: function () { /* your callback code */ }
+                            })
+
+                        });
+
+                }
+            }
+        }
+
+
+        var onDeleteChecked = () => {
+            var checkedId = $dg.datagrid('getChecked').map(x => x.Id);
+            if (checkedId.length > 0) {
+                bootbox.confirm({
+                    message: "@_localizer["Are you sure delete checked rows?"]",
+                    buttons: {
+                        confirm: {
+                            label: '@_localizer["Yes"]',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: '@_localizer["No"]',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
+                            console.log(paras.toString())
+                            axios.get('@Url.Page("/Projects/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
+                                toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
+                                reload();
+                            })
+                                .catch((error) => {
+                                    var msg = error.response.data;
+                                    bootbox.alert({
+                                        size: "small",
+                                        title: "@_localizer["Error"]",
+                                        message: msg,
+                                        callback: function () { /* your callback code */ }
+                                    })
+                                });
+                        }
+                    }
+                });
+
+            }
+        }
+        var onExport = () => {
+            var options = $dg.datagrid('options');
+            var data = {
+                filterRules: JSON.stringify(options.filterRules),
+                sort: options.sortName,
+                order: options.sortOrder,
+            }
+            console.log(options,data)
+            var headers = {
+                "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+            }
+            axios.post('@Url.Page("/Projects/Index")?handler=Export',
+                data,
+                {
+                    headers: headers,
+                    responseType: "blob"
+                })
+                .then(response => {
+                    const filename = getFileName(response.headers['content-disposition']);
+                    const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', filename);
+                    document.body.appendChild(link);
+                    link.click();
+                    toastr["info"](`@_localizer["Export Success"]`);
+                }).catch(error => {
+                    console.log(error)
+                })
+
+
+        }
+
+
+    </script>
+}

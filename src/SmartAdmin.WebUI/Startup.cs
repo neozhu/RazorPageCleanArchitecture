@@ -70,8 +70,10 @@ namespace SmartAdmin.WebUI
                 .AddJsonOptions(options =>
                   {
                       options.JsonSerializerOptions.PropertyNamingPolicy = null;
-                      
-                    })
+                      options.JsonSerializerOptions.IgnoreNullValues = false;
+                      options.JsonSerializerOptions.Converters.Add(new EmptyNumberConverter());
+                      options.JsonSerializerOptions.Converters.Add(new EmptyIntConverter());
+                  })
                 .AddRazorRuntimeCompilation()
                 .AddRazorPagesOptions(options =>
                 {

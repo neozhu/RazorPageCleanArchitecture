@@ -6,7 +6,7 @@ namespace CleanArchitecture.Razor.Application.Products.Commands.Import
     {
         public ImportProductsCommandValidator()
         {
-            //TODO:Implementing ImportProductCommandValidator method 
+            
             RuleFor(v => v.Data).NotNull();
         }
     }

@@ -11,6 +11,11 @@
         "dist/axios.min.js",
         "dist/axios.min.map"
       ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "numeral.js@2.0.6",
+      "destination": "wwwroot/lib/numeral/"
     }
   ]
 }

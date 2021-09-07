@@ -17,7 +17,18 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Permission
             public const string Search = "Permissions.Approval.Search";
             public const string Export = "Permissions.Approval.Export";
         }
-
+        [DisplayName("Projects")]
+        [Description("Projects Permissions")]
+        public static class Projects
+        {
+            public const string View = "Permissions.Projects.View";
+            public const string Create = "Permissions.Projects.Create";
+            public const string Edit = "Permissions.Projects.Edit";
+            public const string Delete = "Permissions.Projects.Delete";
+            public const string Search = "Permissions.Projects.Search";
+            public const string Export = "Permissions.Projects.Export";
+            public const string Import = "Permissions.Projects.Import";
+        }
         [DisplayName("Products")]
         [Description("Products Permissions")]
         public static class Products
