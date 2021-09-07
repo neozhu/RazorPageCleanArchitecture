@@ -11,17 +11,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitecture.Razor.Application.Customers.Commands.Delete
 {
-    public class DeleteCommerCommand: IRequest<Result>
+    public class DeleteCustomerCommand: IRequest<Result>
     {
         public int Id { get; set; }
     }
-    public class DeleteCheckedCommersCommand : IRequest<Result>
+    public class DeleteCheckedCustomersCommand : IRequest<Result>
     {
         public int[] Id { get; set; }
     }
 
-    public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCommerCommand, Result>,
-        IRequestHandler<DeleteCheckedCommersCommand, Result>
+    public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommand, Result>,
+        IRequestHandler<DeleteCheckedCustomersCommand, Result>
     {
         private readonly IApplicationDbContext _context;
 
@@ -31,7 +31,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Delete
         {
             _context = context;
         }
-        public async Task<Result> Handle(DeleteCommerCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
         {
             var item =await _context.Customers.FindAsync(request.Id);
             _context.Customers.Remove(item);
@@ -39,7 +39,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Delete
             return Result.Success();
         }
 
-        public async Task<Result> Handle(DeleteCheckedCommersCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(DeleteCheckedCustomersCommand request, CancellationToken cancellationToken)
         {
             var items = await _context.Customers.Where(x => request.Id.Contains(x.Id)).ToListAsync(cancellationToken);
             foreach(var item in items)
