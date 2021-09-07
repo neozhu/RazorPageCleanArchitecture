@@ -65,7 +65,7 @@ namespace CleanArchitecture.Razor.Application.PurchaseOrders.Queries.Export
                     { _localizer["Qty"], item => item.Qty },
                     { _localizer["Price"], item => item.Price },
                     { _localizer["Amount"], item => item.Amount },
-                    { _localizer["Invice No"], item => item.InviceNo },
+                    { _localizer["Invoice No"], item => item.InvoiceNo },
                     { _localizer["Tax Rate"], item => item.TaxRate },
                     { _localizer["Is Special"], item => item.IsSpecial }
                 }

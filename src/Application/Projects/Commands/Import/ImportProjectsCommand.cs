@@ -16,6 +16,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using CleanArchitecture.Razor.Application.Projects.Commands.AddEdit;
+using CleanArchitecture.Razor.Application.Projects.Commands.Create;
 
 namespace CleanArchitecture.Razor.Application.Projects.Commands.Import
 {
@@ -37,14 +38,14 @@ namespace CleanArchitecture.Razor.Application.Projects.Commands.Import
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
         private readonly IStringLocalizer<ImportProjectsCommandHandler> _localizer;
-        private readonly IValidator<AddEditProjectCommand> _addValidator;
+        private readonly IValidator<CreateProjectCommand> _addValidator;
         private readonly IExcelService _excelService;
 
         public ImportProjectsCommandHandler(
             IApplicationDbContext context,
             IExcelService excelService,
             IStringLocalizer<ImportProjectsCommandHandler> localizer,
-            IValidator<AddEditProjectCommand> addValidator,
+            IValidator<CreateProjectCommand> addValidator,
             IMapper mapper
             )
         {
@@ -62,12 +63,12 @@ namespace CleanArchitecture.Razor.Application.Projects.Commands.Import
                 { _localizer["Status"], (row,item) => item.Status = row[_localizer["Status"]]?.ToString() },
                 { _localizer["Description"], (row,item) => item.Description =  row[_localizer["Description"]]?.ToString() },
                 { _localizer["Begin DateTime"], (row,item) => item.BeginDateTime = DateTime.Parse(row[_localizer["Begin DateTime"]].ToString()) },
-                { _localizer["End DateTime"], (row,item) => item.EndDateTime = row[_localizer["Status"]]==null?null:  DateTime.Parse(row[_localizer["End DateTime"]].ToString()) },
-                { _localizer["Estimated Cost"], (row,item) => item.EstimatedCost = row[_localizer["Estimated Cost"]]==null?null: decimal.Parse(row[_localizer["Estimated Cost"]].ToString())},
-                { _localizer["Actual Cost"], (row,item) => item.ActualCost = row[_localizer["Actual Cost"]]==null?null: decimal.Parse(row[_localizer["Actual Cost"]].ToString())},
-                { _localizer["Contract Amount"], (row,item) => item.ContractAmount = row[_localizer["Status"]]==null?null:decimal.Parse(row[_localizer["Contract Amount"]].ToString()) },
-                { _localizer["Receipt Amount"], (row,item) => item.ReceiptAmount = row[_localizer["Receipt Amount"]]==null?null:decimal.Parse(row[_localizer["Receipt Amount"]].ToString()) },
-                { _localizer["Gross Margin"], (row,item) => item.GrossMargin = row[_localizer["Gross Margin"]]==null?null:decimal.Parse(row[_localizer["Gross Margin"]].ToString()) }
+                { _localizer["End DateTime"], (row,item) => item.EndDateTime = row.IsNull(_localizer["End DateTime"])?null:  DateTime.Parse(row[_localizer["End DateTime"]].ToString()) },
+                { _localizer["Estimated Cost"], (row,item) => item.EstimatedCost = row.IsNull(_localizer["Estimated Cost"])?null: decimal.Parse(row[_localizer["Estimated Cost"]].ToString())},
+                { _localizer["Actual Cost"], (row,item) => item.ActualCost = row.IsNull(_localizer["Actual Cost"])?null: decimal.Parse(row[_localizer["Actual Cost"]].ToString())},
+                { _localizer["Contract Amount"], (row,item) => item.ContractAmount = row.IsNull(_localizer["Contract Amount"])?null:decimal.Parse(row[_localizer["Contract Amount"]].ToString()) },
+                { _localizer["Receipt Amount"], (row,item) => item.ReceiptAmount = row.IsNull(_localizer["Receipt Amount"])?null:decimal.Parse(row[_localizer["Receipt Amount"]].ToString()) },
+                { _localizer["Gross Margin"], (row,item) => item.GrossMargin = row.IsNull(_localizer["Gross Margin"])?null:decimal.Parse(row[_localizer["Gross Margin"]].ToString()) }
 
             }, _localizer["Projects"]);
 
@@ -78,7 +79,7 @@ namespace CleanArchitecture.Razor.Application.Projects.Commands.Import
                 var errorsOccurred = false;
                 foreach (var item in importItems)
                 {
-                    var validationResult = await _addValidator.ValidateAsync(_mapper.Map<AddEditProjectCommand>(item), cancellationToken);
+                    var validationResult = await _addValidator.ValidateAsync(_mapper.Map<CreateProjectCommand>(item), cancellationToken);
                     if (validationResult.IsValid)
                     {
                         var exist = await _context.Projects.AnyAsync(x => x.Name == item.Name, cancellationToken);

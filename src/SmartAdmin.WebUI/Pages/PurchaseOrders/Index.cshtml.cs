@@ -118,14 +118,29 @@ namespace SmartAdmin.WebUI.Pages.PurchaseOrders
         }
         public async Task<IActionResult> OnPostImportAsync()
         {
-            var stream=new MemoryStream();
-            await  UploadedFile.CopyToAsync(stream);
-            var command = new ImportPurchaseOrdersCommand() {
-                 FileName=UploadedFile.FileName,
-                 Data= stream.ToArray()
-            };
-            var result = await _mediator.Send(command);
-            return new JsonResult(result);
+            try
+            {
+                var stream = new MemoryStream();
+                await UploadedFile.CopyToAsync(stream);
+                var command = new ImportPurchaseOrdersCommand()
+                {
+                    FileName = UploadedFile.FileName,
+                    Data = stream.ToArray()
+                };
+                var result = await _mediator.Send(command);
+                return new JsonResult(result);
+            }
+            catch (ValidationException ex)
+            {
+                var errors = ex.Errors.Select(x => $"{ string.Join(",", x.Value) }");
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return new JsonResult(string.Join(",", errors));
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return new JsonResult(ex.Message);
+            }
         }
 
     }

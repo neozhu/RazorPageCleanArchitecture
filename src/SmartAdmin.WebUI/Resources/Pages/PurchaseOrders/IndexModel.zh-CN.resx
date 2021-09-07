@@ -189,7 +189,67 @@
   <data name="Yes" xml:space="preserve">
     <value>是</value>
   </data>
-  <data name="Products" xml:space="preserve">
-    <value>原材料</value>
+  <data name="Projects" xml:space="preserve">
+    <value>项目信息</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>状体</value>
+  </data>
+  <data name="Begin DateTime" xml:space="preserve">
+    <value>开始日期</value>
+  </data>
+  <data name="End DateTime" xml:space="preserve">
+    <value>结束日期</value>
+  </data>
+  <data name="Estimated Cost" xml:space="preserve">
+    <value>评估成本</value>
+  </data>
+  <data name="Actual Cost" xml:space="preserve">
+    <value>实际成本</value>
+  </data>
+  <data name="Contract Amount" xml:space="preserve">
+    <value>合同金额(含税)</value>
+  </data>
+  <data name="Receipt Amount" xml:space="preserve">
+    <value>已收款</value>
+  </data>
+  <data name="Gross Margin" xml:space="preserve">
+    <value>毛利</value>
+  </data>
+  <data name="Purchase Orders" xml:space="preserve">
+    <value>原料采购单信息</value>
+  </data>
+  <data name="Contracts" xml:space="preserve">
+    <value>合同管理</value>
+  </data>
+  <data name="PO" xml:space="preserve">
+    <value>采购单号</value>
+  </data>
+  <data name="Product Name" xml:space="preserve">
+    <value>原材料名称</value>
+  </data>
+  <data name="Customer Name" xml:space="preserve">
+    <value>供应商名称</value>
+  </data>
+  <data name="Order Date" xml:space="preserve">
+    <value>采购日期</value>
+  </data>
+  <data name="Qty" xml:space="preserve">
+    <value>数量</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>单价</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>总金额(含税)</value>
+  </data>
+  <data name="Invoice No" xml:space="preserve">
+    <value>发票号</value>
+  </data>
+  <data name="Tax Rate" xml:space="preserve">
+    <value>税率</value>
+  </data>
+  <data name="Is Special" xml:space="preserve">
+    <value>是否专票</value>
   </data>
 </root>

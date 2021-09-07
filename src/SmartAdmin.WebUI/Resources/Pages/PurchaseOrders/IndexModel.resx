@@ -118,78 +118,138 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Add" xml:space="preserve">
-    <value>新增</value>
+    <value>Add</value>
   </data>
   <data name="Are you sure delete checked rows?" xml:space="preserve">
-    <value>你确定要删除选择的记录吗？</value>
+    <value>Are you sure delete checked rows?</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>取消</value>
+    <value>Cancel</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>关闭</value>
+    <value>Close</value>
   </data>
   <data name="Command" xml:space="preserve">
-    <value>操作</value>
+    <value>Command</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>删除</value>
+    <value>Delete</value>
   </data>
   <data name="Delete ${checkedId.length} Success" xml:space="preserve">
-    <value>删除 ${checkedId.length} 成功</value>
+    <value>Delete ${checkedId.length} Success</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>描述</value>
+    <value>Description</value>
   </data>
   <data name="Download Template" xml:space="preserve">
-    <value>下载模板</value>
+    <value>Download Template</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>编辑</value>
+    <value>Edit</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>错误</value>
+    <value>Error</value>
   </data>
   <data name="Export Excel" xml:space="preserve">
-    <value>导出Excel</value>
+    <value>Export Excel</value>
   </data>
   <data name="Export Success" xml:space="preserve">
-    <value>导出成功</value>
+    <value>Export Success</value>
   </data>
   <data name="Import Excel" xml:space="preserve">
-    <value>导入 Excel</value>
+    <value>Import Excel</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>名称</value>
+    <value>Name</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>否</value>
+    <value>No</value>
   </data>
   <data name="Please upload a file" xml:space="preserve">
-    <value>请上传附件</value>
+    <value>Please upload a file</value>
+  </data>
+  <data name="Projects" xml:space="preserve">
+    <value>Projects</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>保存</value>
+    <value>Save</value>
   </data>
   <data name="Save Success" xml:space="preserve">
-    <value>保存成功</value>
+    <value>Save Success</value>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>查询</value>
+    <value>Search</value>
   </data>
   <data name="See all available options" xml:space="preserve">
-    <value>所有可用功能</value>
+    <value>See all available options</value>
   </data>
   <data name="Text" xml:space="preserve">
-    <value>文本</value>
+    <value>Text</value>
   </data>
   <data name="Value" xml:space="preserve">
-    <value>值</value>
+    <value>Value</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>是</value>
+    <value>Yes</value>
   </data>
-  <data name="Products" xml:space="preserve">
-    <value>原材料</value>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Begin DateTime" xml:space="preserve">
+    <value>Begin DateTime</value>
+  </data>
+  <data name="End DateTime" xml:space="preserve">
+    <value>End DateTime</value>
+  </data>
+  <data name="Estimated Cost" xml:space="preserve">
+    <value>Estimated Cost</value>
+  </data>
+  <data name="Actual Cost" xml:space="preserve">
+    <value>Actual Cost</value>
+  </data>
+  <data name="Contract Amount" xml:space="preserve">
+    <value>Contract Amount</value>
+  </data>
+  <data name="Receipt Amount" xml:space="preserve">
+    <value>Receipt Amount</value>
+  </data>
+  <data name="Gross Margin" xml:space="preserve">
+    <value>Gross Margin</value>
+  </data>
+  <data name="Purchase Orders" xml:space="preserve">
+    <value>Purchase Orders</value>
+  </data>
+  <data name="Contracts" xml:space="preserve">
+    <value>Contracts</value>
+  </data>
+  <data name="PO" xml:space="preserve">
+    <value>PO</value>
+  </data>
+  <data name="Product Name" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="Customer Name" xml:space="preserve">
+    <value>Customer Name</value>
+  </data>
+  <data name="Order Date" xml:space="preserve">
+    <value>Order Date</value>
+  </data>
+  <data name="Qty" xml:space="preserve">
+    <value>Qty</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="Invoice No" xml:space="preserve">
+    <value>Invoice No</value>
+  </data>
+  <data name="Tax Rate" xml:space="preserve">
+    <value>Tax Rate</value>
+  </data>
+  <data name="Is Special" xml:space="preserve">
+    <value>Is Special</value>
   </data>
 </root>

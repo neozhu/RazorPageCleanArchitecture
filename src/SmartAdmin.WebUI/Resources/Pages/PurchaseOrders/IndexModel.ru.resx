@@ -117,79 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add" xml:space="preserve">
-    <value>新增</value>
+  <data name="Export Excel" xml:space="preserve">
+    <value>Экспорт в Excel</value>
   </data>
-  <data name="Are you sure delete checked rows?" xml:space="preserve">
-    <value>你确定要删除选择的记录吗？</value>
+  <data name="Add" xml:space="preserve">
+    <value>Добавлять</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>取消</value>
+    <value>Отмена</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>关闭</value>
+    <value>Закрывать</value>
   </data>
   <data name="Command" xml:space="preserve">
-    <value>操作</value>
+    <value>Командование</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>删除</value>
-  </data>
-  <data name="Delete ${checkedId.length} Success" xml:space="preserve">
-    <value>删除 ${checkedId.length} 成功</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>描述</value>
+    <value>Удалить</value>
   </data>
   <data name="Download Template" xml:space="preserve">
-    <value>下载模板</value>
+    <value>Скачать шаблон</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>编辑</value>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>错误</value>
-  </data>
-  <data name="Export Excel" xml:space="preserve">
-    <value>导出Excel</value>
-  </data>
-  <data name="Export Success" xml:space="preserve">
-    <value>导出成功</value>
+    <value>Редактировать</value>
   </data>
   <data name="Import Excel" xml:space="preserve">
-    <value>导入 Excel</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>名称</value>
-  </data>
-  <data name="No" xml:space="preserve">
-    <value>否</value>
-  </data>
-  <data name="Please upload a file" xml:space="preserve">
-    <value>请上传附件</value>
+    <value>Импортировать Excel</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>保存</value>
-  </data>
-  <data name="Save Success" xml:space="preserve">
-    <value>保存成功</value>
+    <value>Сохранить</value>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>查询</value>
+    <value>Поиск</value>
   </data>
   <data name="See all available options" xml:space="preserve">
-    <value>所有可用功能</value>
+    <value>Посмотреть все доступные варианты</value>
   </data>
-  <data name="Text" xml:space="preserve">
-    <value>文本</value>
+  <data name="Are you sure delete checked rows?" xml:space="preserve">
+    <value>Вы уверены, что удалите </value>
   </data>
-  <data name="Value" xml:space="preserve">
-    <value>值</value>
-  </data>
-  <data name="Yes" xml:space="preserve">
-    <value>是</value>
-  </data>
-  <data name="Products" xml:space="preserve">
-    <value>原材料</value>
+  <data name="Projects" xml:space="preserve">
+    <value>Продукция</value>
   </data>
 </root>

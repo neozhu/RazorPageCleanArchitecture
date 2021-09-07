@@ -35,7 +35,7 @@
 <div id="js-page-content-demopanels" class="card mb-g">
     <div class="card-header bg-white d-flex align-items-center">
         <h4 class="m-0">
-            @_localizer["PurchaseOrders"] 
+            @_localizer["Purchase Orders"] 
             <small>@_localizer["See all available options"]</small>
         </h4>
         <div class="ml-auto">
@@ -159,9 +159,9 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-4">
-                            <label class="form-label" for="InviceNo">@_localizer["Invice No"] </label>
-                            <input type="text" asp-for="Input.InviceNo" class="form-control" placeholder="Invice No" />
-                            <span class="invalid-feedback" asp-validation-for="Input.InviceNo">Sorry, you missed this one.</span>
+                            <label class="form-label" for="InviceNo">@_localizer["Invoice No"] </label>
+                            <input type="text" asp-for="Input.InvoiceNo" class="form-control" placeholder="Invice No" />
+                            <span class="invalid-feedback" asp-validation-for="Input.InvoiceNo">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label" for="TaxRate">@_localizer["Tax Rate"] </label>
@@ -315,7 +315,7 @@
                     { field: 'InviceNo', title: '@_localizer["Invice No"]', sortable: true, width: 120 },
                     { field: 'TaxRate', title: '@_localizer["Tax Rate"]', sortable: true, width: 130 },
                     { field: 'IsSpecial', title: '@_localizer["Is Special"]', sortable: true, width: 120,formatter:checkboxformatter },
-                    { field: 'Description', title: '@_localizer["Description"]', sortable: true, width: 160 },
+                    { field: 'Description', title: '@_localizer["Description"]', sortable: true, width: 260 },
 
                 ]]
             })

@@ -53,12 +53,70 @@ namespace CleanArchitecture.Razor.Application.PurchaseOrders.Commands.Import
         public async Task<Result> Handle(ImportPurchaseOrdersCommand request, CancellationToken cancellationToken)
         {
            //TODO:Implementing ImportPurchaseOrdersCommandHandler method
-           var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, PurchaseOrder, object>>
+           var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, PurchaseOrderDto, object>>
             {
-                //ex. { _localizer["Name"], (row,item) => item.Name = row[_localizer["Name"]]?.ToString() },
+                { _localizer["PO"], (row,item) => item.PO = row[_localizer["PO"]]?.ToString() },
+                { _localizer["Status"], (row,item) => item.Status = row[_localizer["Status"]]?.ToString() },
+                { _localizer["Product Name"], (row,item) => item.ProductName = row[_localizer["Product Name"]]?.ToString() },
+                { _localizer["Customer Name"], (row,item) => item.CustomerName = row[_localizer["Customer Name"]]?.ToString() },
+                { _localizer["Description"], (row,item) => item.Description = row[_localizer["Description"]]?.ToString() },
+                { _localizer["Order Date"], (row,item) => item.OrderDate = DateTime.Parse(row[_localizer["Order Date"]].ToString()) },
+                { _localizer["Qty"], (row,item) => item.Qty = row.IsNull(_localizer["Qty"])?null:int.Parse(row[_localizer["Qty"]].ToString()) },
+                { _localizer["Price"], (row,item) => item.Price = row.IsNull(_localizer["Price"])?null:decimal.Parse(row[_localizer["Price"]].ToString()) },
+                { _localizer["Amount"], (row,item) => item.Amount = row.IsNull(_localizer["Amount"])?0m:decimal.Parse(row[_localizer["Amount"]].ToString()) },
+                { _localizer["Invoice No"], (row,item) => item.InvoiceNo = row[_localizer["Invoice No"]]?.ToString() },
+                { _localizer["Tax Rate"], (row,item) => item.TaxRate = row.IsNull(_localizer["Tax Rate"])?null:decimal.Parse(row[_localizer["Tax Rate"]].ToString()) },
+                { _localizer["Is Special"], (row,item) => item.IsSpecial =bool.Parse(row[_localizer["Is Special"]].ToString()) }
 
             }, _localizer["PurchaseOrders"]);
-           throw new System.NotImplementedException();
+            if (result.Succeeded)
+            {
+                foreach (var item in result.Data) {
+                    var product =await  _context.Products.FirstOrDefaultAsync(x => x.Name ==item.ProductName);
+                    if (product == null)
+                    {
+                        product = new Product() { Name = item.ProductName ,Description=   "从采购单导入" };
+                        _context.Products.Add(product);
+                    }
+                    var customer=await _context.Customers.FirstOrDefaultAsync(x=>x.Name==item.CustomerName);
+                    if (customer == null)
+                    {
+                        customer = new Customer()
+                        {
+                            Name = item.CustomerName,
+                            PartnerType = Domain.Enums.PartnerType.Supplier,
+                            Comments="从采购单导入",
+                        };
+                        _context.Customers.Add(customer);   
+                    }
+                    var purchaseOrder = new PurchaseOrder()
+                    {
+                        PO = item.PO,
+                        Amount = item.Amount,
+                        CustomerId = customer.Id,
+                        Customer = customer,
+                        InvoiceNo = item.InvoiceNo,
+                        IsSpecial = item.IsSpecial,
+                        Description = item.Description,
+                        OrderDate = item.OrderDate,
+                        Product = product,
+                        ProductId = product.Id,
+                        Price = item.Price,
+                        Qty = item.Qty,
+                        Status = "Draft",
+                        TaxRate = item.TaxRate,
+
+                    };
+                    _context.PurchaseOrders.Add(purchaseOrder);
+                    await _context.SaveChangesAsync(cancellationToken);
+                }
+
+                return Result.Success();
+            }
+            else
+            {
+                return await Result.FailureAsync(result.Errors);
+            }
         }
         public async Task<byte[]> Handle(CreatePurchaseOrdersTemplateCommand request, CancellationToken cancellationToken)
         {
@@ -72,7 +130,7 @@ namespace CleanArchitecture.Razor.Application.PurchaseOrders.Commands.Import
                 _localizer["Qty"],
                 _localizer["Price"],
                 _localizer["Amount"],
-                _localizer["Invice No"],
+                _localizer["Invoice No"],
                 _localizer["Tax Rate"],
                 _localizer["Is Special"]
                 };

@@ -14,7 +14,10 @@ namespace CleanArchitecture.Razor.Application.Projects.Commands.Create
 {
     public class CreateProjectCommand: ProjectDto,IRequest<Result>, IMapFrom<Project>
     {
-      
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<Project, CreateProjectCommand>().ReverseMap();
+        }
     }
     
 
