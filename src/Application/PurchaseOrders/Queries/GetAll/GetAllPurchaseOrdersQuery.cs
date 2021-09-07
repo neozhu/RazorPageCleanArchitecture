@@ -12,26 +12,26 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper.QueryableExtensions;
 using Microsoft.Extensions.Localization;
-using CleanArchitecture.Razor.Application.Products.DTOs;
+using CleanArchitecture.Razor.Application.PurchaseOrders.DTOs;
 
-namespace CleanArchitecture.Razor.Application.Products.Queries.GetAll
+namespace CleanArchitecture.Razor.Application.PurchaseOrders.Queries.GetAll
 {
-    public class GetAllProductsQuery : IRequest<IEnumerable<ProductDto>>
+    public class GetAllPurchaseOrdersQuery : IRequest<IEnumerable<PurchaseOrderDto>>
     {
        
     }
     
-    public class GetAllProductsQueryHandler :
-         IRequestHandler<GetAllProductsQuery, IEnumerable<ProductDto>>
+    public class GetAllPurchaseOrdersQueryHandler :
+         IRequestHandler<GetAllPurchaseOrdersQuery, IEnumerable<PurchaseOrderDto>>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
-        private readonly IStringLocalizer<GetAllProductsQueryHandler> _localizer;
+        private readonly IStringLocalizer<GetAllPurchaseOrdersQueryHandler> _localizer;
 
-        public GetAllProductsQueryHandler(
+        public GetAllPurchaseOrdersQueryHandler(
             IApplicationDbContext context,
             IMapper mapper,
-            IStringLocalizer<GetAllProductsQueryHandler> localizer
+            IStringLocalizer<GetAllPurchaseOrdersQueryHandler> localizer
             )
         {
             _context = context;
@@ -39,11 +39,10 @@ namespace CleanArchitecture.Razor.Application.Products.Queries.GetAll
             _localizer = localizer;
         }
 
-        public async Task<IEnumerable<ProductDto>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<PurchaseOrderDto>> Handle(GetAllPurchaseOrdersQuery request, CancellationToken cancellationToken)
         {
-            
-            var data = await _context.Products
-                         .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
+            var data = await _context.PurchaseOrders
+                         .ProjectTo<PurchaseOrderDto>(_mapper.ConfigurationProvider)
                          .ToListAsync(cancellationToken);
             return data;
         }

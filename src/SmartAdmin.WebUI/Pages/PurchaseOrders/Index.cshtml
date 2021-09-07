@@ -1,23 +1,23 @@
 ﻿@page
 @using CleanArchitecture.Razor.Domain.Enums
-@using Microsoft.AspNetCore.Mvc.Localization
 @using CleanArchitecture.Razor.Infrastructure.Constants.Permission
-@model SmartAdmin.WebUI.Pages.Documents.IndexModel
+@model SmartAdmin.WebUI.Pages.PurchaseOrders.IndexModel
 @inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
-  ViewData["Title"] = _localizer["Documents"].Value;
-  ViewData["PageName"] = "documents_index";
-  ViewData["Category1"] = _localizer["Documents"].Value;
-  ViewData["Heading"] = _localizer["Documents"].Value;
+  ViewData["Title"] = _localizer["Purchase Orders"].Value;
+  ViewData["PageName"] = "purchaseOrders_index";
+  ViewData["Category1"] = _localizer["Contracts"].Value;
+  ViewData["Heading"] = _localizer["Purchase Orders"].Value;
   ViewData["PageDescription"] = _localizer["See all available options"].Value;
   ViewData["PreemptiveClass"] = "Default";
-  var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Create);
-  var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Edit);
-  var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Delete);
-  var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Search);
-  var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Export);
-  var _canDownload = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Download);
+  var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseOrders.Create);
+  var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseOrders.Edit);
+  var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseOrders.Delete);
+  var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseOrders.Search);
+  var _canImport = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseOrders.Import);
+  var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseOrders.Export);
+
 }
 @section HeadBlock {
 
@@ -27,7 +27,7 @@
     <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
     <style>
 
-        .document_dg_datagrid-cell-c1-_action {
+        .purchaseOrder_dg_datagrid-cell-c1-_action {
             overflow: visible !important
         }
     </style>
@@ -35,7 +35,7 @@
 <div id="js-page-content-demopanels" class="card mb-g">
     <div class="card-header bg-white d-flex align-items-center">
         <h4 class="m-0">
-            @_localizer["Documents"]
+            @_localizer["PurchaseOrders"] 
             <small>@_localizer["See all available options"]</small>
         </h4>
         <div class="ml-auto">
@@ -60,6 +60,20 @@
                     @_localizer["Search"]
                 </button>
             }
+            @if (_canImport.Succeeded)
+            {
+                <div class="btn-group" role="group">
+                    <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
+                        <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>   @_localizer["Import Excel"]
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="importbutton">
+                        <button id="gettemplatebutton" class="dropdown-item">@_localizer["Download Template"]</button>
+                    </div>
+                </div>
+            }
             @if (_canExport.Succeeded)
             {
                 <button class="btn btn-sm btn-outline-primary " id="exportbutton">
@@ -67,18 +81,18 @@
                     @_localizer["Export Excel"]
                 </button>
             }
-        </div>
+            </div>
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col-md-12">
-                <table id="document_dg">
+                <table id="purchaseOrder_dg">
                 </table>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="document_modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="purchaseOrder_modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -87,51 +101,85 @@
                     <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
                 </button>
             </div>
-            <form id="document_form" class="needs-validation" novalidate="novalidate">
+            <form id="purchaseOrder_form" class="needs-validation" novalidate="novalidate">
                 <div class="modal-body">
                     @Html.AntiForgeryToken()
                     <input type="hidden" asp-for="Input.Id" />
+                    @Html.ValidationSummary()
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label class="form-label" for="PO">@_localizer["PO"] <span class="text-danger">*</span></label>
+                        <input type="text" asp-for="Input.PO" class="form-control" placeholder="PO" required />
+                        <span class="invalid-feedback" asp-validation-for="Input.PO">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="PO">@_localizer["Status"]  </label>
+                        <input type="text" asp-for="Input.Status" class="form-control" placeholder="Status" readonly="readonly" />
+                        <span class="invalid-feedback" asp-validation-for="Input.Status">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="ProductId">@_localizer["Product Name"] <span class="text-danger">*</span></label>
+                        <select type="text" asp-for="Input.ProductId" class="custom-select" asp-items="Model.Products" required>
+                            <option value="">@_localizer["Choose Product"]</option>
+                        </select>
+                        <span class="invalid-feedback" asp-validation-for="Input.ProductId">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="CustomerId">@_localizer["Customer Name"] <span class="text-danger">*</span></label>
+                        <select type="text" asp-for="Input.CustomerId" class="custom-select" asp-items="Model.Customers" required>
+                            <option value="">@_localizer["Choose Customer"]</option>
+                        </select>
+                        <span class="invalid-feedback" asp-validation-for="Input.CustomerId">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label" for="OrderDate">@_localizer["Order Date"] <span class="text-danger">*</span></label>
+                        <input type="date" asp-for="Input.OrderDate" class="form-control" placeholder="Order Date" required  />
+                        <span class="invalid-feedback" asp-validation-for="Input.OrderDate">Sorry, you missed this one.</span>
+                    </div>
+                   
+
+                </div>
                     <div class="form-row">
-                        <div class="col-md-6">
-                            <label class="form-label" for="Title">@_localizer["Title"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.Title" class="form-control" placeholder="Title" required />
-                            <span class="invalid-feedback" asp-validation-for="Input.Title">Sorry, you missed this one.</span>
+                        <div class="col-md-4">
+                            <label class="form-label" for="Qty">@_localizer["Qty"] </label>
+                            <input type="number" asp-for="Input.Qty" class="form-control" placeholder="Contract" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Qty">Sorry, you missed this one.</span>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="DocumentTypeId">@_localizer["Document Type"] <span class="text-danger">*</span></label>
-                            <select type="text" asp-for="Input.DocumentTypeId" asp-items="Model.DocumentTypes" class="custom-select" placeholder="Document Type" required>
-                                <option value="">@_localizer["Choose Document Type"]</option>
-                            </select>
-                            <span class="invalid-feedback" asp-validation-for="Input.DocumentTypeId">Sorry, you missed this one.</span>
+                        <div class="col-md-4">
+                            <label class="form-label" for="Price">@_localizer["Price"] </label>
+                            <input type="number" asp-for="Input.Price" class="form-control" placeholder="Price" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Price">Sorry, you missed this one.</span>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="IsPublic"> </label>
+                        <div class="col-md-4">
+                            <label class="form-label" for="Amount">@_localizer["Amount"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.Amount" class="form-control" placeholder="Amount" required />
+                            <span class="invalid-feedback" asp-validation-for="Input.Amount">Sorry, you missed this one.</span>
+                        </div>
+                        
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label class="form-label" for="InviceNo">@_localizer["Invice No"] </label>
+                            <input type="text" asp-for="Input.InviceNo" class="form-control" placeholder="Invice No" />
+                            <span class="invalid-feedback" asp-validation-for="Input.InviceNo">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="TaxRate">@_localizer["Tax Rate"] </label>
+                            <input type="number" asp-for="Input.TaxRate" class="form-control" placeholder="Tax Rate" />
+                            <span class="invalid-feedback" asp-validation-for="Input.TaxRate">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="IsSpecial">  </label>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" asp-for="Input.IsPublic" class="custom-control-input" value="true">
-                                <label class="custom-control-label" for="Input_IsPublic">@_localizer["Is Public"]</label>
+                                <input type="checkbox" asp-for="Input.IsSpecial" class="custom-control-input" value="true" >
+                                <label class="custom-control-label" for="Input_IsSpecial">@_localizer["Is Special"]</label>
                             </div>
+                           
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="col-md-12">
-                            <label class="form-label" for=""></label>
-
-                            <input type="file" asp-for="UploadedFile" style="display:none" required />
-                            <div class="">
-
-                                <button name="uploadbutton" class="btn btn-primary btn-icon waves-effect waves-themed mr-2">
-                                    <i class="fal fa-paperclip"></i>
-                                </button><span class="text-danger">*</span>
-                                <div id="uploadfilename">
-                                    <div class="alert alert-danger mt-2 mb-2" role="alert">
-                                        <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a file"].
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                        </div>
-                        <div class="col-md-12">
-                            <label class="form-label" for="Description">@_localizer["Description"] </label>
+                            <label class="form-label" for="Sales">@_localizer["Description"] </label>
                             <input type="text" asp-for="Input.Description" class="form-control" placeholder="Description" />
                             <span class="invalid-feedback" asp-validation-for="Input.Description">Sorry, you missed this one.</span>
                         </div>
@@ -139,18 +187,15 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
-                    <button type="submit" name="savebutton" class="btn btn-primary">@_localizer["Save"]</button>
+                    <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-@await Component.InvokeAsync("ImportExcel", new
-{
-    importUri = Url.Page("/Documents/Index") + "?handler=Import",
-    getTemplateUri = @Url.Page("/Documents/Index") + "?handler=CreateTemplate",
-    onImportedSucceeded = "reload()"
-})
+@await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/PurchaseOrders/Index") + "?handler=Import",
+    getTemplateUri = @Url.Page("/PurchaseOrders/Index") + "?handler=CreateTemplate",
+    onImportedSucceeded = "reload()" })
 @section ScriptsBlock {
     <partial name="_ValidationScriptsPartial" />
 
@@ -166,7 +211,7 @@
             reload();
         });
         $('#addbutton').click(function () {
-            popupmodal(null);
+            popupmodal({ Id: 0, Status: 'Draft', IsSpecial:false},'add');
         });
         $('#deletebutton').click(function () {
             onDeleteChecked();
@@ -174,36 +219,26 @@
         $('#exportbutton').click(function () {
             onExport();
         });
-        $('#document_form :submit').click(function (e) {
-            var form = document.querySelector('#document_form');
+        $('#importbutton').click(function () {
+            showImportModal();
+        });
+        $('#gettemplatebutton').click(function () {
+            onGetTemplate();
+        });
+        $('#purchaseOrder_form :submit').click(function (e) {
+            var form = document.querySelector('#purchaseOrder_form');
             $(form).find(":valid").parent().removeClass("was-validated");
             if (form.checkValidity() === false) {
                 form.classList.add('was-validated');
             } else {
-                event.preventDefault();
-                event.stopPropagation();
-                var request = $('#document_form').serialize();
+                var request = $('#purchaseOrder_form').serialize();
                 var formData = new FormData(form);
-                //formData.append("UploadedFile", uploadfileinput.files[0]);
-                axios({
-                    url: '@Url.Page("/Documents/Index")',
-                    method: 'post',
-                    data: formData,
-                    processData: false,// 告诉axios不要去处理发送的数据(重要参数)
-                    contentType: false,   // 告诉axios不要去设置Content-Type请求头
-                }).then((response) => {
-                    if (response.data.Succeeded) {
-                        toastr["info"]('@_localizer["Save Success"]');
-                        $('#document_modal').modal('toggle');
-                        reload();
-                    } else {
-                        var errors = response.data.Errors;
-                        errors.forEach(item => {
-                            toastr["error"](item);
-                        })
-
-                    }
-                }).catch(error => {
+            
+                axios.post('@Url.Page("/PurchaseOrders/Index")', formData).then(res => {
+                    toastr["info"]('@_localizer["Save Success"]');
+                    $('#purchaseOrder_modal').modal('toggle');
+                    reload();
+                }).catch((error) => {
                     var msg = error.response.data;
                     bootbox.alert({
                         size: "small",
@@ -211,46 +246,16 @@
                         message: msg,
                         callback: function () { /* your callback code */ }
                     })
-                })
 
+                });
             }
             event.preventDefault();
             event.stopPropagation();
         })
-        var uploadfilename = document.querySelector("#uploadfilename");
-        var uploadbutton = document.querySelector("button[name='uploadbutton']");
-        var uploadfileinput = document.getElementById("UploadedFile");
-        var savebutton = document.querySelector("button[name='savebutton']");
-        uploadbutton.addEventListener('click', (e) => {
-            uploadfileinput.click();
-        })
-        uploadfileinput.onchange = () => {
-            fileName = uploadfileinput.value.split('\\').pop();
-            uploadfilename.innerHTML = `
-              <div class="alert alert-info alert-dismissible fadeup show mb-2 mt-2" role="alert">
-                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                         <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
-                      </button>
-                      <div class="d-flex align-items-center">
-							<div class="alert-icon">
-									<i class="@(Settings.Theme.IconPrefix) fa-upload fs-xl"></i>
-							</div>
-							<div class="flex-1">
-	    							${fileName}
-							</div>
-					</div>
-             </div>
-        `
-            savebutton.disabled = false;
-            $('#uploadfilename .alert').on('closed.bs.alert', (e) => {
-                uploadfileinput.value = null;
-                savebutton.disabled = true;
-            })
-        };
         var $dg={};
         var initdatagrid = () => {
-            $dg = $('#document_dg').datagrid({
-                height: 700,
+            $dg = $('#purchaseOrder_dg').datagrid({
+                height: (window.innerHeight-320),
                 method: 'GET',
                 rownumbers: false,
                 singleSelect: true,
@@ -294,75 +299,79 @@
                                      </button>
                                      <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
                                        <button class="dropdown-item" onclick="onEdit(${index})" @(_canEdit.Succeeded? "":"disabled")><i class="fal fa-edit mr-1"></i> @_localizer["Edit"]</button>
-                                       <button class="dropdown-item" onclick="onDownload(${index})" @(_canDownload.Succeeded? "":"disabled")><i class="fal fa-download mr-1"></i> @_localizer["Download"]</button>
                                        <button class="dropdown-item" onclick="onDelete('${row.Id}')" @(_canDelete.Succeeded? "":"disabled") ><i class="fal fa-trash-alt mr-1"></i> @_localizer["Delete"]</button>
                                      </div>
                                   </div>`;
                         }
                     },
-                    { field: 'Title', title: '@_localizer["Title"]', sortable: true, width: 180 },
-                    { field: 'DocumentTypeName', title: '@_localizer["Document Type"]', sortable: true, width: 150 },
-                    { field: 'IsPublic', title: '@_localizer["Is Public"]', sortable: true, width: 120 },
-                    { field: 'Description', title: '@_localizer["Description"]', sortable: true, width: 280 },
-                    { field: 'CreatedBy', title: '@_localizer["Created By"]', sortable: true, width: 160 },
-                    { field: 'Created', title: '@_localizer["Created Time"]', formatter: dateformatter, sortable: true, width: 160 },
+                    { field: 'PO', title: '@_localizer["PO"]', sortable: true, width: 160 },
+                    { field: 'Status', title: '@_localizer["Status"]', sortable: true, width: 140 },
+                    { field: 'ProductName', title: '@_localizer["Product Name"]', sortable: true, width: 180, align: 'right' },
+                    { field: 'CustomerName', title: '@_localizer["Customer Name"]', sortable: true, width: 180 },
+                    { field: 'OrderDate', title: '@_localizer["Order Date"]', sortable: true, width: 180,formatter:dateformatter },
+                    { field: 'Qty', title: '@_localizer["Qty"]', sortable: true, width: 120 },
+                    { field: 'Price', title: '@_localizer["Price"]', sortable: true, width: 130 },
+                    { field: 'Amount', title: '@_localizer["Amount"]', sortable: true, width: 150 },
+                    { field: 'InviceNo', title: '@_localizer["Invice No"]', sortable: true, width: 120 },
+                    { field: 'TaxRate', title: '@_localizer["Tax Rate"]', sortable: true, width: 130 },
+                    { field: 'IsSpecial', title: '@_localizer["Is Special"]', sortable: true, width: 120,formatter:checkboxformatter },
+                    { field: 'Description', title: '@_localizer["Description"]', sortable: true, width: 160 },
 
                 ]]
             })
                 .datagrid('enableFilter', {})
-                .datagrid('load', '@Url.Page("/Documents/Index")?handler=Data');
+                .datagrid('load', '@Url.Page("/PurchaseOrders/Index")?handler=Data');
 
         }
 
         var reload = () => {
-            $dg.datagrid('load', '@Url.Page("/Documents/Index")?handler=Data');
+            $dg.datagrid('load', '@Url.Page("/PurchaseOrders/Index")?handler=Data');
         }
 
         $(() => {
             initdatagrid();
         })
-        var popupmodal = (document) => {
-            $('#document_modal').modal('toggle');
-            $('#document_modal .modal-title').html('@_localizer["Add Document"]');
-            $('#document_form')[0].reset();
-            if (document) {
-                uploadbutton.disabled = true;
-                uploadfileinput.required = false;
-                $('#document_modal .modal-title').html('@_localizer["Edit Document"]');
-                uploadfilename.innerHTML = `
-                  <div class="alert alert-info alert-dismissible fadeup show mb-2 mt-2" role="alert">
-                         <div class="d-flex align-items-center">
-							<div class="alert-icon">
-									<i class="@(Settings.Theme.IconPrefix) fa-upload fs-xl"></i>
-							</div>
-							<div class="flex-1">
-	    							${document.URL}
-							</div>
-					</div>
-                </div>
-                `
-                $('#document_form').jsonToForm(document, {
-                    IsPublic: function (value) {
+        var popupmodal = (purchaseOrder, state) => {
+            $('#purchaseOrder_modal').modal('toggle');
+            $('#purchaseOrder_modal .modal-title').html('@_localizer["Add Purchase Order"]');
+            $('#purchaseOrder_form')[0].reset();
+            if (state!='add') {
+                $('#purchaseOrder_modal .modal-title').html('@_localizer["Edit Purchase Order"]');
+                $('#purchaseOrder_form').jsonToForm(purchaseOrder, {
+                    Id: function (value) {
+                        $('#purchaseOrder_form #Input_Id').val(value);
+
+                    },
+                    IsSpecial: function (value) {
                         if (value == true) {
-                            $('#document_form [name*="IsPublic"]').prop('checked', true);
+                            $('#purchaseOrder_form [name*="IsSpecial"]').prop('checked', true);
                         } else {
-                            $('#document_form [name*="IsPublic"]').prop('checked', false);
+                            $('#purchaseOrder_form [name*="IsSpecial"]').prop('checked', false);
                         }
+                    },
+                    OrderDate: function (value) {
+                        $('#purchaseOrder_form #Input_OrderDate').val(moment(value).format('YYYY-MM-DD'));
+                        
                     }
                 })
             } else {
-                uploadbutton.disabled = false;
-                uploadfileinput.required = true;
-                $('#document_form #Input_Id').val(0);
-                uploadfilename.innerHTML =`<div class="alert alert-danger mt-2 mb-2" role="alert">
-                                        <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a file"].
-                             </div>`
+                $('#purchaseOrder_form').jsonToForm(purchaseOrder, {
+                    IsSpecial: function (value) {
+                        if (value == true) {
+                            $('#purchaseOrder_form [name*="IsSpecial"]').prop('checked', true);
+                        } else {
+                            $('#purchaseOrder_form [name*="IsSpecial"]').prop('checked', false);
+                        }
+                    }
+                });
+                
+
             }
         }
 
         var onEdit = (index) => {
-            var document = $dg.datagrid('getRows')[index];
-            popupmodal(document);
+            var purchaseOrder = $dg.datagrid('getRows')[index];
+            popupmodal(purchaseOrder);
         }
         var onDelete = (id) => {
             bootbox.confirm({
@@ -379,7 +388,7 @@
                 },
                 callback: function (result) {
                     if (result) {
-                        axios.get('@Url.Page("/Documents/Index")?handler=Delete&id=' + id).then(res => {
+                        axios.get('@Url.Page("/PurchaseOrders/Index")?handler=Delete&id=' + id).then(res => {
                             toastr["info"]('@_localizer["Delete Success"]');
                             reload();
                         })
@@ -415,7 +424,7 @@
                         if (result) {
                             var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
                             console.log(paras.toString())
-                            axios.get('@Url.Page("/Documents/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
+                            axios.get('@Url.Page("/PurchaseOrders/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
                                 toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
                                 reload();
                             })
@@ -445,7 +454,7 @@
             var headers = {
                 "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
             }
-            axios.post('@Url.Page("/Documents/Index")?handler=Export',
+            axios.post('@Url.Page("/PurchaseOrders/Index")?handler=Export',
                 data,
                 {
                     headers: headers,
@@ -459,24 +468,13 @@
                     link.setAttribute('download', filename);
                     document.body.appendChild(link);
                     link.click();
-                    toastr["info"](`@_localizer["Export Success"]`);
                 }).catch(error => {
                     console.log(error)
                 })
 
 
         }
-        var onDownload = (index) => {
-            const item = $dg.datagrid('getRows')[index];
-            const url = item.URL;
-            const filename = getFileName(item.URL);
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', filename);
-            document.body.appendChild(link);
-            link.click();
-            toastr["info"](`@_localizer["Download Success"]`);
-        }
+
 
     </script>
 }

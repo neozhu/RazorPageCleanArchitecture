@@ -42,9 +42,12 @@ namespace CleanArchitecture.Razor.Application.Customers.Queries.GetAll
             _localizer = localizer;
         }
 
-        public Task<IEnumerable<CustomerDto>> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<CustomerDto>> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var data = await _context.Customers
+                         .ProjectTo<CustomerDto>(_mapper.ConfigurationProvider)
+                         .ToListAsync(cancellationToken);
+            return data;
         }
     }
 }
