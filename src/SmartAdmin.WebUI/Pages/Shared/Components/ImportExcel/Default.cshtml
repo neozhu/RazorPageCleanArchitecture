@@ -67,6 +67,16 @@
             }
         }).catch(error => {
             modalcontent.classList.remove("enable-loader");
+            $('#default-import-modal').modal('toggle');
+            if (error.response && error.response.data) {
+                bootbox.alert({
+                    size: "small",
+                    title: "@_localizer["Error"]",
+                    message: error.response.data,
+                    callback: function () { /* your callback code */ }
+                });
+            }
+
             toastr["error"](`@_localizer["Import fail."]`);
         })
 
@@ -98,6 +108,11 @@
         })
     };
     var showImportModal = () => {
+        uploadfilealert.innerHTML = `<div class="alert alert-secondary alert-dismissible fadedown show mb-0" role="alert">
+                                     @_localizer["Please upload excel file!"]
+                                   </div>`;
+        uploadfileinput.value = null;
+        importbutton.disabled = true;
         $('#default-import-modal').modal('toggle');
     }
     var onGetTemplate = ( ) => {
