@@ -252,4 +252,7 @@
   <data name="Is Special" xml:space="preserve">
     <value>Is Special</value>
   </data>
+  <data name="PurchaseOrders" xml:space="preserve">
+    <value>PurchaseOrders</value>
+  </data>
 </root>

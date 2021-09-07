@@ -252,4 +252,7 @@
   <data name="Is Special" xml:space="preserve">
     <value>是否专票</value>
   </data>
+  <data name="PurchaseOrders" xml:space="preserve">
+    <value>采购单信息</value>
+  </data>
 </root>
