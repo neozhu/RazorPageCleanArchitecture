@@ -44,6 +44,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\Projects\Commands\Import\ImportProjectsCommandHandler.Designer.cs">
+      <DependentUpon>ImportProjectsCommandHandler.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\Projects\Queries\Export\ExportProjectsQueryHandler.Designer.cs">
+      <DependentUpon>ExportProjectsQueryHandler.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\Customers\Commands\Import\ImportCustomersCommandHandler.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -84,9 +94,27 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ExportKeyValuesQueryHandler.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\PurchaseOrders\Commands\Import\ImportPurchaseOrdersCommandHandler.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ImportPurchaseOrdersCommandHandler.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\PurchaseOrders\Queries\Export\ExportPurchaseOrdersQueryHandler.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExportPurchaseOrdersQueryHandler.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\Projects\Commands\Import\ImportProjectsCommandHandler.resx">
+      <LastGenOutput>ImportProjectsCommandHandler.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Projects\Queries\Export\ExportProjectsQueryHandler.resx">
+      <LastGenOutput>ExportProjectsQueryHandler.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Customers\Commands\Import\ImportCustomersCommandHandler.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ImportCustomersCommandHandler.Designer.cs</LastGenOutput>
@@ -118,6 +146,14 @@
     <EmbeddedResource Update="Resources\KeyValues\Queries\Export\ExportKeyValuesQueryHandler.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ExportKeyValuesQueryHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PurchaseOrders\Commands\Import\ImportPurchaseOrdersCommandHandler.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ImportPurchaseOrdersCommandHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PurchaseOrders\Queries\Export\ExportPurchaseOrdersQueryHandler.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExportPurchaseOrdersQueryHandler.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
