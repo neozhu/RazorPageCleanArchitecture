@@ -21,13 +21,13 @@ namespace CleanArchitecture.Razor.Domain.Entities
         public decimal RatioAmount { get; set; }
         public DateTime PlanedPaidDate { get; set; }
 
-        public decimal PaidAmount { get; set; }
-        public decimal PaidRatio { get; set; }
+        public decimal? PaidAmount { get; set; }
+        public decimal? PaidRatio { get; set; }
         public DateTime? PaidDate { get; set; }
-        public string InviceNo { get; set; }
+        public string InvoiceNo { get; set; }
+        public DateTime? InvoiceDate {  get; set; }
         public decimal? TaxRate { get; set; }
         public bool IsSpecial { get; set; }
-        public decimal Balance { get; set; }
         public string Comments { get; set; }
 
 

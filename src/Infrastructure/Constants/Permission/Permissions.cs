@@ -17,6 +17,18 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Permission
             public const string Search = "Permissions.Approval.Search";
             public const string Export = "Permissions.Approval.Export";
         }
+        [DisplayName("PurchaseContracts")]
+        [Description("PurchaseContracts Permissions")]
+        public static class PurchaseContracts
+        {
+            public const string View = "Permissions.PurchaseContracts.View";
+            public const string Create = "Permissions.PurchaseContracts.Create";
+            public const string Edit = "Permissions.PurchaseContracts.Edit";
+            public const string Delete = "Permissions.PurchaseContracts.Delete";
+            public const string Search = "Permissions.PurchaseContracts.Search";
+            public const string Export = "Permissions.PurchaseContracts.Export";
+            public const string Import = "Permissions.PurchaseContracts.Import";
+        }
         [DisplayName("PurchaseOrders")]
         [Description("PurchaseOrders Permissions")]
         public static class PurchaseOrders

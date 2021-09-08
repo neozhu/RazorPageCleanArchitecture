@@ -94,6 +94,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ExportKeyValuesQueryHandler.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\PurchaseContracts\Commands\Import\ImportPurchaseContractsCommandHandler.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ImportPurchaseContractsCommandHandler.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\PurchaseContracts\Queries\Export\ExportPurchaseContractsQueryHandler.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExportPurchaseContractsQueryHandler.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\PurchaseOrders\Commands\Import\ImportPurchaseOrdersCommandHandler.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -146,6 +156,14 @@
     <EmbeddedResource Update="Resources\KeyValues\Queries\Export\ExportKeyValuesQueryHandler.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ExportKeyValuesQueryHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PurchaseContracts\Commands\Import\ImportPurchaseContractsCommandHandler.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ImportPurchaseContractsCommandHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PurchaseContracts\Queries\Export\ExportPurchaseContractsQueryHandler.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExportPurchaseContractsQueryHandler.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\PurchaseOrders\Commands\Import\ImportPurchaseOrdersCommandHandler.resx">
       <Generator>ResXFileCodeGenerator</Generator>

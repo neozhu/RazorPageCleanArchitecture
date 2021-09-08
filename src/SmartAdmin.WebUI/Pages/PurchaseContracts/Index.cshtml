@@ -1,22 +1,22 @@
 ﻿@page
 @using CleanArchitecture.Razor.Domain.Enums
 @using CleanArchitecture.Razor.Infrastructure.Constants.Permission
-@model SmartAdmin.WebUI.Pages.PurchaseOrders.IndexModel
+@model SmartAdmin.WebUI.Pages.PurchaseContracts.IndexModel
 @inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
-  ViewData["Title"] = _localizer["Purchase Orders"].Value;
-  ViewData["PageName"] = "purchaseOrders_index";
+  ViewData["Title"] = _localizer["Purchase Contracts"].Value;
+  ViewData["PageName"] = "purchaseContracts_index";
   ViewData["Category1"] = _localizer["Contracts"].Value;
-  ViewData["Heading"] = _localizer["Purchase Orders"].Value;
+  ViewData["Heading"] = _localizer["Purchase Contracts"].Value;
   ViewData["PageDescription"] = _localizer["See all available options"].Value;
   ViewData["PreemptiveClass"] = "Default";
-  var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseOrders.Create);
-  var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseOrders.Edit);
-  var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseOrders.Delete);
-  var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseOrders.Search);
-  var _canImport = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseOrders.Import);
-  var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseOrders.Export);
+  var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Create);
+  var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Edit);
+  var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Delete);
+  var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Search);
+  var _canImport = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Import);
+  var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Export);
 
 }
 @section HeadBlock {
@@ -27,7 +27,7 @@
     <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
     <style>
 
-        .purchaseOrder_dg_datagrid-cell-c1-_action {
+        .purchaseContract_dg_datagrid-cell-c1-_action {
             overflow: visible !important
         }
     </style>
@@ -35,7 +35,7 @@
 <div id="js-page-content-demopanels" class="card mb-g">
     <div class="card-header bg-white d-flex align-items-center">
         <h4 class="m-0">
-            @_localizer["Purchase Orders"] 
+            @_localizer["Purchase Contracts"] 
             <small>@_localizer["See all available options"]</small>
         </h4>
         <div class="ml-auto">
@@ -86,13 +86,13 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-12">
-                <table id="purchaseOrder_dg">
+                <table id="purchaseContract_dg">
                 </table>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="purchaseOrder_modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="purchaseContract_modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -101,28 +101,29 @@
                     <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
                 </button>
             </div>
-            <form id="purchaseOrder_form" class="needs-validation" novalidate="novalidate">
+            <form id="purchaseContract_form" class="needs-validation" novalidate="novalidate">
                 <div class="modal-body">
                     @Html.AntiForgeryToken()
                     <input type="hidden" asp-for="Input.Id" />
                     @Html.ValidationSummary()
                 <div class="form-row">
                     <div class="col-md-6">
-                        <label class="form-label" for="PO">@_localizer["PO"] <span class="text-danger">*</span></label>
-                        <input type="text" asp-for="Input.PO" class="form-control" placeholder="PO" required />
-                        <span class="invalid-feedback" asp-validation-for="Input.PO">Sorry, you missed this one.</span>
+                        <label class="form-label" for="PO">@_localizer["Contract No"] <span class="text-danger">*</span></label>
+                        <input type="text" asp-for="Input.ContractNo" class="form-control" placeholder="Contract No" required />
+                        <span class="invalid-feedback" asp-validation-for="Input.ContractNo">Sorry, you missed this one.</span>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label" for="PO">@_localizer["Status"]  </label>
                         <input type="text" asp-for="Input.Status" class="form-control" placeholder="Status" readonly="readonly" />
                         <span class="invalid-feedback" asp-validation-for="Input.Status">Sorry, you missed this one.</span>
                     </div>
+
                     <div class="col-md-6">
-                        <label class="form-label" for="ProductId">@_localizer["Product Name"] <span class="text-danger">*</span></label>
-                        <select type="text" asp-for="Input.ProductId" class="custom-select" asp-items="Model.Products" required>
-                            <option value="">@_localizer["Choose Product"]</option>
+                        <label class="form-label" for="ProjectId">@_localizer["Project Name"] <span class="text-danger">*</span></label>
+                        <select type="text" asp-for="Input.ProjectId" class="custom-select" asp-items="Model.Projects" required>
+                            <option value="">@_localizer["Choose Project"]</option>
                         </select>
-                        <span class="invalid-feedback" asp-validation-for="Input.ProductId">Sorry, you missed this one.</span>
+                        <span class="invalid-feedback" asp-validation-for="Input.ProjectId">Sorry, you missed this one.</span>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label" for="CustomerId">@_localizer["Customer Name"] <span class="text-danger">*</span></label>
@@ -131,57 +132,52 @@
                         </select>
                         <span class="invalid-feedback" asp-validation-for="Input.CustomerId">Sorry, you missed this one.</span>
                     </div>
-                    <div class="col-md-12">
-                        <label class="form-label" for="OrderDate">@_localizer["Order Date"] <span class="text-danger">*</span></label>
-                        <input type="date" asp-for="Input.OrderDate" class="form-control" placeholder="Order Date" required  />
-                        <span class="invalid-feedback" asp-validation-for="Input.OrderDate">Sorry, you missed this one.</span>
+                    <div class="col-md-6">
+                        <label class="form-label" for="ContractDate">@_localizer["Contract Date"] <span class="text-danger">*</span></label>
+                        <input type="date" asp-for="Input.ContractDate" class="form-control" placeholder="Contract Date" required />
+                        <span class="invalid-feedback" asp-validation-for="Input.ContractDate">Sorry, you missed this one.</span>
                     </div>
-                   
-
+                    <div class="col-md-6">
+                        <label class="form-label" for="OrderNo">@_localizer["Order No"]  </label>
+                        <input type="text" asp-for="Input.OrderNo" class="form-control" placeholder="OrderNo" />
+                        <span class="invalid-feedback" asp-validation-for="Input.OrderNo">Sorry, you missed this one.</span>
+                    </div>
+           
+                        <div class="col-md-12">
+                            <label class="form-label" for="Description">@_localizer["Description"] </label>
+                            <input type="text" asp-for="Input.Description" class="form-control" placeholder="Description" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Description">Sorry, you missed this one.</span>
+                        </div>
+                 
                 </div>
                     <div class="form-row">
                         <div class="col-md-4">
-                            <label class="form-label" for="Qty">@_localizer["Qty"] </label>
-                            <input type="number" asp-for="Input.Qty" class="form-control" placeholder="Contract" />
-                            <span class="invalid-feedback" asp-validation-for="Input.Qty">Sorry, you missed this one.</span>
+                            <label class="form-label" for="ContractAmount">@_localizer["Contract Amount"] <span class="text-danger">*</span> </label>
+                            <input type="number" asp-for="Input.ContractAmount" class="form-control" placeholder="Contract Amount" required />
+                            <span class="invalid-feedback" asp-validation-for="Input.ContractAmount">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label" for="Price">@_localizer["Price"] </label>
-                            <input type="number" asp-for="Input.Price" class="form-control" placeholder="Price" />
-                            <span class="invalid-feedback" asp-validation-for="Input.Price">Sorry, you missed this one.</span>
+                            <label class="form-label" for="PaidAmount">@_localizer["Paid Amount"] </label>
+                            <input type="number" asp-for="Input.PaidAmount" class="form-control" placeholder="Paid Amount" readonly="readonly" />
+                            <span class="invalid-feedback" asp-validation-for="Input.PaidAmount">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label" for="Amount">@_localizer["Amount"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.Amount" class="form-control" placeholder="Amount" required />
-                            <span class="invalid-feedback" asp-validation-for="Input.Amount">Sorry, you missed this one.</span>
-                        </div>
-                        
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-4">
-                            <label class="form-label" for="InvoiceNo">@_localizer["Invoice No"] </label>
-                            <input type="text" asp-for="Input.InvoiceNo" class="form-control" placeholder="Invoice No" />
-                            <span class="invalid-feedback" asp-validation-for="Input.InvoiceNo">Sorry, you missed this one.</span>
+                            <label class="form-label" for="Balance">@_localizer["Balance"]  </label>
+                            <input type="text" asp-for="Input.Balance" class="form-control" placeholder="Balance" readonly="readonly" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Balance">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label" for="TaxRate">@_localizer["Tax Rate"] </label>
-                            <input type="number" asp-for="Input.TaxRate" class="form-control" placeholder="Tax Rate" />
-                            <span class="invalid-feedback" asp-validation-for="Input.TaxRate">Sorry, you missed this one.</span>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label" for="IsSpecial">  </label>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" asp-for="Input.IsSpecial" class="custom-control-input" value="true" >
-                                <label class="custom-control-label" for="Input_IsSpecial">@_localizer["Is Special"]</label>
-                            </div>
-                           
+                            <label class="form-label" for="InvoiceAmount">@_localizer["Invoice Amount"]  </label>
+                            <input type="text" asp-for="Input.InvoiceAmount" class="form-control" placeholder="Invoice Amount" readonly="readonly" />
+                            <span class="invalid-feedback" asp-validation-for="Input.InvoiceAmount">Sorry, you missed this one.</span>
                         </div>
                     </div>
+                     
                     <div class="form-row">
                         <div class="col-md-12">
-                            <label class="form-label" for="Sales">@_localizer["Description"] </label>
-                            <input type="text" asp-for="Input.Description" class="form-control" placeholder="Description" />
-                            <span class="invalid-feedback" asp-validation-for="Input.Description">Sorry, you missed this one.</span>
+                            <label class="form-label" for="Comments">@_localizer["Comments"] </label>
+                            <input type="text" asp-for="Input.Comments" class="form-control" placeholder="Comments" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Comments">Sorry, you missed this one.</span>
                         </div>
                     </div>
                 </div>
@@ -193,8 +189,8 @@
         </div>
     </div>
 </div>
-@await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/PurchaseOrders/Index") + "?handler=Import",
-    getTemplateUri = @Url.Page("/PurchaseOrders/Index") + "?handler=CreateTemplate",
+@await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/PurchaseContracts/Index") + "?handler=Import",
+    getTemplateUri = @Url.Page("/PurchaseContracts/Index") + "?handler=CreateTemplate",
     onImportedSucceeded = "reload()" })
 @section ScriptsBlock {
     <partial name="_ValidationScriptsPartial" />
@@ -225,18 +221,18 @@
         $('#gettemplatebutton').click(function () {
             onGetTemplate();
         });
-        $('#purchaseOrder_form :submit').click(function (e) {
-            var form = document.querySelector('#purchaseOrder_form');
+        $('#purchaseContract_form :submit').click(function (e) {
+            var form = document.querySelector('#purchaseContract_form');
             $(form).find(":valid").parent().removeClass("was-validated");
             if (form.checkValidity() === false) {
                 form.classList.add('was-validated');
             } else {
-                var request = $('#purchaseOrder_form').serialize();
+                var request = $('#purchaseContract_form').serialize();
                 var formData = new FormData(form);
-            
-                axios.post('@Url.Page("/PurchaseOrders/Index")', formData).then(res => {
+
+                axios.post('@Url.Page("/PurchaseContracts/Index")', formData).then(res => {
                     toastr["info"]('@_localizer["Save Success"]');
-                    $('#purchaseOrder_modal').modal('toggle');
+                    $('#purchaseContract_modal').modal('toggle');
                     reload();
                 }).catch((error) => {
                     var msg = error.response.data;
@@ -254,7 +250,7 @@
         })
         var $dg={};
         var initdatagrid = () => {
-            $dg = $('#purchaseOrder_dg').datagrid({
+            $dg = $('#purchaseContract_dg').datagrid({
                 height: (window.innerHeight-320),
                 method: 'GET',
                 rownumbers: false,
@@ -304,74 +300,74 @@
                                   </div>`;
                         }
                     },
-                    { field: 'PO', title: '@_localizer["PO"]', sortable: true, width: 160 },
+                    { field: 'ContractNo', title: '@_localizer["Contract No"]', sortable: true, width: 150 },
                     { field: 'Status', title: '@_localizer["Status"]', sortable: true, width: 140 },
-                    { field: 'ProductName', title: '@_localizer["Product Name"]', sortable: true, width: 180, align: 'right' },
+                    { field: 'ProjectName', title: '@_localizer["Project Name"]', sortable: true, width: 180 },
                     { field: 'CustomerName', title: '@_localizer["Customer Name"]', sortable: true, width: 180 },
-                    { field: 'OrderDate', title: '@_localizer["Order Date"]', sortable: true, width: 180,formatter:dateformatter },
-                    { field: 'Qty', title: '@_localizer["Qty"]', sortable: true, width: 120 },
-                    { field: 'Price', title: '@_localizer["Price"]', sortable: true, width: 130 },
-                    { field: 'Amount', title: '@_localizer["Amount"]', sortable: true, width: 150 },
-                    { field: 'InvoiceNo', title: '@_localizer["Invoice No"]', sortable: true, width: 120 },
-                    { field: 'TaxRate', title: '@_localizer["Tax Rate"]', sortable: true, width: 130 },
-                    { field: 'IsSpecial', title: '@_localizer["Is Special"]', sortable: true, width: 120,formatter:checkboxformatter },
-                    { field: 'Description', title: '@_localizer["Description"]', sortable: true, width: 260 },
+                    { field: 'ContractDate', title: '@_localizer["Contract Date"]', sortable: true, width: 180,formatter:dateformatter },
+                    { field: 'Description', title: '@_localizer["Description"]', sortable: true, width: 150 },
+                    { field: 'OrderNo', title: '@_localizer["Order No"]', sortable: true, width: 120 },
+                    { field: 'ContractAmount', title: '@_localizer["Contract Amount"]', sortable: true, width: 160,align: 'right',formatter:numberformatter},
+                    { field: 'PaidAmount', title: '@_localizer["Paid Amount"]', sortable: true, width: 160, align: 'right', formatter: numberformatter},
+                    { field: 'InvoiceAmount', title: '@_localizer["Invoice Amount"]', sortable: true, width: 160, align: 'right', formatter: numberformatter},
+                    { field: 'Balance', title: '@_localizer["Balance"]', sortable: true, width: 130, align: 'right', formatter: numberformatter},
+                    { field: 'Comments', title: '@_localizer["Comments"]', sortable: true, width: 260 },
 
                 ]]
             })
                 .datagrid('enableFilter', {})
-                .datagrid('load', '@Url.Page("/PurchaseOrders/Index")?handler=Data');
+                .datagrid('load', '@Url.Page("/PurchaseContracts/Index")?handler=Data');
 
         }
 
         var reload = () => {
-            $dg.datagrid('load', '@Url.Page("/PurchaseOrders/Index")?handler=Data');
+            $dg.datagrid('load', '@Url.Page("/PurchaseContracts/Index")?handler=Data');
         }
 
         $(() => {
             initdatagrid();
         })
-        var popupmodal = (purchaseOrder, state) => {
-            $('#purchaseOrder_modal').modal('toggle');
-            $('#purchaseOrder_modal .modal-title').html('@_localizer["Add Purchase Order"]');
-            $('#purchaseOrder_form')[0].reset();
+        var popupmodal = (purchaseContract, state) => {
+            $('#purchaseContract_modal').modal('toggle');
+            $('#purchaseContract_modal .modal-title').html('@_localizer["Add Purchase Order"]');
+            $('#purchaseContract_form')[0].reset();
             if (state!='add') {
-                $('#purchaseOrder_modal .modal-title').html('@_localizer["Edit Purchase Order"]');
-                $('#purchaseOrder_form').jsonToForm(purchaseOrder, {
+                $('#purchaseContract_modal .modal-title').html('@_localizer["Edit Purchase Order"]');
+                $('#purchaseContract_form').jsonToForm(purchaseContract, {
                     Id: function (value) {
-                        $('#purchaseOrder_form #Input_Id').val(value);
+                        $('#purchaseContract_form #Input_Id').val(value);
 
                     },
                     IsSpecial: function (value) {
                         if (value == true) {
-                            $('#purchaseOrder_form [name*="IsSpecial"]').prop('checked', true);
+                            $('#purchaseContract_form [name*="IsSpecial"]').prop('checked', true);
                         } else {
-                            $('#purchaseOrder_form [name*="IsSpecial"]').prop('checked', false);
+                            $('#purchaseContract_form [name*="IsSpecial"]').prop('checked', false);
                         }
                     },
                     OrderDate: function (value) {
-                        $('#purchaseOrder_form #Input_OrderDate').val(moment(value).format('YYYY-MM-DD'));
-                        
+                        $('#purchaseContract_form #Input_OrderDate').val(moment(value).format('YYYY-MM-DD'));
+
                     }
                 })
             } else {
-                $('#purchaseOrder_form').jsonToForm(purchaseOrder, {
+                $('#purchaseContract_form').jsonToForm(purchaseContract, {
                     IsSpecial: function (value) {
                         if (value == true) {
-                            $('#purchaseOrder_form [name*="IsSpecial"]').prop('checked', true);
+                            $('#purchaseContract_form [name*="IsSpecial"]').prop('checked', true);
                         } else {
-                            $('#purchaseOrder_form [name*="IsSpecial"]').prop('checked', false);
+                            $('#purchaseContract_form [name*="IsSpecial"]').prop('checked', false);
                         }
                     }
                 });
-                
+
 
             }
         }
 
         var onEdit = (index) => {
-            var purchaseOrder = $dg.datagrid('getRows')[index];
-            popupmodal(purchaseOrder);
+            var purchaseContract = $dg.datagrid('getRows')[index];
+            popupmodal(purchaseContract);
         }
         var onDelete = (id) => {
             bootbox.confirm({
@@ -388,7 +384,7 @@
                 },
                 callback: function (result) {
                     if (result) {
-                        axios.get('@Url.Page("/PurchaseOrders/Index")?handler=Delete&id=' + id).then(res => {
+                        axios.get('@Url.Page("/PurchaseContracts/Index")?handler=Delete&id=' + id).then(res => {
                             toastr["info"]('@_localizer["Delete Success"]');
                             reload();
                         })
@@ -424,7 +420,7 @@
                         if (result) {
                             var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
                             console.log(paras.toString())
-                            axios.get('@Url.Page("/PurchaseOrders/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
+                            axios.get('@Url.Page("/PurchaseContracts/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
                                 toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
                                 reload();
                             })
@@ -454,7 +450,7 @@
             var headers = {
                 "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
             }
-            axios.post('@Url.Page("/PurchaseOrders/Index")?handler=Export',
+            axios.post('@Url.Page("/PurchaseContracts/Index")?handler=Export',
                 data,
                 {
                     headers: headers,

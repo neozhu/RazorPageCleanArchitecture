@@ -24,7 +24,7 @@ namespace CleanArchitecture.Razor.Domain.Entities
         public decimal ReceiptAmount { get; set; }
         public decimal ReceiptRatio { get; set; }
         public DateTime? ReceiptDate { get; set; }
-        public string InviceNo { get; set; }
+        public string InvoiceNo { get; set; }
         public decimal Balance { get; set; }
         public DateTime? DueTime { get; set; }
         public string Comments { get; set; }
