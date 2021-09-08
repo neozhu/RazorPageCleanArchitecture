@@ -59,7 +59,7 @@ namespace CleanArchitecture.Razor.Application.PurchaseContracts.Commands.Import
                 { _localizer["Description"], (row,item) => item.Description = row[_localizer["Description"]].ToString() },
                 { _localizer["Project Name"], (row,item) => item.ProjectName = row[_localizer["Project Name"]].ToString() },
                 { _localizer["Customer Name"], (row,item) => item.CustomerName = row[_localizer["Customer Name"]].ToString() },
-                { _localizer["Contract Date"], (row,item) => item.ContractDate =DateTime.Parse(row[_localizer["ContractDate"]].ToString()) },
+                { _localizer["Contract Date"], (row,item) => item.ContractDate =DateTime.Parse(row[_localizer["Contract Date"]].ToString()) },
                 { _localizer["Order No"], (row,item) => item.OrderNo = row[_localizer["Order No"]].ToString() },
                 { _localizer["Contract Amount"], (row,item) => item.ContractAmount =decimal.Parse(row[_localizer["Contract Amount"]].ToString()) },
                 { _localizer["Paid Amount"], (row,item) => item.PaidAmount = row.IsNull(_localizer["Paid Amount"])? 0m:decimal.Parse( row[_localizer["Paid Amount"]].ToString()) },
@@ -69,7 +69,74 @@ namespace CleanArchitecture.Razor.Application.PurchaseContracts.Commands.Import
             
 
             }, _localizer["PurchaseContracts"]);
-           throw new System.NotImplementedException();
+
+            if (result.Succeeded)
+            {
+                var projectlist = new List<Project>();
+                var customerlist=new List<Customer>();
+                foreach (var item in result.Data)
+                {
+                    
+                    if (!(await _context.PurchaseContracts.AnyAsync(x => x.ContractNo == item.ContractNo)))
+                    {
+                        var project = projectlist.FirstOrDefault(x => x.Name == item.ProjectName);
+                        if (project == null)
+                        {
+                            project = await _context.Projects.FirstOrDefaultAsync(x => x.Name == item.ProjectName);
+                            projectlist.Add(project);
+                        }
+                        if (project == null)
+                        {
+                            project = new Project() { Name = item.ProjectName, Description = "从采购合同导入" };
+                            _context.Projects.Add(project);
+                            projectlist.Add(project);
+                        }
+                        var customer = customerlist.FirstOrDefault(x => x.Name == item.CustomerName);
+                        if (customer == null)
+                        {
+                            customer = await _context.Customers.FirstOrDefaultAsync(x => x.Name == item.CustomerName);
+                            customerlist.Add(customer);
+                        }
+                        if (customer == null)
+                        {
+                            customer = new Customer()
+                            {
+                                Name = item.CustomerName,
+                                PartnerType = Domain.Enums.PartnerType.Supplier,
+                                Comments = "从采购合同导入",
+                            };
+                            _context.Customers.Add(customer);
+                            customerlist.Add(customer);
+                        }
+                        var purchaseContract = new PurchaseContract()
+                        {
+                            Balance = item.Balance,
+                            ClosedDate = item.ClosedDate,
+                            Comments = item.Comments,
+                            CustomerId = customer.Id,
+                            Customer = customer,
+                            Description = item.Description,
+                            Status = "Draft",
+                            ContractAmount = item.ContractAmount,
+                            ContractDate = item.ContractDate,
+                            ContractNo = item.ContractNo,
+                            InvoiceAmount = item.InvoiceAmount,
+                            OrderNo = item.OrderNo,
+                            Project = project,
+                            ProjectId = project.Id,
+                            PaidAmount = item.PaidAmount
+                        };
+                        _context.PurchaseContracts.Add(purchaseContract);
+                    }
+                    await _context.SaveChangesAsync(cancellationToken);
+                }
+
+                return Result.Success();
+            }
+            else
+            {
+                return await Result.FailureAsync(result.Errors);
+            }
         }
         public async Task<byte[]> Handle(CreatePurchaseContractsTemplateCommand request, CancellationToken cancellationToken)
         {

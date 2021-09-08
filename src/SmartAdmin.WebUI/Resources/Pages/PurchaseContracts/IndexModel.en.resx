@@ -219,4 +219,49 @@
   <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="Contract Terms" xml:space="preserve">
+    <value>Contract Terms</value>
+  </data>
+  <data name="Add Terms" xml:space="preserve">
+    <value>Add Terms</value>
+  </data>
+  <data name="Terms" xml:space="preserve">
+    <value>Terms</value>
+  </data>
+  <data name="Ratio" xml:space="preserve">
+    <value>Ratio</value>
+  </data>
+  <data name="Ratio Amount" xml:space="preserve">
+    <value>Ratio Amount</value>
+  </data>
+  <data name="Planed Paid Date" xml:space="preserve">
+    <value>Planed Paid Date</value>
+  </data>
+  <data name="Paid Ratio" xml:space="preserve">
+    <value>Paid Ratio</value>
+  </data>
+  <data name="Invoice No" xml:space="preserve">
+    <value>Invoice No</value>
+  </data>
+  <data name="Invoice Date" xml:space="preserve">
+    <value>Invoice Date</value>
+  </data>
+  <data name="Tax Rate" xml:space="preserve">
+    <value>Tax Rate</value>
+  </data>
+  <data name="Is Special" xml:space="preserve">
+    <value>Is Special</value>
+  </data>
+  <data name="Paid Date" xml:space="preserve">
+    <value>Paid Date</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
 </root>

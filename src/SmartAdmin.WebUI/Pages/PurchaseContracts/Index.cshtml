@@ -17,6 +17,7 @@
   var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Search);
   var _canImport = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Import);
   var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Export);
+  var _canViewTerms = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.ViewTerms);
 
 }
 @section HeadBlock {
@@ -27,7 +28,7 @@
     <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
     <style>
 
-        .purchaseContract_dg_datagrid-cell-c1-_action {
+        .purchaseContract_dg_datagrid-cell-c2-_action {
             overflow: visible !important
         }
     </style>
@@ -144,7 +145,7 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label" for="OrderNo">@_localizer["Order No"]  </label>
-                        <input type="text" asp-for="Input.OrderNo" class="form-control" placeholder="OrderNo" />
+                        <input type="text" asp-for="Input.OrderNo" class="form-control" placeholder="Order No" />
                         <span class="invalid-feedback" asp-validation-for="Input.OrderNo">Sorry, you missed this one.</span>
                     </div>
 
@@ -194,6 +195,47 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="contractTerms-modal-right" tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-right  ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4">@_localizer["Contract Terms"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                </button>
+            </div>
+            <form id="contractTerms_form" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="PurchaseContractId" />
+                <div class="modal-body">
+
+                    <div class="card mb-g">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col text-right">
+                                    <button id="refreshtermsbutton" type="button" class="btn btn-default btn-sm waves-effect waves-themed">@_localizer["Refresh"]</button>
+                                    <button id="addtermsbutton" type="button" class="btn btn-default btn-sm waves-effect waves-themed">@_localizer["Add Terms"]</button>
+                                    <button id="canceltermsbutton" type="button" class="btn btn-default btn-sm waves-effect waves-themed">@_localizer["Cancel"]</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <table id="terms_dg">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect waves-themed" data-dismiss="modal"> @_localizer["Close"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/PurchaseContracts/Index") + "?handler=Import",
     getTemplateUri = @Url.Page("/PurchaseContracts/Index") + "?handler=CreateTemplate",
     onImportedSucceeded = "reload()" })
@@ -203,7 +245,7 @@
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
-    <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
+    @*<script>jQuery.fn.tooltip = bootstrapTooltip;</script>*@
     <script src="~/lib/axios/dist/axios.js"></script>
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
 
@@ -299,6 +341,7 @@
                                      </button>
                                      <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
                                        <button class="dropdown-item" onclick="onEdit(${index})" @(_canEdit.Succeeded? "":"disabled")><i class="fal fa-edit mr-1"></i> @_localizer["Edit"]</button>
+                                       <button class="dropdown-item" onclick="onViewTerms(${index})" @(_canViewTerms.Succeeded? "":"disabled")><i class="fal fa-file-contract mr-1"></i> @_localizer["Contract Terms"]</button>
                                        <button class="dropdown-item" onclick="onDelete('${row.Id}')" @(_canDelete.Succeeded? "":"disabled") ><i class="fal fa-trash-alt mr-1"></i> @_localizer["Delete"]</button>
                                      </div>
                                   </div>`;
@@ -477,7 +520,220 @@
 
 
         }
+        var currentPurchaseContract = null;
 
+        $('#contractTerms-modal-right').on('shown.bs.modal', function () {
+            $termsdg.datagrid('resize');
+        })
+        var $termsdg = {};
+        var inittermsdg = () => {
+            $termsdg = $('#terms_dg').datagrid({
+                height: (window.innerHeight-320),
+                rownumbers: false,
+                pagination: false,
+                clientPaging: false,
+                remoteFilter: false,
+                onBeforeLoad: function () {
+                    $('#canceltermsbutton').prop('disabled', true);
+                },
+                columns: [[
+                    { field: 'ContractNo', title: '@_localizer["Contract No"]',  width: 120 },
+                    { field: 'ContractAmount', title: '@_localizer["Contract Amount"]',  width: 130,align: 'right', formatter: numberformatter },
+                    {
+                        field: 'Terms',
+                        title: '@_localizer["Terms"]',
+                        width: 160,
+                        editor: {
+                            type: 'textbox', options: { required: true }
+                        }
+                    },
+                    {
+                        field: 'Ratio',
+                        title: '@_localizer["Ratio"]',
+                        width: 90,
+                        align: 'right',
+                        formatter: numberformatter,
+                        editor: {
+                            type: 'numberbox', options: { required: true }
+                        }
+
+                    },
+                    {
+                        field: 'RatioAmount',
+                        title: '@_localizer["Ratio Amount"]',
+                        width: 120,
+                        align: 'right',
+                        formatter: numberformatter,
+                        editor: {
+                            type: 'numberbox', options: { required: true }
+                        }
+                    },
+                    {
+                        field: 'PlanedPaidDate',
+                        title: '@_localizer["Planed Paid Date"]',
+                        width: 120,
+                        formatter: dateformatter,
+                        editor: {
+                            type: 'datebox', options: { required: true }
+                        }
+                    },
+                    {
+                        field: 'PaidAmount',
+                        title: '@_localizer["Paid Amount"]',
+                        width: 120,
+                        align: 'right',
+                        formatter: numberformatter,
+                        editor: {
+                            type: 'numberbox', options: { required: false }
+                        }
+                    },
+                    {
+                        field: 'PaidRatio',
+                        title: '@_localizer["Paid Ratio"]',
+                        width: 90,
+                        align: 'right',
+                        formatter: numberformatter,
+                        editor: {
+                            type: 'numberbox', options: { required: false }
+                        }
+                    },
+                    {
+                        field: 'PaidDate',
+                        title: '@_localizer["Paid Date"]',
+                        width: 120,
+                        formatter: dateformatter,
+                        editor: {
+                            type: 'datebox', options: { required: false }
+                        }
+                    },
+                    {
+                        field: 'InvoiceNo',
+                        title: '@_localizer["Invoice No"]',
+                        width: 160,
+                        editor: {
+                            type: 'textbox', options: { required: false }
+                        }
+                    },
+                    {
+                        field: 'InvoiceDate',
+                        title: '@_localizer["Invoice Date"]',
+                        width: 160,
+                        formatter: dateformatter,
+                        editor: {
+                            type: 'datebox', options: { required: false }
+                        }
+                    },
+                    {
+                        field: 'TaxRate',
+                        title: '@_localizer["Tax Rate"]',
+                        width: 90,
+                        editor: {
+                            type: 'numberbox', options: { required: false }
+                        }
+                    },
+                    {
+                        field: 'IsSpecial',
+                        title: '@_localizer["Is Special"]',
+                        width: 90,
+                        editor: {
+                            type: 'checkbox', options: { id:'checkboxIsSpecial', required: false }
+                        }
+                    },
+                    {
+                        field: 'Comments',
+                        title: '@_localizer["Comments"]',
+                        width: 200,
+                        editor: {
+                            type: 'textbox', options: { required: false }
+                        }
+                    },
+                    {
+                        field: '_command',
+                        title: '@_localizer["Command"]',
+                        width: 200,
+                        formatter: function (v, r, i) {
+                            if (r._state == 'add' || r._state == 'edit') {
+                                return `<button type="button" onclick="onSaveTerms(${i})" class="btn btn-sm btn-info waves-effect waves-themed">@_localizer["Save"]</button>`
+                            } else {
+                                return `<button type="button" onclick="onUpdateTerms(${i})" class="btn btn-sm btn-info waves-effect waves-themed">@_localizer["Update"]</button>
+                                        <button type="button" onclick="onDeleteTerms(${i})" class="btn btn-sm btn-danger waves-effect waves-themed">@_localizer["Delete"]</button>
+                                       `
+                            }
+
+                        }
+                    },
+                ]]
+            })
+        }
+        inittermsdg();
+        var onViewTerms = (index) => {
+            currentPurchaseContract = $dg.datagrid('getRows')[index];
+            axios.get('@Url.Page("/PurchaseContracts/Index")?handler=PurchaseTerms&id=' + currentPurchaseContract.Id)
+                .then(response => {
+                    $('#contractTerms-modal-right').modal('toggle');
+                    $termsdg.datagrid('loadData', response.data)
+                })
+        }
+        $('#addtermsbutton').click(function () {
+            onAddTerms();
+        })
+        $('#canceltermsbutton').click(function () {
+            $dg.datagrid('rejectChanges');
+            $('#canceltermsbutton').prop('disabled', true);
+            editIndex = undefined;
+        })
+        var editIndex = undefined;
+        var onAddTerms = () => {
+            $('#canceltermsbutton').prop('disabled', false);
+            $termsdg.datagrid('appendRow', {
+                Id:0,
+                _state: 'add',
+                PaidDate: null,
+                InvoiceDate:null,
+                PurchaseContractId: currentPurchaseContract.Id,
+                ContractNo: currentPurchaseContract.ContractNo,
+                ContractAmount: currentPurchaseContract.ContractAmount
+            });
+            editIndex = $termsdg.datagrid('getRows').length - 1;
+            $termsdg.datagrid('selectRow', editIndex)
+                .datagrid('beginEdit', editIndex);
+        }
+        var onUpdateTerms = (index) => {
+            var item = $termsdg.datagrid('getRows')[index];
+            item._state = 'edit';
+            $termsdg.datagrid('updateRow', { index: index, row: item });
+            $termsdg.datagrid('refreshRow', index);
+            $termsdg.datagrid('selectRow', index)
+                    .datagrid('beginEdit', index);
+
+        }
+        var onSaveTerms = (index) => {
+            if ($termsdg.datagrid('validateRow', index)) {
+                $termsdg.datagrid('endEdit', index);
+                editIndex = undefined;
+                var item = $termsdg.datagrid('getRows')[index];
+                var headers = {
+                    "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+                }
+                axios.post('@Url.Page("/PurchaseContracts/Index")?handler=SaveTerms',  item ,
+                    {
+                        headers: headers
+                    }).then(response => {
+                        item._state = null;
+                        item.Id = response.data.Data;
+                        $termsdg.datagrid('updateRow', { index: index, row: item });
+                        $termsdg.datagrid('refreshRow', index);
+                    })
+            }
+        }
+        var onDeleteTerms = (index) => {
+            var item = $termsdg.datagrid('getRows')[index];
+            axios.get('@Url.Page("/PurchaseContracts/Index")?handler=DeleteTerms&id=' + item.Id)
+                .then(response => {
+                    $termsdg.datagrid('deleteRow', index);
+                })
+
+        }
 
     </script>
 }

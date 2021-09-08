@@ -18,7 +18,7 @@ using Microsoft.Extensions.Localization;
 
 namespace CleanArchitecture.Razor.Application.PurchaseOrders.Commands.Import
 {
-    public class ImportPurchaseOrdersCommand: IRequest<Result>
+    public class ImportPurchaseOrdersCommand : IRequest<Result>
     {
         public string FileName { get; set; }
         public byte[] Data { get; set; }
@@ -29,7 +29,7 @@ namespace CleanArchitecture.Razor.Application.PurchaseOrders.Commands.Import
         public string SheetName { get; set; }
     }
 
-    public class ImportPurchaseOrdersCommandHandler : 
+    public class ImportPurchaseOrdersCommandHandler :
                  IRequestHandler<CreatePurchaseOrdersTemplateCommand, byte[]>,
                  IRequestHandler<ImportPurchaseOrdersCommand, Result>
     {
@@ -52,8 +52,8 @@ namespace CleanArchitecture.Razor.Application.PurchaseOrders.Commands.Import
         }
         public async Task<Result> Handle(ImportPurchaseOrdersCommand request, CancellationToken cancellationToken)
         {
-           //TODO:Implementing ImportPurchaseOrdersCommandHandler method
-           var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, PurchaseOrderDto, object>>
+            //TODO:Implementing ImportPurchaseOrdersCommandHandler method
+            var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, PurchaseOrderDto, object>>
             {
                 { _localizer["PO"], (row,item) => item.PO = row[_localizer["PO"]]?.ToString() },
                 { _localizer["Status"], (row,item) => item.Status = row[_localizer["Status"]]?.ToString() },
@@ -71,43 +71,62 @@ namespace CleanArchitecture.Razor.Application.PurchaseOrders.Commands.Import
             }, _localizer["PurchaseOrders"]);
             if (result.Succeeded)
             {
-                foreach (var item in result.Data) {
-                    var product =await  _context.Products.FirstOrDefaultAsync(x => x.Name ==item.ProductName);
-                    if (product == null)
+                var customerlist=new List<Customer>();
+                var productlist=new List<Product>();
+                foreach (var item in result.Data)
+                {
+                    if (!(await _context.PurchaseOrders.AnyAsync(x => x.PO == item.PO)))
                     {
-                        product = new Product() { Name = item.ProductName ,Description=   "从采购单导入" };
-                        _context.Products.Add(product);
-                    }
-                    var customer=await _context.Customers.FirstOrDefaultAsync(x=>x.Name==item.CustomerName);
-                    if (customer == null)
-                    {
-                        customer = new Customer()
+                        var product = productlist.FirstOrDefault(x => x.Name == item.ProductName);
+                        if (product != null)
                         {
-                            Name = item.CustomerName,
-                            PartnerType = Domain.Enums.PartnerType.Supplier,
-                            Comments="从采购单导入",
-                        };
-                        _context.Customers.Add(customer);   
-                    }
-                    var purchaseOrder = new PurchaseOrder()
-                    {
-                        PO = item.PO,
-                        Amount = item.Amount,
-                        CustomerId = customer.Id,
-                        Customer = customer,
-                        InvoiceNo = item.InvoiceNo,
-                        IsSpecial = item.IsSpecial,
-                        Description = item.Description,
-                        OrderDate = item.OrderDate,
-                        Product = product,
-                        ProductId = product.Id,
-                        Price = item.Price,
-                        Qty = item.Qty,
-                        Status = "Draft",
-                        TaxRate = item.TaxRate,
+                            product = await _context.Products.FirstOrDefaultAsync(x => x.Name == item.ProductName);
+                            productlist.Add(product);
+                            }
+                        if (product == null)
+                        {
+                            product = new Product() { Name = item.ProductName, Description = "从采购单导入" };
+                            _context.Products.Add(product);
+                            productlist.Add(product);
+                        }
+                        var customer = customerlist.FirstOrDefault(x => x.Name == item.CustomerName);
+                        if (customer != null)
+                        {
+                            customer = await _context.Customers.FirstOrDefaultAsync(x => x.Name == item.CustomerName);
+                            customerlist.Add(customer);
+                        }
+                 
+                        if (customer == null)
+                        {
+                            customer = new Customer()
+                            {
+                                Name = item.CustomerName,
+                                PartnerType = Domain.Enums.PartnerType.Supplier,
+                                Comments = "从采购单导入",
+                            };
+                            _context.Customers.Add(customer);
+                            customerlist.Add(customer);
+                        }
+                        var purchaseOrder = new PurchaseOrder()
+                        {
+                            PO = item.PO,
+                            Amount = item.Amount,
+                            CustomerId = customer.Id,
+                            Customer = customer,
+                            InvoiceNo = item.InvoiceNo,
+                            IsSpecial = item.IsSpecial,
+                            Description = item.Description,
+                            OrderDate = item.OrderDate,
+                            Product = product,
+                            ProductId = product.Id,
+                            Price = item.Price,
+                            Qty = item.Qty,
+                            Status = "Draft",
+                            TaxRate = item.TaxRate,
 
-                    };
-                    _context.PurchaseOrders.Add(purchaseOrder);
+                        };
+                        _context.PurchaseOrders.Add(purchaseOrder);
+                    }
                     await _context.SaveChangesAsync(cancellationToken);
                 }
 
@@ -120,7 +139,7 @@ namespace CleanArchitecture.Razor.Application.PurchaseOrders.Commands.Import
         }
         public async Task<byte[]> Handle(CreatePurchaseOrdersTemplateCommand request, CancellationToken cancellationToken)
         {
-          
+
             var fields = new string[] {
                 _localizer["PO"],
                 _localizer["Product Name"],

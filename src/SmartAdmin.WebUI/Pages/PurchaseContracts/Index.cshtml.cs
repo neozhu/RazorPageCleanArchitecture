@@ -10,6 +10,9 @@ using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
 using CleanArchitecture.Razor.Application.Customers.Queries.GetAll;
 using CleanArchitecture.Razor.Application.Products.Queries.GetAll;
 using CleanArchitecture.Razor.Application.Projects.Queries.GetAll;
+using CleanArchitecture.Razor.Application.PurchaseContractDetails.Commands.AddEdit;
+using CleanArchitecture.Razor.Application.PurchaseContractDetails.Commands.Delete;
+using CleanArchitecture.Razor.Application.PurchaseContractDetails.Queries.Specify;
 using CleanArchitecture.Razor.Application.PurchaseContracts.Commands.AddEdit;
 using CleanArchitecture.Razor.Application.PurchaseContracts.Commands.Delete;
 using CleanArchitecture.Razor.Application.PurchaseContracts.Commands.Import;
@@ -32,8 +35,12 @@ namespace SmartAdmin.WebUI.Pages.PurchaseContracts
     {
         [BindProperty]
         public AddEditPurchaseContractCommand Input { get; set; }
+    
+
         [BindProperty]
         public IFormFile UploadedFile { get; set; }
+        [BindProperty]
+        public int PurchaseContractId { get; set; }
 
         public SelectList Projects { get; set; }
         public SelectList Customers { get; set; } 
@@ -94,17 +101,23 @@ namespace SmartAdmin.WebUI.Pages.PurchaseContracts
             }
         }
 
+        public async Task<IActionResult> OnPostSaveTermsAsync([FromBody] AddEditPurchaseContractDetailCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return new JsonResult(result);
+        }
+
         public async Task<IActionResult> OnGetDeleteCheckedAsync([FromQuery] int[] id)
         {
             var command = new DeleteCheckedPurchaseContractsCommand() { Id = id };
             var result = await _mediator.Send(command);
-            return new JsonResult("");
+            return new JsonResult(result);
         }
         public async Task<IActionResult> OnGetDeleteAsync([FromQuery] int id)
         {
             var command = new DeletePurchaseContractCommand() { Id = id };
             var result = await _mediator.Send(command);
-            return new JsonResult("");
+            return new JsonResult(result);
         }
         public async Task<FileResult> OnPostExportAsync([FromBody] ExportPurchaseContractsQuery command)
         {
@@ -144,5 +157,23 @@ namespace SmartAdmin.WebUI.Pages.PurchaseContracts
             }
         }
 
+        public async Task<IActionResult> OnGetPurchaseTermsAsync(int id)
+        {
+            var command = new GetPurchaseContractDetailsByPurchaseIdQuery()
+            { 
+               PurchaseContractId= id
+            };
+            var result = await _mediator.Send(command);
+            return new JsonResult(result);
+        }
+        public async Task<IActionResult> OnGetDeleteTermsAsync(int id)
+        {
+            var command = new DeletePurchaseContractDetailCommand()
+            {
+                 Id = id
+            };
+            var result = await _mediator.Send(command);
+            return new JsonResult(result);
+        }
     }
 }
