@@ -193,7 +193,7 @@
     <value>项目信息</value>
   </data>
   <data name="Status" xml:space="preserve">
-    <value>状体</value>
+    <value>状态</value>
   </data>
   <data name="Begin DateTime" xml:space="preserve">
     <value>开始日期</value>

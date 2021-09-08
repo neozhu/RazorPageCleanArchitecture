@@ -138,17 +138,22 @@
                         <span class="invalid-feedback" asp-validation-for="Input.ContractDate">Sorry, you missed this one.</span>
                     </div>
                     <div class="col-md-6">
+                        <label class="form-label" for="ClosedDate">@_localizer["Closed Date"] </label>
+                        <input type="date" asp-for="Input.ClosedDate" class="form-control" placeholder="Closed Date" readonly="readonly"  />
+                        <span class="invalid-feedback" asp-validation-for="Input.ClosedDate">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="col-md-6">
                         <label class="form-label" for="OrderNo">@_localizer["Order No"]  </label>
                         <input type="text" asp-for="Input.OrderNo" class="form-control" placeholder="OrderNo" />
                         <span class="invalid-feedback" asp-validation-for="Input.OrderNo">Sorry, you missed this one.</span>
                     </div>
-           
-                        <div class="col-md-12">
-                            <label class="form-label" for="Description">@_localizer["Description"] </label>
-                            <input type="text" asp-for="Input.Description" class="form-control" placeholder="Description" />
-                            <span class="invalid-feedback" asp-validation-for="Input.Description">Sorry, you missed this one.</span>
-                        </div>
-                 
+
+                    <div class="col-md-12">
+                        <label class="form-label" for="Description">@_localizer["Description"] </label>
+                        <input type="text" asp-for="Input.Description" class="form-control" placeholder="Description" />
+                        <span class="invalid-feedback" asp-validation-for="Input.Description">Sorry, you missed this one.</span>
+                    </div>
+
                 </div>
                     <div class="form-row">
                         <div class="col-md-4">
@@ -229,7 +234,6 @@
             } else {
                 var request = $('#purchaseContract_form').serialize();
                 var formData = new FormData(form);
-
                 axios.post('@Url.Page("/PurchaseContracts/Index")', formData).then(res => {
                     toastr["info"]('@_localizer["Save Success"]');
                     $('#purchaseContract_modal').modal('toggle');
@@ -304,7 +308,8 @@
                     { field: 'Status', title: '@_localizer["Status"]', sortable: true, width: 140 },
                     { field: 'ProjectName', title: '@_localizer["Project Name"]', sortable: true, width: 180 },
                     { field: 'CustomerName', title: '@_localizer["Customer Name"]', sortable: true, width: 180 },
-                    { field: 'ContractDate', title: '@_localizer["Contract Date"]', sortable: true, width: 180,formatter:dateformatter },
+                    { field: 'ContractDate', title: '@_localizer["Contract Date"]', sortable: true, width: 150, formatter: dateformatter },
+                    { field: 'ClosedDate', title: '@_localizer["Closed Date"]', sortable: true, width: 150, formatter: dateformatter },
                     { field: 'Description', title: '@_localizer["Description"]', sortable: true, width: 150 },
                     { field: 'OrderNo', title: '@_localizer["Order No"]', sortable: true, width: 120 },
                     { field: 'ContractAmount', title: '@_localizer["Contract Amount"]', sortable: true, width: 160,align: 'right',formatter:numberformatter},
@@ -345,9 +350,11 @@
                             $('#purchaseContract_form [name*="IsSpecial"]').prop('checked', false);
                         }
                     },
-                    OrderDate: function (value) {
-                        $('#purchaseContract_form #Input_OrderDate').val(moment(value).format('YYYY-MM-DD'));
-
+                    ContractDate: function (value) {
+                        $('#purchaseContract_form #Input_ContractDate').val(moment(value).format('YYYY-MM-DD'));
+                    },
+                    ClosedDate: function (value) {
+                        $('#purchaseContract_form #Input_ClosedDate').val(moment(value).format('YYYY-MM-DD'));
                     }
                 })
             } else {
