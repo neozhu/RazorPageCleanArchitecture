@@ -28,7 +28,7 @@ $.fn.jsonToForm = function (data, callbacks) {
                     });
                 } else if ($(element).is(":checkbox") || $(element).is(":radio")) {
                     // checkbox group or radio group
-                    $(element).val() == v ? $(element).prop("checked", true) : "";
+                   ($(element).val() == v || $(element).val() == v.toString()) ? $(element).prop("checked", true) : "";
                 } else {
                     $('[name$="' + k + '"]', formInstance).val(v);
                 }

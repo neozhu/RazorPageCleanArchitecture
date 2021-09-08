@@ -151,7 +151,7 @@
     <value>操作</value>
   </data>
   <data name="Contract" xml:space="preserve">
-    <value>联系人</value>
+    <value>采购联系人</value>
   </data>
   <data name="Customers" xml:space="preserve">
     <value>客户信息</value>
@@ -163,7 +163,7 @@
     <value>下载模板</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>电子邮件</value>
+    <value>采购电子邮件</value>
   </data>
   <data name="Export Excel" xml:space="preserve">
     <value>导出Excel</value>
@@ -178,7 +178,7 @@
     <value>系统编号</value>
   </data>
   <data name="Import Excel" xml:space="preserve">
-    <value>导入Excel</value>
+    <value>导入 Excel</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>客户名称</value>
@@ -190,7 +190,7 @@
     <value>客户类型</value>
   </data>
   <data name="Phone Number" xml:space="preserve">
-    <value>电话</value>
+    <value>采购电话</value>
   </data>
   <data name="Region" xml:space="preserve">
     <value>区域</value>
@@ -212,5 +212,23 @@
   </data>
   <data name="Choose Region" xml:space="preserve">
     <value>选择区域</value>
+  </data>
+  <data name="Contract2" xml:space="preserve">
+    <value>财务联系人</value>
+  </data>
+  <data name="Email2" xml:space="preserve">
+    <value>财务电子邮件</value>
+  </data>
+  <data name="Phone Number2" xml:space="preserve">
+    <value>财务电话</value>
+  </data>
+  <data name="Tax No" xml:space="preserve">
+    <value>税号</value>
+  </data>
+  <data name="Bank" xml:space="preserve">
+    <value>开户行名称</value>
+  </data>
+  <data name="Account No" xml:space="preserve">
+    <value>银行账号</value>
   </data>
 </root>

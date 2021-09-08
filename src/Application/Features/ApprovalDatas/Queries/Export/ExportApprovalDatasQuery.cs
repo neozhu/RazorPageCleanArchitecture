@@ -68,7 +68,7 @@ namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Queries.Exp
                     { _localizer["Outcome"], item => item.Outcome },
                     { _localizer["Comments"], item => item.Comments },
                     { _localizer["Approved DateTime"], item => item.ApprovedDateTime?.ToString("yyyy-MM-dd HH:mm:ss") }
-                }, _localizer["Documents"]
+                }, _localizer["ApprovalHistories"]
                 );
             return result;
         }

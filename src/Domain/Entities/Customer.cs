@@ -34,6 +34,15 @@ namespace CleanArchitecture.Razor.Domain.Entities
 
         public string PhoneNumber { get; set; }
 
+        public string Contract2 { get; set; }
+
+        public string Email2 { get; set; }
+
+        public string PhoneNumber2 { get; set; }
+        public string TaxNo { get; set; }
+        public string Bank { get; set; }
+        public string AccountNo { get; set; }
+
         public string Fax { get; set; }
         public string Comments { get; set; }
         public List<DomainEvent> DomainEvents { get; set; } = new();

@@ -83,13 +83,13 @@ namespace SmartAdmin.WebUI.Pages.Customers
 
         public async Task<IActionResult> OnGetDeleteCheckedAsync([FromQuery] int[] id)
         {
-            var command = new DeleteCheckedCommersCommand() { Id = id };
+            var command = new DeleteCheckedCustomersCommand() { Id = id };
             var result = await _mediator.Send(command);
             return new JsonResult("");
         }
         public async Task<IActionResult> OnGetDeleteAsync([FromQuery] int id)
         {
-            var command = new DeleteCommerCommand() { Id = id };
+            var command = new DeleteCustomerCommand() { Id = id };
             var result = await _mediator.Send(command);
             return new JsonResult("");
         }

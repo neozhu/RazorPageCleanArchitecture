@@ -243,4 +243,25 @@
   <data name="Workflow" xml:space="preserve">
     <value>Workflow</value>
   </data>
+  <data name="Contracts" xml:space="preserve">
+    <value>Contracts</value>
+  </data>
+  <data name="Sales Contracts" xml:space="preserve">
+    <value>Sales Contracts</value>
+  </data>
+  <data name="Purchase Contracts" xml:space="preserve">
+    <value>Purchase Contracts</value>
+  </data>
+  <data name="Purchase Orders" xml:space="preserve">
+    <value>Purchase Orders</value>
+  </data>
+  <data name="Projects" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="Invoices" xml:space="preserve">
+    <value>Invoices</value>
+  </data>
 </root>

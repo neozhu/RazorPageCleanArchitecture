@@ -46,7 +46,6 @@ namespace SmartAdmin.WebUI
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddWorkflow(Configuration);
             services.AddApplication();
             services.AddInfrastructure(Configuration);
          
@@ -71,8 +70,10 @@ namespace SmartAdmin.WebUI
                 .AddJsonOptions(options =>
                   {
                       options.JsonSerializerOptions.PropertyNamingPolicy = null;
-                      
-                    })
+                      options.JsonSerializerOptions.IgnoreNullValues = false;
+                      options.JsonSerializerOptions.Converters.Add(new EmptyNumberConverter());
+                      options.JsonSerializerOptions.Converters.Add(new EmptyIntConverter());
+                  })
                 .AddRazorRuntimeCompilation()
                 .AddRazorPagesOptions(options =>
                 {
@@ -115,7 +116,6 @@ namespace SmartAdmin.WebUI
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseWorkflow();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

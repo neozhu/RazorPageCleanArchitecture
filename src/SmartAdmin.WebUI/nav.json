@@ -2,120 +2,38 @@
   "version": "4.5",
   "lists": [
     {
-      "title": "Application Intel",
-      "icon": "fal fa-info-circle",
-      "roles": [ "Admin", "Basic" ],
-      "items": [
-        {
-          "title": "Analytics Dashboard",
-          "showOnSeed": false,
-          "href": "intel_analytics_dashboard.html",
-          "roles": []
-        },
-        {
-          "title": "Marketing Dashboard",
-          "showOnSeed": false,
-          "href": "intel_marketing_dashboard.html",
-          "roles": []
-        },
-        {
-          "title": "Introduction",
-          "href": "intel_introduction.html",
-          "roles": []
-        },
-        {
-          "title": "Privacy",
-          "href": "intel_privacy.html",
-          "roles": []
-        }
-      ]
-    },
-    {
-      "title": "Theme Settings",
-      "icon": "fal fa-cog",
-      "roles": [],
-      "items": [
-        {
-          "title": "How it works",
-          "href": "settings_how_it_works.html",
-          "roles": []
-        },
-        {
-          "title": "Layout Options",
-          "href": "settings_layout_options.html",
-          "roles": []
-        },
-        {
-          "title": "Theme Modes (beta)",
-          "href": "settings_theme_modes.html",
-          "roles": []
-        },
-        {
-          "title": "Skin Options",
-          "href": "settings_skin_options.html",
-          "roles": []
-        },
-        {
-          "title": "Saving to Database",
-          "href": "settings_saving_db.html",
-          "roles": []
-        }
-      ]
-    },
-    {
-      "title": "Documentation",
-      "showOnSeed": false,
-      "icon": "fal fa-book",
-      "roles": [],
-      "items": [
-        {
-          "title": "General Docs",
-          "href": "docs_general.html",
-          "roles": []
-        },
-        {
-          "title": "Flavors & Editions",
-          "href": "docs_flavors_editions.html",
-          "roles": []
-        },
-        {
-          "title": "Community Support",
-          "href": "docs_community_support.html",
-          "roles": []
-        },
-        {
-          "title": "Licensing",
-          "href": "docs_licensing.html",
-          "roles": []
-        },
-        {
-          "title": "Build Notes",
-          "text": "Build Notes",
-          "href": "docs_buildnotes.html",
-          "span": {
-            "text": "v4.5.1"
-          },
-          "roles": []
-        }
-      ]
-    },
-    {
-      "title": "CRM Application",
+      "title": "Project Management",
       "roles": []
     },
     {
-      "title": "Workflow",
-      "icon": "fal fa-clipboard-check",
+      "title": "Welcome",
+      "href": "aspnetcore_welcome.html",
+      "icon": "fal fa-graduation-cap",
+      "roles": []
+    },
+    {
+      "title": "Contracts",
+      "icon": "fal fa-file-contract",
       "roles": [ "Admin", "Basic" ],
       "items": [
         {
-          "title": "Approval",
-          "href": "approval_index.html",
+          "title": "Sales Contracts",
+          "href": "salescontracts_index.html",
           "roles": []
         },
         {
-          "title": "Histories",
-          "href": "approval_histories.html",
+          "title": "Invoices",
+          "href": "invoicedetails_index.html",
+          "roles": []
+        },
+        {
+          "title": "Purchase Contracts",
+          "href": "purchasecontracts_index.html",
+          "roles": []
+        },
+        {
+          "title": "Purchase Orders",
+          "href": "purchaseorders_index.html",
           "roles": []
         }
       ]
@@ -131,8 +49,23 @@
           "roles": []
         },
         {
+          "title": "Products",
+          "href": "products_index.html",
+          "roles": []
+        },
+        {
+          "title": "Projects",
+          "href": "projects_index.html",
+          "roles": []
+        },
+        {
           "title": "Dictionaries",
           "href": "keyValues_index.html",
+          "roles": []
+        },
+        {
+          "title": "Document Type",
+          "href": "documentTypes_index.html",
           "roles": []
         }
       ]
@@ -146,22 +79,11 @@
           "title": "Documents",
           "href": "documents_index.html",
           "roles": []
-        },
-        {
-          "title": "Document Type",
-          "href": "documentTypes_index.html",
-          "roles": []
         }
       ]
     },
     {
-      "title": "ASP.NET Core 5.0",
-      "roles": []
-    },
-    {
-      "title": "Welcome",
-      "href": "aspnetcore_welcome.html",
-      "icon": "fal fa-graduation-cap",
+      "title": "System Management",
       "roles": []
     },
     {
@@ -180,79 +102,10 @@
           "roles": []
         }
       ]
-    },
-    {
-      "title": "Solution Overview",
-      "icon": "fal fa-folder-open",
-      "roles": [],
-      "items": [
-        {
-          "title": "Editions",
-          "showOnSeed": false,
-          "href": "aspnetcore_editions.html",
-          "roles": []
-        },
-        {
-          "title": "FAQ",
-          "href": "aspnetcore_faq.html",
-          "roles": []
-        },
-        {
-          "title": "Interactive",
-          "showOnSeed": false,
-          "href": "aspnetcore_interactive.html",
-          "roles": []
-        }
-      ]
-    },
-    {
-      "title": "Documentation",
-      "icon": "fal fa-book",
-      "roles": [],
-      "items": [
-        {
-          "title": "Introduction",
-          "href": "documentation_introduction.html",
-          "roles": []
-        },
-        {
-          "title": "Getting Started",
-          "href": "documentation_getting_started.html",
-          "roles": []
-        },
-        {
-          "title": "Site Structure",
-          "href": "documentation_site_structure.html",
-          "roles": []
-        },
-        {
-          "title": "Solution Architecture",
-          "href": "documentation_solution_architecture.html",
-          "roles": []
-        },
-        {
-          "title": "Customizations",
-          "href": "documentation_customizations.html",
-          "roles": []
-        },
-        {
-          "title": "Howto Contribute",
-          "href": "documentation_howto_contribute.html",
-          "roles": []
-        },
-        {
-          "title": "Licensing Information",
-          "href": "documentation_licensing_information.html",
-          "roles": []
-        },
-        {
-          "title": "Changelog",
-          "href": "documentation_changelog.html",
-          "roles": []
-        }
-      ]
     }
-     
-     
+
+
+
+
   ]
 }

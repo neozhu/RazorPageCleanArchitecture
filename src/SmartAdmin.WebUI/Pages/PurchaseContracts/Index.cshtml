@@ -1,0 +1,739 @@
+﻿@page
+@using CleanArchitecture.Razor.Domain.Enums
+@using CleanArchitecture.Razor.Infrastructure.Constants.Permission
+@model SmartAdmin.WebUI.Pages.PurchaseContracts.IndexModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
+@inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
+@{
+  ViewData["Title"] = _localizer["Purchase Contracts"].Value;
+  ViewData["PageName"] = "purchaseContracts_index";
+  ViewData["Category1"] = _localizer["Contracts"].Value;
+  ViewData["Heading"] = _localizer["Purchase Contracts"].Value;
+  ViewData["PageDescription"] = _localizer["See all available options"].Value;
+  ViewData["PreemptiveClass"] = "Default";
+  var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Create);
+  var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Edit);
+  var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Delete);
+  var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Search);
+  var _canImport = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Import);
+  var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Export);
+  var _canViewTerms = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.ViewTerms);
+
+}
+@section HeadBlock {
+
+    <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+    <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+    <link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">
+    <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+    <style>
+
+        .purchaseContract_dg_datagrid-cell-c2-_action {
+            overflow: visible !important
+        }
+    </style>
+}
+<div id="js-page-content-demopanels" class="card mb-g">
+    <div class="card-header bg-white d-flex align-items-center">
+        <h4 class="m-0">
+            @_localizer["Purchase Contracts"] 
+            <small>@_localizer["See all available options"]</small>
+        </h4>
+        <div class="ml-auto">
+            @if (_canCreate.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="addbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
+                    @_localizer["Add"]
+                </button>
+            }
+            @if (_canDelete.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-danger" disabled id="deletebutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
+                    @_localizer["Delete"]
+                </button>
+            }
+            @if (_canSearch.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="searchbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
+                    @_localizer["Search"]
+                </button>
+            }
+            @if (_canImport.Succeeded)
+            {
+                <div class="btn-group" role="group">
+                    <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
+                        <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>   @_localizer["Import Excel"]
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="importbutton">
+                        <button id="gettemplatebutton" class="dropdown-item">@_localizer["Download Template"]</button>
+                    </div>
+                </div>
+            }
+            @if (_canExport.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="exportbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                    @_localizer["Export Excel"]
+                </button>
+            }
+            </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table id="purchaseContract_dg">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="purchaseContract_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                </button>
+            </div>
+            <form id="purchaseContract_form" class="needs-validation" novalidate="novalidate">
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="Input.Id" />
+                    @Html.ValidationSummary()
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label class="form-label" for="PO">@_localizer["Contract No"] <span class="text-danger">*</span></label>
+                        <input type="text" asp-for="Input.ContractNo" class="form-control" placeholder="Contract No" required />
+                        <span class="invalid-feedback" asp-validation-for="Input.ContractNo">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="PO">@_localizer["Status"]  </label>
+                        <input type="text" asp-for="Input.Status" class="form-control" placeholder="Status" readonly="readonly" />
+                        <span class="invalid-feedback" asp-validation-for="Input.Status">Sorry, you missed this one.</span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="ProjectId">@_localizer["Project Name"] <span class="text-danger">*</span></label>
+                        <select type="text" asp-for="Input.ProjectId" class="custom-select" asp-items="Model.Projects" required>
+                            <option value="">@_localizer["Choose Project"]</option>
+                        </select>
+                        <span class="invalid-feedback" asp-validation-for="Input.ProjectId">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="CustomerId">@_localizer["Customer Name"] <span class="text-danger">*</span></label>
+                        <select type="text" asp-for="Input.CustomerId" class="custom-select" asp-items="Model.Customers" required>
+                            <option value="">@_localizer["Choose Customer"]</option>
+                        </select>
+                        <span class="invalid-feedback" asp-validation-for="Input.CustomerId">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="ContractDate">@_localizer["Contract Date"] <span class="text-danger">*</span></label>
+                        <input type="date" asp-for="Input.ContractDate" class="form-control" placeholder="Contract Date" required />
+                        <span class="invalid-feedback" asp-validation-for="Input.ContractDate">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="ClosedDate">@_localizer["Closed Date"] </label>
+                        <input type="date" asp-for="Input.ClosedDate" class="form-control" placeholder="Closed Date" readonly="readonly"  />
+                        <span class="invalid-feedback" asp-validation-for="Input.ClosedDate">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="OrderNo">@_localizer["Order No"]  </label>
+                        <input type="text" asp-for="Input.OrderNo" class="form-control" placeholder="Order No" />
+                        <span class="invalid-feedback" asp-validation-for="Input.OrderNo">Sorry, you missed this one.</span>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label" for="Description">@_localizer["Description"] </label>
+                        <input type="text" asp-for="Input.Description" class="form-control" placeholder="Description" />
+                        <span class="invalid-feedback" asp-validation-for="Input.Description">Sorry, you missed this one.</span>
+                    </div>
+
+                </div>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label class="form-label" for="ContractAmount">@_localizer["Contract Amount"] <span class="text-danger">*</span> </label>
+                            <input type="number" asp-for="Input.ContractAmount" class="form-control" placeholder="Contract Amount" required />
+                            <span class="invalid-feedback" asp-validation-for="Input.ContractAmount">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="PaidAmount">@_localizer["Paid Amount"] </label>
+                            <input type="number" asp-for="Input.PaidAmount" class="form-control" placeholder="Paid Amount" readonly="readonly" />
+                            <span class="invalid-feedback" asp-validation-for="Input.PaidAmount">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="Balance">@_localizer["Balance"]  </label>
+                            <input type="text" asp-for="Input.Balance" class="form-control" placeholder="Balance" readonly="readonly" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Balance">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="InvoiceAmount">@_localizer["Invoice Amount"]  </label>
+                            <input type="text" asp-for="Input.InvoiceAmount" class="form-control" placeholder="Invoice Amount" readonly="readonly" />
+                            <span class="invalid-feedback" asp-validation-for="Input.InvoiceAmount">Sorry, you missed this one.</span>
+                        </div>
+                    </div>
+                     
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <label class="form-label" for="Comments">@_localizer["Comments"] </label>
+                            <input type="text" asp-for="Input.Comments" class="form-control" placeholder="Comments" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Comments">Sorry, you missed this one.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
+                    <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="contractTerms-modal-right" tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-right  ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4">@_localizer["Contract Terms"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                </button>
+            </div>
+            <form id="contractTerms_form" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="PurchaseContractId" />
+                <div class="modal-body">
+
+                    <div class="card mb-g">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col text-right">
+                                    <button id="refreshtermsbutton" type="button" class="btn btn-default btn-sm waves-effect waves-themed">@_localizer["Refresh"]</button>
+                                    <button id="addtermsbutton" type="button" class="btn btn-default btn-sm waves-effect waves-themed">@_localizer["Add Terms"]</button>
+                                    <button id="canceltermsbutton" type="button" class="btn btn-default btn-sm waves-effect waves-themed">@_localizer["Cancel"]</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <table id="terms_dg">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect waves-themed" data-dismiss="modal"> @_localizer["Close"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/PurchaseContracts/Index") + "?handler=Import",
+    getTemplateUri = @Url.Page("/PurchaseContracts/Index") + "?handler=CreateTemplate",
+    onImportedSucceeded = "reload()" })
+@section ScriptsBlock {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+    @*<script>jQuery.fn.tooltip = bootstrapTooltip;</script>*@
+    <script src="~/lib/axios/dist/axios.js"></script>
+    <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+
+    <script type="text/javascript">
+        $('#searchbutton').click(function () {
+            reload();
+        });
+        $('#addbutton').click(function () {
+            popupmodal({ Id: 0, Status: 'Draft', IsSpecial:false},'add');
+        });
+        $('#deletebutton').click(function () {
+            onDeleteChecked();
+        });
+        $('#exportbutton').click(function () {
+            onExport();
+        });
+        $('#importbutton').click(function () {
+            showImportModal();
+        });
+        $('#gettemplatebutton').click(function () {
+            onGetTemplate();
+        });
+        $('#purchaseContract_form :submit').click(function (e) {
+            var form = document.querySelector('#purchaseContract_form');
+            $(form).find(":valid").parent().removeClass("was-validated");
+            if (form.checkValidity() === false) {
+                form.classList.add('was-validated');
+            } else {
+                var request = $('#purchaseContract_form').serialize();
+                var formData = new FormData(form);
+                axios.post('@Url.Page("/PurchaseContracts/Index")', formData).then(res => {
+                    toastr["info"]('@_localizer["Save Success"]');
+                    $('#purchaseContract_modal').modal('toggle');
+                    reload();
+                }).catch((error) => {
+                    var msg = error.response.data;
+                    bootbox.alert({
+                        size: "small",
+                        title: "@_localizer["Error"]",
+                        message: msg,
+                        callback: function () { /* your callback code */ }
+                    })
+
+                });
+            }
+            event.preventDefault();
+            event.stopPropagation();
+        })
+        var $dg={};
+        var initdatagrid = () => {
+            $dg = $('#purchaseContract_dg').datagrid({
+                height: (window.innerHeight-320),
+                method: 'GET',
+                rownumbers: false,
+                singleSelect: true,
+                selectOnCheck: false,
+                checkOnSelect: false,
+                pagination: true,
+                clientPaging: false,
+                remoteFilter: true,
+                sortName: 'Id',
+                sortOrder:'desc',
+                pageSize: 15,
+                pageList: [10, 15, 30, 50, 100, 1000],
+                onBeforeLoad: function () {
+                    $('#deletebutton').prop('disabled', true);
+                },
+                onCheckAll: function (rows) {
+                    const checked = $(this).datagrid('getChecked').length > 0;
+                    $('#deletebutton').prop('disabled', !checked);
+                },
+                onUncheckAll: function () {
+                    $('#deletebutton').prop('disabled', true);
+                },
+                onCheck: function () {
+                    $('#deletebutton').prop('disabled', false);
+                },
+                onUncheck: function () {
+                    const checked = $(this).datagrid('getChecked').length > 0;
+                    $('#deletebutton').prop('disabled', !checked);
+                },
+                columns: [[
+                    { field: 'ck', checkbox: true },
+                    {
+                        field: '_action',
+                        title: '@_localizer["Command"]',
+                        width: 100,
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            return `<div class="btn-group" role="group">
+                                      <button id="commandbtngroup" type="button" @(_canEdit.Succeeded? "":"disabled")  class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
+                                     </button>
+                                     <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
+                                       <button class="dropdown-item" onclick="onEdit(${index})" @(_canEdit.Succeeded? "":"disabled")><i class="fal fa-edit mr-1"></i> @_localizer["Edit"]</button>
+                                       <button class="dropdown-item" onclick="onViewTerms(${index})" @(_canViewTerms.Succeeded? "":"disabled")><i class="fal fa-file-contract mr-1"></i> @_localizer["Contract Terms"]</button>
+                                       <button class="dropdown-item" onclick="onDelete('${row.Id}')" @(_canDelete.Succeeded? "":"disabled") ><i class="fal fa-trash-alt mr-1"></i> @_localizer["Delete"]</button>
+                                     </div>
+                                  </div>`;
+                        }
+                    },
+                    { field: 'ContractNo', title: '@_localizer["Contract No"]', sortable: true, width: 150 },
+                    { field: 'Status', title: '@_localizer["Status"]', sortable: true, width: 140 },
+                    { field: 'ProjectName', title: '@_localizer["Project Name"]', sortable: true, width: 180 },
+                    { field: 'CustomerName', title: '@_localizer["Customer Name"]', sortable: true, width: 180 },
+                    { field: 'ContractDate', title: '@_localizer["Contract Date"]', sortable: true, width: 150, formatter: dateformatter },
+                    { field: 'ClosedDate', title: '@_localizer["Closed Date"]', sortable: true, width: 150, formatter: dateformatter },
+                    { field: 'Description', title: '@_localizer["Description"]', sortable: true, width: 150 },
+                    { field: 'OrderNo', title: '@_localizer["Order No"]', sortable: true, width: 120 },
+                    { field: 'ContractAmount', title: '@_localizer["Contract Amount"]', sortable: true, width: 160,align: 'right',formatter:numberformatter},
+                    { field: 'PaidAmount', title: '@_localizer["Paid Amount"]', sortable: true, width: 160, align: 'right', formatter: numberformatter},
+                    { field: 'InvoiceAmount', title: '@_localizer["Invoice Amount"]', sortable: true, width: 160, align: 'right', formatter: numberformatter},
+                    { field: 'Balance', title: '@_localizer["Balance"]', sortable: true, width: 130, align: 'right', formatter: numberformatter},
+                    { field: 'Comments', title: '@_localizer["Comments"]', sortable: true, width: 260 },
+
+                ]]
+            })
+                .datagrid('enableFilter', {})
+                .datagrid('load', '@Url.Page("/PurchaseContracts/Index")?handler=Data');
+
+        }
+
+        var reload = () => {
+            $dg.datagrid('load', '@Url.Page("/PurchaseContracts/Index")?handler=Data');
+        }
+
+        $(() => {
+            initdatagrid();
+        })
+        var popupmodal = (purchaseContract, state) => {
+            $('#purchaseContract_modal').modal('toggle');
+            $('#purchaseContract_modal .modal-title').html('@_localizer["Add Purchase Order"]');
+            $('#purchaseContract_form')[0].reset();
+            if (state!='add') {
+                $('#purchaseContract_modal .modal-title').html('@_localizer["Edit Purchase Order"]');
+                $('#purchaseContract_form').jsonToForm(purchaseContract, {
+                    Id: function (value) {
+                        $('#purchaseContract_form #Input_Id').val(value);
+
+                    },
+                    IsSpecial: function (value) {
+                        if (value == true) {
+                            $('#purchaseContract_form [name*="IsSpecial"]').prop('checked', true);
+                        } else {
+                            $('#purchaseContract_form [name*="IsSpecial"]').prop('checked', false);
+                        }
+                    },
+                    ContractDate: function (value) {
+                        $('#purchaseContract_form #Input_ContractDate').val(moment(value).format('YYYY-MM-DD'));
+                    },
+                    ClosedDate: function (value) {
+                        $('#purchaseContract_form #Input_ClosedDate').val(moment(value).format('YYYY-MM-DD'));
+                    }
+                })
+            } else {
+                $('#purchaseContract_form').jsonToForm(purchaseContract, {
+                    IsSpecial: function (value) {
+                        if (value == true) {
+                            $('#purchaseContract_form [name*="IsSpecial"]').prop('checked', true);
+                        } else {
+                            $('#purchaseContract_form [name*="IsSpecial"]').prop('checked', false);
+                        }
+                    }
+                });
+
+
+            }
+        }
+
+        var onEdit = (index) => {
+            var purchaseContract = $dg.datagrid('getRows')[index];
+            popupmodal(purchaseContract);
+        }
+        var onDelete = (id) => {
+            bootbox.confirm({
+                message: "@_localizer["Are you sure delete a row?"]",
+                buttons: {
+                    confirm: {
+                        label: '@_localizer["Yes"]',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: '@_localizer["No"]',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        axios.get('@Url.Page("/PurchaseContracts/Index")?handler=Delete&id=' + id).then(res => {
+                            toastr["info"]('@_localizer["Delete Success"]');
+                            reload();
+                        })
+                            .catch((error) => {
+                                var msg = error.response.data;
+                                bootbox.alert({
+                                    size: "small",
+                                    title: "@_localizer["Error"]",
+                                    message: msg,
+                                    callback: function () { /* your callback code */ }
+                                })
+                            });
+                    }
+                }
+            })
+        }
+        var onDeleteChecked = () => {
+            var checkedId = $dg.datagrid('getChecked').map(x => x.Id);
+            if (checkedId.length > 0) {
+                bootbox.confirm({
+                    message: "@_localizer["Are you sure delete checked rows?"]",
+                    buttons: {
+                        confirm: {
+                            label: '@_localizer["Yes"]',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: '@_localizer["No"]',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
+                            console.log(paras.toString())
+                            axios.get('@Url.Page("/PurchaseContracts/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
+                                toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
+                                reload();
+                            })
+                                .catch((error) => {
+                                    var msg = error.response.data;
+                                    bootbox.alert({
+                                        size: "small",
+                                        title: "@_localizer["Error"]",
+                                        message: msg,
+                                        callback: function () { /* your callback code */ }
+                                    })
+                                });
+                        }
+                    }
+                });
+
+            }
+        }
+        var onExport = () => {
+            var options = $dg.datagrid('options');
+            var data = {
+                filterRules: JSON.stringify(options.filterRules),
+                sort: options.sortName,
+                order: options.sortOrder,
+            }
+            console.log(options,data)
+            var headers = {
+                "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+            }
+            axios.post('@Url.Page("/PurchaseContracts/Index")?handler=Export',
+                data,
+                {
+                    headers: headers,
+                    responseType: "blob"
+                })
+                .then(response => {
+                    const filename = getFileName(response.headers['content-disposition']);
+                    const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', filename);
+                    document.body.appendChild(link);
+                    link.click();
+                }).catch(error => {
+                    console.log(error)
+                })
+
+
+        }
+        var currentPurchaseContract = null;
+
+        $('#contractTerms-modal-right').on('shown.bs.modal', function () {
+            $termsdg.datagrid('resize');
+        })
+        var $termsdg = {};
+        var inittermsdg = () => {
+            $termsdg = $('#terms_dg').datagrid({
+                height: (window.innerHeight-320),
+                rownumbers: false,
+                pagination: false,
+                clientPaging: false,
+                remoteFilter: false,
+                onBeforeLoad: function () {
+                    $('#canceltermsbutton').prop('disabled', true);
+                },
+                columns: [[
+                    { field: 'ContractNo', title: '@_localizer["Contract No"]',  width: 120 },
+                    { field: 'ContractAmount', title: '@_localizer["Contract Amount"]',  width: 130,align: 'right', formatter: numberformatter },
+                    {
+                        field: 'Terms',
+                        title: '@_localizer["Terms"]',
+                        width: 160,
+                        editor: {
+                            type: 'textbox', options: { required: true }
+                        }
+                    },
+                    {
+                        field: 'Ratio',
+                        title: '@_localizer["Ratio"]',
+                        width: 90,
+                        align: 'right',
+                        formatter: numberformatter,
+                        editor: {
+                            type: 'numberbox', options: { required: true }
+                        }
+
+                    },
+                    {
+                        field: 'RatioAmount',
+                        title: '@_localizer["Ratio Amount"]',
+                        width: 120,
+                        align: 'right',
+                        formatter: numberformatter,
+                        editor: {
+                            type: 'numberbox', options: { required: true }
+                        }
+                    },
+                    {
+                        field: 'PlanedPaidDate',
+                        title: '@_localizer["Planed Paid Date"]',
+                        width: 120,
+                        formatter: dateformatter,
+                        editor: {
+                            type: 'datebox', options: { required: true }
+                        }
+                    },
+                    {
+                        field: 'PaidAmount',
+                        title: '@_localizer["Paid Amount"]',
+                        width: 120,
+                        align: 'right',
+                        formatter: numberformatter,
+                        editor: {
+                            type: 'numberbox', options: { required: false }
+                        }
+                    },
+                    {
+                        field: 'PaidRatio',
+                        title: '@_localizer["Paid Ratio"]',
+                        width: 90,
+                        align: 'right',
+                        formatter: numberformatter,
+                        editor: {
+                            type: 'numberbox', options: { required: false }
+                        }
+                    },
+                    {
+                        field: 'PaidDate',
+                        title: '@_localizer["Paid Date"]',
+                        width: 120,
+                        formatter: dateformatter,
+                        editor: {
+                            type: 'datebox', options: { required: false }
+                        }
+                    },
+                    {
+                        field: 'InvoiceNo',
+                        title: '@_localizer["Invoice No"]',
+                        width: 160,
+                        editor: {
+                            type: 'textbox', options: { required: false }
+                        }
+                    },
+                    {
+                        field: 'InvoiceDate',
+                        title: '@_localizer["Invoice Date"]',
+                        width: 160,
+                        formatter: dateformatter,
+                        editor: {
+                            type: 'datebox', options: { required: false }
+                        }
+                    },
+                    {
+                        field: 'TaxRate',
+                        title: '@_localizer["Tax Rate"]',
+                        width: 90,
+                        editor: {
+                            type: 'numberbox', options: { required: false }
+                        }
+                    },
+                    {
+                        field: 'IsSpecial',
+                        title: '@_localizer["Is Special"]',
+                        width: 90,
+                        editor: {
+                            type: 'checkbox', options: { id:'checkboxIsSpecial', required: false }
+                        }
+                    },
+                    {
+                        field: 'Comments',
+                        title: '@_localizer["Comments"]',
+                        width: 200,
+                        editor: {
+                            type: 'textbox', options: { required: false }
+                        }
+                    },
+                    {
+                        field: '_command',
+                        title: '@_localizer["Command"]',
+                        width: 200,
+                        formatter: function (v, r, i) {
+                            if (r._state == 'add' || r._state == 'edit') {
+                                return `<button type="button" onclick="onSaveTerms(${i})" class="btn btn-sm btn-info waves-effect waves-themed">@_localizer["Save"]</button>`
+                            } else {
+                                return `<button type="button" onclick="onUpdateTerms(${i})" class="btn btn-sm btn-info waves-effect waves-themed">@_localizer["Update"]</button>
+                                        <button type="button" onclick="onDeleteTerms(${i})" class="btn btn-sm btn-danger waves-effect waves-themed">@_localizer["Delete"]</button>
+                                       `
+                            }
+
+                        }
+                    },
+                ]]
+            })
+        }
+        inittermsdg();
+        var onViewTerms = (index) => {
+            currentPurchaseContract = $dg.datagrid('getRows')[index];
+            axios.get('@Url.Page("/PurchaseContracts/Index")?handler=PurchaseTerms&id=' + currentPurchaseContract.Id)
+                .then(response => {
+                    $('#contractTerms-modal-right').modal('toggle');
+                    $termsdg.datagrid('loadData', response.data)
+                })
+        }
+        $('#addtermsbutton').click(function () {
+            onAddTerms();
+        })
+        $('#canceltermsbutton').click(function () {
+            $dg.datagrid('rejectChanges');
+            $('#canceltermsbutton').prop('disabled', true);
+            editIndex = undefined;
+        })
+        var editIndex = undefined;
+        var onAddTerms = () => {
+            $('#canceltermsbutton').prop('disabled', false);
+            $termsdg.datagrid('appendRow', {
+                Id:0,
+                _state: 'add',
+                PaidDate: null,
+                InvoiceDate:null,
+                PurchaseContractId: currentPurchaseContract.Id,
+                ContractNo: currentPurchaseContract.ContractNo,
+                ContractAmount: currentPurchaseContract.ContractAmount
+            });
+            editIndex = $termsdg.datagrid('getRows').length - 1;
+            $termsdg.datagrid('selectRow', editIndex)
+                .datagrid('beginEdit', editIndex);
+        }
+        var onUpdateTerms = (index) => {
+            var item = $termsdg.datagrid('getRows')[index];
+            item._state = 'edit';
+            $termsdg.datagrid('updateRow', { index: index, row: item });
+            $termsdg.datagrid('refreshRow', index);
+            $termsdg.datagrid('selectRow', index)
+                    .datagrid('beginEdit', index);
+
+        }
+        var onSaveTerms = (index) => {
+            if ($termsdg.datagrid('validateRow', index)) {
+                $termsdg.datagrid('endEdit', index);
+                editIndex = undefined;
+                var item = $termsdg.datagrid('getRows')[index];
+                var headers = {
+                    "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+                }
+                axios.post('@Url.Page("/PurchaseContracts/Index")?handler=SaveTerms',  item ,
+                    {
+                        headers: headers
+                    }).then(response => {
+                        item._state = null;
+                        item.Id = response.data.Data;
+                        $termsdg.datagrid('updateRow', { index: index, row: item });
+                        $termsdg.datagrid('refreshRow', index);
+                    })
+            }
+        }
+        var onDeleteTerms = (index) => {
+            var item = $termsdg.datagrid('getRows')[index];
+            axios.get('@Url.Page("/PurchaseContracts/Index")?handler=DeleteTerms&id=' + item.Id)
+                .then(response => {
+                    $termsdg.datagrid('deleteRow', index);
+                })
+
+        }
+
+    </script>
+}

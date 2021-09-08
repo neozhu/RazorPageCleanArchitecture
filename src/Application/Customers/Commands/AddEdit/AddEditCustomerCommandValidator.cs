@@ -12,21 +12,16 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.AddEdit
             RuleFor(v => v.Name)
                 .MaximumLength(256)
                 .NotEmpty();
-            RuleFor(v => v.NameOfEnglish)
-                .MaximumLength(256)
-                .NotEmpty();
-            RuleFor(v => v.GroupName)
+            RuleFor(v => v.Sales)
                 .MaximumLength(256)
                 .NotEmpty();
             RuleFor(v => v.Region)
                 .MaximumLength(256)
                 .NotEmpty();
-            RuleFor(v => v.Sales)
+            RuleFor(v => v.PartnerType)
                 .MaximumLength(256)
                 .NotEmpty();
-            RuleFor(v => v.RegionSalesDirector)
-                .MaximumLength(256)
-                .NotEmpty();
+           
         }
     }
 }

@@ -243,4 +243,25 @@
   <data name="Workflow" xml:space="preserve">
     <value>ワークフロー</value>
   </data>
+  <data name="Purchase Orders" xml:space="preserve">
+    <value>発注書</value>
+  </data>
+  <data name="Sales Contracts" xml:space="preserve">
+    <value>販売契約</value>
+  </data>
+  <data name="Contracts" xml:space="preserve">
+    <value>契約</value>
+  </data>
+  <data name="Purchase Contracts" xml:space="preserve">
+    <value>購買契約</value>
+  </data>
+  <data name="Projects" xml:space="preserve">
+    <value>プロジェクト</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>プロダクツ</value>
+  </data>
+  <data name="Invoices" xml:space="preserve">
+    <value>請求 書</value>
+  </data>
 </root>

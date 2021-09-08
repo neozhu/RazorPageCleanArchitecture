@@ -156,4 +156,40 @@
   <data name="Are you sure delete checked rows?" xml:space="preserve">
     <value>Вы уверены, что удалите </value>
   </data>
+  <data name="Please upload a file" xml:space="preserve">
+    <value>Пожалуйста, загрузите файл</value>
+  </data>
+  <data name="Delete ${checkedId.length} Success" xml:space="preserve">
+    <value>Удалить ${checkedId.length} Успешно</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="Export Success" xml:space="preserve">
+    <value>Успех экспорта</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="Save Success" xml:space="preserve">
+    <value>Сохраните успех</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="Dictionaries" xml:space="preserve">
+    <value>Словари</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Ценность</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>СМС</value>
+  </data>
 </root>

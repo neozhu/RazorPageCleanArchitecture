@@ -145,13 +145,13 @@
     <value>客户关系管理应用程序</value>
   </data>
   <data name="Customers" xml:space="preserve">
-    <value>客户</value>
+    <value>客户信息</value>
   </data>
   <data name="Customizations" xml:space="preserve">
     <value>定制</value>
   </data>
   <data name="Dictionaries" xml:space="preserve">
-    <value>字典</value>
+    <value>数据字典</value>
   </data>
   <data name="Document Type" xml:space="preserve">
     <value>文件类型</value>
@@ -160,7 +160,7 @@
     <value>文档</value>
   </data>
   <data name="Documents" xml:space="preserve">
-    <value>附件</value>
+    <value>附件信息</value>
   </data>
   <data name="Editions" xml:space="preserve">
     <value>版本</value>
@@ -242,5 +242,26 @@
   </data>
   <data name="Workflow" xml:space="preserve">
     <value>工作流</value>
+  </data>
+  <data name="Contracts" xml:space="preserve">
+    <value>合同管理</value>
+  </data>
+  <data name="Sales Contracts" xml:space="preserve">
+    <value>销售合同</value>
+  </data>
+  <data name="Purchase Contracts" xml:space="preserve">
+    <value>采购合同</value>
+  </data>
+  <data name="Purchase Orders" xml:space="preserve">
+    <value>采购单</value>
+  </data>
+  <data name="Projects" xml:space="preserve">
+    <value>项目信息</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>原材料</value>
+  </data>
+  <data name="Invoices" xml:space="preserve">
+    <value>开票信息</value>
   </data>
 </root>

@@ -213,4 +213,22 @@
   <data name="Choose Region" xml:space="preserve">
     <value>Choose Region</value>
   </data>
+  <data name="Contract2" xml:space="preserve">
+    <value>Contract2</value>
+  </data>
+  <data name="Email2" xml:space="preserve">
+    <value>Email2</value>
+  </data>
+  <data name="Phone Number2" xml:space="preserve">
+    <value>Phone Number2</value>
+  </data>
+  <data name="Tax No" xml:space="preserve">
+    <value>Tax No</value>
+  </data>
+  <data name="Bank" xml:space="preserve">
+    <value>Bank</value>
+  </data>
+  <data name="Account No" xml:space="preserve">
+    <value>Account No</value>
+  </data>
 </root>

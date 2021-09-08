@@ -18,7 +18,8 @@ namespace CleanArchitecture.Razor.Domain.Entities
         public string Description {  get; set; }
         public DateTime BeginDateTime {  get; set; }
         public DateTime? EndDateTime {  get; set; }
-        public decimal? Cost { get; set; }
+        public decimal? EstimatedCost { get; set; }
+        public decimal? ActualCost { get; set; }
         public decimal? ContractAmount { get;set; }
         public decimal? ReceiptAmount {  get; set; }
         public decimal? GrossMargin { get; set; }

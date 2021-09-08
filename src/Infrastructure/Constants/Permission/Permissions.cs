@@ -17,7 +17,58 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Permission
             public const string Search = "Permissions.Approval.Search";
             public const string Export = "Permissions.Approval.Export";
         }
-
+        [DisplayName("PurchaseContracts")]
+        [Description("PurchaseContracts Permissions")]
+        public static class PurchaseContracts
+        {
+            public const string View = "Permissions.PurchaseContracts.View";
+            public const string Create = "Permissions.PurchaseContracts.Create";
+            public const string Edit = "Permissions.PurchaseContracts.Edit";
+            public const string Delete = "Permissions.PurchaseContracts.Delete";
+            public const string Search = "Permissions.PurchaseContracts.Search";
+            public const string Export = "Permissions.PurchaseContracts.Export";
+            public const string Import = "Permissions.PurchaseContracts.Import";
+            public const string ViewTerms = "Permissions.PurchaseContracts.ViewTerms";
+            public const string AddTerms = "Permissions.PurchaseContracts.AddTerms";
+            public const string DeleteTerms = "Permissions.PurchaseContracts.DeleteTerms";
+            public const string UpdateTerms = "Permissions.PurchaseContracts.UpdateTerms";
+        }
+        [DisplayName("PurchaseContractDetails")]
+        [Description("PurchaseContractDetails Permissions")]
+        public static class PurchaseContractDetails
+        {
+            public const string View = "Permissions.PurchaseContractDetails.View";
+            public const string Create = "Permissions.PurchaseContractDetails.Create";
+            public const string Edit = "Permissions.PurchaseContractDetails.Edit";
+            public const string Delete = "Permissions.PurchaseContractDetails.Delete";
+            public const string Search = "Permissions.PurchaseContractDetails.Search";
+            public const string Export = "Permissions.PurchaseContractDetails.Export";
+            public const string Import = "Permissions.PurchaseContractDetails.Import";
+        }
+        [DisplayName("PurchaseOrders")]
+        [Description("PurchaseOrders Permissions")]
+        public static class PurchaseOrders
+        {
+            public const string View = "Permissions.PurchaseOrders.View";
+            public const string Create = "Permissions.PurchaseOrders.Create";
+            public const string Edit = "Permissions.PurchaseOrders.Edit";
+            public const string Delete = "Permissions.PurchaseOrders.Delete";
+            public const string Search = "Permissions.PurchaseOrders.Search";
+            public const string Export = "Permissions.PurchaseOrders.Export";
+            public const string Import = "Permissions.PurchaseOrders.Import";
+        }
+        [DisplayName("Projects")]
+        [Description("Projects Permissions")]
+        public static class Projects
+        {
+            public const string View = "Permissions.Projects.View";
+            public const string Create = "Permissions.Projects.Create";
+            public const string Edit = "Permissions.Projects.Edit";
+            public const string Delete = "Permissions.Projects.Delete";
+            public const string Search = "Permissions.Projects.Search";
+            public const string Export = "Permissions.Projects.Export";
+            public const string Import = "Permissions.Projects.Import";
+        }
         [DisplayName("Products")]
         [Description("Products Permissions")]
         public static class Products
@@ -66,7 +117,8 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Permission
             public const string Delete = "Permissions.Documents.Delete";
             public const string Search = "Permissions.Documents.Search";
             public const string Export = "Permissions.Documents.Export";
-            public const string Import = "Permissions.Categories.Import";
+            public const string Import = "Permissions.Documents.Import";
+            public const string Download = "Permissions.Documents.Download";
         }
         [DisplayName("DocumentTypes")]
         [Description("DocumentTypes Permissions")]

@@ -36,7 +36,143 @@
   <ItemGroup>
     <Folder Include="Documents\Commands\Import\" />
     <Folder Include="Features\ApprovalDatas\EventHandlers\" />
+    <Folder Include="Products\EventHandlers\" />
+    <Folder Include="Projects\EventHandlers\" />
+    <Folder Include="Resources\Documents\Commands\Import\" />
+    <Folder Include="Resources\Features\ApprovalDatas\Commands\Import\" />
     <Folder Include="Workflow\Approval\Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Projects\Commands\Import\ImportProjectsCommandHandler.Designer.cs">
+      <DependentUpon>ImportProjectsCommandHandler.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\Projects\Queries\Export\ExportProjectsQueryHandler.Designer.cs">
+      <DependentUpon>ExportProjectsQueryHandler.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\Customers\Commands\Import\ImportCustomersCommandHandler.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ImportCustomersCommandHandler.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Customers\Queries\Export\ExportCustomersQueryHandler.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExportCustomersQueryHandler.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Documents\Queries\Export\ExportDocumentsQueryHandler.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExportDocumentsQueryHandler.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\DocumentTypes\Commands\Import\ImportDocumentTypesCommandHandler.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ImportDocumentTypesCommandHandler.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\DocumentTypes\Queries\Export\ExportDocumentTypesQueryHandler.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExportDocumentTypesQueryHandler.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Features\ApprovalDatas\Queries\Export\ExportApprovalDatasQueryHandler.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExportApprovalDatasQueryHandler.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\KeyValues\Commands\Import\ImportKeyValuesCommandHandler.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ImportKeyValuesCommandHandler.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\KeyValues\Queries\Export\ExportKeyValuesQueryHandler.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExportKeyValuesQueryHandler.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\PurchaseContracts\Commands\Import\ImportPurchaseContractsCommandHandler.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ImportPurchaseContractsCommandHandler.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\PurchaseContracts\Queries\Export\ExportPurchaseContractsQueryHandler.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExportPurchaseContractsQueryHandler.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\PurchaseOrders\Commands\Import\ImportPurchaseOrdersCommandHandler.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ImportPurchaseOrdersCommandHandler.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\PurchaseOrders\Queries\Export\ExportPurchaseOrdersQueryHandler.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExportPurchaseOrdersQueryHandler.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Projects\Commands\Import\ImportProjectsCommandHandler.resx">
+      <LastGenOutput>ImportProjectsCommandHandler.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Projects\Queries\Export\ExportProjectsQueryHandler.resx">
+      <LastGenOutput>ExportProjectsQueryHandler.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Customers\Commands\Import\ImportCustomersCommandHandler.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ImportCustomersCommandHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Customers\Queries\Export\ExportCustomersQueryHandler.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExportCustomersQueryHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Documents\Queries\Export\ExportDocumentsQueryHandler.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExportDocumentsQueryHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\DocumentTypes\Commands\Import\ImportDocumentTypesCommandHandler.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ImportDocumentTypesCommandHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\DocumentTypes\Queries\Export\ExportDocumentTypesQueryHandler.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExportDocumentTypesQueryHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Features\ApprovalDatas\Queries\Export\ExportApprovalDatasQueryHandler.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExportApprovalDatasQueryHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\KeyValues\Commands\Import\ImportKeyValuesCommandHandler.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ImportKeyValuesCommandHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\KeyValues\Queries\Export\ExportKeyValuesQueryHandler.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExportKeyValuesQueryHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PurchaseContracts\Commands\Import\ImportPurchaseContractsCommandHandler.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ImportPurchaseContractsCommandHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PurchaseContracts\Queries\Export\ExportPurchaseContractsQueryHandler.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExportPurchaseContractsQueryHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PurchaseOrders\Commands\Import\ImportPurchaseOrdersCommandHandler.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ImportPurchaseOrdersCommandHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PurchaseOrders\Queries\Export\ExportPurchaseOrdersQueryHandler.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExportPurchaseOrdersQueryHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

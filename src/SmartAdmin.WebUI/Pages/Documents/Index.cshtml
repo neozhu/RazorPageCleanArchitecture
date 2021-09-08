@@ -17,6 +17,7 @@
   var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Delete);
   var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Search);
   var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Export);
+  var _canDownload = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Download);
 }
 @section HeadBlock {
 
@@ -183,7 +184,7 @@
                 event.stopPropagation();
                 var request = $('#document_form').serialize();
                 var formData = new FormData(form);
-                formData.append("UploadedFile", uploadfileinput.files[0]);
+                //formData.append("UploadedFile", uploadfileinput.files[0]);
                 axios({
                     url: '@Url.Page("/Documents/Index")',
                     method: 'post',
@@ -293,6 +294,7 @@
                                      </button>
                                      <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
                                        <button class="dropdown-item" onclick="onEdit(${index})" @(_canEdit.Succeeded? "":"disabled")><i class="fal fa-edit mr-1"></i> @_localizer["Edit"]</button>
+                                       <button class="dropdown-item" onclick="onDownload(${index})" @(_canDownload.Succeeded? "":"disabled")><i class="fal fa-download mr-1"></i> @_localizer["Download"]</button>
                                        <button class="dropdown-item" onclick="onDelete('${row.Id}')" @(_canDelete.Succeeded? "":"disabled") ><i class="fal fa-trash-alt mr-1"></i> @_localizer["Delete"]</button>
                                      </div>
                                   </div>`;
@@ -464,7 +466,17 @@
 
 
         }
-
+        var onDownload = (index) => {
+            const item = $dg.datagrid('getRows')[index];
+            const url = item.URL;
+            const filename = getFileName(item.URL);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', filename);
+            document.body.appendChild(link);
+            link.click();
+            toastr["info"](`@_localizer["Download Success"]`);
+        }
 
     </script>
 }

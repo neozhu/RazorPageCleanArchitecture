@@ -12,20 +12,24 @@ namespace CleanArchitecture.Razor.Domain.Entities
 {
     public class PurchaseContract : AuditableEntity, IHasDomainEvent
     {
-        public int Id {  get; set; }
+        public int Id { get; set; }
         public string Status { get; set; }
         public string ContractNo { get; set; }
         public string Description { get; set; }
         public int ProjectId { get; set; }
         public virtual Project Project { get; set; }
+        public int CustomerId { get; set; }
+        public virtual Customer Customer { get; set; }
         public DateTime ContractDate { get; set; }
         public DateTime? ClosedDate { get; set; }
         public string OrderNo { get; set; }
-        public decimal ContractExtAmount { get; set; }
-        public decimal TaxRate { get; set; }
         public decimal ContractAmount { get; set; }
         public decimal PaidAmount { get; set; }
+        public decimal InvoiceAmount { get; set; }
+        public decimal Balance { get; set; }
         public string Comments { get; set; }
-        public List<DomainEvent> DomainEvents { get ; set ; }= new List<DomainEvent>();
+        public List<DomainEvent> DomainEvents { get; set; } = new List<DomainEvent>();
+
+        public virtual ICollection<PurchaseContractDetail> PurchaseContractDetails { get; set; } = new HashSet<PurchaseContractDetail>();
     }
 }

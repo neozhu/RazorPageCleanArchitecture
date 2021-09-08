@@ -90,7 +90,20 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
             }
             if (!context.Customers.Any())
             {
-                context.Customers.Add(new Domain.Entities.Customer() { Name = "SmartAdmin", AddressOfEnglish= "https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0", GroupName= "SmartAdmin", Address= "https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0", Sales= "GotBootstrap",RegionSalesDirector= "GotBootstrap",Region= "all over the world", NameOfEnglish="SmartAdmin", PartnerType= Domain.Enums.PartnerType.TP,Contract= "GotBootstrap", Email= "drlantern@gotbootstrap.com" });
+                context.Customers.Add(new Domain.Entities.Customer() { Name = "上海电气工业", Address= "上海浦东", Sales= "Sales",Region= "CNC",   PartnerType= Domain.Enums.PartnerType.Customer,Contract= "采购联系人", Email= "采购电子邮件" });
+                context.Customers.Add(new Domain.Entities.Customer() { Name = "腾讯科技", Address = "深圳", Sales = "Sales", Region = "CNS", PartnerType = Domain.Enums.PartnerType.Customer, Contract = "采购联系人", Email = "采购电子邮件" });
+                await context.SaveChangesAsync();
+            }
+            if (!context.Products.Any())
+            {
+                context.Products.Add(new Domain.Entities.Product() { Name = "铜管",Description="内:13.9,外:21.7" });
+                context.Products.Add(new Domain.Entities.Product() { Name = "电缆", Description = "5芯,2.5平方" });
+                await context.SaveChangesAsync();
+            }
+            if (!context.Projects.Any())
+            {
+                context.Projects.Add(new Domain.Entities.Project() { Name = "特斯拉1期", BeginDateTime=new System.DateTime(2021,8,12), Description = "特斯拉1期,3.8千平米" });
+                context.Projects.Add(new Domain.Entities.Project() { Name = "上海大众新厂", BeginDateTime = new System.DateTime(2021, 9, 8), Description = "上海大众新厂,500平方米" });
                 await context.SaveChangesAsync();
             }
         }

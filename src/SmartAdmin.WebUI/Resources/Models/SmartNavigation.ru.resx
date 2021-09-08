@@ -243,4 +243,25 @@
   <data name="Workflow" xml:space="preserve">
     <value>Рабочий процесс</value>
   </data>
+  <data name="Purchase Orders" xml:space="preserve">
+    <value>Заказы на поставку</value>
+  </data>
+  <data name="Sales Contracts" xml:space="preserve">
+    <value>Договоры купли-продажи</value>
+  </data>
+  <data name="Contracts" xml:space="preserve">
+    <value>Контракты</value>
+  </data>
+  <data name="Purchase Contracts" xml:space="preserve">
+    <value>Договоры купли-продажи</value>
+  </data>
+  <data name="Projects" xml:space="preserve">
+    <value>Проекты</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Продукция</value>
+  </data>
+  <data name="Invoices" xml:space="preserve">
+    <value>Счета</value>
+  </data>
 </root>
