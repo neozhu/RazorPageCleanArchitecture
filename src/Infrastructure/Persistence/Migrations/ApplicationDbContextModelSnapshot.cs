@@ -35,7 +35,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                     b.Property<string>("Comments")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Contract")
+                    b.Property<string>("Contact")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
@@ -419,10 +419,12 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationUserLogin", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -459,10 +461,12 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210812094550_InitialCreate")]
+    [Migration("20210909072132_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.8")
+                .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.Customer", b =>
@@ -37,7 +37,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                     b.Property<string>("Comments")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Contract")
+                    b.Property<string>("Contact")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
@@ -195,6 +195,62 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                     b.ToTable("KeyValues");
                 });
 
+            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.Worflow.ApprovalData", b =>
+                {
+                    b.Property<string>("WorkflowId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Applicant")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ApprovedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Approver")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DocumentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DocumentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Outcome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RequestDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkflowName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("WorkflowId");
+
+                    b.ToTable("ApprovalDatas");
+                });
+
             modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationRole", b =>
                 {
                     b.Property<string>("Id")
@@ -223,6 +279,36 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationRoleClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Group")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationUser", b =>
@@ -308,6 +394,54 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationUserClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationUserLogin", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
             modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationUserRole", b =>
                 {
                     b.Property<string>("UserId")
@@ -323,91 +457,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AspNetRoleClaims");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRoleClaim<string>");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AspNetUserClaims");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserClaim<string>");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.ToTable("AspNetUserLogins");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserLogin<string>");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationUserToken", b =>
                 {
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -420,58 +470,12 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserToken<string>");
-                });
-
-            modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationRoleClaim", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Group")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("RoleId");
-
-                    b.HasDiscriminator().HasValue("ApplicationRoleClaim");
-                });
-
-            modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationUserClaim", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>");
-
-                    b.HasIndex("UserId");
-
-                    b.HasDiscriminator().HasValue("ApplicationUserClaim");
-                });
-
-            modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationUserLogin", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>");
-
-                    b.HasIndex("UserId");
-
-                    b.HasDiscriminator().HasValue("ApplicationUserLogin");
-                });
-
-            modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationUserToken", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserToken<string>");
-
-                    b.HasDiscriminator().HasValue("ApplicationUserToken");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.Document", b =>
@@ -483,25 +487,6 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("DocumentType");
-                });
-
-            modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationUserRole", b =>
-                {
-                    b.HasOne("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationRole", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationUser", "User")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationRoleClaim", b =>
@@ -533,6 +518,25 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationUserRole", b =>
+                {
+                    b.HasOne("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationRole", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationUser", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
 
                     b.Navigation("User");
                 });
