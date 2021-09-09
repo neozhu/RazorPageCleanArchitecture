@@ -24,7 +24,7 @@ namespace CleanArchitecture.Razor.Application.Customers.DTOs
         public string RegionSalesDirector { get; set; }
         public string Address { get; set; }
         public string AddressOfEnglish { get; set; }
-        public string Contract { get; set; }
+        public string Contact { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Fax { get; set; }

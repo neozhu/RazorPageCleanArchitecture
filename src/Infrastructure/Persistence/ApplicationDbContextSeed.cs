@@ -90,7 +90,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
             }
             if (!context.Customers.Any())
             {
-                context.Customers.Add(new Domain.Entities.Customer() { Name = "SmartAdmin", AddressOfEnglish= "https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0", GroupName= "SmartAdmin", Address= "https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0", Sales= "GotBootstrap",RegionSalesDirector= "GotBootstrap",Region= "all over the world", NameOfEnglish="SmartAdmin", PartnerType= Domain.Enums.PartnerType.TP,Contract= "GotBootstrap", Email= "drlantern@gotbootstrap.com" });
+                context.Customers.Add(new Domain.Entities.Customer() { Name = "SmartAdmin", AddressOfEnglish= "https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0", GroupName= "SmartAdmin", Address= "https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0", Sales= "GotBootstrap",RegionSalesDirector= "GotBootstrap",Region= "CNC", NameOfEnglish="SmartAdmin", PartnerType= Domain.Enums.PartnerType.TP,Contact= "GotBootstrap", Email= "drlantern@gotbootstrap.com" });
                 await context.SaveChangesAsync();
             }
         }

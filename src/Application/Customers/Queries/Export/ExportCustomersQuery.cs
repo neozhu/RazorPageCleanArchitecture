@@ -66,7 +66,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Queries.Export
                     { _localizer["Region Sales Director"], item => item.RegionSalesDirector },
                     { _localizer["Address"], item => item.Address },
                     { _localizer["Address Of English"], item => item.AddressOfEnglish },
-                    { _localizer["Contract"], item => item.Contract },
+                    { _localizer["Contact"], item => item.Contact },
                     { _localizer["Email"], item => item.Email },
                     { _localizer["Phone Number"], item => item.PhoneNumber },
                     { _localizer["Fax"], item => item.Fax },
