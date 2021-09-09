@@ -379,7 +379,7 @@ $.extend($.fn.datagrid.defaults.editors, {
 $.extend($.fn.datagrid.defaults.editors, {
     checkbox: {
         init: function (container, options) {
-            console.log(options, container)
+            //console.log(options, container)
             var checked = `<div class="datagrid-cell"><div class="custom-control custom-checkbox">
                       <input type="checkbox"  class="custom-control-input" name="defaultUnchecked" id="${options.id}">
                       <label class="custom-control-label"  for="${options.id}"></label>
@@ -418,26 +418,6 @@ function checkboxformatter(value, row, index) {
     } else {
         var unchecked = `<div class="custom-control custom-checkbox">
                        <input type="checkbox" class="custom-control-input" name="defaultCheckedDisabled"  disabled="">
-                       <label class="custom-control-label" for="defaultCheckedDisabled"></label>
-                   </div>`;
-
-        return unchecked;
-    }
-
-
-}
-//兼容性考虑等同于checkboxformatter
-function booleanformatter(value, row, index) {
-    if (istrue(value)) {
-
-        const checked = `<div class="custom-control custom-checkbox">
-                       <input type="checkbox" class="custom-control-input" name="defaultCheckedDisabled" checked="checked" disabled="">
-                       <label class="custom-control-label" for="defaultCheckedDisabled"></label>
-                   </div>`;
-        return checked;
-    } else {
-        var unchecked = `<div class="custom-control custom-checkbox">
-                       <input type="checkbox" class="custom-control-input" name="defaultCheckedDisabled" disabled="">
                        <label class="custom-control-label" for="defaultCheckedDisabled"></label>
                    </div>`;
 

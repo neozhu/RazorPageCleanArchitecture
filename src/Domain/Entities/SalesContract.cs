@@ -27,6 +27,8 @@ namespace CleanArchitecture.Razor.Domain.Entities
         public decimal TaxRate { get; set; }
         public decimal ContractIncAmount { get; set; }
         public decimal ReceiptAmount { get; set; }
+        public decimal InvoiceAmount { get; set; }
+        public decimal Balance { get; set; }
         public string Comments { get; set; }
         public List<DomainEvent> DomainEvents { get ; set ; }= new List<DomainEvent>();
     }

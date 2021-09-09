@@ -90,8 +90,8 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
             }
             if (!context.Customers.Any())
             {
-                context.Customers.Add(new Domain.Entities.Customer() { Name = "上海电气工业", Address= "上海浦东", Sales= "Sales",Region= "CNC",   PartnerType= Domain.Enums.PartnerType.Customer,Contract= "采购联系人", Email= "采购电子邮件" });
-                context.Customers.Add(new Domain.Entities.Customer() { Name = "腾讯科技", Address = "深圳", Sales = "Sales", Region = "CNS", PartnerType = Domain.Enums.PartnerType.Customer, Contract = "采购联系人", Email = "采购电子邮件" });
+                context.Customers.Add(new Domain.Entities.Customer() { Name = "上海电气工业", Address= "上海浦东", Sales= "Sales",Region= "CNC",   PartnerType= Domain.Enums.PartnerType.Customer,Contact= "采购联系人", Email= "采购电子邮件" });
+                context.Customers.Add(new Domain.Entities.Customer() { Name = "腾讯科技", Address = "深圳", Sales = "Sales", Region = "CNS", PartnerType = Domain.Enums.PartnerType.Customer, Contact = "采购联系人", Email = "采购电子邮件" });
                 await context.SaveChangesAsync();
             }
             if (!context.Products.Any())

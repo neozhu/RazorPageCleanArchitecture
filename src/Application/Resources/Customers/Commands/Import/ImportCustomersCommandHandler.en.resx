@@ -126,8 +126,8 @@
   <data name="Comments" xml:space="preserve">
     <value>Comments</value>
   </data>
-  <data name="Contract" xml:space="preserve">
-    <value>Contract</value>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
   </data>
   <data name="Customers" xml:space="preserve">
     <value>Customers</value>
@@ -171,8 +171,8 @@
   <data name="Phone Number2" xml:space="preserve">
     <value>Phone Number2</value>
   </data>
-  <data name="Contract2" xml:space="preserve">
-    <value>Contract2</value>
+  <data name="Contact2" xml:space="preserve">
+    <value>Contact2</value>
   </data>
   <data name="Bank" xml:space="preserve">
     <value>Bank</value>

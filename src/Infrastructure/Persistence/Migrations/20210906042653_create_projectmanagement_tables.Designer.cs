@@ -635,7 +635,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                     b.ToTable("SalesContracts");
                 });
 
-            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.SalesContrcatDetail", b =>
+            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.SalesContractDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -703,7 +703,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("SalesContractId");
 
-                    b.ToTable("SalesContrcatDetails");
+                    b.ToTable("SalesContractDetails");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.Worflow.ApprovalData", b =>
@@ -1071,7 +1071,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.SalesContrcatDetail", b =>
+            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.SalesContractDetail", b =>
                 {
                     b.HasOne("CleanArchitecture.Razor.Domain.Entities.SalesContract", "SalesContract")
                         .WithMany()

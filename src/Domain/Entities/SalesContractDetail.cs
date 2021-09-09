@@ -10,7 +10,7 @@ using CleanArchitecture.Razor.Domain.Common;
 
 namespace CleanArchitecture.Razor.Domain.Entities
 {
-    public class SalesContrcatDetail : AuditableEntity, IHasDomainEvent
+    public class SalesContractDetail : AuditableEntity, IHasDomainEvent
     {
         public int Id {  get; set; }
         public int SalesContractId { get; set; }
@@ -20,7 +20,6 @@ namespace CleanArchitecture.Razor.Domain.Entities
         public decimal Ratio { get; set; }
         public decimal RatioAmount { get; set; }
         public DateTime PlanedReceiptDate { get; set; }
-
         public decimal ReceiptAmount { get; set; }
         public decimal ReceiptRatio { get; set; }
         public DateTime? ReceiptDate { get; set; }
@@ -28,8 +27,6 @@ namespace CleanArchitecture.Razor.Domain.Entities
         public decimal Balance { get; set; }
         public DateTime? DueTime { get; set; }
         public string Comments { get; set; }
-
-
         public List<DomainEvent> DomainEvents { get ; set; }= new List<DomainEvent>();
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -45,6 +45,10 @@ namespace CleanArchitecture.Razor.Application.PurchaseContractDetails.Commands.D
            //TODO:Implementing DeletePurchaseContractDetailCommandHandler method 
            var item = await _context.PurchaseContractDetails.FindAsync(new object[] { request.Id }, cancellationToken);
             _context.PurchaseContractDetails.Remove(item);
+
+            var deletedEvent = new PurchaseContractDetailDeletedEvent(item);
+            item.DomainEvents.Add(deletedEvent);
+
             await _context.SaveChangesAsync(cancellationToken);
             return Result.Success();
         }
@@ -56,6 +60,8 @@ namespace CleanArchitecture.Razor.Application.PurchaseContractDetails.Commands.D
             foreach (var item in items)
             {
                 _context.PurchaseContractDetails.Remove(item);
+                var deletedEvent = new PurchaseContractDetailDeletedEvent(item);
+                item.DomainEvents.Add(deletedEvent);
             }
             await _context.SaveChangesAsync(cancellationToken);
             return Result.Success();

@@ -20,7 +20,7 @@ namespace CleanArchitecture.Razor.Application.Common.Interfaces
         DbSet<PurchaseContractDetail> PurchaseContractDetails {  get; set;}
         DbSet<PurchaseOrder> PurchaseOrders {  get; set; }
         DbSet<SalesContract> SalesContracts {  get; set; }
-        DbSet<SalesContrcatDetail> SalesContrcatDetails {  get; set;}
+        DbSet<SalesContractDetail> SalesContractDetails {  get; set;}
         DbSet<InvoiceDetail> InvoiceDetails { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);

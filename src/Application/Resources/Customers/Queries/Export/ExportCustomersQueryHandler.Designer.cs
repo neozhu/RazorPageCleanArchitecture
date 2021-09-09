@@ -62,6 +62,15 @@ namespace CleanArchitecture.Razor.Application.Resources.Customers.Queries.Export
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account No.
+        /// </summary>
+        internal static string Account_No {
+            get {
+                return ResourceManager.GetString("Account No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         internal static string Address {
@@ -80,6 +89,15 @@ namespace CleanArchitecture.Razor.Application.Resources.Customers.Queries.Export
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bank.
+        /// </summary>
+        internal static string Bank {
+            get {
+                return ResourceManager.GetString("Bank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Comments.
         /// </summary>
         internal static string Comments {
@@ -89,11 +107,20 @@ namespace CleanArchitecture.Razor.Application.Resources.Customers.Queries.Export
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contract.
+        ///   Looks up a localized string similar to Contact.
         /// </summary>
-        internal static string Contract {
+        internal static string Contact {
             get {
-                return ResourceManager.GetString("Contract", resourceCulture);
+                return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact2.
+        /// </summary>
+        internal static string Contact2 {
+            get {
+                return ResourceManager.GetString("Contact2", resourceCulture);
             }
         }
         
@@ -112,6 +139,15 @@ namespace CleanArchitecture.Razor.Application.Resources.Customers.Queries.Export
         internal static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email2.
+        /// </summary>
+        internal static string Email2 {
+            get {
+                return ResourceManager.GetString("Email2", resourceCulture);
             }
         }
         
@@ -170,6 +206,15 @@ namespace CleanArchitecture.Razor.Application.Resources.Customers.Queries.Export
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Phone Number2.
+        /// </summary>
+        internal static string Phone_Number2 {
+            get {
+                return ResourceManager.GetString("Phone Number2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Region.
         /// </summary>
         internal static string Region {
@@ -193,6 +238,15 @@ namespace CleanArchitecture.Razor.Application.Resources.Customers.Queries.Export
         internal static string Sales {
             get {
                 return ResourceManager.GetString("Sales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tax No.
+        /// </summary>
+        internal static string Tax_No {
+            get {
+                return ResourceManager.GetString("Tax No", resourceCulture);
             }
         }
     }

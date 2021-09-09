@@ -305,7 +305,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SalesContrcatDetails",
+                name: "SalesContractDetails",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -330,9 +330,9 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SalesContrcatDetails", x => x.Id);
+                    table.PrimaryKey("PK_SalesContractDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SalesContrcatDetails_SalesContracts_SalesContractId",
+                        name: "FK_SalesContractDetails_SalesContracts_SalesContractId",
                         column: x => x.SalesContractId,
                         principalTable: "SalesContracts",
                         principalColumn: "Id",
@@ -375,8 +375,8 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SalesContrcatDetails_SalesContractId",
-                table: "SalesContrcatDetails",
+                name: "IX_SalesContractDetails_SalesContractId",
+                table: "SalesContractDetails",
                 column: "SalesContractId");
         }
 
@@ -392,7 +392,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                 name: "PurchaseOrders");
 
             migrationBuilder.DropTable(
-                name: "SalesContrcatDetails");
+                name: "SalesContractDetails");
 
             migrationBuilder.DropTable(
                 name: "PurchaseContracts");

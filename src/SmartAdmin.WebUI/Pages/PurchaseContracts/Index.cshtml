@@ -238,7 +238,7 @@
 </div>
 @await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/PurchaseContracts/Index") + "?handler=Import",
     getTemplateUri = @Url.Page("/PurchaseContracts/Index") + "?handler=CreateTemplate",
-    onImportedSucceeded = "reload()" })
+    onImportedSucceeded = "onLoadData()" })
 @section ScriptsBlock {
     <partial name="_ValidationScriptsPartial" />
 
@@ -251,7 +251,7 @@
 
     <script type="text/javascript">
         $('#searchbutton').click(function () {
-            reload();
+            onLoadData();
         });
         $('#addbutton').click(function () {
             popupmodal({ Id: 0, Status: 'Draft', IsSpecial:false},'add');
@@ -279,7 +279,7 @@
                 axios.post('@Url.Page("/PurchaseContracts/Index")', formData).then(res => {
                     toastr["info"]('@_localizer["Save Success"]');
                     $('#purchaseContract_modal').modal('toggle');
-                    reload();
+                    onLoadData();
                 }).catch((error) => {
                     var msg = error.response.data;
                     bootbox.alert({
@@ -368,7 +368,7 @@
 
         }
 
-        var reload = () => {
+        var onLoadData = () => {
             $dg.datagrid('load', '@Url.Page("/PurchaseContracts/Index")?handler=Data');
         }
 
@@ -436,7 +436,7 @@
                     if (result) {
                         axios.get('@Url.Page("/PurchaseContracts/Index")?handler=Delete&id=' + id).then(res => {
                             toastr["info"]('@_localizer["Delete Success"]');
-                            reload();
+                            onLoadData();
                         })
                             .catch((error) => {
                                 var msg = error.response.data;
@@ -472,7 +472,7 @@
                             console.log(paras.toString())
                             axios.get('@Url.Page("/PurchaseContracts/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
                                 toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
-                                reload();
+                                onLoadData();
                             })
                                 .catch((error) => {
                                     var msg = error.response.data;
@@ -536,6 +536,29 @@
                 onBeforeLoad: function () {
                     $('#canceltermsbutton').prop('disabled', true);
                 },
+                onBeginEdit: function (index, row) {
+                    const contractAmount = row.ContractAmount;
+                    const edratio = $(this).datagrid('getEditor', { index: index, field: 'Ratio' });
+                    const edamount = $(this).datagrid('getEditor', { index: index, field: 'RatioAmount' });
+                    $(edratio.target).numberbox({
+                        value: row.Ratio,
+                        precision:2,
+                        onChange: function (newValue, oldValue) {
+                            const amount = contractAmount * numeral(newValue).value();
+                            $(edamount.target).numberbox('setValue', amount);
+                        }
+                    });
+                    const edpa = $(this).datagrid('getEditor', { index: index, field: 'PaidAmount' });
+                    const edpr = $(this).datagrid('getEditor', { index: index, field: 'PaidRatio' });
+                    $(edpa.target).numberbox({
+                        value: row.RatioAmount,
+                        precision: 2,
+                        onChange: function (newValue, oldValue) {
+                            const ratio = numeral(newValue).value() / contractAmount;
+                            $(edpr.target).numberbox('setValue', ratio);
+                        }
+                    });
+                },
                 columns: [[
                     { field: 'ContractNo', title: '@_localizer["Contract No"]',  width: 120 },
                     { field: 'ContractAmount', title: '@_localizer["Contract Amount"]',  width: 130,align: 'right', formatter: numberformatter },
@@ -554,7 +577,9 @@
                         align: 'right',
                         formatter: numberformatter,
                         editor: {
-                            type: 'numberbox', options: { required: true }
+                            type: 'numberbox', options: {
+                                required: true, precision: 2,
+                            }
                         }
 
                     },
@@ -565,7 +590,7 @@
                         align: 'right',
                         formatter: numberformatter,
                         editor: {
-                            type: 'numberbox', options: { required: true }
+                            type: 'numberbox', options: { required: true, precision: 2, }
                         }
                     },
                     {
@@ -584,7 +609,7 @@
                         align: 'right',
                         formatter: numberformatter,
                         editor: {
-                            type: 'numberbox', options: { required: false }
+                            type: 'numberbox', options: { required: false, precision: 2,}
                         }
                     },
                     {
@@ -594,7 +619,7 @@
                         align: 'right',
                         formatter: numberformatter,
                         editor: {
-                            type: 'numberbox', options: { required: false }
+                            type: 'numberbox', options: { required: false, precision: 2, }
                         }
                     },
                     {
@@ -628,13 +653,14 @@
                         title: '@_localizer["Tax Rate"]',
                         width: 90,
                         editor: {
-                            type: 'numberbox', options: { required: false }
+                            type: 'numberbox', options: { required: false, precision: 2 }
                         }
                     },
                     {
                         field: 'IsSpecial',
                         title: '@_localizer["Is Special"]',
                         width: 90,
+                        formatter:checkboxformatter,
                         editor: {
                             type: 'checkbox', options: { id:'checkboxIsSpecial', required: false }
                         }
@@ -723,6 +749,8 @@
                         item.Id = response.data.Data;
                         $termsdg.datagrid('updateRow', { index: index, row: item });
                         $termsdg.datagrid('refreshRow', index);
+                        toastr["info"](`@_localizer["Updated Purchase Contract"]`);
+                        onLoadData();
                     })
             }
         }
@@ -731,6 +759,8 @@
             axios.get('@Url.Page("/PurchaseContracts/Index")?handler=DeleteTerms&id=' + item.Id)
                 .then(response => {
                     $termsdg.datagrid('deleteRow', index);
+                    toastr["info"](`@_localizer["Updated Purchase Contract"]`);
+                    onLoadData();
                 })
 
         }
