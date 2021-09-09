@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,6 +39,15 @@ namespace CleanArchitecture.Razor.Application.PurchaseContractDetails.EventHandl
             purchase.PaidAmount = paidamount??0m;
             purchase.InvoiceAmount = invamount ?? 0m;
             purchase.Balance = purchase.ContractAmount - purchase.PaidAmount;
+            if (purchase.Balance <= 0)
+            {
+                purchase.Status = "Closed";
+                purchase.ClosedDate = DateTime.Now;
+            }
+            else
+            {
+                purchase.Status = "Pending";
+            }
             await _context.SaveChangesAsync(cancellationToken);
             _logger.LogInformation($"Update PurchaseContracts:ContractAmount:{ purchase.ContractAmount},PaidAmount:{ purchase.PaidAmount},InvoiceAmount:{ purchase.InvoiceAmount},Balance:{purchase.Balance} ");
 

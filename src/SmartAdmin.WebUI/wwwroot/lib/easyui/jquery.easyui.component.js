@@ -379,7 +379,7 @@ $.extend($.fn.datagrid.defaults.editors, {
 $.extend($.fn.datagrid.defaults.editors, {
     checkbox: {
         init: function (container, options) {
-            console.log(options, container)
+            //console.log(options, container)
             var checked = `<div class="datagrid-cell"><div class="custom-control custom-checkbox">
                       <input type="checkbox"  class="custom-control-input" name="defaultUnchecked" id="${options.id}">
                       <label class="custom-control-label"  for="${options.id}"></label>
