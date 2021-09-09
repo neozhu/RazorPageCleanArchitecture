@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Serilog;
 using SmartAdmin.WebUI.Extensions;
 using SmartAdmin.WebUI.Models;
 using SmartAdmin.WebUI.Services;
@@ -109,6 +110,12 @@ namespace SmartAdmin.WebUI
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Files")),
                 RequestPath = new PathString("/Files")
+            });
+            app.UseSerilogRequestLogging(options =>
+            {
+                options.EnrichDiagnosticContext = (diagnosticContext, httpContext) => {
+                    diagnosticContext.Set("UserName", httpContext.User?.Identity?.Name??string.Empty);
+                };
             });
             app.UseRequestLocalization();
             app.UseRequestLocalizationCookies();
