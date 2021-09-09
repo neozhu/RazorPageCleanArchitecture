@@ -62,7 +62,8 @@ namespace SmartAdmin.WebUI
                     .ReadFrom.Configuration(context.Configuration)
                     .ReadFrom.Services(services)
                     .Enrich.FromLogContext()
-                    .WriteTo.Console())
+                    .WriteTo.Console()
+                    )
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
