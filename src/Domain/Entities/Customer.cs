@@ -28,7 +28,7 @@ namespace CleanArchitecture.Razor.Domain.Entities
 
         public string AddressOfEnglish { get; set; }
 
-        public string Contract { get; set; }
+        public string Contact { get; set; }
 
         public string Email { get; set; }
 
