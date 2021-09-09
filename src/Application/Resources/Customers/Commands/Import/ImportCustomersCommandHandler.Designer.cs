@@ -107,20 +107,20 @@ namespace CleanArchitecture.Razor.Application.Resources.Customers.Commands.Impor
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contract.
+        ///   Looks up a localized string similar to Contact.
         /// </summary>
-        internal static string Contract {
+        internal static string Contact {
             get {
-                return ResourceManager.GetString("Contract", resourceCulture);
+                return ResourceManager.GetString("Contact", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contract2.
+        ///   Looks up a localized string similar to Contact2.
         /// </summary>
-        internal static string Contract2 {
+        internal static string Contact2 {
             get {
-                return ResourceManager.GetString("Contract2", resourceCulture);
+                return ResourceManager.GetString("Contact2", resourceCulture);
             }
         }
         

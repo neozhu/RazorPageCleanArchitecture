@@ -126,7 +126,7 @@
   <data name="Address Of English" xml:space="preserve">
     <value>英文地址</value>
   </data>
-  <data name="Contract" xml:space="preserve">
+  <data name="Contact" xml:space="preserve">
     <value>采购联系人</value>
   </data>
   <data name="Customers" xml:space="preserve">
@@ -162,7 +162,7 @@
   <data name="Sales" xml:space="preserve">
     <value>销售</value>
   </data>
-  <data name="Contract2" xml:space="preserve">
+  <data name="Contact2" xml:space="preserve">
     <value>财务联系人</value>
   </data>
   <data name="Email2" xml:space="preserve">
