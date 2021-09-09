@@ -426,26 +426,6 @@ function checkboxformatter(value, row, index) {
 
 
 }
-//兼容性考虑等同于checkboxformatter
-function booleanformatter(value, row, index) {
-    if (istrue(value)) {
-
-        const checked = `<div class="custom-control custom-checkbox">
-                       <input type="checkbox" class="custom-control-input" name="defaultCheckedDisabled" checked="checked" disabled="">
-                       <label class="custom-control-label" for="defaultCheckedDisabled"></label>
-                   </div>`;
-        return checked;
-    } else {
-        var unchecked = `<div class="custom-control custom-checkbox">
-                       <input type="checkbox" class="custom-control-input" name="defaultCheckedDisabled" disabled="">
-                       <label class="custom-control-label" for="defaultCheckedDisabled"></label>
-                   </div>`;
-
-        return unchecked;
-    }
-
-
-}
 //switchbutton formatter for datagrid
 function switchformatter(value, row, index) {
     if (istrue(value)) {
