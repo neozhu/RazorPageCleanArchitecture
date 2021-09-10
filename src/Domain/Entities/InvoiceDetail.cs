@@ -16,8 +16,9 @@ namespace CleanArchitecture.Razor.Domain.Entities
         public int SalesContractId { get; set; }
         public SalesContract SalesContract {  get; set; }
         public decimal ContractAmount { get; set; }
-        public decimal Amount { get; set; }
+        public decimal InvoiceAmount { get; set; }
         public decimal TaxRate { get; set; }
+        public bool HasPaid { get; set; }
         public string InvoiceNo { get; set; }
         public DateTime InviceDate { get; set; }
         public decimal Balance { get; set; }
