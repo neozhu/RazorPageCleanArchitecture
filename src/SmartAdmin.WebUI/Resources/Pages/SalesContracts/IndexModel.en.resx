@@ -264,4 +264,13 @@
   <data name="Import" xml:space="preserve">
     <value>Import</value>
   </data>
+  <data name="Sales Contracts" xml:space="preserve">
+    <value>Sales Contracts</value>
+  </data>
+  <data name="Receipt Date" xml:space="preserve">
+    <value>Receipt Date</value>
+  </data>
+  <data name="Receipt Ratio" xml:space="preserve">
+    <value>Receipt Ratio</value>
+  </data>
 </root>

@@ -232,10 +232,10 @@
     <value>付款条款</value>
   </data>
   <data name="Ratio" xml:space="preserve">
-    <value>付款比率</value>
+    <value>收款款比率</value>
   </data>
   <data name="Ratio Amount" xml:space="preserve">
-    <value>应付金额</value>
+    <value>应收金额</value>
   </data>
   <data name="Planed Paid Date" xml:space="preserve">
     <value>计划付款日期</value>
@@ -266,5 +266,14 @@
   </data>
   <data name="Import" xml:space="preserve">
     <value>导入</value>
+  </data>
+  <data name="Sales Contracts" xml:space="preserve">
+    <value>销售合同</value>
+  </data>
+  <data name="Receipt Date" xml:space="preserve">
+    <value>实际收款日期</value>
+  </data>
+  <data name="Receipt Ratio" xml:space="preserve">
+    <value>实际收款比率</value>
   </data>
 </root>
