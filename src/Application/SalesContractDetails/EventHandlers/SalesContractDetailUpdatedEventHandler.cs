@@ -30,13 +30,9 @@ namespace CleanArchitecture.Razor.Application.SalesContractDetails.EventHandlers
             var receiptamount = await _context.SalesContractDetails
                            .Where(x => x.SalesContractId == domainEvent.Item.SalesContractId)
                            .SumAsync(x => x.ReceiptAmount, cancellationToken);
-            var invamount = await _context.SalesContractDetails
-                           .Where(x => x.SalesContractId == domainEvent.Item.SalesContractId && x.InvoiceNo != null)
-                           .SumAsync(x => x.ReceiptAmount, cancellationToken);
             var contract = await _context.SalesContracts.FindAsync(new object[] { domainEvent.Item.SalesContractId }, cancellationToken);
 
             contract.ReceiptAmount = receiptamount ?? 0m;
-            contract.InvoiceAmount = invamount ?? 0m;
             contract.Balance = contract.ContractAmount - contract.ReceiptAmount;
             if (contract.Balance <= 0)
             {
