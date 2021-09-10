@@ -21,6 +21,7 @@ namespace CleanArchitecture.Razor.Domain.Entities
         public bool HasPaid { get; set; }
         public string InvoiceNo { get; set; }
         public DateTime InviceDate { get; set; }
+        public DateTime? DueTime { get; set; }
         public decimal Balance { get; set; }
         public string Comments { get; set; }
 

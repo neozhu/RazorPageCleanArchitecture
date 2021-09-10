@@ -45,7 +45,7 @@ namespace CleanArchitecture.Razor.Application.SalesContracts.Queries.Pagination
         {
            var filters = PredicateBuilder.FromFilter<SalesContract>(request.FilterRules);
            var data = await _context.SalesContracts.Where(filters)
-                .OrderBy("{request.Sort} {request.Order}")
+                .OrderBy($"{request.Sort} {request.Order}")
                 .ProjectTo<SalesContractDto>(_mapper.ConfigurationProvider)
                 .PaginatedDataAsync(request.Page, request.Rows);
             return data;

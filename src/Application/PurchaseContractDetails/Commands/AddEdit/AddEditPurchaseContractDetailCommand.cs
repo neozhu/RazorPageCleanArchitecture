@@ -48,7 +48,6 @@ namespace CleanArchitecture.Razor.Application.PurchaseContractDetails.Commands.A
                 var item = _mapper.Map<PurchaseContractDetail>(request);
                 _context.PurchaseContractDetails.Add(item);
                 Id = item.Id;
-
                 var createdEvent = new PurchaseContractDetailCreatedEvent(item);
                 item.DomainEvents.Add(createdEvent);
             }

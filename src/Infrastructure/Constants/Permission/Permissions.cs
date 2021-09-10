@@ -17,6 +17,34 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Permission
             public const string Search = "Permissions.Approval.Search";
             public const string Export = "Permissions.Approval.Export";
         }
+        [DisplayName("SalesContracts")]
+        [Description("SalesContracts Permissions")]
+        public static class SalesContracts
+        {
+            public const string View = "Permissions.SalesContracts.View";
+            public const string Create = "Permissions.SalesContracts.Create";
+            public const string Edit = "Permissions.SalesContracts.Edit";
+            public const string Delete = "Permissions.SalesContracts.Delete";
+            public const string Search = "Permissions.SalesContracts.Search";
+            public const string Export = "Permissions.SalesContracts.Export";
+            public const string Import = "Permissions.SalesContracts.Import";
+            public const string ViewTerms = "Permissions.SalesContracts.ViewTerms";
+            public const string AddTerms = "Permissions.SalesContracts.AddTerms";
+            public const string DeleteTerms = "Permissions.SalesContracts.DeleteTerms";
+            public const string UpdateTerms = "Permissions.SalesContracts.UpdateTerms";
+        }
+        [DisplayName("SalesContractDetails")]
+        [Description("SalesContractDetails Permissions")]
+        public static class SalesContractDetails
+        {
+            public const string View = "Permissions.SalesContractDetails.View";
+            public const string Create = "Permissions.SalesContractDetails.Create";
+            public const string Edit = "Permissions.SalesContractDetails.Edit";
+            public const string Delete = "Permissions.SalesContractDetails.Delete";
+            public const string Search = "Permissions.SalesContractDetails.Search";
+            public const string Export = "Permissions.SalesContractDetails.Export";
+            public const string Import = "Permissions.SalesContractDetails.Import";
+        }
         [DisplayName("PurchaseContracts")]
         [Description("PurchaseContracts Permissions")]
         public static class PurchaseContracts

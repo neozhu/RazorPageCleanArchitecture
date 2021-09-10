@@ -18,7 +18,7 @@ using Microsoft.Extensions.Localization;
 
 namespace CleanArchitecture.Razor.Application.SalesContracts.Commands.Import
 {
-    public class ImportSalesContractsCommand: IRequest<Result>
+    public class ImportSalesContractsCommand : IRequest<Result>
     {
         public string FileName { get; set; }
         public byte[] Data { get; set; }
@@ -29,7 +29,7 @@ namespace CleanArchitecture.Razor.Application.SalesContracts.Commands.Import
         public string SheetName { get; set; }
     }
 
-    public class ImportSalesContractsCommandHandler : 
+    public class ImportSalesContractsCommandHandler :
                  IRequestHandler<CreateSalesContractsTemplateCommand, byte[]>,
                  IRequestHandler<ImportSalesContractsCommand, Result>
     {
@@ -52,8 +52,8 @@ namespace CleanArchitecture.Razor.Application.SalesContracts.Commands.Import
         }
         public async Task<Result> Handle(ImportSalesContractsCommand request, CancellationToken cancellationToken)
         {
-          
-           var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, SalesContractDto, object>>
+
+            var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, SalesContractDto, object>>
             {
                 { _localizer["Contract No"], (row,item) => item.ContractNo = row[_localizer["Contract No"]]?.ToString() },
                 { _localizer["Description"], (row,item) => item.Description = row[_localizer["Description"]]?.ToString() },
@@ -68,7 +68,76 @@ namespace CleanArchitecture.Razor.Application.SalesContracts.Commands.Import
                 { _localizer["Balance"], (row,item) => item.Balance = row.IsNull(_localizer["Balance"])?0m: decimal.Parse(row[_localizer["Balance"]].ToString()) },
                 { _localizer["Comments"], (row,item) => item.ContractNo = row[_localizer["Comments"]]?.ToString() },
            }, _localizer["SalesContracts"]);
-      
+            if (result.Succeeded)
+            {
+                var projectlist = new List<Project>();
+                var customerlist = new List<Customer>();
+                foreach (var item in result.Data)
+                {
+
+                    if (!(await _context.SalesContracts.AnyAsync(x => x.ContractNo == item.ContractNo)))
+                    {
+                        var project = projectlist.FirstOrDefault(x => x.Name == item.ProjectName);
+                        if (project == null)
+                        {
+                            project = await _context.Projects.FirstOrDefaultAsync(x => x.Name == item.ProjectName);
+                            projectlist.Add(project);
+                        }
+                        if (project == null)
+                        {
+                            project = new Project() { Name = item.ProjectName, Description = "从销售合同导入" };
+                            _context.Projects.Add(project);
+                            projectlist.Add(project);
+                        }
+                        var customer = customerlist.FirstOrDefault(x => x.Name == item.CustomerName);
+                        if (customer == null)
+                        {
+                            customer = await _context.Customers.FirstOrDefaultAsync(x => x.Name == item.CustomerName);
+                            customerlist.Add(customer);
+                        }
+                        if (customer == null)
+                        {
+                            customer = new Customer()
+                            {
+                                Name = item.CustomerName,
+                                PartnerType = Domain.Enums.PartnerType.Customer,
+                                Comments = "从销售合同导入",
+                            };
+                            _context.Customers.Add(customer);
+                            customerlist.Add(customer);
+                        }
+                        var salesContract = new SalesContract()
+                        {
+
+                            ClosedDate = item.ClosedDate,
+                            Comments = item.Comments,
+                            CustomerId = customer.Id,
+                            Customer = customer,
+                            Description = item.Description,
+                            Status = "Draft",
+                            ContractAmount = item.ContractAmount,
+                            ContractDate = item.ContractDate,
+                            ContractNo = item.ContractNo,
+                            InvoiceAmount = item.InvoiceAmount,
+                            OrderNo = item.OrderNo,
+                            Project = project,
+                            ProjectId = project.Id,
+                            ReceiptAmount = item.ReceiptAmount,
+                            ContractIncAmount = item.ContractIncAmount,
+                            TaxRate = item.TaxRate,
+                            Balance = item.ContractAmount - item.ReceiptAmount
+                        };
+                        _context.SalesContracts.Add(salesContract);
+                    }
+                    await _context.SaveChangesAsync(cancellationToken);
+                }
+
+                return Result.Success();
+            }
+            else
+            {
+                return await Result.FailureAsync(result.Errors);
+            }
         }
         public async Task<byte[]> Handle(CreateSalesContractsTemplateCommand request, CancellationToken cancellationToken)
         {
