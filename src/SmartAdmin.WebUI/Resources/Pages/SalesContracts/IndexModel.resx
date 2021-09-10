@@ -276,4 +276,10 @@
   <data name="Receipt Ratio" xml:space="preserve">
     <value>Receipt Ratio</value>
   </data>
+  <data name="Receipt Amount" xml:space="preserve">
+    <value>Receipt Amount</value>
+  </data>
+  <data name="Planed Receipt Date" xml:space="preserve">
+    <value>Planed Receipt Date</value>
+  </data>
 </root>

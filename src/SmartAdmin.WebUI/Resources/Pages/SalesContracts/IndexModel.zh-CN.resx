@@ -276,4 +276,10 @@
   <data name="Receipt Ratio" xml:space="preserve">
     <value>实际收款比率</value>
   </data>
+  <data name="Receipt Amount" xml:space="preserve">
+    <value>已收款</value>
+  </data>
+  <data name="Planed Receipt Date" xml:space="preserve">
+    <value>计划收款日期</value>
+  </data>
 </root>

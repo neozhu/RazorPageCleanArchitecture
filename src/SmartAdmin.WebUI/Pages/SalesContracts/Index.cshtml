@@ -395,10 +395,10 @@
         })
         var popupmodal = (salesContracts, state) => {
             $('#salesContracts_modal').modal('toggle');
-            $('#salesContracts_modal .modal-title').html('@_localizer["Add Purchase Order"]');
+            $('#salesContracts_modal .modal-title').html('@_localizer["Add Sales Contract"]');
             $('#salesContracts_form')[0].reset();
             if (state!='add') {
-                $('#salesContracts_modal .modal-title').html('@_localizer["Edit Purchase Order"]');
+                $('#salesContracts_modal .modal-title').html('@_localizer["Edit Sales Contract"]');
                 $('#salesContracts_form').jsonToForm(salesContracts, {
                     Id: function (value) {
                         $('#salesContracts_form #Input_Id').val(value);
