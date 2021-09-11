@@ -45,6 +45,8 @@ namespace CleanArchitecture.Razor.Application.InvoiceDetails.Queries.Pagination
         {
            var filters = PredicateBuilder.FromFilter<InvoiceDetail>(request.FilterRules);
            var data = await _context.InvoiceDetails.Where(filters)
+                .Include(x=>x.SalesContract).ThenInclude(x=>x.Project)
+                .Include(x=>x.SalesContract).ThenInclude(x=>x.Customer)
                 .OrderBy($"{request.Sort} {request.Order}")
                 .ProjectTo<InvoiceDetailDto>(_mapper.ConfigurationProvider)
                 .PaginatedDataAsync(request.Page, request.Rows);

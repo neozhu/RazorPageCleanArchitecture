@@ -5,18 +5,18 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
-  ViewData["Title"] = _localizer["Invoice Details"].Value;
-  ViewData["PageName"] = "invoiceDetails_index";
-  ViewData["Category1"] = _localizer["Contracts"].Value;
-  ViewData["Heading"] = _localizer["Invoice Details"].Value;
-  ViewData["PageDescription"] = _localizer["See all available options"].Value;
-  ViewData["PreemptiveClass"] = "Default";
-  var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.InvoiceDetails.Create);
-  var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.InvoiceDetails.Edit);
-  var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.InvoiceDetails.Delete);
-  var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.InvoiceDetails.Search);
-  var _canImport = await _authorizationService.AuthorizeAsync(User, null, Permissions.InvoiceDetails.Import);
-  var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.InvoiceDetails.Export);
+    ViewData["Title"] = _localizer["Invoice Details"].Value;
+    ViewData["PageName"] = "invoiceDetails_index";
+    ViewData["Category1"] = _localizer["Contracts"].Value;
+    ViewData["Heading"] = _localizer["Invoice Details"].Value;
+    ViewData["PageDescription"] = _localizer["See all available options"].Value;
+    ViewData["PreemptiveClass"] = "Default";
+    var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.InvoiceDetails.Create);
+    var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.InvoiceDetails.Edit);
+    var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.InvoiceDetails.Delete);
+    var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.InvoiceDetails.Search);
+    var _canImport = await _authorizationService.AuthorizeAsync(User, null, Permissions.InvoiceDetails.Import);
+    var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.InvoiceDetails.Export);
 
 }
 @section HeadBlock {
@@ -35,7 +35,7 @@
 <div id="js-page-content-demopanels" class="card mb-g">
     <div class="card-header bg-white d-flex align-items-center">
         <h4 class="m-0">
-            @_localizer["Invoice Details"] 
+            @_localizer["Invoice Details"]
             <small>@_localizer["See all available options"]</small>
         </h4>
         <div class="ml-auto">
@@ -81,7 +81,7 @@
                     @_localizer["Export Excel"]
                 </button>
             }
-            </div>
+        </div>
     </div>
     <div class="card-body">
         <div class="row">
@@ -130,33 +130,42 @@
                         <span class="invalid-feedback" asp-validation-for="Input.ContractAmount">Sorry, you missed this one.</span>
                     </div>
                     <div class="col-md-6">
+                        <label class="form-label" for="ReceiptAmount">@_localizer["Receipt Amount"]  </label>
+                        <input type="text" asp-for="Input.ReceiptAmount" class="form-control" placeholder="Receipt Amount" readonly="readonly" />
+                        <span class="invalid-feedback" asp-validation-for="Input.ReceiptAmount">Sorry, you missed this one.</span>
+                    </div>
+                    <div class="col-md-6">
                         <label class="form-label" for="Balance">@_localizer["Balance"]  </label>
                         <input type="text" asp-for="Input.Balance" class="form-control" placeholder="Balance" readonly="readonly" />
                         <span class="invalid-feedback" asp-validation-for="Input.Balance">Sorry, you missed this one.</span>
                     </div>
-                    
 
+                    <div class="col-md-12">
+                        <label class="form-label" for="Description">@_localizer["Description"]  </label>
+                        <input type="text" asp-for="Input.Description" class="form-control" placeholder="Balance" readonly="readonly" />
+                        <span class="invalid-feedback" asp-validation-for="Input.Description">Sorry, you missed this one.</span>
+                    </div>
 
                 </div>
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <label class="form-label" for="InvoiceNo">@_localizer["Invoice No"] <span class="text-danger">*</span></label>
-                        <input type="text" asp-for="Input.InvoiceNo" class="form-control" placeholder="Invoice No" required />
-                        <span class="invalid-feedback" asp-validation-for="Input.InvoiceNo">Sorry, you missed this one.</span>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label" for="Qty">@_localizer["Invoice Amount"] <span class="text-danger">*</span></label>
-                        <input type="number" asp-for="Input.InvoiceAmount" class="form-control" placeholder="Contract" required />
-                        <span class="invalid-feedback" asp-validation-for="Input.InvoiceAmount">Sorry, you missed this one.</span>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label" for="TaxRate">@_localizer["Tax Rate"]  <span class="text-danger">*</span></label>
-                        <input type="number" asp-for="Input.TaxRate" class="form-control" placeholder="Tax Rate" />
-                        <span class="invalid-feedback" asp-validation-for="Input.TaxRate">Sorry, you missed this one.</span>
-                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label class="form-label" for="InvoiceNo">@_localizer["Invoice No"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.InvoiceNo" class="form-control" placeholder="Invoice No" required />
+                            <span class="invalid-feedback" asp-validation-for="Input.InvoiceNo">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="Qty">@_localizer["Invoice Amount"] <span class="text-danger">*</span></label>
+                            <input type="number" asp-for="Input.InvoiceAmount" class="form-control" placeholder="Contract" required />
+                            <span class="invalid-feedback" asp-validation-for="Input.InvoiceAmount">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="TaxRate">@_localizer["Tax Rate"]  <span class="text-danger">*</span></label>
+                            <input type="number" asp-for="Input.TaxRate" class="form-control" step="0.01" min="0" max="1" placeholder="Tax Rate" />
+                            <span class="invalid-feedback" asp-validation-for="Input.TaxRate">Sorry, you missed this one.</span>
+                        </div>
 
 
-                </div>
+                    </div>
                     <div class="form-row">
                         <div class="col-md-4">
                             <label class="form-label" for="InvoiceDate">@_localizer["Invoice Date"]  <span class="text-danger">*</span></label>
@@ -171,10 +180,10 @@
                         <div class="col-md-4">
                             <label class="form-label" for="HasPaid">  </label>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" asp-for="Input.HasPaid" class="custom-control-input" value="true" >
+                                <input type="checkbox" asp-for="Input.HasPaid" class="custom-control-input" value="true">
                                 <label class="custom-control-label" for="Input_HasPaid">@_localizer["Has Paid"]</label>
                             </div>
-                           
+
                         </div>
                     </div>
                     <div class="form-row">
@@ -193,9 +202,12 @@
         </div>
     </div>
 </div>
-@await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/InvoiceDetails/Index") + "?handler=Import",
+@await Component.InvokeAsync("ImportExcel", new
+{
+    importUri = Url.Page("/InvoiceDetails/Index") + "?handler=Import",
     getTemplateUri = @Url.Page("/InvoiceDetails/Index") + "?handler=CreateTemplate",
-    onImportedSucceeded = "reload()" })
+    onImportedSucceeded = "reload()"
+})
 @section ScriptsBlock {
     <partial name="_ValidationScriptsPartial" />
 
@@ -205,13 +217,24 @@
     <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
     <script src="~/lib/axios/dist/axios.js"></script>
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/short-unique-id@4.4.2/dist/short-unique-id.min.js"></script>
+    <script>
+        // Instantiate
+        var uid = new ShortUniqueId({
+            dictionary: 'number', // the default
+        });
+    </script>
     <script type="text/javascript">
         $('#searchbutton').click(function () {
             reload();
         });
         $('#addbutton').click(function () {
-            popupmodal({ Id: 0, Status: 'Draft', IsSpecial:false},'add');
+            popupmodal({
+                Id: 0,
+                InvoiceNo: uid(12).replace(/(.{4})(.{7})(.{1})/g, '$1-$2-$3'),
+                Status: 'Draft',
+                HasPaid: false
+            }, 'add');
         });
         $('#deletebutton').click(function () {
             onDeleteChecked();
@@ -478,7 +501,22 @@
 
 
         }
-
+        $('#invoiceDetail_form #Input_SalesContractId').change(function () {
+            const contractid = $(this).val();
+            if (contractid > 0) {
+                axios.get('@Url.Page("/InvoiceDetails/Index")?handler=SalesContract&Id=' + contractid)
+                    .then(response => {
+                        const contract = response.data;
+                        $('#Input_ProjectName').val(contract.ProjectName);
+                        $('#Input_CustomerName').val(contract.CustomerName);
+                        $('#Input_ContractAmount').val(contract.ContractAmount);
+                        $('#Input_ReceiptAmount').val(contract.ReceiptAmount);
+                        $('#Input_Balance').val(contract.Balance);
+                        $('#Input_Description').val(contract.Description);
+                      
+                    })
+            }
+        });
 
     </script>
 }

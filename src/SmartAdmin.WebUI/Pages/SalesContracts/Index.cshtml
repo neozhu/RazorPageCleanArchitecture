@@ -251,20 +251,19 @@
     @*<script>jQuery.fn.tooltip = bootstrapTooltip;</script>*@
     <script src="~/lib/axios/dist/axios.js"></script>
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/short-unique-id@4.4.2/dist/short-unique-id.min.js"></script>
 
-    <!-- Add source (minified 4.6kB) -->
-    <script src="https://cdn.jsdelivr.net/npm/short-unique-id@latest/dist/short-unique-id.min.js"></script>
-
-    <!-- Usage -->
     <script>
         // Instantiate
-        var uid = new ShortUniqueId();
+        var uid = new ShortUniqueId({
+            dictionary: 'number', // the default
+        });
 
         // Random UUID
-        document.write(uid());
+        //console.log(uid(10).replace(/(.{3})(.{4})(.{3})/g, '$1-$2-$3'));
 
         // Sequential UUID
-        document.write(uid.seq());
+        //console.log(uid(11).replace(/(.{4})(.{3})(.{4})/g, '$1-$2-$3'));
     </script>
     <script type="text/javascript">
 
@@ -272,7 +271,14 @@
             onLoadData();
         });
         $('#addbutton').click(function () {
-            popupmodal({ Id: 0, Status: 'Draft', IsSpecial:false},'add');
+            popupmodal({
+                Id: 0,
+                ContractNo: uid(8).replace(/(.{4})(.{3})(.{1})/g, '$1-$2-$3'),
+                ContractDate: moment().format('YYYY-MM-DD'),
+                OrderNo: uid(8).replace(/(.{7})(.{1})/g, '$1-$2'),
+                Status: 'Draft',
+                IsSpecial: false,
+            }, 'add');
         });
         $('#deletebutton').click(function () {
             onDeleteChecked();

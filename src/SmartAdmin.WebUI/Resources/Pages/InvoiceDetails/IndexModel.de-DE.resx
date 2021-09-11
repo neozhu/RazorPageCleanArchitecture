@@ -117,149 +117,70 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
+  <data name="Export Excel" xml:space="preserve">
+    <value>Excel exportieren</value>
   </data>
-  <data name="Are you sure delete checked rows?" xml:space="preserve">
-    <value>Are you sure delete checked rows?</value>
+  <data name="Add" xml:space="preserve">
+    <value>Hinzufügen</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Abbrechen</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Close</value>
+    <value>Nah dran</value>
   </data>
   <data name="Command" xml:space="preserve">
-    <value>Command</value>
+    <value>Befehl</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="Delete ${checkedId.length} Success" xml:space="preserve">
-    <value>Delete ${checkedId.length} Success.</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>Description</value>
+    <value>Löschen</value>
   </data>
   <data name="Download Template" xml:space="preserve">
-    <value>Download Template</value>
+    <value>Vorlage herunterladen</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="Export Excel" xml:space="preserve">
-    <value>Export Excel</value>
-  </data>
-  <data name="Export Success" xml:space="preserve">
-    <value>Export Success</value>
+    <value>Bearbeiten</value>
   </data>
   <data name="Import Excel" xml:space="preserve">
-    <value>Import Excel</value>
+    <value>Excel importieren</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Suche</value>
+  </data>
+  <data name="See all available options" xml:space="preserve">
+    <value>Alle verfügbaren Optionen anzeigen</value>
+  </data>
+  <data name="Are you sure delete checked rows?" xml:space="preserve">
+    <value>Sind Sie sicher, markierte Zeilen zu löschen?</value>
+  </data>
+  <data name="Delete ${checkedId.length} Success" xml:space="preserve">
+    <value>Löschen ${checkedId.length} Erfolgreich.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="Export Success" xml:space="preserve">
+    <value>Exporterfolg</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="Please upload a file" xml:space="preserve">
+    <value>Bitte laden Sie eine Datei hoch</value>
+  </data>
+  <data name="Save Success" xml:space="preserve">
+    <value>Erfolg speichern</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Beschreibung</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="No" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="Please upload a file" xml:space="preserve">
-    <value>Please upload a file</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="Save Success" xml:space="preserve">
-    <value>Save Success</value>
-  </data>
-  <data name="Search" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="See all available options" xml:space="preserve">
-    <value>See all available options</value>
-  </data>
-  <data name="Text" xml:space="preserve">
-    <value>Text</value>
-  </data>
-  <data name="Value" xml:space="preserve">
-    <value>Value</value>
-  </data>
-  <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
-  </data>
-  <data name="Projects" xml:space="preserve">
-    <value>Projects</value>
-  </data>
-  <data name="Status" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="Begin DateTime" xml:space="preserve">
-    <value>Begin DateTime</value>
-  </data>
-  <data name="End DateTime" xml:space="preserve">
-    <value>End DateTime</value>
-  </data>
-  <data name="Estimated Cost" xml:space="preserve">
-    <value>Estimated Cost</value>
-  </data>
-  <data name="Actual Cost" xml:space="preserve">
-    <value>Actual Cost</value>
-  </data>
-  <data name="Contract Amount" xml:space="preserve">
-    <value>Contract Amount</value>
-  </data>
-  <data name="Receipt Amount" xml:space="preserve">
-    <value>Receipt Amount</value>
-  </data>
-  <data name="Gross Margin" xml:space="preserve">
-    <value>Gross Margin</value>
-  </data>
-  <data name="Purchase Orders" xml:space="preserve">
-    <value>Purchase Orders</value>
-  </data>
-  <data name="Contracts" xml:space="preserve">
-    <value>Contracts</value>
-  </data>
-  <data name="PO" xml:space="preserve">
-    <value>PO</value>
-  </data>
-  <data name="Product Name" xml:space="preserve">
-    <value>Product Name</value>
-  </data>
-  <data name="Customer Name" xml:space="preserve">
-    <value>Customer Name</value>
-  </data>
-  <data name="Order Date" xml:space="preserve">
-    <value>Order Date</value>
-  </data>
-  <data name="Qty" xml:space="preserve">
-    <value>Qty</value>
-  </data>
-  <data name="Price" xml:space="preserve">
-    <value>Price</value>
-  </data>
-  <data name="Amount" xml:space="preserve">
-    <value>Amount</value>
-  </data>
-  <data name="Invoice No" xml:space="preserve">
-    <value>Invoice No</value>
-  </data>
-  <data name="Tax Rate" xml:space="preserve">
-    <value>Tax Rate</value>
-  </data>
-  <data name="Is Special" xml:space="preserve">
-    <value>Is Special</value>
-  </data>
-  <data name="PurchaseOrders" xml:space="preserve">
-    <value>PurchaseOrders</value>
-  </data>
-  <data name="Edit Purchase Order" xml:space="preserve">
-    <value>Edit Purchase Order
-</value>
-  </data>
-  <data name="Add Purchase Order" xml:space="preserve">
-    <value>Add Purchase Order</value>
+  <data name="Contract No" xml:space="preserve">
+    <value>Contract No</value>
   </data>
 </root>

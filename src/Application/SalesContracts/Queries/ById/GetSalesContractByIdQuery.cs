@@ -41,7 +41,9 @@ namespace CleanArchitecture.Razor.Application.SalesContracts.Queries.GetAll
 
         public async Task<SalesContractDto> Handle(GetSalesContractByIdQuery request, CancellationToken cancellationToken)
         {
-            var data = await _context.SalesContracts.FindAsync(new object[] { request.Id }, cancellationToken);
+            var data = await _context.SalesContracts.Where(x => x.Id == request.Id)
+                .Include(x => x.Customer).Include(x => x.Project)
+                .FirstAsync(cancellationToken);
             return _mapper.Map<SalesContractDto>(data);
         }
     }

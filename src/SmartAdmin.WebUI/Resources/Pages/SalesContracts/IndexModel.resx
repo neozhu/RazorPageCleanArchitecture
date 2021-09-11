@@ -282,4 +282,10 @@
   <data name="Planed Receipt Date" xml:space="preserve">
     <value>Planed Receipt Date</value>
   </data>
+  <data name="Add Sales Contract" xml:space="preserve">
+    <value>Add Sales Contract</value>
+  </data>
+  <data name="Edit Sales Contract" xml:space="preserve">
+    <value>Edit Sales Contract</value>
+  </data>
 </root>

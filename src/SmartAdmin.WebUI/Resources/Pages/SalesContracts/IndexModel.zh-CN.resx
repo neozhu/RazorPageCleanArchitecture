@@ -282,4 +282,10 @@
   <data name="Planed Receipt Date" xml:space="preserve">
     <value>计划收款日期</value>
   </data>
+  <data name="Add Sales Contract" xml:space="preserve">
+    <value>新增销售合同</value>
+  </data>
+  <data name="Edit Sales Contract" xml:space="preserve">
+    <value>编辑销售合同</value>
+  </data>
 </root>

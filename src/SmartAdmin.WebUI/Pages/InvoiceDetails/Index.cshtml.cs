@@ -141,6 +141,10 @@ namespace SmartAdmin.WebUI.Pages.InvoiceDetails
                 return new JsonResult(ex.Message);
             }
         }
-
+        public async  Task<IActionResult> OnGetSalesContractAsync([FromQuery]GetSalesContractByIdQuery comand)
+        {
+           var result=await _mediator.Send(comand);
+            return new JsonResult(result);
+        }
     }
 }

@@ -180,17 +180,8 @@
   <data name="See all available options" xml:space="preserve">
     <value>See all available options</value>
   </data>
-  <data name="Text" xml:space="preserve">
-    <value>Text</value>
-  </data>
-  <data name="Value" xml:space="preserve">
-    <value>Value</value>
-  </data>
-  <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
-  </data>
-  <data name="Projects" xml:space="preserve">
-    <value>Projects</value>
+  <data name="Contract No" xml:space="preserve">
+    <value>Contract No</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
@@ -216,29 +207,14 @@
   <data name="Gross Margin" xml:space="preserve">
     <value>Gross Margin</value>
   </data>
-  <data name="Purchase Orders" xml:space="preserve">
-    <value>Purchase Orders</value>
+  <data name="Invoice Detail" xml:space="preserve">
+    <value>Invoice Detail</value>
   </data>
-  <data name="Contracts" xml:space="preserve">
-    <value>Contracts</value>
-  </data>
-  <data name="PO" xml:space="preserve">
-    <value>PO</value>
-  </data>
-  <data name="Product Name" xml:space="preserve">
-    <value>Product Name</value>
+  <data name="Project Name" xml:space="preserve">
+    <value>Project Name</value>
   </data>
   <data name="Customer Name" xml:space="preserve">
     <value>Customer Name</value>
-  </data>
-  <data name="Order Date" xml:space="preserve">
-    <value>Order Date</value>
-  </data>
-  <data name="Qty" xml:space="preserve">
-    <value>Qty</value>
-  </data>
-  <data name="Price" xml:space="preserve">
-    <value>Price</value>
   </data>
   <data name="Amount" xml:space="preserve">
     <value>Amount</value>
@@ -249,17 +225,29 @@
   <data name="Tax Rate" xml:space="preserve">
     <value>Tax Rate</value>
   </data>
-  <data name="Is Special" xml:space="preserve">
-    <value>Is Special</value>
+  <data name="Has Paid" xml:space="preserve">
+    <value>Has Paid</value>
   </data>
-  <data name="PurchaseOrders" xml:space="preserve">
-    <value>PurchaseOrders</value>
+  <data name="InvoiceDetails" xml:space="preserve">
+    <value>InvoiceDetails</value>
   </data>
-  <data name="Edit Purchase Order" xml:space="preserve">
-    <value>Edit Purchase Order
+  <data name="Edit Invoice Detail" xml:space="preserve">
+    <value>Edit Invoice Detail
 </value>
   </data>
-  <data name="Add Purchase Order" xml:space="preserve">
-    <value>Add Purchase Order</value>
+  <data name="Add Invoice Detail" xml:space="preserve">
+    <value>Add Invoice Detail</value>
+  </data>
+  <data name="Balance" xml:space="preserve">
+    <value>Balance</value>
+  </data>
+  <data name="Invoice Amount" xml:space="preserve">
+    <value>Invoice Amount</value>
+  </data>
+  <data name="Invoice Date" xml:space="preserve">
+    <value>Invoice Date</value>
+  </data>
+  <data name="Due Time" xml:space="preserve">
+    <value>Due Time</value>
   </data>
 </root>
