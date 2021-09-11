@@ -20,11 +20,11 @@ namespace CleanArchitecture.Razor.Domain.Entities
         public decimal Ratio { get; set; }
         public decimal RatioAmount { get; set; }
         public DateTime PlanedReceiptDate { get; set; }
-        public decimal ReceiptAmount { get; set; }
-        public decimal ReceiptRatio { get; set; }
+        public decimal? ReceiptAmount { get; set; }
+        public decimal? ReceiptRatio { get; set; }
         public DateTime? ReceiptDate { get; set; }
         public string InvoiceNo { get; set; }
-        public decimal Balance { get; set; }
+        public decimal? Balance { get; set; }
         public DateTime? DueTime { get; set; }
         public string Comments { get; set; }
         public List<DomainEvent> DomainEvents { get ; set; }= new List<DomainEvent>();

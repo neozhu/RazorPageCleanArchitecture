@@ -255,4 +255,11 @@
   <data name="PurchaseOrders" xml:space="preserve">
     <value>PurchaseOrders</value>
   </data>
+  <data name="Edit Purchase Order" xml:space="preserve">
+    <value>Edit Purchase Order
+</value>
+  </data>
+  <data name="Add Purchase Order" xml:space="preserve">
+    <value>Add Purchase Order</value>
+  </data>
 </root>

@@ -255,4 +255,10 @@
   <data name="PurchaseOrders" xml:space="preserve">
     <value>采购单信息</value>
   </data>
+  <data name="Edit Purchase Order" xml:space="preserve">
+    <value>编辑采购单</value>
+  </data>
+  <data name="Add Purchase Order" xml:space="preserve">
+    <value>新增采购单</value>
+  </data>
 </root>
