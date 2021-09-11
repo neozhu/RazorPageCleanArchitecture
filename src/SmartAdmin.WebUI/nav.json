@@ -17,6 +17,11 @@
       "roles": [ "Admin", "Basic" ],
       "items": [
         {
+          "title": "Projects",
+          "href": "projects_index.html",
+          "roles": []
+        },
+        {
           "title": "Sales Contracts",
           "href": "salescontracts_index.html",
           "roles": []
@@ -53,11 +58,7 @@
           "href": "products_index.html",
           "roles": []
         },
-        {
-          "title": "Projects",
-          "href": "projects_index.html",
-          "roles": []
-        },
+        
         {
           "title": "Dictionaries",
           "href": "keyValues_index.html",

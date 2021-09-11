@@ -5,19 +5,19 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
-  ViewData["Title"] = _localizer["Purchase Contracts"].Value;
-  ViewData["PageName"] = "purchaseContracts_index";
-  ViewData["Category1"] = _localizer["Contracts"].Value;
-  ViewData["Heading"] = _localizer["Purchase Contracts"].Value;
-  ViewData["PageDescription"] = _localizer["See all available options"].Value;
-  ViewData["PreemptiveClass"] = "Default";
-  var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Create);
-  var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Edit);
-  var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Delete);
-  var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Search);
-  var _canImport = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Import);
-  var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Export);
-  var _canViewTerms = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.ViewTerms);
+    ViewData["Title"] = _localizer["Purchase Contracts"].Value;
+    ViewData["PageName"] = "purchaseContracts_index";
+    ViewData["Category1"] = _localizer["Contracts"].Value;
+    ViewData["Heading"] = _localizer["Purchase Contracts"].Value;
+    ViewData["PageDescription"] = _localizer["See all available options"].Value;
+    ViewData["PreemptiveClass"] = "Default";
+    var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Create);
+    var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Edit);
+    var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Delete);
+    var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Search);
+    var _canImport = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Import);
+    var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.Export);
+    var _canViewTerms = await _authorizationService.AuthorizeAsync(User, null, Permissions.PurchaseContracts.ViewTerms);
 
 }
 @section HeadBlock {
@@ -36,7 +36,7 @@
 <div id="js-page-content-demopanels" class="card mb-g">
     <div class="card-header bg-white d-flex align-items-center">
         <h4 class="m-0">
-            @_localizer["Purchase Contracts"] 
+            @_localizer["Purchase Contracts"]
             <small>@_localizer["See all available options"]</small>
         </h4>
         <div class="ml-auto">
@@ -82,7 +82,7 @@
                     @_localizer["Export Excel"]
                 </button>
             }
-            </div>
+        </div>
     </div>
     <div class="card-body">
         <div class="row">
@@ -107,55 +107,55 @@
                     @Html.AntiForgeryToken()
                     <input type="hidden" asp-for="Input.Id" />
                     @Html.ValidationSummary()
-                <div class="form-row">
-                    <div class="col-md-6">
-                        <label class="form-label" for="PO">@_localizer["Contract No"] <span class="text-danger">*</span></label>
-                        <input type="text" asp-for="Input.ContractNo" class="form-control" placeholder="Contract No" required />
-                        <span class="invalid-feedback" asp-validation-for="Input.ContractNo">Sorry, you missed this one.</span>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="PO">@_localizer["Status"]  </label>
-                        <input type="text" asp-for="Input.Status" class="form-control" placeholder="Status" readonly="readonly" />
-                        <span class="invalid-feedback" asp-validation-for="Input.Status">Sorry, you missed this one.</span>
-                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <label class="form-label" for="PO">@_localizer["Contract No"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.ContractNo" class="form-control" placeholder="Contract No" required />
+                            <span class="invalid-feedback" asp-validation-for="Input.ContractNo">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="PO">@_localizer["Status"]  </label>
+                            <input type="text" asp-for="Input.Status" class="form-control" placeholder="Status" readonly="readonly" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Status">Sorry, you missed this one.</span>
+                        </div>
 
-                    <div class="col-md-6">
-                        <label class="form-label" for="ProjectId">@_localizer["Project Name"] <span class="text-danger">*</span></label>
-                        <select type="text" asp-for="Input.ProjectId" class="custom-select" asp-items="Model.Projects" required>
-                            <option value="">@_localizer["Choose Project"]</option>
-                        </select>
-                        <span class="invalid-feedback" asp-validation-for="Input.ProjectId">Sorry, you missed this one.</span>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="CustomerId">@_localizer["Customer Name"] <span class="text-danger">*</span></label>
-                        <select type="text" asp-for="Input.CustomerId" class="custom-select" asp-items="Model.Customers" required>
-                            <option value="">@_localizer["Choose Customer"]</option>
-                        </select>
-                        <span class="invalid-feedback" asp-validation-for="Input.CustomerId">Sorry, you missed this one.</span>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="ContractDate">@_localizer["Contract Date"] <span class="text-danger">*</span></label>
-                        <input type="date" asp-for="Input.ContractDate" class="form-control" placeholder="Contract Date" required />
-                        <span class="invalid-feedback" asp-validation-for="Input.ContractDate">Sorry, you missed this one.</span>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="ClosedDate">@_localizer["Closed Date"] </label>
-                        <input type="date" asp-for="Input.ClosedDate" class="form-control" placeholder="Closed Date" readonly="readonly"  />
-                        <span class="invalid-feedback" asp-validation-for="Input.ClosedDate">Sorry, you missed this one.</span>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="OrderNo">@_localizer["Order No"]  </label>
-                        <input type="text" asp-for="Input.OrderNo" class="form-control" placeholder="Order No" />
-                        <span class="invalid-feedback" asp-validation-for="Input.OrderNo">Sorry, you missed this one.</span>
-                    </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="ProjectId">@_localizer["Project Name"] <span class="text-danger">*</span></label>
+                            <select type="text" asp-for="Input.ProjectId" class="custom-select" asp-items="Model.Projects" required>
+                                <option value="">@_localizer["Choose Project"]</option>
+                            </select>
+                            <span class="invalid-feedback" asp-validation-for="Input.ProjectId">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="CustomerId">@_localizer["Customer Name"] <span class="text-danger">*</span></label>
+                            <select type="text" asp-for="Input.CustomerId" class="custom-select" asp-items="Model.Customers" required>
+                                <option value="">@_localizer["Choose Customer"]</option>
+                            </select>
+                            <span class="invalid-feedback" asp-validation-for="Input.CustomerId">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="ContractDate">@_localizer["Contract Date"] <span class="text-danger">*</span></label>
+                            <input type="date" asp-for="Input.ContractDate" class="form-control" placeholder="Contract Date" required />
+                            <span class="invalid-feedback" asp-validation-for="Input.ContractDate">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="ClosedDate">@_localizer["Closed Date"] </label>
+                            <input type="date" asp-for="Input.ClosedDate" class="form-control" placeholder="Closed Date" readonly="readonly" />
+                            <span class="invalid-feedback" asp-validation-for="Input.ClosedDate">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="OrderNo">@_localizer["Order No"]  </label>
+                            <input type="text" asp-for="Input.OrderNo" class="form-control" placeholder="Order No" />
+                            <span class="invalid-feedback" asp-validation-for="Input.OrderNo">Sorry, you missed this one.</span>
+                        </div>
 
-                    <div class="col-md-12">
-                        <label class="form-label" for="Description">@_localizer["Description"] </label>
-                        <input type="text" asp-for="Input.Description" class="form-control" placeholder="Description" />
-                        <span class="invalid-feedback" asp-validation-for="Input.Description">Sorry, you missed this one.</span>
-                    </div>
+                        <div class="col-md-12">
+                            <label class="form-label" for="Description">@_localizer["Description"] </label>
+                            <input type="text" asp-for="Input.Description" class="form-control" placeholder="Description" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Description">Sorry, you missed this one.</span>
+                        </div>
 
-                </div>
+                    </div>
                     <div class="form-row">
                         <div class="col-md-4">
                             <label class="form-label" for="ContractAmount">@_localizer["Contract Amount"] <span class="text-danger">*</span> </label>
@@ -178,7 +178,7 @@
                             <span class="invalid-feedback" asp-validation-for="Input.InvoiceAmount">Sorry, you missed this one.</span>
                         </div>
                     </div>
-                     
+
                     <div class="form-row">
                         <div class="col-md-12">
                             <label class="form-label" for="Comments">@_localizer["Comments"] </label>
@@ -236,9 +236,12 @@
         </div>
     </div>
 </div>
-@await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/PurchaseContracts/Index") + "?handler=Import",
+@await Component.InvokeAsync("ImportExcel", new
+{
+    importUri = Url.Page("/PurchaseContracts/Index") + "?handler=Import",
     getTemplateUri = @Url.Page("/PurchaseContracts/Index") + "?handler=CreateTemplate",
-    onImportedSucceeded = "onLoadData()" })
+    onImportedSucceeded = "onLoadData()"
+})
 @section ScriptsBlock {
     <partial name="_ValidationScriptsPartial" />
 
@@ -248,13 +251,31 @@
     @*<script>jQuery.fn.tooltip = bootstrapTooltip;</script>*@
     <script src="~/lib/axios/dist/axios.js"></script>
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/short-unique-id@4.4.2/dist/short-unique-id.min.js"></script>
 
+    <script>
+        // Instantiate
+        var uid = new ShortUniqueId({
+            dictionary: 'number', // the default
+        });
+
+        // Random UUID
+        //console.log(uid(10).replace(/(.{3})(.{4})(.{3})/g, '$1-$2-$3'));
+
+        // Sequential UUID
+        //console.log(uid(11).replace(/(.{4})(.{3})(.{4})/g, '$1-$2-$3'));
+    </script>
     <script type="text/javascript">
         $('#searchbutton').click(function () {
             onLoadData();
         });
         $('#addbutton').click(function () {
-            popupmodal({ Id: 0, Status: 'Draft', IsSpecial:false},'add');
+            popupmodal({
+                Id: 0,
+                ContractNo: uid(8).replace(/(.{3})(.{4})(.{1})/g, '$1-$2-$3'),
+                Status: 'Draft',
+                IsSpecial: false
+            }, 'add');
         });
         $('#deletebutton').click(function () {
             onDeleteChecked();
