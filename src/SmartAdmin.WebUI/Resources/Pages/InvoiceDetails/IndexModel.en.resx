@@ -250,4 +250,7 @@
   <data name="Due Time" xml:space="preserve">
     <value>Due Time</value>
   </data>
+  <data name="Invoice Details" xml:space="preserve">
+    <value>Invoice Details</value>
+  </data>
 </root>

@@ -42,7 +42,6 @@ namespace CleanArchitecture.Razor.Application.PurchaseContractDetails.Commands.D
         }
         public async Task<Result> Handle(DeletePurchaseContractDetailCommand request, CancellationToken cancellationToken)
         {
-           //TODO:Implementing DeletePurchaseContractDetailCommandHandler method 
            var item = await _context.PurchaseContractDetails.FindAsync(new object[] { request.Id }, cancellationToken);
             _context.PurchaseContractDetails.Remove(item);
 
@@ -55,8 +54,7 @@ namespace CleanArchitecture.Razor.Application.PurchaseContractDetails.Commands.D
 
         public async Task<Result> Handle(DeleteCheckedPurchaseContractDetailsCommand request, CancellationToken cancellationToken)
         {
-           //TODO:Implementing DeleteCheckedPurchaseContractDetailsCommandHandler method 
-           var items = await _context.PurchaseContractDetails.Where(x => request.Id.Contains(x.Id)).ToListAsync(cancellationToken);
+            var items = await _context.PurchaseContractDetails.Where(x => request.Id.Contains(x.Id)).ToListAsync(cancellationToken);
             foreach (var item in items)
             {
                 _context.PurchaseContractDetails.Remove(item);

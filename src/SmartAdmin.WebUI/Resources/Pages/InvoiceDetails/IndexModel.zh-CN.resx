@@ -249,4 +249,7 @@
   <data name="Due Time" xml:space="preserve">
     <value>发票有效期</value>
   </data>
+  <data name="Invoice Details" xml:space="preserve">
+    <value>开票信息</value>
+  </data>
 </root>

@@ -45,6 +45,8 @@ namespace CleanArchitecture.Razor.Application.InvoiceDetails.Commands.Delete
         
            var item = await _context.InvoiceDetails.FindAsync(new object[] { request.Id }, cancellationToken);
             _context.InvoiceDetails.Remove(item);
+            var deletedEvent = new InvoiceDetailDeletedEvent(item);
+            item.DomainEvents.Add(deletedEvent);
             await _context.SaveChangesAsync(cancellationToken);
             return Result.Success();
         }
@@ -56,6 +58,8 @@ namespace CleanArchitecture.Razor.Application.InvoiceDetails.Commands.Delete
             foreach (var item in items)
             {
                 _context.InvoiceDetails.Remove(item);
+                var deletedEvent = new InvoiceDetailDeletedEvent(item);
+                item.DomainEvents.Add(deletedEvent);
             }
             await _context.SaveChangesAsync(cancellationToken);
             return Result.Success();

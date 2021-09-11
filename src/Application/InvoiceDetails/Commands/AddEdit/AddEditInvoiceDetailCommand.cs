@@ -39,11 +39,15 @@ namespace CleanArchitecture.Razor.Application.InvoiceDetails.Commands.AddEdit
             {
                 var item = await _context.InvoiceDetails.FindAsync(new object[] { request.Id }, cancellationToken);
                 item = _mapper.Map(request, item);
+                var updateEvent = new InvoiceDetailUpdatedEvent(item);
+                item.DomainEvents.Add(updateEvent);
             }
             else
             {
                 var item = _mapper.Map<InvoiceDetail>(request);
                 _context.InvoiceDetails.Add(item);
+                var createdEvent = new InvoiceDetailCreatedEvent(item);
+                item.DomainEvents.Add(createdEvent);
             }
             await _context.SaveChangesAsync(cancellationToken);
             return Result.Success();
