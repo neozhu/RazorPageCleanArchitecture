@@ -563,7 +563,9 @@
                     const edamount = $(this).datagrid('getEditor', { index: index, field: 'RatioAmount' });
                     $(edratio.target).numberbox({
                         value: row.Ratio,
-                        precision:2,
+                        precision: 2,
+                        min: 0,
+                        max:1,
                         onChange: function (newValue, oldValue) {
                             const amount = contractAmount * numeral(newValue).value();
                             $(edamount.target).numberbox('setValue', amount);
@@ -599,7 +601,8 @@
                         formatter: numberformatter,
                         editor: {
                             type: 'numberbox', options: {
-                                required: true, precision: 2,
+                                required: true, precision: 2, min: 0,
+                                max: 1,
                             }
                         }
 
@@ -640,7 +643,9 @@
                         align: 'right',
                         formatter: numberformatter,
                         editor: {
-                            type: 'numberbox', options: { required: false, precision: 2, }
+                            type: 'numberbox', options: {
+                                required: false, precision: 2, min: 0,
+                                max: 1, }
                         }
                     },
                     {
@@ -674,7 +679,7 @@
                         title: '@_localizer["Tax Rate"]',
                         width: 90,
                         editor: {
-                            type: 'numberbox', options: { required: false, precision: 2 }
+                            type: 'numberbox', options: { required: false, precision: 2,min:0,max:1 }
                         }
                     },
                     {

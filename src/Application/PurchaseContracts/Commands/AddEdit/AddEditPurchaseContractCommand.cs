@@ -38,11 +38,13 @@ namespace CleanArchitecture.Razor.Application.PurchaseContracts.Commands.AddEdit
             {
                 var item = await _context.PurchaseContracts.FindAsync(new object[] { request.Id }, cancellationToken);
                 item = _mapper.Map(request, item);
+                item.DomainEvents.Add(new PurchaseContractUpdatedEvent(item));
             }
             else
             {
                 var item = _mapper.Map<PurchaseContract>(request);
                 _context.PurchaseContracts.Add(item);
+                item.DomainEvents.Add(new PurchaseContractCreatedEvent(item));
             }
             await _context.SaveChangesAsync(cancellationToken);
             return Result.Success();
