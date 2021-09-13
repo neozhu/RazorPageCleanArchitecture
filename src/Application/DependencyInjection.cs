@@ -31,7 +31,7 @@ namespace CleanArchitecture.Razor.Application
             services.AddWorkflowSteps(w => w.Name.EndsWith("Step"), Assembly.GetExecutingAssembly());
             return services;
         }
-        public static void AddWorkflowSteps(this IServiceCollection services, Func<Type, bool> predicate, params Assembly[] assemblies)
+        public static IServiceCollection AddWorkflowSteps(this IServiceCollection services, Func<Type, bool> predicate, params Assembly[] assemblies)
         {
             if (assemblies.Length == 0)
             {
@@ -45,7 +45,7 @@ namespace CleanArchitecture.Razor.Application
                .ForEach(type =>
                         services.Add(new ServiceDescriptor(type, type, ServiceLifetime.Transient))
                );
-
+            return services;
         }
     }
 }
