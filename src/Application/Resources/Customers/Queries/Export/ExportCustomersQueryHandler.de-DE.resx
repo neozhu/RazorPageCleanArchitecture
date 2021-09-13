@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -127,7 +127,7 @@
     <value>Adresse des Englischen</value>
   </data>
   <data name="Contact" xml:space="preserve">
-    <value>Vertrag</value>
+    <value>Kontakt</value>
   </data>
   <data name="Customers" xml:space="preserve">
     <value>Kundschaft</value>
