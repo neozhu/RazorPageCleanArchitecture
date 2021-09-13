@@ -68,8 +68,6 @@ namespace CleanArchitecture.Razor.Application.SalesContracts.Queries.Export
                     { _localizer["Invoice Amount"], item => item.InvoiceAmount },
                     { _localizer["Balance"], item => item.Balance },
                     { _localizer["Comments"], item => item.Comments }
-      
-
                 }
                 , _localizer["SalesContracts"]);
             return result;
