@@ -26,9 +26,6 @@ namespace CleanArchitecture.Razor.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
-
-
-            services.AddWorkflowSteps(w => w.Name.EndsWith("Step"), Assembly.GetExecutingAssembly());
             return services;
         }
         public static IServiceCollection AddWorkflowSteps(this IServiceCollection services, Func<Type, bool> predicate, params Assembly[] assemblies)
