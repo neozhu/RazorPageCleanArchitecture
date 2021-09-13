@@ -47,10 +47,11 @@ namespace SmartAdmin.WebUI
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddWorkflow(Configuration);
-            services.AddApplication();
-            services.AddInfrastructure(Configuration);
-         
+        
+            services.AddApplication()
+                    .AddInfrastructure(Configuration)
+                    .AddWorkflow(Configuration);
+
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddTransient<IEmailSender, EmailSender>();
