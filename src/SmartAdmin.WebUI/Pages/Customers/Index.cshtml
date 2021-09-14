@@ -240,10 +240,8 @@
             onGetTemplate();
         });
         $('#customer_form :submit').click(function (e) {
-            console.log('submmit')
             var form = document.querySelector('#customer_form');
-            $(form).find(":valid").parent().removeClass("was-validated");
-            if (form.checkValidity() === false) {
+            if ($(form).valid() === false) {
                 form.classList.add('was-validated');
             } else {
                 var request = $('#customer_form').serialize();
