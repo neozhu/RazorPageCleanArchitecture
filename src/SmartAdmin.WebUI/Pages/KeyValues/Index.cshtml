@@ -316,13 +316,14 @@
                             $dg.datagrid('acceptChanges');
                             reloadData();
                         }).catch(error => {
-                            var msg = error.response.data.Errors.join();
-                            bootbox.alert({
-                                size: "small",
-                                title: "@_localizer["Error"]",
-                                message: msg,
-                                callback: function () { /* your callback code */ }
-                            })
+                            if (error.response.data.Errors) {
+                                const errors = error.response.data.Errors;
+                                errors.forEach(item => {
+                                    toastr["error"](item);
+                                });
+                            } else {
+                                toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
+                            }
 
                         });
 
@@ -396,7 +397,14 @@
                     link.click();
                     toastr["info"](`@_localizer["Export Success"]`);
                 }).catch(error => {
-                    console.log(error)
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Export fail"],${error.response.data}`);
+                    }
                 })
 
 

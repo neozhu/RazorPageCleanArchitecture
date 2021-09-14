@@ -223,25 +223,24 @@
             onGetTemplate();
         });
         $('#customer_form :submit').click(function (e) {
-            console.log('submmit')
-            var form = document.querySelector('#customer_form');
+            const form = document.querySelector('#customer_form');
             if ($(form).valid() === false) {
                 form.classList.add('was-validated');
             } else {
-                var request = $('#customer_form').serialize();
+                const request = $('#customer_form').serialize();
                 axios.post('@Url.Page("/Customers/Index")', request).then(res => {
-                    toastr["info"]('@_localizer["Save Success"]');
+                    toastr["info"]('@_localizer["Save Success."]');
                     $('#customer_modal').modal('toggle');
                     reloadData();
                 }).catch((error) => {
-                    var msg = error.response.data.Errors.join();
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
-
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
+                    }
                 });
             }
             event.preventDefault();
@@ -374,13 +373,14 @@
                             reloadData();
                         })
                             .catch((error) => {
-                                var msg = error.response.data;
-                                bootbox.alert({
-                                    size: "small",
-                                    title: "@_localizer["Error"]",
-                                    message: msg,
-                                    callback: function () { /* your callback code */ }
-                                })
+                                if (error.response.data.Errors) {
+                                    const errors = error.response.data.Errors;
+                                    errors.forEach(item => {
+                                        toastr["error"](item);
+                                    });
+                                } else {
+                                    toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                }
                             });
                     }
                 }
@@ -410,13 +410,14 @@
                                 reloadData();
                             })
                                 .catch((error) => {
-                                    var msg = error.response.data;
-                                    bootbox.alert({
-                                        size: "small",
-                                        title: "@_localizer["Error"]",
-                                        message: msg,
-                                        callback: function () { /* your callback code */ }
-                                    })
+                                    if (error.response.data.Errors) {
+                                        const errors = error.response.data.Errors;
+                                        errors.forEach(item => {
+                                            toastr["error"](item);
+                                        });
+                                    } else {
+                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                    }
                                 });
                         }
                     }
@@ -450,7 +451,14 @@
                     document.body.appendChild(link);
                     link.click();
                 }).catch(error => {
-                    console.log(error)
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Export fail"],${error.response.data}`);
+                    }
                 })
 
 
