@@ -192,7 +192,7 @@
 </div>
 @await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/Customers/Index") + "?handler=Import",
     getTemplateUri = @Url.Page("/Customers/Index") + "?handler=CreateTemplate",
-    onImportedSucceeded = "reload()" })
+    onImportedSucceeded = "reloadData()" })
 @section ScriptsBlock {
     <partial name="_ValidationScriptsPartial" />
 
@@ -205,7 +205,7 @@
 
     <script type="text/javascript">
         $('#searchbutton').click(function () {
-            reload();
+            reloadData();
         });
         $('#addbutton').click(function () {
             popupmodal(null);
@@ -232,9 +232,9 @@
                 axios.post('@Url.Page("/Customers/Index")', request).then(res => {
                     toastr["info"]('@_localizer["Save Success"]');
                     $('#customer_modal').modal('toggle');
-                    reload();
+                    reloadData();
                 }).catch((error) => {
-                    var msg = error.response.data;
+                    var msg = error.response.data.Errors.join();
                     bootbox.alert({
                         size: "small",
                         title: "@_localizer["Error"]",
@@ -321,7 +321,7 @@
 
         }
 
-        var reload = () => {
+        var reloadData = () => {
             $dg.datagrid('load', '@Url.Page("/Customers/Index")?handler=Data');
         }
 
@@ -371,7 +371,7 @@
                     if (result) {
                         axios.get('@Url.Page("/Customers/Index")?handler=Delete&id=' + id).then(res => {
                             toastr["info"]('@_localizer["Delete Success"]');
-                            reload();
+                            reloadData();
                         })
                             .catch((error) => {
                                 var msg = error.response.data;
@@ -407,7 +407,7 @@
                             console.log(paras.toString())
                             axios.get('@Url.Page("/Customers/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
                                 toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
-                                reload();
+                                reloadData();
                             })
                                 .catch((error) => {
                                     var msg = error.response.data;

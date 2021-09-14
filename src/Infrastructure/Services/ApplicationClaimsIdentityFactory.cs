@@ -25,7 +25,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Services
             _userManager = userManager;
             _roleManager = roleManager;
         }
-        public async override Task<ClaimsPrincipal> CreateAsync(ApplicationUser user)
+        public override async Task<ClaimsPrincipal> CreateAsync(ApplicationUser user)
         {
             var principal = await base.CreateAsync(user);
             

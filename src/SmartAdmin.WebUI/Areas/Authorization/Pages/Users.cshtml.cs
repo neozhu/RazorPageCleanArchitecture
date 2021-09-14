@@ -122,6 +122,10 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
         public async Task<IActionResult> OnGetDeleteAsync(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
+            if (user.UserName == "administrator")
+            {
+                return BadRequest(Result.Failure(new string[] { "Please do not delete the default user." }));
+            }
             var result = await _userManager.DeleteAsync(user);
             return new JsonResult(result.ToApplicationResult());
         }
@@ -140,6 +144,10 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
             foreach(var key in id)
             {
                 var user = await _userManager.FindByIdAsync(key);
+                if (user.UserName == "administrator")
+                {
+                    return BadRequest(Result.Failure(new string[] { "Please do not delete the default user." }));
+                }
                 var result = await _userManager.DeleteAsync(user);
             }
             return new JsonResult(Result.Success());
@@ -192,7 +200,7 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
                 if (result.Succeeded)
                 {
                     var importItems = result.Data;
-                    foreach(var item in importItems)
+                    foreach (var item in importItems)
                     {
                         var user = new ApplicationUser
                         {
@@ -204,21 +212,22 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
                             Email = item.Email,
                             PhoneNumber = item.PhoneNumber
                         };
-                        if((await _userManager.FindByNameAsync(user.UserName)) is null)
+                        if ((await _userManager.FindByNameAsync(user.UserName)) is null)
                         {
                             var iresult = await _userManager.CreateAsync(user, item.Password);
                             if (iresult.Succeeded == false)
                             {
-                                return new JsonResult(Result.FailureAsync(iresult.Errors.Select(x => x.Description)));
+                                return BadRequest(Result.FailureAsync(iresult.Errors.Select(x => x.Description)));
                             }
                         }
-                        
+
                     }
                 }
                 return new JsonResult(Result.Success());
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
-                return new JsonResult(Result.Failure(new string[]{ e.Message}));
+                return BadRequest(Result.Failure(new string[] { e.Message }));
             }
         }
 

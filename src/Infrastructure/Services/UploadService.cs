@@ -20,9 +20,8 @@ namespace CleanArchitecture.Razor.Infrastructure.Services
                 var folder = request.UploadType.ToDescriptionString();
                 var folderName = Path.Combine("Files", folder);
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-                bool exists = System.IO.Directory.Exists(pathToSave);
-                if (!exists)
-                    System.IO.Directory.CreateDirectory(pathToSave);
+                bool exists = Directory.Exists(pathToSave);
+                if (!exists) Directory.CreateDirectory(pathToSave);
                 var fileName = request.FileName.Trim('"');
                 var fullPath = Path.Combine(pathToSave, fileName);
                 var dbPath = Path.Combine(folderName, fileName);
@@ -43,7 +42,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Services
             }
         }
 
-        private static string numberPattern = " ({0})";
+        private static string _numberPattern = " ({0})";
 
         public static string NextAvailableFilename(string path)
         {
@@ -53,10 +52,10 @@ namespace CleanArchitecture.Razor.Infrastructure.Services
 
             // If path has extension then insert the number pattern just before the extension and return next filename
             if (Path.HasExtension(path))
-                return GetNextFilename(path.Insert(path.LastIndexOf(Path.GetExtension(path)), numberPattern));
+                return GetNextFilename(path.Insert(path.LastIndexOf(Path.GetExtension(path)), _numberPattern));
 
             // Otherwise just append the pattern to the path and return next filename
-            return GetNextFilename(path + numberPattern);
+            return GetNextFilename(path + _numberPattern);
         }
 
         private static string GetNextFilename(string pattern)
