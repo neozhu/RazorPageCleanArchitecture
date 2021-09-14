@@ -105,45 +105,44 @@
                 <div class="modal-body">
                     @Html.AntiForgeryToken()
                     <input type="hidden" asp-for="Input.Id" />
-                    @Html.ValidationSummary()
                     <div class="form-row">
                         <div class="col-md-6">
                             <label class="form-label" for="name">@_localizer["Name"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.Name" class="form-control" placeholder="Customer Name" required />
+                            <input type="text" asp-for="Input.Name" class="form-control" placeholder="Customer Name"  />
                             <span class="invalid-feedback" asp-validation-for="Input.Name">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label" for="nameOfEnglish">@_localizer["Name Of English"] </label>
+                            <label class="form-label" for="nameOfEnglish">@_localizer["Name Of English"] <span class="text-danger">*</span></label>
                             <input type="text" asp-for="Input.NameOfEnglish" class="form-control" placeholder="Customer Name of English" />
                             <span class="invalid-feedback" asp-validation-for="Input.NameOfEnglish">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="GroupName">@_localizer["Group Name"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.GroupName" class="form-control" placeholder="Group Name" required />
+                            <input type="text" asp-for="Input.GroupName" class="form-control" placeholder="Group Name"  />
                             <span class="invalid-feedback" asp-validation-for="Input.GroupName">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="PartnerType">@_localizer["Partner Type"] <span class="text-danger">*</span></label>
-                            <select type="text" asp-for="Input.PartnerType" class="custom-select" asp-items="Html.GetEnumSelectList<PartnerType>()" required>
+                            <select type="text" asp-for="Input.PartnerType" class="custom-select" asp-items="Html.GetEnumSelectList<PartnerType>()" >
                                 <option value="">@_localizer["Choose Partner Type"]</option>
                             </select>
                             <span class="invalid-feedback" asp-validation-for="Input.PartnerType">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="GroupName">@_localizer["Region"] <span class="text-danger">*</span></label>
-                            <select type="text" asp-for="Input.Region" class="custom-select" asp-dictionaries-for="Region" placeholder="Region" required>
+                            <select type="text" asp-for="Input.Region" class="custom-select" asp-dictionaries-for="Region" placeholder="Region" >
                                 <option value="">@_localizer["Choose Region"]</option>
                             </select>
                             <span class="invalid-feedback" asp-validation-for="Input.Region">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="Sales">@_localizer["Sales"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.Sales" class="form-control" placeholder="Sales" required />
+                            <input type="text" asp-for="Input.Sales" class="form-control" placeholder="Sales"  />
                             <span class="invalid-feedback" asp-validation-for="Input.Sales">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="RegionSalesDirector">@_localizer["Region Sales Director"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.RegionSalesDirector" class="form-control" placeholder="Region Sales Director" required />
+                            <input type="text" asp-for="Input.RegionSalesDirector" class="form-control" placeholder="Region Sales Director"  />
                             <span class="invalid-feedback" asp-validation-for="Input.RegionSalesDirector">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-12">
@@ -226,8 +225,7 @@
         $('#customer_form :submit').click(function (e) {
             console.log('submmit')
             var form = document.querySelector('#customer_form');
-            $(form).find(":valid").parent().removeClass("was-validated");
-            if (form.checkValidity() === false) {
+            if ($(form).valid() === false) {
                 form.classList.add('was-validated');
             } else {
                 var request = $('#customer_form').serialize();
@@ -333,6 +331,7 @@
         var popupmodal = (customer) => {
             $('#customer_modal').modal('toggle');
             $('#customer_modal .modal-title').html('@_localizer["Add Customer"]');
+            $('#customer_form').clearForm();
             $('#customer_form')[0].reset();
             if (customer) {
                 $('#customer_modal .modal-title').html('@_localizer["Edit Customer"]');

@@ -94,12 +94,12 @@
                     <div class="form-row">
                         <div class="col-md-6">
                             <label class="form-label" for="Title">@_localizer["Title"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.Title" class="form-control" placeholder="Title" required />
+                            <input type="text" asp-for="Input.Title" class="form-control" placeholder="Title"  />
                             <span class="invalid-feedback" asp-validation-for="Input.Title">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="DocumentTypeId">@_localizer["Document Type"] <span class="text-danger">*</span></label>
-                            <select type="text" asp-for="Input.DocumentTypeId" asp-items="Model.DocumentTypes" class="custom-select" placeholder="Document Type" required>
+                            <select type="text" asp-for="Input.DocumentTypeId" asp-items="Model.DocumentTypes" class="custom-select" placeholder="Document Type" >
                                 <option value="">@_localizer["Choose Document Type"]</option>
                             </select>
                             <span class="invalid-feedback" asp-validation-for="Input.DocumentTypeId">Sorry, you missed this one.</span>
@@ -116,8 +116,7 @@
 
                             <input type="file" asp-for="UploadedFile" style="display:none" required />
                             <div class="">
-
-                                <button name="uploadbutton" class="btn btn-primary btn-icon waves-effect waves-themed mr-2">
+                                <button name="uploadbutton" type="button" class="btn btn-primary btn-icon waves-effect waves-themed mr-2">
                                     <i class="fal fa-paperclip"></i>
                                 </button><span class="text-danger">*</span>
                                 <div id="uploadfilename">
@@ -176,8 +175,7 @@
         });
         $('#document_form :submit').click(function (e) {
             var form = document.querySelector('#document_form');
-            $(form).find(":valid").parent().removeClass("was-validated");
-            if (form.checkValidity() === false) {
+            if ($(form).valid() === false) {
                 form.classList.add('was-validated');
             } else {
                 event.preventDefault();
@@ -324,6 +322,7 @@
         var popupmodal = (document) => {
             $('#document_modal').modal('toggle');
             $('#document_modal .modal-title').html('@_localizer["Add Document"]');
+            $('#document_form').clearForm();
             $('#document_form')[0].reset();
             if (document) {
                 uploadbutton.disabled = true;
@@ -478,5 +477,7 @@
             toastr["info"](`@_localizer["Download Success"]`);
         }
 
+
+        
     </script>
 }
