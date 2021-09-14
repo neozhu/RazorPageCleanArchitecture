@@ -15,9 +15,11 @@ namespace CleanArchitecture.Razor.Application.Documents.Commands.AddEdit
                 .NotEmpty();
             RuleFor(v => v.DocumentTypeId)
                 .NotNull()
-                .GreaterThan(0);
+                .NotEqual(0);
             RuleFor(v => v.Description)
-                .MaximumLength(1);
+                .MaximumLength(256);
+            RuleFor(v => v.UploadRequest)
+                .NotNull();
 
 
         }
