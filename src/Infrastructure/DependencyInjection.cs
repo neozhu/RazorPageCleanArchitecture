@@ -43,7 +43,7 @@ namespace CleanArchitecture.Razor.Infrastructure
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
             services.AddScoped<IDomainEventService, DomainEventService>();
-            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationClaimsIdentityFactory>();
+           
 
             services
                 .AddDefaultIdentity<ApplicationUser>()
@@ -84,6 +84,7 @@ namespace CleanArchitecture.Razor.Infrastructure
                     }
                 }
             });
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationClaimsIdentityFactory>();
             return services;
         }
 

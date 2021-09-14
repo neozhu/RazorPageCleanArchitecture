@@ -47,7 +47,7 @@ namespace SmartAdmin.WebUI
             services.AddApplication()
                     .AddInfrastructure(Configuration)
                     .AddWorkflow(Configuration);
-
+          
             services.AddDatabaseDeveloperPageExceptionFilter();
            
             services.AddControllers();
