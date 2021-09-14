@@ -11,6 +11,7 @@ using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Models;
 using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
+using CleanArchitecture.Razor.Application.Customers.DTOs;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Enums;
 using FluentValidation;
@@ -56,12 +57,12 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
         }
         public async Task<Result> Handle(ImportCustomersCommand request, CancellationToken cancellationToken)
         {
-            var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, Customer, object>>
+            var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, CustomerDto, object>>
             {
                 { _localizer["Name"], (row,item) => item.Name = row[_localizer["Name"]]?.ToString() },
                 { _localizer["Name Of English"], (row,item) => item.NameOfEnglish = row[_localizer["Name Of English"]]?.ToString() },
                 { _localizer["Group Name"], (row,item) => item.GroupName =  row[_localizer["Group Name"]]?.ToString() },
-                { _localizer["Partner Type"], (row,item) => item.PartnerType = (PartnerType) Enum.Parse(typeof(PartnerType), row[_localizer["Partner Type"]]==null?"TP":row[_localizer["Partner Type"]].ToString(), true)  },
+                { _localizer["Partner Type"], (row,item) => item.PartnerType = row[_localizer["Partner Type"]].ToString()},
                 { _localizer["Region"], (row,item) => item.Region =  row[_localizer["Region"]]?.ToString() },
                 { _localizer["Sales"], (row,item) => item.Sales =  row[_localizer["Sales"]]?.ToString() },
                 { _localizer["Region Sales Director"], (row,item) => item.RegionSalesDirector =  row[_localizer["Region Sales Director"]]?.ToString() },
@@ -87,7 +88,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
                         var exist = await _context.Customers.AnyAsync(x => x.Name==item.Name,cancellationToken);
                         if (!exist)
                         {
-                            await _context.Customers.AddAsync(item, cancellationToken);
+                            await _context.Customers.AddAsync(_mapper.Map<Customer>(item), cancellationToken);
                         }
                     }
                     else

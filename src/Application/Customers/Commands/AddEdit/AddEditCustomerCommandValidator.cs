@@ -28,7 +28,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.AddEdit
                 .MaximumLength(256)
                 .NotEmpty();
             RuleFor(v=>v.PartnerType)
-                .MaximumLength(30)
+                .MaximumLength(128)
                 .NotEmpty();
         }
     }

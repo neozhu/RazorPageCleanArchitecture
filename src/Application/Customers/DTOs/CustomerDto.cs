@@ -1,9 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
 using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using CleanArchitecture.Razor.Domain.Entities;
+using CleanArchitecture.Razor.Domain.Enums;
 
 namespace CleanArchitecture.Razor.Application.Customers.DTOs
 {
@@ -11,7 +13,10 @@ namespace CleanArchitecture.Razor.Application.Customers.DTOs
     {
         public void Mapping(Profile profile)
         {
-            profile.CreateMap< Customer, CustomerDto>().ReverseMap();
+            profile.CreateMap<Customer, CustomerDto>()
+                .ForMember(x => x.PartnerType, y => y.MapFrom(z => z.PartnerType.ToString()));
+            profile.CreateMap<CustomerDto, Customer>()
+                .ForMember(x => x.PartnerType, y => y.MapFrom(z => Enum.Parse<PartnerType>(z.PartnerType)));
 
         }
         public int Id { get; set; }
