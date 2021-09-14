@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Application.Common.Exceptions;
+using CleanArchitecture.Razor.Application.Common.Models;
 using CleanArchitecture.Razor.Application.KeyValues.Commands.Delete;
 using CleanArchitecture.Razor.Application.KeyValues.Commands.Import;
 using CleanArchitecture.Razor.Application.KeyValues.Commands.SaveChanged;
@@ -55,13 +56,11 @@ namespace SmartAdmin.WebUI.Pages.KeyValues
             catch (ValidationException ex)
             {
                 var errors = ex.Errors.Select(x => $"{ string.Join(",", x.Value) }");
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return new JsonResult(string.Join(",", errors));
+                return BadRequest(Result.Failure(errors));
             }
             catch (Exception ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return new JsonResult(ex.Message);
+                return BadRequest(Result.Failure(new string[] { ex.Message }));
             }
         }
 
