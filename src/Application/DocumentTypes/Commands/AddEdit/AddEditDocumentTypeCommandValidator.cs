@@ -12,6 +12,8 @@ namespace CleanArchitecture.Razor.Application.DocumentTypes.Commands.AddEdit
             RuleFor(v => v.Name)
                 .MaximumLength(256)
                 .NotEmpty();
+            RuleFor(v => v.Description)
+                .MaximumLength(512);
           
         }
     }
