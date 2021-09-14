@@ -107,7 +107,7 @@
 {
     importUri = Url.Page("/KeyValues/Index") + "?handler=Import",
     getTemplateUri = @Url.Page("/KeyValues/Index") + "?handler=CreateTemplate",
-    onImportedSucceeded = "reload()"
+    onImportedSucceeded = "reloadData()"
 })
 @section ScriptsBlock {
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
@@ -119,7 +119,7 @@
 
     <script type="text/javascript">
         $('#searchbutton').click(function () {
-            reload();
+            reloadData();
         });
         $('#addbutton').click(function () {
             onAddRow(null);
@@ -222,7 +222,7 @@
 
         }
 
-        var reload = () => {
+        var reloadData = () => {
             $dg.datagrid('load', '@Url.Page("/KeyValues/Index")?handler=Data');
         }
 
@@ -314,9 +314,9 @@
                         .then(response => {
                             toastr["info"]('@_localizer["Save Success"]');
                             $dg.datagrid('acceptChanges');
-                            reload();
+                            reloadData();
                         }).catch(error => {
-                            var msg = error.response.data;
+                            var msg = error.response.data.Errors.join();
                             bootbox.alert({
                                 size: "small",
                                 title: "@_localizer["Error"]",
@@ -352,7 +352,7 @@
                             console.log(paras.toString())
                             axios.get('@Url.Page("/KeyValues/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
                                 toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
-                                reload();
+                                reloadData();
                             })
                                 .catch((error) => {
                                     var msg = error.response.data;
