@@ -10,12 +10,14 @@ namespace CleanArchitecture.Razor.Application.Documents.Commands.AddEdit
         public AddEditDocumentCommandValidator()
         {
             RuleFor(v => v.Title)
+                .NotNull()
                 .MaximumLength(256)
                 .NotEmpty();
             RuleFor(v => v.DocumentTypeId)
+                .NotNull()
                 .GreaterThan(0);
-            //RuleFor(v => v.UploadRequest)
-            //    .NotNull();
+            RuleFor(v => v.Description)
+                .MaximumLength(1);
 
 
         }

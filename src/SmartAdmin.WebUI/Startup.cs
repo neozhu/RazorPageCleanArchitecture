@@ -3,6 +3,7 @@ using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Infrastructure;
 using CleanArchitecture.Razor.Infrastructure.Constants.Localization;
 using CleanArchitecture.Razor.Infrastructure.Identity;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -57,11 +58,6 @@ namespace SmartAdmin.WebUI
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationClaimsIdentityFactory>();
             services.AddControllers();
-            //services.AddMvc().AddFluentValidation(fv =>
-            //{
-            //    fv.DisableDataAnnotationsValidation = false;
-            //    fv.ImplicitlyValidateChildProperties = true;
-            //});
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 options.AddSupportedUICultures(LocalizationConstants.SupportedLanguages.Select(x=>x.Code).ToArray());
@@ -69,6 +65,12 @@ namespace SmartAdmin.WebUI
             });
             services
                 .AddRazorPages()
+                .AddFluentValidation(fv =>
+                {
+                    fv.DisableDataAnnotationsValidation = true;
+                    fv.ImplicitlyValidateChildProperties = true;
+                    fv.ImplicitlyValidateRootCollectionElements = true;
+                })
                 .AddViewLocalization()
                 .AddJsonOptions(options =>
                   {
