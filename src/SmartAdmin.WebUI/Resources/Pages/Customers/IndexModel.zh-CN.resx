@@ -213,4 +213,13 @@
   <data name="Choose Region" xml:space="preserve">
     <value>选择区域</value>
   </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>保存失败</value>
+  </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>删除失败</value>
+  </data>
+  <data name="Export fail" xml:space="preserve">
+    <value>导出失败</value>
+  </data>
 </root>

@@ -356,13 +356,14 @@
                                 reloadData();
                             })
                                 .catch((error) => {
-                                    var msg = error.response.data;
-                                    bootbox.alert({
-                                        size: "small",
-                                        title: "@_localizer["Error"]",
-                                        message: msg,
-                                        callback: function () { /* your callback code */ }
-                                    })
+                                    if (error.response.data.Errors) {
+                                        const errors = error.response.data.Errors;
+                                        errors.forEach(item => {
+                                            toastr["error"](item);
+                                        });
+                                    } else {
+                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                    }
                                 });
                         }
                     }

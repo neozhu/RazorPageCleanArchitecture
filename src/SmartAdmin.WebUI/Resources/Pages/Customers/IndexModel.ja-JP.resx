@@ -213,4 +213,13 @@
   <data name="Choose Region" xml:space="preserve">
     <value>地域を選択</value>
   </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>削除失敗</value>
+  </data>
+  <data name="Export fail" xml:space="preserve">
+    <value>エクスポート失敗</value>
+  </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>保存失敗</value>
+  </data>
 </root>
