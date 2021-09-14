@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using WorkflowCore.Interface;
 
 namespace CleanArchitecture.Razor.Infrastructure
@@ -41,10 +40,10 @@ namespace CleanArchitecture.Razor.Infrastructure
                     
                     );
             }
-
+            services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
-
             services.AddScoped<IDomainEventService, DomainEventService>();
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationClaimsIdentityFactory>();
 
             services
                 .AddDefaultIdentity<ApplicationUser>()

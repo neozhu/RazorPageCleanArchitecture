@@ -12,9 +12,9 @@ using CleanArchitecture.Razor.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
-namespace SmartAdmin.WebUI.Services
+namespace CleanArchitecture.Razor.Infrastructure.Services
 {
-    public class ApplicationClaimsIdentityFactory : Microsoft.AspNetCore.Identity.UserClaimsPrincipalFactory<ApplicationUser>
+    public class ApplicationClaimsIdentityFactory : UserClaimsPrincipalFactory<ApplicationUser>
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
