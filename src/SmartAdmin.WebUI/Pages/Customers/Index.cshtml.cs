@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CleanArchitecture.Razor.Application.Common.Exceptions;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
+using CleanArchitecture.Razor.Application.Common.Models;
 using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
 using CleanArchitecture.Razor.Application.Customers.Commands.Delete;
 using CleanArchitecture.Razor.Application.Customers.Commands.Import;
@@ -71,13 +72,11 @@ namespace SmartAdmin.WebUI.Pages.Customers
             catch (ValidationException ex)
             {
                 var errors = ex.Errors.Select(x => $"{ string.Join(",", x.Value) }");
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return new JsonResult(string.Join(",", errors));
+                return BadRequest(Result.Failure(errors));
             }
             catch (Exception ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return new JsonResult(ex.Message);
+                return BadRequest(Result.Failure(new string[] {ex.Message }));
             }
         }
 
