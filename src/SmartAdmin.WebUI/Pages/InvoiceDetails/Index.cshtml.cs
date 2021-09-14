@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Localization;
 using SmartAdmin.WebUI.Extensions;
 using CleanArchitecture.Razor.Application.SalesContracts.Queries.GetAll;
+using CleanArchitecture.Razor.Application.Common.Models;
 
 namespace SmartAdmin.WebUI.Pages.InvoiceDetails
 {
@@ -82,13 +83,11 @@ namespace SmartAdmin.WebUI.Pages.InvoiceDetails
             catch (ValidationException ex)
             {
                 var errors = ex.Errors.Select(x => $"{ string.Join(",", x.Value) }");
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return new JsonResult(string.Join(",", errors));
+                return BadRequest(Result.Failure(errors));
             }
             catch (Exception ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return new JsonResult(ex.Message);
+                return BadRequest(Result.Failure(new string[] { ex.Message }));
             }
         }
 
@@ -132,13 +131,11 @@ namespace SmartAdmin.WebUI.Pages.InvoiceDetails
             catch (ValidationException ex)
             {
                 var errors = ex.Errors.Select(x => $"{ string.Join(",", x.Value) }");
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return new JsonResult(string.Join(",", errors));
+                return BadRequest(Result.Failure(errors));
             }
             catch (Exception ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return new JsonResult(ex.Message);
+                return BadRequest(Result.Failure(new string[] { ex.Message }));
             }
         }
         public async  Task<IActionResult> OnGetSalesContractAsync([FromQuery]GetSalesContractByIdQuery comand)

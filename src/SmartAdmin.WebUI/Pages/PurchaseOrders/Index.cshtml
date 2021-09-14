@@ -261,7 +261,7 @@
                     $('#purchaseOrder_modal').modal('toggle');
                     reload();
                 }).catch((error) => {
-                    var msg = error.response.data;
+                    var msg = error.response.data.Errors.join();
                     bootbox.alert({
                         size: "small",
                         title: "@_localizer["Error"]",

@@ -55,13 +55,11 @@ namespace SmartAdmin.WebUI.Pages.Products
             catch (ValidationException ex)
             {
                 var errors = ex.Errors.Select(x => $"{ string.Join(",", x.Value) }");
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return new JsonResult(string.Join(",", errors));
+                return BadRequest(Result.Failure(errors));
             }
             catch (Exception ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return new JsonResult(ex.Message);
+                return BadRequest(Result.Failure(new string[] { ex.Message }));
             }
         }
 
