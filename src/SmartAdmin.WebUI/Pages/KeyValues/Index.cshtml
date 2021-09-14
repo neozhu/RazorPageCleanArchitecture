@@ -110,8 +110,6 @@
     onImportedSucceeded = "reload()"
 })
 @section ScriptsBlock {
-    <partial name="_ValidationScriptsPartial" />
-
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
@@ -144,31 +142,6 @@
         $('#gettemplatebutton').click(function () {
             onGetTemplate();
         });
-        $('#keyValues_form :submit').click(function (e) {
-            var form = document.querySelector('#keyValues_form');
-            $(form).find(":valid").parent().removeClass("was-validated");
-            if (form.checkValidity() === false) {
-                form.classList.add('was-validated');
-            } else {
-                var request = $('#keyValues_form').serialize();
-                axios.post('@Url.Page("/KeyValues/Index")', request).then(res => {
-                    toastr["info"]('@_localizer["Save Success"]');
-                    $('#keyValues_modal').modal('toggle');
-                    reload();
-                }).catch((error) => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
-
-                });
-            }
-            event.preventDefault();
-            event.stopPropagation();
-        })
         var $dg={};
         var initdatagrid = () => {
             $dg = $('#keyValues_dg').datagrid({

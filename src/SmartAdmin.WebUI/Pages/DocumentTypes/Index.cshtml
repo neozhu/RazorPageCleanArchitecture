@@ -107,7 +107,7 @@
                     <div class="form-row">
                         <div class="col-md-12">
                             <label class="form-label" for="name">@_localizer["Name"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.Name" class="form-control" placeholder="DocumentType Name" required />
+                            <input type="text" asp-for="Input.Name" class="form-control" placeholder="DocumentType Name" />
                             <span class="invalid-feedback" asp-validation-for="Input.Name">Sorry, you missed this one.</span>
                         </div>
 
@@ -163,8 +163,7 @@
         });
         $('#documentType_form :submit').click(function (e) {
             var form = document.querySelector('#documentType_form');
-            $(form).find(":valid").parent().removeClass("was-validated");
-            if (form.checkValidity() === false) {
+            if ($(form).valid() === false) {
                 form.classList.add('was-validated');
             } else {
                 var request = $('#documentType_form').serialize();
@@ -258,18 +257,11 @@
         var popupmodal = (documentType) => {
             $('#documentType_modal').modal('toggle');
             $('#documentType_modal .modal-title').html('@_localizer["Add Document Type"]');
+            $('#documentType_form').clearForm();
             $('#documentType_form')[0].reset();
             if (documentType) {
                 $('#documentType_modal .modal-title').html('@_localizer["Edit Document Type"]');
-                $('#documentType_form').jsonToForm(documentType, {
-                    PartnerType: function (value) {
-                        if (value == 'TP') {
-                            $('#documentType_form [name*="PartnerType"]').val(0);
-                        } else {
-                            $('#documentType_form [name*="PartnerType"]').val(1);
-                        }
-                    }
-                })
+                $('#documentType_form').jsonToForm(documentType);
             } else {
                 $('#documentType_form #Input_Id').val(0)
 

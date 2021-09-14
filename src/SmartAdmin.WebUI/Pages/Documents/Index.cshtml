@@ -175,7 +175,6 @@
         });
         $('#document_form :submit').click(function (e) {
             var form = document.querySelector('#document_form');
-            $(form).removeClass("was-validated");
             if ($(form).valid() === false) {
                 form.classList.add('was-validated');
             } else {
