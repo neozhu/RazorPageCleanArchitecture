@@ -192,4 +192,13 @@
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="Export fail" xml:space="preserve">
+    <value>Export fail</value>
+  </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>Delete fail</value>
+  </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>Save fail</value>
+  </data>
 </root>

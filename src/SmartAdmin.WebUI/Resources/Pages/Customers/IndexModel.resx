@@ -213,4 +213,13 @@
   <data name="Choose Region" xml:space="preserve">
     <value>Choose Region</value>
   </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>Save fail</value>
+  </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>Delete fail</value>
+  </data>
+  <data name="Export fail" xml:space="preserve">
+    <value>Export fail</value>
+  </data>
 </root>

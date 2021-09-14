@@ -174,4 +174,13 @@
   <data name="No" xml:space="preserve">
     <value>否</value>
   </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>保存失败</value>
+  </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>删除失败</value>
+  </data>
+  <data name="Export fail" xml:space="preserve">
+    <value>导出失败</value>
+  </data>
 </root>
