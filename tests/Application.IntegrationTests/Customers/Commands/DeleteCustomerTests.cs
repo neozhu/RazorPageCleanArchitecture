@@ -7,7 +7,7 @@ using CleanArchitecture.Razor.Application.Common.Exceptions;
 using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
 using CleanArchitecture.Razor.Domain.Entities;
 
-namespace CleanArchitecture.Application.IntegrationTests.TodoItems.Commands
+namespace CleanArchitecture.Application.IntegrationTests.Customers.Commands
 {
     using static Testing;
 
@@ -45,7 +45,7 @@ namespace CleanArchitecture.Application.IntegrationTests.TodoItems.Commands
             item.Should().BeNull();
         }
         [Test]
-        public async Task ShouldDeleteCheckedCustomer()
+        public async Task ShouldDeleteCheckedCustomers()
         {
             var result1 = await SendAsync(new AddEditCustomerCommand
             {

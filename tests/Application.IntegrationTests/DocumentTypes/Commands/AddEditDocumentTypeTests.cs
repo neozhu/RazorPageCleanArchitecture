@@ -1,43 +1,39 @@
 using CleanArchitecture.Razor.Application.Common.Exceptions;
-using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
+using CleanArchitecture.Razor.Application.Documents.Commands.AddEdit;
+using CleanArchitecture.Razor.Application.DocumentTypes.Commands.AddEdit;
 using CleanArchitecture.Razor.Domain.Entities;
 using FluentAssertions;
 using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
 
-namespace CleanArchitecture.Application.IntegrationTests.Customers.Commands
+namespace CleanArchitecture.Application.IntegrationTests.Documents.Commands
 {
     using static Testing;
 
-    public class AddEditCustomerTests : TestBase
+    public class AddEditDocumentTypeTests : TestBase
     {
         [Test]
         public void ShouldRequireMinimumFields()
         {
-            var command = new AddEditCustomerCommand();
+            var command = new AddEditDocumentTypeCommand();
 
             FluentActions.Invoking(() =>
                 SendAsync(command)).Should().ThrowAsync<ValidationException>();
         }
 
         [Test]
-        public async Task ShouldCreateCustomer()
+        public async Task ShouldCreateDocumentType()
         {
             var userId = await RunAsDefaultUserAsync();
-            var command = new AddEditCustomerCommand
+            var command = new AddEditDocumentTypeCommand()
             {
-                Name = "Name",
-                NameOfEnglish = "NameOfEnglish",
-                GroupName = "GroupName",
-                Region = "Region",
-                Sales = "Sales",
-                RegionSalesDirector = "RegionSalesDirector",
-                PartnerType = "IC"
+                Name = "Word",
+                Description = "For Test"
             };
             var result = await SendAsync(command);
-
-            var item = await FindAsync<Customer>(result.Data);
+            
+            var item = await FindAsync<DocumentType>(result.Data);
 
             item.Should().NotBeNull();
             item.Id.Should().Be(result.Data);
