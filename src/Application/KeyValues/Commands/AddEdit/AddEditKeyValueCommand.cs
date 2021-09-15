@@ -15,13 +15,12 @@ using MediatR;
 
 namespace CleanArchitecture.Razor.Application.KeyValues.Commands.AddEdit
 {
-    public class AddEditKeyValueCommand:KeyValueDto,IRequest<Result>, IMapFrom<KeyValue>
+    public class AddEditKeyValueCommand:KeyValueDto,IRequest<Result<int>>
     {
-       
-         
+
     }
 
-    public class AddEditKeyValueCommandHandler : IRequestHandler<AddEditKeyValueCommand, Result>
+    public class AddEditKeyValueCommandHandler : IRequestHandler<AddEditKeyValueCommand, Result<int>>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -34,24 +33,27 @@ namespace CleanArchitecture.Razor.Application.KeyValues.Commands.AddEdit
             _context = context;
             _mapper = mapper;
         }
-        public async Task<Result> Handle(AddEditKeyValueCommand request, CancellationToken cancellationToken)
+        public async Task<Result<int>> Handle(AddEditKeyValueCommand request, CancellationToken cancellationToken)
         {
 
            
             if (request.Id > 0)
             {
-                var KeyValue = await _context.KeyValues.FindAsync(request.Id);
-                KeyValue=_mapper.Map(request, KeyValue);
+                var keyValue = await _context.KeyValues.FindAsync(request.Id);
+                keyValue = _mapper.Map(request, keyValue);
+                await _context.SaveChangesAsync(cancellationToken);
+                return Result<int>.Success(keyValue.Id);
             }
             else
             {
-                var KeyValue = _mapper.Map<KeyValue>(request);
-                var createevent = new KeyValueCreatedEvent(KeyValue);
-                KeyValue.DomainEvents.Add(createevent);
-                _context.KeyValues.Add(KeyValue);
+                var keyValue = _mapper.Map<KeyValue>(request);
+                var createevent = new KeyValueCreatedEvent(keyValue);
+                keyValue.DomainEvents.Add(createevent);
+                _context.KeyValues.Add(keyValue);
+                await _context.SaveChangesAsync(cancellationToken);
+                return Result<int>.Success(keyValue.Id);
             }
-            await _context.SaveChangesAsync(cancellationToken);
-            return Result.Success();
+            
 
         }
     }

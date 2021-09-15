@@ -16,10 +16,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.AddEdit
 {
     public class AddEditCustomerCommand: CustomerDto,IRequest<Result<int>>, IMapFrom<Customer>
     {
-        //public void Mapping(Profile profile)
-        //{
-        //    profile.CreateMap<AddEditCustomerCommand, CustomerDto>().ReverseMap();
-        //}
+    
     }
 
     public class AddEditCustomerCommandHandler : IRequestHandler<AddEditCustomerCommand, Result<int>>

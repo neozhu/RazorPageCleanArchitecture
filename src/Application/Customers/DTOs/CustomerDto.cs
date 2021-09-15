@@ -16,7 +16,12 @@ namespace CleanArchitecture.Razor.Application.Customers.DTOs
             profile.CreateMap<Customer, CustomerDto>()
                 .ForMember(x => x.PartnerType, y => y.MapFrom(z => z.PartnerType.ToString()));
             profile.CreateMap<CustomerDto, Customer>()
-                .ForMember(x => x.PartnerType, y => y.MapFrom(z => Enum.Parse<PartnerType>(z.PartnerType)));
+                .ForMember(x => x.PartnerType, y => y.MapFrom(z => Enum.Parse<PartnerType>(z.PartnerType)))
+                .ForMember(x => x.DomainEvents, y => y.Ignore())
+                .ForMember(x => x.Created, y => y.Ignore())
+                .ForMember(x => x.CreatedBy, y => y.Ignore())
+                .ForMember(x => x.LastModified, y => y.Ignore())
+                .ForMember(x => x.LastModifiedBy, y => y.Ignore());
 
         }
         public int Id { get; set; }

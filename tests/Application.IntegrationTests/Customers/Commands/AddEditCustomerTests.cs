@@ -22,29 +22,28 @@ namespace CleanArchitecture.Application.IntegrationTests.TodoItems.Commands
         }
 
         [Test]
-        public async Task ShouldCreateTodoItem()
+        public async Task ShouldCreateCustomer()
         {
             var userId = await RunAsDefaultUserAsync();
-
-            var listId = await SendAsync(new AddEditCustomerCommand
-            {
-                 Name="Name"
-            });
-
             var command = new AddEditCustomerCommand
             {
-                Name = "Name1"
+                Name = "Name",
+                NameOfEnglish = "NameOfEnglish",
+                GroupName = "GroupName",
+                Region = "Region",
+                Sales = "Sales",
+                RegionSalesDirector = "RegionSalesDirector",
+                PartnerType = "IC"
             };
+            var result = await SendAsync(command);
 
-            var itemId = await SendAsync(command);
-
-            var item = await FindAsync<Customer>(itemId);
+            var item = await FindAsync<Customer>(result.Data);
 
             item.Should().NotBeNull();
-            item.Id.Should().Be(command.Id);
+            item.Id.Should().Be(result.Data);
             item.Name.Should().Be(command.Name);
             item.CreatedBy.Should().Be(userId);
-            item.Created.Should().BeCloseTo(DateTime.Now, new TimeSpan(10000));
+            item.Created.Should().BeCloseTo(DateTime.Now,new TimeSpan(0,0,10));
             item.LastModifiedBy.Should().BeNull();
             item.LastModified.Should().BeNull();
         }

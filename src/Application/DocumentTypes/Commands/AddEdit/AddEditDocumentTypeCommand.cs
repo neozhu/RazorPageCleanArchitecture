@@ -19,13 +19,13 @@ using MediatR;
 
 namespace CleanArchitecture.Razor.Application.DocumentTypes.Commands.AddEdit
 {
-    public class AddEditDocumentTypeCommand:DocumentTypeDto, IRequest<Result>, IMapFrom<DocumentType>
+    public class AddEditDocumentTypeCommand:DocumentTypeDto, IRequest<Result<int>>, IMapFrom<DocumentType>
     {
        
 
     }
 
-    public class AddEditDocumentTypeCommandHandler : IRequestHandler<AddEditDocumentTypeCommand, Result>
+    public class AddEditDocumentTypeCommandHandler : IRequestHandler<AddEditDocumentTypeCommand, Result<int>>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -38,22 +38,25 @@ namespace CleanArchitecture.Razor.Application.DocumentTypes.Commands.AddEdit
             _context = context;
             _mapper = mapper;
         }
-        public async Task<Result> Handle(AddEditDocumentTypeCommand request, CancellationToken cancellationToken)
+        public async Task<Result<int>> Handle(AddEditDocumentTypeCommand request, CancellationToken cancellationToken)
         {
 
            
             if (request.Id > 0)
             {
-                var DocumentType = await _context.DocumentTypes.FindAsync(request.Id);
-                DocumentType=_mapper.Map(request, DocumentType);
+                var documentType = await _context.DocumentTypes.FindAsync(request.Id);
+                documentType = _mapper.Map(request, documentType);
+                await _context.SaveChangesAsync(cancellationToken);
+                return Result<int>.Success(documentType.Id);
             }
             else
             {
-                var DocumentType = _mapper.Map<DocumentType>(request);
-                _context.DocumentTypes.Add(DocumentType);
+                var documentType = _mapper.Map<DocumentType>(request);
+                _context.DocumentTypes.Add(documentType);
+                await _context.SaveChangesAsync(cancellationToken);
+                return Result<int>.Success(documentType.Id);
             }
-            await _context.SaveChangesAsync(cancellationToken);
-            return Result.Success();
+            
 
         }
     }
