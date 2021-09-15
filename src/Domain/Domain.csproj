@@ -6,8 +6,4 @@
     <AssemblyName>CleanArchitecture.Razor.Domain</AssemblyName>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
-
 </Project>

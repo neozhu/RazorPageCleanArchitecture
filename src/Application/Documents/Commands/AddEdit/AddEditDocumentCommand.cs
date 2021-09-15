@@ -20,12 +20,12 @@ using MediatR;
 
 namespace CleanArchitecture.Razor.Application.Documents.Commands.AddEdit
 {
-    public class AddEditDocumentCommand: DocumentDto,IRequest<Result>, IMapFrom<Document>
+    public class AddEditDocumentCommand: DocumentDto,IRequest<Result<int>>, IMapFrom<Document>
     {
         public UploadRequest UploadRequest { get; set; }
     }
 
-    public class AddEditDocumentCommandHandler : IRequestHandler<AddEditDocumentCommand, Result>
+    public class AddEditDocumentCommandHandler : IRequestHandler<AddEditDocumentCommand, Result<int>>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -41,16 +41,17 @@ namespace CleanArchitecture.Razor.Application.Documents.Commands.AddEdit
             _mapper = mapper;
             _uploadService = uploadService;
         }
-        public async Task<Result> Handle(AddEditDocumentCommand request, CancellationToken cancellationToken)
+        public async Task<Result<int>> Handle(AddEditDocumentCommand request, CancellationToken cancellationToken)
         {
-
-           
+            
             if (request.Id > 0)
             {
                 var document = await _context.Documents.FindAsync(request.Id);
                 document.Title = request.Title;
                 document.Description = request.Description;
                 document.IsPublic = request.IsPublic;
+                await _context.SaveChangesAsync(cancellationToken);
+                return Result<int>.Success(document.Id);
             }
             else
             {
@@ -60,9 +61,10 @@ namespace CleanArchitecture.Razor.Application.Documents.Commands.AddEdit
                 var createdevent = new DocumentCreatedEvent(document);
                 document.DomainEvents.Add(createdevent);
                 _context.Documents.Add(document);
+                await _context.SaveChangesAsync(cancellationToken);
+                return Result<int>.Success(document.Id);
             }
-            await _context.SaveChangesAsync(cancellationToken);
-            return Result.Success();
+           
 
         }
     }

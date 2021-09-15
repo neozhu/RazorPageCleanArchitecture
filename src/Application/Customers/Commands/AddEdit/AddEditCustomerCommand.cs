@@ -14,17 +14,12 @@ using MediatR;
 
 namespace CleanArchitecture.Razor.Application.Customers.Commands.AddEdit
 {
-    public class AddEditCustomerCommand: CustomerDto,IRequest<Result>, IMapFrom<Customer>
+    public class AddEditCustomerCommand: CustomerDto,IRequest<Result<int>>, IMapFrom<Customer>
     {
-        //public void Mapping(Profile profile)
-        //{
-        //    profile.CreateMap<AddEditCustomerCommand, CustomerDto>().ReverseMap();
-               
-
-        //}
+    
     }
 
-    public class AddEditCustomerCommandHandler : IRequestHandler<AddEditCustomerCommand, Result>
+    public class AddEditCustomerCommandHandler : IRequestHandler<AddEditCustomerCommand, Result<int>>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -37,13 +32,15 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.AddEdit
             _context = context;
             _mapper = mapper;
         }
-        public async Task<Result> Handle(AddEditCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<Result<int>> Handle(AddEditCustomerCommand request, CancellationToken cancellationToken)
         {
            
             if (request.Id > 0)
             {
                 var customer = await _context.Customers.FindAsync(request.Id);
                 customer=_mapper.Map(request, customer);
+                await _context.SaveChangesAsync(cancellationToken);
+                return Result<int>.Success(customer.Id);
             }
             else
             {
@@ -51,9 +48,10 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.AddEdit
                 var createevent = new CustomerCreatedEvent(customer);
                 customer.DomainEvents.Add(createevent);
                 _context.Customers.Add(customer);
+                await _context.SaveChangesAsync(cancellationToken);
+                return Result<int>.Success(customer.Id);
             }
-            await _context.SaveChangesAsync(cancellationToken);
-            return Result.Success();
+            
 
         }
     }
