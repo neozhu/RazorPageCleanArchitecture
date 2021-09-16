@@ -1,25 +1,26 @@
 ﻿@page
 @model UserModel
+@using CleanArchitecture.Razor.Infrastructure.Constants.Application
 @using CleanArchitecture.Razor.Infrastructure.Constants.Permission
 @inject Microsoft.Extensions.Localization.IStringLocalizer<UserModel> _localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
-  ViewData["Title"] = _localizer["Application Users"].Value;
-  ViewData["PageName"] = "authorization_users";
-  ViewData["Heading"] = _localizer["Application Users"].Value;
-  ViewData["Category1"] = _localizer["Authorization"].Value;
-  ViewData["PageDescription"] = _localizer["See all available options"].Value;
-  ViewData["PageIcon"] = "fa-shield-alt";
-  ViewData["PreemptiveClass"] = "Default";
-  var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.Create);
-  var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.Edit);
-  var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.Delete);
-  var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.Search);
-  var _canImport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.Import);
-  var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.Export);
-  var _canActive = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.Active);
-  var _canManageRoles = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.ManageRoles);
-  var _canRestPassword = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.RestPassword);
+    ViewData["Title"] = _localizer["Application Users"].Value;
+    ViewData["PageName"] = "authorization_users";
+    ViewData["Heading"] = _localizer["Application Users"].Value;
+    ViewData["Category1"] = _localizer["Authorization"].Value;
+    ViewData["PageDescription"] = _localizer["See all available options"].Value;
+    ViewData["PageIcon"] = "fa-shield-alt";
+    ViewData["PreemptiveClass"] = "Default";
+    var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.Create);
+    var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.Edit);
+    var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.Delete);
+    var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.Search);
+    var _canImport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.Import);
+    var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.Export);
+    var _canActive = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.Active);
+    var _canManageRoles = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.ManageRoles);
+    var _canRestPassword = await _authorizationService.AuthorizeAsync(User, null, Permissions.Users.RestPassword);
 }
 
 @section HeadBlock {
@@ -393,6 +394,24 @@
                                    </div>`;
                         }
                     },
+					{
+                        field: 'IsLive',
+                        title: '@_localizer["Avatar"]',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (value) {
+                                return `<span class="status status-success">
+                                           <span class="profile-image rounded-circle d-inline-block" style="background-image:url('${row.ProfilePictureDataUrl}');background-repeat:no-repeat;background-size:100% 100%;-moz-background-size:100% 100%;"></span>
+                                        </span>`;
+                            } else {
+                                return `<span class="status status-danger">
+                                           <span class="profile-image rounded-circle d-inline-block" style="background-image:url('${row.ProfilePictureDataUrl}');background-repeat:no-repeat;background-size:100% 100%;-moz-background-size:100% 100%;"></span>
+                                        </span>`;
+                            }
+                        },
+                        sortable: false,
+                        width: 150
+                    },
                     { field: 'Site', title: '@_localizer["Site"]', sortable: true, width: 130 },
                     { field: 'UserName', title: '@_localizer["User Name"]', sortable: true, width: 150 },
                     { field: 'DisplayName', title: '@_localizer["Display Name"]', sortable: true, width: 160 },
@@ -410,7 +429,7 @@
                         formatter: checkboxformatter,
                         sortable: true, width: 150
                     },
-                    {
+					{
                         field: 'LockoutEnd',
                         title: '@_localizer["Lock Status"]',
                         align: 'center',
@@ -447,33 +466,35 @@
         var onLock = (id) => {
             axios.get('/authorization/users?handler=Lock&id=' + id).then(res => {
                 //console.log(res);
-                toastr["error"]('@_localizer["Locked Success"]');
+                toastr["error"]('@_localizer["Locked success"]');
                 reload();
             })
                 .catch((error) => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Lock fail"],${error.response.data}`);
+                    }
                 });
         }
         var onUnlock = (id) => {
             axios.get('/authorization/users?handler=UnLock&id=' + id).then(res => {
                 //console.log(res);
-                toastr["info"]('@_localizer["Unlocked Success"]');
+                toastr["info"]('@_localizer["Unlocked success"]');
                 reload();
             })
                 .catch((error) => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Unlock fail"],${error.response.data}`);
+                    }
                 });
         }
 
@@ -494,17 +515,18 @@
                 callback: function (result) {
                     if (result) {
                         axios.get('/authorization/users?handler=Delete&id=' + id).then(res => {
-                            toastr["info"]('@_localizer["Delete Success"]');
+                            toastr["info"]('@_localizer["Delete success"]');
                             reload();
                         })
                             .catch((error) => {
-                                var msg = error.response.data;
-                                bootbox.alert({
-                                    size: "small",
-                                    title: "@_localizer["Error"]",
-                                    message: msg,
-                                    callback: function () { /* your callback code */ }
-                                })
+                                if (error.response.data.Errors) {
+                                    const errors = error.response.data.Errors;
+                                    errors.forEach(item => {
+                                        toastr["error"](item);
+                                    });
+                                } else {
+                                    toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                }
                             });
                     }
                 }
@@ -530,17 +552,18 @@
                             var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
                             console.log(paras.toString())
                             axios.get('/authorization/users?handler=ActiveChecked&' + paras.toString()).then(res => {
-                                toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
+                                toastr["info"](`@_localizer["Active ${checkedId.length} Success"]`);
                                 reload();
                             })
                                 .catch((error) => {
-                                    var msg = error.response.data;
-                                    bootbox.alert({
-                                        size: "small",
-                                        title: "@_localizer["Error"]",
-                                        message: msg,
-                                        callback: function () { /* your callback code */ }
-                                    })
+                                    if (error.response.data.Errors) {
+                                        const errors = error.response.data.Errors;
+                                        errors.forEach(item => {
+                                            toastr["error"](item);
+                                        });
+                                    } else {
+                                        toastr["error"](`@_localizer["Active fail"],${error.response.data}`);
+                                    }
                                 });
                         }
                     }
@@ -572,13 +595,14 @@
                                 reload();
                             })
                                 .catch((error) => {
-                                    var msg = error.response.data;
-                                    bootbox.alert({
-                                        size: "small",
-                                        title: "@_localizer["Error"]",
-                                        message: msg,
-                                        callback: function () { /* your callback code */ }
-                                    })
+                                    if (error.response.data.Errors) {
+                                        const errors = error.response.data.Errors;
+                                        errors.forEach(item => {
+                                            toastr["error"](item);
+                                        });
+                                    } else {
+                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                    }
                                 });
                         }
                     }
@@ -630,18 +654,18 @@
                 $('#manageroles_form #UserId').val(user.Id)
                 $('#manageroles_modal').modal('toggle');
             }).catch((error) => {
-                var msg = error.response.data;
-                bootbox.alert({
-                    size: "small",
-                    title: "@_localizer["Error"]",
-                    message: msg,
-                    callback: function () { /* your callback code */ }
-                })
+                if (error.response.data.Errors) {
+                    const errors = error.response.data.Errors;
+                    errors.forEach(item => {
+                        toastr["error"](item);
+                    });
+                } else {
+                    toastr["error"](`@_localizer["Load roles fail"],${error.response.data}`);
+                }
             });
 
         }
         $('#register_form :submit').click(function (e) {
-            console.log('submmit')
             var form = document.querySelector('#register_form');
             $(form).find(":valid").parent().removeClass("was-validated");
             if (form.checkValidity() === false) {
@@ -650,7 +674,7 @@
                 var request = $('#register_form').serialize();
                 axios.post('/authorization/users?handler=Register', request).then(res => {
                     if (res.data.Succeeded) {
-                        toastr["info"]('@_localizer["Save Success"]');
+                        toastr["info"]('@_localizer["Register new user success"]');
                         $('#register_modal').modal('toggle');
                         reload();
                     } else {
@@ -660,13 +684,14 @@
 
                     }
                 }).catch((error) => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Register fail"],${error.response.data}`);
+                    }
 
                 });
             }
@@ -693,13 +718,14 @@
 
                     }
                 }).catch((error) => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
+                    }
 
                 });
             }
@@ -715,17 +741,18 @@
             } else {
                 var request = $('#resetpassword_form').serialize();
                 axios.post('/authorization/users?handler=ResetPassword', request).then(res => {
-                    toastr["info"]('@_localizer["Save Success"]');
+                    toastr["info"]('@_localizer["Reset password success"]');
                     $('#resetpassword_modal').modal('toggle');
                     reload();
                 }).catch((error) => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Reset password fail"],${error.response.data}`);
+                    }
 
                 });
             }
@@ -741,17 +768,18 @@
                 var request = $('#manageroles_form').serialize();
                 console.log(request)
                 axios.post('/authorization/users?handler=AssignRoles', request).then(res => {
-                    toastr["info"]('@_localizer["Assign Success"]');
+                    toastr["info"]('@_localizer["Assign success"]');
                     $('#manageroles_modal').modal('toggle');
                     reload();
                 }).catch((error) => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Assign fail"],${error.response.data}`);
+                    }
 
                 });
             }
@@ -774,7 +802,19 @@
             $('#resetpassword_form').jsonToForm(user)
         }
         $(() => {
-            initdatagrid()
+            initdatagrid();
+			if(connection){
+				connection.on("@ApplicationConstants.SignalR.ConnectUser", function (user) {
+					toastr["info"](`@_localizer["${user.displayName} logon."]`);
+					reload();
+                });
+				connection.on("@ApplicationConstants.SignalR.DisconnectUser", function (user) {
+					toastr["info"](`@_localizer["${user.displayName} logoff."]`);
+					reload();
+                });
+			}
         })
+
+
     </script>
 }

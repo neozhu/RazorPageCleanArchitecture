@@ -1,13 +1,11 @@
 using CleanArchitecture.Razor.Application;
-using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Infrastructure;
+using CleanArchitecture.Razor.Infrastructure.Constants.Application;
 using CleanArchitecture.Razor.Infrastructure.Constants.Localization;
-using CleanArchitecture.Razor.Infrastructure.Identity;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -15,8 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Serilog;
 using SmartAdmin.WebUI.Extensions;
+using SmartAdmin.WebUI.Hubs;
 using SmartAdmin.WebUI.Models;
-using SmartAdmin.WebUI.Services;
 using System.IO;
 using System.Linq;
 
@@ -51,15 +49,8 @@ namespace SmartAdmin.WebUI
             services.AddInfrastructure(Configuration);
          
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddSingleton<ICurrentUserService, CurrentUserService>();
-            services.AddTransient<IEmailSender, EmailSender>();
-            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationClaimsIdentityFactory>();
+           
             services.AddControllers();
-            //services.AddMvc().AddFluentValidation(fv =>
-            //{
-            //    fv.DisableDataAnnotationsValidation = false;
-            //    fv.ImplicitlyValidateChildProperties = true;
-            //});
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 options.AddSupportedUICultures(LocalizationConstants.SupportedLanguages.Select(x=>x.Code).ToArray());
@@ -67,6 +58,12 @@ namespace SmartAdmin.WebUI
             });
             services
                 .AddRazorPages()
+                .AddFluentValidation(fv =>
+                {
+                    fv.DisableDataAnnotationsValidation = true;
+                    fv.ImplicitlyValidateChildProperties = true;
+                    fv.ImplicitlyValidateRootCollectionElements = true;
+                })
                 .AddViewLocalization()
                 .AddJsonOptions(options =>
                   {
@@ -89,6 +86,7 @@ namespace SmartAdmin.WebUI
                   });
 
             services.AddScoped<RequestLocalizationCookiesMiddleware>();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -127,6 +125,7 @@ namespace SmartAdmin.WebUI
             {
                 endpoints.MapControllers();
                 endpoints.MapRazorPages();
+                endpoints.MapHub<SignalRHub>(ApplicationConstants.SignalR.HubUrl);
             });
         }
     }

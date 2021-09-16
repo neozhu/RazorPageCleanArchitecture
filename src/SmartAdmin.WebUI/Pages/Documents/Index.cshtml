@@ -94,12 +94,12 @@
                     <div class="form-row">
                         <div class="col-md-6">
                             <label class="form-label" for="Title">@_localizer["Title"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.Title" class="form-control" placeholder="Title" required />
+                            <input type="text" asp-for="Input.Title" class="form-control" placeholder="Title"  />
                             <span class="invalid-feedback" asp-validation-for="Input.Title">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="DocumentTypeId">@_localizer["Document Type"] <span class="text-danger">*</span></label>
-                            <select type="text" asp-for="Input.DocumentTypeId" asp-items="Model.DocumentTypes" class="custom-select" placeholder="Document Type" required>
+                            <select type="text" asp-for="Input.DocumentTypeId" asp-items="Model.DocumentTypes" class="custom-select" placeholder="Document Type" >
                                 <option value="">@_localizer["Choose Document Type"]</option>
                             </select>
                             <span class="invalid-feedback" asp-validation-for="Input.DocumentTypeId">Sorry, you missed this one.</span>
@@ -116,8 +116,7 @@
 
                             <input type="file" asp-for="UploadedFile" style="display:none" required />
                             <div class="">
-
-                                <button name="uploadbutton" class="btn btn-primary btn-icon waves-effect waves-themed mr-2">
+                                <button name="uploadbutton" type="button" class="btn btn-primary btn-icon waves-effect waves-themed mr-2">
                                     <i class="fal fa-paperclip"></i>
                                 </button><span class="text-danger">*</span>
                                 <div id="uploadfilename">
@@ -149,7 +148,7 @@
 {
     importUri = Url.Page("/Documents/Index") + "?handler=Import",
     getTemplateUri = @Url.Page("/Documents/Index") + "?handler=CreateTemplate",
-    onImportedSucceeded = "reload()"
+    onImportedSucceeded = "reloadData()"
 })
 @section ScriptsBlock {
     <partial name="_ValidationScriptsPartial" />
@@ -163,7 +162,7 @@
 
     <script type="text/javascript">
         $('#searchbutton').click(function () {
-            reload();
+            reloadData();
         });
         $('#addbutton').click(function () {
             popupmodal(null);
@@ -176,15 +175,14 @@
         });
         $('#document_form :submit').click(function (e) {
             var form = document.querySelector('#document_form');
-            $(form).find(":valid").parent().removeClass("was-validated");
-            if (form.checkValidity() === false) {
+            if ($(form).valid() === false) {
                 form.classList.add('was-validated');
             } else {
                 event.preventDefault();
                 event.stopPropagation();
                 var request = $('#document_form').serialize();
                 var formData = new FormData(form);
-                //formData.append("UploadedFile", uploadfileinput.files[0]);
+                formData.append("UploadedFile", uploadfileinput.files[0]);
                 axios({
                     url: '@Url.Page("/Documents/Index")',
                     method: 'post',
@@ -192,25 +190,18 @@
                     processData: false,// 告诉axios不要去处理发送的数据(重要参数)
                     contentType: false,   // 告诉axios不要去设置Content-Type请求头
                 }).then((response) => {
-                    if (response.data.Succeeded) {
                         toastr["info"]('@_localizer["Save Success"]');
                         $('#document_modal').modal('toggle');
-                        reload();
-                    } else {
-                        var errors = response.data.Errors;
+                        reloadData();
+                }).catch(error => {
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
                         errors.forEach(item => {
                             toastr["error"](item);
-                        })
-
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
                     }
-                }).catch(error => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
                 })
 
             }
@@ -314,7 +305,7 @@
 
         }
 
-        var reload = () => {
+        var reloadData = () => {
             $dg.datagrid('load', '@Url.Page("/Documents/Index")?handler=Data');
         }
 
@@ -324,6 +315,7 @@
         var popupmodal = (document) => {
             $('#document_modal').modal('toggle');
             $('#document_modal .modal-title').html('@_localizer["Add Document"]');
+            $('#document_form').clearForm();
             $('#document_form')[0].reset();
             if (document) {
                 uploadbutton.disabled = true;
@@ -381,16 +373,17 @@
                     if (result) {
                         axios.get('@Url.Page("/Documents/Index")?handler=Delete&id=' + id).then(res => {
                             toastr["info"]('@_localizer["Delete Success"]');
-                            reload();
+                            reloadData();
                         })
                             .catch((error) => {
-                                var msg = error.response.data;
-                                bootbox.alert({
-                                    size: "small",
-                                    title: "@_localizer["Error"]",
-                                    message: msg,
-                                    callback: function () { /* your callback code */ }
-                                })
+                                if (error.response.data.Errors) {
+                                    const errors = error.response.data.Errors;
+                                    errors.forEach(item => {
+                                        toastr["error"](item);
+                                    });
+                                } else {
+                                    toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                }
                             });
                     }
                 }
@@ -417,16 +410,17 @@
                             console.log(paras.toString())
                             axios.get('@Url.Page("/Documents/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
                                 toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
-                                reload();
+                                reloadData();
                             })
                                 .catch((error) => {
-                                    var msg = error.response.data;
-                                    bootbox.alert({
-                                        size: "small",
-                                        title: "@_localizer["Error"]",
-                                        message: msg,
-                                        callback: function () { /* your callback code */ }
-                                    })
+                                    if (error.response.data.Errors) {
+                                        const errors = error.response.data.Errors;
+                                        errors.forEach(item => {
+                                            toastr["error"](item);
+                                        });
+                                    } else {
+                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                    }
                                 });
                         }
                     }
@@ -461,7 +455,14 @@
                     link.click();
                     toastr["info"](`@_localizer["Export Success"]`);
                 }).catch(error => {
-                    console.log(error)
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Export fail"],${error.response.data}`);
+                    }
                 })
 
 
@@ -477,6 +478,8 @@
             link.click();
             toastr["info"](`@_localizer["Download Success"]`);
         }
+
+
 
     </script>
 }

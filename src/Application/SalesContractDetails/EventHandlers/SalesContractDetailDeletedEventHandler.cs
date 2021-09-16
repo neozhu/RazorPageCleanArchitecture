@@ -34,6 +34,7 @@ namespace CleanArchitecture.Razor.Application.SalesContractDetails.EventHandlers
             var contract = await _context.SalesContracts.FindAsync(new object[] { domainEvent.Item.SalesContractId }, cancellationToken);
             contract.ReceiptAmount = receiptamount ?? 0m;
             contract.Balance = contract.ContractAmount - contract.ReceiptAmount;
+            contract.DomainEvents.Add(new SalesContractUpdatedEvent(contract));
             if (contract.Balance <= 0)
             {
                 contract.Status = "Closed";

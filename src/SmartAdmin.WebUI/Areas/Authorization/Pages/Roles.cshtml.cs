@@ -111,10 +111,9 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
                 }
                 
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return new JsonResult(ex.Message);
+                return BadRequest(Result.Failure(new string[] { e.Message }));
             }
         }
         public async Task<IActionResult> OnGetDataAsync(int page = 1, int rows = 15, string sort = "Name", string order = "asc", string filterRules = "")
@@ -128,6 +127,10 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
         public async Task<IActionResult> OnGetDeleteAsync(string id)
         {
             var role = await _roleManager.FindByIdAsync(id);
+            if (role.Name == "Admin")
+            {
+                return BadRequest(Result.Failure(new string[] { "Please do not delete the default role." }));
+            }
             var result = await _roleManager.DeleteAsync(role);
             return new JsonResult(result.ToApplicationResult());
         }
@@ -136,6 +139,10 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
             foreach (var key in id)
             {
                 var role = await _roleManager.FindByIdAsync(key);
+                if (role.Name == "Admin")
+                {
+                    return BadRequest(Result.Failure(new string[] { "Please do not delete the default role." }));
+                }
                 var result = await _roleManager.DeleteAsync(role);
             }
             return new JsonResult(Result.Success());
@@ -189,7 +196,7 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
                             var iresult = await _roleManager.CreateAsync(role);
                             if (iresult.Succeeded == false)
                             {
-                                return new JsonResult(Result.FailureAsync(iresult.Errors.Select(x => x.Description)));
+                                return BadRequest(Result.FailureAsync(iresult.Errors.Select(x => x.Description)));
                             }
                         }
                     }
@@ -198,7 +205,7 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
             }
             catch (Exception e)
             {
-                return new JsonResult(Result.Failure(new string[] { e.Message }));
+                return BadRequest(Result.Failure(new string[] { e.Message }));
             }
         }
 

@@ -85,7 +85,7 @@ namespace CleanArchitecture.Razor.Application.SalesContracts.Commands.Import
                         }
                         if (project == null)
                         {
-                            project = new Project() { Name = item.ProjectName, Description = "从销售合同导入" };
+                            project = new Project() { Name = item.ProjectName, Description = _localizer["Created from Excel import"] };
                             _context.Projects.Add(project);
                             projectlist.Add(project);
                         }
@@ -101,7 +101,7 @@ namespace CleanArchitecture.Razor.Application.SalesContracts.Commands.Import
                             {
                                 Name = item.CustomerName,
                                 PartnerType = Domain.Enums.PartnerType.Customer,
-                                Comments = "从销售合同导入",
+                                Comments = _localizer["Created from Excel import"],
                             };
                             _context.Customers.Add(customer);
                             customerlist.Add(customer);

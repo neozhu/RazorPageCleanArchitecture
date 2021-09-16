@@ -255,7 +255,7 @@
 
                     const owner = model.getModeId();
                     const markers = monaco.editor.getModelMarkers({ owner });
-                    console.log(owner,markers)
+                    //console.log(owner,markers)
                     let decorations = editor.getModel().getAllDecorations();
                     let error = decorations.filter(isError).map(e => e);
                
@@ -301,7 +301,7 @@
 
         $('#managenavigationbutton').click(function () {
             $('#managenavigation_modal').modal('toggle')
-         
+
         });
         $('#searchbutton').click(function () {
             reload();
@@ -408,17 +408,18 @@
                 callback: function (result) {
                     if (result) {
                         axios.get('/authorization/roles?handler=Delete&id=' + id).then(res => {
-                            toastr["info"]('@_localizer["Delete Success"]');
+                            toastr["info"]('@_localizer["Delete success"]');
                             reload();
                         })
                             .catch((error) => {
-                                var msg = error.response.data;
-                                bootbox.alert({
-                                    size: "small",
-                                    title: "@_localizer["Error"]",
-                                    message: msg,
-                                    callback: function () { /* your callback code */ }
-                                })
+                                if (error.response.data.Errors) {
+                                        const errors = error.response.data.Errors;
+                                        errors.forEach(item => {
+                                            toastr["error"](item);
+                                        });
+                                    } else {
+                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                    }
                             });
                     }
                 }
@@ -447,13 +448,14 @@
                                 reload();
                             })
                                 .catch((error) => {
-                                    var msg = error.response.data;
-                                    bootbox.alert({
-                                        size: "small",
-                                        title: "@_localizer["Error"]",
-                                        message: msg,
-                                        callback: function () { /* your callback code */ }
-                                    })
+                                    if (error.response.data.Errors) {
+                                        const errors = error.response.data.Errors;
+                                        errors.forEach(item => {
+                                            toastr["error"](item);
+                                        });
+                                    } else {
+                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                    }
                                 });
                         }
                     }
@@ -504,13 +506,14 @@
                 $('#managepermissions_form #RoleId').val(role.Id)
                 $('#managepermissions_modal').modal('toggle');
             }).catch((error) => {
-                var msg = error.response.data;
-                bootbox.alert({
-                    size: "small",
-                    title: "@_localizer["Error"]",
-                    message: msg,
-                    callback: function () { /* your callback code */ }
-                })
+                if (error.response.data.Errors) {
+                    const errors = error.response.data.Errors;
+                    errors.forEach(item => {
+                        toastr["error"](item);
+                    });
+                } else {
+                    toastr["error"](`@_localizer["Load permissions fail"],${error.response.data}`);
+                }
             });
         }
         var popupmodal = (role) => {
@@ -535,7 +538,7 @@
                 var request = $('#editrole_form').serialize();
                 axios.post('/authorization/roles', request).then(res => {
                     if (res.data.Succeeded) {
-                        toastr["info"]('@_localizer["Save Success"]');
+                        toastr["info"]('@_localizer["Save success"]');
                         $('#editrole_modal').modal('toggle');
                         reload();
                     } else {
@@ -545,13 +548,14 @@
 
                     }
                 }).catch((error) => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
+                    }
 
                 });
             }
@@ -567,17 +571,18 @@
                 var request = $('#managepermissions_form').serialize();
                 console.log(request)
                 axios.post('/authorization/roles?handler=AssignPermissions', request).then(res => {
-                    toastr["info"]('@_localizer["Assign Success"]');
+                    toastr["info"]('@_localizer["Authorize success"]');
                     $('#managepermissions_modal').modal('toggle');
                     reload();
                 }).catch((error) => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Authorize fail"],${error.response.data}`);
+                    }
 
                 });
             }

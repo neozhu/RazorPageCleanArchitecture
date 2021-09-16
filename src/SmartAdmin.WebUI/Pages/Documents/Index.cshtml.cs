@@ -19,6 +19,8 @@ using CleanArchitecture.Razor.Application.DocumentTypes.Queries.PaginationQuery;
 using Microsoft.AspNetCore.Authorization;
 using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using FluentValidation.AspNetCore;
+using CleanArchitecture.Razor.Application.Common.Models;
 
 namespace SmartAdmin.WebUI.Pages.Documents
 {
@@ -44,6 +46,7 @@ namespace SmartAdmin.WebUI.Pages.Documents
         }
         public async Task OnGetAsync()
         {
+
             var request = new DocumentTypesGetAllQuery();
             var documentTypeDtos = await _mediator.Send(request);
             DocumentTypes = new SelectList(documentTypeDtos, "Id", "Name");
@@ -72,13 +75,11 @@ namespace SmartAdmin.WebUI.Pages.Documents
             catch (ValidationException ex)
             {
                 var errors = ex.Errors.Select(x => $"{ string.Join(",", x.Value) }");
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return new JsonResult(string.Join(",", errors));
+                return BadRequest(Result.Failure(errors));
             }
             catch (Exception ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return new JsonResult(ex.Message);
+                return BadRequest(Result.Failure(new string[] { ex.Message }));
             }
         }
 

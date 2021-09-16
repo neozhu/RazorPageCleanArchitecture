@@ -39,6 +39,7 @@ namespace CleanArchitecture.Razor.Application.PurchaseContractDetails.EventHandl
             purchase.PaidAmount = paidamount??0m;
             purchase.InvoiceAmount = invamount ?? 0m;
             purchase.Balance = purchase.ContractAmount - purchase.PaidAmount;
+            purchase.DomainEvents.Add(new PurchaseContractUpdatedEvent(purchase));
             if (purchase.Balance <= 0)
             {
                 purchase.Status = "Closed";

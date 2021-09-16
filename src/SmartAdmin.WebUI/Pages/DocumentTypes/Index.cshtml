@@ -107,7 +107,7 @@
                     <div class="form-row">
                         <div class="col-md-12">
                             <label class="form-label" for="name">@_localizer["Name"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.Name" class="form-control" placeholder="DocumentType Name" required />
+                            <input type="text" asp-for="Input.Name" class="form-control" placeholder="DocumentType Name" />
                             <span class="invalid-feedback" asp-validation-for="Input.Name">Sorry, you missed this one.</span>
                         </div>
 
@@ -130,7 +130,7 @@
 {
     importUri = Url.Page("/DocumentTypes/Index") + "?handler=Import",
     getTemplateUri = @Url.Page("/DocumentTypes/Index") + "?handler=CreateTemplate",
-    onImportedSucceeded = "reload()"
+    onImportedSucceeded = "reloadData()"
 })
 @section ScriptsBlock {
     <partial name="_ValidationScriptsPartial" />
@@ -144,7 +144,7 @@
 
     <script type="text/javascript">
         $('#searchbutton').click(function () {
-            reload();
+            reloadData();
         });
         $('#addbutton').click(function () {
             popupmodal(null);
@@ -163,23 +163,23 @@
         });
         $('#documentType_form :submit').click(function (e) {
             var form = document.querySelector('#documentType_form');
-            $(form).find(":valid").parent().removeClass("was-validated");
-            if (form.checkValidity() === false) {
+            if ($(form).valid() === false) {
                 form.classList.add('was-validated');
             } else {
                 var request = $('#documentType_form').serialize();
                 axios.post('/DocumentTypes/Index', request).then(res => {
                     toastr["info"]('@_localizer["Save Success"]');
                     $('#documentType_modal').modal('toggle');
-                    reload();
+                    reloadData();
                 }).catch((error) => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
+                    }
 
                 });
             }
@@ -248,7 +248,7 @@
 
         }
 
-        var reload = () => {
+        var reloadData = () => {
             $dg.datagrid('load', '@Url.Page("/DocumentTypes/Index")?handler=Data');
         }
 
@@ -258,18 +258,11 @@
         var popupmodal = (documentType) => {
             $('#documentType_modal').modal('toggle');
             $('#documentType_modal .modal-title').html('@_localizer["Add Document Type"]');
+            $('#documentType_form').clearForm();
             $('#documentType_form')[0].reset();
             if (documentType) {
                 $('#documentType_modal .modal-title').html('@_localizer["Edit Document Type"]');
-                $('#documentType_form').jsonToForm(documentType, {
-                    PartnerType: function (value) {
-                        if (value == 'TP') {
-                            $('#documentType_form [name*="PartnerType"]').val(0);
-                        } else {
-                            $('#documentType_form [name*="PartnerType"]').val(1);
-                        }
-                    }
-                })
+                $('#documentType_form').jsonToForm(documentType);
             } else {
                 $('#documentType_form #Input_Id').val(0)
 
@@ -297,16 +290,17 @@
                     if (result) {
                         axios.get('@Url.Page("/DocumentTypes/Index")?handler=Delete&id=' + id).then(res => {
                             toastr["info"]('@_localizer["Delete Success"]');
-                            reload();
+                            reloadData();
                         })
                             .catch((error) => {
-                                var msg = error.response.data;
-                                bootbox.alert({
-                                    size: "small",
-                                    title: "@_localizer["Error"]",
-                                    message: msg,
-                                    callback: function () { /* your callback code */ }
-                                })
+                                if (error.response.data.Errors) {
+                                        const errors = error.response.data.Errors;
+                                        errors.forEach(item => {
+                                            toastr["error"](item);
+                                        });
+                                    } else {
+                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                    }
                             });
                     }
                 }
@@ -333,16 +327,17 @@
                             console.log(paras.toString())
                             axios.get('@Url.Page("/DocumentTypes/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
                                 toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
-                                reload();
+                                reloadData();
                             })
                                 .catch((error) => {
-                                    var msg = error.response.data;
-                                    bootbox.alert({
-                                        size: "small",
-                                        title: "@_localizer["Error"]",
-                                        message: msg,
-                                        callback: function () { /* your callback code */ }
-                                    })
+                                    if (error.response.data.Errors) {
+                                        const errors = error.response.data.Errors;
+                                        errors.forEach(item => {
+                                            toastr["error"](item);
+                                        });
+                                    } else {
+                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                    }
                                 });
                         }
                     }
@@ -377,7 +372,14 @@
                     link.click();
                     toastr["info"](`@_localizer["Export Success"]`);
                 }).catch(error => {
-                    console.log(error)
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Export fail"],${error.response.data}`);
+                    }
                 })
 
 

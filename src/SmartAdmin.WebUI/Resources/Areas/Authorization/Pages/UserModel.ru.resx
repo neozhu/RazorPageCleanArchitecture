@@ -135,7 +135,7 @@
   <data name="Assign roles" xml:space="preserve">
     <value>Назначьте роли</value>
   </data>
-  <data name="Assign Success" xml:space="preserve">
+  <data name="Assign success" xml:space="preserve">
     <value>Назначить успех</value>
   </data>
   <data name="Close" xml:space="preserve">
@@ -156,7 +156,7 @@
   <data name="Delete ${checkedId.length} Success" xml:space="preserve">
     <value>Удалите $ {checkedId.length} успешно</value>
   </data>
-  <data name="Delete Success" xml:space="preserve">
+  <data name="Delete success" xml:space="preserve">
     <value>Удалить успех</value>
   </data>
   <data name="Display Name" xml:space="preserve">
@@ -198,7 +198,7 @@
   <data name="Lock Status" xml:space="preserve">
     <value>Состояние блокировки</value>
   </data>
-  <data name="Locked Success" xml:space="preserve">
+  <data name="Locked success" xml:space="preserve">
     <value>Заблокированный успех</value>
   </data>
   <data name="Login user name" xml:space="preserve">
@@ -257,5 +257,8 @@
   </data>
   <data name="Authorization" xml:space="preserve">
     <value>Авторизация</value>
+  </data>
+  <data name="Avatar" xml:space="preserve">
+    <value>Аватар</value>
   </data>
 </root>

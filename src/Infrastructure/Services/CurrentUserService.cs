@@ -1,8 +1,8 @@
-﻿using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 
-namespace SmartAdmin.WebUI
+namespace CleanArchitecture.Razor.Infrastructure.Services
 {
     public class CurrentUserService : ICurrentUserService
     {

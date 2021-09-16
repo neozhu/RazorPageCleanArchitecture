@@ -12,9 +12,9 @@ using CleanArchitecture.Razor.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
-namespace SmartAdmin.WebUI.Services
+namespace CleanArchitecture.Razor.Infrastructure.Services
 {
-    public class ApplicationClaimsIdentityFactory : Microsoft.AspNetCore.Identity.UserClaimsPrincipalFactory<ApplicationUser>
+    public class ApplicationClaimsIdentityFactory : UserClaimsPrincipalFactory<ApplicationUser>
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -25,7 +25,7 @@ namespace SmartAdmin.WebUI.Services
             _userManager = userManager;
             _roleManager = roleManager;
         }
-        public async override Task<ClaimsPrincipal> CreateAsync(ApplicationUser user)
+        public override async Task<ClaimsPrincipal> CreateAsync(ApplicationUser user)
         {
             var principal = await base.CreateAsync(user);
             
