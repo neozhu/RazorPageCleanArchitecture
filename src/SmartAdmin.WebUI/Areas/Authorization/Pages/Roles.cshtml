@@ -255,7 +255,7 @@
 
                     const owner = model.getModeId();
                     const markers = monaco.editor.getModelMarkers({ owner });
-                    console.log(owner,markers)
+                    //console.log(owner,markers)
                     let decorations = editor.getModel().getAllDecorations();
                     let error = decorations.filter(isError).map(e => e);
                
@@ -301,7 +301,7 @@
 
         $('#managenavigationbutton').click(function () {
             $('#managenavigation_modal').modal('toggle')
-         
+
         });
         $('#searchbutton').click(function () {
             reload();
@@ -447,13 +447,14 @@
                                 reload();
                             })
                                 .catch((error) => {
-                                    var msg = error.response.data;
-                                    bootbox.alert({
-                                        size: "small",
-                                        title: "@_localizer["Error"]",
-                                        message: msg,
-                                        callback: function () { /* your callback code */ }
-                                    })
+                                    if (error.response.data.Errors) {
+                                        const errors = error.response.data.Errors;
+                                        errors.forEach(item => {
+                                            toastr["error"](item);
+                                        });
+                                    } else {
+                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                    }
                                 });
                         }
                     }
@@ -504,13 +505,14 @@
                 $('#managepermissions_form #RoleId').val(role.Id)
                 $('#managepermissions_modal').modal('toggle');
             }).catch((error) => {
-                var msg = error.response.data;
-                bootbox.alert({
-                    size: "small",
-                    title: "@_localizer["Error"]",
-                    message: msg,
-                    callback: function () { /* your callback code */ }
-                })
+                if (error.response.data.Errors) {
+                    const errors = error.response.data.Errors;
+                    errors.forEach(item => {
+                        toastr["error"](item);
+                    });
+                } else {
+                    toastr["error"](`@_localizer["Load permissions fail"],${error.response.data}`);
+                }
             });
         }
         var popupmodal = (role) => {
@@ -545,13 +547,14 @@
 
                     }
                 }).catch((error) => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Edit fail"],${error.response.data}`);
+                    }
 
                 });
             }
@@ -571,13 +574,14 @@
                     $('#managepermissions_modal').modal('toggle');
                     reload();
                 }).catch((error) => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        errors.forEach(item => {
+                            toastr["error"](item);
+                        });
+                    } else {
+                        toastr["error"](`@_localizer["Update permissions fail"],${error.response.data}`);
+                    }
 
                 });
             }

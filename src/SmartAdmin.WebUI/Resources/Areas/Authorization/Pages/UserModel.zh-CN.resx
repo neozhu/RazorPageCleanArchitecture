@@ -258,4 +258,7 @@
   <data name="Authorization" xml:space="preserve">
     <value>系统授权</value>
   </data>
+  <data name="Avatar" xml:space="preserve">
+    <value>头像</value>
+  </data>
 </root>

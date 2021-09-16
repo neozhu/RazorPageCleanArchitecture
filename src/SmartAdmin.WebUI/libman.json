@@ -16,6 +16,16 @@
       "provider": "cdnjs",
       "library": "numeral.js@2.0.6",
       "destination": "wwwroot/lib/numeral/"
+    },
+    {
+      "library": "@microsoft/signalr@latest",
+      "destination": "wwwroot/lib/microsoft/signalr/",
+      "files": [
+        "dist/browser/signalr.js",
+        "dist/browser/signalr.js.map",
+        "dist/browser/signalr.min.js",
+        "dist/browser/signalr.min.js.map"
+      ]
     }
   ]
 }

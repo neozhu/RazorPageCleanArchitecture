@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <partial name="_CopyrightHeader"/>
 <html lang="en">
 	<head>
@@ -14,7 +14,7 @@
 					<partial name="_PageHeader"/>
                     <main id="js-page-content" role="main" class="page-content">
                         @if (ViewBag.PreemptiveClass?.Length > 0)
-{
+                        {
                         } else {
                             <partial name="_PageBreadcrumb"/>
                             <div class="subheader"><partial name="_PageHeading"/>@RenderSection("Subheaderblock", required: false)</div>
@@ -33,6 +33,7 @@
 		<partial name="_PageSettings"/>
 		<partial name="_GoogleAnalytics"/>
 		<partial name="_ScriptsBasePlugins"/>
+		<partial name="_SignalrScriptsPartial"/>
 		@RenderSection("ScriptsBlock", required: false)
 	</body>
 </html>
