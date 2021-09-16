@@ -126,7 +126,7 @@
   <data name="Lock Status" xml:space="preserve">
     <value>锁定状态</value>
   </data>
-  <data name="Locked Success" xml:space="preserve">
+  <data name="Locked success" xml:space="preserve">
     <value>锁定成功</value>
   </data>
   <data name="Add" xml:space="preserve">
@@ -144,8 +144,8 @@
   <data name="Assign roles" xml:space="preserve">
     <value>分配角色</value>
   </data>
-  <data name="Assign Success" xml:space="preserve">
-    <value>分配成功</value>
+  <data name="Assign success" xml:space="preserve">
+    <value>分配角色成功</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>关闭</value>
@@ -165,7 +165,7 @@
   <data name="Delete ${checkedId.length} Success" xml:space="preserve">
     <value>删除 ${checkedId.length} 成功</value>
   </data>
-  <data name="Delete Success" xml:space="preserve">
+  <data name="Delete success" xml:space="preserve">
     <value>删除成功</value>
   </data>
   <data name="Display Name" xml:space="preserve">
@@ -260,5 +260,41 @@
   </data>
   <data name="Avatar" xml:space="preserve">
     <value>头像</value>
+  </data>
+  <data name="Assign fail" xml:space="preserve">
+    <value>分配角色失败</value>
+  </data>
+  <data name="Reset password fail" xml:space="preserve">
+    <value>重置密码失败</value>
+  </data>
+  <data name="Reset password success" xml:space="preserve">
+    <value>重置密码成功</value>
+  </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>保存失败</value>
+  </data>
+  <data name="Register fail" xml:space="preserve">
+    <value>注册失败</value>
+  </data>
+  <data name="Register new user success" xml:space="preserve">
+    <value>注册新用户成功</value>
+  </data>
+  <data name="Load roles fail" xml:space="preserve">
+    <value>加载角色失败</value>
+  </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>删除失败</value>
+  </data>
+  <data name="Active fail" xml:space="preserve">
+    <value>激活失败</value>
+  </data>
+  <data name="Unlock fail" xml:space="preserve">
+    <value>解锁失败</value>
+  </data>
+  <data name="Unlocked success" xml:space="preserve">
+    <value>解锁成功</value>
+  </data>
+  <data name="Lock fail" xml:space="preserve">
+    <value>锁定失败</value>
   </data>
 </root>

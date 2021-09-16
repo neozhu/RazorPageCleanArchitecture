@@ -466,7 +466,7 @@
         var onLock = (id) => {
             axios.get('/authorization/users?handler=Lock&id=' + id).then(res => {
                 //console.log(res);
-                toastr["error"]('@_localizer["Locked Success"]');
+                toastr["error"]('@_localizer["Locked success"]');
                 reload();
             })
                 .catch((error) => {
@@ -483,7 +483,7 @@
         var onUnlock = (id) => {
             axios.get('/authorization/users?handler=UnLock&id=' + id).then(res => {
                 //console.log(res);
-                toastr["info"]('@_localizer["Unlocked Success"]');
+                toastr["info"]('@_localizer["Unlocked success"]');
                 reload();
             })
                 .catch((error) => {
@@ -515,7 +515,7 @@
                 callback: function (result) {
                     if (result) {
                         axios.get('/authorization/users?handler=Delete&id=' + id).then(res => {
-                            toastr["info"]('@_localizer["Delete Success"]');
+                            toastr["info"]('@_localizer["Delete success"]');
                             reload();
                         })
                             .catch((error) => {
@@ -660,7 +660,7 @@
                         toastr["error"](item);
                     });
                 } else {
-                    toastr["error"](`@_localizer["Role manage fail"],${error.response.data}`);
+                    toastr["error"](`@_localizer["Load roles fail"],${error.response.data}`);
                 }
             });
 
@@ -674,7 +674,7 @@
                 var request = $('#register_form').serialize();
                 axios.post('/authorization/users?handler=Register', request).then(res => {
                     if (res.data.Succeeded) {
-                        toastr["info"]('@_localizer["Save Success"]');
+                        toastr["info"]('@_localizer["Register new user success"]');
                         $('#register_modal').modal('toggle');
                         reload();
                     } else {
@@ -690,7 +690,7 @@
                             toastr["error"](item);
                         });
                     } else {
-                        toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
+                        toastr["error"](`@_localizer["Register fail"],${error.response.data}`);
                     }
 
                 });
@@ -724,7 +724,7 @@
                             toastr["error"](item);
                         });
                     } else {
-                        toastr["error"](`@_localizer["Edit fail"],${error.response.data}`);
+                        toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
                     }
 
                 });
@@ -741,7 +741,7 @@
             } else {
                 var request = $('#resetpassword_form').serialize();
                 axios.post('/authorization/users?handler=ResetPassword', request).then(res => {
-                    toastr["info"]('@_localizer["Save Success"]');
+                    toastr["info"]('@_localizer["Reset password success"]');
                     $('#resetpassword_modal').modal('toggle');
                     reload();
                 }).catch((error) => {
@@ -768,7 +768,7 @@
                 var request = $('#manageroles_form').serialize();
                 console.log(request)
                 axios.post('/authorization/users?handler=AssignRoles', request).then(res => {
-                    toastr["info"]('@_localizer["Assign Success"]');
+                    toastr["info"]('@_localizer["Assign success"]');
                     $('#manageroles_modal').modal('toggle');
                     reload();
                 }).catch((error) => {
@@ -778,7 +778,7 @@
                             toastr["error"](item);
                         });
                     } else {
-                        toastr["error"](`@_localizer["Manage roles fail"],${error.response.data}`);
+                        toastr["error"](`@_localizer["Assign fail"],${error.response.data}`);
                     }
 
                 });
