@@ -1,5 +1,6 @@
 using CleanArchitecture.Razor.Application;
 using CleanArchitecture.Razor.Infrastructure;
+using CleanArchitecture.Razor.Infrastructure.Constants.Application;
 using CleanArchitecture.Razor.Infrastructure.Constants.Localization;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Serilog;
 using SmartAdmin.WebUI.Extensions;
+using SmartAdmin.WebUI.Hubs;
 using SmartAdmin.WebUI.Models;
 using System.IO;
 using System.Linq;
@@ -84,6 +86,7 @@ namespace SmartAdmin.WebUI
                   });
 
             services.AddScoped<RequestLocalizationCookiesMiddleware>();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -123,6 +126,7 @@ namespace SmartAdmin.WebUI
             {
                 endpoints.MapControllers();
                 endpoints.MapRazorPages();
+                endpoints.MapHub<SignalRHub>(ApplicationConstants.SignalR.HubUrl);
             });
         }
     }

@@ -1,0 +1,10 @@
+﻿@using CleanArchitecture.Razor.Infrastructure.Constants.Application
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script>
+	 Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
+     var connection = new signalR.HubConnectionBuilder().withUrl("@ApplicationConstants.SignalR.HubUrl").build();
+     connection.on("UpdateOnlineUsers", function (count) {
+            console.log(count);
+      });
+      connection.start();
+</script>
