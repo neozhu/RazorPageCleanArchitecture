@@ -135,8 +135,8 @@
   <data name="Assign roles" xml:space="preserve">
     <value>Assign roles</value>
   </data>
-  <data name="Assign Success" xml:space="preserve">
-    <value>Assign Success</value>
+  <data name="Assign success" xml:space="preserve">
+    <value>Assign success</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Close</value>
@@ -156,8 +156,8 @@
   <data name="Delete ${checkedId.length} Success" xml:space="preserve">
     <value>Delete ${checkedId.length} Success</value>
   </data>
-  <data name="Delete Success" xml:space="preserve">
-    <value>Delete Success</value>
+  <data name="Delete success" xml:space="preserve">
+    <value>Delete success</value>
   </data>
   <data name="Display Name" xml:space="preserve">
     <value>Display Name</value>
@@ -198,8 +198,8 @@
   <data name="Lock Status" xml:space="preserve">
     <value>Lock Status</value>
   </data>
-  <data name="Locked Success" xml:space="preserve">
-    <value>Locked Success</value>
+  <data name="Locked success" xml:space="preserve">
+    <value>Locked success</value>
   </data>
   <data name="Login user name" xml:space="preserve">
     <value>Login user name</value>
@@ -260,5 +260,41 @@
   </data>
   <data name="Avatar" xml:space="preserve">
     <value>Avatar</value>
+  </data>
+  <data name="Assign fail" xml:space="preserve">
+    <value>Assign fail</value>
+  </data>
+  <data name="Reset password fail" xml:space="preserve">
+    <value>Reset password fail</value>
+  </data>
+  <data name="Reset password success" xml:space="preserve">
+    <value>Reset password success</value>
+  </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>Save fail</value>
+  </data>
+  <data name="Register fail" xml:space="preserve">
+    <value>Register fail</value>
+  </data>
+  <data name="Register new user success" xml:space="preserve">
+    <value>Register new user success</value>
+  </data>
+  <data name="Load roles fail" xml:space="preserve">
+    <value>Load roles fail</value>
+  </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>Delete fail</value>
+  </data>
+  <data name="Active fail" xml:space="preserve">
+    <value>Active fail</value>
+  </data>
+  <data name="Unlock fail" xml:space="preserve">
+    <value>Unlock fail</value>
+  </data>
+  <data name="Unlocked success" xml:space="preserve">
+    <value>Unlocked success</value>
+  </data>
+  <data name="Lock fail" xml:space="preserve">
+    <value>Lock fail</value>
   </data>
 </root>

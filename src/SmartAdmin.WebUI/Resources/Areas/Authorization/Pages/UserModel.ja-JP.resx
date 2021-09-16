@@ -135,7 +135,7 @@
   <data name="Assign roles" xml:space="preserve">
     <value>役割を割り当てる</value>
   </data>
-  <data name="Assign Success" xml:space="preserve">
+  <data name="Assign success" xml:space="preserve">
     <value>成功を割り当てる</value>
   </data>
   <data name="Close" xml:space="preserve">
@@ -156,7 +156,7 @@
   <data name="Delete ${checkedId.length} Success" xml:space="preserve">
     <value>$ {checkedId.length}の成功を削除します</value>
   </data>
-  <data name="Delete Success" xml:space="preserve">
+  <data name="Delete success" xml:space="preserve">
     <value>成功を削除</value>
   </data>
   <data name="Display Name" xml:space="preserve">
@@ -198,7 +198,7 @@
   <data name="Lock Status" xml:space="preserve">
     <value>ロックステータス</value>
   </data>
-  <data name="Locked Success" xml:space="preserve">
+  <data name="Locked success" xml:space="preserve">
     <value>ロックされた成功</value>
   </data>
   <data name="Login user name" xml:space="preserve">

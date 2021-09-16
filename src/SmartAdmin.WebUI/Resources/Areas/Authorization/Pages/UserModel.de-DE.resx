@@ -135,7 +135,7 @@
   <data name="Assign roles" xml:space="preserve">
     <value>Rollen zuweisen</value>
   </data>
-  <data name="Assign Success" xml:space="preserve">
+  <data name="Assign success" xml:space="preserve">
     <value>Erfolg zuordnen</value>
   </data>
   <data name="Close" xml:space="preserve">
@@ -156,7 +156,7 @@
   <data name="Delete ${checkedId.length} Success" xml:space="preserve">
     <value>Löschen von ${checkedId.length} Erfolgreich</value>
   </data>
-  <data name="Delete Success" xml:space="preserve">
+  <data name="Delete success" xml:space="preserve">
     <value>Erfolg löschen</value>
   </data>
   <data name="Display Name" xml:space="preserve">
@@ -198,7 +198,7 @@
   <data name="Lock Status" xml:space="preserve">
     <value>Sperrstatus</value>
   </data>
-  <data name="Locked Success" xml:space="preserve">
+  <data name="Locked success" xml:space="preserve">
     <value>Gesperrter Erfolg</value>
   </data>
   <data name="Login user name" xml:space="preserve">
