@@ -144,8 +144,8 @@
   <data name="Delete ${checkedId.length} Success" xml:space="preserve">
     <value>Delete ${checkedId.length} Success</value>
   </data>
-  <data name="Delete Success" xml:space="preserve">
-    <value>Delete Success</value>
+  <data name="Delete success" xml:space="preserve">
+    <value>Delete success</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
@@ -180,8 +180,8 @@
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="Save Success" xml:space="preserve">
-    <value>Save Success</value>
+  <data name="Save success" xml:space="preserve">
+    <value>Save success</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
@@ -206,5 +206,20 @@
   </data>
   <data name="Edit Navigation" xml:space="preserve">
     <value>Edit Navigation</value>
+  </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>Delete fail</value>
+  </data>
+  <data name="Load permissions fail" xml:space="preserve">
+    <value>Load permissions fail</value>
+  </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>Save fail</value>
+  </data>
+  <data name="Authorize success" xml:space="preserve">
+    <value>Authorize success</value>
+  </data>
+  <data name="Authorize fail" xml:space="preserve">
+    <value>Authorize fail</value>
   </data>
 </root>

@@ -144,7 +144,7 @@
   <data name="Delete ${checkedId.length} Success" xml:space="preserve">
     <value>$ {checkedId.length}の成功を削除します</value>
   </data>
-  <data name="Delete Success" xml:space="preserve">
+  <data name="Delete success" xml:space="preserve">
     <value>成功を削除</value>
   </data>
   <data name="Description" xml:space="preserve">
@@ -180,7 +180,7 @@
   <data name="Save" xml:space="preserve">
     <value>保存する</value>
   </data>
-  <data name="Save Success" xml:space="preserve">
+  <data name="Save success" xml:space="preserve">
     <value>成功を保存</value>
   </data>
   <data name="Search" xml:space="preserve">

@@ -408,17 +408,18 @@
                 callback: function (result) {
                     if (result) {
                         axios.get('/authorization/roles?handler=Delete&id=' + id).then(res => {
-                            toastr["info"]('@_localizer["Delete Success"]');
+                            toastr["info"]('@_localizer["Delete success"]');
                             reload();
                         })
                             .catch((error) => {
-                                var msg = error.response.data;
-                                bootbox.alert({
-                                    size: "small",
-                                    title: "@_localizer["Error"]",
-                                    message: msg,
-                                    callback: function () { /* your callback code */ }
-                                })
+                                if (error.response.data.Errors) {
+                                        const errors = error.response.data.Errors;
+                                        errors.forEach(item => {
+                                            toastr["error"](item);
+                                        });
+                                    } else {
+                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                    }
                             });
                     }
                 }
@@ -537,7 +538,7 @@
                 var request = $('#editrole_form').serialize();
                 axios.post('/authorization/roles', request).then(res => {
                     if (res.data.Succeeded) {
-                        toastr["info"]('@_localizer["Save Success"]');
+                        toastr["info"]('@_localizer["Save success"]');
                         $('#editrole_modal').modal('toggle');
                         reload();
                     } else {
@@ -553,7 +554,7 @@
                             toastr["error"](item);
                         });
                     } else {
-                        toastr["error"](`@_localizer["Edit fail"],${error.response.data}`);
+                        toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
                     }
 
                 });
@@ -570,7 +571,7 @@
                 var request = $('#managepermissions_form').serialize();
                 console.log(request)
                 axios.post('/authorization/roles?handler=AssignPermissions', request).then(res => {
-                    toastr["info"]('@_localizer["Assign Success"]');
+                    toastr["info"]('@_localizer["Authorize success"]');
                     $('#managepermissions_modal').modal('toggle');
                     reload();
                 }).catch((error) => {
@@ -580,7 +581,7 @@
                             toastr["error"](item);
                         });
                     } else {
-                        toastr["error"](`@_localizer["Update permissions fail"],${error.response.data}`);
+                        toastr["error"](`@_localizer["Authorize fail"],${error.response.data}`);
                     }
 
                 });
