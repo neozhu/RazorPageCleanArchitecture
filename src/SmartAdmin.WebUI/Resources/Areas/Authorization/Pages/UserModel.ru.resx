@@ -258,4 +258,7 @@
   <data name="Authorization" xml:space="preserve">
     <value>Авторизация</value>
   </data>
+  <data name="Avatar" xml:space="preserve">
+    <value>Аватар</value>
+  </data>
 </root>

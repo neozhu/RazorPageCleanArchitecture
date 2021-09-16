@@ -13,6 +13,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Identity
         [Column(TypeName = "text")]
         public string ProfilePictureDataUrl { get; set; }
         public bool IsActive { get; set; }
+        public bool IsLive { get; set; }
         public string RefreshToken { get; set; }
         public DateTime RefreshTokenExpiryTime { get; set; }
         public virtual ICollection<ApplicationUserClaim> Claims { get; set; }

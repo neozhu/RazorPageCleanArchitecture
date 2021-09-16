@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Application.Common.Exceptions;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
@@ -19,7 +18,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
-using SmartAdmin.WebUI.Extensions;
 
 namespace SmartAdmin.WebUI.Pages.Customers
 {
@@ -55,7 +53,7 @@ namespace SmartAdmin.WebUI.Pages.Customers
 
         public async Task OnGetAsync()
         {
-            var result =await _identityService.FetchUsers("Admin");
+            var result = await _identityService.FetchUsers("Admin");
         }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] CustomersWithPaginationQuery command)
         {
@@ -76,7 +74,7 @@ namespace SmartAdmin.WebUI.Pages.Customers
             }
             catch (Exception ex)
             {
-                return BadRequest(Result.Failure(new string[] {ex.Message }));
+                return BadRequest(Result.Failure(new string[] { ex.Message }));
             }
         }
 
@@ -94,8 +92,8 @@ namespace SmartAdmin.WebUI.Pages.Customers
         }
         public async Task<FileResult> OnPostExportAsync([FromBody] ExportCustomersQuery command)
         {
-            var result =await _mediator.Send(command);
-            return  File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["Customers"]+".xlsx");
+            var result = await _mediator.Send(command);
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["Customers"] + ".xlsx");
         }
         public async Task<FileResult> OnGetCreateTemplate()
         {
@@ -105,11 +103,12 @@ namespace SmartAdmin.WebUI.Pages.Customers
         }
         public async Task<IActionResult> OnPostImportAsync()
         {
-            var stream=new MemoryStream();
-            await  UploadedFile.CopyToAsync(stream);
-            var command = new ImportCustomersCommand() {
-                 FileName=UploadedFile.FileName,
-                 Data= stream.ToArray()
+            var stream = new MemoryStream();
+            await UploadedFile.CopyToAsync(stream);
+            var command = new ImportCustomersCommand()
+            {
+                FileName = UploadedFile.FileName,
+                Data = stream.ToArray()
             };
             var result = await _mediator.Send(command);
             return new JsonResult(result);
