@@ -17,10 +17,9 @@ namespace CleanArchitecture.Razor.Application.Documents.DTOs
     {
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Document, DocumentDto>()
+             profile.CreateMap<Document, DocumentDto>()
                 .ForMember(x => x.DocumentTypeName, s => s.MapFrom(y => y.DocumentType.Name));
-          
-               
+
         }
         public int Id { get; set; }
         public string Title { get; set; }
