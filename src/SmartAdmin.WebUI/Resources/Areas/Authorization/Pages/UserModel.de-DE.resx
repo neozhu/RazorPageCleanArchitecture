@@ -261,4 +261,40 @@
   <data name="Avatar" xml:space="preserve">
     <value>Avatar</value>
   </data>
+  <data name="Assign fail" xml:space="preserve">
+    <value>Zuweisen fehlgeschlagen</value>
+  </data>
+  <data name="Reset password success" xml:space="preserve">
+    <value>Kennwort erfolgreich zurücksetzen</value>
+  </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>Speichern fehlgeschlagen</value>
+  </data>
+  <data name="Register fail" xml:space="preserve">
+    <value>Registrieren fehlgeschlagen</value>
+  </data>
+  <data name="Register new user success" xml:space="preserve">
+    <value>Registrieren des Erfolgs neuer Benutzer</value>
+  </data>
+  <data name="Load roles fail" xml:space="preserve">
+    <value>Fehler beim Laden von Rollen</value>
+  </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>Löschen fehlgeschlagen</value>
+  </data>
+  <data name="Active fail" xml:space="preserve">
+    <value>Aktiver Fehler</value>
+  </data>
+  <data name="Unlock fail" xml:space="preserve">
+    <value>Entsperren fehlgeschlagen</value>
+  </data>
+  <data name="Unlocked success" xml:space="preserve">
+    <value>Erschlossener Erfolg</value>
+  </data>
+  <data name="Lock fail" xml:space="preserve">
+    <value>Sperre fehlgeschlagen</value>
+  </data>
+  <data name="Reset password fail" xml:space="preserve">
+    <value>Kennwort zurücksetzen fehlgeschlagen</value>
+  </data>
 </root>

@@ -174,4 +174,13 @@
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="Export fail" xml:space="preserve">
+    <value>Export fehlgeschlagen</value>
+  </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>Speichern fehlgeschlagen</value>
+  </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>Löschen fehlgeschlagen</value>
+  </data>
 </root>

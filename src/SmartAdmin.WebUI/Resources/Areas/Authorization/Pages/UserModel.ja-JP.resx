@@ -261,4 +261,40 @@
   <data name="Avatar" xml:space="preserve">
     <value>アバター</value>
   </data>
+  <data name="Assign fail" xml:space="preserve">
+    <value>割り当て失敗</value>
+  </data>
+  <data name="Reset password success" xml:space="preserve">
+    <value>パスワードのリセットの成功</value>
+  </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>保存失敗</value>
+  </data>
+  <data name="Register fail" xml:space="preserve">
+    <value>登録失敗</value>
+  </data>
+  <data name="Register new user success" xml:space="preserve">
+    <value>新しいユーザーの成功を登録する</value>
+  </data>
+  <data name="Load roles fail" xml:space="preserve">
+    <value>ロールの読み込みに失敗する</value>
+  </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>削除失敗</value>
+  </data>
+  <data name="Active fail" xml:space="preserve">
+    <value>アクティブな失敗</value>
+  </data>
+  <data name="Unlock fail" xml:space="preserve">
+    <value>ロック解除失敗</value>
+  </data>
+  <data name="Unlocked success" xml:space="preserve">
+    <value>ロック解除された成功</value>
+  </data>
+  <data name="Lock fail" xml:space="preserve">
+    <value>ロック失敗</value>
+  </data>
+  <data name="Reset password fail" xml:space="preserve">
+    <value>パスワードのリセットが失敗する</value>
+  </data>
 </root>

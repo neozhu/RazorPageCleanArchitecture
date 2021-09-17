@@ -207,4 +207,19 @@
   <data name="Edit Navigation" xml:space="preserve">
     <value>ナビゲーションの編集</value>
   </data>
+  <data name="Authorize fail" xml:space="preserve">
+    <value>失敗の承認</value>
+  </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>削除失敗</value>
+  </data>
+  <data name="Load permissions fail" xml:space="preserve">
+    <value>アクセス許可の読み込みに失敗する</value>
+  </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>保存失敗</value>
+  </data>
+  <data name="Authorize success" xml:space="preserve">
+    <value>成功の承認</value>
+  </data>
 </root>

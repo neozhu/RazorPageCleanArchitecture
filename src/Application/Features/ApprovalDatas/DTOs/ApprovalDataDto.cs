@@ -8,11 +8,7 @@ namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.DTOs
 {
     public class ApprovalDataDto:IMapFrom<ApprovalData>
     {
-        public void Mapping(Profile profile)
-        {
-            profile.CreateMap<ApprovalData, ApprovalDataDto>().ReverseMap();
-
-        }
+     
         public string WorkflowId { get; set; }
         public string WorkflowName { get; set; }
         public string Status { get; set; }

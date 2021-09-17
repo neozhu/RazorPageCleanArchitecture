@@ -19,7 +19,8 @@ namespace CleanArchitecture.Razor.Application.Documents.Commands.AddEdit
             RuleFor(v => v.Description)
                 .MaximumLength(256);
             RuleFor(v => v.UploadRequest)
-                .NotNull();
+                .NotNull()
+                .When(x => x.Id <= 0);
 
 
         }

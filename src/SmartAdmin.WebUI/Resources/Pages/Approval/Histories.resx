@@ -216,4 +216,7 @@
   <data name="Workflow Name" xml:space="preserve">
     <value>Workflow Name</value>
   </data>
+  <data name="Approval Histories" xml:space="preserve">
+    <value>Approval Histories</value>
+  </data>
 </root>

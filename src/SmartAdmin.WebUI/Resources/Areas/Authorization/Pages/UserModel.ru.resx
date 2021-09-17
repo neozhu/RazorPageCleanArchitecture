@@ -261,4 +261,40 @@
   <data name="Avatar" xml:space="preserve">
     <value>Аватар</value>
   </data>
+  <data name="Assign fail" xml:space="preserve">
+    <value>Назначить сбой</value>
+  </data>
+  <data name="Reset password success" xml:space="preserve">
+    <value>Сброс пароля успешно</value>
+  </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>Сохранить не удается</value>
+  </data>
+  <data name="Register fail" xml:space="preserve">
+    <value>Сбой регистрации</value>
+  </data>
+  <data name="Register new user success" xml:space="preserve">
+    <value>Регистрация успеха нового пользователя</value>
+  </data>
+  <data name="Load roles fail" xml:space="preserve">
+    <value>Сбой загрузочных ролей</value>
+  </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>Удалить не удаляем</value>
+  </data>
+  <data name="Active fail" xml:space="preserve">
+    <value>Активный сбой</value>
+  </data>
+  <data name="Unlock fail" xml:space="preserve">
+    <value>Сбой разблокиров</value>
+  </data>
+  <data name="Unlocked success" xml:space="preserve">
+    <value>Разблокированный успех</value>
+  </data>
+  <data name="Lock fail" xml:space="preserve">
+    <value>Сбой блокировки</value>
+  </data>
+  <data name="Reset password fail" xml:space="preserve">
+    <value>Сбой сброса пароля</value>
+  </data>
 </root>

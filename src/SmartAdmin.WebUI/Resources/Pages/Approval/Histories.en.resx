@@ -216,4 +216,7 @@
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="Approval Histories" xml:space="preserve">
+    <value>Approval Histories</value>
+  </data>
 </root>
