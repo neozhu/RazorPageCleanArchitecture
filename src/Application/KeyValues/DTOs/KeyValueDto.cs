@@ -11,17 +11,7 @@ namespace CleanArchitecture.Razor.Application.KeyValues.DTOs
 {
     public partial class KeyValueDto:IMapFrom<KeyValue>
     {
-        public void Mapping(Profile profile)
-        {
-            profile.CreateMap<KeyValueDto, KeyValue>()
-                .ForMember(x=>x.DomainEvents,y=>y.Ignore())
-                .ForMember(x=>x.Created,y=>y.Ignore())
-                .ForMember(x => x.CreatedBy, y => y.Ignore())
-                .ForMember(x => x.LastModified, y => y.Ignore())
-                .ForMember(x => x.LastModifiedBy, y => y.Ignore());
-            profile.CreateMap<KeyValue,KeyValueDto>()
-                .ForMember(x=>x.TrackingState,y=>y.MapFrom(z=> TrackingState.Unchanged));
-        }
+       
         public int Id { get; set; }
         public string Name { get; set; }
         public string Value { get; set; }

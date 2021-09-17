@@ -26,7 +26,6 @@ namespace CleanArchitecture.Razor.Application.Documents.DTOs
                 .ForMember(x => x.CreatedBy, y => y.Ignore())
                 .ForMember(x => x.LastModified, y => y.Ignore())
                 .ForMember(x => x.LastModifiedBy, y => y.Ignore());
-
         }
         public int Id { get; set; }
         public string Title { get; set; }
