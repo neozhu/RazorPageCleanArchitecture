@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Application.Common.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -11,6 +12,7 @@ using Serilog;
 
 namespace SmartAdmin.WebUI.Pages.AspNetCore
 {
+    [Authorize()]
     public class WelcomeModel : PageModel
     {
         static int _callCount;
