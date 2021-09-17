@@ -192,4 +192,13 @@
   <data name="Value" xml:space="preserve">
     <value>Wert</value>
   </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>Löschen fehlgeschlagen</value>
+  </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>Speichern fehlgeschlagen</value>
+  </data>
+  <data name="Export fail" xml:space="preserve">
+    <value>Export fehlgeschlagen</value>
+  </data>
 </root>

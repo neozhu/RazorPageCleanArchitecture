@@ -294,4 +294,7 @@
   <data name="Lock fail" xml:space="preserve">
     <value>Lock fail</value>
   </data>
+  <data name="Assign fail" xml:space="preserve">
+    <value>Assign fail</value>
+  </data>
 </root>

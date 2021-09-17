@@ -192,4 +192,13 @@
   <data name="Text" xml:space="preserve">
     <value>СМС</value>
   </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>Удалить не удаляем</value>
+  </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>Сохранить не удается</value>
+  </data>
+  <data name="Export fail" xml:space="preserve">
+    <value>Сбой экспорта</value>
+  </data>
 </root>

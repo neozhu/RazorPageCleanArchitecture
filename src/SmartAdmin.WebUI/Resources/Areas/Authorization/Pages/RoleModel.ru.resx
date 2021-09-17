@@ -207,4 +207,19 @@
   <data name="Edit Navigation" xml:space="preserve">
     <value>Изменить навигацию</value>
   </data>
+  <data name="Authorize fail" xml:space="preserve">
+    <value>Авторизация не пройденная</value>
+  </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>Удалить не удаляем</value>
+  </data>
+  <data name="Load permissions fail" xml:space="preserve">
+    <value>Сбой разрешений на загрузку</value>
+  </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>Сохранить не удается</value>
+  </data>
+  <data name="Authorize success" xml:space="preserve">
+    <value>Авторизуйтесь на успех</value>
+  </data>
 </root>

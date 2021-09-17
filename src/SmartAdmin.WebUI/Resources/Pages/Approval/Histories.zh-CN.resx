@@ -216,4 +216,7 @@
   <data name="Yes" xml:space="preserve">
     <value>是</value>
   </data>
+  <data name="Approval Histories" xml:space="preserve">
+    <value>审批历史记录</value>
+  </data>
 </root>

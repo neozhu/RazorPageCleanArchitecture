@@ -216,4 +216,7 @@
   <data name="Workflow Name" xml:space="preserve">
     <value>Название рабочего процесса</value>
   </data>
+  <data name="Approval Histories" xml:space="preserve">
+    <value>История утверждений</value>
+  </data>
 </root>

@@ -207,4 +207,19 @@
   <data name="Edit Navigation" xml:space="preserve">
     <value>Navigation bearbeiten</value>
   </data>
+  <data name="Authorize fail" xml:space="preserve">
+    <value>Autorisierung fehlgeschlagen</value>
+  </data>
+  <data name="Delete fail" xml:space="preserve">
+    <value>Löschen fehlgeschlagen</value>
+  </data>
+  <data name="Load permissions fail" xml:space="preserve">
+    <value>Ladeberechtigungen schlagen fehl</value>
+  </data>
+  <data name="Save fail" xml:space="preserve">
+    <value>Speichern fehlgeschlagen</value>
+  </data>
+  <data name="Authorize success" xml:space="preserve">
+    <value>Erfolg autorisieren</value>
+  </data>
 </root>
