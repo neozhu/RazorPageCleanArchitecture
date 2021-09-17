@@ -20,7 +20,7 @@ using MediatR;
 
 namespace CleanArchitecture.Razor.Application.Documents.Commands.AddEdit
 {
-    public class AddEditDocumentCommand: DocumentDto,IRequest<Result<int>>, IMapFrom<Document>
+    public class AddEditDocumentCommand: DocumentDto,IRequest<Result<int>>
     {
         public UploadRequest UploadRequest { get; set; }
     }

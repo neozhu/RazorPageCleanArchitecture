@@ -19,13 +19,8 @@ namespace CleanArchitecture.Razor.Application.Documents.DTOs
         {
             profile.CreateMap<Document, DocumentDto>()
                 .ForMember(x => x.DocumentTypeName, s => s.MapFrom(y => y.DocumentType.Name));
-            profile.CreateMap<DocumentDto, Document>()
-                .ForMember(x => x.DomainEvents, y => y.Ignore())
-                .ForMember(x => x.DocumentType, s => s.Ignore())
-                .ForMember(x => x.Created, y => y.Ignore())
-                .ForMember(x => x.CreatedBy, y => y.Ignore())
-                .ForMember(x => x.LastModified, y => y.Ignore())
-                .ForMember(x => x.LastModifiedBy, y => y.Ignore());
+          
+               
         }
         public int Id { get; set; }
         public string Title { get; set; }
