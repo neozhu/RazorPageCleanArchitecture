@@ -22,7 +22,7 @@ namespace CleanArchitecture.Application.UnitTests.Common.Mappings
         {
             _configuration = new MapperConfiguration(cfg =>
             {
-                cfg.Advanced.AllowAdditiveTypeMapCreation = true;
+                //cfg.Advanced.AllowAdditiveTypeMapCreation = true;
                 cfg.AddProfile<MappingProfile>();
             });
 
