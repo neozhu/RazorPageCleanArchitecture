@@ -25,7 +25,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.AddEdit
         private readonly IMapper _mapper;
 
         public AddEditCustomerCommandHandler(
-            IApplicationDbContext context,
+             IApplicationDbContext context,
              IMapper mapper
             )
         {

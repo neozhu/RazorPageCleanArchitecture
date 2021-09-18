@@ -20,8 +20,13 @@ using MediatR;
 
 namespace CleanArchitecture.Razor.Application.Documents.Commands.AddEdit
 {
-    public class AddEditDocumentCommand: DocumentDto,IRequest<Result<int>>
+    public class AddEditDocumentCommand: DocumentDto,IRequest<Result<int>>,IMapFrom<Document>
     {
+        public new void Mapping(Profile profile)
+        {
+            profile.CreateMap<AddEditDocumentCommand, Document>(MemberList.None);
+               
+        }
         public UploadRequest UploadRequest { get; set; }
     }
 

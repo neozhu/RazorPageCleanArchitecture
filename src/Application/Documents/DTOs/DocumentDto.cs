@@ -19,7 +19,7 @@ namespace CleanArchitecture.Razor.Application.Documents.DTOs
         {
              profile.CreateMap<Document, DocumentDto>()
                 .ForMember(x => x.DocumentTypeName, s => s.MapFrom(y => y.DocumentType.Name));
-
+            profile.CreateMap<DocumentDto, Document>(MemberList.None);
         }
         public int Id { get; set; }
         public string Title { get; set; }
