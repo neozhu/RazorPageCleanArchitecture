@@ -38,7 +38,7 @@ namespace CleanArchitecture.Razor.Application.Common.Behaviours
             {
                 _cache.Remove(request.CacheKey);
             }
-            request.CancellationTokenSource?.Cancel();
+            request.ResetCacheToken?.Cancel();
         
             return response;
         }
