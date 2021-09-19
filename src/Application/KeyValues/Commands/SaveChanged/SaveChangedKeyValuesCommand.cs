@@ -5,8 +5,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using CleanArchitecture.Razor.Application.Common.Models;
+using CleanArchitecture.Razor.Application.Constants;
+using CleanArchitecture.Razor.Application.KeyValues.Caching;
 using CleanArchitecture.Razor.Application.KeyValues.DTOs;
 using CleanArchitecture.Razor.Application.KeyValues.Queries;
 using CleanArchitecture.Razor.Domain.Entities;
@@ -16,9 +19,13 @@ using MediatR;
 
 namespace CleanArchitecture.Razor.Application.KeyValues.Commands.SaveChanged
 {
-    public class SaveChangedKeyValuesCommand:IRequest<Result>
+    public class SaveChangedKeyValuesCommand:IRequest<Result>, ICacheInvalidator
     {
       public KeyValueDto[] Items { get; set; }
+
+        public string CacheKey => Cache.GetAllKeyValuesCacheKey;
+
+        public CancellationTokenSource CancellationTokenSource => ExpirationTokenSource.Source;
     }
 
     public class SaveChangedKeyValuesCommandHandler : IRequestHandler<SaveChangedKeyValuesCommand, Result>

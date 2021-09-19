@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.KeyValues.Queries.ByName;
+using MediatR;
 using Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -19,13 +21,14 @@ namespace SmartAdmin.WebUI.Extensions
 
         [HtmlAttributeName(DICTIONARIESNAME)]
         public string Dictionaries { get; set; }
-        private readonly IDictionaryService _dictionaryService;
+        private readonly ISender _mediator;
 
         public DictionaryTagHelper(
-            IDictionaryService dictionaryService
+            ISender mediator
             )
         {
-            _dictionaryService = dictionaryService;
+       
+            _mediator = mediator;
         }
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
@@ -33,12 +36,13 @@ namespace SmartAdmin.WebUI.Extensions
             if (!string.IsNullOrEmpty(Dictionaries))
             {
                 string name = Dictionaries;
-                var items = await _dictionaryService.Fetch(name);
+                var query = new KeyValuesQueryByName() { Name = name };
+                var items = await _mediator.Send(query);
                 if (items != null)
                 {
                     foreach (var key in items)
                     {
-                        output.PostContent.AppendHtml($"<option value=\"{key.Key}\">{key.Value}</option>");
+                        output.PostContent.AppendHtml($"<option value=\"{key.Value}\">{key.Text}</option>");
                     }
                 }
             }
