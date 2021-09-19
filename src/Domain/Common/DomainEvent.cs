@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace CleanArchitecture.Razor.Domain.Common
 {
     public interface IHasDomainEvent
     {
-        public List<DomainEvent> DomainEvents { get; set; }
+         List<DomainEvent> DomainEvents { get; set; }
     }
 
     public abstract class DomainEvent
