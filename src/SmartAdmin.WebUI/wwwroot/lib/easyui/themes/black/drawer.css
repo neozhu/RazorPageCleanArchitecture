@@ -1,5 +1,5 @@
 .drawer.window-shadow {
-  box-shadow: 0 4px 12px #ccc;
+  box-shadow: 0 4px 12px #777;
   border-radius: 0;
   position: fixed;
 }
@@ -8,4 +8,8 @@
 }
 .drawer-mask.window-mask {
   position: fixed;
+}
+.drawer.layout-panel-east,
+.drawer.layout-panel-west {
+  bottom: 0;
 }
