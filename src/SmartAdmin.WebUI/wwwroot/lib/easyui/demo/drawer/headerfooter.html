@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Header and Footer - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+</head>
+<body>
+	<h2>Header and Footer</h2>
+	<div style="margin:20px 0;">
+		<a href="javascript:;" class="easyui-linkbutton" onclick="$('#dd').drawer('expand')">Expand Drawer</a>
+	</div>
+	<div id="dd" class="easyui-drawer f-column" style="width:250px;">
+		<div style="line-height:30px;text-align:center;border-bottom:1px solid #ddd">Header Title</div>
+		<div class="f-full">
+			<p style="text-align:center;margin:50px 0;font-size:16px">Drawer Content...</p>
+		</div>
+		<div style="padding:5px;text-align:center;border-top:1px solid #ddd">
+          <a href="javascript:;" class="easyui-linkbutton">Save</a>
+          <a href="javascript:;" class="easyui-linkbutton">Cancel</a>
+        </div>
+	</div>
+</body>
+</html>

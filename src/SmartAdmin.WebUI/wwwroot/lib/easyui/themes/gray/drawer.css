@@ -9,3 +9,7 @@
 .drawer-mask.window-mask {
   position: fixed;
 }
+.drawer.layout-panel-east,
+.drawer.layout-panel-west {
+  bottom: 0;
+}

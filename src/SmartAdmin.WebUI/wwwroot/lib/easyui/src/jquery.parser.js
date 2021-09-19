@@ -1,5 +1,5 @@
 /**
- * EasyUI for jQuery 1.9.14
+ * EasyUI for jQuery 1.10.0
  * 
  * Copyright (c) 2009-2021 www.jeasyui.com. All rights reserved.
  *
@@ -86,7 +86,7 @@
 		         'linkbutton','menu','sidemenu','menubutton','splitbutton','switchbutton','progressbar','radiobutton','checkbox',
 				 'tree','textbox','passwordbox','maskedbox','filebox','combo','combobox','combotree','combogrid','combotreegrid','tagbox','numberbox','validatebox','searchbox',
 				 'spinner','numberspinner','timespinner','datetimespinner','calendar','datebox','datetimebox','timepicker','slider',
-				 'layout','panel','datagrid','propertygrid','treegrid','datalist','tabs','accordion','window','dialog','form'
+				 'layout','panel','datagrid','propertygrid','treegrid','datalist','tabs','accordion','window','dialog','drawer','form'
 		],
 		parse: function(context){
 			var aa = [];
