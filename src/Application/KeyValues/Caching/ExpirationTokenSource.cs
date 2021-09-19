@@ -13,8 +13,8 @@ namespace CleanArchitecture.Razor.Application.KeyValues.Caching
     public  sealed class ExpirationTokenSource
     {
         static ExpirationTokenSource() {
-            Source = new CancellationTokenSource();
+            ResetCacheToken = new CancellationTokenSource();
         }
-        public static CancellationTokenSource Source { get; private set; }
+        public static CancellationTokenSource ResetCacheToken { get; private set; }
     }
 }

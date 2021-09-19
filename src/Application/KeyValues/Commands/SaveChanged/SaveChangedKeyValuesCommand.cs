@@ -25,7 +25,7 @@ namespace CleanArchitecture.Razor.Application.KeyValues.Commands.SaveChanged
 
         public string CacheKey => Cache.GetAllKeyValuesCacheKey;
 
-        public CancellationTokenSource CancellationTokenSource => ExpirationTokenSource.Source;
+        public CancellationTokenSource ResetCacheToken => ExpirationTokenSource.ResetCacheToken;
     }
 
     public class SaveChangedKeyValuesCommandHandler : IRequestHandler<SaveChangedKeyValuesCommand, Result>
