@@ -42,3 +42,33 @@
 .window-thinborder .messager-button {
   padding-bottom: 8px;
 }
+.messager-tip {
+  box-shadow: 0 1px 6px #777;
+  height: auto;
+}
+.messager-tip .messager-body {
+  margin: 0;
+  padding: 0 10px;
+  height: 40px;
+  line-height: 40px;
+}
+.messager-tip .messager-body>.f-row {
+  align-items: center;
+}
+.messager-tip .messager-icon {
+  width: 16px;
+  height: 16px;
+  margin: 0 10px 0 0;
+}
+.messager-tip .messager-info {
+  background: url('images/messager_icons16.png') no-repeat scroll 0 0;
+}
+.messager-tip .messager-question {
+  background: url('images/messager_icons16.png') no-repeat scroll -16px 0;
+}
+.messager-tip .messager-error {
+  background: url('images/messager_icons16.png') no-repeat scroll -32px 0;
+}
+.messager-tip .messager-warning {
+  background: url('images/messager_icons16.png') no-repeat scroll -48px 0;
+}
