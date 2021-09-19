@@ -1,9 +1,10 @@
-Version 1.9.x
--------------
+Version 1.10.0
+--------------
 * Bug
  * layout: The icon on the collapsed panel is overlaped by title. fixed.
  * propertygrid: The css style of the row expander will affact that in the detailview. fixed.
  * combogrid: The 'getValues' method returns incorrect values sometimes. fixed.
+ * datebox: The 'initValue' method can't apply a new value. fixed.
 * Improvement
  * datagrid: The 'sorter' function on the column accepts the entire row as the sorting parameters.
  * datagrid: Add 'hformatter' and 'hstyler' properties for the colomns.
@@ -13,6 +14,9 @@ Version 1.9.x
  * window: Add 'fixed' property.
  * timepicker: Add 'hour24' property.
  * layout: Add 'stopCollapsing' method.
+ * messager: Add 'tip' method.
+* New Plugins
+ * drawer: Allow the user to anchor to the left or right edge of the screen.
 
 Version 1.9.0
 -------------
