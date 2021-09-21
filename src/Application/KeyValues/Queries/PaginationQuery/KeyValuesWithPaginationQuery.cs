@@ -26,7 +26,7 @@ namespace CleanArchitecture.Razor.Application.KeyValues.Queries.PaginationQuery
     {
         public string CacheKey => $"KeyValuesWithPaginationQuery,{this.ToString()}";
 
-        public MemoryCacheEntryOptions Options => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(ExpirationTokenSource.ResetCacheToken.Token));
+        public MemoryCacheEntryOptions Options => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(KeyValueCacheTokenSource.ResetCacheToken.Token));
     }
     public class KeyValuesQueryHandler : IRequestHandler<KeyValuesWithPaginationQuery, PaginatedData<KeyValueDto>>
     {

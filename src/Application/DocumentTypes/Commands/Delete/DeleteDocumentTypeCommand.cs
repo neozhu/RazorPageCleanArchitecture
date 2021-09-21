@@ -6,19 +6,30 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
 using CleanArchitecture.Razor.Application.Common.Models;
+using CleanArchitecture.Razor.Application.Constants;
+using CleanArchitecture.Razor.Application.DocumentTypes.Caching;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitecture.Razor.Application.DocumentTypes.Commands.Delete
 {
-    public class DeleteDocumentTypeCommand: IRequest<Result>
+    public class DeleteDocumentTypeCommand: IRequest<Result>, ICacheInvalidator
     {
         public int Id { get; set; }
+
+        public string CacheKey => Cache.GetAllDocumentTypesCacheKey;
+
+        public CancellationTokenSource ResetCacheToken => DocumentTypeCacheTokenSource.ResetCacheToken;
     }
-    public class DeleteCheckedDocumentTypesCommand : IRequest<Result>
+    public class DeleteCheckedDocumentTypesCommand : IRequest<Result>, ICacheInvalidator
     {
         public int[] Id { get; set; }
+
+        public string CacheKey => Cache.GetAllDocumentTypesCacheKey;
+
+        public CancellationTokenSource ResetCacheToken => DocumentTypeCacheTokenSource.ResetCacheToken;
     }
 
     public class DeleteDocumentTypeCommandHandler : IRequestHandler<DeleteDocumentTypeCommand, Result>,

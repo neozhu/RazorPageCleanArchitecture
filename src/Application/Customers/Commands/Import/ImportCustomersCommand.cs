@@ -9,7 +9,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
 using CleanArchitecture.Razor.Application.Common.Models;
+using CleanArchitecture.Razor.Application.Constants;
+using CleanArchitecture.Razor.Application.Customers.Caching;
 using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
 using CleanArchitecture.Razor.Application.Customers.DTOs;
 using CleanArchitecture.Razor.Domain.Entities;
@@ -21,10 +24,13 @@ using Microsoft.Extensions.Localization;
 
 namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
 {
-    public class ImportCustomersCommand : IRequest<Result>
+    public class ImportCustomersCommand : IRequest<Result>, ICacheInvalidator
     {
         public string FileName { get; set; }
         public byte[] Data { get; set; }
+        public string CacheKey => Cache.GetAllCustomersCacheKey;
+
+        public CancellationTokenSource ResetCacheToken => CustomerCacheTokenSource.ResetCacheToken;
     }
     public class CreateCustomerTemplateCommand : IRequest<byte[]>
     {

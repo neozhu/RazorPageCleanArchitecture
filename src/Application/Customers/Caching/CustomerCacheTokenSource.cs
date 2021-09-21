@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CleanArchitecture.Razor.Application.KeyValues.Caching
+namespace CleanArchitecture.Razor.Application.Customers.Caching
 {
-    public  sealed class ExpirationTokenSource
+    public  sealed class CustomerCacheTokenSource
     {
-        static ExpirationTokenSource() {
+        static CustomerCacheTokenSource() {
             ResetCacheToken = new CancellationTokenSource();
         }
         public static CancellationTokenSource ResetCacheToken { get; private set; }

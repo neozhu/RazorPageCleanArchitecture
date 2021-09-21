@@ -27,7 +27,7 @@ namespace CleanArchitecture.Razor.Application.KeyValues.Queries.ByName
 
         public string CacheKey =>Cache.GetKeyValuesCacheKey(Name);
 
-        public MemoryCacheEntryOptions Options => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(ExpirationTokenSource.ResetCacheToken.Token));
+        public MemoryCacheEntryOptions Options => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(KeyValueCacheTokenSource.ResetCacheToken.Token));
     }
     public class KeyValuesQueryByNameHandler : IRequestHandler<KeyValuesQueryByName, IEnumerable<KeyValueDto>>
     {

@@ -12,7 +12,9 @@ namespace CleanArchitecture.Razor.Application.Constants
 
     public static class Cache
     {
+        public const string GetAllCustomersCacheKey = "all-customers";
         public const string GetAllKeyValuesCacheKey = "all-keyvalues";
+        public const string GetAllDocumentTypesCacheKey = "all-documenttypes";
         public static string GetKeyValuesCacheKey(string name)
         {
             return $"{name}-keyvalues";

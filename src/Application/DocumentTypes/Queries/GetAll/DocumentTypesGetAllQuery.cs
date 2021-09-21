@@ -19,13 +19,18 @@ using CleanArchitecture.Razor.Application.Common.Mappings;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using CleanArchitecture.Razor.Application.DocumentTypes.DTOs;
+using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
+using Microsoft.Extensions.Caching.Memory;
+using CleanArchitecture.Razor.Application.Constants;
 
 namespace CleanArchitecture.Razor.Application.DocumentTypes.Queries.PaginationQuery
 {
-    public class DocumentTypesGetAllQuery : IRequest<IEnumerable<DocumentTypeDto>>
+    public class DocumentTypesGetAllQuery : IRequest<IEnumerable<DocumentTypeDto>>,ICacheable
     {
-        public string Key { get; set; } = "";
-        
+
+        public string CacheKey => Cache.GetAllDocumentTypesCacheKey;
+
+        public MemoryCacheEntryOptions Options => null;
     }
     public class DocumentTypesGetAllQueryHandler : IRequestHandler<DocumentTypesGetAllQuery, IEnumerable<DocumentTypeDto>>
     {
@@ -45,7 +50,7 @@ namespace CleanArchitecture.Razor.Application.DocumentTypes.Queries.PaginationQu
         }
         public async Task<IEnumerable<DocumentTypeDto>> Handle(DocumentTypesGetAllQuery request, CancellationToken cancellationToken)
         {
-            var data = await _context.DocumentTypes.Where(x=>x.Name.Contains(request.Key))
+            var data = await _context.DocumentTypes
                 .OrderBy(x=>x.Name)
                 .ProjectTo<DocumentTypeDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
