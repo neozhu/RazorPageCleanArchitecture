@@ -14,13 +14,19 @@ using MediatR;
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using AutoMapper.QueryableExtensions;
 using CleanArchitecture.Razor.Application.KeyValues.DTOs;
+using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Primitives;
+using CleanArchitecture.Razor.Application.KeyValues.Caching;
+using System.Text.Json;
 
 namespace CleanArchitecture.Razor.Application.KeyValues.Queries.PaginationQuery
 {
-    public class KeyValuesWithPaginationQuery : PaginationRequest, IRequest<PaginatedData<KeyValueDto>>
+    public class KeyValuesWithPaginationQuery : PaginationRequest, IRequest<PaginatedData<KeyValueDto>>, ICacheable
     {
-       
-        
+        public string CacheKey => $"KeyValuesWithPaginationQuery,{this.ToString()}";
+
+        public MemoryCacheEntryOptions Options => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(ExpirationTokenSource.ResetCacheToken.Token));
     }
     public class KeyValuesQueryHandler : IRequestHandler<KeyValuesWithPaginationQuery, PaginatedData<KeyValueDto>>
     {
