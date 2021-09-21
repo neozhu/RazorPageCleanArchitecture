@@ -17,18 +17,21 @@ using CleanArchitecture.Razor.Application.Customers.DTOs;
 using System;
 using System.Collections.Generic;
 using CleanArchitecture.Razor.Application.Common.Specification;
+using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Primitives;
+using CleanArchitecture.Razor.Application.Customers.Caching;
 
 namespace CleanArchitecture.Razor.Application.Customers.Queries.PaginationQuery
 {
-    public class CustomersByMeQueryQuery : IRequest<PaginatedData<CustomerDto>>
+    public class CustomersByMeQueryQuery : PaginationRequest,IRequest<PaginatedData<CustomerDto>>, ICacheable
     {
         public string UserId { get; set; }
-        public string filterRules { get; set; }
-        public int page { get; set; } = 1;
-        public int rows { get; set; } = 15;
-        public string sort { get; set; } = "Id";
-        public string order { get; set; } = "desc";
-        
+
+
+        public string CacheKey => $"CustomersByMeQueryQuery,userid:{UserId},{this.ToString()}";
+
+        public MemoryCacheEntryOptions Options => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(CustomerCacheTokenSource.ResetCacheToken.Token));
     }
     public class ByMeCustomersQueryHandler : IRequestHandler<CustomersByMeQueryQuery, PaginatedData<CustomerDto>>
     {
@@ -48,12 +51,12 @@ namespace CleanArchitecture.Razor.Application.Customers.Queries.PaginationQuery
         }
         public async Task<PaginatedData<CustomerDto>> Handle(CustomersByMeQueryQuery request, CancellationToken cancellationToken)
         {
-            var filters = PredicateBuilder.FromFilter<Customer>(request.filterRules);
+            var filters = PredicateBuilder.FromFilter<Customer>(request.FilterRules);
             var data = await _context.Customers.Specify(new CustomerByMeQuerySpec(request.UserId))
                 .Where(filters)
-                .OrderBy($"{request.sort} {request.order}")
+                .OrderBy($"{request.Sort} {request.Order}")
                 .ProjectTo<CustomerDto>(_mapper.ConfigurationProvider)
-                .PaginatedDataAsync(request.page, request.rows);
+                .PaginatedDataAsync(request.Page, request.Rows);
 
             return data;
         }

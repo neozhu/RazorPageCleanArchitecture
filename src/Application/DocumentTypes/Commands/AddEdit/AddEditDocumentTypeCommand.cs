@@ -9,8 +9,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using CleanArchitecture.Razor.Application.Common.Models;
+using CleanArchitecture.Razor.Application.Constants;
+using CleanArchitecture.Razor.Application.DocumentTypes.Caching;
 using CleanArchitecture.Razor.Application.DocumentTypes.DTOs;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Enums;
@@ -19,10 +22,11 @@ using MediatR;
 
 namespace CleanArchitecture.Razor.Application.DocumentTypes.Commands.AddEdit
 {
-    public class AddEditDocumentTypeCommand:DocumentTypeDto, IRequest<Result<int>>, IMapFrom<DocumentType>
+    public class AddEditDocumentTypeCommand : DocumentTypeDto, IRequest<Result<int>>, IMapFrom<DocumentType>, ICacheInvalidator
     {
-       
+        public string CacheKey => Cache.GetAllDocumentTypesCacheKey;
 
+        public CancellationTokenSource ResetCacheToken => DocumentTypeCacheTokenSource.ResetCacheToken;
     }
 
     public class AddEditDocumentTypeCommandHandler : IRequestHandler<AddEditDocumentTypeCommand, Result<int>>

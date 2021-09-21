@@ -16,14 +16,21 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper.QueryableExtensions;
 using Microsoft.Extensions.Localization;
 using CleanArchitecture.Razor.Application.Customers.DTOs;
+using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
+using Microsoft.Extensions.Caching.Memory;
+using CleanArchitecture.Razor.Application.Constants;
+using Microsoft.Extensions.Primitives;
+using CleanArchitecture.Razor.Application.Customers.Caching;
 
 namespace CleanArchitecture.Razor.Application.Customers.Queries.GetAll
 {
-    public class GetAllCustomersQuery : IRequest<IEnumerable<CustomerDto>>
+    public class GetAllCustomersQuery : IRequest<IEnumerable<CustomerDto>>, ICacheable
     {
-       
+        public string CacheKey => Cache.GetAllCustomersCacheKey;
+
+        public MemoryCacheEntryOptions Options => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(CustomerCacheTokenSource.ResetCacheToken.Token));
     }
-    
+
     public class GetAllCustomersQueryQueryHandler :
          IRequestHandler<GetAllCustomersQuery, IEnumerable<CustomerDto>>
     {

@@ -5,8 +5,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using CleanArchitecture.Razor.Application.Common.Models;
+using CleanArchitecture.Razor.Application.Constants;
+using CleanArchitecture.Razor.Application.Customers.Caching;
 using CleanArchitecture.Razor.Application.Customers.DTOs;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Events;
@@ -14,9 +17,11 @@ using MediatR;
 
 namespace CleanArchitecture.Razor.Application.Customers.Commands.AddEdit
 {
-    public class AddEditCustomerCommand: CustomerDto,IRequest<Result<int>>, IMapFrom<Customer>
+    public class AddEditCustomerCommand : CustomerDto, IRequest<Result<int>>, IMapFrom<Customer>, ICacheInvalidator
     {
-    
+        public string CacheKey => Cache.GetAllCustomersCacheKey;
+
+        public CancellationTokenSource ResetCacheToken => CustomerCacheTokenSource.ResetCacheToken;
     }
 
     public class AddEditCustomerCommandHandler : IRequestHandler<AddEditCustomerCommand, Result<int>>

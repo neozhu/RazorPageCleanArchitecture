@@ -19,13 +19,18 @@ using CleanArchitecture.Razor.Application.Common.Mappings;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using CleanArchitecture.Razor.Application.DocumentTypes.DTOs;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Primitives;
+using CleanArchitecture.Razor.Application.DocumentTypes.Caching;
+using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
 
 namespace CleanArchitecture.Razor.Application.DocumentTypes.Queries.PaginationQuery
 {
-    public class DocumentTypesWithPaginationQuery : PaginationRequest, IRequest<PaginatedData<DocumentTypeDto>>
+    public class DocumentTypesWithPaginationQuery : PaginationRequest, IRequest<PaginatedData<DocumentTypeDto>>, ICacheable
     {
-        
-        
+        public string CacheKey => $"DocumentTypesWithPaginationQuery,{this.ToString()}";
+
+        public MemoryCacheEntryOptions Options => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(DocumentTypeCacheTokenSource.ResetCacheToken.Token));
     }
     public class DocumentTypesQueryHandler : IRequestHandler<DocumentTypesWithPaginationQuery, PaginatedData<DocumentTypeDto>>
     {
