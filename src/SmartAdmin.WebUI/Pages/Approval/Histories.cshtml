@@ -90,23 +90,6 @@
 				sortOrder: 'desc',
 				pageSize: 15,
 				pageList: [10, 15, 30, 50, 100, 1000],
-				onBeforeLoad: function () {
-					$('#approvalbutton').prop('disabled', true);
-				},
-				onCheckAll: function (rows) {
-					const checked = $(this).datagrid('getChecked').length > 0;
-					$('#approvalbutton').prop('disabled', !checked);
-				},
-				onUncheckAll: function () {
-					$('#approvalbutton').prop('disabled', true);
-				},
-				onCheck: function () {
-					$('#approvalbutton').prop('disabled', false);
-				},
-				onUncheck: function () {
-					const checked = $(this).datagrid('getChecked').length > 0;
-					$('#approvalbutton').prop('disabled', !checked);
-				},
 				columns: [[
 					{ field: 'ck', checkbox: true },
 					{ field: 'WorkflowName', title: '@_localizer["Workflow Name"]', sortable: true, width: 200 },

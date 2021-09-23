@@ -8,6 +8,7 @@ using CleanArchitecture.Razor.Application.Features.ApprovalDatas.Queries.Paginat
 using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 using CleanArchitecture.Razor.Application.Features.ApprovalDatas.Queries.Export;
 using CleanArchitecture.Razor.Application.AuditTrails.Queries.PaginationQuery;
+using CleanArchitecture.Razor.Application.Features.AuditTrails.Queries.Export;
 
 namespace SmartAdmin.WebUI.Pages.AuditTrails
 {
@@ -41,7 +42,11 @@ namespace SmartAdmin.WebUI.Pages.AuditTrails
             var result = await _mediator.Send(command);
             return new JsonResult(result);
         }
-         
+        public async Task<FileResult> OnPostExportAsync([FromBody] ExportAuditTrailsQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["ApprovalHistories"] + ".xlsx");
+        }
 
 
 

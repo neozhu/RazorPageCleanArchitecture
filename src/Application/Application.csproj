@@ -74,6 +74,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ExportApprovalDatasQueryHandler.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Features\AuditTrails\Queries\Export\ExportAuditTrailsQuery.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExportAuditTrailsQuery.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\KeyValues\Commands\Import\ImportKeyValuesCommandHandler.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -110,6 +115,10 @@
     <EmbeddedResource Update="Resources\Features\ApprovalDatas\Queries\Export\ExportApprovalDatasQueryHandler.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ExportApprovalDatasQueryHandler.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Features\AuditTrails\Queries\Export\ExportAuditTrailsQuery.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExportAuditTrailsQuery.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\KeyValues\Commands\Import\ImportKeyValuesCommandHandler.resx">
       <Generator>ResXFileCodeGenerator</Generator>

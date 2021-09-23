@@ -81,6 +81,11 @@
           "title": "Roles",
           "href": "authorization_roles.html",
           "roles": []
+        },
+        {
+          "title": "Audit Trails",
+          "href": "audittrails_index.html",
+          "roles": []
         }
       ]
     },
