@@ -15,7 +15,7 @@ namespace SmartAdmin.WebUI
 {
     public class Program
     {
-        public async static Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Files");
             if (!Directory.Exists(filePath))
