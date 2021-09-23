@@ -7,6 +7,12 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Permission
 {
     public static class Permissions
     {
+        [DisplayName("AuditTrails")]
+        [Description("AuditTrails Permissions")]
+        public static class AuditTrails
+        {
+            public const string View = "Permissions.AuditTrails.View";
+        }
         [DisplayName("Workflow")]
         [Description("Approval Permissions")]
         public static class Approval

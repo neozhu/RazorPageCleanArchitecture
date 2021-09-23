@@ -12,7 +12,7 @@ using CleanArchitecture.Razor.Domain.Enums;
 
 namespace CleanArchitecture.Razor.Domain.Entities
 {
-    public partial class Customer : AuditableEntity, IHasDomainEvent
+    public partial class Customer : AuditableEntity, IHasDomainEvent,IAuditTrial
     {
         public int Id { get; set; }
         public string Name { get; set; }
