@@ -122,7 +122,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">@_localizer["Login user name"]</label>
-                        <input type="text" asp-for="RegisterFormModel.UserName" class="form-control" placeholder="User name" required="required" />
+                        <input type="text" asp-for="RegisterFormModel.UserName" class="form-control" placeholder="User Name" required="required" />
                         <span class="invalid-feedback" asp-validation-for="RegisterFormModel.UserName">Sorry, you missed this one.</span>
                     </div>
                     <div class="form-group">
@@ -181,8 +181,8 @@
                     <input type="hidden" asp-for="EditFormModel.Id" />
                     @Html.AntiForgeryToken()
                     <div class="form-group">
-                        <label class="form-label">@_localizer["User name"]</label>
-                        <input type="text" asp-for="EditFormModel.UserName" class="form-control" placeholder="User name" readonly="readonly" />
+                        <label class="form-label">@_localizer["User Name"]</label>
+                        <input type="text" asp-for="EditFormModel.UserName" class="form-control" placeholder="User Name" readonly="readonly" />
                         <span class="invalid-feedback" asp-validation-for="RegisterFormModel.UserName">Sorry, you missed this one.</span>
                     </div>
                     <div class="form-group">
@@ -232,8 +232,8 @@
                     <input type="hidden" asp-for="ResetFormModel.Id" />
                     @Html.AntiForgeryToken()
                     <div class="form-group">
-                        <label class="col-xl-12 form-label">@_localizer["User name"]</label>
-                        <input type="text" asp-for="ResetFormModel.UserName" class="form-control" placeholder="User name" readonly="readonly" />
+                        <label class="col-xl-12 form-label">@_localizer["User Name"]</label>
+                        <input type="text" asp-for="ResetFormModel.UserName" class="form-control" placeholder="User Name" readonly="readonly" />
                         <span class="invalid-feedback" asp-validation-for="ResetFormModel.UserName">Sorry, you missed this one.</span>
                     </div>
                     <div class="form-group">

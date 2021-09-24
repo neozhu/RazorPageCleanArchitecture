@@ -1,7 +1,18 @@
+/**
+ * DataGrid GroupView for jQuery EasyUI
+ * version: 1.0.1
+ */
+
 $.extend($.fn.datagrid.defaults, {
-	groupHeight: 25,
+	groupHeight: 28,
 	expanderWidth: 30,
-	groupStyler: function(value,rows){return ''}
+	groupSortOrder: null,	// 'asc','desc'
+	groupStyler: function(value,rows){return ''},
+	groupSorter: function(g1,g2){
+		var a = g1.value;
+		var b = g2.value;
+		return a==b ? 0 : (a>b?1:-1);
+	}
 });
 
 var groupview = $.extend({}, $.fn.datagrid.defaults.view, {
@@ -43,11 +54,20 @@ var groupview = $.extend({}, $.fn.datagrid.defaults.view, {
 			table.push('</span>');
 		}
 		table.push('</div>');
+
+		var groupRows = $.extend([], group.rows);
+		if (opts.groupFooter){
+			var footerRow = opts.groupFooter.call(target, group.value, group.rows);
+			if (footerRow){
+				footerRow._group_footer = true;
+				groupRows.push(footerRow);
+			}
+		}
 		
 		table.push('<table class="datagrid-btable" cellspacing="0" cellpadding="0" border="0"><tbody>');
 		var index = group.startIndex;
-		for(var j=0; j<group.rows.length; j++) {
-			var css = opts.rowStyler ? opts.rowStyler.call(target, index, group.rows[j]) : '';
+		for(var j=0; j<groupRows.length; j++) {
+			var css = opts.rowStyler ? opts.rowStyler.call(target, index, groupRows[j]) : '';
 			var classValue = '';
 			var styleValue = '';
 			if (typeof css == 'string'){
@@ -58,10 +78,14 @@ var groupview = $.extend({}, $.fn.datagrid.defaults.view, {
 			}
 			
 			var cls = 'class="datagrid-row ' + (index % 2 && opts.striped ? 'datagrid-row-alt ' : ' ') + classValue + '"';
+			if (groupRows[j]._group_footer){
+				cls = 'class="datagrid-group-footer"';
+				styleValue = 'height:'+(opts.editorHeight+1)+'px';
+			}
 			var style = styleValue ? 'style="' + styleValue + '"' : '';
 			var rowId = state.rowIdPrefix + '-' + (frozen?1:2) + '-' + index;
 			table.push('<tr id="' + rowId + '" datagrid-row-index="' + index + '" ' + cls + ' ' + style + '>');
-			table.push(this.renderRow.call(this, target, fields, frozen, index, group.rows[j]));
+			table.push(this.renderRow.call(this, target, fields, frozen, index, groupRows[j]));
 			table.push('</tr>');
 			index++;
 		}
@@ -100,7 +124,7 @@ var groupview = $.extend({}, $.fn.datagrid.defaults.view, {
 			} else {
 				clickHandler(e);
 			}
-			e.stopPropagation();
+			// e.stopPropagation();
 		});
 	},
 	
@@ -124,6 +148,13 @@ var groupview = $.extend({}, $.fn.datagrid.defaults.view, {
 				group.rows.push(row);
 			}
 		}
+		if (opts.groupSortOrder){
+			groups.sort(function(a, b){
+				var r = opts.groupSorter.call(target, a, b);
+				return r * (opts.groupSortOrder=='asc'?1:-1);
+			});
+		}
+		
 		
 		var index = 0;
 		var newRows = [];
@@ -133,7 +164,7 @@ var groupview = $.extend({}, $.fn.datagrid.defaults.view, {
 			index += group.rows.length;
 			newRows = newRows.concat(group.rows);
 		}
-		
+
 		state.data.rows = newRows;
 		this.groups = groups;
 		
@@ -159,7 +190,8 @@ var groupview = $.extend({}, $.fn.datagrid.defaults.view, {
 					'.datagrid-group-title,.datagrid-group-expander{display:inline-block;vertical-align:bottom;height:100%;line-height:'+opts.groupHeight+'px;padding:0 4px;}' +
 					'.datagrid-group-title{position:relative;}' +
 					'.datagrid-group-expander{width:'+opts.expanderWidth+'px;text-align:center;padding:0}' +
-					'.datagrid-row-expander{margin:'+Math.floor((opts.groupHeight-16)/2)+'px 0;display:inline-block;width:16px;height:16px;cursor:pointer}' +
+					'.datagrid-group-expander .datagrid-row-expander{margin:'+Math.floor((opts.groupHeight-16)/2)+'px 0;display:inline-block;width:16px;height:16px;cursor:pointer}' +
+					'.datagrid-group-footer .datagrid-cell-rownumber{display:none}' +
 					'</style>'
 				);
 			}
@@ -195,6 +227,7 @@ $.extend($.fn.datagrid.methods, {
 	},
     expandGroup:function(jq, groupIndex){
         return jq.each(function(){
+        	var opts = $(this).datagrid('options');
             var view = $.data(this, 'datagrid').dc.view;
             var group = view.find(groupIndex!=undefined ? 'div.datagrid-group[group-index="'+groupIndex+'"]' : 'div.datagrid-group');
             var expander = group.find('span.datagrid-row-expander');
@@ -203,10 +236,14 @@ $.extend($.fn.datagrid.methods, {
                 group.next('table').show();
             }
             $(this).datagrid('fixRowHeight');
+            if (opts.onExpandGroup){
+            	opts.onExpandGroup.call(this, groupIndex);
+            }
         });
     },
     collapseGroup:function(jq, groupIndex){
         return jq.each(function(){
+        	var opts = $(this).datagrid('options');
             var view = $.data(this, 'datagrid').dc.view;
             var group = view.find(groupIndex!=undefined ? 'div.datagrid-group[group-index="'+groupIndex+'"]' : 'div.datagrid-group');
             var expander = group.find('span.datagrid-row-expander');
@@ -215,6 +252,9 @@ $.extend($.fn.datagrid.methods, {
                 group.next('table').hide();
             }
             $(this).datagrid('fixRowHeight');
+            if (opts.onCollapseGroup){
+            	opts.onCollapseGroup.call(this, groupIndex);
+            }
         });
     },
     scrollToGroup: function(jq, groupIndex){
@@ -234,6 +274,12 @@ $.extend($.fn.datagrid.methods, {
 				}
 			}
     	});
+    },
+    refreshGroupTitle: function(jq, groupIndex){
+    	return jq.each(function(){
+    		var opts = $(this).datagrid('options');
+    		opts.view.refreshGroupTitle(this, groupIndex)
+    	})
     }
 });
 
@@ -250,8 +296,10 @@ $.extend(groupview, {
 		var state = $.data(target, 'datagrid');
 		var dc = state.dc;
 		var ht = dc.header2.find('table');
-		var fr = ht.find('tr.datagrid-filter-row').hide();
-		var ww = ht.width();
+		var fr = ht.find('tr.datagrid-filter-row');
+		// var fr = ht.find('tr.datagrid-filter-row').hide();
+		// var ww = ht.width();
+		var ww = dc.body2.children('table.datagrid-btable:first').width();
 		if (groupIndex == undefined){
 			var groupHeader = dc.body2.children('div.datagrid-group');
 		} else {
@@ -375,4 +423,5 @@ $.extend(groupview, {
 		}
 	}
 });
+
 

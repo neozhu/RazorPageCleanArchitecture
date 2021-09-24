@@ -1,8 +1,14 @@
+/**
+ * DataGrid DetailView for jQuery EasyUI
+ * version: 1.0.2
+ */
+
 $.extend($.fn.datagrid.defaults, {
 	autoUpdateDetail: true  // Define if update the row detail content when update a row
 });
 
 var detailview = $.extend({}, $.fn.datagrid.defaults.view, {
+	type: 'detailview',
 	render: function(target, container, frozen){
 		var state = $.data(target, 'datagrid');
 		var opts = state.options;
@@ -115,7 +121,7 @@ var detailview = $.extend({}, $.fn.datagrid.defaults.view, {
 					cc.push('<input type="checkbox" name="' + field + '" value="' + (value!=undefined ? value : '') + '">');
 				} else if (col.expander) {
 					//cc.push('<div style="text-align:center;width:16px;height:16px;">');
-					cc.push('<span class="datagrid-row-expander datagrid-row-expand" style="display:inline-block;width:16px;height:16px;cursor:pointer;" />');
+					cc.push('<span class="datagrid-row-expander datagrid-row-expand" style="display:inline-block;width:16px;height:16px;margin:0;cursor:pointer;" />');
 					//cc.push('</div>');
 				} else if (col.formatter){
 					cc.push(col.formatter(value, rowData, rowIndex));
@@ -141,6 +147,8 @@ var detailview = $.extend({}, $.fn.datagrid.defaults.view, {
 		var rowLength = $(target).datagrid('getRows').length;
 		if (rowLength == 0){
 			$(target).datagrid('loadData',{total:1,rows:[row]});
+			var insertedRows = $.data(target, 'datagrid').insertedRows;
+			insertedRows.push(row);
 			return;
 		}
 		
@@ -208,7 +216,7 @@ var detailview = $.extend({}, $.fn.datagrid.defaults.view, {
 		var opts = state.options;
 		var body = dc.body1.add(dc.body2);
 		var clickHandler = ($.data(body[0],'events')||$._data(body[0],'events')).click[0].handler;
-		body.unbind('click').bind('click', function(e){
+		body.unbind('click.detailview').bind('click.detailview', function(e){
 			var tt = $(e.target);
 			var tr = tt.closest('tr.datagrid-row');
 			if (!tr.length){return}
@@ -220,11 +228,11 @@ var detailview = $.extend({}, $.fn.datagrid.defaults.view, {
 					$(target).datagrid('collapseRow', rowIndex);
 				}
 				$(target).datagrid('fixRowHeight');
+				e.stopPropagation();
 				
 			} else {
-				clickHandler(e);
+				// clickHandler(e);
 			}
-			e.stopPropagation();
 		});
 	},
 	
@@ -304,19 +312,26 @@ var detailview = $.extend({}, $.fn.datagrid.defaults.view, {
 		}
 
 		// function resizeDetails(){
-		// 	var ht = dc.header2.find('table');
-		// 	var fr = ht.find('tr.datagrid-filter-row');
-		// 	fr.hide();
-		// 	var ww = ht.width()-1;
-		// 	var details = dc.body2.find('>table.datagrid-btable>tbody>tr>td>div.datagrid-row-detail:visible')._outerWidth(ww);
-		// 	details.find('.easyui-fluid').trigger('_resize');
-		// 	fr.show();
+		// 	var details = dc.body2.find('>table.datagrid-btable>tbody>tr>td>div.datagrid-row-detail:visible');
+		// 	if (details.length){
+		// 		var ww = 0;
+		// 		dc.header2.find('.datagrid-header-check:visible,.datagrid-cell:visible').each(function(){
+		// 			ww += $(this).outerWidth(true) + 1;
+		// 		});
+		// 		if (ww != details.outerWidth(true)){
+		// 			details._outerWidth(ww);
+		// 			details.find('.easyui-fluid').trigger('_resize');
+		// 		}
+		// 	}
 		// }
 		function resizeDetails(){
 			var details = dc.body2.find('>table.datagrid-btable>tbody>tr>td>div.datagrid-row-detail:visible');
 			if (details.length){
 				var ww = 0;
-				dc.header2.find('.datagrid-header-check:visible,.datagrid-cell:visible').each(function(){
+				// dc.header2.find('.datagrid-header-check:visible,.datagrid-cell:visible').each(function(){
+				// 	ww += $(this).outerWidth(true) + 1;
+				// });
+				dc.body2.find('>table.datagrid-btable>tbody>tr:visible:first').find('.datagrid-cell-check:visible,.datagrid-cell:visible').each(function(){
 					ww += $(this).outerWidth(true) + 1;
 				});
 				if (ww != details.outerWidth(true)){

@@ -58,8 +58,19 @@ namespace CleanArchitecture.Razor.Application.Common.Extensions
             var expressionParameter = GetMemberExpression<T>(parameter, fieldName);
             if (prop != null && fieldValue != null)
             {
-
                 BinaryExpression body = null;
+                if (prop.PropertyType.IsEnum)
+                {
+                    if (Enum.IsDefined(prop.PropertyType, fieldValue)) {
+                        object value = Enum.Parse(prop.PropertyType, fieldValue.ToString(),true);
+                        body = Expression.Equal(expressionParameter, Expression.Constant(value));
+                        return Expression.Lambda<Func<T, bool>>(body, parameter);
+                    }
+                    else
+                    {
+                       return x=>false;
+                    }
+                }
                 switch (selectedOperator)
                 {
                     case OperationExpression.equal:
@@ -97,13 +108,12 @@ namespace CleanArchitecture.Razor.Application.Common.Extensions
                     case OperationExpression.between:
                         return Between<T>(fieldValue, parameter, expressionParameter, prop.PropertyType);
                     default:
-                        throw new Exception("Not implement Operation");
+                        throw new ArgumentException("OperationExpression");
                 }
             }
             else
             {
-                Expression<Func<T, bool>> filter = x => true;
-                return filter;
+               return x => false;
             }
         }
 
