@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Entities.Audit;
-using CleanArchitecture.Razor.Domain.Entities.Logs;
+using CleanArchitecture.Razor.Domain.Entities.Log;
 using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using Microsoft.EntityFrameworkCore;
 

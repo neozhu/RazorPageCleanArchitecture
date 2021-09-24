@@ -21,6 +21,49 @@
         "dist/browser/signalr.min.js",
         "dist/browser/signalr.min.js.map"
       ]
+    },
+    {
+      "library": "numeral@2.0.6",
+      "destination": "wwwroot/lib/numeral/",
+      "files": [
+        "min/locales/be-nl.min.js",
+        "min/locales/bg.min.js",
+        "min/locales/chs.min.js",
+        "min/locales/cs.min.js",
+        "min/locales/da-dk.min.js",
+        "min/locales/de-ch.min.js",
+        "min/locales/de.min.js",
+        "min/locales/en-au.min.js",
+        "min/locales/en-gb.min.js",
+        "min/locales/en-za.min.js",
+        "min/locales/es-es.min.js",
+        "min/locales/es.min.js",
+        "min/locales/et.min.js",
+        "min/locales/fi.min.js",
+        "min/locales/fr-ca.min.js",
+        "min/locales/fr-ch.min.js",
+        "min/locales/fr.min.js",
+        "min/locales/hu.min.js",
+        "min/locales/it.min.js",
+        "min/locales/ja.min.js",
+        "min/locales/lv.min.js",
+        "min/locales/nl-be.min.js",
+        "min/locales/nl-nl.min.js",
+        "min/locales/no.min.js",
+        "min/locales/pl.min.js",
+        "min/locales/pt-br.min.js",
+        "min/locales/pt-pt.min.js",
+        "min/locales/ru-ua.min.js",
+        "min/locales/ru.min.js",
+        "min/locales/sk.min.js",
+        "min/locales/sl.min.js",
+        "min/locales/th.min.js",
+        "min/locales/tr.min.js",
+        "min/locales/uk-ua.min.js",
+        "min/locales/vi.min.js",
+        "min/locales.min.js",
+        "min/numeral.min.js"
+      ]
     }
   ]
 }
