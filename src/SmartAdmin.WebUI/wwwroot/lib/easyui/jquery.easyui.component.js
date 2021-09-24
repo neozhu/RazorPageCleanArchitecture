@@ -557,7 +557,7 @@ $.extend($.fn.form.methods, {
 //dateRange filter
 $.extend($.fn.datagrid.defaults.filters, {
   dateRange: {
-    init: function (container, options) {
+        init: function (container, options) {
       var cc = $('<span class="textbox combo datebox " style="padding:0px">\
                      <span class="textbox-addon textbox-addon-right" style="right: 0px; top: 0px;">\
                      <a href="javascript:" class="textbox-icon combo-arrow" icon-index="0" tabindex="-1" style="width: 26px; height: 29px;">\

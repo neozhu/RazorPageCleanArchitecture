@@ -6,18 +6,18 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
-  ViewData["Title"] = _localizer["Documents"].Value;
-  ViewData["PageName"] = "documents_index";
-  ViewData["Category1"] = _localizer["Documents"].Value;
-  ViewData["Heading"] = _localizer["Documents"].Value;
-  ViewData["PageDescription"] = _localizer["See all available options"].Value;
-  ViewData["PreemptiveClass"] = "Default";
-  var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Create);
-  var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Edit);
-  var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Delete);
-  var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Search);
-  var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Export);
-  var _canDownload = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Download);
+    ViewData["Title"] = _localizer["Documents"].Value;
+    ViewData["PageName"] = "documents_index";
+    ViewData["Category1"] = _localizer["Documents"].Value;
+    ViewData["Heading"] = _localizer["Documents"].Value;
+    ViewData["PageDescription"] = _localizer["See all available options"].Value;
+    ViewData["PreemptiveClass"] = "Default";
+    var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Create);
+    var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Edit);
+    var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Delete);
+    var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Search);
+    var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Export);
+    var _canDownload = await _authorizationService.AuthorizeAsync(User, null, Permissions.Documents.Download);
 }
 @section HeadBlock {
 
@@ -94,12 +94,12 @@
                     <div class="form-row">
                         <div class="col-md-6">
                             <label class="form-label" for="Title">@_localizer["Title"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.Title" class="form-control" placeholder="Title"  />
+                            <input type="text" asp-for="Input.Title" class="form-control" placeholder="Title" />
                             <span class="invalid-feedback" asp-validation-for="Input.Title">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="DocumentTypeId">@_localizer["Document Type"] <span class="text-danger">*</span></label>
-                            <select type="text" asp-for="Input.DocumentTypeId" asp-items="Model.DocumentTypes" class="custom-select" placeholder="Document Type" >
+                            <select type="text" asp-for="Input.DocumentTypeId" asp-items="Model.DocumentTypes" class="custom-select" placeholder="Document Type">
                                 <option value="">@_localizer["Choose Document Type"]</option>
                             </select>
                             <span class="invalid-feedback" asp-validation-for="Input.DocumentTypeId">Sorry, you missed this one.</span>
@@ -154,8 +154,9 @@
     <partial name="_ValidationScriptsPartial" />
 
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
+
     <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
     <script src="~/lib/axios/dist/axios.js"></script>
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
