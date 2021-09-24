@@ -83,7 +83,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
         {
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
+            builder.ApplyGlobalFilters<ISoftDelete>(s => s.Deleted == null);
         }
         
         private async Task DispatchEvents()
