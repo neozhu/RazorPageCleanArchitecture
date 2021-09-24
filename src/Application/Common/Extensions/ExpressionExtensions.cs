@@ -174,7 +174,7 @@ namespace CleanArchitecture.Razor.Application.Common.Extensions
             }
 
             var propertiesName = propName.Split('.');
-            if (propertiesName.Count() == 2)
+            if (propertiesName.Length == 2)
             {
                 return Expression.Property(Expression.Property(parameter, propertiesName[0]), propertiesName[1]);
             }
@@ -190,7 +190,7 @@ namespace CleanArchitecture.Razor.Application.Common.Extensions
             {
                 case "string":
                     var strlist = fieldValue.ToString().Split(',', StringSplitOptions.RemoveEmptyEntries).ToList();
-                    if (strlist == null || strlist.Count() == 0)
+                    if (strlist == null || strlist.Count == 0)
                     {
                         return x => true;
                     }
@@ -199,7 +199,7 @@ namespace CleanArchitecture.Razor.Application.Common.Extensions
                     return Expression.Lambda<Func<T, bool>>(strcallexp, parameterExpression);
                 case "int32":
                     var intlist = fieldValue.ToString().Split(',', StringSplitOptions.RemoveEmptyEntries).Select(Int32.Parse).ToList();
-                    if (intlist == null || intlist.Count() == 0)
+                    if (intlist == null || intlist.Count == 0)
                     {
                         return x => true;
                     }
@@ -209,7 +209,7 @@ namespace CleanArchitecture.Razor.Application.Common.Extensions
                 case "float":
                 case "decimal":
                     var floatlist = fieldValue.ToString().Split(',', StringSplitOptions.RemoveEmptyEntries).Select(Decimal.Parse).ToList();
-                    if (floatlist == null || floatlist.Count() == 0)
+                    if (floatlist == null || floatlist.Count == 0)
                     {
                         return x => true;
                     }
@@ -283,7 +283,7 @@ namespace CleanArchitecture.Razor.Application.Common.Extensions
         {
             var lambda = (Expression<Func<T2, bool>>)fieldValue;
             var anyMethod = typeof(Enumerable).GetMethods(BindingFlags.Static | BindingFlags.Public)
-            .First(m => m.Name == "Any" && m.GetParameters().Count() == 2).MakeGenericMethod(typeof(T2));
+            .First(m => m.Name == "Any" && m.GetParameters().Length == 2).MakeGenericMethod(typeof(T2));
 
             var body = Expression.Call(anyMethod, memberExpression, lambda);
 

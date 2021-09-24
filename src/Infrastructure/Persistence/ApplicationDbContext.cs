@@ -2,6 +2,7 @@ using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Domain.Common;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Entities.Audit;
+using CleanArchitecture.Razor.Domain.Entities.Logs;
 using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using CleanArchitecture.Razor.Domain.Enums;
 using CleanArchitecture.Razor.Infrastructure.Identity;
@@ -35,6 +36,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
             _domainEventService = domainEventService;
             _dateTime = dateTime;
         }
+        public DbSet<Serilog> Serilogs { get; set; }
         public DbSet<AuditTrail> AuditTrails { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<DocumentType> DocumentTypes { get; set; }
