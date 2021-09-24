@@ -64,7 +64,8 @@
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
-    <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
+    <script src="~/lib/easyui/plugins/datagrid-detailview.js"></script>
+<script>jQuery.fn.tooltip = bootstrapTooltip;</script>
     <script src="~/lib/axios/dist/axios.js"></script>
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
     <script type="text/javascript">
@@ -90,6 +91,29 @@
 				sortOrder: 'desc',
 				pageSize: 15,
 				pageList: [10, 15, 30, 50, 100, 1000],
+                view: detailview,
+				detailFormatter: function (rowIndex, rowData) {
+					var str1 = '<div class="p-2">';
+                    var str2 = '<div class="p-2">';
+					var oldvalues = JSON.parse(rowData.OldValues);
+					for (item in oldvalues) {
+						str1 += `<span class="badge border border-secondary text-secondary m-1">${item}:${oldvalues[item]}</span>`
+					}
+					str1+='</div>'
+					var newvalues = JSON.parse(rowData.NewValues);
+              		for(item in newvalues) {
+                            str2 += `<span class="badge border border-info text-secondary m-1">${item}:${newvalues[item]}</span>`
+				    }
+				    str2+='</div>'
+                    return `<div class="d-flex flex-row mb-1">
+					  <div class="p-2 ">@_localizer["Old Values"]</div>
+					  ${str1}
+					</div>
+                    <div class="d-flex flex-row mb-1">
+					 <div class="p-2 ">@_localizer["New Values"]</div>
+					  ${str2}
+					</div>`;
+                },
 				columns: [[
 					 { field: 'DateTime', title: '@_localizer["Date Time"]', sortable: true, width: 165, formatter: datetimeformatter },
                     { field: 'TableName', title: '@_localizer["Table Name"]', sortable: true, width: 150 },

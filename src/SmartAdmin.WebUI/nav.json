@@ -1,7 +1,7 @@
 {
   "version": "4.5",
   "lists": [
-    
+
     {
       "title": "CRM Application",
       "roles": [ "Admin", "Basic" ]
@@ -85,6 +85,223 @@
         {
           "title": "Audit Trails",
           "href": "audittrails_index.html",
+          "roles": []
+        }
+      ]
+    },
+    {
+      "title": "Utilities",
+      "icon": "fal fa-bolt",
+      "roles": [
+       
+      ],
+      "items": [
+        {
+          "title": "Borders",
+          "href": "utilities_borders.html",
+          "roles": []
+        },
+        {
+          "title": "Clearfix",
+          "href": "utilities_clearfix.html",
+          "roles": []
+        },
+        {
+          "title": "Color Pallet",
+          "href": "utilities_color_pallet.html",
+          "roles": []
+        },
+        {
+          "title": "Display Property",
+          "href": "utilities_display_property.html",
+          "roles": []
+        },
+        {
+          "title": "Fonts",
+          "href": "utilities_fonts.html",
+          "roles": []
+        },
+        {
+          "title": "Flexbox",
+          "href": "utilities_flexbox.html",
+          "roles": []
+        },
+        {
+          "title": "Helpers",
+          "href": "utilities_helpers.html",
+          "roles": []
+        },
+        {
+          "title": "Position",
+          "href": "utilities_position.html",
+          "roles": []
+        },
+        {
+          "title": "Responsive Grid",
+          "href": "utilities_responsive_grid.html",
+          "roles": []
+        },
+        {
+          "title": "Sizing",
+          "href": "utilities_sizing.html",
+          "roles": []
+        },
+        {
+          "title": "Spacing",
+          "href": "utilities_spacing.html",
+          "roles": []
+        },
+        {
+          "title": "Typography",
+          "tags": "fonts headings bold lead colors sizes link text states list styles truncate alignment",
+          "href": "utilities_typography.html",
+          "roles": []
+        },
+        {
+          "title": "Menu child",
+          "href": "javascript:void(0);",
+          "roles": [],
+          "items": [
+            {
+              "title": "Sublevel Item",
+              "href": "javascript:void(0);",
+              "roles": []
+            },
+            {
+              "title": "Another Item",
+              "href": "javascript:void(0);",
+              "roles": []
+            }
+          ]
+        },
+        {
+          "title": "Disabled item",
+          "disabled": true,
+          "href": "javascript:void(0);",
+          "roles": []
+        }
+      ]
+    },
+    {
+      "title": "UI Components",
+      "icon": "fal fa-window",
+      "roles": [
+
+      ],
+      "items": [
+        {
+          "title": "Alerts",
+          "href": "ui_alerts.html",
+          "roles": []
+        },
+        {
+          "title": "Accordions",
+          "href": "ui_accordion.html",
+          "roles": []
+        },
+        {
+          "title": "Badges",
+          "href": "ui_badges.html",
+          "roles": []
+        },
+        {
+          "title": "Breadcrumbs",
+          "href": "ui_breadcrumbs.html",
+          "roles": []
+        },
+        {
+          "title": "Buttons",
+          "href": "ui_buttons.html",
+          "roles": []
+        },
+        {
+          "title": "Button Group",
+          "href": "ui_button_group.html",
+          "roles": []
+        },
+        {
+          "title": "Cards",
+          "href": "ui_cards.html",
+          "roles": []
+        },
+        {
+          "title": "Carousel",
+          "href": "ui_carousel.html",
+          "roles": []
+        },
+        {
+          "title": "Collapse",
+          "href": "ui_collapse.html",
+          "roles": []
+        },
+        {
+          "title": "Dropdowns",
+          "href": "ui_dropdowns.html",
+          "roles": []
+        },
+        {
+          "title": "List Filter",
+          "href": "ui_list_filter.html",
+          "roles": []
+        },
+        {
+          "title": "Modal",
+          "href": "ui_modal.html",
+          "roles": []
+        },
+        {
+          "title": "Navbars",
+          "href": "ui_navbars.html",
+          "roles": []
+        },
+        {
+          "title": "Panels",
+          "href": "ui_panels.html",
+          "roles": []
+        },
+        {
+          "title": "Pagination",
+          "href": "ui_pagination.html",
+          "roles": []
+        },
+        {
+          "title": "Popovers",
+          "href": "ui_popovers.html",
+          "roles": []
+        },
+        {
+          "title": "Progress Bars",
+          "href": "ui_progress_bars.html",
+          "roles": []
+        },
+        {
+          "title": "ScrollSpy",
+          "href": "ui_scrollspy.html",
+          "roles": []
+        },
+        {
+          "title": "Side Panel",
+          "href": "ui_side_panel.html",
+          "roles": []
+        },
+        {
+          "title": "Spinners",
+          "href": "ui_spinners.html",
+          "roles": []
+        },
+        {
+          "title": "Tabs & Pills",
+          "href": "ui_tabs_pills.html",
+          "roles": []
+        },
+        {
+          "title": "Toasts",
+          "href": "ui_toasts.html",
+          "roles": []
+        },
+        {
+          "title": "Tooltips",
+          "href": "ui_tooltips.html",
           "roles": []
         }
       ]

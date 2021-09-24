@@ -1,10 +1,16 @@
+/**
+ * DataGrid BufferView for jQuery EasyUI 
+ * version: 1.0.1
+ */
+
 $.extend($.fn.datagrid.defaults, {
-	rowHeight: 25,
+	rowHeight: null,
 	onBeforeFetch: function(page){},
 	onFetch: function(page, rows){}
 });
 
 var bufferview = $.extend({}, $.fn.datagrid.defaults.view, {
+	type: 'bufferview',
 	render: function(target, container, frozen){
 		var state = $.data(target, 'datagrid');
 		var opts = state.options;
@@ -53,12 +59,14 @@ var bufferview = $.extend({}, $.fn.datagrid.defaults.view, {
 		var dc = state.dc;
 		var view = this;
 		this.renderedCount = 0;
+		this.deletedCount = 0;
 		this.rows = [];
 		
 		dc.body1.add(dc.body2).empty();
 		init();
 		
 		function init(){
+			opts.rowHeight = $(target).datagrid('getRowHeight');
 			// erase the onLoadSuccess event, make sure it can't be triggered
 			state.onLoadSuccess = opts.onLoadSuccess;
 			opts.onLoadSuccess = function(){};
@@ -103,7 +111,8 @@ var bufferview = $.extend({}, $.fn.datagrid.defaults.view, {
 			// 	h = view.renderedCount * opts.rowHeight;
 			// }
 			// return h;
-			return view.renderedCount * opts.rowHeight;
+			// return view.renderedCount * opts.rowHeight;
+			return (view.renderedCount-view.deletedCount) * opts.rowHeight;
 		}
 	},
 	
@@ -117,6 +126,7 @@ var bufferview = $.extend({}, $.fn.datagrid.defaults.view, {
 		
 //		var rows = state.data.rows.slice(this.renderedCount, this.renderedCount+opts.pageSize);
 		var index = (page-1)*opts.pageSize;
+		index -= this.deletedCount;
 		var rows = state.data.rows.slice(index, index+opts.pageSize);
 		if (rows.length){
 			opts.onFetch.call(target, page, rows);
@@ -175,5 +185,25 @@ var bufferview = $.extend({}, $.fn.datagrid.defaults.view, {
 //				$(target).datagrid('fixRowHeight', i);
 //			}
 		}
+	},
+	deleteRow: function(target, index){
+		$.fn.datagrid.defaults.view.deleteRow.call(this, target, index);
+		this.deletedCount++;
+		var state = $.data(target, 'datagrid');
+		state.total--;
+		state.dc.body2.triggerHandler('scroll');
 	}
 });
+$.extend($.fn.datagrid.methods, {
+	getRowHeight: function(jq){
+		var opts = jq.datagrid('options');
+		if (!opts.rowHeight){
+			var d = $('<div style="position:absolute;top:-1000px;width:100px;height:100px;padding:5px"><table><tr class="datagrid-row"><td>cell</td></tr></table></div>').appendTo('body');
+			var rowHeight = d.find('tr').outerHeight();
+			d.remove();
+			opts.rowHeight = rowHeight;
+		}
+		return opts.rowHeight;
+	}
+});
+

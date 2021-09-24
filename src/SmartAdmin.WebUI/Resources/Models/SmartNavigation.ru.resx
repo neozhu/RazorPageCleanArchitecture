@@ -129,6 +129,9 @@
   <data name="ASP.NET Core 5.0" xml:space="preserve">
     <value>ASP.NET Core 5.0</value>
   </data>
+  <data name="Audit Trails" xml:space="preserve">
+    <value>Журналы аудита</value>
+  </data>
   <data name="Authorization" xml:space="preserve">
     <value>Авторизация</value>
   </data>
