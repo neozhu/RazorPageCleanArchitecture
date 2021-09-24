@@ -626,8 +626,7 @@
       }
       var menu = input[0].menu;
       if (menu) {
-        //menu.find('.menu-icon').removeClass(opts.filterMenuIconCls);
-        menu.find('.' + opts.filterMenuIconCls).removeClass(opts.filterMenuIconCls);
+        menu.find('.menu-icon').removeClass(opts.filterMenuIconCls);
         var item = menu.menu('findItem', opts.operators[param.op]['text']);
         menu.menu('setIcon', {
           target: item.target,
