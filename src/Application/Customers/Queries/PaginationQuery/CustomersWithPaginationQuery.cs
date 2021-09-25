@@ -14,7 +14,6 @@ using MediatR;
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using AutoMapper.QueryableExtensions;
 using CleanArchitecture.Razor.Application.Customers.DTOs;
-using CleanArchitecture.Razor.Application.Constants;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Primitives;
 using CleanArchitecture.Razor.Application.Customers.Caching;
@@ -23,7 +22,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Queries.PaginationQuery
 {
     public class CustomersWithPaginationQuery : PaginationRequest,IRequest<PaginatedData<CustomerDto>>
     {
-        public string CacheKey => $"CustomersWithPaginationQuery,{this.ToString()}";
+        public string CacheKey => CustomerCacheKey.GetPaginationCacheKey(this.ToString());
 
         public MemoryCacheEntryOptions Options => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(CustomerCacheTokenSource.ResetCacheToken.Token));
 
