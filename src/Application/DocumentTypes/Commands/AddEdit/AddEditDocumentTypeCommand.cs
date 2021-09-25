@@ -12,7 +12,6 @@ using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using CleanArchitecture.Razor.Application.Common.Models;
-using CleanArchitecture.Razor.Application.Constants;
 using CleanArchitecture.Razor.Application.DocumentTypes.Caching;
 using CleanArchitecture.Razor.Application.DocumentTypes.DTOs;
 using CleanArchitecture.Razor.Domain.Entities;
@@ -24,7 +23,7 @@ namespace CleanArchitecture.Razor.Application.DocumentTypes.Commands.AddEdit
 {
     public class AddEditDocumentTypeCommand : DocumentTypeDto, IRequest<Result<int>>, IMapFrom<DocumentType>, ICacheInvalidator
     {
-        public string CacheKey => Cache.GetAllDocumentTypesCacheKey;
+        public string CacheKey => string.Empty;
 
         public CancellationTokenSource ResetCacheToken => DocumentTypeCacheTokenSource.ResetCacheToken;
     }

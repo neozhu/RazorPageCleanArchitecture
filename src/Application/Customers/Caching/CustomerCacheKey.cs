@@ -12,7 +12,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Caching
     public static class CustomerCacheKey
     {
         public const string GetAllCacheKey = "all-customers";
-        public static string GetPagtionCacheKey(string parameters) {
+        public static string GetPaginationCacheKey(string parameters) {
             return $"CustomersWithPaginationQuery,{parameters}";
         }
     }
