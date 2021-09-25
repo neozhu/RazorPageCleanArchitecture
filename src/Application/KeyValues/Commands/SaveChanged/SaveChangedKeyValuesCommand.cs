@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
-using CleanArchitecture.Razor.Application.Common.Mappings;
 using CleanArchitecture.Razor.Application.Common.Models;
-using CleanArchitecture.Razor.Application.Constants;
 using CleanArchitecture.Razor.Application.KeyValues.Caching;
 using CleanArchitecture.Razor.Application.KeyValues.DTOs;
-using CleanArchitecture.Razor.Application.KeyValues.Queries;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Enums;
-using CleanArchitecture.Razor.Domain.Events;
 using MediatR;
 
 namespace CleanArchitecture.Razor.Application.KeyValues.Commands.SaveChanged
@@ -23,7 +19,7 @@ namespace CleanArchitecture.Razor.Application.KeyValues.Commands.SaveChanged
     {
       public KeyValueDto[] Items { get; set; }
 
-        public string CacheKey => Cache.GetAllKeyValuesCacheKey;
+        public string CacheKey => KeyValueCacheKey.GetAllCacheKey;
 
         public CancellationTokenSource ResetCacheToken => KeyValueCacheTokenSource.ResetCacheToken;
     }
