@@ -8,7 +8,6 @@ using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using CleanArchitecture.Razor.Application.Common.Models;
-using CleanArchitecture.Razor.Application.Constants;
 using CleanArchitecture.Razor.Application.Customers.Caching;
 using CleanArchitecture.Razor.Application.Customers.DTOs;
 using CleanArchitecture.Razor.Domain.Entities;
@@ -19,7 +18,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.AddEdit
 {
     public class AddEditCustomerCommand : CustomerDto, IRequest<Result<int>>, IMapFrom<Customer>, ICacheInvalidator
     {
-        public string CacheKey => Cache.GetAllCustomersCacheKey;
+        public string CacheKey => CustomerCacheKey.GetAllCacheKey;
 
         public CancellationTokenSource ResetCacheToken => CustomerCacheTokenSource.ResetCacheToken;
     }

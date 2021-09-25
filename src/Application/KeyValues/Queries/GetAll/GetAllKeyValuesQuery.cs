@@ -11,7 +11,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
-using CleanArchitecture.Razor.Application.Constants;
+using CleanArchitecture.Razor.Application.KeyValues.Caching;
 using CleanArchitecture.Razor.Application.KeyValues.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +22,7 @@ namespace CleanArchitecture.Razor.Application.KeyValues.Queries.ByName
     public class GetAllKeyValuesQuery : IRequest<IEnumerable<KeyValueDto>>, ICacheable
     {
 
-        public string CacheKey =>Cache.GetAllKeyValuesCacheKey;
+        public string CacheKey =>KeyValueCacheKey.GetAllCacheKey;
 
         public MemoryCacheEntryOptions Options =>null;
     }
