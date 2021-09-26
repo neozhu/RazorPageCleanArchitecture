@@ -32,7 +32,7 @@ namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Im
             _localizer = localizer;
             _mapper = mapper;
         }
-        public async Task<Result> Handle(ImportApprovalDataCommand request, CancellationToken cancellationToken)
+        public  Task<Result> Handle(ImportApprovalDataCommand request, CancellationToken cancellationToken)
         {
            //TODO:Implementing ImportApprovalDataCommandHandler method 
            throw new System.NotImplementedException();

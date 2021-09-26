@@ -24,7 +24,7 @@ namespace CleanArchitecture.Razor.Application.Documents.DTOs
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public bool IsPublic { get; set; } = false;
+        public bool IsPublic { get; set; }
         public string URL { get; set; }
         public string CreatedBy { get; set; }
         public DateTime Created { get; set; }

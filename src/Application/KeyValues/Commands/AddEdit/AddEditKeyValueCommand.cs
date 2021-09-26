@@ -39,7 +39,7 @@ namespace CleanArchitecture.Razor.Application.KeyValues.Commands.AddEdit
            
             if (request.Id > 0)
             {
-                var keyValue = await _context.KeyValues.FindAsync(request.Id);
+                var keyValue = await _context.KeyValues.FindAsync(new object[] { request.Id }, cancellationToken);
                 keyValue = _mapper.Map(request, keyValue);
                 await _context.SaveChangesAsync(cancellationToken);
                 return Result<int>.Success(keyValue.Id);

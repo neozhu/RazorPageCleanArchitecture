@@ -38,13 +38,13 @@ namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.De
             _localizer = localizer;
             _mapper = mapper;
         }
-        public async Task<Result> Handle(DeleteApprovalDataCommand request, CancellationToken cancellationToken)
+        public  Task<Result> Handle(DeleteApprovalDataCommand request, CancellationToken cancellationToken)
         {
            //TODO:Implementing DeleteApprovalDataCommandHandler method 
            throw new System.NotImplementedException();
         }
 
-        public async Task<Result> Handle(DeleteCheckedApprovalDatasCommand request, CancellationToken cancellationToken)
+        public  Task<Result> Handle(DeleteCheckedApprovalDatasCommand request, CancellationToken cancellationToken)
         {
            //TODO:Implementing DeleteCheckedApprovalDatasCommandHandler method 
            throw new System.NotImplementedException();

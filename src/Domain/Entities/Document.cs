@@ -15,7 +15,7 @@ namespace CleanArchitecture.Razor.Domain.Entities
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public bool IsPublic { get; set; } = false;
+        public bool IsPublic { get; set; } 
         public string URL { get; set; }
         public int DocumentTypeId { get; set; }
         public virtual DocumentType DocumentType { get; set; }

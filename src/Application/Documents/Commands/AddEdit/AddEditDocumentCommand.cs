@@ -51,7 +51,7 @@ namespace CleanArchitecture.Razor.Application.Documents.Commands.AddEdit
             
             if (request.Id > 0)
             {
-                var document = await _context.Documents.FindAsync(request.Id);
+                var document = await _context.Documents.FindAsync(new object[] { request.Id }, cancellationToken);
                 document.Title = request.Title;
                 document.Description = request.Description;
                 document.IsPublic = request.IsPublic;

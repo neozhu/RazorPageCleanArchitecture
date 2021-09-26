@@ -33,9 +33,9 @@ namespace SmartAdmin.WebUI.Pages.AuditTrails
             _mediator = mediator;
             _localizer = localizer;
         }
-        public async Task OnGetAsync()
+        public  Task OnGetAsync()
         {
-            
+            return Task.CompletedTask;
         }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] AuditTrailsWithPaginationQuery command)
         {

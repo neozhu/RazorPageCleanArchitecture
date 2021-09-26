@@ -41,7 +41,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Delete
         }
         public async Task<Result> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
         {
-            var item =await _context.Customers.FindAsync(request.Id);
+            var item =await _context.Customers.FindAsync(new object[] { request.Id }, cancellationToken);
             _context.Customers.Remove(item);
             await _context.SaveChangesAsync(cancellationToken);
             return Result.Success();
