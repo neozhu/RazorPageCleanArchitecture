@@ -12,6 +12,8 @@ This is a solution template for creating a Razor Page App with ASP.NET Core foll
 [![Clean Architecture with ASP.NET Core 3.0 • Jason Taylor • GOTO 2019](https://img.youtube.com/vi/dK4Yb6-LxAk/0.jpg)](https://www.youtube.com/watch?v=dK4Yb6-LxAk)
 
 ## Demonstration [http://razor.i247365.net/](http://razor.i247365.net/)
+default admin: administrator/123456
+default user: demo/123456
 
 ## Give a Star! :star:
 If you like or are using this project please give it a star. Thanks!
@@ -26,6 +28,7 @@ If you like or are using this project please give it a star. Thanks!
 * [Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-5.0&tabs=visual-studio)
 * [Jquery EasyUI](https://www.jeasyui.com/)
 * [MediatR](https://github.com/jbogard/MediatR)
+* [LazyCache](https://github.com/alastairtree/LazyCache)
 * [AutoMapper](https://automapper.org/)
 * [FluentValidation](https://fluentvalidation.net/)
 * [NUnit](https://nunit.org/), [FluentAssertions](https://fluentassertions.com/), [Moq](https://github.com/moq) & [Respawn](https://github.com/jbogard/Respawn)
