@@ -33,7 +33,7 @@ namespace CleanArchitecture.Razor.Application.KeyValues.Commands.Delete
         }
         public async Task<Result> Handle(DeleteKeyValueCommand request, CancellationToken cancellationToken)
         {
-            var item =await _context.KeyValues.FindAsync(request.Id);
+            var item =await _context.KeyValues.FindAsync(new object[] { request.Id }, cancellationToken);
             _context.KeyValues.Remove(item);
             await _context.SaveChangesAsync(cancellationToken);
             return Result.Success();

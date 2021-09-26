@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,11 +23,11 @@ namespace CleanArchitecture.Razor.Application.Common.Models
 
         public static Result Success()
         {
-            return new Result(true, new string[] { });
+            return new Result(true, Array.Empty<string>());
         }
     public static Task<Result> SuccessAsync()
     {
-      return Task.FromResult(new Result(true, new string[] { }));
+      return Task.FromResult(new Result(true, Array.Empty<string>()));
     }
     public static Result Failure(IEnumerable<string> errors)
         {

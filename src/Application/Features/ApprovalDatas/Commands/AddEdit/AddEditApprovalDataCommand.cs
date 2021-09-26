@@ -32,7 +32,7 @@ namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Ad
             _localizer = localizer;
             _mapper = mapper;
         }
-        public async Task<Result> Handle(AddEditApprovalDataCommand request, CancellationToken cancellationToken)
+        public  Task<Result> Handle(AddEditApprovalDataCommand request, CancellationToken cancellationToken)
         {
            //TODO:Implementing AddEditApprovalDataCommandHandler method 
            throw new System.NotImplementedException();

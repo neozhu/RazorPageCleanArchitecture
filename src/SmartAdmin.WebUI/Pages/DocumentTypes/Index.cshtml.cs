@@ -39,9 +39,9 @@ namespace SmartAdmin.WebUI.Pages.DocumentTypes
             _mediator = mediator;
             _localizer = localizer;
         }
-        public async Task OnGetAsync()
+        public  Task OnGetAsync()
         {
-       
+            return Task.CompletedTask;
         }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] DocumentTypesWithPaginationQuery command)
         {

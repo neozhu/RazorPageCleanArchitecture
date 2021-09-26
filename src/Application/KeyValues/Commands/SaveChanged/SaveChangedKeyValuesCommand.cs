@@ -48,11 +48,11 @@ namespace CleanArchitecture.Razor.Application.KeyValues.Commands.SaveChanged
                         await _context.KeyValues.AddAsync(newitem, cancellationToken);
                         break;
                     case TrackingState.Deleted:
-                        var delitem =await _context.KeyValues.FindAsync(item.Id);
+                        var delitem =await _context.KeyValues.FindAsync(new object[] { item.Id }, cancellationToken);
                         _context.KeyValues.Remove(delitem);
                         break;
                     case TrackingState.Modified:
-                        var edititem = await _context.KeyValues.FindAsync(item.Id);
+                        var edititem = await _context.KeyValues.FindAsync(new object[] { item.Id }, cancellationToken);
                         edititem.Name = item.Name;
                         edititem.Text = item.Text;
                         edititem.Value = item.Value;

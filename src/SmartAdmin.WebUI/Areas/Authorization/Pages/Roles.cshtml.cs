@@ -59,20 +59,21 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
             _excelService = excelService;
             _localizer = localizer;
         }
-        public async Task OnGetAsync()
+        public  Task OnGetAsync()
         {
             var allPermissions = GetAllPermissions();
             foreach(var group in allPermissions.GroupBy(x => x.Group))
             {
                 GroupedPermissions.Add(group.Key, group.ToArray());
             }
+            return Task.CompletedTask;
         }
         public IActionResult OnGetNavgitation()
         {
             var jsonText = System.IO.File.ReadAllText("nav.json");
             return Content(jsonText);
         }
-        public async Task<IActionResult> OnPostUpdateNavgitationAsync()
+        public async  Task<IActionResult> OnPostUpdateNavgitationAsync()
         {
             try
             {
@@ -81,7 +82,7 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
                 //  await sw.WriteAsync(this.NavJsonStr);
                 //  await  sw.FlushAsync();
                 //}
-
+                await Task.CompletedTask;
             }
             catch
             {

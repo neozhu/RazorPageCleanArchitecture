@@ -47,7 +47,7 @@ namespace CleanArchitecture.Razor.Application.DocumentTypes.Commands.AddEdit
            
             if (request.Id > 0)
             {
-                var documentType = await _context.DocumentTypes.FindAsync(request.Id);
+                var documentType = await _context.DocumentTypes.FindAsync(new object[] { request.Id }, cancellationToken);
                 documentType = _mapper.Map(request, documentType);
                 await _context.SaveChangesAsync(cancellationToken);
                 return Result<int>.Success(documentType.Id);
