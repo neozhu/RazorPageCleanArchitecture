@@ -73,9 +73,14 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
                 }
             }
 
-            var result = await base.SaveChangesAsync(cancellationToken);
+            var events = ChangeTracker.Entries<IHasDomainEvent>()
+                    .Select(x => x.Entity.DomainEvents)
+                    .SelectMany(x => x)
+                    .Where(domainEvent => !domainEvent.IsPublished)
+                    .ToArray();
 
-            await DispatchEvents();
+            var result = await base.SaveChangesAsync(cancellationToken);
+            await DispatchEvents(events);
             await OnAfterSaveChanges(auditEntries, cancellationToken);
             return result;
         }
@@ -87,19 +92,11 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
             builder.ApplyGlobalFilters<ISoftDelete>(s => s.Deleted == null);
         }
         
-        private async Task DispatchEvents()
+        private async Task DispatchEvents(DomainEvent[] events)
         {
-            while (true)
-            {
-                var domainEventEntity = ChangeTracker.Entries<IHasDomainEvent>()
-                    .Select(x => x.Entity.DomainEvents)
-                    .SelectMany(x => x)
-                    .Where(domainEvent => !domainEvent.IsPublished)
-                    .FirstOrDefault();
-                if (domainEventEntity == null) break;
-
-                domainEventEntity.IsPublished = true;
-                await _domainEventService.Publish(domainEventEntity);
+            foreach (var @event in events) {
+                @event.IsPublished = true;
+                await _domainEventService.Publish(@event);
             }
         }
 
