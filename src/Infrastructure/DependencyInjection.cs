@@ -7,8 +7,10 @@ using CleanArchitecture.Razor.Application.Settings;
 using CleanArchitecture.Razor.Application.Workflow.Approval;
 using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using CleanArchitecture.Razor.Infrastructure.Constants.ClaimTypes;
+using CleanArchitecture.Razor.Infrastructure.Constants.Localization;
 using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 using CleanArchitecture.Razor.Infrastructure.Identity;
+using CleanArchitecture.Razor.Infrastructure.Localization;
 using CleanArchitecture.Razor.Infrastructure.Persistence;
 using CleanArchitecture.Razor.Infrastructure.Services;
 using CleanArchitecture.Razor.Infrastructure.Services.Identity;
@@ -85,6 +87,15 @@ namespace CleanArchitecture.Razor.Infrastructure
                 }
             });
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationClaimsIdentityFactory>();
+            // Localization
+            services.AddLocalization(options => options.ResourcesPath = LocalizationConstants.ResourcesPath);
+            services.AddScoped<RequestLocalizationCookiesMiddleware>();
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.AddSupportedUICultures(LocalizationConstants.SupportedLanguages.Select(x => x.Code).ToArray());
+                options.FallBackToParentUICultures = true;
+            });
+
             return services;
         }
 
