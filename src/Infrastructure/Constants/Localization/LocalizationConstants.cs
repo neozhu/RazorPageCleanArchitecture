@@ -11,6 +11,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Localization
 {
    public static class LocalizationConstants
     {
+        public const string ResourcesPath = "Resources";
         public static readonly LanguageCode[] SupportedLanguages = {
             new LanguageCode
             {
