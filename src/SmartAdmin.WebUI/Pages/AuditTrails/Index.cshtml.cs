@@ -17,14 +17,6 @@ namespace SmartAdmin.WebUI.Pages.AuditTrails
     {
         private readonly ISender _mediator;
         private readonly IStringLocalizer<IndexModel> _localizer;
-        [BindProperty]
-        public string WorkflowId { get; set; }
-        [BindProperty]
-        public string Comments { get; set; }
-        [BindProperty]
-        public string Outcome { get; set; }
-        [BindProperty]
-        public string Approver { get; set; }
         public IndexModel(
                 ISender mediator,
             IStringLocalizer<IndexModel> localizer
@@ -45,7 +37,7 @@ namespace SmartAdmin.WebUI.Pages.AuditTrails
         public async Task<FileResult> OnPostExportAsync([FromBody] ExportAuditTrailsQuery command)
         {
             var result = await _mediator.Send(command);
-            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["ApprovalHistories"] + ".xlsx");
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["AuditTrails"] + ".xlsx");
         }
 
 
