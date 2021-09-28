@@ -1,0 +1,343 @@
+﻿@page
+@using CleanArchitecture.Razor.Infrastructure.Constants.Permission
+@model SmartAdmin.WebUI.Pages.Logs.IndexModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
+@inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
+@{
+    ViewData["Title"] = _localizer["Logs"].Value;
+    ViewData["PageName"] = "logs_index";
+    ViewData["Category1"] = _localizer["Authorization"].Value;
+    ViewData["Heading"] = _localizer["Logs"].Value;
+    ViewData["PageDescription"] = _localizer["See all available options"].Value;
+    ViewData["PreemptiveClass"] = "Default";
+    var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.Logs.Search);
+    var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Logs.Export);
+
+}
+@section HeadBlock {
+    <link href="~/css/statistics/chartist/chartist.css" rel="stylesheet" />
+    <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+    <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+    <link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">
+    <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+    <style>
+        .approval_dg_datagrid-cell-c1-_action {
+            overflow: visible !important
+        }
+    </style>
+}
+
+
+<div class="row mb-2">
+    <div class="col-sm-12 col-md-8" style="position: relative;height:200px">
+        <canvas id='timebar' style="height: 100%;"></canvas>
+    </div>
+    <div class="col-sm-12 col-md-4" style="position: relative;height:200px">
+        <canvas id='levelpie' class="m-auto" style="height: 100%;"></canvas>
+    </div>
+</div>
+
+<div id="js-page-content-demopanels" class="card mb-g">
+    <div class="card-header bg-white d-flex align-items-center">
+        <h4 class="m-0">
+            @_localizer["Logs"]
+            <small>@_localizer["See all available options"]</small>
+        </h4>
+        <div class="ml-auto">
+            @if (_canSearch.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="searchbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
+                    @_localizer["Search"]
+                </button>
+            }
+            @if (_canExport.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="exportbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                    @_localizer["Export Excel"]
+                </button>
+            }
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table id="logs_dg">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section ScriptsBlock {
+    <script src="~/js/statistics/chartjs/chartjs.bundle.js"></script>
+    <script src="~/js/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.js"></script>
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
+
+
+    <script src="~/lib/easyui/plugins/datagrid-detailview.js"></script>
+    <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
+    <script src="~/lib/axios/dist/axios.js"></script>
+    <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+    <script>
+	$(async () => {
+
+        var piedata = (await axios.get('@Url.Page("/Logs/Index")?handler=LogsLevelData')).data;
+        var piechart= new Chart(document.getElementById("levelpie").getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: piedata.map(item => item.level),
+                datasets: [{
+                    label: "Population (millions)",
+                    backgroundColor: ["#1dc9b7", "#2196f3", "#868e96", "#ffc241", "#fe6bb0", "#e7026e"],
+                    data: piedata.map(item => item.total)
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: false,
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                },
+                title: {
+                    display: false,
+                    text: '@_localizer["Logs Level"]'
+                }
+            }
+		});
+
+		 var linedata = (await axios.get('@Url.Page("/Logs/Index")?handler=LogsTimeLineData')).data;
+        var ctx = document.getElementById('timebar').getContext('2d');
+        var barchart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: Array.from(new Set(linedata.map(item => moment(item.time).format('MM-DD HH:mm')))),
+                datasets: [{
+                    label: 'Information',
+                    data: linedata.filter(item => item.level == 'Information').map(item => item.total),
+                    backgroundColor: '#1dc9b7',
+                    //borderColor: "rgba(179,181,198,1)",
+                    //pointBorderColor: "#fff",
+                    //pointBackgroundColor: "rgba(179,181,198,1)",
+                },
+                {
+                    label: 'Verbose',
+                    data: linedata.filter(item => item.level == 'Verbose').map(item => item.total),
+                    backgroundColor: '#2196f3',
+                    //borderColor: "rgba(179,181,198,1)",
+                    //pointBorderColor: "#fff",
+                    //pointBackgroundColor: "rgba(179,181,198,1)",
+                },
+                {
+                    label: 'Debug',
+                    data: linedata.filter(item => item.level == 'Debug').map(item => item.total),
+                    backgroundColor: '#868e96',
+                    //borderColor: "rgba(179,181,198,1)",
+                    //pointBorderColor: "#fff",
+                    //pointBackgroundColor: "rgba(179,181,198,1)",
+                },
+                {
+                    label: 'Warn',
+                    data: linedata.filter(item => item.level == 'Warn').map(item => item.total),
+                    backgroundColor: '#ffc241',
+                    //borderColor: "rgba(179,181,198,1)",
+                    //pointBorderColor: "#fff",
+                    //pointBackgroundColor: "rgba(179,181,198,1)",
+                },
+                {
+                    label: 'Error',
+                    data: linedata.filter(item => item.level == 'Error').map(item => item.total),
+                    backgroundColor: '#fe6bb0',
+                    //borderColor: "rgba(179,181,198,1)",
+                    //pointBorderColor: "#fff",
+                    //pointBackgroundColor: "rgba(179,181,198,1)",
+                },
+                {
+                    label: 'Fatal',
+                    data: linedata.filter(item => item.level == 'Fatal').map(item => item.total),
+                    backgroundColor: '#e7026e',
+                    //borderColor: "rgba(179,181,198,1)",
+                    //pointBorderColor: "#fff",
+                    //pointBackgroundColor: "rgba(179,181,198,1)",
+                }
+                ]
+            },
+            options: {
+                legend: { display: false },
+                maintainAspectRatio: false,
+                responsive: true,
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                title: {
+                    display: true,
+                    text: '@_localizer["Logs"]',
+                },
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                        type: "time",
+                        time: {
+                            displayFormats: {
+                                'hour': 'H',
+                            }
+                        }
+                    }],
+                    yAxes: [{
+                        stacked: true,
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 20
+                        }
+                    }]
+                }
+            }
+        });
+	})
+    </script>
+
+    <script type="text/javascript">
+	$('#searchbutton').click(function () {
+		reload();
+	});
+	$('#exportbutton').click(function () {
+		onExport();
+	});
+	var $dg={};
+		var initdatagrid = () => {
+			$dg = $('#logs_dg').datagrid({
+				height: 700,
+				method: 'GET',
+				rownumbers: false,
+				singleSelect: true,
+				selectOnCheck: false,
+				checkOnSelect: false,
+				pagination: true,
+				clientPaging: false,
+				remoteFilter: true,
+                sortName: 'TimeStamp',
+				sortOrder: 'desc',
+				pageSize: 15,
+				pageList: [10, 15, 30, 50, 100, 1000],
+				view: detailview,
+				detailFormatter: function (rowIndex, rowData) {
+
+					return `<div class="d-flex flex-row mb-1">
+					  <div class="p-2 ">@_localizer["Message"]</div>
+					  <div class="p-2 ">${rowData.Message}</div>
+					</div>
+                    <div class="d-flex flex-row mb-1">
+					 <div class="p-2 ">@_localizer["Exception"]</div>
+					 <div class="p-2 ">${rowData.Exception}</div>
+					</div>`;
+				},
+				columns: [[
+                    { field: 'TimeStamp', title: '@_localizer["Time Stamp"]', sortable: true, width: 165, formatter: datetimeformatter },
+                    { field: 'Level', title: '@_localizer["Level"]', sortable: true, width: 130 },
+                    { field: 'Message', title: '@_localizer["Message"]', sortable: true, width: 200 },
+                    { field: 'UserName', title: '@_localizer["User Name"]', sortable: true, width: 120 },
+                    { field: 'Exception', title: '@_localizer["Exception"]', sortable: true, width: 200 },
+					{ field: 'Properties', title: '@_localizer["Properties"]', sortable: true, width: 200 },
+                    { field: 'MessageTemplate', title: '@_localizer["Message Template"]', sortable: true, width: 200 },
+				]]
+			})
+				.datagrid('enableFilter', [
+					{
+						field: 'DateTime',
+						type: 'dateRange'
+					},
+					{
+                        field: 'Level',
+						type: 'combobox',
+						options: {
+							panelHeight: 'auto',
+							data: [{
+								     value: null,
+								     text: 'ALL'
+							      },
+							@foreach (var val in Enum.GetNames(typeof(Serilog.Events.LogEventLevel)))
+			                {
+				               <text>
+							   {
+								value: '@val',
+								text: '@val'
+							   },
+							   </text>
+			                }
+							]
+						}
+					}
+				])
+				.datagrid('load', '@Url.Page("/Logs/Index")?handler=Data');
+
+		}
+
+	var reload = () => {
+		$dg.datagrid('load', '@Url.Page("/Logs/Index")?handler=Data');
+	}
+
+	$(() => {
+		initdatagrid();
+	})
+	var onExport = () => {
+		var options = $dg.datagrid('options');
+		var data = {
+			filterRules: JSON.stringify(options.filterRules),
+			sort: options.sortName,
+			order: options.sortOrder,
+		}
+		console.log(options, data)
+		var headers = {
+			"RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+		}
+		axios.post('@Url.Page("/Logs/Index")?handler=Export',
+			data,
+			{
+				headers: headers,
+				responseType: "blob"
+			})
+			.then(response => {
+				const filename = getFileName(response.headers['content-disposition']);
+				const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+				const link = document.createElement('a');
+				link.href = url;
+				link.setAttribute('download', filename);
+				document.body.appendChild(link);
+				link.click();
+				toastr["info"](`@_localizer["Export Success"]`);
+			}).catch(error => {
+				if (error.response.data.Errors) {
+					const errors = error.response.data.Errors;
+					errors.forEach(item => {
+						toastr["error"](item);
+					});
+				} else {
+					toastr["error"](`@_localizer["Export fail"],${error.response.data}`);
+				}
+			})
+
+
+	}
+	var getFileName = (disposition) => {
+		const utf8FilenameRegex = /filename\*=UTF-8''([\w%\-\.]+)(?:; ?|$)/;
+		const asciiFilenameRegex = /filename=(["']?)(.*?[^\\])\1(?:; ?|$)/;
+		let fileName = '';
+		if (utf8FilenameRegex.test(disposition)) {
+			fileName = decodeURIComponent(utf8FilenameRegex.exec(disposition)[1]);
+		} else {
+			const matches = asciiFilenameRegex.exec(disposition);
+			if (matches != null && matches[2]) {
+				fileName = matches[2];
+			}
+		}
+		return fileName;
+	}
+    </script>
+}
