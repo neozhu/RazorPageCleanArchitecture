@@ -48,7 +48,7 @@ namespace CleanArchitecture.Razor.Application.Features.Logs.Queries.ChatData
                       .OrderBy(x=>x.Level).ThenBy(x=>x.Date)
                       .ToListAsync( cancellationToken);
             var result=new List<LogTimeLineDto>();
-            var end=DateTime.Now;
+            var end=new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,DateTime.Now.Hour,0,0);
             var start = end;
             if (data.Any())
             {
