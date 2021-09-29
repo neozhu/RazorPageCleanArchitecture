@@ -169,6 +169,18 @@
                 ]
             },
             options: {
+                animation: {
+                    onComplete: () => {
+                        delayed = true;
+                    },
+                    delay: (context) => {
+                        let delay = 0;
+                        if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                            delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                        }
+                        return delay;
+                    },
+                },
                 legend: { display: false },
                 maintainAspectRatio: false,
                 responsive: true,
@@ -183,11 +195,13 @@
                 scales: {
                     xAxes: [{
                         stacked: true,
+                        offset: true,
                         type: "time",
                         time: {
                             displayFormats: {
                                 'hour': 'H',
-                            }
+                            },
+                            unit: 'hour'
                         }
                     }],
                     yAxes: [{
