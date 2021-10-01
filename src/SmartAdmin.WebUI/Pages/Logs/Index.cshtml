@@ -94,7 +94,7 @@
                 labels: piedata.map(item => item.level),
                 datasets: [{
                     label: "Population (millions)",
-                    backgroundColor: ["#1dc9b7", "#2196f3", "#868e96", "#ffc241", "#fe6bb0", "#e7026e"],
+                    backgroundColor: ["#2697FF", "#26E5FF", "#FFCF26", "#EE2727", "#007EE5", "#A6D4FF"],
                     data: piedata.map(item => item.total)
                 }]
             },
@@ -121,7 +121,7 @@
                 datasets: [{
                     label: 'Information',
                     data: linedata.filter(item => item.level == 'Information').map(item => item.total),
-                    backgroundColor: '#1dc9b7',
+                    backgroundColor: '#2697FF',
                     //borderColor: "rgba(179,181,198,1)",
                     //pointBorderColor: "#fff",
                     //pointBackgroundColor: "rgba(179,181,198,1)",
@@ -129,7 +129,7 @@
                 {
                     label: 'Verbose',
                     data: linedata.filter(item => item.level == 'Verbose').map(item => item.total),
-                    backgroundColor: '#2196f3',
+                    backgroundColor: '#a4cdff',
                     //borderColor: "rgba(179,181,198,1)",
                     //pointBorderColor: "#fff",
                     //pointBackgroundColor: "rgba(179,181,198,1)",
@@ -145,7 +145,7 @@
                 {
                     label: 'Warn',
                     data: linedata.filter(item => item.level == 'Warn').map(item => item.total),
-                    backgroundColor: '#ffc241',
+                    backgroundColor: '#FFCF26',
                     //borderColor: "rgba(179,181,198,1)",
                     //pointBorderColor: "#fff",
                     //pointBackgroundColor: "rgba(179,181,198,1)",
@@ -161,7 +161,7 @@
                 {
                     label: 'Fatal',
                     data: linedata.filter(item => item.level == 'Fatal').map(item => item.total),
-                    backgroundColor: '#e7026e',
+                    backgroundColor: '#EE2727',
                     //borderColor: "rgba(179,181,198,1)",
                     //pointBorderColor: "#fff",
                     //pointBackgroundColor: "rgba(179,181,198,1)",
