@@ -129,11 +129,13 @@
 				.datagrid('enableFilter', [
 					{
 						field: 'DateTime',
-						type: 'dateRange'
+						type: 'dateRange',
+                        op: 'between',
 					},
 					{
 						field: 'AuditType',
 						type: 'combobox',
+                        op: 'equal',
 						options: {
 							panelHeight: 'auto',
 							data: [{
