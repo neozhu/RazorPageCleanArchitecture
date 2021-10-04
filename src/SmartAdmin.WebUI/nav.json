@@ -86,6 +86,11 @@
           "title": "Audit Trails",
           "href": "audittrails_index.html",
           "roles": []
+        },
+        {
+          "title": "Logs",
+          "href": "logs_index.html",
+          "roles": []
         }
       ]
     },

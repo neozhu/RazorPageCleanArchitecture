@@ -38,6 +38,8 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
                 await userManager.AddToRolesAsync(administrator, new[] { administratorRole.Name });
                 await userManager.CreateAsync(demo, "Password123!");
                 await userManager.AddToRolesAsync(demo, new[] { userRole.Name });
+
+
             }
 
         }
@@ -75,7 +77,9 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
                 context.DocumentTypes.Add(new Domain.Entities.DocumentType() { Name = "Image", Description = "Image" });
                 context.DocumentTypes.Add(new Domain.Entities.DocumentType() { Name = "Other", Description = "Other" });
                 await context.SaveChangesAsync();
-                }
+                context.Serilogs.Add(new Domain.Entities.Log.Serilog() { Message= "Initial add document types",Level= "Information",UserName="System",TimeStamp=System.DateTime.Now });
+                await context.SaveChangesAsync();
+            }
             if (!context.KeyValues.Any())
             {
                 context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Status", Value= "initialization",Text= "initialization", Description = "Status of workflow" });
@@ -87,10 +91,15 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
                 context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Region", Value = "CNS", Text = "CNS", Description = "Region of Customer" });
                 context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Region", Value = "Oversea", Text = "Oversea", Description = "Region of Customer" });
                 await context.SaveChangesAsync();
+                context.Serilogs.Add(new Domain.Entities.Log.Serilog() { Message = "Initial add key values", Level = "Information", UserName = "System", TimeStamp = System.DateTime.Now });
+                await context.SaveChangesAsync();
             }
             if (!context.Customers.Any())
             {
                 context.Customers.Add(new Domain.Entities.Customer() { Name = "SmartAdmin", AddressOfEnglish= "https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0", GroupName= "SmartAdmin", Address= "https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0", Sales= "GotBootstrap",RegionSalesDirector= "GotBootstrap",Region= "CNC", NameOfEnglish="SmartAdmin", PartnerType= Domain.Enums.PartnerType.TP,Contact= "GotBootstrap", Email= "drlantern@gotbootstrap.com" });
+                await context.SaveChangesAsync();
+
+                context.Serilogs.Add(new Domain.Entities.Log.Serilog() { Message = "Initial add customer", Level = "Information", UserName = "System", TimeStamp = System.DateTime.Now });
                 await context.SaveChangesAsync();
             }
         }

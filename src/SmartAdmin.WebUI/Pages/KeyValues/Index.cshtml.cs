@@ -38,8 +38,9 @@ namespace SmartAdmin.WebUI.Pages.KeyValues
             _mediator = mediator;
             _localizer = localizer;
         }
-        public async Task OnGetAsync()
+        public  Task OnGetAsync()
         {
+            return Task.CompletedTask;
         }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] KeyValuesWithPaginationQuery command)
         {

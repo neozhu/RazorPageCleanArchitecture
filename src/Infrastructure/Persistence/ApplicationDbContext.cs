@@ -2,11 +2,11 @@ using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Domain.Common;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Entities.Audit;
-using CleanArchitecture.Razor.Domain.Entities.Logs;
+using CleanArchitecture.Razor.Domain.Entities.Log;
 using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using CleanArchitecture.Razor.Domain.Enums;
 using CleanArchitecture.Razor.Infrastructure.Identity;
-using Microsoft.AspNetCore.Identity;
+using CleanArchitecture.Razor.Infrastructure.Persistence.Extensions;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -73,9 +73,14 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
                 }
             }
 
-            var result = await base.SaveChangesAsync(cancellationToken);
+            var events = ChangeTracker.Entries<IHasDomainEvent>()
+                    .Select(x => x.Entity.DomainEvents)
+                    .SelectMany(x => x)
+                    .Where(domainEvent => !domainEvent.IsPublished)
+                    .ToArray();
 
-            await DispatchEvents();
+            var result = await base.SaveChangesAsync(cancellationToken);
+            await DispatchEvents(events);
             await OnAfterSaveChanges(auditEntries, cancellationToken);
             return result;
         }
@@ -84,22 +89,14 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
         {
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
+            builder.ApplyGlobalFilters<ISoftDelete>(s => s.Deleted == null);
         }
         
-        private async Task DispatchEvents()
+        private async Task DispatchEvents(DomainEvent[] events)
         {
-            while (true)
-            {
-                var domainEventEntity = ChangeTracker.Entries<IHasDomainEvent>()
-                    .Select(x => x.Entity.DomainEvents)
-                    .SelectMany(x => x)
-                    .Where(domainEvent => !domainEvent.IsPublished)
-                    .FirstOrDefault();
-                if (domainEventEntity == null) break;
-
-                domainEventEntity.IsPublished = true;
-                await _domainEventService.Publish(domainEventEntity);
+            foreach (var @event in events) {
+                @event.IsPublished = true;
+                await _domainEventService.Publish(@event);
             }
         }
 

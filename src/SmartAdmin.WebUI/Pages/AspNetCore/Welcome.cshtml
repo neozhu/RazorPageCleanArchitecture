@@ -130,17 +130,7 @@
 @Html.AntiForgeryToken()
 @section ScriptsBlock{
 <script>
-    $.get('@Url.Page("/AspNetCore/Welcome")?handler=Filter&input=HellWord').done(res=>{
-      console.log(res);
-        });
-        $.ajax({
-    type: "POST",
-    url: "@Url.Page("/AspNetCore/Welcome")",
-    data: { input: "bar" },
-    headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
-    success: function (response) {
-        }
-        });
+    
   
 </script>
 }

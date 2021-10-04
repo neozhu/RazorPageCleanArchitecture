@@ -57,7 +57,7 @@ namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Ap
 
                 }
             }
-            var approval = await _context.ApprovalDatas.FindAsync(request.WorkflowId);
+            var approval = await _context.ApprovalDatas.FindAsync(new object[]{ request.WorkflowId },cancellationToken);
             approval.Comments = request.Comments;
             approval.Status = "Finished";
             approval.ApprovedDateTime = DateTime.Now;

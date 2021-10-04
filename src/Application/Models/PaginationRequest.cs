@@ -16,9 +16,6 @@ namespace CleanArchitecture.Razor.Application.Models
         public int Rows { get; set; } = 15;
         public string Sort { get; set; } = "Id";
         public string Order { get; set; } = "desc";
-        public override string ToString()
-        {
-            return $"page:{Page},rows:{Rows},sort:{Sort},order:{Order},filterRule:{FilterRules}";
-        }
+        public override string ToString() => $"page:{Page},rows:{Rows},sort:{Sort},order:{Order},filterRule:{FilterRules}";
     }
 }

@@ -34,7 +34,7 @@ namespace CleanArchitecture.Razor.Application.Documents.Commands.Delete
         }
         public async Task<Result> Handle(DeleteDocumentCommand request, CancellationToken cancellationToken)
         {
-            var item =await _context.Documents.FindAsync(request.Id);
+            var item =await _context.Documents.FindAsync(new object[] { request.Id },cancellationToken);
             _context.Documents.Remove(item);
             await _context.SaveChangesAsync(cancellationToken);
             return Result.Success();

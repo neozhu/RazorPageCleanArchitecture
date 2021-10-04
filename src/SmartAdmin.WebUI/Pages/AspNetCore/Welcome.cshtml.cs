@@ -33,13 +33,13 @@ namespace SmartAdmin.WebUI.Pages.AspNetCore
             _logger.LogInformation("Welcome.");
             _diagnosticContext.Set("IndexCallCount", Interlocked.Increment(ref _callCount));
         }
-    public async Task<JsonResult> OnGetFilter(string input)
+    public  Task<JsonResult> OnGetFilter(string input)
     {
-      return new JsonResult(input);
+      return  Task.FromResult(new JsonResult(input));
     }
-    public async Task<JsonResult> OnPost(string input)
+    public  Task<JsonResult> OnPost(string input)
     {
-      return new JsonResult("");
-    }
+      return Task.FromResult(new JsonResult(string.Empty));
+        }
   }
 }

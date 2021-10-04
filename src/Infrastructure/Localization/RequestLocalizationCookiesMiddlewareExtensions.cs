@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 
-namespace SmartAdmin.WebUI.Extensions
+namespace CleanArchitecture.Razor.Infrastructure.Localization
 {
     public static class RequestLocalizationCookiesMiddlewareExtensions
     {

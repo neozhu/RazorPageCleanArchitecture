@@ -1,17 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
-using CleanArchitecture.Razor.Application.Constants;
 using CleanArchitecture.Razor.Application.KeyValues.Caching;
 using CleanArchitecture.Razor.Application.KeyValues.DTOs;
 using MediatR;
@@ -25,7 +22,7 @@ namespace CleanArchitecture.Razor.Application.KeyValues.Queries.ByName
     {
         public string Name { get; set; }
 
-        public string CacheKey =>Cache.GetKeyValuesCacheKey(Name);
+        public string CacheKey => KeyValueCacheKey.GetCacheKey(Name);
 
         public MemoryCacheEntryOptions Options => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(KeyValueCacheTokenSource.ResetCacheToken.Token));
     }

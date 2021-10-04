@@ -2,6 +2,7 @@ using CleanArchitecture.Razor.Application;
 using CleanArchitecture.Razor.Infrastructure;
 using CleanArchitecture.Razor.Infrastructure.Constants.Application;
 using CleanArchitecture.Razor.Infrastructure.Constants.Localization;
+using CleanArchitecture.Razor.Infrastructure.Localization;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,7 +35,7 @@ namespace SmartAdmin.WebUI
         {
             services.Configure<SmartSettings>(Configuration.GetSection(SmartSettings.SectionName));
 
-            services.AddLocalization(options => options.ResourcesPath = "Resources");
+          
             // Note: This line is for demonstration purposes only, I would not recommend using this as a shorthand approach for accessing settings
             // While having to type '.Value' everywhere is driving me nuts (>_<), using this method means reloaded appSettings.json from disk will not work
             services.AddSingleton(s => s.GetRequiredService<IOptions<SmartSettings>>().Value);
@@ -46,18 +47,14 @@ namespace SmartAdmin.WebUI
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
         
-            services.AddApplication()
-                    .AddInfrastructure(Configuration)
+            services.AddInfrastructure(Configuration)
+                    .AddApplication()
                     .AddWorkflow(Configuration);
           
             services.AddDatabaseDeveloperPageExceptionFilter();
            
             services.AddControllers();
-            services.Configure<RequestLocalizationOptions>(options =>
-            {
-                options.AddSupportedUICultures(LocalizationConstants.SupportedLanguages.Select(x=>x.Code).ToArray());
-                options.FallBackToParentUICultures = true;
-            });
+           
             services
                 .AddRazorPages()
                 .AddFluentValidation(fv =>
@@ -85,7 +82,7 @@ namespace SmartAdmin.WebUI
                         options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                   });
 
-            services.AddScoped<RequestLocalizationCookiesMiddleware>();
+        
             services.AddSignalR();
         }
 

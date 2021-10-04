@@ -12,7 +12,6 @@ using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
 using CleanArchitecture.Razor.Application.Common.Mappings;
 using CleanArchitecture.Razor.Application.Common.Models;
-using CleanArchitecture.Razor.Application.Constants;
 using CleanArchitecture.Razor.Application.DocumentTypes.Caching;
 using CleanArchitecture.Razor.Application.DocumentTypes.DTOs;
 using CleanArchitecture.Razor.Domain.Entities;
@@ -24,7 +23,7 @@ namespace CleanArchitecture.Razor.Application.DocumentTypes.Commands.AddEdit
 {
     public class AddEditDocumentTypeCommand : DocumentTypeDto, IRequest<Result<int>>, IMapFrom<DocumentType>, ICacheInvalidator
     {
-        public string CacheKey => Cache.GetAllDocumentTypesCacheKey;
+        public string CacheKey => string.Empty;
 
         public CancellationTokenSource ResetCacheToken => DocumentTypeCacheTokenSource.ResetCacheToken;
     }
@@ -48,7 +47,7 @@ namespace CleanArchitecture.Razor.Application.DocumentTypes.Commands.AddEdit
            
             if (request.Id > 0)
             {
-                var documentType = await _context.DocumentTypes.FindAsync(request.Id);
+                var documentType = await _context.DocumentTypes.FindAsync(new object[] { request.Id }, cancellationToken);
                 documentType = _mapper.Map(request, documentType);
                 await _context.SaveChangesAsync(cancellationToken);
                 return Result<int>.Success(documentType.Id);

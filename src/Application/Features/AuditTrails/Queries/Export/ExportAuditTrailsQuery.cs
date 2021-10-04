@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Extensions;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
-using CleanArchitecture.Razor.Domain.Entities;
 using System.Linq.Dynamic.Core;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper.QueryableExtensions;
 using Microsoft.Extensions.Localization;
 using CleanArchitecture.Razor.Application.Features.AuditTrails.DTOs;
-using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using CleanArchitecture.Razor.Domain.Entities.Audit;
 
 namespace CleanArchitecture.Razor.Application.Features.AuditTrails.Queries.Export

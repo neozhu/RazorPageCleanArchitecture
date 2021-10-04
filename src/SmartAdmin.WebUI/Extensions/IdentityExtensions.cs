@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
@@ -20,7 +21,7 @@ namespace SmartAdmin.WebUI.Extensions
 
             var claims = principal.FindAll(ClaimTypes.Role).Select(x => x.Value).ToSafeList();
 
-            return claims?.Any() == true && claims.Intersect(roles ?? new string[] { }).Any();
+            return claims?.Any() == true && claims.Intersect(roles ?? Array.Empty<string>()).Any();
         }
 
         [DebuggerStepThrough]

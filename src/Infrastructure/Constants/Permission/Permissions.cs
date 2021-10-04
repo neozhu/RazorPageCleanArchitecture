@@ -15,6 +15,14 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Permission
             public const string Search = "Permissions.AuditTrails.Search";
             public const string Export = "Permissions.AuditTrails.Export";
         }
+        [DisplayName("Logs")]
+        [Description("Logs Permissions")]
+        public static class Logs
+        {
+            public const string View = "Permissions.Logs.View";
+            public const string Search = "Permissions.Logs.Search";
+            public const string Export = "Permissions.Logs.Export";
+        }
         [DisplayName("Workflow")]
         [Description("Approval Permissions")]
         public static class Approval
