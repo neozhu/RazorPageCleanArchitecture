@@ -172,11 +172,12 @@
                     $('#documentType_modal').modal('toggle');
                     reloadData();
                 }).catch((error) => {
-                    if (error.response.data.Errors) {
-                        const errors = error.response.data.Errors;
-                        errors.forEach(item => {
-                            toastr["error"](item);
-                        });
+                    if (error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        for (let [key, value] of Object.entries(errors)) {
+                            toastr["error"](`${key}: ${value.toString()}`);
+                        }
+
                     } else {
                         toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
                     }
@@ -293,14 +294,15 @@
                             reloadData();
                         })
                             .catch((error) => {
-                                if (error.response.data.Errors) {
-                                        const errors = error.response.data.Errors;
-                                        errors.forEach(item => {
-                                            toastr["error"](item);
-                                        });
-                                    } else {
-                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                if (error.response.data.errors) {
+                                    const errors = error.response.data.errors;
+                                    for (let [key, value] of Object.entries(errors)) {
+                                        toastr["error"](`${key}: ${value.toString()}`);
                                     }
+
+                                } else {
+                                    toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                }
                             });
                     }
                 }
@@ -330,11 +332,12 @@
                                 reloadData();
                             })
                                 .catch((error) => {
-                                    if (error.response.data.Errors) {
-                                        const errors = error.response.data.Errors;
-                                        errors.forEach(item => {
-                                            toastr["error"](item);
-                                        });
+                                    if (error.response.data.errors) {
+                                        const errors = error.response.data.errors;
+                                        for (let [key, value] of Object.entries(errors)) {
+                                            toastr["error"](`${key}: ${value.toString()}`);
+                                        }
+
                                     } else {
                                         toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
                                     }
@@ -352,7 +355,7 @@
                 sort: options.sortName,
                 order: options.sortOrder,
             }
-            console.log(options,data)
+            console.log(options, data)
             var headers = {
                 "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
             }
@@ -372,11 +375,12 @@
                     link.click();
                     toastr["info"](`@_localizer["Export Success"]`);
                 }).catch(error => {
-                    if (error.response.data.Errors) {
-                        const errors = error.response.data.Errors;
-                        errors.forEach(item => {
-                            toastr["error"](item);
-                        });
+                    if (error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        for (let [key, value] of Object.entries(errors)) {
+                            toastr["error"](`${key}: ${value.toString()}`);
+                        }
+
                     } else {
                         toastr["error"](`@_localizer["Export fail"],${error.response.data}`);
                     }

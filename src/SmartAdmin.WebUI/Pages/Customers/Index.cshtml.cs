@@ -62,20 +62,9 @@ namespace SmartAdmin.WebUI.Pages.Customers
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            try
-            {
-                var result = await _mediator.Send(Input);
-                return new JsonResult(result);
-            }
-            catch (ValidationException ex)
-            {
-                var errors = ex.Errors.Select(x => $"{ string.Join(",", x.Value) }");
-                return BadRequest(Result.Failure(errors));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(Result.Failure(new string[] { ex.Message }));
-            }
+            var result = await _mediator.Send(Input);
+            return new JsonResult(result);
+
         }
 
         public async Task<IActionResult> OnGetDeleteCheckedAsync([FromQuery] int[] id)

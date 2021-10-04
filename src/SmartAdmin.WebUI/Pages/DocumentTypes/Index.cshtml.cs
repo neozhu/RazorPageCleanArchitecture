@@ -39,7 +39,7 @@ namespace SmartAdmin.WebUI.Pages.DocumentTypes
             _mediator = mediator;
             _localizer = localizer;
         }
-        public  Task OnGetAsync()
+        public Task OnGetAsync()
         {
             return Task.CompletedTask;
         }
@@ -50,20 +50,10 @@ namespace SmartAdmin.WebUI.Pages.DocumentTypes
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            try
-            {
-                var result = await _mediator.Send(Input);
-                return new JsonResult(result);
-            }
-            catch (ValidationException ex)
-            {
-                var errors = ex.Errors.Select(x => $"{ string.Join(",", x.Value) }");
-                return BadRequest(Result.Failure(errors));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(Result.Failure(new string[] { ex.Message }));
-            }
+
+            var result = await _mediator.Send(Input);
+            return new JsonResult(result);
+
         }
 
         public async Task<IActionResult> OnGetDeleteCheckedAsync([FromQuery] int[] id)
@@ -80,8 +70,8 @@ namespace SmartAdmin.WebUI.Pages.DocumentTypes
         }
         public async Task<FileResult> OnPostExportAsync([FromBody] ExportDocumentTypesQuery command)
         {
-            var result =await _mediator.Send(command);
-            return  File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["DocumentTypes"]+".xlsx");
+            var result = await _mediator.Send(command);
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["DocumentTypes"] + ".xlsx");
         }
         public async Task<FileResult> OnGetCreateTemplate()
         {
@@ -91,11 +81,12 @@ namespace SmartAdmin.WebUI.Pages.DocumentTypes
         }
         public async Task<IActionResult> OnPostImportAsync()
         {
-            var stream=new MemoryStream();
-            await  UploadedFile.CopyToAsync(stream);
-            var command = new ImportDocumentTypesCommand() {
-                 FileName=UploadedFile.FileName,
-                 Data= stream.ToArray()
+            var stream = new MemoryStream();
+            await UploadedFile.CopyToAsync(stream);
+            var command = new ImportDocumentTypesCommand()
+            {
+                FileName = UploadedFile.FileName,
+                Data = stream.ToArray()
             };
             var result = await _mediator.Send(command);
             return new JsonResult(result);
