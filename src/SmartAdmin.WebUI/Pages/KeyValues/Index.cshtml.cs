@@ -23,7 +23,7 @@ namespace SmartAdmin.WebUI.Pages.KeyValues
     [Authorize(policy: Permissions.Dictionaries.View)]
     public class IndexModel : PageModel
     {
-        
+
         [BindProperty]
         public IFormFile UploadedFile { get; set; }
 
@@ -38,7 +38,7 @@ namespace SmartAdmin.WebUI.Pages.KeyValues
             _mediator = mediator;
             _localizer = localizer;
         }
-        public  Task OnGetAsync()
+        public Task OnGetAsync()
         {
             return Task.CompletedTask;
         }
@@ -49,20 +49,9 @@ namespace SmartAdmin.WebUI.Pages.KeyValues
         }
         public async Task<IActionResult> OnPostAsync([FromBody] SaveChangedKeyValuesCommand command)
         {
-            try
-            {
-                var result = await _mediator.Send(command);
-                return new JsonResult(result);
-            }
-            catch (ValidationException ex)
-            {
-                var errors = ex.Errors.Select(x => $"{ string.Join(",", x.Value) }");
-                return BadRequest(Result.Failure(errors));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(Result.Failure(new string[] { ex.Message }));
-            }
+            var result = await _mediator.Send(command);
+            return new JsonResult(result);
+
         }
 
         public async Task<IActionResult> OnGetDeleteCheckedAsync([FromQuery] int[] id)
@@ -79,8 +68,8 @@ namespace SmartAdmin.WebUI.Pages.KeyValues
         }
         public async Task<FileResult> OnPostExportAsync([FromBody] ExportKeyValuesQuery command)
         {
-            var result =await _mediator.Send(command);
-            return  File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["KeyValues"]+".xlsx");
+            var result = await _mediator.Send(command);
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["KeyValues"] + ".xlsx");
         }
         public async Task<FileResult> OnGetCreateTemplate()
         {
@@ -90,11 +79,12 @@ namespace SmartAdmin.WebUI.Pages.KeyValues
         }
         public async Task<IActionResult> OnPostImportAsync()
         {
-            var stream=new MemoryStream();
-            await  UploadedFile.CopyToAsync(stream);
-            var command = new ImportKeyValuesCommand() {
-                 FileName=UploadedFile.FileName,
-                 Data= stream.ToArray()
+            var stream = new MemoryStream();
+            await UploadedFile.CopyToAsync(stream);
+            var command = new ImportKeyValuesCommand()
+            {
+                FileName = UploadedFile.FileName,
+                Data = stream.ToArray()
             };
             var result = await _mediator.Send(command);
             return new JsonResult(result);

@@ -50,7 +50,7 @@ namespace SmartAdmin.WebUI.Pages.Documents
             var request = new DocumentTypesGetAllQuery();
             var documentTypeDtos = await _mediator.Send(request);
             DocumentTypes = new SelectList(documentTypeDtos, "Id", "Name");
-            }
+        }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] DocumentsWithPaginationQuery command)
         {
             var result = await _mediator.Send(command);
@@ -58,29 +58,19 @@ namespace SmartAdmin.WebUI.Pages.Documents
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            try
+
+            if (UploadedFile != null)
             {
-                if (UploadedFile != null)
-                {
-                    Input.UploadRequest = new CleanArchitecture.Razor.Application.Models.UploadRequest();
-                    Input.UploadRequest.FileName = UploadedFile.FileName;
-                    Input.UploadRequest.UploadType = CleanArchitecture.Razor.Domain.Enums.UploadType.Document;
-                    var stream = new MemoryStream();
-                    UploadedFile.CopyTo(stream);
-                    Input.UploadRequest.Data = stream.ToArray();
-                }
-                var result = await _mediator.Send(Input);
-                return new JsonResult(result);
+                Input.UploadRequest = new CleanArchitecture.Razor.Application.Models.UploadRequest();
+                Input.UploadRequest.FileName = UploadedFile.FileName;
+                Input.UploadRequest.UploadType = CleanArchitecture.Razor.Domain.Enums.UploadType.Document;
+                var stream = new MemoryStream();
+                UploadedFile.CopyTo(stream);
+                Input.UploadRequest.Data = stream.ToArray();
             }
-            catch (ValidationException ex)
-            {
-                var errors = ex.Errors.Select(x => $"{ string.Join(",", x.Value) }");
-                return BadRequest(Result.Failure(errors));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(Result.Failure(new string[] { ex.Message }));
-            }
+            var result = await _mediator.Send(Input);
+            return new JsonResult(result);
+
         }
 
         public async Task<IActionResult> OnGetDeleteCheckedAsync([FromQuery] int[] id)
@@ -97,10 +87,10 @@ namespace SmartAdmin.WebUI.Pages.Documents
         }
         public async Task<FileResult> OnPostExportAsync([FromBody] ExportDocumentsQuery command)
         {
-            var result =await _mediator.Send(command);
-            return  File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["Documents"]+".xlsx");
+            var result = await _mediator.Send(command);
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["Documents"] + ".xlsx");
         }
-        
+
 
     }
 }
