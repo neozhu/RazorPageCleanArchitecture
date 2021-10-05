@@ -26,7 +26,7 @@ namespace SmartAdmin.WebUI.EndPoints
         /// <param name="model"></param>
         /// <returns>Status 200 OK</returns>
         [HttpPost]
-        public async Task<ActionResult> Get([FromBody]TokenRequestDto model)
+        public async Task<ActionResult> Login([FromBody]TokenRequestDto model)
         {
             var response = await _identityService.LoginAsync(model);
             return Ok(response);
