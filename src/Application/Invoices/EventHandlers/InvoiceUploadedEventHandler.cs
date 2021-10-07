@@ -36,7 +36,7 @@ namespace CleanArchitecture.Razor.Application.Invoices.EventHandlers
             var item =await _context.Invoices.FindAsync(id);
             item.Status = "Queuing";
             await _context.SaveChangesAsync(cancellationToken);
-            BackgroundJob.Enqueue(()=> _ocr.Recognition(domainEvent.Item.Id,domainEvent.Item.ImgString));
+            BackgroundJob.Enqueue(()=> _ocr.Recognition(domainEvent.Item.Id));
 
            
         }

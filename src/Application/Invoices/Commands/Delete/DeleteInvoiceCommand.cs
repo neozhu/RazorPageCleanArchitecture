@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -42,7 +42,6 @@ namespace CleanArchitecture.Razor.Application.Invoices.Commands.Delete
         }
         public async Task<Result> Handle(DeleteInvoiceCommand request, CancellationToken cancellationToken)
         {
-           //TODO:Implementing DeleteInvoiceCommandHandler method 
            var item = await _context.Invoices.FindAsync(new object[] { request.Id }, cancellationToken);
             _context.Invoices.Remove(item);
             await _context.SaveChangesAsync(cancellationToken);
@@ -51,7 +50,6 @@ namespace CleanArchitecture.Razor.Application.Invoices.Commands.Delete
 
         public async Task<Result> Handle(DeleteCheckedInvoicesCommand request, CancellationToken cancellationToken)
         {
-           //TODO:Implementing DeleteCheckedInvoicesCommandHandler method 
            var items = await _context.Invoices.Where(x => request.Id.Contains(x.Id)).ToListAsync(cancellationToken);
             foreach (var item in items)
             {

@@ -1,7 +1,7 @@
 using CleanArchitecture.Razor.Application;
+using CleanArchitecture.Razor.Application.Hubs;
+using CleanArchitecture.Razor.Application.Hubs.Constants;
 using CleanArchitecture.Razor.Infrastructure;
-using CleanArchitecture.Razor.Infrastructure.Constants.Application;
-using CleanArchitecture.Razor.Infrastructure.Constants.Localization;
 using CleanArchitecture.Razor.Infrastructure.Localization;
 using FluentValidation.AspNetCore;
 using Hangfire;
@@ -16,7 +16,6 @@ using Microsoft.Extensions.Options;
 using Serilog;
 using SmartAdmin.WebUI.Extensions;
 using SmartAdmin.WebUI.Filters;
-using SmartAdmin.WebUI.Hubs;
 using SmartAdmin.WebUI.Models;
 using System.IO;
 using System.Linq;
@@ -130,7 +129,7 @@ namespace SmartAdmin.WebUI
                 endpoints.MapControllers();
                 endpoints.MapRazorPages();
                 endpoints.MapHangfireDashboard();
-                endpoints.MapHub<SignalRHub>(ApplicationConstants.SignalR.HubUrl);
+                endpoints.MapHub<SignalRHub>(SignalR.HubUrl);
             });
         }
     }

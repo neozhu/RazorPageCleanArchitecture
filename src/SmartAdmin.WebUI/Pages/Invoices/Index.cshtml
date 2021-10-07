@@ -1,5 +1,6 @@
 ﻿@page
 @using CleanArchitecture.Razor.Domain.Enums
+@using CleanArchitecture.Razor.Application.Hubs.Constants
 @using CleanArchitecture.Razor.Infrastructure.Constants.Permission
 @model SmartAdmin.WebUI.Pages.Invoices.IndexModel
 @inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
@@ -21,101 +22,101 @@
 }
 @section HeadBlock {
 
-<link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
-<link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
-<link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">
-<link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
-<style>
+    <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+    <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+    <link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">
+    <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+    <style>
 
-    .plfile_empty_div {
-        position: absolute;
-        left: 17%;
-        top: 43%;
-        z-index: 1;
-    }
-
-    ul#filelist {
-        width: 450px;
-        min-height: 100px;
-        background: #fff;
-        border-left: 0;
-        border-right: 0;
-        line-height: 24px;
-        overflow: hidden;
-        margin: 0 15px;
-        padding: 5px 0;
-        font-size: 12px;
-    }
-
-        ul#filelist li {
-            list-style-type: none;
-            margin: 4px 0;
-            padding: 0px 17px 0px 0px;
+        .plfile_empty_div {
+            position: absolute;
+            left: 17%;
+            top: 43%;
+            z-index: 1;
         }
 
-            ul#filelist li:hover {
-                background: #d6e7f9;
+        ul#filelist {
+            width: 450px;
+            min-height: 100px;
+            background: #fff;
+            border-left: 0;
+            border-right: 0;
+            line-height: 24px;
+            overflow: hidden;
+            margin: 0 15px;
+            padding: 5px 0;
+            font-size: 12px;
+        }
+
+            ul#filelist li {
+                list-style-type: none;
+                margin: 4px 0;
+                padding: 0px 17px 0px 0px;
             }
 
-    #filelist li {
-        clear: both;
-        line-height: 22px;
-        height: 22px;
-    }
+                ul#filelist li:hover {
+                    background: #d6e7f9;
+                }
 
-    .plupload_filename {
-        width: 230px;
-        display: block;
-        float: left;
-        word-wrap: break-word;
-        margin-right: 10px;
-        line-height: 22px;
-        margin-left: 5px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+        #filelist li {
+            clear: both;
+            line-height: 22px;
+            height: 22px;
+        }
 
-    .plupload_filesize {
-        width: 80px;
-        line-height: 22px;
-        display: block;
-        float: left;
-    }
+        .plupload_filename {
+            width: 230px;
+            display: block;
+            float: left;
+            word-wrap: break-word;
+            margin-right: 10px;
+            line-height: 22px;
+            margin-left: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-    .plupload_d-none {
-        display: none;
-    }
+        .plupload_filesize {
+            width: 80px;
+            line-height: 22px;
+            display: block;
+            float: left;
+        }
 
-    .plupload_fileremove {
-        float: right;
-        line-height: 22px;
-        display: block;
-        cursor: pointer;
-    }
+        .plupload_d-none {
+            display: none;
+        }
 
-    .plupload_fileprogress {
-        display: block;
-        width: 60px;
-        line-height: 22px;
-        margin-right: 19px;
-        float: right;
-        text-align: right;
-    }
-</style>
-<style>
+        .plupload_fileremove {
+            float: right;
+            line-height: 22px;
+            display: block;
+            cursor: pointer;
+        }
 
-	.invoice_dg_datagrid-cell-c1-_action {
-		overflow: visible !important
-	}
-</style>
+        .plupload_fileprogress {
+            display: block;
+            width: 60px;
+            line-height: 22px;
+            margin-right: 19px;
+            float: right;
+            text-align: right;
+        }
+    </style>
+    <style>
+
+        .invoice_dg_datagrid-cell-c1-_action {
+            overflow: visible !important
+        }
+    </style>
 }
 <div id="js-page-content-demopanels" class="card mb-g">
-	<div class="card-header bg-white d-flex align-items-center">
-		<h4 class="m-0">
-			@_localizer["Invoices"]
-			<small>@_localizer["See all available options"]</small>
-		</h4>
+    <div class="card-header bg-white d-flex align-items-center">
+        <h4 class="m-0">
+            @_localizer["Invoices"]
+            <small>@_localizer["See all available options"]</small>
+        </h4>
         <div class="ml-auto">
             @if (_canUpload.Succeeded)
             {
@@ -167,29 +168,48 @@
                 </button>
             }
         </div>
-	</div>
-	<div class="card-body">
-		<div class="row">
-			<div class="col-md-12">
-				<table id="invoice_dg">
-				</table>
-			</div>
-		</div>
-	</div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table id="invoice_dg">
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="modal fade" id="invoice_modal" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Modal title</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
-				</button>
-			</div>
-			<form id="invoice_form" class="needs-validation" novalidate="novalidate">
-				<div class="modal-body">
-					@Html.AntiForgeryToken()
-					<input type="hidden" asp-for="Input.Id" />
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                </button>
+            </div>
+            <form id="invoice_form" class="needs-validation" novalidate="novalidate">
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="Input.Id" />
+                    <input type="hidden" asp-for="Input.AttachmentUrl" />
+                    <div class="form-row">
+                        <div class="col-md-8" style="overflow:  auto;max-height:450px">
+                            <canvas id="photoCanvas"></canvas>
+                        </div>
+                        <div class="col-md-4" style="overflow: auto; max-height: 450px ">
+                            <table id="rawdata_table" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>@_localizer["No"]</th>
+                                        <th>@_localizer["Text"]</th>
+                                        <th>@_localizer["Label"]</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     <div class="form-row">
                         <div class="col-md-6">
                             <label class="form-label" for="Title">@_localizer["Title"] <span class="text-danger">*</span></label>
@@ -239,14 +259,14 @@
                             <span class="invalid-feedback" asp-validation-for="Input.Result">Sorry, you missed this one.</span>
                         </div>
                     </div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
-					<button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
-				</div>
-			</form>
-		</div>
-	</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
+                    <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 
@@ -282,25 +302,28 @@
     </div>
 </div>
 
-@await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/invoices/index") + "?handler=Import",
+@await Component.InvokeAsync("ImportExcel", new
+{
+    importUri = Url.Page("/invoices/index") + "?handler=Import",
     getTemplateUri = @Url.Page("/invoices/index") + "?handler=CreateTemplate",
-    onImportedSucceeded = "reloadData()" })
+    onImportedSucceeded = "reloadData()"
+})
 @section ScriptsBlock {
-<partial name="_ValidationScriptsPartial" />
-<script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
-<script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
-<script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
 
-<script>jQuery.fn.tooltip = bootstrapTooltip;</script>
-<script src="~/lib/axios/dist/axios.js"></script>
-<script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+    <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
+    <script src="~/lib/axios/dist/axios.js"></script>
+    <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
 
-<script src="~/lib/filesize/filesize.js"></script>
-<script src="~/lib/plupload/plupload.full.min.js"></script>
-<script src="~/lib/plupload/jquery.plupload.queue/jquery.plupload.queue.js"></script>
-<script src="~/lib/plupload/jquery.ui.plupload/jquery.ui.plupload.js"></script>
+    <script src="~/lib/filesize/filesize.js"></script>
+    <script src="~/lib/plupload/plupload.full.min.js"></script>
+    <script src="~/lib/plupload/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+    <script src="~/lib/plupload/jquery.ui.plupload/jquery.ui.plupload.js"></script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
     $('#uploadbutton').click(function () {
         onUploadPhoto();
     });
@@ -424,7 +447,10 @@
 
 	$(() => {
 		initdatagrid();
-	})
+    })
+    var canvas = document.getElementById("photoCanvas");
+    var ctx = canvas.getContext("2d");
+
 	var popupmodal = (invoice) => {
 		$('#invoice_modal').modal('toggle');
 		$('#invoice_modal .modal-title').html('@_localizer["Add Invoice"]');
@@ -434,9 +460,19 @@
 			$('#invoice_modal .modal-title').html('@_localizer["Edit Invoice"]');
 			$('#invoice_form').jsonToForm(invoice, {
 
-			})
+            })
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            var photo = new Image();
+            photo.src = invoice.AttachmentUrl;
+            photo.onload = function () {
+                canvas.width = photo.width;
+                canvas.height = photo.height;
+                ctx.drawImage(photo, 0, 0);
+            }
+            onLoadRawData(invoice.Id);
 		} else {
 			$('#invoice_form #Input_Id').val(0)
+
 
 		}
 	}
@@ -562,7 +598,43 @@
 		$('#uploadfilesmodal').modal('toggle');
 	}
 
+    var onLoadRawData = (id) => {
+        axios.get('@Url.Page("/invoices/index")?handler=RawData&id=' + id)
+            .then(res => {
+                const data = res.data;
+                console.log(data);
+                $('#rawdata_table > tbody').empty();
+                data.map((item,index) => {
+                    $('#rawdata_table > tbody').append(`<tr><td>${index + 1}</td><td>${item.Text}</td><td></td></tr>`);
+                    var points = JSON.parse(item.Text_Region);
+                    ctx.lineWidth = "5";
+                    ctx.strokeStyle = "#00ff00";
+                    ctx.textAlign = 'left';
+                    ctx.textBaseline = 'top';
+                    ctx.fillStyle = "#ff0000";
+                    ctx.font = "bold 13px verdana, sans-serif ";
+                    ctx.fillText(item.Text, points[0][0], points[0][1]-15);
+                    ctx.beginPath();
+                    ctx.moveTo(points[0][0], points[0][1]);
+                    ctx.lineTo(points[1][0], points[1][1]);
+                    ctx.lineTo(points[2][0], points[2][1]);
+                    ctx.lineTo(points[3][0], points[3][1]);
+                    ctx.closePath();
+                    ctx.stroke();
+                });
+            })
+    }
     document.addEventListener("DOMContentLoaded", function () {
+
+        if (connection) {
+            connection.on("@SignalR.OCRTaskCompleted", function (item) {
+                toastr["info"](`@_localizer["OCR Completed."]`);
+                reloadData();
+            });
+
+        }
+
+
         $('#slimscroll').slimScroll({
             height: '100px',
             railVisible: true,
@@ -679,5 +751,5 @@
             uploader.start();
         });
     });
-</script>
+    </script>
 }

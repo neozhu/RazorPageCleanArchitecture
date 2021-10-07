@@ -11,6 +11,6 @@ namespace CleanArchitecture.Razor.Application.Invoices.PaddleOCR
 {
     public interface IOcrJob
     {
-        void Recognition(int id, string base64string);
+        void Recognition(int id);
     }
 }

@@ -11,6 +11,7 @@ using CleanArchitecture.Razor.Application.Invoices.Commands.Delete;
 using CleanArchitecture.Razor.Application.Invoices.Commands.Import;
 using CleanArchitecture.Razor.Application.Invoices.Commands.Upload;
 using CleanArchitecture.Razor.Application.Invoices.Queries.Export;
+using CleanArchitecture.Razor.Application.Invoices.Queries.GetRawData;
 using CleanArchitecture.Razor.Application.Invoices.Queries.Pagination;
 using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 using MediatR;
@@ -114,6 +115,12 @@ namespace SmartAdmin.WebUI.Pages.Invoices
                 FileName = UploadedPhoto.FileName,
                 Data = stream.ToArray()
             };
+            var result = await _mediator.Send(command);
+            return new JsonResult(result);
+        }
+        public async Task<IActionResult> OnGetRawData([FromQuery] int id)
+        {
+            var command = new GetInvoiceRawDatasQuery() { InvoiceId = id };
             var result = await _mediator.Send(command);
             return new JsonResult(result);
         }
