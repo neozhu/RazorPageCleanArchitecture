@@ -1,6 +1,6 @@
 ﻿@page
 @model UserModel
-@using CleanArchitecture.Razor.Infrastructure.Constants.Application
+@using CleanArchitecture.Razor.Application.Hubs.Constants
 @using CleanArchitecture.Razor.Infrastructure.Constants.Permission
 @inject Microsoft.Extensions.Localization.IStringLocalizer<UserModel> _localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
@@ -804,11 +804,11 @@
         $(() => {
             initdatagrid();
 			if(connection){
-				connection.on("@ApplicationConstants.SignalR.ConnectUser", function (user) {
+				connection.on("@SignalR.ConnectUser", function (user) {
 					toastr["info"](`@_localizer["${user.displayName} logon."]`);
 					reload();
                 });
-				connection.on("@ApplicationConstants.SignalR.DisconnectUser", function (user) {
+				connection.on("@SignalR.DisconnectUser", function (user) {
 					toastr["info"](`@_localizer["${user.displayName} logoff."]`);
 					reload();
                 });

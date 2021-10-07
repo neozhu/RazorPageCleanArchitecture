@@ -6,40 +6,45 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
-using CleanArchitecture.Razor.Infrastructure.Constants.Application;
-using CleanArchitecture.Razor.Infrastructure.Identity;
-using Microsoft.AspNetCore.Identity;
+using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
+using CleanArchitecture.Razor.Application.Hubs.Constants;
 using Microsoft.AspNetCore.SignalR;
-using SmartAdmin.WebUI.Extensions;
 
-namespace SmartAdmin.WebUI.Hubs
+
+namespace CleanArchitecture.Razor.Application.Hubs
 {
     public class SignalRHub : Hub
     {
-        
+
         private static readonly ConcurrentDictionary<string, bool> _onlineUsers = new ConcurrentDictionary<string, bool>();
         private readonly ICurrentUserService _currentUserService;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IIdentityService _identityService;
+
 
         public SignalRHub(
             ICurrentUserService currentUserService,
-            UserManager<ApplicationUser> userManager
+            IIdentityService identityService
+
             )
         {
             _currentUserService = currentUserService;
-            _userManager = userManager;
+            _identityService = identityService;
+
         }
         public override async Task OnConnectedAsync()
         {
             var userId = _currentUserService.UserId;
             if (userId is not null)
             {
-               if( _onlineUsers.TryAdd(userId, true))
+                if (_onlineUsers.TryAdd(userId, true))
                 {
-                    var user =await _userManager.FindByIdAsync(userId);
-                    user.IsLive = true;
-                    await _userManager.UpdateAsync(user);
-                    await Clients.All.SendAsync(ApplicationConstants.SignalR.ConnectUser, new { user.Id, user.DisplayName });
+                    var result = await _identityService.UpdateLiveStatus(userId, true);
+                    if (result != string.Empty)
+                    {
+
+                        await Clients.All.SendAsync(SignalR.ConnectUser, new { userId, result });
+                    }
+
                 }
 
                 await UpdateOnlineUsers();
@@ -61,10 +66,12 @@ namespace SmartAdmin.WebUI.Hubs
                 }
                 else
                 {
-                    var user = await _userManager.FindByIdAsync(userId);
-                    user.IsLive = false;
-                    await _userManager.UpdateAsync(user);
-                    await Clients.All.SendAsync(ApplicationConstants.SignalR.DisconnectUser, new { user.Id, user.DisplayName });
+                    var result = await _identityService.UpdateLiveStatus(userId, true);
+                    if (result != string.Empty)
+                    {
+
+                        await Clients.All.SendAsync(SignalR.DisconnectUser, new { userId, result });
+                    }
                 }
 
                 await UpdateOnlineUsers();

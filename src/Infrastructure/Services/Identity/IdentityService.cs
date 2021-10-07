@@ -251,5 +251,14 @@ namespace CleanArchitecture.Razor.Infrastructure.Services.Identity
             var secret = Encoding.UTF8.GetBytes(_appConfig.Value.Secret);
             return new SigningCredentials(new SymmetricSecurityKey(secret), SecurityAlgorithms.HmacSha256);
         }
+
+        public async Task<string> UpdateLiveStatus(string userId, bool isLive)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user is null) return string.Empty;
+            user.IsLive = true;
+            await _userManager.UpdateAsync(user);
+            return user.DisplayName;
+        }
     }
 }
