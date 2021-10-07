@@ -46,6 +46,19 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Permission
             public const string Export = "Permissions.Products.Export";
             public const string Import = "Permissions.Products.Import";
         }
+        [DisplayName("Invoices")]
+        [Description("Invoices Permissions")]
+        public static class Invoices
+        {
+            public const string View = "Permissions.Invoices.View";
+            public const string Create = "Permissions.Invoices.Create";
+            public const string Edit = "Permissions.Invoices.Edit";
+            public const string Delete = "Permissions.Invoices.Delete";
+            public const string Search = "Permissions.Invoices.Search";
+            public const string Export = "Permissions.Invoices.Export";
+            public const string Import = "Permissions.Invoices.Import";
+            public const string Upload = "Permissions.Invoices.Upload";
+        }
         [DisplayName("Customers")]
         [Description("Customers Permissions")]
         public static class Customers

@@ -1,0 +1,683 @@
+﻿@page
+@using CleanArchitecture.Razor.Domain.Enums
+@using CleanArchitecture.Razor.Infrastructure.Constants.Permission
+@model SmartAdmin.WebUI.Pages.Invoices.IndexModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
+@inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
+@{
+    ViewData["Title"] = _localizer["Invoices"].Value;
+    ViewData["PageName"] = "invoices_index";
+    ViewData["Category1"] = _localizer["Documents"].Value;
+    ViewData["Heading"] = _localizer["Invoices"].Value;
+    ViewData["PageDescription"] = _localizer["See all available options"].Value;
+    ViewData["PreemptiveClass"] = "Default";
+    var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Invoices.Create);
+    var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.Invoices.Edit);
+    var _canDelete = await _authorizationService.AuthorizeAsync(User, null, Permissions.Invoices.Delete);
+    var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.Invoices.Search);
+    var _canImport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Invoices.Import);
+    var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.Invoices.Export);
+    var _canUpload = await _authorizationService.AuthorizeAsync(User, null, Permissions.Invoices.Upload);
+}
+@section HeadBlock {
+
+<link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+<link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+<link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">
+<link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+<style>
+
+    .plfile_empty_div {
+        position: absolute;
+        left: 17%;
+        top: 43%;
+        z-index: 1;
+    }
+
+    ul#filelist {
+        width: 450px;
+        min-height: 100px;
+        background: #fff;
+        border-left: 0;
+        border-right: 0;
+        line-height: 24px;
+        overflow: hidden;
+        margin: 0 15px;
+        padding: 5px 0;
+        font-size: 12px;
+    }
+
+        ul#filelist li {
+            list-style-type: none;
+            margin: 4px 0;
+            padding: 0px 17px 0px 0px;
+        }
+
+            ul#filelist li:hover {
+                background: #d6e7f9;
+            }
+
+    #filelist li {
+        clear: both;
+        line-height: 22px;
+        height: 22px;
+    }
+
+    .plupload_filename {
+        width: 230px;
+        display: block;
+        float: left;
+        word-wrap: break-word;
+        margin-right: 10px;
+        line-height: 22px;
+        margin-left: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .plupload_filesize {
+        width: 80px;
+        line-height: 22px;
+        display: block;
+        float: left;
+    }
+
+    .plupload_d-none {
+        display: none;
+    }
+
+    .plupload_fileremove {
+        float: right;
+        line-height: 22px;
+        display: block;
+        cursor: pointer;
+    }
+
+    .plupload_fileprogress {
+        display: block;
+        width: 60px;
+        line-height: 22px;
+        margin-right: 19px;
+        float: right;
+        text-align: right;
+    }
+</style>
+<style>
+
+	.invoice_dg_datagrid-cell-c1-_action {
+		overflow: visible !important
+	}
+</style>
+}
+<div id="js-page-content-demopanels" class="card mb-g">
+	<div class="card-header bg-white d-flex align-items-center">
+		<h4 class="m-0">
+			@_localizer["Invoices"]
+			<small>@_localizer["See all available options"]</small>
+		</h4>
+        <div class="ml-auto">
+            @if (_canUpload.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-info " id="uploadbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-camera mr-1"></span>
+                    @_localizer["Upload Invoices Photo"]
+                </button>
+            }
+            @if (_canCreate.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="addbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
+                    @_localizer["Add"]
+                </button>
+            }
+            @if (_canDelete.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-danger" disabled id="deletebutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
+                    @_localizer["Delete"]
+                </button>
+            }
+            @if (_canSearch.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="searchbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
+                    @_localizer["Search"]
+                </button>
+            }
+            @if (_canImport.Succeeded)
+            {
+                <div class="btn-group" role="group">
+                    <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
+                        <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>   @_localizer["Import Excel"]
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="importbutton">
+                        <button id="gettemplatebutton" class="dropdown-item">@_localizer["Download Template"]</button>
+                    </div>
+                </div>
+            }
+            @if (_canExport.Succeeded)
+            {
+                <button class="btn btn-sm btn-outline-primary " id="exportbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                    @_localizer["Export Excel"]
+                </button>
+            }
+        </div>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-12">
+				<table id="invoice_dg">
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="invoice_modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Modal title</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+				</button>
+			</div>
+			<form id="invoice_form" class="needs-validation" novalidate="novalidate">
+				<div class="modal-body">
+					@Html.AntiForgeryToken()
+					<input type="hidden" asp-for="Input.Id" />
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <label class="form-label" for="Title">@_localizer["Title"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.Title" class="form-control" placeholder="Title" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Title">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="Status">@_localizer["Status"] </label>
+                            <input type="text" asp-for="Input.Status" class="form-control" placeholder="Status" readonly="readonly" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Status">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="InvoiceNo">@_localizer["Invoice No"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.InvoiceNo" class="form-control" placeholder="Invoice No" />
+                            <span class="invalid-feedback" asp-validation-for="Input.InvoiceNo">Sorry, you missed this one.</span>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label class="form-label" for="Amount">@_localizer["Amount"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.Amount" class="form-control" placeholder="Amount" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Amount">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="RegionSalesDirector">@_localizer["TaxRate"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.TaxRate" class="form-control" placeholder="TaxRate" />
+                            <span class="invalid-feedback" asp-validation-for="Input.TaxRate">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="Tax">@_localizer["Tax"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.Tax" class="form-control" placeholder="Tax" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Tax">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label" for="InvoiceDate">@_localizer["Invoice Date"] </label>
+                            <input type="date" asp-for="Input.InvoiceDate" class="form-control" placeholder="InvoiceDate" />
+                            <span class="invalid-feedback" asp-validation-for="Input.InvoiceDate">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label" for="Description">@_localizer["Description"] </label>
+                            <input type="text" asp-for="Input.Description" class="form-control" placeholder="Description" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Description">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label" for="Result">@_localizer["Result"] </label>
+                            <input type="text" asp-for="Input.Result" class="form-control" placeholder="Result" readonly="readonly" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Result">Sorry, you missed this one.</span>
+                        </div>
+                    </div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
+					<button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="uploadfilesmodal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    @_localizer["Upload Invoices Photo"]
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body pb-0 pt-0">
+                <div id="slimscroll">
+                    <div id="file_empty_div" class="plfile_empty_div">
+                        <span style="color: Dodgerblue;"><i class="fal fa-exclamation-circle"></i></span> @_localizer["Please click [Choose Files] button to upload your photo."]
+                    </div>
+                    <ul id="filelist"></ul>
+                </div>
+                <div id="plupload_max_size_alert" class="alert alert-primary mb-0  fw-300 fs-sm p-2  d-none" role="alert">
+                    <strong>@_localizer["Note"]</strong> @_localizer["The size of the uploaded photo must be less than 5MB."]
+                </div>
+                <input id="fileupload" type="file" name="fileupload" multiple style="display: none" />
+
+            </div>
+            <div class="modal-footer">
+                <button id="selectuploadfilesbtn" type="button" class="btn btn-info">@_localizer["Choose Files"]</button>
+                <button id="postuploadfilesbtn" type="button" class="btn btn-primary">@_localizer["Upload"]</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Component.InvokeAsync("ImportExcel", new { importUri = Url.Page("/invoices/index") + "?handler=Import",
+    getTemplateUri = @Url.Page("/invoices/index") + "?handler=CreateTemplate",
+    onImportedSucceeded = "reloadData()" })
+@section ScriptsBlock {
+<partial name="_ValidationScriptsPartial" />
+<script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
+<script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+<script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
+
+<script>jQuery.fn.tooltip = bootstrapTooltip;</script>
+<script src="~/lib/axios/dist/axios.js"></script>
+<script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+
+<script src="~/lib/filesize/filesize.js"></script>
+<script src="~/lib/plupload/plupload.full.min.js"></script>
+<script src="~/lib/plupload/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script src="~/lib/plupload/jquery.ui.plupload/jquery.ui.plupload.js"></script>
+
+<script type="text/javascript">
+    $('#uploadbutton').click(function () {
+        onUploadPhoto();
+    });
+	$('#searchbutton').click(function () {
+		reloadData();
+	});
+	$('#addbutton').click(function () {
+		popupmodal(null);
+	});
+	$('#deletebutton').click(function () {
+		onDeleteChecked();
+	});
+	$('#exportbutton').click(function () {
+		onExport();
+	});
+	$('#importbutton').click(function () {
+		showImportModal();
+	});
+	$('#gettemplatebutton').click(function () {
+		onGetTemplate();
+	});
+	$('#invoice_form :submit').click(function (e) {
+		const form = document.querySelector('#invoice_form');
+		if ($(form).valid() === false) {
+			form.classList.add('was-validated');
+		} else {
+			const request = $('#invoice_form').serialize();
+			axios.post('@Url.Page("/invoices/index")', request).then(res => {
+				toastr["info"]('@_localizer["Save Success."]');
+				$('#invoice_modal').modal('toggle');
+				reloadData();
+			}).catch(error => {
+                if (error.response.data.errors) {
+					const errors = error.response.data.errors;
+                    for (let [key, value] of Object.entries(errors)) {
+                        toastr["error"](`${key}: ${value.toString()}`);
+                    }
+
+				} else {
+					toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
+				}
+			});
+		}
+		event.preventDefault();
+		event.stopPropagation();
+	})
+	var $dg={};
+	var initdatagrid = () => {
+		$dg = $('#invoice_dg').datagrid({
+			height: (window.innerHeight-320),
+			method: 'GET',
+			rownumbers: false,
+			singleSelect: true,
+			selectOnCheck: false,
+			checkOnSelect: false,
+			pagination: true,
+			clientPaging: false,
+			remoteFilter: true,
+			sortName: 'Id',
+			sortOrder:'desc',
+			pageSize: 15,
+			pageList: [10, 15, 30, 50, 100, 1000],
+			onBeforeLoad: function () {
+				$('#deletebutton').prop('disabled', true);
+			},
+			onCheckAll: function (rows) {
+				const checked = $(this).datagrid('getChecked').length > 0;
+				$('#deletebutton').prop('disabled', !checked);
+			},
+			onUncheckAll: function () {
+				$('#deletebutton').prop('disabled', true);
+			},
+			onCheck: function () {
+				$('#deletebutton').prop('disabled', false);
+			},
+			onUncheck: function () {
+				const checked = $(this).datagrid('getChecked').length > 0;
+				$('#deletebutton').prop('disabled', !checked);
+			},
+			columns: [[
+				{ field: 'ck', checkbox: true },
+				{
+					field: '_action',
+					title: '@_localizer["Command"]',
+					width: 100,
+					align: 'center',
+					formatter: function (value, row, index) {
+						return `<div class="btn-group" role="group">
+								  <button id="commandbtngroup" type="button" @(_canEdit.Succeeded? "":"disabled")  class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
+								 </button>
+								 <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
+								   <button class="dropdown-item" onclick="onEdit(${index})" @(_canEdit.Succeeded? "":"disabled")><i class="fal fa-edit mr-1"></i> @_localizer["Edit"]</button>
+								   <button class="dropdown-item" onclick="onDelete('${row.Id}')" @(_canDelete.Succeeded? "":"disabled") ><i class="fal fa-trash-alt mr-1"></i> @_localizer["Delete"]</button>
+								 </div>
+							  </div>`;
+					}
+				},
+                { field: 'Status', title: '@_localizer["Status"]', sortable: true, width: 120 },
+                { field: 'AttachmentUrl', title: '@_localizer["Attachment"]', sortable: true, width: 180 },
+                { field: 'InvoiceNo', title: '@_localizer["Invoice No"]', sortable: true, width: 150 },
+                { field: 'Title', title: '@_localizer["Title"]', sortable: true, width: 180 },
+                { field: 'Amount', title: '@_localizer["Amount"]', sortable: true, width: 120, align: 'right' },
+                { field: 'Tax', title: '@_localizer["Tax"]', sortable: true, width: 120, align: 'right'},
+				{ field: 'TaxRate', title: '@_localizer["Rate"]', sortable: true, width: 120, align: 'right' },
+				{ field: 'InvoiceDate', title: '@_localizer["Invoice Date"]', sortable: true, width: 140, dateformatter },
+                { field: 'Description', title: '@_localizer["Description"]', sortable: true, width: 180 },
+				{ field: 'Result', title: '@_localizer["Result"]', sortable: true, width: 180 },
+
+
+			]]
+		})
+			.datagrid('enableFilter', {})
+			.datagrid('load', '@Url.Page("/invoices/index")?handler=Data');
+
+	}
+
+	var reloadData = () => {
+		$dg.datagrid('load', '@Url.Page("/invoices/index")?handler=Data');
+	}
+
+	$(() => {
+		initdatagrid();
+	})
+	var popupmodal = (invoice) => {
+		$('#invoice_modal').modal('toggle');
+		$('#invoice_modal .modal-title').html('@_localizer["Add Invoice"]');
+		$('#invoice_form').clearForm();
+		$('#invoice_form')[0].reset();
+		if (invoice) {
+			$('#invoice_modal .modal-title').html('@_localizer["Edit Invoice"]');
+			$('#invoice_form').jsonToForm(invoice, {
+
+			})
+		} else {
+			$('#invoice_form #Input_Id').val(0)
+
+		}
+	}
+
+	var onEdit = (index) => {
+		var invoice = $dg.datagrid('getRows')[index];
+		popupmodal(invoice);
+	}
+	var onDelete = (id) => {
+		bootbox.confirm({
+			message: "@_localizer["Are you sure delete a row?"]",
+			buttons: {
+				confirm: {
+					label: '@_localizer["Yes"]',
+					className: 'btn-success'
+				},
+				cancel: {
+					label: '@_localizer["No"]',
+					className: 'btn-danger'
+				}
+			},
+			callback: function (result) {
+				if (result) {
+					axios.get('@Url.Page("/invoices/index")?handler=Delete&id=' + id).then(res => {
+						toastr["info"]('@_localizer["Delete Success"]');
+						reloadData();
+					})
+						.catch(error => {
+                            if (error.response.data.errors) {
+                                const errors = error.response.data.errors;
+                                for (let [key, value] of Object.entries(errors)) {
+                                    toastr["error"](`${key}: ${value.toString()}`);
+                                }
+
+                            } else {
+								toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+							}
+						});
+				}
+			}
+		})
+	}
+	var onDeleteChecked = () => {
+		var checkedId = $dg.datagrid('getChecked').map(x => x.Id);
+		if (checkedId.length > 0) {
+			bootbox.confirm({
+				message: "@_localizer["Are you sure delete checked rows?"]",
+				buttons: {
+					confirm: {
+						label: '@_localizer["Yes"]',
+						className: 'btn-success'
+					},
+					cancel: {
+						label: '@_localizer["No"]',
+						className: 'btn-danger'
+					}
+				},
+				callback: function (result) {
+					if (result) {
+						var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
+						console.log(paras.toString())
+						axios.get('@Url.Page("/invoices/index")?handler=DeleteChecked&' + paras.toString()).then(res => {
+							toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
+							reloadData();
+						})
+							.catch(error => {
+								if (error.response.data.errors) {
+									const errors = error.response.data.errors;
+									for (let [key, value] of Object.entries(errors)) {
+										toastr["error"](`${key}: ${value.toString()}`);
+									}
+
+								} else {
+									toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+								}
+							});
+					}
+				}
+			});
+
+		}
+	}
+	var onExport = () => {
+		var options = $dg.datagrid('options');
+		var data = {
+			filterRules: JSON.stringify(options.filterRules),
+			sort: options.sortName,
+			order: options.sortOrder,
+		}
+		console.log(options,data)
+		var headers = {
+			"RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+		}
+		axios.post('@Url.Page("/invoices/index")?handler=Export',
+			data,
+			{
+				headers: headers,
+				responseType: "blob"
+			})
+			.then(response => {
+				const filename = getFileName(response.headers['content-disposition']);
+				const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+				const link = document.createElement('a');
+				link.href = url;
+				link.setAttribute('download', filename);
+				document.body.appendChild(link);
+				link.click();
+			}).catch(error => {
+				if (error.response.data.errors) {
+					const errors = error.response.data.errors;
+                    for (let [key, value] of Object.entries(errors)) {
+                        toastr["error"](`${key}: ${value.toString()}`);
+                    }
+				} else {
+					toastr["error"](`@_localizer["Export fail"],${error.response.data}`);
+				}
+			})
+
+
+	}
+
+	var onUploadPhoto=() => {
+		$('#uploadfilesmodal').modal('toggle');
+	}
+
+    document.addEventListener("DOMContentLoaded", function () {
+        $('#slimscroll').slimScroll({
+            height: '100px',
+            railVisible: true,
+            alwaysVisible: false,
+        });
+        var headers = {
+            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+        }
+        var uploader = new plupload.Uploader({
+            runtimes: 'html5',
+            headers,
+            file_data_name:'UploadedPhoto',
+            filters: {
+                max_file_size: "5mb"
+            },
+            browse_button: 'selectuploadfilesbtn', // this can be an id of a DOM element or the DOM element itself
+            url: '@Url.Page("/invoices/index")?handler=Upload',
+        });
+        uploader.init();
+        //验证文件大小
+        plupload.addFileFilter('max_file_size', function (maxSize, file, cb) {
+            var undef;
+            if (file.size !== undef && maxSize && file.size > plupload.parseSize(maxSize)) {
+                this.trigger('Error', {
+                    code: plupload.FILE_SIZE_ERROR,
+                    message: plupload.translate('File size error.'),
+                    file: file
+                });
+                cb(false);
+            } else {
+                cb(true);
+            }
+        });
+        //初始化
+        uploader.bind('Init', function (up) {
+            $('#plupload_max_size_alert').addClass('d-none');
+        });
+        //设置post参数
+        uploader.bind('BeforeUpload', function (up) {
+
+            up.settings.multipart_params.tags = '';
+        });
+        //单击选择文件
+        uploader.bind('Browse', function () {
+            $('#plupload_max_size_alert').addClass('d-none');
+        });
+        //分段上传
+        uploader.bind('ChunkUploaded', function (up, file, info) {
+            console.log(up, file, info)
+        });
+        //捕获异常
+        uploader.bind('Error', function (up, error) {
+            console.log(up, error)
+            if (error.code == -600) {
+                $('#plupload_max_size_alert').removeClass('d-none')
+            } else {
+                bootbox.alert(`异常:${error.message}`);
+            }
+        });
+        //添加文件
+        uploader.bind('FilesAdded', function (up, files) {
+            $('#file_empty_div').hide()
+            var html = '';
+            plupload.each(files, function (file) {
+                html += ` <li id="${file.id}"  >
+                            <span class="plupload_filename">${file.name}</span>
+                            <span id="filesize" class="plupload_filesize">(大小:${plupload.formatSize(file.size)})</span>
+                            <span id="plfilesize" class="plupload_d-none">${plupload.formatSize(file.size)}</span>
+                            <span id="remove" class="plupload_fileremove">
+                                        <a href="javascript:void(0);" class="btn btn-outline-info btn-xs btn-icon waves-effect waves-themed">
+                                            <i class="fal fa-times"></i>
+                                        </a>
+                            </span>
+                            <span id="progress" class="plupload_fileprogress"></span>
+                            </li>`
+                //html += '<li id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></li>';
+            });
+            document.getElementById('filelist').innerHTML += html;
+        });
+        //删除队列中的文件
+        $(document).on('click', '#remove', function (e) {
+            var li = $(this).closest('li');
+            var fileid = li.attr('id');
+            uploader.removeFile(fileid);
+            li.remove()
+            if ($('ul#filelist li').length == 0) {
+                $('#file_empty_div').show();
+            }
+        });
+        //显示进度
+        uploader.bind('UploadProgress', function (up, file) {
+            $(`li#${file.id} > .plupload_fileprogress`).text(file.percent + " %")
+
+        });
+        uploader.bind('BeforeChunkUpload', function (up, file) {
+            //console.log('BeforeChunkUpload', up, file)
+
+        });
+
+        //完成上传
+        uploader.bind('UploadComplete', function (up, files) {
+            //console.log('UploadComplete', up.files)
+            $('#plupload_max_size_alert').addClass('d-none');
+            $('#uploadfilesmodal').modal('toggle')
+            uploader.files.forEach(function (item) {
+                uploader.removeFile(item);
+                $(`ul#filelist #${item.id}`).remove();
+            });
+            $('#file_empty_div').show();
+            reloadData()
+        });
+        //开始上传
+        $('#postuploadfilesbtn').click(function () {
+            uploader.start();
+        });
+    });
+</script>
+}

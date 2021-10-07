@@ -4,7 +4,9 @@ using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
 using CleanArchitecture.Razor.Application.Workflow.Approval.Steps;
 using FluentValidation;
+using Hangfire;
 using MediatR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -12,6 +14,10 @@ using System.Linq;
 using System.Reflection;
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
+using Hangfire.MemoryStorage;
+using CleanArchitecture.Razor.Application.Invoices.PaddleOCR;
+using Polly;
+using System.Net.Http.Headers;
 
 namespace CleanArchitecture.Razor.Application
 {
@@ -29,6 +35,25 @@ namespace CleanArchitecture.Razor.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheInvalidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
             services.AddLazyCache();
+            services.AddTransient<IOcrJob, OcrJob>();
+            services.AddHangfire(options =>
+            {
+                options.UseMemoryStorage();
+
+            });
+
+            services.AddHangfireServer(options => {
+                options.WorkerCount = 1;
+                });
+
+
+            services.AddHttpClient("ocr", c =>
+            {
+                c.BaseAddress = new Uri("https://paddleocr.i247365.net/predict/ocr_system");
+                c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            })
+            .AddTransientHttpErrorPolicy(policy => policy.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(1000))); ;
+
             return services;
         }
         public static IServiceCollection AddWorkflowSteps(this IServiceCollection services, Func<Type, bool> predicate, params Assembly[] assemblies)
@@ -47,5 +72,7 @@ namespace CleanArchitecture.Razor.Application
                );
             return services;
         }
+
+      
     }
 }

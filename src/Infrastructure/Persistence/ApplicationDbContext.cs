@@ -44,7 +44,8 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
 
         public DbSet<KeyValue> KeyValues { get; set; }
         public DbSet<ApprovalData> ApprovalDatas { get; set; }
-
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<InvoiceRawData> InvoiceRawDatas { get; set; }
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             var auditEntries = OnBeforeSaveChanges(_currentUserService.UserId);

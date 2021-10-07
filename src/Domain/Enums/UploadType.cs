@@ -12,6 +12,8 @@ namespace CleanArchitecture.Razor.Domain.Enums
         [Description(@"ProfilePictures")]
         ProfilePicture,
         [Description(@"Documents")]
-        Document
+        Document,
+        [Description(@"Invoice")]
+        Invoice
     }
 }

@@ -37,9 +37,13 @@ namespace SmartAdmin.WebUI.Hubs
                if( _onlineUsers.TryAdd(userId, true))
                 {
                     var user =await _userManager.FindByIdAsync(userId);
-                    user.IsLive = true;
-                    await _userManager.UpdateAsync(user);
-                    await Clients.All.SendAsync(ApplicationConstants.SignalR.ConnectUser, new { user.Id, user.DisplayName });
+                    if(user is not null)
+                    {
+                        user.IsLive = true;
+                        await _userManager.UpdateAsync(user);
+                        await Clients.All.SendAsync(ApplicationConstants.SignalR.ConnectUser, new { user.Id, user.DisplayName });
+                    }
+                    
                 }
 
                 await UpdateOnlineUsers();
@@ -62,9 +66,14 @@ namespace SmartAdmin.WebUI.Hubs
                 else
                 {
                     var user = await _userManager.FindByIdAsync(userId);
-                    user.IsLive = false;
-                    await _userManager.UpdateAsync(user);
-                    await Clients.All.SendAsync(ApplicationConstants.SignalR.DisconnectUser, new { user.Id, user.DisplayName });
+                    if(user is not null)
+                    {
+                        user.IsLive = false;
+                        await _userManager.UpdateAsync(user);
+                        await Clients.All.SendAsync(ApplicationConstants.SignalR.DisconnectUser, new { user.Id, user.DisplayName });
+                    }
+                   
+                   
                 }
 
                 await UpdateOnlineUsers();

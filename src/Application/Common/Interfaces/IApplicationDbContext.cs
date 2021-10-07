@@ -17,6 +17,8 @@ namespace CleanArchitecture.Razor.Application.Common.Interfaces
         DbSet<Document> Documents { get; set; }
         DbSet<KeyValue> KeyValues { get; set; }
         DbSet<ApprovalData> ApprovalDatas { get; set; }
+        DbSet<Invoice> Invoices {  get; set; }
+        DbSet<InvoiceRawData> InvoiceRawDatas { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

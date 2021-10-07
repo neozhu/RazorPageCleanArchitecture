@@ -46,6 +46,11 @@
       "roles": [ "Admin", "Basic" ],
       "items": [
         {
+          "title": "Invoices",
+          "href": "invoices_index.html",
+          "roles": []
+        },
+        {
           "title": "Documents",
           "href": "documents_index.html",
           "roles": []
@@ -90,6 +95,11 @@
         {
           "title": "Logs",
           "href": "logs_index.html",
+          "roles": []
+        },
+        {
+          "title": "Hangfire",
+          "href": "hangfire_index.html",
           "roles": []
         }
       ]

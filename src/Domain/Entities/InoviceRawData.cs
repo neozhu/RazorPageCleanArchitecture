@@ -10,7 +10,7 @@ using CleanArchitecture.Razor.Domain.Common;
 
 namespace CleanArchitecture.Razor.Domain.Entities
 {
-    public class InoviceRawData: AuditableEntity
+    public class InvoiceRawData: AuditableEntity
     {
         public int Id { get; set; }
         public int InvoiceId { get; set; }

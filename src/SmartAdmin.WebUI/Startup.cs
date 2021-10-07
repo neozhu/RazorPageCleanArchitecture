@@ -4,6 +4,7 @@ using CleanArchitecture.Razor.Infrastructure.Constants.Application;
 using CleanArchitecture.Razor.Infrastructure.Constants.Localization;
 using CleanArchitecture.Razor.Infrastructure.Localization;
 using FluentValidation.AspNetCore;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -123,10 +124,12 @@ namespace SmartAdmin.WebUI
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseWorkflow();
+            app.UseHangfireDashboard("/hangfire/index");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
                 endpoints.MapRazorPages();
+                endpoints.MapHangfireDashboard();
                 endpoints.MapHub<SignalRHub>(ApplicationConstants.SignalR.HubUrl);
             });
         }
