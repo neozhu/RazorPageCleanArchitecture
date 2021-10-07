@@ -468,8 +468,9 @@
                 canvas.width = photo.width;
                 canvas.height = photo.height;
                 ctx.drawImage(photo, 0, 0);
+                onLoadRawData(invoice.Id);
             }
-            onLoadRawData(invoice.Id);
+           
 		} else {
 			$('#invoice_form #Input_Id').val(0)
 
@@ -628,7 +629,7 @@
 
         if (connection) {
             connection.on("@SignalR.OCRTaskCompleted", function (item) {
-                toastr["info"](`@_localizer["OCR Completed."]`);
+                toastr["info"](`${item.invoiceNo} : @_localizer["OCR job completed."]`);
                 reloadData();
             });
 

@@ -35,7 +35,7 @@ namespace CleanArchitecture.Razor.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheInvalidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
             services.AddLazyCache();
-            services.AddTransient<IOcrJob, OcrJob>();
+            services.AddTransient<IInvoicesOcrJob, InvoicesOcrJob>();
             services.AddHangfire(options =>
             {
                 options.UseMemoryStorage();

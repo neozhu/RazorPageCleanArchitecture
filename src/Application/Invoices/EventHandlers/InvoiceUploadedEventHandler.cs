@@ -16,12 +16,12 @@ namespace CleanArchitecture.Razor.Application.Invoices.EventHandlers
     public class InvoiceUploadedEventHandler : INotificationHandler<DomainEventNotification<InvoiceUploadedEvent>>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IOcrJob _ocr;
+        private readonly IInvoicesOcrJob _ocr;
         private readonly ILogger<InvoiceUploadedEventHandler> _logger;
 
         public InvoiceUploadedEventHandler(
             IApplicationDbContext context,
-            IOcrJob ocr,
+            IInvoicesOcrJob ocr,
             ILogger<InvoiceUploadedEventHandler> logger
             )
         {

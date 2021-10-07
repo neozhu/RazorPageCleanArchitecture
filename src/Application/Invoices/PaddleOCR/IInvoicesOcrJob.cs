@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CleanArchitecture.Razor.Application.Invoices.PaddleOCR
 {
-    public interface IOcrJob
+    public interface IInvoicesOcrJob
     {
         void Recognition(int id);
     }

@@ -19,14 +19,14 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace CleanArchitecture.Razor.Application.Invoices.PaddleOCR
 {
-    public class OcrJob : IOcrJob
+    public class InvoicesOcrJob : IInvoicesOcrJob
     {
         private readonly IHubContext<SignalRHub> _hubContext;
         private readonly IApplicationDbContext _context;
         private readonly IHttpClientFactory _httpClientFactory;
 
 
-        public OcrJob(
+        public InvoicesOcrJob(
             IHubContext<SignalRHub> hubContext,
             IApplicationDbContext context,
             IHttpClientFactory httpClientFactory
@@ -110,7 +110,7 @@ namespace CleanArchitecture.Razor.Application.Invoices.PaddleOCR
                        
                     }
                     _context.SaveChangesAsync(default).Wait();
-                    _hubContext.Clients.All.SendAsync(SignalR.OCRTaskCompleted, new { });
+                    _hubContext.Clients.All.SendAsync(SignalR.OCRTaskCompleted, new { invoiceNo = invoice.InvoiceNo  });
 
 
 

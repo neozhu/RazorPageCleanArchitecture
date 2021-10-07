@@ -43,7 +43,7 @@ namespace CleanArchitecture.Razor.Application.Hubs
                     if(result != string.Empty)
                     {
                      
-                        await Clients.All.SendAsync(SignalR.ConnectUser, new { userId, result });
+                        await Clients.All.SendAsync(SignalR.ConnectUser, new { userId, displayName=result });
                     }
                     
                 }
@@ -71,7 +71,7 @@ namespace CleanArchitecture.Razor.Application.Hubs
                     if (result != string.Empty)
                     {
 
-                        await Clients.All.SendAsync(SignalR.DisconnectUser, new { userId, result });
+                        await Clients.All.SendAsync(SignalR.DisconnectUser, new { userId, displayName=result });
                     }
                 }
 
