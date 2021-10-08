@@ -313,7 +313,7 @@
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
-
+    
     <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
     <script src="~/lib/axios/dist/axios.js"></script>
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
@@ -323,6 +323,7 @@
     <script src="~/lib/plupload/jquery.plupload.queue/jquery.plupload.queue.js"></script>
     <script src="~/lib/plupload/jquery.ui.plupload/jquery.ui.plupload.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/460/fabric.js" integrity="sha512-d5yqsvICrC8y0ivNsNizSCHXjzireXYU6LmzAvcrL97GMwEn0VKx1vclEwvtsh/yPD2EcATnUG1oEtJuFcTE3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript">
     $('#uploadbutton').click(function () {
         onUploadPhoto();
@@ -448,9 +449,26 @@
 	$(() => {
 		initdatagrid();
     })
-    var canvas = document.getElementById("photoCanvas");
-    var ctx = canvas.getContext("2d");
+       
+    //var canvas = document.getElementById("photoCanvas");
+    //var ctx = canvas.getContext("2d");
+        var canvas = new fabric.Canvas('photoCanvas', {
+            width: 800, height: 450, selectable: false,
+            isDrawingMode:false,
+        });
+        var group = null;
+        canvas.on('mouse:wheel', function (opt) {
+            var delta = opt.e.deltaY;
+            var zoom = canvas.getZoom();
+            zoom *= 0.999 ** delta;
+            if (zoom > 20) zoom = 20;
+            if (zoom < 0.01) zoom = 0.01;
+            canvas.setZoom(zoom);
+            opt.e.preventDefault();
+            opt.e.stopPropagation();
+        })
 
+        
 	var popupmodal = (invoice) => {
 		$('#invoice_modal').modal('toggle');
 		$('#invoice_modal .modal-title').html('@_localizer["Add Invoice"]');
@@ -461,16 +479,21 @@
 			$('#invoice_form').jsonToForm(invoice, {
 
             })
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            canvas.clear();
             var photo = new Image();
             photo.src = invoice.AttachmentUrl;
             photo.onload = function () {
-                canvas.width = photo.width;
-                canvas.height = photo.height;
-                ctx.drawImage(photo, 0, 0);
-                onLoadRawData(invoice.Id);
+                var imgInstance = new fabric.Image(photo, {
+                    draggable: false,
+                    selectable:false,
+                });
+                group = new fabric.Group([imgInstance]);
+               
+                onLoadRawData(invoice.Id)
             }
-           
+     
+
 		} else {
 			$('#invoice_form #Input_Id').val(0)
 
@@ -605,24 +628,41 @@
                 const data = res.data;
                 console.log(data);
                 $('#rawdata_table > tbody').empty();
+               
                 data.map((item,index) => {
                     $('#rawdata_table > tbody').append(`<tr><td>${index + 1}</td><td>${item.Text}</td><td></td></tr>`);
                     var points = JSON.parse(item.Text_Region);
-                    ctx.lineWidth = "5";
-                    ctx.strokeStyle = "#00ff00";
-                    ctx.textAlign = 'left';
-                    ctx.textBaseline = 'top';
-                    ctx.fillStyle = "#ff0000";
-                    ctx.font = "bold 13px verdana, sans-serif ";
-                    ctx.fillText(item.Text, points[0][0], points[0][1]-15);
-                    ctx.beginPath();
-                    ctx.moveTo(points[0][0], points[0][1]);
-                    ctx.lineTo(points[1][0], points[1][1]);
-                    ctx.lineTo(points[2][0], points[2][1]);
-                    ctx.lineTo(points[3][0], points[3][1]);
-                    ctx.closePath();
-                    ctx.stroke();
+        
+                    var text = new fabric.Text(item.Text, {
+                        draggable: false,
+                        selectable: true,
+                        fontSize: 15, fontWeight: 'bold', fill: '#D32F2F', stroke: '#D32F2F', strokeWidth: 0, left: points[0][0], top: points[0][1] - 15
+                    });
+                    //canvas.add(text);
+                    group.addWithUpdate(text);
+                    var polyline = new fabric.Polyline([
+                        { x: points[0][0], y: points[0][1] },
+                        { x: points[1][0], y: points[1][1] },
+                        { x: points[2][0], y: points[2][1] },
+                        { x: points[3][0], y: points[3][1] },
+                    ], {
+                        draggable: false,
+                        selectable: true,
+                        hasRotatingPoint: false,
+                        opacity: 0.2,
+                        strokeWidth: 5,
+                        borderColor: '#76FF03',
+                        stroke: '#76FF03',
+                        fill:'#76FF03',
+                        transparentCorners: false
+                   
+                    });
+                    group.addWithUpdate(polyline);
+                    // Render the polyline in canvas
+                    //canvas.add(polyline);
                 });
+                canvas.add(group);
+                
             })
     }
     document.addEventListener("DOMContentLoaded", function () {
@@ -752,5 +792,9 @@
             uploader.start();
         });
     });
+
+
+
+
     </script>
 }
