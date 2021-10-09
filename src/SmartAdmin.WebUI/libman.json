@@ -64,6 +64,11 @@
         "min/locales.min.js",
         "min/numeral.min.js"
       ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "fabric.js@460",
+      "destination": "wwwroot/lib/fabric/"
     }
   ]
 }
