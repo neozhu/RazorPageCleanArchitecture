@@ -193,10 +193,10 @@
                     <input type="hidden" asp-for="Input.Id" />
                     <input type="hidden" asp-for="Input.AttachmentUrl" />
                     <div class="form-row">
-                        <div class="col-md-8" style="overflow:  auto;max-height:450px">
+                        <div class="col-md-8" style="overflow:hidden;max-height:450px">
                             <canvas id="photoCanvas"></canvas>
                         </div>
-                        <div class="col-md-4" style="overflow: auto; max-height: 450px ">
+                        <div class="col-md-4" style="overflow:auto; max-height: 450px ">
                             <table id="rawdata_table" class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -457,6 +457,7 @@
             isDrawingMode:false,
         });
         var group = null;
+   
         canvas.on('mouse:wheel', function (opt) {
             var delta = opt.e.deltaY;
             var zoom = canvas.getZoom();
@@ -489,7 +490,8 @@
                     selectable:false,
                 });
                 group = new fabric.Group([imgInstance]);
-               
+                canvas.setHeight(photo.height);
+                canvas.setWidth(photo.width);
                 onLoadRawData(invoice.Id)
             }
      
@@ -629,17 +631,20 @@
                 console.log(data);
                 $('#rawdata_table > tbody').empty();
                
-                data.map((item,index) => {
-                    $('#rawdata_table > tbody').append(`<tr><td>${index + 1}</td><td>${item.Text}</td><td></td></tr>`);
+                data.map((item, index) => {
+                    $('#rawdata_table > tbody').append(`<tr style="cursor: pointer;"><td>${index + 1}</td><td>${item.Text}</td><td></td></tr>`);
                     var points = JSON.parse(item.Text_Region);
-        
-                    var text = new fabric.Text(item.Text, {
+
+                    var text = new fabric.Text(`${index + 1}:${item.Text}`, {
                         draggable: false,
                         selectable: true,
                         fontSize: 15, fontWeight: 'bold', fill: '#D32F2F', stroke: '#D32F2F', strokeWidth: 0, left: points[0][0], top: points[0][1] - 15
                     });
                     //canvas.add(text);
                     group.addWithUpdate(text);
+                });
+                data.map((item, index) => {
+                    var points = JSON.parse(item.Text_Region);
                     var polyline = new fabric.Polyline([
                         { x: points[0][0], y: points[0][1] },
                         { x: points[1][0], y: points[1][1] },
@@ -662,9 +667,36 @@
                     //canvas.add(polyline);
                 });
                 canvas.add(group);
+
+                $('#rawdata_table > tbody > tr').click(function () {
+            
+                    var index = $(this).find("td:eq(0)").text();
+                    selectedeletement(index);
+                })
+                //console.log(group.item(1))
                 
             })
-    }
+        }
+
+
+        var selectedeletement = (index) => {
+            console.log(index,group.item(index))
+            //canvas.relativePan([100,100]);
+            //group.item(index).setCoords()
+            const containerwith = $('.canvas-container').parent().width();
+            const containerheight = $('.canvas-container').parent().height();
+            const left = group.item(index).left;
+            const top = group.item(index).top;
+            const ox = group.item(index).oCoords.bl.x;
+            const oy = group.item(index).oCoords.bl.y;
+            
+            console.log(canvas.width, left, ox, containerwith)
+            group.set('left', -550 );
+            //group.set('top', top  );
+            group.setCoords();
+            canvas.renderAll();
+          
+        }
     document.addEventListener("DOMContentLoaded", function () {
 
         if (connection) {
