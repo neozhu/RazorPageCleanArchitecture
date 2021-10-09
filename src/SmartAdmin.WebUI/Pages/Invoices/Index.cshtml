@@ -489,7 +489,9 @@
                     draggable: false,
                     selectable:false,
                 });
+    
                 group = new fabric.Group([imgInstance]);
+             
                 canvas.setHeight(photo.height);
                 canvas.setWidth(photo.width);
                 onLoadRawData(invoice.Id)
@@ -683,15 +685,25 @@
             console.log(index,group.item(index))
             //canvas.relativePan([100,100]);
             //group.item(index).setCoords()
-            const containerwith = $('.canvas-container').parent().width();
-            const containerheight = $('.canvas-container').parent().height();
+            const containerlef = $('.canvas-container').parent().width()/2;
+            const containertop = $('.canvas-container').parent().height() / 2;
+
+            const containerwidth = $('.canvas-container').parent().width() ;
+            const containerheight = $('.canvas-container').parent().height() ;
+
             const left = group.item(index).left;
             const top = group.item(index).top;
             const ox = group.item(index).oCoords.bl.x;
             const oy = group.item(index).oCoords.bl.y;
             
-            console.log(canvas.width, left, ox, containerwith)
-            group.set('left', -550 );
+            console.log(canvas.width, left, ox, containerwidth)
+            if (ox > containerwidth || ox < 0 || oy > containerheight || oy < 0) {
+                group.set('left', -(ox - containerwidth + containerlef));
+                group.set('top', -(oy - containerheight + containertop));
+            }
+            if (oy > containerheight || oy < 0) {
+                
+            }
             //group.set('top', top  );
             group.setCoords();
             canvas.renderAll();
