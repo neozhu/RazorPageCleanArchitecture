@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -37,15 +38,33 @@ namespace CleanArchitecture.Razor.Application.Invoices.PaddleOCR
             _httpClientFactory = httpClientFactory;
 
         }
+        private string readbase64string(string path) {
+            using (Image image = Image.FromFile(path))
+            {
+                using (MemoryStream m = new MemoryStream())
+                {
+                    image.Save(m, image.RawFormat);
+                    byte[] imageBytes = m.ToArray();
 
+                    // Convert byte[] to Base64 String
+                    string base64String = Convert.ToBase64String(imageBytes);
+                    return base64String;
+                }
+            }
+
+        }
         public void Recognition(int id)
         {
             using (var client = _httpClientFactory.CreateClient("ocr"))
             {
                 var invoice = _context.Invoices.Find(id);
+                invoice.Status = "Processing";
+                _context.SaveChangesAsync(default).Wait();
+                
                 var imgfile = Path.Combine(Directory.GetCurrentDirectory(), invoice.AttachmentUrl);
-                var bytes = File.ReadAllBytes(imgfile);
-                string base64string = Convert.ToBase64String(bytes);
+                
+                string base64string = readbase64string(imgfile);
+                invoice = _context.Invoices.Find(id);
                 var response = client.PostAsJsonAsync<dynamic>("", new { images = new string[] { base64string } }).Result;
                 if(response.StatusCode== System.Net.HttpStatusCode.OK)
                 {
@@ -67,16 +86,16 @@ namespace CleanArchitecture.Razor.Application.Invoices.PaddleOCR
                                      Text=item.text,
                                      Text_Region= JsonSerializer.Serialize(item.text_region)
                                 };
-                                if (item.text.Contains("发票号码"))
+                                if ((item.text.Contains("发票号码") && item.text.Length>12) || (item.text.Length==10 || item.text.Length==12))
                                 {
                                     var regex = new Regex("\\d*$");
                                     var mc = regex.Match(item.text);
-                                    if(mc.Success)
+                                    if(mc.Success && mc.Value.Length>=10)
                                     {
                                         invoice.InvoiceNo = mc.Value;
                                     }
                                 }
-                                if (item.text.Contains("开票日期"))
+                                if (item.text.Contains("开票日期") || (item.text.Contains("年") && item.text.Contains("月") && item.text.Contains("日")))
                                 {
                                     var regex = new Regex("\\d{4}年\\d{2}月\\d{2}日");
                                     var mc = regex.Match(item.text);
@@ -87,7 +106,7 @@ namespace CleanArchitecture.Razor.Application.Invoices.PaddleOCR
                                 }
                                 if (item.text.Contains("%"))
                                 {
-                                    var regex = new Regex("^\\d*.\\d*");
+                                    var regex = new Regex("^\\d*.\\d+");
                                     var mc = regex.Match(item.text);
                                     if (mc.Success)
                                     {
