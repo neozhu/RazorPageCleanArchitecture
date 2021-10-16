@@ -277,7 +277,7 @@
         var field = $(this).attr('name');
         var input = $(this);
         
-        if (input.data('textbox') && !$(this).is('select') && !$(this).hasClass('combogrid-f')) {
+            if (input.data('textbox') && !$(this).is('select') && !$(this).is('combobox') && !$(this).hasClass('combobox-f') && !$(this).hasClass('combogrid-f')) {
           input = input.textbox('textbox');
         }
             input.unbind('.filter').bind('keydown.filter blur.filter', function (e) {
@@ -327,23 +327,23 @@
             });
         }
         //combobox filter
-        if ($(this).is('select')) {
-          input.off('.filter').on('combobox.filter', function (e) {
-            var t = $(this);
-            if (this.timer) {
-              clearTimeout(this.timer);
-            }
-            if (e.keyCode == 13) {
-              _doFilterWithCombobox();
-            } else {
-              this.timer = setTimeout(function () {
-                _doFilterWithCombobox();
-              }, opts.filterDelay);
-            }
-          });
+            if ($(this).is('select') || $(this).is('combobox') || $(this).hasClass('combobox-f')) {
+                input.off('.filter').on('combobox.filter', function (e) {
+                    var t = $(this);
+                    if (this.timer) {
+                        clearTimeout(this.timer);
+                    }
+                    if (e.keyCode == 13) {
+                        _doFilterWithCombobox();
+                    } else {
+                        this.timer = setTimeout(function () {
+                            _doFilterWithCombobox();
+                        }, opts.filterDelay);
+                    }
+                });
 
 
-        }
+            }
         //combogrid filter
         if ($(this).hasClass('combogrid-f')) {
           input.off('.filter').on('combobox.filter', function (e) {
