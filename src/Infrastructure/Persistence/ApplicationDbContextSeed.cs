@@ -100,6 +100,10 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
                 await context.SaveChangesAsync();
 
                 context.Serilogs.Add(new Domain.Entities.Log.Serilog() { Message = "Initial add customer", Level = "Information", UserName = "System", TimeStamp = System.DateTime.Now });
+
+                context.Serilogs.Add(new Domain.Entities.Log.Serilog() { Message = "Error", Level = "Error", UserName = "System", TimeStamp = System.DateTime.Now.AddHours(-1) });
+                context.Serilogs.Add(new Domain.Entities.Log.Serilog() { Message = "Warning", Level = "Warning", UserName = "System", TimeStamp = System.DateTime.Now.AddHours(-2) });
+                context.Serilogs.Add(new Domain.Entities.Log.Serilog() { Message = "Trace", Level = "Trace", UserName = "System", TimeStamp = System.DateTime.Now.AddHours(-4) });
                 await context.SaveChangesAsync();
             }
         }

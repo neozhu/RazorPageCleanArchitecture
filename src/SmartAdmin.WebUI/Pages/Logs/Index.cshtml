@@ -73,7 +73,9 @@
 
 
 @section ScriptsBlock {
-    <script src="~/js/statistics/chartjs/chartjs.bundle.js"></script>
+    @*<script src="~/js/statistics/chartjs/chartjs.bundle.js"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script>*@
     <script src="~/js/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.js"></script>
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
@@ -108,12 +110,18 @@
                 title: {
                     display: false,
                     text: '@_localizer["Logs Level"]'
-                }
+                },
+                //plugins: {
+                //    colorschemes: {
+                //        scheme: 'brewer.Paired12'
+                //    }
+                //}
             }
 		});
 
 		 var linedata = (await axios.get('@Url.Page("/Logs/Index")?handler=LogsTimeLineData')).data;
         var ctx = document.getElementById('timebar').getContext('2d');
+        var delayed = false;
         var barchart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -196,7 +204,7 @@
                     xAxes: [{
                         stacked: true,
                         offset: true,
-                        type: "time",
+                        type: "timeseries",
                         time: {
                             displayFormats: {
                                 'hour': 'H',
