@@ -62,6 +62,8 @@ namespace SmartAdmin.WebUI
                     .ReadFrom.Configuration(context.Configuration)
                     .ReadFrom.Services(services)
                     .Enrich.FromLogContext()
+                    .Enrich.WithClientIp()
+                    .Enrich.WithClientAgent()
                     .WriteTo.Console()
                     )
                 .ConfigureWebHostDefaults(webBuilder =>
