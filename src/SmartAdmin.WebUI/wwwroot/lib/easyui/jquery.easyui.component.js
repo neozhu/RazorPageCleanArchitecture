@@ -556,86 +556,88 @@ $.extend($.fn.form.methods, {
 
 //dateRange filter
 $.extend($.fn.datagrid.defaults.filters, {
-  dateRange: {
+    dateRange: {
         init: function (container, options) {
-      var cc = $('<span class="textbox combo datebox " style="padding:0px">\
+            var defaultvalue = options.value ?? '';
+            var cc = $('<span class="textbox combo datebox " style="padding:0px">\
                      <span class="textbox-addon textbox-addon-right" style="right: 0px; top: 0px;">\
                      <a href="javascript:" class="textbox-icon combo-arrow" icon-index="0" tabindex="-1" style="width: 26px; height: 29px;">\
                      </a>\
                      </span>\
                   </span>').appendTo(container);
-      var input = $('<input type="text" value="" class="daterange" style="border:0px ;height:29px;padding:2px 8px">').appendTo(cc);
-      var myoptions = {
-        autoUpdateInput: false,
-        applyClass: 'btn-sm btn-success',
-        cancelClass: 'btn-sm btn-default',
-        locale: {
-          applyLabel: '确认',
-          cancelLabel: '清空',
-          fromLabel: '起始时间',
-          toLabel: '结束时间',
-          customRangeLabel: '自定义',
-          firstDay: 1,
-          daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
-          monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
-            '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            var input = $(`<input type="text" value="${defaultvalue}" class="daterange" style="border:0px ;height:29px;padding:2px 8px">`).appendTo(cc);
+            var myoptions = {
+                autoUpdateInput: false,
+                applyClass: 'btn-sm btn-success',
+                cancelClass: 'btn-sm btn-default',
+                locale: {
+                    applyLabel: '确认',
+                    cancelLabel: '清空',
+                    fromLabel: '起始时间',
+                    toLabel: '结束时间',
+                    customRangeLabel: '自定义',
+                    firstDay: 1,
+                    daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+                    monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+                        '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                },
+                ranges: {
+                    //'最近1小时': [moment().subtract('hours',1), moment()],
+                    '今日': [moment(), moment()],
+                    '昨日': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
+                    '最近7日': [moment().subtract(6, 'days'), moment()],
+                    '最近30日': [moment().subtract(29, 'days'), moment()],
+                    '本月': [moment().startOf("month"), moment().endOf("month")],
+                    '上个月': [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
+                },
+                opens: 'right',    // 日期选择框的弹出位置
+                separator: '-',
+                showWeekNumbers: false,     // 是否显示第几周
+                format: 'YYYY/MM/DD'
+
+            };
+            input.on('blur', function () {
+                $(this).parent().removeClass('textbox-focused');
+            }).on('focus', function () {
+                $(this).parent().addClass('textbox-focused');
+            });
+            input.daterangepicker(myoptions);
+
+            container.find('.textbox-icon').on('click', function () {
+                container.find('input').trigger('click.daterangepicker');
+            });
+            input.on('cancel.daterangepicker', function (ev, picker) {
+                $(this).val('');
+            });
+            input.on('apply.daterangepicker', function (ev, picker) {
+                console.log(picker.startDate.format('YYYY/MM/DD') + '-' + picker.endDate.format('YYYY/MM/DD'));
+                $(this).val(picker.startDate.format('YYYY/MM/DD') + '-' + picker.endDate.format('YYYY/MM/DD'));
+                //options.onChange(picker.startDate.format('YYYY/MM/DD') + '-' + picker.endDate.format('YYYY/MM/DD'));
+            });
+
+
+            //console.log($(target));
+            return input;
         },
-        ranges: {
-          //'最近1小时': [moment().subtract('hours',1), moment()],
-          '今日': [moment(), moment()],
-          '昨日': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
-          '最近7日': [moment().subtract(6, 'days'), moment()],
-          '最近30日': [moment().subtract(29, 'days'), moment()],
-          '本月': [moment().startOf("month"), moment().endOf("month")],
-          '上个月': [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
+        destroy: function (target) {
+            $(target).daterangepicker('destroy');
         },
-        opens: 'right',    // 日期选择框的弹出位置
-        separator: '-',
-        showWeekNumbers: false,     // 是否显示第几周
-        format: 'YYYY/MM/DD'
+        getValue: function (target) {
+            return $(target).data('daterangepicker').getStartDate() + '-' + $(target).data('daterangepicker').getEndDate();
+        },
+        setValue: function (target, value) {
+            //console.log($(target), value);
+            var daterange = value.split('-');
+            $(target).data('daterangepicker').setStartDate(moment(daterange[0]));
+            $(target).data('daterangepicker').setEndDate(moment(daterange[1]));
+            $(this).val(value);
 
-      };
-      input.on('blur', function () {
-        $(this).parent().removeClass('textbox-focused');
-      }).on('focus', function () {
-        $(this).parent().addClass('textbox-focused');
-      });
-      input.daterangepicker(myoptions);
-
-      container.find('.textbox-icon').on('click', function () {
-        container.find('input').trigger('click.daterangepicker');
-      });
-      input.on('cancel.daterangepicker', function (ev, picker) {
-        $(this).val('');
-      });
-      input.on('apply.daterangepicker', function (ev, picker) {
-        console.log(picker.startDate.format('YYYY/MM/DD') + '-' + picker.endDate.format('YYYY/MM/DD'));
-        $(this).val(picker.startDate.format('YYYY/MM/DD') + '-' + picker.endDate.format('YYYY/MM/DD'));
-        //options.onChange(picker.startDate.format('YYYY/MM/DD') + '-' + picker.endDate.format('YYYY/MM/DD'));
-      });
-
-
-      //console.log($(target));
-      return input;
-    },
-    destroy: function (target) {
-      $(target).daterangepicker('destroy');
-    },
-    getValue: function (target) {
-      return $(target).data('daterangepicker').getStartDate() + '-' + $(target).data('daterangepicker').getEndDate();
-    },
-    setValue: function (target, value) {
-      //console.log($(target), value);
-      var daterange = value.split('-');
-      $(target).data('daterangepicker').setStartDate(daterange[0]);
-      $(target).data('daterangepicker').setEndDate(daterange[1]);
-
-    },
-    resize: function (target, width) {
-      $(target)._outerWidth(width - 2)._outerHeight(29);
-      // $(target).daterangepicker('resize', width / 2);
+        },
+        resize: function (target, width) {
+            $(target)._outerWidth(width - 2)._outerHeight(29);
+            // $(target).daterangepicker('resize', width / 2);
+        }
     }
-  }
 });
 
 
