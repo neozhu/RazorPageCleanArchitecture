@@ -15,16 +15,16 @@
 
 }
 @section HeadBlock {
-    <link href="~/css/statistics/chartist/chartist.css" rel="stylesheet" />
-    <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
-    <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
-    <link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">
-    <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
-    <style>
-        .approval_dg_datagrid-cell-c1-_action {
-            overflow: visible !important
-        }
-    </style>
+<link href="~/css/statistics/chartist/chartist.css" rel="stylesheet" />
+<link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+<link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+<link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">
+<link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+<style>
+    .approval_dg_datagrid-cell-c1-_action {
+        overflow: visible !important
+    }
+</style>
 }
 
 
@@ -74,20 +74,22 @@
 
 @section ScriptsBlock {
     @*<script src="~/js/statistics/chartjs/chartjs.bundle.js"></script>*@
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     @*<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script>*@
-    <script src="~/js/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.js"></script>
-    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+<script src="~/js/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.js"></script>
+<script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
+<script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+<script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
 
 
-    <script src="~/lib/easyui/plugins/datagrid-detailview.js"></script>
-    <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
-    <script src="~/lib/axios/dist/axios.js"></script>
-    <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
-    <script>
-	$(async () => {
+<script src="~/lib/easyui/plugins/datagrid-detailview.js"></script>
+<script>jQuery.fn.tooltip = bootstrapTooltip;</script>
+<script src="~/lib/axios/dist/axios.js"></script>
+<script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+<script>
+    $(async () => {
 
         var piedata = (await axios.get('@Url.Page("/Logs/Index")?handler=LogsLevelData')).data;
         var piechart= new Chart(document.getElementById("levelpie").getContext('2d'), {
@@ -101,6 +103,8 @@
                 }]
             },
             options: {
+               hoverBorderColor:'#2ba1ff',
+               hoverBorderWidth:3,
                 maintainAspectRatio: false,
                 responsive: false,
                 legend: {
@@ -117,15 +121,16 @@
                 //    }
                 //}
             }
-		});
+        });
 
-		 var linedata = (await axios.get('@Url.Page("/Logs/Index")?handler=LogsTimeLineData')).data;
+        var linedata = (await axios.get('@Url.Page("/Logs/Index")?handler=LogsTimeLineData')).data;
+
         var ctx = document.getElementById('timebar').getContext('2d');
         var delayed = false;
         var barchart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: Array.from(new Set(linedata.map(item => moment(item.time).format('MM-DD HH:mm')))),
+                labels: Array.from(new Set(linedata.map(item => moment(item.time).format('YYYY-MM-DD HH:mm')))),
                 datasets: [{
                     label: 'Information',
                     data: linedata.filter(item => item.level == 'Information').map(item => item.total),
@@ -135,8 +140,8 @@
                     //pointBackgroundColor: "rgba(179,181,198,1)",
                 },
                 {
-                    label: 'Verbose',
-                    data: linedata.filter(item => item.level == 'Verbose').map(item => item.total),
+                    label: 'Trace',
+                    data: linedata.filter(item => item.level == 'Trace').map(item => item.total),
                     backgroundColor: '#a4cdff',
                     //borderColor: "rgba(179,181,198,1)",
                     //pointBorderColor: "#fff",
@@ -151,8 +156,8 @@
                     //pointBackgroundColor: "rgba(179,181,198,1)",
                 },
                 {
-                    label: 'Warn',
-                    data: linedata.filter(item => item.level == 'Warn').map(item => item.total),
+                    label: 'Warning',
+                    data: linedata.filter(item => item.level == 'Warning').map(item => item.total),
                     backgroundColor: '#FFCF26',
                     //borderColor: "rgba(179,181,198,1)",
                     //pointBorderColor: "#fff",
@@ -184,7 +189,7 @@
                     delay: (context) => {
                         let delay = 0;
                         if (context.type === 'data' && context.mode === 'default' && !delayed) {
-                            delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                            delay = context.dataIndex * 200 + context.datasetIndex * 100;
                         }
                         return delay;
                     },
@@ -201,140 +206,145 @@
                     text: '@_localizer["Logs"]',
                 },
                 scales: {
-                    xAxes: [{
+                    x: {
                         stacked: true,
                         offset: true,
-                        type: "timeseries",
+                        type: "time",
                         time: {
                             displayFormats: {
-                                'hour': 'H',
+                                'hour': 'ah:mm',
                             },
-                            unit: 'hour'
-                        }
-                    }],
-                    yAxes: [{
+                          unit: 'hour'
+                        },
+                        //ticks:{
+                        //callback:function(v,cx,values){
+                        //    console.log(v,cx,values)
+                        //    return ''
+                        //}
+                        //}
+                    },
+                    y: {
                         stacked: true,
                         ticks: {
                             beginAtZero: true,
-                            stepSize: 20
                         }
-                    }]
+                    }
                 }
             }
         });
-	})
-    </script>
+    })
+</script>
 
-    <script type="text/javascript">
-	$('#searchbutton').click(function () {
-		reload();
-	});
-	$('#exportbutton').click(function () {
-		onExport();
-	});
-	var $dg={};
-		var initdatagrid = () => {
-			$dg = $('#logs_dg').datagrid({
-				height: 700,
-				method: 'GET',
-				rownumbers: false,
-				singleSelect: true,
-				selectOnCheck: false,
-				checkOnSelect: false,
-				pagination: true,
-				clientPaging: false,
-				remoteFilter: true,
+<script type="text/javascript">
+    $('#searchbutton').click(function () {
+        reload();
+    });
+    $('#exportbutton').click(function () {
+        onExport();
+    });
+    var $dg={};
+        var initdatagrid = () => {
+            $dg = $('#logs_dg').datagrid({
+                height: 700,
+                method: 'GET',
+                rownumbers: false,
+                singleSelect: true,
+                selectOnCheck: false,
+                checkOnSelect: false,
+                pagination: true,
+                clientPaging: false,
+                remoteFilter: true,
                 sortName: 'TimeStamp',
-				sortOrder: 'desc',
-				pageSize: 15,
-				pageList: [10, 15, 30, 50, 100, 1000],
-				view: detailview,
-				detailFormatter: function (rowIndex, rowData) {
+                sortOrder: 'desc',
+                pageSize: 15,
+                pageList: [10, 15, 30, 50, 100, 1000],
+                view: detailview,
+                detailFormatter: function (rowIndex, rowData) {
 
-					return `<div class="d-flex flex-row mb-1">
-					  <div class="p-2 ">@_localizer["Message"]</div>
-					  <div class="p-2 ">${rowData.Message}</div>
-					</div>
+                    return `<div class="d-flex flex-row mb-1">
+                      <div class="p-2 ">@_localizer["Message"]</div>
+                      <div class="p-2 ">${rowData.Message}</div>
+                    </div>
                     <div class="d-flex flex-row mb-1">
-					 <div class="p-2 ">@_localizer["Exception"]</div>
-					 <div class="p-2 ">${rowData.Exception}</div>
-					</div>`;
-				},
-				columns: [[
+                     <div class="p-2 ">@_localizer["Exception"]</div>
+                     <div class="p-2 ">${rowData.Exception}</div>
+                    </div>`;
+                },
+                columns: [[
                     { field: 'TimeStamp', title: '@_localizer["Time Stamp"]', sortable: true, width: 165, formatter: datetimeformatter },
                     { field: 'Level', title: '@_localizer["Level"]', sortable: true, width: 130 },
                     { field: 'Message', title: '@_localizer["Message"]', sortable: true, width: 200 },
                     { field: 'UserName', title: '@_localizer["User Name"]', sortable: true, width: 120 },
                     { field: 'Exception', title: '@_localizer["Exception"]', sortable: true, width: 200 },
-					{ field: 'Properties', title: '@_localizer["Properties"]', sortable: true, width: 200 },
+                    { field: 'Properties', title: '@_localizer["Properties"]', sortable: true, width: 200 },
                     { field: 'MessageTemplate', title: '@_localizer["Message Template"]', sortable: true, width: 200 },
-				]]
-			})
-				.datagrid('enableFilter', [
-					{
+                ]]
+            })
+                .datagrid('enableFilter', [
+                    {
                         field: 'TimeStamp',
-						type: 'dateRange'
-					},
-					{
+                        type: 'dateRange'
+                    },
+                    {
                         field: 'Level',
-						type: 'combobox',
-						options: {
-							panelHeight: 'auto',
-							data: [{
-								     value: null,
-								     text: 'ALL'
-							      },
-							@foreach (var val in Enum.GetNames(typeof(Serilog.Events.LogEventLevel)))
-			                {
-				               <text>
-							   {
-								value: '@val',
-								text: '@val'
-							   },
-							   </text>
-			                }
-							]
-						}
-					}
-				])
-				.datagrid('load', '@Url.Page("/Logs/Index")?handler=Data');
+                        type: 'combobox',
+                        options: {
+                            panelHeight: 'auto',
+                            data: [{
+                                     value: null,
+                                     text: 'ALL'
+                                  },
+                            @foreach (var val in Enum.GetNames(typeof(Serilog.Events.LogEventLevel)))
+                            {
+                               <text>
+                               {
+                                value: '@val',
+                                text: '@val'
+                               },
+                               </text>
+                            }
+                            ]
+                        }
+                    }
+                ])
+                .datagrid('load', '@Url.Page("/Logs/Index")?handler=Data');
 
-		}
+        }
 
-	var reload = () => {
-		$dg.datagrid('load', '@Url.Page("/Logs/Index")?handler=Data');
-	}
+    var reload = () => {
+        $dg.datagrid('load', '@Url.Page("/Logs/Index")?handler=Data');
+    }
 
-	$(() => {
-		initdatagrid();
-	})
-	var onExport = () => {
-		var options = $dg.datagrid('options');
-		var data = {
-			filterRules: JSON.stringify(options.filterRules),
-			sort: options.sortName,
-			order: options.sortOrder,
-		}
-		console.log(options, data)
-		var headers = {
-			"RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
-		}
-		axios.post('@Url.Page("/Logs/Index")?handler=Export',
-			data,
-			{
-				headers: headers,
-				responseType: "blob"
-			})
-			.then(response => {
-				const filename = getFileName(response.headers['content-disposition']);
-				const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
-				const link = document.createElement('a');
-				link.href = url;
-				link.setAttribute('download', filename);
-				document.body.appendChild(link);
-				link.click();
-				toastr["info"](`@_localizer["Export Success"]`);
-			}).catch(error => {
+    $(() => {
+        initdatagrid();
+    })
+    var onExport = () => {
+        var options = $dg.datagrid('options');
+        var data = {
+            filterRules: JSON.stringify(options.filterRules),
+            sort: options.sortName,
+            order: options.sortOrder,
+        }
+        console.log(options, data)
+        var headers = {
+            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+        }
+        axios.post('@Url.Page("/Logs/Index")?handler=Export',
+            data,
+            {
+                headers: headers,
+                responseType: "blob"
+            })
+            .then(response => {
+                const filename = getFileName(response.headers['content-disposition']);
+                const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', filename);
+                document.body.appendChild(link);
+                link.click();
+                toastr["info"](`@_localizer["Export Success"]`);
+            }).catch(error => {
                 if (error.response.data.errors) {
                     const errors = error.response.data.errors;
                     for (let [key, value] of Object.entries(errors)) {
@@ -342,25 +352,25 @@
                     }
 
                 } else {
-					toastr["error"](`@_localizer["Export fail"],${error.response.data}`);
-				}
-			})
+                    toastr["error"](`@_localizer["Export fail"],${error.response.data}`);
+                }
+            })
 
 
-	}
-	var getFileName = (disposition) => {
-		const utf8FilenameRegex = /filename\*=UTF-8''([\w%\-\.]+)(?:; ?|$)/;
-		const asciiFilenameRegex = /filename=(["']?)(.*?[^\\])\1(?:; ?|$)/;
-		let fileName = '';
-		if (utf8FilenameRegex.test(disposition)) {
-			fileName = decodeURIComponent(utf8FilenameRegex.exec(disposition)[1]);
-		} else {
-			const matches = asciiFilenameRegex.exec(disposition);
-			if (matches != null && matches[2]) {
-				fileName = matches[2];
-			}
-		}
-		return fileName;
-	}
-    </script>
+    }
+    var getFileName = (disposition) => {
+        const utf8FilenameRegex = /filename\*=UTF-8''([\w%\-\.]+)(?:; ?|$)/;
+        const asciiFilenameRegex = /filename=(["']?)(.*?[^\\])\1(?:; ?|$)/;
+        let fileName = '';
+        if (utf8FilenameRegex.test(disposition)) {
+            fileName = decodeURIComponent(utf8FilenameRegex.exec(disposition)[1]);
+        } else {
+            const matches = asciiFilenameRegex.exec(disposition);
+            if (matches != null && matches[2]) {
+                fileName = matches[2];
+            }
+        }
+        return fileName;
+    }
+</script>
 }
