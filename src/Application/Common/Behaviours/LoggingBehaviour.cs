@@ -29,6 +29,7 @@ namespace CleanArchitecture.Razor.Application.Common.Behaviours
             if (!string.IsNullOrEmpty(userId))
             {
                 userName = await _identityService.GetUserNameAsync(userId);
+               
             }
 
             _logger.LogInformation("CleanArchitecture Request: {Name} {@UserId} {@UserName} {@Request}",

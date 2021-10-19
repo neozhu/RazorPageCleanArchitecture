@@ -10,7 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
-
+using Serilog.Filters;
+using System.Linq;
 namespace SmartAdmin.WebUI
 {
     public class Program
@@ -55,15 +56,26 @@ namespace SmartAdmin.WebUI
 
             await host.RunAsync();
         }
-
+        private static string[] filters = new string[] { "Microsoft.EntityFrameworkCore.Model.Validation", "WorkflowCore.Services.WorkflowHost", "WorkflowCore.Services.BackgroundTasks.RunnablePoller", "Microsoft.Hosting.Lifetime", "Serilog.AspNetCore.RequestLoggingMiddleware" };
         public static IHostBuilder CreateHostBuilder(string[] args) =>
+            
             Host.CreateDefaultBuilder(args)
                 .UseSerilog((context, services, configuration) => configuration
                     .ReadFrom.Configuration(context.Configuration)
                     .ReadFrom.Services(services)
                     .Enrich.FromLogContext()
+                    .Enrich.WithClientIp()
+                    .Enrich.WithClientAgent()
+                  
+                    .Filter.ByExcluding(
+                       /* (logevent) => {
+                            Console.WriteLine(logevent);
+                            return false;
+                            }*/
+                        Matching.WithProperty<string>("SourceContext", p => filters.Contains(p))
+                        )
                     .WriteTo.Console()
-                    )
+                    , writeToProviders: true)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
