@@ -90,12 +90,7 @@ namespace SmartAdmin.WebUI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseSerilogRequestLogging(options =>
-            {
-                options.EnrichDiagnosticContext = (diagnosticContext, httpContext) => {
-                    diagnosticContext.Set("UserName", httpContext.User?.Identity?.Name ?? string.Empty);
-                };
-            });
+           
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -117,6 +112,12 @@ namespace SmartAdmin.WebUI
            
             app.UseRequestLocalization();
             app.UseRequestLocalizationCookies();
+            app.UseSerilogRequestLogging(options =>
+            {
+                options.EnrichDiagnosticContext = (diagnosticContext, httpContext) => {
+                    diagnosticContext.Set("UserName", httpContext.User?.Identity?.Name ?? string.Empty);
+                };
+            });
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -127,6 +128,7 @@ namespace SmartAdmin.WebUI
                 endpoints.MapRazorPages();
                 endpoints.MapHub<SignalRHub>(SignalR.HubUrl);
             });
+            
         }
     }
 }

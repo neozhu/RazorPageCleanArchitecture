@@ -47,11 +47,13 @@ namespace CleanArchitecture.Razor.Application.Features.Logs.Queries.ChatData
                       .Select(x => new { x.Key.Level, x.Key.Date, x.Key.Hour, Total = x.Count() })
                       .OrderBy(x=>x.Level).ThenBy(x=>x.Date)
                       .ToListAsync( cancellationToken);
-            //var result= data.Select(item=>new LogTimeLineDto() {
+            //var result = data.Select(item => new LogTimeLineDto()
+            //{
             //    time = item.Date.AddHours(item.Hour),
             //    level = item.Level,
             //    total = item.Total
-            //}).OrderBy(x=>x.level).ThenBy(x=>x.time);
+            //}).OrderBy(x => x.level).ThenBy(x => x.time);
+            //return result;
             var result = new List<LogTimeLineDto>();
             var end = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, 0, 0);
             var start = end;
