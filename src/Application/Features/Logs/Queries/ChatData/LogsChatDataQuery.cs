@@ -47,38 +47,38 @@ namespace CleanArchitecture.Razor.Application.Features.Logs.Queries.ChatData
                       .Select(x => new { x.Key.Level, x.Key.Date, x.Key.Hour, Total = x.Count() })
                       .OrderBy(x=>x.Level).ThenBy(x=>x.Date)
                       .ToListAsync( cancellationToken);
-            //var result = data.Select(item => new LogTimeLineDto()
-            //{
-            //    time = item.Date.AddHours(item.Hour),
-            //    level = item.Level,
-            //    total = item.Total
-            //}).OrderBy(x => x.level).ThenBy(x => x.time);
-            //return result;
-            var result = new List<LogTimeLineDto>();
-            var end = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, 0, 0);
-            var start = end;
-            if (data.Any())
+            var result = data.Select(item => new LogTimeLineDto()
             {
-                start = new DateTime(data.First().Date.Year, data.First().Date.Month, data.First().Date.Day, 0, 0, 0);
-            }
-            while (start <= end)
-            {
-                foreach (var level in levels)
-                {
-                    var item = data.Where(x => x.Date == start.Date && x.Hour == start.Hour && x.Level == level).FirstOrDefault();
-                    if (item != null)
-                    {
-                        result.Add(new LogTimeLineDto { time = item.Date.AddHours(item.Hour), level = level, total = item.Total });
-                    }
-                    else
-                    {
-                        result.Add(new LogTimeLineDto { time = start, level = level, total = 0 });
-
-                    }
-                }
-                start = start.AddHours(1);
-            }
+                time = item.Date.AddHours(item.Hour),
+                level = item.Level,
+                total = item.Total
+            }).OrderBy(x => x.level).ThenBy(x => x.time);
             return result;
+            //var result = new List<LogTimeLineDto>();
+            //var end = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, 0, 0);
+            //var start = end;
+            //if (data.Any())
+            //{
+            //    start = new DateTime(data.First().Date.Year, data.First().Date.Month, data.First().Date.Day, 0, 0, 0);
+            //}
+            //while (start <= end)
+            //{
+            //    foreach (var level in levels)
+            //    {
+            //        var item = data.Where(x => x.Date == start.Date && x.Hour == start.Hour && x.Level == level).FirstOrDefault();
+            //        if (item != null)
+            //        {
+            //            result.Add(new LogTimeLineDto { time = item.Date.AddHours(item.Hour), level = level, total = item.Total });
+            //        }
+            //        else
+            //        {
+            //            result.Add(new LogTimeLineDto { time = start, level = level, total = 0 });
+
+            //        }
+            //    }
+            //    start = start.AddHours(1);
+            //}
+            //return result;
         }
 
         public async Task<IEnumerable<LogLevelChartDto>> Handle(LogsLevelChatDataQuery request, CancellationToken cancellationToken)
@@ -87,6 +87,7 @@ namespace CleanArchitecture.Razor.Application.Features.Logs.Queries.ChatData
             var data = await _context.Serilogs.Where(x => x.TimeStamp >= request.LastDateTime)
                       .GroupBy(x => new { x.Level })
                       .Select(x => new LogLevelChartDto() { level= x.Key.Level, total = x.Count() })
+                      .OrderBy(x=>x.level)
                       .ToListAsync(cancellationToken);
             return data;
 

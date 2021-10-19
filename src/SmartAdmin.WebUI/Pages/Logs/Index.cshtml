@@ -29,10 +29,10 @@
 
 
 <div class="row mb-2">
-    <div class="col-sm-12 col-md-8" style="position: relative;height:200px">
+    <div class="col-sm-12 col-md-8" style="position: relative;height:160px">
         <canvas id='timebar' style="height: 100%;"></canvas>
     </div>
-    <div class="col-sm-12 col-md-4" style="position: relative;height:200px">
+    <div class="col-sm-12 col-md-4" style="position: relative;height:160px">
         <canvas id='levelpie' class="m-auto" style="height: 100%;"></canvas>
     </div>
 </div>
@@ -92,13 +92,14 @@
     $(async () => {
 
         var piedata = (await axios.get('@Url.Page("/Logs/Index")?handler=LogsLevelData')).data;
+        console.log(piedata.map(item => item.level))
         var piechart= new Chart(document.getElementById("levelpie").getContext('2d'), {
             type: 'doughnut',
             data: {
                 labels: piedata.map(item => item.level),
                 datasets: [{
                     label: "Population (millions)",
-                    backgroundColor: ["#2697FF", "#26E5FF", "#FFCF26", "#EE2727", "#007EE5", "#A6D4FF"],
+                    backgroundColor: ["#868e96", "#fe6bb0", "#EE2727", "#2697FF", "#a4cdff","#FFCF26"],
                     data: piedata.map(item => item.total)
                 }]
             },
@@ -107,33 +108,31 @@
                hoverBorderWidth:3,
                 maintainAspectRatio: false,
                 responsive: false,
-                legend: {
-                    display: true,
-                    position: 'bottom'
-                },
-                title: {
-                    display: false,
-                    text: '@_localizer["Logs Level"]'
-                },
-                //plugins: {
-                //    colorschemes: {
+                plugins: {
+                 //   colorschemes: {
                 //        scheme: 'brewer.Paired12'
-                //    }
-                //}
+                //    },
+                    legend: {
+                        position:'left',
+                        display: true,
+                        
+                    }
+                }
+                
             }
         });
 
         var linedata = (await axios.get('@Url.Page("/Logs/Index")?handler=LogsTimeLineData')).data;
-
+        console.log(linedata)
+        console.log(linedata.filter(item => item.level == 'Information').map(item => { return { time: item.time, total: item.total } } ))
         var ctx = document.getElementById('timebar').getContext('2d');
         var delayed = false;
         var barchart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: Array.from(new Set(linedata.map(item => moment(item.time).format('YYYY-MM-DD HH:mm')))),
                 datasets: [{
                     label: 'Information',
-                    data: linedata.filter(item => item.level == 'Information').map(item => item.total),
+                    data: linedata.filter(item => item.level == 'Information').map(item => { return { time: item.time, total: item.total } } ),
                     backgroundColor: '#2697FF',
                     //borderColor: "rgba(179,181,198,1)",
                     //pointBorderColor: "#fff",
@@ -141,7 +140,7 @@
                 },
                 {
                     label: 'Trace',
-                    data: linedata.filter(item => item.level == 'Trace').map(item => item.total),
+                    data: linedata.filter(item => item.level == 'Trace').map(item => { return { time: item.time, total: item.total } } ),
                     backgroundColor: '#a4cdff',
                     //borderColor: "rgba(179,181,198,1)",
                     //pointBorderColor: "#fff",
@@ -149,7 +148,7 @@
                 },
                 {
                     label: 'Debug',
-                    data: linedata.filter(item => item.level == 'Debug').map(item => item.total),
+                    data: linedata.filter(item => item.level == 'Debug').map(item => { return { time: item.time, total: item.total } } ),
                     backgroundColor: '#868e96',
                     //borderColor: "rgba(179,181,198,1)",
                     //pointBorderColor: "#fff",
@@ -157,7 +156,7 @@
                 },
                 {
                     label: 'Warning',
-                    data: linedata.filter(item => item.level == 'Warning').map(item => item.total),
+                    data: linedata.filter(item => item.level == 'Warning').map(item => { return { time: item.time, total: item.total } } ),
                     backgroundColor: '#FFCF26',
                     //borderColor: "rgba(179,181,198,1)",
                     //pointBorderColor: "#fff",
@@ -165,7 +164,7 @@
                 },
                 {
                     label: 'Error',
-                    data: linedata.filter(item => item.level == 'Error').map(item => item.total),
+                    data: linedata.filter(item => item.level == 'Error').map(item => { return { time: item.time, total: item.total } } ),
                     backgroundColor: '#fe6bb0',
                     //borderColor: "rgba(179,181,198,1)",
                     //pointBorderColor: "#fff",
@@ -173,7 +172,7 @@
                 },
                 {
                     label: 'Fatal',
-                    data: linedata.filter(item => item.level == 'Fatal').map(item => item.total),
+                    data: linedata.filter(item => item.level == 'Fatal').map(item => { return { time: item.time, total: item.total } } ),
                     backgroundColor: '#EE2727',
                     //borderColor: "rgba(179,181,198,1)",
                     //pointBorderColor: "#fff",
@@ -197,36 +196,43 @@
                 legend: { display: false },
                 maintainAspectRatio: false,
                 responsive: true,
-                tooltips: {
-                    mode: 'index',
-                    intersect: false
-                },
+                indexAxis:'x',
                 title: {
                     display: true,
                     text: '@_localizer["Logs"]',
+                },
+                parsing: {
+                    xAxisKey: 'time',
+                    yAxisKey:'total'
                 },
                 scales: {
                     x: {
                         stacked: true,
                         offset: true,
-                        type: "time",
+                        type: "timeseries",
                         time: {
                             displayFormats: {
                                 'hour': 'ah:mm',
                             },
                           unit: 'hour'
                         },
-                        //ticks:{
-                        //callback:function(v,cx,values){
-                        //    console.log(v,cx,values)
-                        //    return ''
-                        //}
-                        //}
                     },
                     y: {
                         stacked: true,
                         ticks: {
                             beginAtZero: true,
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        mode: 'x',
+                        intersect: false
+                    },
+                    legend: {
+                        display: false,
+                        labels: {
+                            color: 'rgb(255, 99, 132)'
                         }
                     }
                 }
