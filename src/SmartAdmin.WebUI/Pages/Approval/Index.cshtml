@@ -4,253 +4,253 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
-  ViewData["Title"] = _localizer["Approval"].Value;
-  ViewData["PageName"] = "approval_index";
-  ViewData["Category1"] = _localizer["Workflow"].Value;
-  ViewData["Heading"] = _localizer["Approval"].Value;
-  ViewData["PageDescription"] = _localizer["See all available options"].Value;
-  ViewData["PreemptiveClass"] = "Default";
-  var _canApprove = await _authorizationService.AuthorizeAsync(User, null, Permissions.Approval.Approve); ;
-  var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.Approval.Search);
+	ViewData["Title"] = _localizer["Approval"].Value;
+	ViewData["PageName"] = "approval_index";
+	ViewData["Category1"] = _localizer["Workflow"].Value;
+	ViewData["Heading"] = _localizer["Approval"].Value;
+	ViewData["PageDescription"] = _localizer["See all available options"].Value;
+	ViewData["PreemptiveClass"] = "Default";
+	var _canApprove = await _authorizationService.AuthorizeAsync(User, null, Permissions.Approval.Approve); ;
+	var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.Approval.Search);
 
 }
 @section HeadBlock {
 
-    <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
-    <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
-    <link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">
-    <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
-    <style>
+<link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+<link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+<link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">
+<link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+<style>
 
-        .approval_dg_datagrid-cell-c1-_action {
-            overflow: visible !important
-        }
-    </style>
+	.approval_dg_datagrid-cell-c1-_action {
+		overflow: visible !important
+	}
+</style>
 }
 <div id="js-page-content-demopanels" class="card mb-g">
-    <div class="card-header bg-white d-flex align-items-center">
-        <h4 class="m-0">
-            @_localizer["Approval"]
-            <small>@_localizer["See all available options"]</small>
-        </h4>
-        <div class="ml-auto">
-            
-            
-            @if (_canSearch.Succeeded)
-            {
-                <button class="btn btn-sm btn-outline-primary " id="searchbutton">
-                    <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
-                    @_localizer["Search"]
-                </button>
-            }
-            @if (_canApprove.Succeeded)
-            {
-                <button class="btn btn-sm btn-outline-primary " id="approvalbutton">
-                    <span class="@(Settings.Theme.IconPrefix) fa-file-signature mr-1"></span>
-                    @_localizer["Approval"]
-                </button>
-            }
-        </div>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-12">
-                <table id="approval_dg">
-                </table>
-            </div>
-        </div>
-    </div>
+	<div class="card-header bg-white d-flex align-items-center">
+		<h4 class="m-0">
+			@_localizer["Approval"]
+			<small>@_localizer["See all available options"]</small>
+		</h4>
+		<div class="ml-auto">
+
+
+			@if (_canSearch.Succeeded)
+			{
+				<button class="btn btn-sm btn-outline-primary " id="searchbutton">
+					<span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
+					@_localizer["Search"]
+				</button>
+			}
+			@if (_canApprove.Succeeded)
+			{
+				<button class="btn btn-sm btn-outline-primary " id="approvalbutton">
+					<span class="@(Settings.Theme.IconPrefix) fa-file-signature mr-1"></span>
+					@_localizer["Approval"]
+				</button>
+			}
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-12">
+				<table id="approval_dg">
+				</table>
+			</div>
+		</div>
+	</div>
 </div>
 <div class="modal fade" id="approval_modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Approval Request</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
-                </button>
-            </div>
-            <form id="approval_form" class="needs-validation" novalidate="novalidate">
-                <div class="modal-body">
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" asp-for="WorkflowId" />
-                    <input type="hidden" asp-for="Outcome" />
-                    <input type="hidden" asp-for="Approver" />
-                    <div class="form-row">
-                        <div class="col-md-12">
-                            <label class="form-label" for="Comments">@_localizer["Comments"] </label>
-                            <textarea asp-for="Comments" class="form-control" placeholder="Comments" required></textarea>
-                            <span class="invalid-feedback" asp-validation-for="Comments">Sorry, you missed this one.</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" name="rejectedbutton" class="btn btn-secondary">@_localizer["Reject"]</button>
-                    <button type="button" name="approvedbutton" class="btn btn-primary">@_localizer["Approved"]</button>
-                </div>
-            </form>
-        </div>
-    </div>
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Approval Request</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+				</button>
+			</div>
+			<form id="approval_form" class="needs-validation" novalidate="novalidate">
+				<div class="modal-body">
+					@Html.AntiForgeryToken()
+					<input type="hidden" asp-for="WorkflowId" />
+					<input type="hidden" asp-for="Outcome" />
+					<input type="hidden" asp-for="Approver" />
+					<div class="form-row">
+						<div class="col-md-12">
+							<label class="form-label" for="Comments">@_localizer["Comments"] </label>
+							<textarea asp-for="Comments" class="form-control" placeholder="Comments" required></textarea>
+							<span class="invalid-feedback" asp-validation-for="Comments">Sorry, you missed this one.</span>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" name="rejectedbutton" class="btn btn-secondary">@_localizer["Reject"]</button>
+					<button type="button" name="approvedbutton" class="btn btn-primary">@_localizer["Approved"]</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 
 @section ScriptsBlock {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
 
-    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
-    
-    <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
-    <script src="~/lib/axios/dist/axios.js"></script>
-    <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+<script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
+<script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+<script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
 
-    <script type="text/javascript">
-        $('#searchbutton').click(function () {
-            reload();
-        });
-        $('#approvalbutton').click(function () {
-            onApproval();
-        });
-        var $dg={};
-        var initdatagrid = () => {
-            $dg = $('#approval_dg').datagrid({
-                height: 700,
-                method: 'GET',
-                rownumbers: false,
-                singleSelect: true,
-                selectOnCheck: true,
-                checkOnSelect: true,
-                pagination: true,
-                clientPaging: false,
-                remoteFilter: true,
-                sortName: 'RequestDateTime',
-                sortOrder:'desc',
-                pageSize: 15,
-                pageList: [10, 15, 30, 50, 100, 1000],
-                onBeforeLoad: function () {
-                    $('#approvalbutton').prop('disabled', true);
-                },
-                onCheckAll: function (rows) {
-                    const checked = $(this).datagrid('getChecked').length > 0;
-                    $('#approvalbutton').prop('disabled', !checked);
-                },
-                onUncheckAll: function () {
-                    $('#approvalbutton').prop('disabled', true);
-                },
-                onCheck: function () {
-                    $('#approvalbutton').prop('disabled', false);
-                },
-                onUncheck: function () {
-                    const checked = $(this).datagrid('getChecked').length > 0;
-                    $('#approvalbutton').prop('disabled', !checked);
-                },
-                columns: [[
-                    { field: 'ck', checkbox: true },
-                    {
-                        field: '_action',
-                        title: '@_localizer["Command"]',
-                        width: 100,
-                        align: 'center',
-                        formatter: function (value, row, index) {
-                            return `<div class="btn-group" role="group">
-                                      <button id="commandbtngroup" type="button" @(_canApprove.Succeeded? "":"disabled") class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="@(Settings.Theme.IconPrefix) fa-file-signature"></i>
-                                     </button>
-                                     <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
-                                       <button class="dropdown-item" onclick="onApproval(${index})" @(_canApprove.Succeeded? "":"disabled")><i class="fal fa-gavel mr-1"></i> @_localizer["Approval"]</button>
-                                     </div>
-                                  </div>`;
-                        }
-                    },
-                    { field: 'WorkflowName', title: '@_localizer["Workflow Name"]', sortable: true, width:200 },
-                    { field: 'Status', title: '@_localizer["Status"]', sortable: true, width: 130 },
-                    { field: 'DocumentName', title: '@_localizer["Document Name"]', sortable: true, width: 180 },
-                    { field: 'Applicant', title: '@_localizer["Applicant"]', sortable: true, width: 130 },
-                    { field: 'Approver', title: '@_localizer["Approver"]', sortable: true, width: 130 },
-                    { field: 'RequestDateTime', title: '@_localizer["Request DateTime"]', formatter: datetimeformatter, sortable: true, width: 160 },
+<script>jQuery.fn.tooltip = bootstrapTooltip;</script>
+<script src="~/lib/axios/dist/axios.js"></script>
+<script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
 
-                ]]
-            })
-                .datagrid('enableFilter', {})
-                .datagrid('load', '@Url.Page("/Approval/Index")?handler=Data');
+<script type="text/javascript">
+	$('#searchbutton').click(function () {
+		reload();
+	});
+	$('#approvalbutton').click(function () {
+		onApproval();
+	});
+	var $dg={};
+	var initdatagrid = () => {
+		$dg = $('#approval_dg').datagrid({
+			height: 700,
+			method: 'GET',
+			rownumbers: false,
+			singleSelect: true,
+			selectOnCheck: true,
+			checkOnSelect: true,
+			pagination: true,
+			clientPaging: false,
+			remoteFilter: true,
+		    sortName: 'RequestDateTime',
+			sortOrder:'desc',
+			pageSize: 15,
+			pageList: [10, 15, 30, 50, 100, 1000],
+			onBeforeLoad: function () {
+			                 	$('#approvalbutton').prop('disabled', true);
+			},
+			onCheckAll: function (rows) {
+				const checked = $(this).datagrid('getChecked').length > 0;
+				$('#approvalbutton').prop('disabled', !checked);
+			},
+			onUncheckAll: function () {
+				$('#approvalbutton').prop('disabled', true);
+			},
+			onCheck: function () {
+				$('#approvalbutton').prop('disabled', false);
+			},
+			onUncheck: function () {
+				const checked = $(this).datagrid('getChecked').length > 0;
+				$('#approvalbutton').prop('disabled', !checked);
+			},
+			columns: [[
+				{ field: 'ck', checkbox: true },
+				{
+					field: '_action',
+					title: '@_localizer["Command"]',
+					width: 100,
+					align: 'center',
+					formatter: function (value, row, index) {
+						return `<div class="btn-group" role="group">
+								  <button id="commandbtngroup" type="button" @(_canApprove.Succeeded? "":"disabled") class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="@(Settings.Theme.IconPrefix) fa-file-signature"></i>
+								 </button>
+								 <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
+								   <button class="dropdown-item" onclick="onApproval(${index})" @(_canApprove.Succeeded? "":"disabled")><i class="fal fa-gavel mr-1"></i> @_localizer["Approval"]</button>
+								 </div>
+							  </div>`;
+					}
+				},
+				{ field: 'WorkflowName', title: '@_localizer["Workflow Name"]', sortable: true, width:200 },
+				{ field: 'Status', title: '@_localizer["Status"]', sortable: true, width: 130 },
+				{ field: 'DocumentName', title: '@_localizer["Document Name"]', sortable: true, width: 180 },
+				{ field: 'Applicant', title: '@_localizer["Applicant"]', sortable: true, width: 130 },
+				{ field: 'Approver', title: '@_localizer["Approver"]', sortable: true, width: 130 },
+				{ field: 'RequestDateTime', title: '@_localizer["Request DateTime"]', formatter: datetimeformatter, sortable: true, width: 160 },
 
-        }
+			]]
+		})
+			.datagrid('enableFilter', {})
+			.datagrid('load', '@Url.Page("/Approval/Index")?handler=Data');
 
-        var reload = () => {
-            $dg.datagrid('load', '@Url.Page("/Approval/Index")?handler=Data');
-        }
+	}
 
-        $(() => {
-            initdatagrid();
-        })
-        var onApproval = (index) => {
-            $('#approval_form')[0].reset();
-            if (index != undefined && index >= 0) {
-                var approval = $dg.datagrid('getRows')[index];
-                var workid = approval.WorkflowId;
-                $('#WorkflowId').val(workid);
-                $('#approval_form').jsonToForm(approval);
-            } else {
-                var approval = $dg.datagrid('getChecked')[0]
-                var workid = approval.WorkflowId;
-                $('#WorkflowId').val(workid);
-                $('#approval_form').jsonToForm(approval);
-            }
-            $('#approval_modal').modal('toggle');
+	var reload = () => {
+		$dg.datagrid('load', '@Url.Page("/Approval/Index")?handler=Data');
+	}
 
-        }
+	$(() => {
+		initdatagrid();
+	})
+	var onApproval = (index) => {
+		$('#approval_form')[0].reset();
+		if (index != undefined && index >= 0) {
+			var approval = $dg.datagrid('getRows')[index];
+			var workid = approval.WorkflowId;
+			$('#WorkflowId').val(workid);
+			$('#approval_form').jsonToForm(approval);
+		} else {
+			var approval = $dg.datagrid('getChecked')[0]
+			var workid = approval.WorkflowId;
+			$('#WorkflowId').val(workid);
+			$('#approval_form').jsonToForm(approval);
+		}
+		   $('#approval_modal').modal('toggle');
 
-        $('#approval_modal button[name="rejectedbutton"]').click(function (e) {
-            console.log('rejected');
-            $('#Outcome').val('Rejected');
-            var form = document.querySelector('#approval_form');
-            $(form).find(":valid").parent().removeClass("was-validated");
-            if (form.checkValidity() === false) {
-                form.classList.add('was-validated');
-            } else {
-                var request = $('#approval_form').serialize();
-                axios.post('/approval/index', request).then(res => {
-                    toastr["error"]('@_localizer["Rejected"]');
-                    $('#approval_modal').modal('toggle');
-                    reload();
-                }).catch((error) => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
+	}
 
-                });
-            }
+	$('#approval_modal button[name="rejectedbutton"]').click(function (e) {
+		console.log('rejected');
+		$('#Outcome').val('Rejected');
+		var form = document.querySelector('#approval_form');
+		$(form).find(":valid").parent().removeClass("was-validated");
+		if (form.checkValidity() === false) {
+			form.classList.add('was-validated');
+		} else {
+			var request = $('#approval_form').serialize();
+			axios.post('/approval/index', request).then(res => {
+				toastr["error"]('@_localizer["Rejected"]');
+				$('#approval_modal').modal('toggle');
+				reload();
+			}).catch((error) => {
+				var msg = error.response.data;
+				bootbox.alert({
+					size: "small",
+					title: "@_localizer["Error"]",
+					message: msg,
+					callback: function () { /* your callback code */ }
+				})
 
-        })
-        $('#approval_modal button[name="approvedbutton"]').click(function (e) {
-            console.log('approved');
-            $('#Outcome').val('Approved');
-            var form = document.querySelector('#approval_form');
-            $(form).find(":valid").parent().removeClass("was-validated");
-            if (form.checkValidity() === false) {
-                form.classList.add('was-validated');
-            } else {
-                var request = $('#approval_form').serialize();
-                axios.post('/approval/index', request).then(res => {
-                    toastr["info"]('@_localizer["Approved"]');
-                    $('#approval_modal').modal('toggle');
-                    reload();
-                }).catch((error) => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
+			});
+		}
 
-                });
-            }
-        })
+	})
+	$('#approval_modal button[name="approvedbutton"]').click(function (e) {
+		console.log('approved');
+		$('#Outcome').val('Approved');
+		var form = document.querySelector('#approval_form');
+		$(form).find(":valid").parent().removeClass("was-validated");
+		if (form.checkValidity() === false) {
+			form.classList.add('was-validated');
+		} else {
+			var request = $('#approval_form').serialize();
+			axios.post('/approval/index', request).then(res => {
+				toastr["info"]('@_localizer["Approved"]');
+				$('#approval_modal').modal('toggle');
+				reload();
+			}).catch((error) => {
+				var msg = error.response.data;
+				bootbox.alert({
+					size: "small",
+					title: "@_localizer["Error"]",
+					message: msg,
+					callback: function () { /* your callback code */ }
+				})
 
-    </script>
+			});
+		}
+	})
+
+</script>
 }
