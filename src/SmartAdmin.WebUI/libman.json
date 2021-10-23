@@ -69,6 +69,15 @@
       "provider": "cdnjs",
       "library": "fabric.js@460",
       "destination": "wwwroot/lib/fabric/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "papaparse@5.3.1",
+      "destination": "wwwroot/lib/papaparse/",
+      "files": [
+        "papaparse.js",
+        "papaparse.min.js"
+      ]
     }
   ]
 }

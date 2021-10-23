@@ -12,6 +12,11 @@
       "roles": [ "Admin", "Basic" ],
       "items": [
         {
+          "title": "Org Chart",
+          "href": "orgchart_index.html",
+          "roles": []
+        },
+        {
           "title": "Approval",
           "href": "approval_index.html",
           "roles": []

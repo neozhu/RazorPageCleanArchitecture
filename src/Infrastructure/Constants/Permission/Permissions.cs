@@ -7,6 +7,14 @@ namespace CleanArchitecture.Razor.Infrastructure.Constants.Permission
 {
     public static class Permissions
     {
+        [DisplayName("OrgChart")]
+        [Description("OrgChart Permissions")]
+        public static class OrgChart
+        {
+            public const string View = "Permissions.OrgChart.View";
+            public const string Search = "Permissions.OrgChart.Search";
+            public const string Export = "Permissions.OrgChart.Export";
+        }
         [DisplayName("AuditTrails")]
         [Description("AuditTrails Permissions")]
         public static class AuditTrails
