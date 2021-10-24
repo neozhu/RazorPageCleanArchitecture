@@ -493,31 +493,54 @@
 			   skipEmptyLines:true,
 	           header: true,
 			   complete: function(results, file) {
-	               console.log("Parsing complete:", results, file);
-				   $('#orgchart_dg').datagrid({
-				height: 700,
-				data:results.data,
-				rownumbers: false,
-			    singleSelect: false,
-			    selectOnCheck: false,
-			    checkOnSelect: false,
-				pagination: true,
-			    clientPaging: true,
-			    remoteFilter: false,
-				pageSize: 15,
-			    pageList: [10, 15, 30, 50, 100, 1000],
-				columns: [[
-				{ field: 'ck', checkbox: true },
-				{ field: 'name', title: '@_localizer["User Name"]', sortable: true, width:150 },
-				{ field: 'imageUrl', title: '@_localizer["Image Url"]', sortable: true, width: 200 },
-				{ field: 'area', title: '@_localizer["Area"]', sortable: true, width: 100 },
-				{ field: 'profileUrl', title: '@_localizer["Profile Url"]', sortable: true, width: 130 },
-				{ field: 'office', title: '@_localizer["Office"]', sortable: true, width: 130 },
-		        { field: 'tags', title: '@_localizer["Tags"]', sortable: true, width: 130 },
-				{ field: 'isLoggedUser', title: '@_localizer["Is Logged User"]', sortable: true, width: 150 },
-				{ field: 'positionName', title: '@_localizer["Position Name"]', sortable: true, width: 150 },
-			]]
-			}).datagrid('clientPaging');
+                   console.log("Parsing complete:", results, file);
+                   //var data = results.data.map(item => {
+                   //    return { id: item.id, name: item.name, _parentId: item.parentId, area: item.area, office: item.office, tags: item.tags, positionName: item.positionName, parentId: item.parentId };
+                   //});
+                   const data = results.data;
+                   console.log(data);
+                   $('#orgchart_dg').treegrid({
+                       height: 700,
+                       data: data,
+                       idField: 'id',
+                       treeField: 'name',
+                       rownumbers: false,
+                       singleSelect: false,
+                       selectOnCheck: false,
+                       checkOnSelect: false,
+                       pagination: false,
+                       loadFilter: function (data) {
+                           var rows = [];
+                           rows = data.filter(item => item.parentId == '');
+                           function loadchildren(parent,parentId) {
+                               const array = data.filter(item => item.parentId == parentId);
+                               if (array.length > 0) {
+                                   parent.children = array;
+                                   for (var i = 0; i < array.length; i++) {
+                                       loadchildren(array[i], array[i].id);
+                                   }
+                               }
+                               return;
+                           }
+                           for (var i = 0; i < rows.length; i++) {
+                               const _parentId = rows[i].id;
+                               loadchildren(rows[i],_parentId);
+
+                           }
+                           console.log(rows)
+                           return rows;
+                       },
+                       columns: [[
+                           { field: 'name', title: '@_localizer["User Name"]', sortable: true, width: 300 },
+                           { field: 'imageUrl', title: '@_localizer["Image Url"]', sortable: true, width: 180 },
+                           { field: 'area', title: '@_localizer["Area"]', sortable: true, width: 100 },
+                           { field: 'profileUrl', title: '@_localizer["Profile Url"]', sortable: true, width: 130 },
+                           { field: 'office', title: '@_localizer["Office"]', sortable: true, width: 130 },
+                           { field: 'tags', title: '@_localizer["Tags"]', sortable: true, width: 130 },
+                           { field: 'isLoggedUser', title: '@_localizer["Is Logged User"]', sortable: true, width: 150 },
+                           { field: 'positionName', title: '@_localizer["Position Name"]', sortable: true, width: 150 },
+                       ]]
+                   });
               }
             })
 
