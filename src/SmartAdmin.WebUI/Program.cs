@@ -26,10 +26,20 @@ using CleanArchitecture.Razor.Application.Hubs;
 using CleanArchitecture.Razor.Application.Hubs.Constants;
 using CleanArchitecture.Razor.Infrastructure.Localization;
 using Microsoft.Extensions.FileProviders;
+using System.Net;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Configuration;
 
 string[] filters = new string[] { "Microsoft.EntityFrameworkCore.Model.Validation", "WorkflowCore.Services.WorkflowHost", "WorkflowCore.Services.BackgroundTasks.RunnablePoller", "Microsoft.Hosting.Lifetime", "Serilog.AspNetCore.RequestLoggingMiddleware" };
 
+var configuration = new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json")
+        .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", true)
+        .Build();
+
 Log.Logger = new LoggerConfiguration()
+          .ReadFrom.Configuration(configuration)
           .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
           .Enrich.FromLogContext()
           .Enrich.WithClientIp()
@@ -40,8 +50,16 @@ Log.Logger = new LoggerConfiguration()
           .WriteTo.Console()
           .CreateLogger();
 var builder = WebApplication.CreateBuilder(args);
- 
- 
+
+builder.WebHost.ConfigureKestrel((context, options) =>
+{
+    options.Listen(IPAddress.Any, 5001, listenOptions =>
+    {
+        // Use HTTP/3
+        listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+        listenOptions.UseHttps();
+    });
+});
 
 builder.WebHost.UseSerilog();
 builder.Services.Configure<SmartSettings>(builder.Configuration.GetSection(SmartSettings.SectionName));
