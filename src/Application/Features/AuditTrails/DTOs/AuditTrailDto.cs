@@ -19,10 +19,10 @@ namespace CleanArchitecture.Razor.Application.Features.AuditTrails.DTOs
         {
             profile.CreateMap<AuditTrail, AuditTrailDto>()
                .ForMember(x => x.AuditType, s => s.MapFrom(y => y.AuditType.ToString()))
-               .ForMember(x => x.OldValues, s => s.MapFrom(y => JsonSerializer.Serialize(y.OldValues, null)))
-               .ForMember(x => x.NewValues, s => s.MapFrom(y => JsonSerializer.Serialize(y.NewValues, null)))
-               .ForMember(x => x.PrimaryKey, s => s.MapFrom(y => JsonSerializer.Serialize(y.PrimaryKey, null)))
-               .ForMember(x => x.AffectedColumns, s => s.MapFrom(y => JsonSerializer.Serialize(y.AffectedColumns, null)))
+               .ForMember(x => x.OldValues, s => s.MapFrom(y => JsonSerializer.Serialize(y.OldValues, (JsonSerializerOptions)null)))
+               .ForMember(x => x.NewValues, s => s.MapFrom(y => JsonSerializer.Serialize(y.NewValues, (JsonSerializerOptions)null)))
+               .ForMember(x => x.PrimaryKey, s => s.MapFrom(y => JsonSerializer.Serialize(y.PrimaryKey, (JsonSerializerOptions)null)))
+               .ForMember(x => x.AffectedColumns, s => s.MapFrom(y => JsonSerializer.Serialize(y.AffectedColumns, (JsonSerializerOptions)null)))
                ;
            
         }
