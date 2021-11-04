@@ -22,8 +22,8 @@ If you like or are using this project please give it a star. Thanks!
 
 ## Technologies
 
-* [ASP.NET Core 5](https://devblogs.microsoft.com/aspnet/announcing-asp-net-core-in-net-5/)
-* [Entity Framework Core 5](https://docs.microsoft.com/en-us/ef/core/)
+* [ASP.NET Core 6](https://devblogs.microsoft.com/dotnet/asp-net-core-updates-in-net-6-rc-2/)
+* [Entity Framework Core 6](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-6.0/whatsnew)
 * [SmartAdmin - Responsive WebApp](https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0/)
 * [Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-5.0&tabs=visual-studio)
 * [Jquery EasyUI](https://www.jeasyui.com/)
@@ -43,7 +43,7 @@ Github Sourcecode: https://github.com/neozhu/CleanArchitectureCodeGenerator
 
 The easiest way to get started is to install the [NuGet package](https://www.nuget.org/packages/Clean.Architecture.Solution.Template) and run `dotnet new ca-sln`:
 
-1. Install the latest [.NET 5 SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
+1. Install the latest [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
 2. Run `dotnet new --install Clean.Architecture.Solution.Template` to install the project template
 3. Create a folder for your solution and cd into it (the template will use it as project name)
 4. Run `dotnet new ca-sln` to create a new project
