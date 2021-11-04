@@ -3,10 +3,12 @@
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
     <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
     <UserSecretsId>aspnet-SmartAdmin.WebUI-E383D1D3-A583-4134-97C9-6DFEB2F1657F</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.4" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.0-rc.2.21480.10" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
