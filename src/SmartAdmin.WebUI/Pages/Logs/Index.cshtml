@@ -74,7 +74,7 @@
 
 @section ScriptsBlock {
     @*<script src="~/js/statistics/chartjs/chartjs.bundle.js"></script>*@
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
     @*<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script>*@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
@@ -92,15 +92,15 @@
     $(async () => {
 
         var piedata = (await axios.get('@Url.Page("/Logs/Index")?handler=LogsLevelData')).data;
-        console.log(piedata.map(item => item.level))
+        console.log(piedata)
         var piechart= new Chart(document.getElementById("levelpie").getContext('2d'), {
             type: 'doughnut',
             data: {
                 labels: piedata.map(item => item.level),
                 datasets: [{
-                    label: "Population (millions)",
+                    label: "log classification",
                     backgroundColor: ["#868e96", "#fe6bb0", "#EE2727", "#2697FF", "#a4cdff","#FFCF26"],
-                    data: piedata.map(item => item.total)
+                    data: piedata
                 }]
             },
             options: {
@@ -108,6 +108,10 @@
                hoverBorderWidth:3,
                 maintainAspectRatio: false,
                 responsive: false,
+                parsing: {
+                   xAxisKey: 'level',
+                   key: 'total'
+                },
                 plugins: {
                  //   colorschemes: {
                 //        scheme: 'brewer.Paired12'
