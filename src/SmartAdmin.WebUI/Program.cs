@@ -85,8 +85,8 @@ builder.WebHost.ConfigureKestrel((context, options) =>
 });
 
 builder.WebHost.UseSerilog();
-builder.Services.Configure<SmartSettings>(builder.Configuration.GetSection(SmartSettings.SectionName));
-builder.Services.AddSingleton(s => s.GetRequiredService<IOptions<SmartSettings>>().Value);
+
+
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
