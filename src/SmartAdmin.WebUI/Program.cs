@@ -29,8 +29,21 @@ using Microsoft.Extensions.FileProviders;
 using System.Net;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
+using Serilog.Context;
 
-string[] filters = new string[] { "Microsoft.EntityFrameworkCore.Model.Validation", "WorkflowCore.Services.WorkflowHost", "WorkflowCore.Services.BackgroundTasks.RunnablePoller", "Microsoft.Hosting.Lifetime", "Serilog.AspNetCore.RequestLoggingMiddleware" };
+string[] filters = new string[] { "Microsoft.EntityFrameworkCore.Model.Validation",
+    "WorkflowCore.Services.WorkflowHost",
+    "WorkflowCore.Services.BackgroundTasks.RunnablePoller",
+    "Microsoft.Hosting.Lifetime",
+    "Microsoft.EntityFrameworkCore.Infrastructure",
+    "Microsoft.EntityFrameworkCore.Update",
+    "Microsoft.AspNetCore.Routing.EndpointMiddleware",
+    "Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager",
+    "Microsoft.AspNetCore.Hosting.Diagnostics",
+    "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker",
+    "Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler",
+    "Microsoft.AspNetCore.Authorization.DefaultAuthorizationService",
+    "Serilog.AspNetCore.RequestLoggingMiddleware" };
 
 var configuration = new ConfigurationBuilder()
         .SetBasePath(Directory.GetCurrentDirectory())
@@ -45,7 +58,17 @@ Log.Logger = new LoggerConfiguration()
           .Enrich.WithClientIp()
           .Enrich.WithClientAgent()
           .Filter.ByExcluding(
-                        Matching.WithProperty<string>("SourceContext", p => filters.Contains(p))
+                        //(logevent) =>
+                        //{
+                        //    Console.WriteLine(logevent);
+                        //    var cxt = logevent.Properties.Where(x => x.Key == "SourceContext").Select(x => x.Value.ToString()).ToArray();
+                        //    if (cxt.Any(x => filters.Contains(x)))
+                        //    {
+                        //        return false;
+                        //    }
+                        //    return true;
+                        //}
+                  Matching.WithProperty<string>("SourceContext", p => filters.Contains(p))
             )
           .WriteTo.Console()
           .CreateLogger();
@@ -55,15 +78,13 @@ builder.WebHost.ConfigureKestrel((context, options) =>
 {
     options.Listen(IPAddress.Any, 5001, listenOptions =>
     {
-        // Use HTTP/3
-        listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
         listenOptions.UseHttps();
     });
 });
 
 builder.WebHost.UseSerilog();
-builder.Services.Configure<SmartSettings>(builder.Configuration.GetSection(SmartSettings.SectionName));
-builder.Services.AddSingleton(s => s.GetRequiredService<IOptions<SmartSettings>>().Value);
+
+
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
@@ -157,7 +178,13 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+app.UseSerilogRequestLogging(options =>
+{
+    options.EnrichDiagnosticContext = (diagnosticContext, httpContext) => {
+        //This didn't work when tested
+        diagnosticContext.Set("UserName", httpContext.User?.Identity?.Name ?? "Anonymous");
+    };
+});
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
@@ -168,15 +195,17 @@ app.UseStaticFiles(new StaticFileOptions
 
 app.UseRequestLocalization();
 app.UseRequestLocalizationCookies();
-app.UseSerilogRequestLogging(options =>
-{
-    options.EnrichDiagnosticContext = (diagnosticContext, httpContext) => {
-        diagnosticContext.Set("UserName", httpContext.User?.Identity?.Name ?? string.Empty);
-    };
-});
+
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.Use(async (httpContext, next) =>
+{
+    //This is the correct implementation 
+    var userName = httpContext.User?.Identity?.Name ?? "Anonymous"; //Gets user Name from user Identity
+    LogContext.PushProperty("UserName", userName); //Push user in LogContext;
+    await next.Invoke();
+});
 app.UseWorkflow();
 app.MapControllers();
 app.MapRazorPages();

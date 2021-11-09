@@ -34,7 +34,7 @@ public class Testing
 
         _configuration = builder.Build();
 
-        var startup = new Startup(_configuration);
+        //var startup = new Startup(_configuration);
 
         var services = new ServiceCollection();
 
@@ -42,9 +42,9 @@ public class Testing
             w.EnvironmentName == "Development" &&
             w.ApplicationName == "CleanArchitecture.WebUI"));
 
-        services.AddLogging();
+        //services.AddLogging();
 
-        startup.ConfigureServices(services);
+        //startup.ConfigureServices(services);
 
         // Replace service registration for ICurrentUserService
         // Remove existing registration
