@@ -1,4 +1,6 @@
+using CleanArchitecture.Razor.Application;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Infrastructure;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Persistence;
 using MediatR;
@@ -38,9 +40,13 @@ public class Testing
 
         var services = new ServiceCollection();
 
+
         services.AddSingleton(Mock.Of<IWebHostEnvironment>(w =>
             w.EnvironmentName == "Development" &&
-            w.ApplicationName == "CleanArchitecture.WebUI"));
+            w.ApplicationName == "SmartAdmin.WebUI"));
+
+        services.AddInfrastructure(_configuration)
+                .AddApplication();
 
         //services.AddLogging();
 
