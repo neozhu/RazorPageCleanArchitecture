@@ -26,11 +26,15 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
         private readonly IDateTime _dateTime;
         private readonly IDomainEventService _domainEventService;
 
+        public ApplicationDbContext() : base()
+        {
+        }
         public ApplicationDbContext(
             DbContextOptions<ApplicationDbContext> options,
             ICurrentUserService currentUserService,
             IDomainEventService domainEventService,
-            IDateTime dateTime) : base(options)
+            IDateTime dateTime
+            ) : base(options)
         {
             _currentUserService = currentUserService;
             _domainEventService = domainEventService;
@@ -188,6 +192,14 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
                 AuditTrails.Add(auditEntry);
             }
             return SaveChangesAsync(cancellationToken);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CleanArchitecture.RazorDb;Trusted_Connection=True;MultipleActiveResultSets=true;");
+            }
         }
     }
 }
