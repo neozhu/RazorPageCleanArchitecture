@@ -1,19 +1,10 @@
-using System;
-using System.IO;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Persistence;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Filters;
-using System.Linq;
 using Serilog.Events;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using CleanArchitecture.Razor.Infrastructure;
 using CleanArchitecture.Razor.Application;
 using SmartAdmin.WebUI.Filters;
@@ -23,7 +14,6 @@ using CleanArchitecture.Razor.Application.Hubs.Constants;
 using CleanArchitecture.Razor.Infrastructure.Localization;
 using Microsoft.Extensions.FileProviders;
 using System.Net;
-using Microsoft.Extensions.Configuration;
 using Serilog.Context;
 
 string[] filters = new string[] { "Microsoft.EntityFrameworkCore.Model.Validation",
