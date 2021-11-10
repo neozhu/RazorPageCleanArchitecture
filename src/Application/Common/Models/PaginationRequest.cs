@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanArchitecture.Razor.Application.Models
+namespace CleanArchitecture.Razor.Application.Common.Models
 {
     public abstract class PaginationRequest
     {

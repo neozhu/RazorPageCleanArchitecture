@@ -1,9 +1,5 @@
-using System;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
-using CleanArchitecture.Razor.Application.Common.Exceptions;
 using CleanArchitecture.Razor.Application.Documents.Commands.AddEdit;
 using CleanArchitecture.Razor.Application.Documents.Commands.Delete;
 using CleanArchitecture.Razor.Application.Documents.Queries.Export;
@@ -13,13 +9,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
-using System.Collections.Generic;
-using CleanArchitecture.Razor.Application.DocumentTypes.DTOs;
 using CleanArchitecture.Razor.Application.DocumentTypes.Queries.PaginationQuery;
 using Microsoft.AspNetCore.Authorization;
 using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using FluentValidation.AspNetCore;
 using CleanArchitecture.Razor.Application.Common.Models;
 
 namespace SmartAdmin.WebUI.Pages.Documents
@@ -61,7 +54,7 @@ namespace SmartAdmin.WebUI.Pages.Documents
 
             if (UploadedFile != null)
             {
-                Input.UploadRequest = new CleanArchitecture.Razor.Application.Models.UploadRequest();
+                Input.UploadRequest = new  UploadRequest();
                 Input.UploadRequest.FileName = UploadedFile.FileName;
                 Input.UploadRequest.UploadType = CleanArchitecture.Razor.Domain.Enums.UploadType.Document;
                 var stream = new MemoryStream();
