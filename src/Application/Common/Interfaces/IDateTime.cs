@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CleanArchitecture.Razor.Application.Common.Interfaces
+﻿namespace CleanArchitecture.Razor.Application.Common.Interfaces
 {
     public interface IDateTime
     {

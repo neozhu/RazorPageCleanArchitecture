@@ -3,7 +3,7 @@
 
 using CleanArchitecture.Razor.Domain.Enums;
 
-namespace CleanArchitecture.Razor.Application.Models
+namespace CleanArchitecture.Razor.Application.Common.Models
 {
     public class UploadRequest
     {

@@ -4,6 +4,7 @@
     <LangVersion>latest</LangVersion>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-SmartAdmin.WebUI-E383D1D3-A583-4134-97C9-6DFEB2F1657F</UserSecretsId>
   </PropertyGroup>
 

@@ -1,7 +1,4 @@
-using System;
-using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Mappings;
-using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Entities.Worflow;
 
 namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.DTOs

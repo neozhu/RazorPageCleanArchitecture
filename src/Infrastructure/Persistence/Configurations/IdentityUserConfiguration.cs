@@ -1,4 +1,3 @@
-using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

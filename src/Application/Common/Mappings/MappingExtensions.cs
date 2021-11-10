@@ -3,13 +3,10 @@ using AutoMapper.QueryableExtensions;
 using CleanArchitecture.Razor.Application.Common.Models;
 using CleanArchitecture.Razor.Application.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Razor.Application.Common.Mappings
 {
-  public static class MappingExtensions
+    public static class MappingExtensions
   {
     public static Task<PaginatedList<TDestination>> PaginatedListAsync<TDestination>(this IQueryable<TDestination> queryable, int pageNumber, int pageSize)
         => PaginatedList<TDestination>.CreateAsync(queryable, pageNumber, pageSize);

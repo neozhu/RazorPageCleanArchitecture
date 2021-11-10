@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Text.Json.Serialization;
 using System.Text.Json;
-using CleanArchitecture.Razor.Application.Models;
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
+using CleanArchitecture.Razor.Application.Common.Models;
 
 namespace CleanArchitecture.Razor.Application.Common.Extensions
 {

@@ -19,7 +19,6 @@ using System.IO;
 using Microsoft.AspNetCore.Http;
 using System.Data;
 using System;
-using System.Net;
 using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 using System.ComponentModel;
 using System.Reflection;

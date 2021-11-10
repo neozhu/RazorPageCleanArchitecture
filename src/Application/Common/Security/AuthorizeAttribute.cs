@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CleanArchitecture.Razor.Application.Common.Security
+﻿namespace CleanArchitecture.Razor.Application.Common.Security
 {
     /// <summary>
     /// Specifies the class this attribute is applied to requires authorization.

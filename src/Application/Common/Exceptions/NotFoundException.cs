@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CleanArchitecture.Razor.Application.Common.Exceptions
+﻿namespace CleanArchitecture.Razor.Application.Common.Exceptions
 {
     public class NotFoundException : Exception
     {

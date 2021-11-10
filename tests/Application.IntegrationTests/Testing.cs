@@ -12,7 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using NUnit.Framework;
 using Respawn;
-using SmartAdmin.WebUI;
 using System;
 using System.IO;
 using System.Linq;

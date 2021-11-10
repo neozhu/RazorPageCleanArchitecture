@@ -1,11 +1,7 @@
-using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitecture.Razor.Application.Common.Exceptions;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
-using CleanArchitecture.Razor.Application.Common.Models;
 using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
 using CleanArchitecture.Razor.Application.Customers.Commands.Delete;
 using CleanArchitecture.Razor.Application.Customers.Commands.Import;

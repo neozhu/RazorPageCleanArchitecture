@@ -1,14 +1,8 @@
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Razor.Infrastructure.Identity
 {
- public  class ApplicationRoleClaim:IdentityRoleClaim<string>
+    public  class ApplicationRoleClaim:IdentityRoleClaim<string>
   {
     public string Description { get; set; }
     public string Group { get; set; }

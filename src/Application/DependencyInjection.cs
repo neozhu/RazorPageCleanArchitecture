@@ -1,17 +1,8 @@
-using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Behaviours;
-using CleanArchitecture.Razor.Application.Common.Interfaces;
-using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
-using CleanArchitecture.Razor.Application.Workflow.Approval.Steps;
 using FluentValidation;
 using MediatR;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
 using System.Reflection;
-using WorkflowCore.Interface;
-using WorkflowCore.Models;
 
 namespace CleanArchitecture.Razor.Application
 {

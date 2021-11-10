@@ -2,9 +2,7 @@
 using FluentAssertions;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using CleanArchitecture.Razor.Application.Documents.Commands.Delete;
 using CleanArchitecture.Razor.Application.Common.Exceptions;
-using CleanArchitecture.Razor.Application.Documents.Commands.AddEdit;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Application.DocumentTypes.Commands.AddEdit;
 using CleanArchitecture.Razor.Application.DocumentTypes.Commands.Delete;
