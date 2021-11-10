@@ -3,8 +3,6 @@
 
 using CleanArchitecture.Razor.Application.Common.Interfaces.Identity.DTOs;
 using CleanArchitecture.Razor.Application.Common.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Razor.Application.Common.Interfaces.Identity
 {

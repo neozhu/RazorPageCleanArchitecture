@@ -6,8 +6,6 @@ using CleanArchitecture.Razor.Application.KeyValues.Commands.Delete;
 using CleanArchitecture.Razor.Application.Common.Exceptions;
 using CleanArchitecture.Razor.Application.KeyValues.Commands.AddEdit;
 using CleanArchitecture.Razor.Domain.Entities;
-using CleanArchitecture.Razor.Application.KeyValues.Commands.AddEdit;
-using CleanArchitecture.Razor.Application.KeyValues.Commands.Delete;
 
 namespace CleanArchitecture.Application.IntegrationTests.KeyValues.Commands
 {

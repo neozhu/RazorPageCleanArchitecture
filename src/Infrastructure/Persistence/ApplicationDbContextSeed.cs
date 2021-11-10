@@ -2,7 +2,6 @@ using CleanArchitecture.Razor.Application.Common.Extensions;
 using CleanArchitecture.Razor.Infrastructure.Constants.ClaimTypes;
 using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
 using CleanArchitecture.Razor.Infrastructure.Identity;
-using CleanArchitecture.Razor.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,5 +1,4 @@
-﻿using CleanArchitecture.Razor.Domain.Common;
-using System.Threading.Tasks;
+using CleanArchitecture.Razor.Domain.Common;
 
 namespace CleanArchitecture.Razor.Application.Common.Interfaces
 {

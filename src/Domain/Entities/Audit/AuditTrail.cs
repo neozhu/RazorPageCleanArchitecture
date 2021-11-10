@@ -4,10 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CleanArchitecture.Razor.Domain.Common;
-using CleanArchitecture.Razor.Domain.Enums;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace CleanArchitecture.Razor.Domain.Entities.Audit

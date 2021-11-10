@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Threading.Tasks;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
@@ -14,9 +13,6 @@ using Serilog.Filters;
 using System.Linq;
 using Serilog.Events;
 using Microsoft.AspNetCore.Builder;
-using SmartAdmin.WebUI.Models;
-using System.Configuration;
-using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Http;
 using CleanArchitecture.Razor.Infrastructure;
 using CleanArchitecture.Razor.Application;
@@ -27,7 +23,6 @@ using CleanArchitecture.Razor.Application.Hubs.Constants;
 using CleanArchitecture.Razor.Infrastructure.Localization;
 using Microsoft.Extensions.FileProviders;
 using System.Net;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Serilog.Context;
 

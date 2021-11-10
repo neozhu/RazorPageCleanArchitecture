@@ -1,16 +1,14 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
-using CleanArchitecture.Razor.Domain.Common;
-using CleanArchitecture.Razor.Domain.Entities;
+namespace CleanArchitecture.Razor.Domain.Events;
 
-namespace CleanArchitecture.Razor.Domain.Events
+public class CustomerCreatedEvent : DomainEvent
 {
-    public class CustomerCreatedEvent : DomainEvent
+    public CustomerCreatedEvent(Customer item)
     {
-        public CustomerCreatedEvent(Customer item)
-        {
-            Item = item;
-        }
-
-        public Customer Item { get; }
+        Item = item;
     }
+
+    public Customer Item { get; }
 }
