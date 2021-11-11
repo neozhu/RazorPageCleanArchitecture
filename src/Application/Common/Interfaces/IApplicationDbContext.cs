@@ -1,20 +1,22 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Entities.Audit;
 using CleanArchitecture.Razor.Domain.Entities.Log;
 using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanArchitecture.Razor.Application.Common.Interfaces
+namespace CleanArchitecture.Razor.Application.Common.Interfaces;
+
+public interface IApplicationDbContext
 {
-    public interface IApplicationDbContext
-    {
-        DbSet<Serilog> Serilogs { get; set; }
-        DbSet<AuditTrail> AuditTrails { get; set; }
-        DbSet<Customer> Customers { get; set; }
-        DbSet<DocumentType> DocumentTypes { get; set; }
-        DbSet<Document> Documents { get; set; }
-        DbSet<KeyValue> KeyValues { get; set; }
-        DbSet<ApprovalData> ApprovalDatas { get; set; }
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
-    }
+    DbSet<Serilog> Serilogs { get; set; }
+    DbSet<AuditTrail> AuditTrails { get; set; }
+    DbSet<Customer> Customers { get; set; }
+    DbSet<DocumentType> DocumentTypes { get; set; }
+    DbSet<Document> Documents { get; set; }
+    DbSet<KeyValue> KeyValues { get; set; }
+    DbSet<ApprovalData> ApprovalDatas { get; set; }
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

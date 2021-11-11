@@ -3,10 +3,9 @@
 
 using CleanArchitecture.Razor.Application.Common.Models;
 
-namespace CleanArchitecture.Razor.Application.Common.Interfaces
+namespace CleanArchitecture.Razor.Application.Common.Interfaces;
+
+public interface IUploadService
 {
-    public interface IUploadService
-    {
-        Task<string> UploadAsync(UploadRequest request);
-    }
+    Task<string> UploadAsync(UploadRequest request);
 }

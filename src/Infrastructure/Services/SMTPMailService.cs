@@ -1,45 +1,46 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Settings;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using System.Threading.Tasks;
 
-namespace CleanArchitecture.Razor.Infrastructure.Services
+namespace CleanArchitecture.Razor.Infrastructure.Services;
+
+public class SMTPMailService : IMailService
 {
-    public class SMTPMailService : IMailService
+    public MailSettings _mailSettings { get; }
+    public ILogger<SMTPMailService> _logger { get; }
+
+    public SMTPMailService(IOptions<MailSettings> mailSettings, ILogger<SMTPMailService> logger)
     {
-        public MailSettings _mailSettings { get; }
-        public ILogger<SMTPMailService> _logger { get; }
+        _mailSettings = mailSettings.Value;
+        _logger = logger;
+    }
 
-        public SMTPMailService(IOptions<MailSettings> mailSettings, ILogger<SMTPMailService> logger)
+    public async Task SendAsync(MailRequest request)
+    {
+        try
         {
-            _mailSettings = mailSettings.Value;
-            _logger = logger;
+            var email = new MimeMessage();
+            email.Sender = MailboxAddress.Parse(request.From ?? _mailSettings.From);
+            email.To.Add(MailboxAddress.Parse(request.To));
+            email.Subject = request.Subject;
+            var builder = new BodyBuilder();
+            builder.HtmlBody = request.Body;
+            email.Body = builder.ToMessageBody();
+            using var smtp = new SmtpClient();
+            smtp.Connect(_mailSettings.Host, _mailSettings.Port, true);
+            smtp.Authenticate(_mailSettings.UserName, _mailSettings.Password);
+            await smtp.SendAsync(email);
+            smtp.Disconnect(true);
         }
-
-        public async Task SendAsync(MailRequest request)
+        catch (System.Exception ex)
         {
-            try
-            {
-                var email = new MimeMessage();
-                email.Sender = MailboxAddress.Parse(request.From ?? _mailSettings.From);
-                email.To.Add(MailboxAddress.Parse(request.To));
-                email.Subject = request.Subject;
-                var builder = new BodyBuilder();
-                builder.HtmlBody = request.Body;
-                email.Body = builder.ToMessageBody();
-                using var smtp = new SmtpClient();
-                 smtp.Connect(_mailSettings.Host, _mailSettings.Port, true);
-                smtp.Authenticate(_mailSettings.UserName, _mailSettings.Password);
-                await smtp.SendAsync(email);
-                smtp.Disconnect(true);
-            }
-            catch (System.Exception ex)
-            {
-                _logger.LogError(ex.Message, ex);
-            }
+            _logger.LogError(ex.Message, ex);
         }
     }
 }

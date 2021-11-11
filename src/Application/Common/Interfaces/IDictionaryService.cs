@@ -1,10 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-namespace CleanArchitecture.Razor.Application.Common.Interfaces
+namespace CleanArchitecture.Razor.Application.Common.Interfaces;
+
+public interface IDictionaryService
 {
-    public interface IDictionaryService
-    {
-        Task<IDictionary<string, string>> Fetch(string typeName);
-    }
+    Task<IDictionary<string, string>> Fetch(string typeName);
 }

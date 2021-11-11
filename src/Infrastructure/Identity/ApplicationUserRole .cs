@@ -3,11 +3,10 @@
 
 using Microsoft.AspNetCore.Identity;
 
-namespace CleanArchitecture.Razor.Infrastructure.Identity
+namespace CleanArchitecture.Razor.Infrastructure.Identity;
+
+public class ApplicationUserRole : IdentityUserRole<string>
 {
-    public class ApplicationUserRole : IdentityUserRole<string>
-    {
-        public virtual ApplicationUser User { get; set; }
-        public virtual ApplicationRole Role { get; set; }
-    }
+    public virtual ApplicationUser User { get; set; }
+    public virtual ApplicationRole Role { get; set; }
 }
