@@ -1,11 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Entities.Audit;
 using CleanArchitecture.Razor.Domain.Entities.Log;
 using CleanArchitecture.Razor.Domain.Entities.Worflow;
-using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitecture.Razor.Application.Common.Interfaces;
 

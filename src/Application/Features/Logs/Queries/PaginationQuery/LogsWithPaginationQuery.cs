@@ -1,17 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using AutoMapper;
-using CleanArchitecture.Razor.Application.Common.Extensions;
-using CleanArchitecture.Razor.Application.Common.Interfaces;
-using CleanArchitecture.Razor.Application.Models;
-using System.Linq.Dynamic.Core;
-using MediatR;
-using CleanArchitecture.Razor.Application.Common.Mappings;
-using AutoMapper.QueryableExtensions;
 using CleanArchitecture.Razor.Application.Features.Logs.DTOs;
 using CleanArchitecture.Razor.Domain.Entities.Log;
-using CleanArchitecture.Razor.Application.Common.Models;
 
 namespace CleanArchitecture.Razor.Application.Logs.Queries.PaginationQuery
 {
