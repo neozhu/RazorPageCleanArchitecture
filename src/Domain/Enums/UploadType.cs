@@ -3,15 +3,14 @@
 
 using System.ComponentModel;
 
-namespace CleanArchitecture.Razor.Domain.Enums
+namespace CleanArchitecture.Razor.Domain.Enums;
+
+public enum UploadType : byte
 {
-    public enum UploadType : byte
-    {
-        [Description(@"Products")]
-        Product,
-        [Description(@"ProfilePictures")]
-        ProfilePicture,
-        [Description(@"Documents")]
-        Document
-    }
+    [Description(@"Products")]
+    Product,
+    [Description(@"ProfilePictures")]
+    ProfilePicture,
+    [Description(@"Documents")]
+    Document
 }

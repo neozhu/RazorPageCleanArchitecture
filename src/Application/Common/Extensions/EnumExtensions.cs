@@ -3,17 +3,16 @@
 
 using System.ComponentModel;
 
-namespace CleanArchitecture.Razor.Application.Common.Extensions
-{
-    public static class EnumExtensions
-    {
-        public static string ToDescriptionString(this Enum val)
-        {
-            var attributes = (DescriptionAttribute[])val.GetType().GetField(val.ToString())?.GetCustomAttributes(typeof(DescriptionAttribute), false);
+namespace CleanArchitecture.Razor.Application.Common.Extensions;
 
-            return attributes?.Length > 0
-                ? attributes[0].Description
-                : val.ToString();
-        }
+public static class EnumExtensions
+{
+    public static string ToDescriptionString(this Enum val)
+    {
+        var attributes = (DescriptionAttribute[])val.GetType().GetField(val.ToString())?.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+        return attributes?.Length > 0
+            ? attributes[0].Description
+            : val.ToString();
     }
 }

@@ -3,11 +3,10 @@
 
 using Microsoft.Extensions.Caching.Memory;
 
-namespace CleanArchitecture.Razor.Application.Common.Interfaces.Caching
+namespace CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
+
+public interface ICacheable
 {
-    public interface ICacheable
-    {
-        string CacheKey { get; }
-        MemoryCacheEntryOptions Options { get; }
-    }
+    string CacheKey { get; }
+    MemoryCacheEntryOptions Options { get; }
 }

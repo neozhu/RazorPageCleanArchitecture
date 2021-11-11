@@ -3,13 +3,12 @@
 
 using CleanArchitecture.Razor.Domain.Enums;
 
-namespace CleanArchitecture.Razor.Application.Common.Models
+namespace CleanArchitecture.Razor.Application.Common.Models;
+
+public class UploadRequest
 {
-    public class UploadRequest
-    {
-        public string FileName { get; set; }
-        public string Extension { get; set; }
-        public UploadType UploadType { get; set; }
-        public byte[] Data { get; set; }
-    }
+    public string FileName { get; set; }
+    public string Extension { get; set; }
+    public UploadType UploadType { get; set; }
+    public byte[] Data { get; set; }
 }
