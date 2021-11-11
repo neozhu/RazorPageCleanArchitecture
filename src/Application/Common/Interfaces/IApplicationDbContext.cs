@@ -16,5 +16,7 @@ public interface IApplicationDbContext
     DbSet<Document> Documents { get; set; }
     DbSet<KeyValue> KeyValues { get; set; }
     DbSet<ApprovalData> ApprovalDatas { get; set; }
+
+    DbSet<Product> Products { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

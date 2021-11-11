@@ -3,7 +3,6 @@
 
 using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
 using MediatR.Pipeline;
-using Microsoft.Extensions.Logging;
 
 namespace CleanArchitecture.Razor.Application.Common.Behaviours;
 

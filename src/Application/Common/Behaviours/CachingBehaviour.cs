@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using LazyCache;
-using Microsoft.Extensions.Logging;
 
 namespace CleanArchitecture.Razor.Application.Common.Behaviours;
 

@@ -3,7 +3,6 @@
 
 using CleanArchitecture.Razor.Application.Workflow.Approval;
 using CleanArchitecture.Razor.Domain.Entities.Worflow;
-using Microsoft.Extensions.Logging;
 using WorkflowCore.Interface;
 
 namespace CleanArchitecture.Razor.Application.Documents.EventHandlers

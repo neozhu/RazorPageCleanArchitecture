@@ -3,7 +3,6 @@
 
 using CleanArchitecture.Razor.Application.KeyValues.Caching;
 using CleanArchitecture.Razor.Application.KeyValues.DTOs;
-using CleanArchitecture.Razor.Domain.Enums;
 
 namespace CleanArchitecture.Razor.Application.KeyValues.Commands.SaveChanged
 {

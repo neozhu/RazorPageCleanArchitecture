@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
-using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
 namespace CleanArchitecture.Razor.Application.Common.Behaviours;
