@@ -2,18 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Data;
-using AutoMapper;
-using CleanArchitecture.Razor.Application.Common.Interfaces;
-using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
-using CleanArchitecture.Razor.Application.Common.Models;
 using CleanArchitecture.Razor.Application.Customers.Caching;
 using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
 using CleanArchitecture.Razor.Application.Customers.DTOs;
-using CleanArchitecture.Razor.Domain.Entities;
-using FluentValidation;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Localization;
 
 namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
 {

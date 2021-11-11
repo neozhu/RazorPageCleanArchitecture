@@ -1,14 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using AutoMapper;
-using CleanArchitecture.Razor.Application.Common.Interfaces;
-using System.Linq.Dynamic.Core;
-using MediatR;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
 using CleanArchitecture.Razor.Application.DocumentTypes.DTOs;
-using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
 using Microsoft.Extensions.Caching.Memory;
 using CleanArchitecture.Razor.Application.DocumentTypes.Caching;
 

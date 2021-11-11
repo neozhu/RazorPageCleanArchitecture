@@ -1,11 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using CleanArchitecture.Razor.Application.Common.Interfaces;
-using CleanArchitecture.Razor.Application.Common.Models;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-
 namespace CleanArchitecture.Razor.Application.KeyValues.Commands.Delete
 {
     public class DeleteKeyValueCommand: IRequest<Result>

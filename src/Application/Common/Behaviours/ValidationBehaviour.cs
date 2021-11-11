@@ -1,8 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using FluentValidation;
-using MediatR;
 using ValidationException = CleanArchitecture.Razor.Application.Common.Exceptions.ValidationException;
 
 namespace CleanArchitecture.Razor.Application.Common.Behaviours;
