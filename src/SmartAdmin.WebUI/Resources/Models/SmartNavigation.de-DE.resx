@@ -246,4 +246,7 @@
   <data name="Workflow" xml:space="preserve">
     <value>Arbeitsablauf</value>
   </data>
+  <data name="Logs" xml:space="preserve">
+    <value>Log</value>
+  </data>
 </root>

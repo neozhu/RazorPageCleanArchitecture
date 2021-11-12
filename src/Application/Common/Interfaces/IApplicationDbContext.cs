@@ -9,7 +9,7 @@ namespace CleanArchitecture.Razor.Application.Common.Interfaces;
 
 public interface IApplicationDbContext
 {
-    DbSet<Serilog> Serilogs { get; set; }
+    DbSet<Logger> Loggers { get; set; }
     DbSet<AuditTrail> AuditTrails { get; set; }
     DbSet<Customer> Customers { get; set; }
     DbSet<DocumentType> DocumentTypes { get; set; }

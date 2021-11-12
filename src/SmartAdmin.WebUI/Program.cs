@@ -9,12 +9,9 @@ using CleanArchitecture.Razor.Infrastructure;
 using CleanArchitecture.Razor.Application;
 using SmartAdmin.WebUI.Filters;
 using FluentValidation.AspNetCore;
-using CleanArchitecture.Razor.Application.Hubs;
-using CleanArchitecture.Razor.Application.Hubs.Constants;
-using CleanArchitecture.Razor.Infrastructure.Localization;
-using Microsoft.Extensions.FileProviders;
+using CleanArchitecture.Razor.Infrastructure.Extensions;
 using System.Net;
-using Serilog.Context;
+
 
 string[] filters = new string[] { "Microsoft.EntityFrameworkCore.Model.Validation",
     "WorkflowCore.Services.WorkflowHost",
@@ -163,43 +160,7 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-app.UseSerilogRequestLogging(options =>
-{
-    options.EnrichDiagnosticContext = (diagnosticContext, httpContext) => {
-        //This didn't work when tested
-        diagnosticContext.Set("UserName", httpContext.User?.Identity?.Name ?? "Anonymous");
-    };
-});
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Files")),
-    RequestPath = new PathString("/Files")
-});
 
-app.UseRequestLocalization();
-app.UseRequestLocalizationCookies();
 
-app.UseRouting();
-app.UseAuthentication();
-app.UseAuthorization();
-app.Use(async (httpContext, next) =>
-{
-    //This is the correct implementation 
-    var userName = httpContext.User?.Identity?.Name ?? "Anonymous"; //Gets user Name from user Identity
-    LogContext.PushProperty("UserName", userName); //Push user in LogContext;
-    await next.Invoke();
-});
-app.UseWorkflow();
-app.MapControllers();
-app.MapRazorPages();
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-    endpoints.MapRazorPages();
-    endpoints.MapHub<SignalRHub>(SignalR.HubUrl);
-});
-
+app.UseInfrastructure(builder.Configuration);
 app.Run();

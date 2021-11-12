@@ -3,7 +3,7 @@
 
 namespace CleanArchitecture.Razor.Domain.Entities.Log;
 
-public class Serilog : IEntity
+public class Logger : IEntity
 {
     public int Id { get; set; }
     public string Message { get; set; }

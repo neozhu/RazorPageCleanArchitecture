@@ -36,8 +36,8 @@ namespace CleanArchitecture.Razor.Application.Features.Logs.Queries.Export
 
         public async Task<byte[]> Handle(ExportLogsQuery request, CancellationToken cancellationToken)
         {
-            var filters = PredicateBuilder.FromFilter<Serilog>(request.filterRules);
-            var data = await _context.Serilogs
+            var filters = PredicateBuilder.FromFilter<Logger>(request.filterRules);
+            var data = await _context.Loggers
                 .Where(filters)
                 .OrderBy($"{request.sort} {request.order}")
                 .ProjectTo<LogDto>(_mapper.ConfigurationProvider)

@@ -29,9 +29,9 @@ namespace CleanArchitecture.Razor.Application.Logs.Queries.PaginationQuery
         }
         public async Task<PaginatedData<LogDto>> Handle(LogsWithPaginationQuery request, CancellationToken cancellationToken)
         {
-            var filters = PredicateBuilder.FromFilter<Serilog>(request.FilterRules);
+            var filters = PredicateBuilder.FromFilter<Logger>(request.FilterRules);
   
-            var data = await _context.Serilogs
+            var data = await _context.Loggers
                 .Where(filters)
                 .OrderBy($"{request.Sort} {request.Order}")
                 .ProjectTo<LogDto>(_mapper.ConfigurationProvider)
