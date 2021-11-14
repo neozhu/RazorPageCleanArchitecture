@@ -12,10 +12,11 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
         // Each User can have many UserClaims
-        builder.HasMany(e => e.Claims)
-            .WithOne()
-            .HasForeignKey(uc => uc.UserId)
-            .IsRequired();
+        // duplicate definition 
+        //builder.HasMany(e => e.UserClaims)
+        //    .WithOne()
+        //    .HasForeignKey(uc => uc.UserId)
+        //    .IsRequired();
 
         // Each User can have many UserLogins
         builder.HasMany(e => e.Logins)
@@ -36,6 +37,18 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
             .IsRequired();
     }
 }
+//public class ApplicationRoleConfiguration : IEntityTypeConfiguration<ApplicationRole>
+//{
+//    //duplicate definition 
+//    public void Configure(EntityTypeBuilder<ApplicationRole> builder)
+//    {
+//        builder.HasMany(e => e.RoleClaims)
+//           .WithOne()
+//           .HasForeignKey(uc => uc.RoleId)
+//           .IsRequired();
+//    }
+//}
+
 public class ApplicationRoleClaimConfiguration : IEntityTypeConfiguration<ApplicationRoleClaim>
 {
     public void Configure(EntityTypeBuilder<ApplicationRoleClaim> builder)
@@ -65,7 +78,7 @@ public class ApplicationUserClaimConfiguration : IEntityTypeConfiguration<Applic
     public void Configure(EntityTypeBuilder<ApplicationUserClaim> builder)
     {
         builder.HasOne(d => d.User)
-              .WithMany(p => p.Claims)
+              .WithMany(p => p.UserClaims)
               .HasForeignKey(d => d.UserId)
               .OnDelete(DeleteBehavior.Cascade);
 
