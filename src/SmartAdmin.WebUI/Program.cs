@@ -33,27 +33,7 @@ var configuration = new ConfigurationBuilder()
         .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", true)
         .Build();
 
-Log.Logger = new LoggerConfiguration()
-          .ReadFrom.Configuration(configuration)
-          .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-          .Enrich.FromLogContext()
-          .Enrich.WithClientIp()
-          .Enrich.WithClientAgent()
-          .Filter.ByExcluding(
-                        //(logevent) =>
-                        //{
-                        //    Console.WriteLine(logevent);
-                        //    var cxt = logevent.Properties.Where(x => x.Key == "SourceContext").Select(x => x.Value.ToString()).ToArray();
-                        //    if (cxt.Any(x => filters.Contains(x)))
-                        //    {
-                        //        return false;
-                        //    }
-                        //    return true;
-                        //}
-                  Matching.WithProperty<string>("SourceContext", p => filters.Contains(p))
-            )
-          .WriteTo.Console()
-          .CreateLogger();
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.ConfigureKestrel((context, options) =>
@@ -64,7 +44,27 @@ builder.WebHost.ConfigureKestrel((context, options) =>
     });
 });
 
-builder.WebHost.UseSerilog();
+builder.WebHost.UseSerilog((context, configuration) => 
+    configuration.ReadFrom.Configuration(context.Configuration)
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+          .Enrich.FromLogContext()
+          .Enrich.WithClientIp()
+          .Enrich.WithClientAgent()
+          .Filter.ByExcluding(
+                  //(logevent) =>
+                  //{
+                  //    Console.WriteLine(logevent);
+                  //    var cxt = logevent.Properties.Where(x => x.Key == "SourceContext").Select(x => x.Value.ToString()).ToArray();
+                  //    if (cxt.Any(x => filters.Contains(x)))
+                  //    {
+                  //        return false;
+                  //    }
+                  //    return true;
+                  //}
+                  Matching.WithProperty<string>("SourceContext", p => filters.Contains(p))
+            )
+          .WriteTo.Console()
+    );
 
 
 
