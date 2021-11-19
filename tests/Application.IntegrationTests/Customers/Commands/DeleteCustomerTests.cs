@@ -14,6 +14,21 @@ namespace CleanArchitecture.Application.IntegrationTests.Customers.Commands
     public class DeleteCustomerTests : TestBase
     {
         [Test]
+        public void ShouldRequireCustomerId() {
+            var command = new DeleteCustomerCommand();
+
+            FluentActions.Invoking(() =>
+                SendAsync(command)).Should().ThrowAsync<ValidationException>();
+        }
+        [Test]
+        public void ShouldRequireCustomerIdNotEmpty()
+        {
+            var command = new DeleteCheckedCustomersCommand();
+
+            FluentActions.Invoking(() =>
+                SendAsync(command)).Should().ThrowAsync<ValidationException>();
+        }
+        [Test]
         public void ShouldRequireValidCustomerId()
         {
             var command = new DeleteCustomerCommand { Id = 99 };

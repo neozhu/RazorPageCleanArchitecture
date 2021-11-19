@@ -5,48 +5,48 @@ using CleanArchitecture.Razor.Application.Customers.Caching;
 using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
 using CleanArchitecture.Razor.Application.Customers.DTOs;
 
-namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
+namespace CleanArchitecture.Razor.Application.Customers.Commands.Import;
+
+public class ImportCustomersCommand : IRequest<Result>, ICacheInvalidator
 {
-    public class ImportCustomersCommand : IRequest<Result>, ICacheInvalidator
-    {
-        public string FileName { get; set; }
-        public byte[] Data { get; set; }
-        public string CacheKey => CustomerCacheKey.GetAllCacheKey;
+    public string FileName { get; set; }
+    public byte[] Data { get; set; }
+    public string CacheKey => CustomerCacheKey.GetAllCacheKey;
 
-        public CancellationTokenSource ResetCacheToken => CustomerCacheTokenSource.ResetCacheToken;
-    }
-    public class CreateCustomerTemplateCommand : IRequest<byte[]>
-    {
-        public IEnumerable<string> Fields { get; set; }
-        public string SheetName  { get;set; }
-    }
-    public class ImportCustomersCommandHandler :
-        IRequestHandler<CreateCustomerTemplateCommand, byte[]>,
-        IRequestHandler<ImportCustomersCommand, Result>
-    {
-        private readonly IApplicationDbContext _context;
-        private readonly IMapper _mapper;
-        private readonly IExcelService _excelService;
-        private readonly IStringLocalizer<ImportCustomersCommandHandler> _localizer;
-        private readonly IValidator<AddEditCustomerCommand> _addValidator;
+    public CancellationTokenSource ResetCacheToken => CustomerCacheTokenSource.ResetCacheToken;
+}
+public class CreateCustomerTemplateCommand : IRequest<byte[]>
+{
+    public IEnumerable<string> Fields { get; set; }
+    public string SheetName { get; set; }
+}
+public class ImportCustomersCommandHandler :
+    IRequestHandler<CreateCustomerTemplateCommand, byte[]>,
+    IRequestHandler<ImportCustomersCommand, Result>
+{
+    private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
+    private readonly IExcelService _excelService;
+    private readonly IStringLocalizer<ImportCustomersCommandHandler> _localizer;
+    private readonly IValidator<AddEditCustomerCommand> _addValidator;
 
-        public ImportCustomersCommandHandler(
-            IApplicationDbContext context,
-            IMapper mapper,
-            IExcelService excelService,
-            IStringLocalizer<ImportCustomersCommandHandler> localizer,
-            IValidator<AddEditCustomerCommand> addValidator
-            )
-        {
-            _context = context;
-            _mapper = mapper;
-            _excelService = excelService;
-            _localizer = localizer;
-            _addValidator = addValidator;
-        }
-        public async Task<Result> Handle(ImportCustomersCommand request, CancellationToken cancellationToken)
-        {
-            var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, CustomerDto, object>>
+    public ImportCustomersCommandHandler(
+        IApplicationDbContext context,
+        IMapper mapper,
+        IExcelService excelService,
+        IStringLocalizer<ImportCustomersCommandHandler> localizer,
+        IValidator<AddEditCustomerCommand> addValidator
+        )
+    {
+        _context = context;
+        _mapper = mapper;
+        _excelService = excelService;
+        _localizer = localizer;
+        _addValidator = addValidator;
+    }
+    public async Task<Result> Handle(ImportCustomersCommand request, CancellationToken cancellationToken)
+    {
+        var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, CustomerDto, object>>
             {
                 { _localizer["Name"], (row,item) => item.Name = row[_localizer["Name"]]?.ToString() },
                 { _localizer["Name Of English"], (row,item) => item.NameOfEnglish = row[_localizer["Name Of English"]]?.ToString() },
@@ -64,46 +64,46 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
                 { _localizer["Comments"], (row,item) => item.Comments =  row[_localizer["Comments"]]?.ToString() }
             }, _localizer["Customers"]);
 
-            if (result.Succeeded)
-            {
-                var importItems = result.Data;
-                var errors = new List<string>();
-                var errorsOccurred = false;
-                foreach (var item in importItems)
-                {
-                    var validationResult = await _addValidator.ValidateAsync(_mapper.Map<AddEditCustomerCommand>(item), cancellationToken);
-                    if (validationResult.IsValid)
-                    {
-                        var exist = await _context.Customers.AnyAsync(x => x.Name==item.Name,cancellationToken);
-                        if (!exist)
-                        {
-                            await _context.Customers.AddAsync(_mapper.Map<Customer>(item), cancellationToken);
-                        }
-                    }
-                    else
-                    {
-                        errorsOccurred = true;
-                        errors.AddRange(validationResult.Errors.Select(e => $"{(!string.IsNullOrWhiteSpace(item.Name) ? $"{item.Name} - " : string.Empty)}{e.ErrorMessage}"));
-                    }
-                }
-
-                if (errorsOccurred)
-                {
-                    return await Result.FailureAsync(errors);
-                }
-
-                await _context.SaveChangesAsync(cancellationToken);
-                return await Result.SuccessAsync();
-            }
-            else
-            {
-                return await Result.FailureAsync(result.Errors);
-            }
-        }
-
-        public async Task<byte[]> Handle(CreateCustomerTemplateCommand request, CancellationToken cancellationToken)
+        if (result.Succeeded)
         {
-            var fields = new string[] {
+            var importItems = result.Data;
+            var errors = new List<string>();
+            var errorsOccurred = false;
+            foreach (var item in importItems)
+            {
+                var validationResult = await _addValidator.ValidateAsync(_mapper.Map<AddEditCustomerCommand>(item), cancellationToken);
+                if (validationResult.IsValid)
+                {
+                    var exist = await _context.Customers.AnyAsync(x => x.Name == item.Name, cancellationToken);
+                    if (!exist)
+                    {
+                        await _context.Customers.AddAsync(_mapper.Map<Customer>(item), cancellationToken);
+                    }
+                }
+                else
+                {
+                    errorsOccurred = true;
+                    errors.AddRange(validationResult.Errors.Select(e => $"{(!string.IsNullOrWhiteSpace(item.Name) ? $"{item.Name} - " : string.Empty)}{e.ErrorMessage}"));
+                }
+            }
+
+            if (errorsOccurred)
+            {
+                return await Result.FailureAsync(errors);
+            }
+
+            await _context.SaveChangesAsync(cancellationToken);
+            return await Result.SuccessAsync();
+        }
+        else
+        {
+            return await Result.FailureAsync(result.Errors);
+        }
+    }
+
+    public async Task<byte[]> Handle(CreateCustomerTemplateCommand request, CancellationToken cancellationToken)
+    {
+        var fields = new string[] {
                 _localizer["Name"],
                 _localizer["Name Of English"],
                 _localizer["Group Name"],
@@ -119,8 +119,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
                 _localizer["Fax"],
                 _localizer["Comments"],
                 };
-            var result = await _excelService.CreateTemplateAsync(fields, _localizer["Customers"]);
-            return result;
-        }
+        var result = await _excelService.CreateTemplateAsync(fields, _localizer["Customers"]);
+        return result;
     }
 }
