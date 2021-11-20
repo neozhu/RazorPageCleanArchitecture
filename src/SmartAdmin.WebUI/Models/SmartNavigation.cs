@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
-// ReSharper disable MemberCanBePrivate.Global
-// ReSharper disable UnusedAutoPropertyAccessor.Global
-// ReSharper disable InconsistentNaming
+
+#nullable disable
 
 namespace SmartAdmin.WebUI.Models
 {

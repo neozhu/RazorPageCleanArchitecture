@@ -1,5 +1,3 @@
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Extensions;
 using CleanArchitecture.Razor.Infrastructure.Identity;
@@ -14,13 +12,9 @@ using System.ComponentModel.DataAnnotations;
 using CleanArchitecture.Razor.Application.Common.Models;
 using Microsoft.EntityFrameworkCore;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
-using System.IO;
-using System;
 using System.Data;
-using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
-
+using CleanArchitecture.Razor.Application.Constants.Permission;
+#nullable disable
 namespace SmartAdmin.WebUI.Areas.Authorization.Pages
 {
     [Authorize(policy: Permissions.Users.View)]

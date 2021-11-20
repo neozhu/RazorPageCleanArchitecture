@@ -1,10 +1,9 @@
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Authorization;
-using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
+using CleanArchitecture.Razor.Application.Constants.Permission;
 using CleanArchitecture.Razor.Application.AuditTrails.Queries.PaginationQuery;
 using CleanArchitecture.Razor.Application.Features.AuditTrails.Queries.Export;
 

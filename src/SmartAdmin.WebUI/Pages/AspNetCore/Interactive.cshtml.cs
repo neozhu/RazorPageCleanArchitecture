@@ -1,6 +1,5 @@
 using CleanArchitecture.Razor.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 
 namespace SmartAdmin.WebUI.Pages.AspNetCore
 {

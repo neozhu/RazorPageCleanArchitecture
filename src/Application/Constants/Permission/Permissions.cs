@@ -4,7 +4,7 @@
 using System.ComponentModel;
 using System.Reflection;
 
-namespace CleanArchitecture.Razor.Infrastructure.Constants.Permission;
+namespace CleanArchitecture.Razor.Application.Constants.Permission;
 
 public static class Permissions
 {

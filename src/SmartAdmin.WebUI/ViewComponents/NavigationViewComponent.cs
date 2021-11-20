@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
 using CleanArchitecture.Razor.Infrastructure.Identity;

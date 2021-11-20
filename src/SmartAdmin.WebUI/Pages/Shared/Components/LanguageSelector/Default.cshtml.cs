@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Globalization;
 
 namespace SmartAdmin.WebUI.Pages.Shared.Components.LanguageSelector
