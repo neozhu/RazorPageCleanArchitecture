@@ -1,0 +1,87 @@
+@page
+@model LoginModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<LoginModel> _localizer
+@{
+    ViewData["PageName"] = "login";
+    ViewData["Title"] = _localizer["Login"].Value;
+}
+
+<style>
+    .validation-summary-valid {
+        display: none;
+    }
+</style>
+<div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            @Settings.AppName
+        </div>
+        <div class="card-body">
+            <p class="login-box-msg">@_localizer["Secure login"]</p>
+
+            <form id="js-login" method="post">
+                <div asp-validation-summary="All" class="alert alert-primary text-light"></div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" asp-for="Input.UserName"   placeholder="User Name for verification" value="administrator" required="required">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" asp-for="Input.Password"   placeholder="Your password (minimum 6 characters)" value="Password123!" required="required">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="icheck-primary">
+                            <input type="checkbox"   asp-for="Input.RememberMe">
+                            <label asp-for="Input.RememberMe">
+                                @_localizer["Remember me for the next 30 days"]
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" id="js-login-btn" class="btn btn-primary btn-block">@_localizer["Login"]</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+
+     
+
+           
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+<!-- /.login-box -->
+
+
+ 
+
+@section ScriptsBlock {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $("#js-logsin-btn").click(function (event) {
+            // Fetch form to apply custom Bootstrap validation
+            var form = $("#js-login");
+
+            if (form[0].checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            form.addClass('was-validated');
+            // Perform ajax submit here...
+        });
+    </script>
+}
