@@ -1,0 +1,115 @@
+@model SmartNavigation
+@inject Microsoft.Extensions.Localization.IStringLocalizer<SmartNavigation> _localizer
+@{
+    var pageName = ViewData["PageName"]?.ToString().ToLower();
+}
+<ul  class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+    @foreach (var group in Model.Lists)
+    {
+        @if (group.Items.Any())
+        {
+            var groups = group.Items.Select(x => x.Href.ToPage()).Where(x => !x.IsVoid()).ToList();
+
+            group.Items.ForEach(item =>
+            {
+                var result = item.Items?.Select(x => x.Href.ToPage()).Where(x => !x.IsVoid()).ToList();
+                if (result?.Any() == true)
+                {
+                    groups = groups.Concat(result).ToList();
+                }
+            });
+            <li class="@(groups.Contains(pageName) ? "nav-item  menu-is-opening menu-open" : "nav-item")">
+                <a href="#" class="nav-link" title="@group.Title" data-filter-tags="@group.Tags">
+                    <i class="@group.Icon"></i>
+                    <p>@_localizer[group.Text] <i class="right fas fa-angle-left"></i></p>
+                    @if (group.Span.HasValue())
+                    {
+                        <span class="@group.Span.Class">@group.Span.Text.AsRaw()</span>
+                    }
+                </a>
+                <ul class="nav nav-treeview">
+                    @{
+                        foreach (var item in group.Items)
+                        {
+                            var items = item.Items?.Select(x => x.Href.ToPage()).Where(x => !x.IsVoid()).ToList();
+
+                            if (item.Disabled)
+                            {
+                                <text>
+                                    <li class="disabled">
+                                </text>
+                            }
+                            else
+                            {
+                                if (items?.Any() == true)
+                                {
+                                    <text>
+                                    <li class="@(items.Contains(pageName) || item.IsRelatedTo(pageName) ? "nav-item  menu-open" : "nav-item")">
+                                    </text>
+                                }
+                                else
+                                {
+                                    <text>
+                                    <li class="@(pageName == item.Href.ToPage() ? "nav-item menu-open" : "nav-item")">
+                                    </text>
+                                }
+                            }
+                            <text>
+                                <a class="nav-link" href="@item.Route" title="@item.Title" target="@item.Target" data-filter-tags="@item.Tags">
+                                    <p>@_localizer[item.Text]</p>
+                                    @if (item.Span.HasValue())
+                                    {
+                                        <span class="@item.Span.Class">@item.Span.Text.AsRaw()</span>
+                                    }
+                                </a>
+                            </text>
+                            if (item.Items?.Any() == true)
+                            {
+                                <text>
+                                    <ul>
+                                        @foreach (var subItem in item.Items)
+                                        {
+                                            if (subItem.Disabled)
+                                            {
+                                                <text>
+                                                <li class="disabled">
+                                </text>
+                            }
+                            else
+                            {
+                                <text>
+                                <li class="@(pageName == subItem.Href.ToPage() ? "active" : "")">
+                                </text>
+                            }
+                            <a class="nav-link" href="@subItem.Route" title="@subItem.Title" target="@subItem.Target" data-filter-tags="@subItem.Tags">
+                                <p>@_localizer[subItem.Text]</p>
+                            </a>
+                        @:</li>
+                    }
+                                    </ul>
+                                    </text>
+                                }
+                            @:</li>
+                        }
+                    }
+                </ul>
+            </li>
+        }
+        else
+        {
+            if (group.Type == ItemType.Category)
+            {
+                <li class="nav-header">@_localizer[group.Title]</li>
+            }
+            else
+            {
+                <li class="@(pageName == group.Href.ToPage() ? "nav-item menu-open" : "nav-item")">
+                    <a class="nav-link @(pageName == group.Href.ToPage() ? "active" : "")" href="@group.Route" title="@group.Title" target="@group.Target" data-filter-tags="@group.Tags">
+                        <i class="@group.Icon"></i>
+                        <p>@_localizer[group.Title]</p>
+                    </a>
+                </li>
+            }
+        }
+    }
+</ul>

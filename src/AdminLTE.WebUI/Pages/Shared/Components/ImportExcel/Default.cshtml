@@ -1,0 +1,142 @@
+@model AdminLTE.WebUI.Pages.Shared.Components.ImportExcel.DefaultModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<DefaultModel> _localizer
+@{
+
+}
+<div class="modal fade" id="default-import-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="loader"><i class="fal fa-spinner-third fa-spin-4x fs-xxl"></i></div>
+            <div class="modal-header">
+                <h5 class="modal-title">@_localizer["Import Excel"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <button name="uploadfilebutton" type="button" class="btn btn-primary mb-4">
+                    <span class="@(Settings.Theme.IconPrefix) fa-paperclip mr-1"></span>
+                    @_localizer["Upload"]
+                </button>
+                @Html.AntiForgeryToken()
+                <input asp-for="UploadedFile" class="form-control" style="display:none">
+                <div class="uploadfilealert">
+                    <div class="alert alert-secondary alert-dismissible fadedown show mb-0" role="alert">
+                        @_localizer["Please upload excel file!"]
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
+                <button name="importbutton" type="button" class="btn btn-primary">@_localizer["Import"]</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var uploadfilebutton = document.getElementsByName("uploadfilebutton")[0];
+    var uploadfileinput = document.getElementById("UploadedFile");
+    var uploadfilealert = document.querySelector("#default-import-modal .uploadfilealert");
+    var importbutton = document.querySelector("#default-import-modal button[name='importbutton']");
+    var modalcontent = document.querySelector("#default-import-modal > div > .modal-content");
+    importbutton.disabled = true;
+    var fileName = '';
+    importbutton.addEventListener('click', (e) => {
+        modalcontent.classList.add("enable-loader");
+        let formData = new FormData()
+        formData.append('UploadedFile', uploadfileinput.files[0])
+        formData.append('__RequestVerificationToken', $('input[name="__RequestVerificationToken"]').val())
+        axios({
+            url: '@Html.Raw(Model.ImportUri)',
+            method: 'post',
+            data: formData,
+            processData: false,// 告诉axios不要去处理发送的数据(重要参数)
+            contentType: false,   // 告诉axios不要去设置Content-Type请求头
+        }).then((response) => {
+            modalcontent.classList.remove("enable-loader");
+            if (response.data.Succeeded) {
+                toastr["info"](`@_localizer["Import data success."]`);
+                $('#default-import-modal').modal('toggle');
+                @Html.Raw(Model.OnImportedSucceeded)
+            } else {
+                var errors = response.data.Errors;
+                errors.forEach(item => {
+                    toastr["error"](item);
+                })
+
+            }
+        }).catch(error => {
+            modalcontent.classList.remove("enable-loader");
+            $('#default-import-modal').modal('toggle');
+            toastr["error"](`@_localizer["Import fail."]`);
+        })
+
+    })
+    uploadfilebutton.addEventListener("click", (e) => {
+        uploadfileinput.click();
+    });
+    uploadfileinput.onchange =  () => {
+        fileName = uploadfileinput.value.split('\\').pop();
+        uploadfilealert.innerHTML = `
+              <div class="alert alert-info alert-dismissible fadeup show mb-0" role="alert">
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                      </button>
+                      <div class="d-flex align-items-center">
+							<div class="alert-icon">
+									<i class="@(Settings.Theme.IconPrefix) fa-upload fs-xl"></i>
+							</div>
+							<div class="flex-1">
+	    							${fileName}
+							</div>
+					</div>
+             </div>
+        `
+        importbutton.disabled = false;
+        $('#default-import-modal .alert').on('closed.bs.alert', (e) => {
+            uploadfileinput.value = null;
+            importbutton.disabled = true;
+        })
+    };
+    var showImportModal = () => {
+        uploadfilealert.innerHTML = `<div class="alert alert-secondary alert-dismissible fadedown show mb-0" role="alert">
+                                     @_localizer["Please upload excel file!"]
+                                   </div>`;
+        uploadfileinput.value = null;
+        importbutton.disabled = true;
+        $('#default-import-modal').modal('toggle');
+    }
+    var onGetTemplate = ( ) => {
+        axios.get('@Html.Raw(Model.GetTemplateUri)',
+            {
+                responseType: "blob"
+            })
+                .then(response => {
+                    //console.log(getFileName(response.headers['content-disposition']));
+                    const filename = getFileName(response.headers['content-disposition']);
+                    const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', filename );
+                    document.body.appendChild(link);
+                    link.click();
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
+    var getFileName = (disposition) => {
+        const utf8FilenameRegex = /filename\*=UTF-8''([\w%\-\.]+)(?:; ?|$)/;
+        const asciiFilenameRegex = /filename=(["']?)(.*?[^\\])\1(?:; ?|$)/;
+        let fileName = '';
+        if (utf8FilenameRegex.test(disposition)) {
+            fileName = decodeURIComponent(utf8FilenameRegex.exec(disposition)[1]);
+        } else {
+            const matches = asciiFilenameRegex.exec(disposition);
+            if (matches != null && matches[2]) {
+                fileName = matches[2];
+            }
+        }
+        return fileName;
+    }
+</script>

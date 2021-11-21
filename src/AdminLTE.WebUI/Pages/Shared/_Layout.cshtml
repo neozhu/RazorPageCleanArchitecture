@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE Starter Kit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <partial name="_Styles" />
+ 
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <partial name="_TopNavigation" />
+        <partial name="_Sidebar" />
+        <div class="content-wrapper" style="padding: 20px;min-height: 530.031px;background:white!important;">
+            @RenderBody()
+        </div>
+        <partial name="_Footer" />
+        <aside class="control-sidebar control-sidebar-dark">
+        </aside>
+ 
+    </div>
+            <partial name="_Scripts" />
+            @RenderSection("ScriptsBlock", required: false)
+</body>
+</html>

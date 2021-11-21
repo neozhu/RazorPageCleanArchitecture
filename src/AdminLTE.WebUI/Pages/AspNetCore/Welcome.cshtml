@@ -1,0 +1,38 @@
+@page
+@model WelcomeModel
+@{
+  ViewData["Title"] = "Welcome";
+  ViewData["Category1"] = "SmartAdmin";
+  ViewData["PageName"] = "aspnetcore_welcome";
+  ViewData["Heading"] = "<i class='fal fa-graduation-cap'></i> Welcome: <span class='fw-300'>SmartAdmin for .NET Core</span>";
+}
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Introducing @Settings.App for @Settings.AppFlavor
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <p>
+                        After the great success of our previous version of @Settings.App we knew we had to do our utmost best to deliver you the latest and greatest when it comes to Bootstrap based theming.
+                        Our journey has not been without challenges and at one point we concluded that the best approach was to completely reboot our framework, not only on how we wanted to setup the template, but also provide a much better customer journey with a strong focus on getting you started quickly, hassle-free!
+                        Whether you are a seasoned @Settings.App veteran or a new customer of @Settings.App, we got you covered! And to start off with that we retained the unique look and feel of @Settings.App but brought it up to the newest industry standards, supporting the latest capabilities of your favorite frameworks and plugins.
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+@Html.AntiForgeryToken()
+@section ScriptsBlock{
+<script>
+    
+  
+</script>
+}
