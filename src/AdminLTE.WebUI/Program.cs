@@ -2,8 +2,10 @@ using System.Net;
 using CleanArchitecture.Razor.Application;
 using CleanArchitecture.Razor.Infrastructure;
 using CleanArchitecture.Razor.Infrastructure.Extensions;
+using CleanArchitecture.Razor.Infrastructure.Filters;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Persistence;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -64,9 +66,29 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 
 // Add services to the container.
-builder.Services.AddRazorPages();
-//builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-//   .AddNegotiate();
+builder.Services
+     .AddRazorPages(options =>
+     {
+         options.Conventions.AddPageRoute("/AspNetCore/Welcome", "");
+     })
+     .AddMvcOptions(options =>
+     {
+         options.Filters.Add<ApiExceptionFilterAttribute>();
+     })
+    .AddFluentValidation(fv =>
+    {
+        fv.DisableDataAnnotationsValidation = true;
+        fv.ImplicitlyValidateChildProperties = true;
+        fv.ImplicitlyValidateRootCollectionElements = true;
+    })
+    .AddViewLocalization()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;
+
+    });
+builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+   .AddNegotiate();
 
 builder.Services.AddSignalR();
 

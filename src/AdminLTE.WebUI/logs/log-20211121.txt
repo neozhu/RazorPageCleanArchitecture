@@ -762,3 +762,37 @@ System.InvalidOperationException: The following sections have been defined but h
 2021-11-21 18:11:45.593 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 Anonymous
 2021-11-21 18:11:45.593 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 Anonymous
 2021-11-21 18:11:45.595 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 Anonymous
+2021-11-21 18:57:16.181 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-21 18:57:16.945 +08:00 [INF] The file /favicon.ico was not modified 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:05:20.089 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-21 19:05:20.233 +08:00 [ERR] An unhandled exception has occurred while executing the request. 127.0.0.1 
+Microsoft.AspNetCore.Routing.Matching.AmbiguousMatchException: The request matched multiple endpoints. Matches: 
+
+/AspNetCore/Welcome
+/Index
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.ReportAmbiguity(CandidateState[] candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.ProcessFinalCandidates(HttpContext httpContext, CandidateState[] candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.Select(HttpContext httpContext, CandidateState[] candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DfaMatcher.MatchAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at CleanArchitecture.Razor.Infrastructure.Middlewares.LocalizationCookiesMiddleware.InvokeAsync(HttpContext context, RequestDelegate next) in D:\github\RazorPageCleanArchitecture\src\Infrastructure\Middlewares\LocalizationCookiesMiddleware.cs:line 41
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at CleanArchitecture.Razor.Infrastructure.Extensions.ApplicationBuilderExtensions.<>c.<<UseInfrastructure>b__0_1>d.MoveNext() in D:\github\RazorPageCleanArchitecture\src\Infrastructure\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-11-21 19:07:22.998 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-21 19:07:23.128 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:07:23.128 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:07:23.128 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:07:23.128 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:07:23.128 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:07:23.128 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:07:44.802 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:07:44.802 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:07:44.802 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:07:44.802 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:07:44.802 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:07:44.802 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
