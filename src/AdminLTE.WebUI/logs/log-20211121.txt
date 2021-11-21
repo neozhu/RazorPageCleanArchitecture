@@ -796,3 +796,51 @@ Microsoft.AspNetCore.Routing.Matching.AmbiguousMatchException: The request match
 2021-11-21 19:07:44.802 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
 2021-11-21 19:07:44.802 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
 2021-11-21 19:07:44.802 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:24.656 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-21 19:12:24.852 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:24.852 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:24.852 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:24.852 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:24.852 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:24.852 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.749 +08:00 [INF] Sending file. Request path: '/css/adminlte.min.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.min.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.749 +08:00 [INF] Sending file. Request path: '/plugins/fontawesome-free/css/all.min.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\fontawesome-free\css\all.min.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.765 +08:00 [INF] Sending file. Request path: '/plugins/icheck-bootstrap/icheck-bootstrap.min.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\icheck-bootstrap\icheck-bootstrap.min.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.788 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.796 +08:00 [INF] Sending file. Request path: '/AdminLTE.WebUI.styles.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\obj\Debug\net6.0\scopedcss\bundle\AdminLTE.WebUI.styles.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.802 +08:00 [INF] Sending file. Request path: '/plugins/jquery/jquery.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\jquery\jquery.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.810 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.819 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.822 +08:00 [INF] Sending file. Request path: '/js/demo.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\demo.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.831 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.838 +08:00 [INF] Sending file. Request path: '/img/codewithmukesh_logo.jpg'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\img\codewithmukesh_logo.jpg' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.893 +08:00 [INF] Sending file. Request path: '/plugins/fontawesome-free/webfonts/fa-solid-900.woff2'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\fontawesome-free\webfonts\fa-solid-900.woff2' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.938 +08:00 [INF] Sending file. Request path: '/plugins/fontawesome-free/webfonts/fa-regular-400.woff2'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\fontawesome-free\webfonts\fa-regular-400.woff2' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.941 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.944 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.952 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:34.959 +08:00 [INF] Sending file. Request path: '/css/adminlte.min.css.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.min.css.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:12:35.251 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\favicon.ico' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:42.674 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-21 19:16:42.818 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:42.818 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:42.818 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:42.818 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:42.818 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:42.818 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:43.160 +08:00 [INF] Sending file. Request path: '/AdminLTE.WebUI.styles.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\obj\Debug\net6.0\scopedcss\bundle\AdminLTE.WebUI.styles.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:43.167 +08:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\site.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:46.373 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:46.373 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:46.373 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:46.373 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:46.373 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:46.373 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:46.455 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:46.455 +08:00 [INF] The file /AdminLTE.WebUI.styles.css was not modified 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:48.167 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:48.167 +08:00 [INF] The file /AdminLTE.WebUI.styles.css was not modified 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:48.327 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:48.327 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:48.327 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-21 19:16:48.363 +08:00 [INF] Sending file. Request path: '/css/adminlte.min.css.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.min.css.map' 127.0.0.1 DESKTOP-408FOJP\home
