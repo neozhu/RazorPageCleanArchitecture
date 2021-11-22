@@ -375,10 +375,15 @@ $.extend($.fn.datagrid.defaults.editors, {
     },
     getValue: function (target) {
       //console.log('getValue', $(target[0]).find(':checkbox').prop('checked'));
-      return $(target[0]).find(':checkbox').prop('checked');
+      return $(target[0]).find(':checkbox').prop('checked')?'True':'False';
     },
-    setValue: function (target, value) {
-      $(target[0]).find(':checkbox').prop('checked', value);
+        setValue: function (target, value) {
+            if (istrue(value)) {
+                $(target[0]).find(':checkbox').prop('checked', true);
+            } else {
+                $(target[0]).find(':checkbox').prop('checked', false);
+            }
+    
 
 
 

@@ -19,5 +19,6 @@ public interface IApplicationDbContext
 
     DbSet<Product> Products { get; set; }
     DbSet<MigrationObject> MigrationObjects { get; set; }
+    DbSet<ObjectField> ObjectFields { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

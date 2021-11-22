@@ -1,6 +1,6 @@
 namespace CleanArchitecture.Razor.Domain.Entities;
 
-public class MigrationObject: AuditableEntity
+public class MigrationObject: AuditableEntity, IAuditTrial
 {
     public int Id { get; set; }
     public string Name { get; set; }
