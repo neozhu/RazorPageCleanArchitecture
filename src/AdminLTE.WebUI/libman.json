@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "defaultProvider": "jsdelivr",
+  "libraries": [
+    {
+      "library": "toastr@2.1.4",
+      "destination": "wwwroot/plugins/toastr/",
+      "files": [
+        "toastr.js",
+        "toastr.min.js",
+        "toastr.scss",
+        "toastr.less"
+      ]
+    }
+  ]
+}
