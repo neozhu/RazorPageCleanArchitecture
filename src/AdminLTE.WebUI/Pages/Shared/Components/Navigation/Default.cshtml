@@ -19,7 +19,7 @@
                 }
             });
             <li class="@(groups.Contains(pageName) ? "nav-item  menu-is-opening menu-open" : "nav-item")">
-                <a href="#" class="nav-link" title="@group.Title" data-filter-tags="@group.Tags">
+                <a href="#" class="nav-link @(groups.Contains(pageName) ? "active" : "")" title="@group.Title" data-filter-tags="@group.Tags">
                     <i class="@group.Icon"></i>
                     <p>@_localizer[group.Text] <i class="right fas fa-angle-left"></i></p>
                     @if (group.Span.HasValue())
@@ -55,7 +55,7 @@
                                 }
                             }
                             <text>
-                                <a class="nav-link" href="@item.Route" title="@item.Title" target="@item.Target" data-filter-tags="@item.Tags">
+                                <a class="nav-link @(pageName == item.Href.ToPage() ? "active" : "")" href="@item.Route" title="@item.Title" target="@item.Target" data-filter-tags="@item.Tags">
                                     <p>@_localizer[item.Text]</p>
                                     @if (item.Span.HasValue())
                                     {
@@ -81,7 +81,7 @@
                                 <li class="@(pageName == subItem.Href.ToPage() ? "active" : "")">
                                 </text>
                             }
-                            <a class="nav-link" href="@subItem.Route" title="@subItem.Title" target="@subItem.Target" data-filter-tags="@subItem.Tags">
+                            <a class="nav-link @(pageName == subItem.Href.ToPage() ? "active" : "")" href="@subItem.Route" title="@subItem.Title" target="@subItem.Target" data-filter-tags="@subItem.Tags">
                                 <p>@_localizer[subItem.Text]</p>
                             </a>
                         @:</li>

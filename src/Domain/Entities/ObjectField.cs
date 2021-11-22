@@ -3,12 +3,12 @@ namespace CleanArchitecture.Razor.Domain.Entities;
 
 public class ObjectField : AuditableEntity
 {
+    public int Id { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
     public bool MasterDataRelevant { get; set; }
     public bool TechMockMasterData { get; set; }
     public string Team { get; set; }
-
     public string Status { get; set; }
     public string Link { get; set; }
     public string LegacySystem { get; set; }

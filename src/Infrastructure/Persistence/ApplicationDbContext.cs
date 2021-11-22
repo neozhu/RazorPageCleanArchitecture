@@ -48,6 +48,7 @@ public class ApplicationDbContext : IdentityDbContext<
     public DbSet<KeyValue> KeyValues { get; set; }
     public DbSet<ApprovalData> ApprovalDatas { get; set; }
     public DbSet<Product> Products { get; set; }
+    public DbSet<MigrationObject> MigrationObjects { get; set; }
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
         var auditEntries = OnBeforeSaveChanges(_currentUserService.UserId);

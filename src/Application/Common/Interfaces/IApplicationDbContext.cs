@@ -18,5 +18,6 @@ public interface IApplicationDbContext
     DbSet<ApprovalData> ApprovalDatas { get; set; }
 
     DbSet<Product> Products { get; set; }
+    DbSet<MigrationObject> MigrationObjects { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

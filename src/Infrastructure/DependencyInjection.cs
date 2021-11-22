@@ -23,6 +23,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using WorkflowCore.Interface;
+using Microsoft.AspNetCore.Http;
 
 namespace CleanArchitecture.Razor.Infrastructure;
 
@@ -47,6 +48,7 @@ public static class DependencyInjection
         }
         services.Configure<SmartSettings>(configuration.GetSection(SmartSettings.SectionName));
         services.AddSingleton(s => s.GetRequiredService<IOptions<SmartSettings>>().Value);
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddSingleton<ICurrentUserService, CurrentUserService>();
         services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
         services.AddScoped<IDomainEventService, DomainEventService>();

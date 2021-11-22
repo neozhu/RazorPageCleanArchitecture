@@ -7,11 +7,10 @@ using Serilog.Filters;
 using Serilog.Events;
 using CleanArchitecture.Razor.Infrastructure;
 using CleanArchitecture.Razor.Application;
-using SmartAdmin.WebUI.Filters;
 using FluentValidation.AspNetCore;
 using CleanArchitecture.Razor.Infrastructure.Extensions;
 using System.Net;
-
+using CleanArchitecture.Razor.Infrastructure.Filters;
 
 string[] filters = new string[] { "Microsoft.EntityFrameworkCore.Model.Validation",
     "WorkflowCore.Services.WorkflowHost",

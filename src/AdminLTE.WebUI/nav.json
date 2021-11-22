@@ -23,13 +23,13 @@
           "roles": []
         },
         {
-          "title": "Cross Fields Status",
-          "href": "logs_index.html",
+          "title": "Migration Fields Status",
+          "href": "objectfields_index.html",
           "roles": []
         },
         {
           "title": "Value Mapping",
-          "href": "logs_index.html",
+          "href": "fieldvaluemappings_index.html",
           "roles": []
         }
       ]
