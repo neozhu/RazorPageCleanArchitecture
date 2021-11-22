@@ -1,6 +1,6 @@
-﻿@page
+@page
+@using CleanArchitecture.Razor.Application.Constants.Permission
 @model RoleModel
-@using CleanArchitecture.Razor.Infrastructure.Constants.Permission
 @inject Microsoft.Extensions.Localization.IStringLocalizer<RoleModel> _localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
@@ -190,7 +190,7 @@
                     <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
                 </button>
             </div>
-            <form id="managenavigation_form" method="post" action="/authorization/roles?handler=UpdateNavgitation"  class="needs-validation" novalidate="novalidate">
+            <form id="managenavigation_form" method="post" action="/authorization/roles?handler=UpdateNavgitation" class="needs-validation" novalidate="novalidate">
                 <input type="hidden" asp-for="NavJsonStr" />
                 @Html.AntiForgeryToken()
                 <div class="modal-body">
@@ -242,8 +242,8 @@
             axios.get('/authorization/roles?handler=Navgitation').then(res => {
                 $('#NavJsonStr').val(JSON.stringify(res.data));
                 editor = monaco.editor.create(document.getElementById('editor-container'), {
-                    autoSize:true,
-                    value: JSON.stringify(res.data,null,2),
+                    autoSize: true,
+                    value: JSON.stringify(res.data, null, 2),
                     language: 'json',
                     theme: 'vs-light',
                 });
@@ -258,7 +258,7 @@
                     //console.log(owner,markers)
                     let decorations = editor.getModel().getAllDecorations();
                     let error = decorations.filter(isError).map(e => e);
-               
+
                     if (error) {
                         var str = editor.getValue();
                         if (IsValidJSONString(str)) {
@@ -268,20 +268,20 @@
                         else {
                             $('#managenavigation_form :submit').prop('disabled', true);
                         }
-                        
+
                     } else {
                         $('#managenavigation_form :submit').prop('disabled', true);
                     }
                 });
             })
-            
+
         });
-        
+
         $('#managenavigation_modal').on('shown.bs.modal', function () {
             editor.layout()
         });
 
-        var  IsValidJSONString=(str)=> {
+        var IsValidJSONString = (str) => {
             try {
                 JSON.parse(str);
             } catch (e) {
@@ -290,7 +290,7 @@
             return true;
         }
         var isError = (decorations) => {
-         
+
             return decorations.options.className === "redsquiggly";
         }
     </script>

@@ -10,7 +10,7 @@ using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using CleanArchitecture.Razor.Infrastructure.Configurations;
 using CleanArchitecture.Razor.Infrastructure.Constants.ClaimTypes;
 using CleanArchitecture.Razor.Infrastructure.Constants.Localization;
-using CleanArchitecture.Razor.Infrastructure.Constants.Permission;
+using CleanArchitecture.Razor.Application.Constants.Permission;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Middlewares;
 using CleanArchitecture.Razor.Infrastructure.Persistence;

@@ -1,11 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using CleanArchitecture.Razor.Application.Common.Security;
+using CleanArchitecture.Razor.Application.Constants.Permission;
 using CleanArchitecture.Razor.Application.Features.ApprovalDatas.DTOs;
 using CleanArchitecture.Razor.Domain.Entities.Worflow;
 
 namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Queries.Pagination
 {
+    [Authorize(Policy = Permissions.Approval.View)]
     public class ApprovalDatasWithPaginationQuery : PaginationRequest, IRequest<PaginatedData<ApprovalDataDto>>
     {
        
