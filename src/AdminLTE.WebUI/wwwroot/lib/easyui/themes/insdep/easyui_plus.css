@@ -1,0 +1,240 @@
+/*
+    JQuery EasyUI 1.5.x of Insdep Theme 1.0.0
+    演示地址：https://www.insdep.com/example/
+    下载地址：https://www.insdep.com
+    问答地址：https://bbs.insdep.com
+
+    项目地址：http://git.oschina.net/weavors/JQuery-EasyUI-1.5.x-Of-Insdep-Theme
+
+    QQ交流群：184075694 （优先发布更新主题及内测包）
+*/
+
+.table {
+  width: 100%;
+  background: #FFFFFF;
+  margin: 1em 0em;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  box-shadow: none;
+  border-radius: 0.28571429rem;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.87);
+  border-collapse: separate;
+  border-spacing: 0px;
+}
+.table:first-child {
+  margin-top: 0em;
+}
+.table:last-child {
+  margin-bottom: 0em;
+}
+
+.table th,
+.table td {
+  -webkit-transition: background 0.1s ease, color 0.1s ease;
+  transition: background 0.1s ease, color 0.1s ease;
+}
+
+.table thead {
+  box-shadow: none;
+}
+.table thead th {
+  cursor: auto;
+  background: #F9FAFB;
+  text-align: inherit;
+  color: rgba(0, 0, 0, 0.87);
+  padding: 0.92857143em 0.78571429em;
+  vertical-align: inherit;
+  font-style: none;
+  font-weight: bold;
+  text-transform: none;
+  border-bottom: 1px solid rgba(34, 36, 38, 0.1);
+  border-left: none;
+}
+.table thead tr > th:first-child {
+  border-left: none;
+}
+.table thead tr:first-child > th:first-child {
+  border-radius: 0.28571429rem 0em 0em 0em;
+}
+.table thead tr:first-child > th:last-child {
+  border-radius: 0em 0.28571429rem 0em 0em;
+}
+.table thead tr:first-child > th:only-child {
+  border-radius: 0.28571429rem 0.28571429rem 0em 0em;
+}
+
+.table tfoot {
+  box-shadow: none;
+}
+.table tfoot th {
+  cursor: auto;
+  border-top: 1px solid rgba(34, 36, 38, 0.15);
+  background: #F9FAFB;
+  text-align: inherit;
+  color: rgba(0, 0, 0, 0.87);
+  padding: 0.78571429em 0.78571429em;
+  vertical-align: middle;
+  font-style: normal;
+  font-weight: normal;
+  text-transform: none;
+}
+.table tfoot tr > th:first-child {
+  border-left: none;
+}
+.table tfoot tr:first-child > th:first-child {
+  border-radius: 0em 0em 0em 0.28571429rem;
+}
+.table tfoot tr:first-child > th:last-child {
+  border-radius: 0em 0em 0.28571429rem 0em;
+}
+.table tfoot tr:first-child > th:only-child {
+  border-radius: 0em 0em 0.28571429rem 0.28571429rem;
+}
+
+/* Table Row */
+.table tr td {
+  border-top: 1px solid rgba(34, 36, 38, 0.1);
+}
+.table tr:first-child td {
+  border-top: none;
+}
+
+.table td {
+  padding: 0.78571429em 0.78571429em;
+  text-align: inherit;
+}
+
+
+.table-structured.table {
+  border-collapse: collapse;
+}
+.table-structured.table thead th {
+  border-left: none;
+  border-right: none;
+}
+.table-structured.sortable.table thead th {
+  border-left: 1px solid rgba(34, 36, 38, 0.15);
+  border-right: 1px solid rgba(34, 36, 38, 0.15);
+}
+.table-structured.basic.table th {
+  border-left: none;
+  border-right: none;
+}
+.table-structured.table-celled.table tr th,
+.table-structured.table-celled.table tr td {
+  border-left: 1px solid rgba(34, 36, 38, 0.1);
+  border-right: 1px solid rgba(34, 36, 38, 0.1);
+}
+
+
+.table-definition.table thead:not(.full-width) th:first-child {
+  pointer-events: none;
+  background: transparent;
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.4);
+  box-shadow: -1px -1px 0px 1px #FFFFFF;
+}
+.table-definition.table tfoot:not(.full-width) th:first-child {
+  pointer-events: none;
+  background: transparent;
+  font-weight: rgba(0, 0, 0, 0.4);
+  color: normal;
+  box-shadow: 1px 1px 0px 1px #FFFFFF;
+}
+
+.table-celled.table-definition.table thead:not(.full-width) th:first-child {
+  box-shadow: 0px -1px 0px 1px #FFFFFF;
+}
+.table-celled.table-definition.table tfoot:not(.full-width) th:first-child {
+  box-shadow: 0px 1px 0px 1px #FFFFFF;
+}
+
+.table-definition.table tr td:first-child:not(.ignored),
+.table-definition.table tr td.table-definition {
+  background: rgba(0, 0, 0, 0.03);
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.95);
+  text-transform: '';
+  box-shadow: '';
+  text-align: '';
+  font-size: 1em;
+  padding-left: '';
+  padding-right: '';
+}
+
+.table-definition.table thead:not(.full-width) th:nth-child(2) {
+  border-left: 1px solid rgba(34, 36, 38, 0.15);
+}
+.table-definition.table tfoot:not(.full-width) th:nth-child(2) {
+  border-left: 1px solid rgba(34, 36, 38, 0.15);
+}
+.table-definition.table td:nth-child(2) {
+  border-left: 1px solid rgba(34, 36, 38, 0.15);
+}
+
+.table-celled.table tr th,
+.table-celled.table tr td {
+  border-left: 1px solid rgba(34, 36, 38, 0.1);
+}
+.table-celled.table tr th:first-child,
+.table-celled.table tr td:first-child {
+  border-left: none;
+}
+
+.table-striped.table > tr:nth-child(2n),
+.table-striped.table tbody tr:nth-child(2n) {
+  background-color: rgba(0, 0, 50, 0.02);
+}
+
+.inverted.table-striped.table > tr:nth-child(2n),
+.inverted.table-striped.table tbody tr:nth-child(2n) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.table-striped.selectable.selectable.selectable.table tbody tr.active:hover {
+  background: #EFEFEF !important;
+  color: rgba(0, 0, 0, 0.95) !important;
+}
+
+.table-basic.table {
+  background: transparent;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  box-shadow: none;
+}
+.table-basic.table thead,
+.table-basic.table tfoot {
+  box-shadow: none;
+}
+.table-basic.table th {
+  background: transparent;
+  border-left: none;
+}
+.table-basic.table tbody tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.table-basic.table td {
+  background: transparent;
+}
+.table-basic.striped.table tbody tr:nth-child(2n) {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Very Basic */
+[class*="table-very table-basic"].table {
+  border: none;
+}
+[class*="table-very table-basic"].table:not(.sortable):not(.striped) th,
+[class*="table-very table-basic"].table:not(.sortable):not(.striped) td {
+  padding: '';
+}
+[class*="table-very table-basic"].table:not(.sortable):not(.striped) th:first-child,
+[class*="table-very table-basic"].table:not(.sortable):not(.striped) td:first-child {
+  padding-left: 0em;
+}
+[class*="table-very table-basic"].table:not(.sortable):not(.striped) th:last-child,
+[class*="table-very table-basic"].table:not(.sortable):not(.striped) td:last-child {
+  padding-right: 0em;
+}
+[class*="table-very table-basic"].table:not(.sortable):not(.striped) thead tr:first-child th {
+  padding-top: 0em;
+}

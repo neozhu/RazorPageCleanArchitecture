@@ -3,7 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE Starter Kit</title>
+    <title>
+@if (ViewBag.Title?.Length > 0)
+{
+	<text>@ViewData["Title"] @(ViewData["Category1"]!=null?(" - "  + ViewData["Category1"]):"") - @Settings.App v@(Settings.Version)</text>
+} else {
+	@Settings.App
+}
+</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <partial name="_Styles" />

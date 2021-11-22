@@ -1,0 +1,15 @@
+.drawer.window-shadow {
+  box-shadow: 0 4px 12px #ccc;
+  border-radius: 0;
+  position: fixed;
+}
+.drawer.layout-collapsed {
+  box-shadow: none;
+}
+.drawer-mask.window-mask {
+  position: fixed;
+}
+.drawer.layout-panel-east,
+.drawer.layout-panel-west {
+  bottom: 0;
+}

@@ -1,0 +1,220 @@
+@page
+@using CleanArchitecture.Razor.Application.Constants.Permission
+@model AdminLTE.WebUI.Pages.AuditTrails.IndexModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
+@inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
+@{
+    ViewData["Title"] = _localizer["Audit Trails"].Value;
+    ViewData["PageName"] = "audittrails_index";
+    ViewData["Category1"] = _localizer["Authorization"].Value;
+    ViewData["Heading"] = _localizer["Audit Trails"].Value;
+    ViewData["PageDescription"] = _localizer["See all available options"].Value;
+    ViewData["PreemptiveClass"] = "Default";
+    //var _canSearch = await _authorizationService.AuthorizeAsync(User, null, Permissions.AuditTrails.Search);
+    //var _canExport = await _authorizationService.AuthorizeAsync(User, null, Permissions.AuditTrails.Export);
+
+}
+@section HeadBlock {
+    <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+    <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+    <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+    <style>
+        .approval_dg_datagrid-cell-c1-_action {
+            overflow: visible !important
+        }
+    </style>
+}
+<div id="js-page-content-demopanels" class="card mb-g">
+    <div class="card-header bg-white d-flex align-items-center">
+        <h4 class="m-0">
+            @_localizer["Audit Trails"]
+            <small>@_localizer["See all available options"]</small>
+        </h4>
+        <div class="ml-auto">
+         
+                <button class="btn btn-sm btn-outline-primary " id="searchbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
+                    @_localizer["Search"]
+                </button>
+     
+          
+                <button class="btn btn-sm btn-outline-primary " id="exportbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                    @_localizer["Export Excel"]
+                </button>
+          
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table id="audit_dg">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section ScriptsBlock {
+    <script src="~/js/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.js"></script>
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
+    
+ 
+    <script src="~/lib/easyui/plugins/datagrid-detailview.js"></script>
+    <script src="~/lib/axios/dist/axios.js"></script>
+    <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+    <script type="text/javascript">
+	$('#searchbutton').click(function () {
+		reload();
+	});
+	$('#exportbutton').click(function () {
+		onExport();
+	});
+	var $dg={};
+		var initdatagrid = () => {
+			$dg = $('#audit_dg').datagrid({
+				height: 700,
+				method: 'GET',
+				rownumbers: false,
+				singleSelect: true,
+				selectOnCheck: false,
+				checkOnSelect: false,
+				pagination: true,
+				clientPaging: false,
+				remoteFilter: true,
+				sortName: 'DateTime',
+				sortOrder: 'desc',
+				pageSize: 15,
+				pageList: [10, 15, 30, 50, 100, 1000],
+				view: detailview,
+				detailFormatter: function (rowIndex, rowData) {
+					var str1 = '<div class="p-2">';
+					var str2 = '<div class="p-2">';
+					var oldvalues = JSON.parse(rowData.OldValues);
+					for (item in oldvalues) {
+						str1 += `<span class="badge border border-secondary text-secondary m-1">${item}:${oldvalues[item]}</span>`
+					}
+					str1 += '</div>'
+					var newvalues = JSON.parse(rowData.NewValues);
+					for (item in newvalues) {
+						str2 += `<span class="badge border border-info text-secondary m-1">${item}:${newvalues[item]}</span>`
+					}
+					str2 += '</div>'
+					return `<div class="d-flex flex-row mb-1">
+					  <div class="p-2 ">@_localizer["Old Values"]</div>
+					  ${str1}
+					</div>
+                    <div class="d-flex flex-row mb-1">
+					 <div class="p-2 ">@_localizer["New Values"]</div>
+					  ${str2}
+					</div>`;
+				},
+				columns: [[
+					{ field: 'DateTime', title: '@_localizer["Date Time"]', sortable: true, width: 165, formatter: datetimeformatter },
+					{ field: 'TableName', title: '@_localizer["Table Name"]', sortable: true, width: 150 },
+					{ field: 'AuditType', title: '@_localizer["Audit Type"]', sortable: true, width: 120 },
+					{ field: 'PrimaryKey', title: '@_localizer["Primary Key"]', sortable: true, width: 160 },
+					{ field: 'OldValues', title: '@_localizer["Old Values"]', sortable: true, width: 280 },
+					{ field: 'NewValues', title: '@_localizer["New Values"]', sortable: true, width: 280 },
+				]]
+			})
+				.datagrid('enableFilter', [
+					{
+						field: 'DateTime',
+						type: 'dateRange',
+                        op: 'between',
+					},
+					{
+						field: 'AuditType',
+						type: 'combobox',
+                        op: 'equal',
+						options: {
+							panelHeight: 'auto',
+							data: [{
+								     value: null,
+								     text: 'ALL'
+							      },
+							@foreach (var val in Enum.GetNames(typeof(CleanArchitecture.Razor.Domain.Enums.AuditType)))
+			                {
+				               <text>
+							   {
+								value: '@val',
+								text: '@val'
+							   },
+							   </text>
+			                }
+							]
+						}
+					}
+				])
+				.datagrid('load', '@Url.Page("/AuditTrails/Index")?handler=Data');
+
+		}
+
+	var reload = () => {
+		$dg.datagrid('load', '@Url.Page("/AuditTrails/Index")?handler=Data');
+	}
+
+	$(() => {
+		initdatagrid();
+	})
+	var onExport = () => {
+		var options = $dg.datagrid('options');
+		var data = {
+			filterRules: JSON.stringify(options.filterRules),
+			sort: options.sortName,
+			order: options.sortOrder,
+		}
+		console.log(options, data)
+		var headers = {
+			"RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+		}
+		axios.post('@Url.Page("/AuditTrails/Index")?handler=Export',
+			data,
+			{
+				headers: headers,
+				responseType: "blob"
+			})
+			.then(response => {
+				const filename = getFileName(response.headers['content-disposition']);
+				const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+				const link = document.createElement('a');
+				link.href = url;
+				link.setAttribute('download', filename);
+				document.body.appendChild(link);
+				link.click();
+				toastr["info"](`@_localizer["Export Success"]`);
+			}).catch(error => {
+                if (error.response.data.errors) {
+                    const errors = error.response.data.errors;
+                    for (let [key, value] of Object.entries(errors)) {
+                        toastr["error"](`${key}: ${value.toString()}`);
+                    }
+
+                } else {
+					toastr["error"](`@_localizer["Export fail"],${error.response.data}`);
+				}
+			})
+
+
+	}
+	var getFileName = (disposition) => {
+		const utf8FilenameRegex = /filename\*=UTF-8''([\w%\-\.]+)(?:; ?|$)/;
+		const asciiFilenameRegex = /filename=(["']?)(.*?[^\\])\1(?:; ?|$)/;
+		let fileName = '';
+		if (utf8FilenameRegex.test(disposition)) {
+			fileName = decodeURIComponent(utf8FilenameRegex.exec(disposition)[1]);
+		} else {
+			const matches = asciiFilenameRegex.exec(disposition);
+			if (matches != null && matches[2]) {
+				fileName = matches[2];
+			}
+		}
+		return fileName;
+	}
+    </script>
+}

@@ -1,64 +1,9 @@
 {
   "version": "4.5",
   "lists": [
-
+   
     {
-      "title": "CRM Application",
-      "roles": [  ]
-    },
-    {
-      "title": "Workflow",
-      "icon": "nav-icon fas fa-clipboard-check",
-      "roles": [  ],
-      "items": [
-        {
-          "title": "Approval",
-          "href": "approval_index.html",
-          "roles": []
-        },
-        {
-          "title": "Histories",
-          "href": "approval_histories.html",
-          "roles": []
-        }
-      ]
-    },
-    {
-      "title": "Master Data",
-      "icon": "nav-icon fas fa-cubes",
-      "roles": [  ],
-      "items": [
-        {
-          "title": "Customers",
-          "href": "customers_index.html",
-          "roles": []
-        },
-        {
-          "title": "Dictionaries",
-          "href": "keyValues_index.html",
-          "roles": []
-        }
-      ]
-    },
-    {
-      "title": "Documents",
-      "icon": "nav-icon fas fa-paperclip",
-      "roles": [  ],
-      "items": [
-        {
-          "title": "Documents",
-          "href": "documents_index.html",
-          "roles": []
-        },
-        {
-          "title": "Document Type",
-          "href": "documentTypes_index.html",
-          "roles": []
-        }
-      ]
-    },
-    {
-      "title": "ASP.NET Core 5.0",
+      "title": "SAP Migration Tools",
       "roles": []
     },
     {
@@ -68,18 +13,35 @@
       "roles": []
     },
     {
-      "title": "Authorization",
-      "icon": "nav-icon fas fa-shield-alt",
-      "roles": [ ],
+      "title": "Migration Projects",
+      "icon": "nav-icon fas fa-tools",
+      "roles": [],
       "items": [
         {
-          "title": "Users",
-          "href": "authorization_users.html",
+          "title": "Migration Objects",
+          "href": "migrationobjects_index.html",
           "roles": []
         },
         {
-          "title": "Roles",
-          "href": "authorization_roles.html",
+          "title": "Cross Fields Status",
+          "href": "logs_index.html",
+          "roles": []
+        },
+        {
+          "title": "Value Mapping",
+          "href": "logs_index.html",
+          "roles": []
+        }
+      ]
+    },
+    {
+      "title": "System",
+      "icon": "nav-icon fas fa-cogs",
+      "roles": [],
+      "items": [
+        {
+          "title": "Dictionaries",
+          "href": "keyvalues_index.html",
           "roles": []
         },
         {

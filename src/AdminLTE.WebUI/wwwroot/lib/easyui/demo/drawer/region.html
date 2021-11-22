@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Region - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+</head>
+<body>
+	<h2>Region</h2>
+	<div style="margin:20px 0;">
+		<div style="margin:20px 0;">
+			<span>Change Region: </span>
+			<select onchange="setregion(this.value)">
+				<option value="east">East</option>
+				<option value="west">West</option>
+			</select>
+		</div>
+		<a href="#" class="easyui-linkbutton" onclick="$('#dd').drawer('expand')">Expand Drawer</a>
+	</div>
+	<div id="dd" class="easyui-drawer" style="width:250px">
+		<p style="text-align:center;margin:50px 0;font-size:16px">Drawer Content...</p>
+	</div>
+	<script type="text/javascript">
+		function setregion(region){
+			$('#dd').drawer({
+				region:region
+			});
+		}
+	</script>
+</body>
+</html>

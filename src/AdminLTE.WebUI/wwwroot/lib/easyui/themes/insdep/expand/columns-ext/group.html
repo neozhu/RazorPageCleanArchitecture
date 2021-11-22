@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Group Data on TreeGrid - jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+    <script type="text/javascript" src="../../jquery.min.js"></script>
+    <script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="columns-ext.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var data = [
+                {id:1,name:'name1',city:'city1',country:'country1'},
+                {id:2,name:'name2',city:'city1',country:'country2'},
+                {id:3,name:'name3',city:'city2',country:'country1'},
+                {id:31,name:'name31',city:'city2',country:'country1'},
+                {id:4,name:'name4',city:'city1',country:'country2'},
+                {id:5,name:'name5',city:'city2',country:'country3'},
+                {id:6,name:'name6',city:'city2',country:'country3'}
+            ];
+            $('#tg').treegrid('groupData', {
+                data: data,
+                fields: ['country','city'],
+                groupHeader: '#fc'
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>Group Data</h2>
+    <div style="margin:20px 0;"></div>
+    <div id="fc" style="background:#efefef;"></div>
+    <table id="tg" class="easyui-treegrid" style="width:700px;height:250px"
+            data-options="
+                idField: 'id',
+                treeField: 'name',
+                toolbar: '#fc'
+            ">
+        <thead>
+            <tr>
+                <th data-options="field:'name'" width="220">Name</th>
+                <th data-options="field:'city'" width="100">City</th>
+                <th data-options="field:'country'" width="150">Country</th>
+            </tr>
+        </thead>
+    </table>
+</body>
+</html>
