@@ -172,6 +172,25 @@
                 columns: [[
                     { field: 'ck', checkbox: true },
                     {
+                        field:'_cmd',
+                        title: '@_localizer["Command"]',
+                        width: 120,
+                        align: 'center'
+                        formatter: function (value, row, index) {
+						return `<div class="btn-group" role="group">
+								  <button id="commandbtngroup" type="button"  class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="@(Settings.Theme.IconPrefix) fa-file-code"></i>
+								 </button>
+								 <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
+								   <button class="dropdown-item" onclick="onDownload1(${index})" >  @_localizer["Download Migration Template(Mock1)"]</button>
+                                   <button class="dropdown-item" onclick="onDownload1(${index})" >  @_localizer["Download Migration Template(Mock2)"]</button>
+								   <button class="dropdown-item" onclick="onDownload2('${row.Id}')"   @_localizer["Download Migration Template(Test)"]</button>
+                                   <button class="dropdown-item" onclick="onDownload2('${row.Id}')"   @_localizer["Download Migration Template(Production)"]</button>
+								 </div>
+							  </div>`;
+					}
+                    },
+                    {
                         field: 'Name',
                         title: '@_localizer["Field"]',
                         sortable: true,
