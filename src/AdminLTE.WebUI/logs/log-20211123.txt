@@ -1735,3 +1735,160 @@ System.ArgumentNullException: Value cannot be null. (Parameter 'value')
 2021-11-23 14:41:00.815 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
 2021-11-23 14:41:00.826 +08:00 [INF] CleanArchitecture Request: FieldValueMappingsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldValueMappingsWithPaginationQuery"} 127.0.0.1 null
 2021-11-23 14:41:00.871 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.FieldValueMappings.DTOs.FieldValueMappingDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:39.157 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-23 14:49:39.587 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:39.587 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:39.587 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:39.587 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:39.587 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:39.587 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:40.409 +08:00 [INF] The file /css/adminlte.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:40.409 +08:00 [INF] The file /plugins/fontawesome-free/css/all.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:40.420 +08:00 [INF] The file /plugins/icheck-bootstrap/icheck-bootstrap.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:40.421 +08:00 [INF] The file /plugins/summernote/summernote-bs4.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:40.425 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:40.426 +08:00 [INF] The file /plugins/toastr/toastr.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:40.428 +08:00 [INF] The file /plugins/jquery/jquery.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:40.438 +08:00 [INF] The file /js/adminlte.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:40.450 +08:00 [INF] The file /plugins/bootstrap/js/bootstrap.bundle.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:40.451 +08:00 [INF] The file /js/demo.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:40.454 +08:00 [INF] The file /plugins/summernote/summernote-bs4.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:40.456 +08:00 [INF] The file /plugins/moment/moment.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:40.458 +08:00 [INF] The file /plugins/toastr/toastr.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:40.468 +08:00 [INF] The file /img/codewithmukesh_logo.jpg was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:41.204 +08:00 [INF] The file /plugins/fontawesome-free/webfonts/fa-solid-900.woff2 was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:44.975 +08:00 [INF] The file /lib/easyui/jquery.easyui.component.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:45.870 +08:00 [INF] CleanArchitecture Request: MigrationObjectsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationObjectsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 14:49:46.876 +08:00 [WRN] CleanArchitecture Long Running Request: MigrationObjectsWithPaginationQuery (945 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationObjectsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 14:49:46.881 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationObjects.DTOs.MigrationObjectDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:56.738 +08:00 [INF] CleanArchitecture Request: ObjectFieldsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"ObjectFieldsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 14:49:56.759 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:58.991 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllObjectFieldsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 14:49:59.028 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:49:59.059 +08:00 [INF] CleanArchitecture Request: FieldValueMappingsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldValueMappingsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 14:49:59.116 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.FieldValueMappings.DTOs.FieldValueMappingDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:50:04.072 +08:00 [INF] CleanArchitecture Request: ImportFieldValueMappingsCommand EURO1\zhuhua null {"FileName":"FieldValueMappings.xlsx","Data":"504B0304140006000800000021000CE8... (296889 bytes)","$type":"ImportFieldValueMappingsCommand"} 127.0.0.1 null
+2021-11-23 14:50:12.735 +08:00 [WRN] CleanArchitecture Long Running Request: ImportFieldValueMappingsCommand (8645 milliseconds) EURO1\zhuhua null {"FileName":"FieldValueMappings.xlsx","Data":"504B0304140006000800000021000CE8... (296889 bytes)","$type":"ImportFieldValueMappingsCommand"} 127.0.0.1 null
+2021-11-23 14:50:12.739 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:50:12.759 +08:00 [INF] CleanArchitecture Request: FieldValueMappingsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldValueMappingsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 14:50:12.770 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.FieldValueMappings.DTOs.FieldValueMappingDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 14:50:15.879 +08:00 [INF] CleanArchitecture Request: ExportFieldValueMappingsQuery EURO1\zhuhua null {"FilterRules":"[]","Sort":"Id","Order":"desc","$type":"ExportFieldValueMappingsQuery"} 127.0.0.1 null
+2021-11-23 14:50:16.707 +08:00 [WRN] CleanArchitecture Long Running Request: ExportFieldValueMappingsQuery (826 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Sort":"Id","Order":"desc","$type":"ExportFieldValueMappingsQuery"} 127.0.0.1 null
+2021-11-23 14:50:16.709 +08:00 [INF] Executing FileContentResult, sending file with download name 'FieldValueMappings.xlsx' ... 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.173 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-23 15:08:32.372 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.372 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.372 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.372 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.372 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.372 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.755 +08:00 [INF] The file /css/adminlte.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.755 +08:00 [INF] The file /plugins/fontawesome-free/css/all.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.770 +08:00 [INF] The file /plugins/summernote/summernote-bs4.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.771 +08:00 [INF] The file /plugins/icheck-bootstrap/icheck-bootstrap.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.774 +08:00 [INF] The file /plugins/toastr/toastr.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.782 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.783 +08:00 [INF] The file /plugins/jquery/jquery.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.785 +08:00 [INF] The file /plugins/bootstrap/js/bootstrap.bundle.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.785 +08:00 [INF] The file /js/adminlte.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.787 +08:00 [INF] The file /js/demo.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.788 +08:00 [INF] The file /plugins/summernote/summernote-bs4.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.791 +08:00 [INF] The file /plugins/moment/moment.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.799 +08:00 [INF] The file /img/codewithmukesh_logo.jpg was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:32.799 +08:00 [INF] The file /plugins/toastr/toastr.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:33.510 +08:00 [INF] The file /plugins/fontawesome-free/webfonts/fa-solid-900.woff2 was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:51.556 +08:00 [INF] The file /lib/easyui/jquery.easyui.component.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:51.982 +08:00 [INF] CleanArchitecture Request: MigrationObjectsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationObjectsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:08:52.577 +08:00 [WRN] CleanArchitecture Long Running Request: MigrationObjectsWithPaginationQuery (569 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationObjectsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:08:52.579 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationObjects.DTOs.MigrationObjectDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:55.717 +08:00 [INF] CleanArchitecture Request: ObjectFieldsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"ObjectFieldsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:08:55.737 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:08:58.342 +08:00 [INF] CleanArchitecture Request: MigrationObjectsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationObjectsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:08:58.344 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationObjects.DTOs.MigrationObjectDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:09:05.729 +08:00 [INF] CleanArchitecture Request: ObjectFieldsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"ObjectFieldsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:09:05.731 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:09:12.436 +08:00 [INF] CleanArchitecture Request: ImportObjectFieldsCommand EURO1\zhuhua null {"FileName":"ObjectFields.xlsx","Data":"504B03041400060008000000210062EE... (40026 bytes)","$type":"ImportObjectFieldsCommand"} 127.0.0.1 null
+2021-11-23 15:09:13.371 +08:00 [WRN] CleanArchitecture Long Running Request: ImportObjectFieldsCommand (918 milliseconds) EURO1\zhuhua null {"FileName":"ObjectFields.xlsx","Data":"504B03041400060008000000210062EE... (40026 bytes)","$type":"ImportObjectFieldsCommand"} 127.0.0.1 null
+2021-11-23 15:09:13.371 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:09:13.393 +08:00 [INF] CleanArchitecture Request: ObjectFieldsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"ObjectFieldsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:09:13.400 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:09:18.301 +08:00 [INF] CleanArchitecture Request: GetAllMigrationObjectsWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllMigrationObjectsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 15:09:18.313 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.MigrationObjects.DTOs.MigrationObjectDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:09:33.130 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllObjectFieldsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 15:09:33.148 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:09:33.173 +08:00 [INF] CleanArchitecture Request: FieldValueMappingsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldValueMappingsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:09:33.226 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.FieldValueMappings.DTOs.FieldValueMappingDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:09:40.866 +08:00 [INF] CleanArchitecture Request: ImportFieldValueMappingsCommand EURO1\zhuhua null {"FileName":"FieldValueMappings.xlsx","Data":"504B0304140006000800000021000CE8... (296889 bytes)","$type":"ImportFieldValueMappingsCommand"} 127.0.0.1 null
+2021-11-23 15:09:44.507 +08:00 [WRN] CleanArchitecture Long Running Request: ImportFieldValueMappingsCommand (3640 milliseconds) EURO1\zhuhua null {"FileName":"FieldValueMappings.xlsx","Data":"504B0304140006000800000021000CE8... (296889 bytes)","$type":"ImportFieldValueMappingsCommand"} 127.0.0.1 null
+2021-11-23 15:09:44.511 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:09:44.527 +08:00 [INF] CleanArchitecture Request: FieldValueMappingsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldValueMappingsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:09:44.535 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.FieldValueMappings.DTOs.FieldValueMappingDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:09:47.111 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllObjectFieldsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 15:09:47.114 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:09:50.989 +08:00 [INF] CleanArchitecture Request: MigrationObjectsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationObjectsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:09:50.992 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationObjects.DTOs.MigrationObjectDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:10:19.548 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllObjectFieldsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 15:10:19.552 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:10:19.594 +08:00 [INF] CleanArchitecture Request: FieldValueMappingsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldValueMappingsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:10:19.598 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.FieldValueMappings.DTOs.FieldValueMappingDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:10:20.813 +08:00 [INF] CleanArchitecture Request: ObjectFieldsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"ObjectFieldsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:10:20.814 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:10:24.114 +08:00 [INF] CleanArchitecture Request: ObjectFieldsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[{\"field\":\"Name\",\"op\":\"contains\",\"value\":\"LS\"}]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"ObjectFieldsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:10:24.138 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:10:26.412 +08:00 [INF] CleanArchitecture Request: ObjectFieldsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[{\"field\":\"Name\",\"op\":\"contains\",\"value\":\"LST\"}]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"ObjectFieldsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:10:26.428 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:10:30.748 +08:00 [INF] CleanArchitecture Request: GetAllMigrationObjectsWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllMigrationObjectsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 15:10:30.749 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.MigrationObjects.DTOs.MigrationObjectDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:10:38.066 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllObjectFieldsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 15:10:38.068 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:10:38.108 +08:00 [INF] CleanArchitecture Request: FieldValueMappingsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldValueMappingsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:10:38.111 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.FieldValueMappings.DTOs.FieldValueMappingDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:10:40.808 +08:00 [INF] CleanArchitecture Request: FieldValueMappingsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[{\"field\":\"ObjectFieldId\",\"op\":\"equal\",\"value\":\"LSTAR\"}]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldValueMappingsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:10:40.808 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsWithKeyQuery EURO1\zhuhua null {"Key":"LSTAR","$type":"GetAllObjectFieldsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 15:10:40.809 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:10:41.221 +08:00 [ERR] CleanArchitecture Request: Unhandled Exception for Request FieldValueMappingsWithPaginationQuery {"FilterRules":"[{\"field\":\"ObjectFieldId\",\"op\":\"equal\",\"value\":\"LSTAR\"}]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldValueMappingsWithPaginationQuery"} 127.0.0.1 EURO1\zhuhua
+System.FormatException: Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at CleanArchitecture.Razor.Application.Common.Extensions.PredicateBuilder.GetCriteriaWhere[T](String fieldName, OperationExpression selectedOperator, Object fieldValue) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Extensions\ExpressionExtensions.cs:line 77
+   at CleanArchitecture.Razor.Application.Common.Extensions.PredicateBuilder.FromFilter[T](String filters) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Extensions\ExpressionExtensions.cs:line 31
+   at CleanArchitecture.Razor.Application.FieldValueMappings.Queries.Pagination.FieldValueMappingsWithPaginationQueryHandler.Handle(FieldValueMappingsWithPaginationQuery request, CancellationToken cancellationToken) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\FieldValueMappings\Queries\Pagination\FieldValueMappingsPaginationQuery.cs:line 34
+   at CleanArchitecture.Razor.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\PerformanceBehaviour.cs:line 32
+   at CleanArchitecture.Razor.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\ValidationBehaviour.cs:line 36
+   at CleanArchitecture.Razor.Application.Common.Behaviours.AuthorizationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\AuthorizationBehaviour.cs:line 80
+   at CleanArchitecture.Razor.Application.Common.Behaviours.UnhandledExceptionBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\UnhandledExceptionBehaviour.cs:line 19
+2021-11-23 15:10:41.406 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:10:41.680 +08:00 [INF] CleanArchitecture Request: FieldValueMappingsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[{\"field\":\"ObjectFieldId\",\"op\":\"equal\",\"value\":26}]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldValueMappingsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:10:41.707 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.FieldValueMappings.DTOs.FieldValueMappingDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:12:02.928 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllObjectFieldsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 15:12:02.937 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:06.017 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-23 15:53:06.421 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:06.421 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:06.421 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:06.421 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:06.422 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:06.422 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:07.845 +08:00 [INF] The file /plugins/jquery/jquery.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:07.845 +08:00 [INF] The file /plugins/fontawesome-free/css/all.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:07.898 +08:00 [INF] The file /css/adminlte.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:07.898 +08:00 [INF] The file /plugins/icheck-bootstrap/icheck-bootstrap.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:07.920 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:07.921 +08:00 [INF] The file /plugins/summernote/summernote-bs4.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:07.925 +08:00 [INF] The file /plugins/toastr/toastr.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:07.930 +08:00 [INF] The file /plugins/bootstrap/js/bootstrap.bundle.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:07.931 +08:00 [INF] The file /js/adminlte.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:07.936 +08:00 [INF] The file /js/demo.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:07.939 +08:00 [INF] The file /plugins/summernote/summernote-bs4.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:07.943 +08:00 [INF] The file /plugins/moment/moment.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:07.950 +08:00 [INF] The file /plugins/toastr/toastr.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:07.956 +08:00 [INF] The file /img/codewithmukesh_logo.jpg was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:53:11.840 +08:00 [INF] The file /plugins/fontawesome-free/webfonts/fa-solid-900.woff2 was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:54:11.193 +08:00 [INF] The file /lib/easyui/jquery.easyui.component.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:54:12.154 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:54:13.029 +08:00 [WRN] CleanArchitecture Long Running Request: MigrationTemplateFilesWithPaginationQuery (840 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:54:13.032 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:54:17.133 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 15:54:17.138 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 15:54:17.358 +08:00 [INF] The file /favicon.ico was not modified 127.0.0.1 EURO1\zhuhua

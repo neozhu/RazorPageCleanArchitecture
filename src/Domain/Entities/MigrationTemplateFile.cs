@@ -9,8 +9,8 @@ public class MigrationTemplateFile:AuditableEntity, IAuditTrial
     public string Legacy2Field { get; set; }
     public string Legacy3Field { get; set; }
     public string NewValueField { get; set; }
-
     public string Description { get; set; }
-
     public string FilePath { get; set; }
+    public string LegacySystem { get; set; }
+    public string Comments { get; set; }
 }

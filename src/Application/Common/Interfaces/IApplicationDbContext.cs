@@ -21,5 +21,6 @@ public interface IApplicationDbContext
     DbSet<MigrationObject> MigrationObjects { get; set; }
     DbSet<ObjectField> ObjectFields { get; set; }
     DbSet<FieldValueMapping> FieldValueMappings { get; set; }
+    DbSet<MigrationTemplateFile> MigrationTemplateFiles { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

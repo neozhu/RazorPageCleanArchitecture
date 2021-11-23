@@ -28,6 +28,11 @@
           "roles": []
         },
         {
+          "title": "Migration Template",
+          "href": "migrationtemplatefiles_index.html",
+          "roles": []
+        },
+        {
           "title": "Value Mapping",
           "href": "fieldvaluemappings_index.html",
           "roles": []

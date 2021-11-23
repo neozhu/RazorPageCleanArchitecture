@@ -50,6 +50,7 @@ public class ApplicationDbContext : IdentityDbContext<
     public DbSet<Product> Products { get; set; }
     public DbSet<MigrationObject> MigrationObjects { get; set; }
     public DbSet<ObjectField> ObjectFields { get; set; }
+    public DbSet<MigrationTemplateFile> MigrationTemplateFiles { get; set; }
 
     public DbSet<FieldValueMapping> FieldValueMappings { get; set; }
 
