@@ -1,4 +1,7 @@
 
+using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Packaging;
+
 namespace CleanArchitecture.Razor.Application.MigrationTemplateFiles.Commands.Upload;
 
 public class UploadMigrationTemplateFilesCommand : IRequest<Result>
@@ -31,8 +34,13 @@ public class UploadMigrationTemplateFilesCommandHandler :
     }
     public async Task<Result> Handle(UploadMigrationTemplateFilesCommand request, CancellationToken cancellationToken)
     {
+         
+
         var result = await _uploadService.UploadAsync(new UploadRequest() { Data = request.Data, FileName = request.FileName, UploadType = UploadType.Document });
-        var item = new MigrationTemplateFile()
+
+        var doc = SpreadsheetDocument.Open(new MemoryStream(request.Data), false);
+
+            var item = new MigrationTemplateFile()
         {
             FilePath = result,
             Name = request.FileName,

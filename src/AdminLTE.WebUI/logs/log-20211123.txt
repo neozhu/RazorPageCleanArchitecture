@@ -2306,3 +2306,152 @@ System.FormatException: Input string was not in a correct format.
 2021-11-23 16:59:54.946 +08:00 [INF] CleanArchitecture Request: ExportMigrationTemplateFilesQuery EURO1\zhuhua null {"FilterRules":"[]","Sort":"Id","Order":"desc","$type":"ExportMigrationTemplateFilesQuery"} 127.0.0.1 null
 2021-11-23 16:59:57.810 +08:00 [WRN] CleanArchitecture Long Running Request: ExportMigrationTemplateFilesQuery (2863 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Sort":"Id","Order":"desc","$type":"ExportMigrationTemplateFilesQuery"} 127.0.0.1 null
 2021-11-23 16:59:57.810 +08:00 [INF] Executing FileContentResult, sending file with download name 'MigrationTemplateFiles.xlsx' ... 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:51.971 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-23 17:07:52.295 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:52.295 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:52.295 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:52.295 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:52.296 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:52.296 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:53.440 +08:00 [INF] The file /plugins/summernote/summernote-bs4.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:53.440 +08:00 [INF] The file /plugins/toastr/toastr.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:53.440 +08:00 [INF] The file /css/adminlte.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:53.440 +08:00 [INF] The file /plugins/icheck-bootstrap/icheck-bootstrap.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:53.440 +08:00 [INF] The file /plugins/fontawesome-free/css/all.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:53.440 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:53.450 +08:00 [INF] The file /plugins/jquery/jquery.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:53.450 +08:00 [INF] The file /js/adminlte.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:53.458 +08:00 [INF] The file /plugins/bootstrap/js/bootstrap.bundle.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:53.459 +08:00 [INF] The file /js/demo.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:53.460 +08:00 [INF] The file /plugins/toastr/toastr.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:53.461 +08:00 [INF] The file /plugins/summernote/summernote-bs4.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:53.462 +08:00 [INF] The file /plugins/moment/moment.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:53.468 +08:00 [INF] The file /img/codewithmukesh_logo.jpg was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:53.847 +08:00 [INF] The file /plugins/fontawesome-free/webfonts/fa-solid-900.woff2 was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:57.024 +08:00 [INF] The file /lib/easyui/jquery.easyui.component.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:57.028 +08:00 [INF] The file /lib/filesize/filesize.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:57.028 +08:00 [INF] The file /lib/plupload/plupload.full.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:57.031 +08:00 [INF] The file /lib/plupload/jquery.plupload.queue/jquery.plupload.queue.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:57.031 +08:00 [INF] The file /lib/plupload/jquery.ui.plupload/jquery.ui.plupload.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:57.037 +08:00 [INF] The file /lib/fabric/fabric.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:07:57.908 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 17:07:59.150 +08:00 [WRN] CleanArchitecture Long Running Request: MigrationTemplateFilesWithPaginationQuery (1187 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 17:07:59.153 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:08:07.049 +08:00 [INF] CleanArchitecture Request: UploadMigrationTemplateFilesCommand EURO1\zhuhua null {"FileName":"Mapping of Plant.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (11288 bytes)","$type":"UploadMigrationTemplateFilesCommand"} 127.0.0.1 null
+2021-11-23 17:08:07.541 +08:00 [ERR] CleanArchitecture Request: Unhandled Exception for Request UploadMigrationTemplateFilesCommand {"FileName":"Mapping of Plant.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (11288 bytes)","$type":"UploadMigrationTemplateFilesCommand"} 127.0.0.1 EURO1\zhuhua
+System.IO.FileFormatException: File contains corrupted data.
+   at System.IO.Packaging.ZipPackage..ctor(Stream s, FileMode packageFileMode, FileAccess packageFileAccess)
+   at System.IO.Packaging.Package.Open(Stream stream, FileMode packageMode, FileAccess packageAccess)
+   at DocumentFormat.OpenXml.Packaging.OpenXmlPackage.OpenCore(Stream stream, Boolean readWriteMode)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable, OpenSettings openSettings)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable)
+   at ClosedXML.Excel.XLWorkbook.LoadSheets(Stream stream)
+   at ClosedXML.Excel.XLWorkbook.Load(Stream stream)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream, XLEventTracking eventTracking)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream)
+   at CleanArchitecture.Razor.Application.MigrationTemplateFiles.Commands.Upload.UploadMigrationTemplateFilesCommandHandler.Handle(UploadMigrationTemplateFilesCommand request, CancellationToken cancellationToken) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\MigrationTemplateFiles\Commands\Upload\UploadMigrationTemplateFilesCommand.cs:line 38
+   at CleanArchitecture.Razor.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\PerformanceBehaviour.cs:line 32
+   at CleanArchitecture.Razor.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\ValidationBehaviour.cs:line 36
+   at CleanArchitecture.Razor.Application.Common.Behaviours.AuthorizationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\AuthorizationBehaviour.cs:line 80
+   at CleanArchitecture.Razor.Application.Common.Behaviours.UnhandledExceptionBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\UnhandledExceptionBehaviour.cs:line 19
+2021-11-23 17:08:07.811 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:08:07.844 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 17:08:07.846 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:08:20.826 +08:00 [INF] CleanArchitecture Request: UploadMigrationTemplateFilesCommand EURO1\zhuhua null {"FileName":"Mapping of Plant.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (11288 bytes)","$type":"UploadMigrationTemplateFilesCommand"} 127.0.0.1 null
+2021-11-23 17:08:21.033 +08:00 [ERR] CleanArchitecture Request: Unhandled Exception for Request UploadMigrationTemplateFilesCommand {"FileName":"Mapping of Plant.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (11288 bytes)","$type":"UploadMigrationTemplateFilesCommand"} 127.0.0.1 EURO1\zhuhua
+System.IO.FileFormatException: File contains corrupted data.
+   at System.IO.Packaging.ZipPackage..ctor(Stream s, FileMode packageFileMode, FileAccess packageFileAccess)
+   at System.IO.Packaging.Package.Open(Stream stream, FileMode packageMode, FileAccess packageAccess)
+   at DocumentFormat.OpenXml.Packaging.OpenXmlPackage.OpenCore(Stream stream, Boolean readWriteMode)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable, OpenSettings openSettings)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable)
+   at ClosedXML.Excel.XLWorkbook.LoadSheets(Stream stream)
+   at ClosedXML.Excel.XLWorkbook.Load(Stream stream)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream, XLEventTracking eventTracking)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream)
+   at CleanArchitecture.Razor.Application.MigrationTemplateFiles.Commands.Upload.UploadMigrationTemplateFilesCommandHandler.Handle(UploadMigrationTemplateFilesCommand request, CancellationToken cancellationToken) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\MigrationTemplateFiles\Commands\Upload\UploadMigrationTemplateFilesCommand.cs:line 38
+   at CleanArchitecture.Razor.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\PerformanceBehaviour.cs:line 32
+   at CleanArchitecture.Razor.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\ValidationBehaviour.cs:line 36
+   at CleanArchitecture.Razor.Application.Common.Behaviours.AuthorizationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\AuthorizationBehaviour.cs:line 80
+   at CleanArchitecture.Razor.Application.Common.Behaviours.UnhandledExceptionBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\UnhandledExceptionBehaviour.cs:line 19
+2021-11-23 17:08:21.177 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:08:21.198 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 17:08:21.200 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:08:36.300 +08:00 [INF] CleanArchitecture Request: UploadMigrationTemplateFilesCommand EURO1\zhuhua null {"FileName":"Mapping of Plant.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (11288 bytes)","$type":"UploadMigrationTemplateFilesCommand"} 127.0.0.1 null
+2021-11-23 17:10:30.050 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-23 17:10:30.878 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:10:30.879 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:10:30.879 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:10:30.879 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:10:30.879 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:10:30.880 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:10:39.722 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 17:10:40.855 +08:00 [WRN] CleanArchitecture Long Running Request: MigrationTemplateFilesWithPaginationQuery (1051 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 17:10:40.858 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:10:45.744 +08:00 [INF] CleanArchitecture Request: UploadMigrationTemplateFilesCommand EURO1\zhuhua null {"FileName":"Mapping of Plant.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (11288 bytes)","$type":"UploadMigrationTemplateFilesCommand"} 127.0.0.1 null
+2021-11-23 17:11:21.375 +08:00 [ERR] CleanArchitecture Request: Unhandled Exception for Request UploadMigrationTemplateFilesCommand {"FileName":"Mapping of Plant.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (11288 bytes)","$type":"UploadMigrationTemplateFilesCommand"} 127.0.0.1 EURO1\zhuhua
+System.IO.FileFormatException: File contains corrupted data.
+   at System.IO.Packaging.ZipPackage..ctor(Stream s, FileMode packageFileMode, FileAccess packageFileAccess)
+   at System.IO.Packaging.Package.Open(Stream stream, FileMode packageMode, FileAccess packageAccess)
+   at DocumentFormat.OpenXml.Packaging.OpenXmlPackage.OpenCore(Stream stream, Boolean readWriteMode)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable, OpenSettings openSettings)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable)
+   at ClosedXML.Excel.XLWorkbook.LoadSheets(Stream stream)
+   at ClosedXML.Excel.XLWorkbook.Load(Stream stream)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream, XLEventTracking eventTracking)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream)
+   at CleanArchitecture.Razor.Application.MigrationTemplateFiles.Commands.Upload.UploadMigrationTemplateFilesCommandHandler.Handle(UploadMigrationTemplateFilesCommand request, CancellationToken cancellationToken) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\MigrationTemplateFiles\Commands\Upload\UploadMigrationTemplateFilesCommand.cs:line 36
+   at CleanArchitecture.Razor.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\PerformanceBehaviour.cs:line 32
+   at CleanArchitecture.Razor.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\ValidationBehaviour.cs:line 36
+   at CleanArchitecture.Razor.Application.Common.Behaviours.AuthorizationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\AuthorizationBehaviour.cs:line 80
+   at CleanArchitecture.Razor.Application.Common.Behaviours.UnhandledExceptionBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\UnhandledExceptionBehaviour.cs:line 19
+2021-11-23 17:11:21.561 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:11:21.694 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 17:11:21.696 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:21.828 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-23 17:25:22.218 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.219 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.219 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.219 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.219 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.219 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.873 +08:00 [INF] The file /plugins/fontawesome-free/css/all.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.886 +08:00 [INF] The file /css/adminlte.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.897 +08:00 [INF] The file /plugins/icheck-bootstrap/icheck-bootstrap.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.903 +08:00 [INF] The file /plugins/summernote/summernote-bs4.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.907 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.913 +08:00 [INF] The file /plugins/toastr/toastr.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.924 +08:00 [INF] The file /plugins/jquery/jquery.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.929 +08:00 [INF] The file /plugins/bootstrap/js/bootstrap.bundle.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.933 +08:00 [INF] The file /js/adminlte.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.940 +08:00 [INF] The file /js/demo.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.948 +08:00 [INF] The file /plugins/summernote/summernote-bs4.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.960 +08:00 [INF] The file /plugins/moment/moment.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.963 +08:00 [INF] The file /plugins/toastr/toastr.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:22.967 +08:00 [INF] The file /img/codewithmukesh_logo.jpg was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:23.391 +08:00 [INF] The file /plugins/fontawesome-free/webfonts/fa-solid-900.woff2 was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:26.768 +08:00 [INF] The file /lib/easyui/jquery.easyui.component.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:26.781 +08:00 [INF] The file /lib/plupload/plupload.full.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:26.786 +08:00 [INF] The file /lib/plupload/jquery.ui.plupload/jquery.ui.plupload.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:26.786 +08:00 [INF] The file /lib/plupload/jquery.plupload.queue/jquery.plupload.queue.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:26.788 +08:00 [INF] The file /lib/fabric/fabric.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:26.801 +08:00 [INF] The file /lib/filesize/filesize.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:27.571 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 17:25:28.648 +08:00 [WRN] CleanArchitecture Long Running Request: MigrationTemplateFilesWithPaginationQuery (1020 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 17:25:28.650 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:32.579 +08:00 [INF] CleanArchitecture Request: UploadMigrationTemplateFilesCommand EURO1\zhuhua null {"FileName":"Mapping of Plant.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (11288 bytes)","$type":"UploadMigrationTemplateFilesCommand"} 127.0.0.1 null
+2021-11-23 17:25:35.530 +08:00 [ERR] CleanArchitecture Request: Unhandled Exception for Request UploadMigrationTemplateFilesCommand {"FileName":"Mapping of Plant.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (11288 bytes)","$type":"UploadMigrationTemplateFilesCommand"} 127.0.0.1 EURO1\zhuhua
+System.IO.FileFormatException: File contains corrupted data.
+   at System.IO.Packaging.ZipPackage..ctor(Stream s, FileMode packageFileMode, FileAccess packageFileAccess)
+   at System.IO.Packaging.Package.Open(Stream stream, FileMode packageMode, FileAccess packageAccess)
+   at DocumentFormat.OpenXml.Packaging.OpenXmlPackage.OpenCore(Stream stream, Boolean readWriteMode)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable, OpenSettings openSettings)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable)
+   at CleanArchitecture.Razor.Application.MigrationTemplateFiles.Commands.Upload.UploadMigrationTemplateFilesCommandHandler.Handle(UploadMigrationTemplateFilesCommand request, CancellationToken cancellationToken) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\MigrationTemplateFiles\Commands\Upload\UploadMigrationTemplateFilesCommand.cs:line 41
+   at CleanArchitecture.Razor.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\PerformanceBehaviour.cs:line 32
+   at CleanArchitecture.Razor.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\ValidationBehaviour.cs:line 36
+   at CleanArchitecture.Razor.Application.Common.Behaviours.AuthorizationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\AuthorizationBehaviour.cs:line 80
+   at CleanArchitecture.Razor.Application.Common.Behaviours.UnhandledExceptionBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\UnhandledExceptionBehaviour.cs:line 19
+2021-11-23 17:25:35.903 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 17:25:36.184 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 17:25:36.188 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
