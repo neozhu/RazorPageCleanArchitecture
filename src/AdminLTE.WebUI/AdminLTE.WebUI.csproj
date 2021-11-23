@@ -27,6 +27,7 @@
   <ItemGroup>
     <Folder Include="Files\" />
     <Folder Include="Files\" />
+    <Folder Include="wwwroot\lib\slimScroll\" />
     <Folder Include="wwwroot\plugins\bootbox.js\" />
   </ItemGroup>
 
