@@ -53,16 +53,16 @@ public class UploadMigrationTemplateFilesCommandHandler :
             var direct = ((XElement)cells[1]).Elements().Where(x=>x.Name.LocalName== "Data").First().Value;
             if (direct == "Import Parameter")
             {
-                index++;
+                ++index;
                 switch (index)
                 {
-                    case 0:
+                    case 1:
                         item.Legacy1Field = paraname;
                         break;
-                    case 1:
+                    case 2:
                         item.Legacy2Field = paraname;
                         break;
-                    case 2:
+                    case 3:
                         item.Legacy3Field = paraname;
                         break;
                 }
