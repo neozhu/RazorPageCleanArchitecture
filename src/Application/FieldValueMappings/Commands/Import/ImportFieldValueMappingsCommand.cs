@@ -48,10 +48,10 @@ public class ImportFieldValueMappingsCommandHandler :
             {
                 { _localizer["Field"], (row,item) => item.FieldName = row[_localizer["Field"]]?.ToString() },
                 { _localizer["Field Description"], (row,item) => item.Description = row[_localizer["Field Description"]]?.ToString() },
-                { _localizer["Target System"], (row,item) => item.Target = row[_localizer["Target System"]]?.ToString() },
+                { _localizer["Stage"], (row,item) => item.Stage = row.IsNull(_localizer["Stage"])?"Mock1":row[_localizer["Stage"]].ToString() },
                 { _localizer["Legacy 1"], (row,item) => item.Legacy1 = row[_localizer["Legacy 1"]]?.ToString() },
                 { _localizer["Legacy 2"], (row,item) => item.Legacy2 = row[_localizer["Legacy 2"]]?.ToString() },
-                { _localizer["Legacy 3"], (row,item) => item.FieldName = row[_localizer["Legacy 3"]]?.ToString() },
+                { _localizer["Legacy 3"], (row,item) => item.Legacy3 = row[_localizer["Legacy 3"]]?.ToString() },
                 { _localizer["New"], (row,item) => item.NewValue = row[_localizer["New"]]?.ToString() },
                 { _localizer["Text Legacy System"], (row,item) => item.LegacySystem = row[_localizer["Text Legacy System"]]?.ToString() },
                 { _localizer["Comments"], (row,item) => item.Comments = row[_localizer["Comments"]]?.ToString() },
@@ -62,31 +62,59 @@ public class ImportFieldValueMappingsCommandHandler :
             var importItems = result.Data;
             var errors = new List<string>();
             var errorsOccurred = false;
+            var objectlist = new List<ObjectField>();
             foreach (var item in importItems)
             {
-                var validationResult = await _addValidator.ValidateAsync(_mapper.Map<CreateFieldValueMappingCommand>(item), cancellationToken);
+                var createcommand = new CreateFieldValueMappingCommand()
+                {
+                    Check = item.Check,
+                    LegacySystem = item.LegacySystem,
+                    Description = item.Description,
+                    FieldName = item.FieldName,
+                    Comments = item.Comments,
+                    Legacy1 = item.Legacy1,
+                    Legacy2 = item.Legacy2,
+                    Legacy3 = item.Legacy3,
+                    Legacy4 = item.Legacy4,
+                    NewValue = item.NewValue,
+                    ObjectFieldId = item.ObjectFieldId,
+                    Stage = item.Stage,
+                    Team = item.Team
+
+                };
+                var validationResult = await _addValidator.ValidateAsync(createcommand, cancellationToken);
                 if (validationResult.IsValid)
                 {
-                    var objectfield =await _context.ObjectFields.Where(x => x.Name == item.FieldName).FirstOrDefaultAsync();
+                    var objectfield = await _context.ObjectFields.Where(x => x.Name == item.FieldName).FirstOrDefaultAsync();
                     if (objectfield == null)
                     {
-                        objectfield = new ObjectField()
+                        objectfield = objectlist.FirstOrDefault(x=>x.Name == item.FieldName);
+                        if (objectfield == null)
                         {
-                            Name = item.FieldName,
-                            Description = item.Description,
-                            LegacySystem = item.LegacySystem,
-                        };
-                       await _context.ObjectFields.AddAsync(objectfield);
+                            objectfield = new ObjectField()
+                            {
+                                Name = item.FieldName,
+                                Description = item.Description,
+                                LegacySystem = item.LegacySystem,
+                                Team = item.Team,
+                            };
+                            await _context.ObjectFields.AddAsync(objectfield);
+                            objectlist.Add(objectfield);
+                        }
                     }
-                    var valuemapping = await _context.FieldValueMappings.FirstOrDefaultAsync(x => x.ObjectFieldId == objectfield.Id && x.Target==item.Target && x.Legacy1==item.Legacy1 && x.NewValue==x.NewValue, cancellationToken);
-                    if (valuemapping==null)
+                    var valuemapping = await _context.FieldValueMappings.FirstOrDefaultAsync(x => x.ObjectFieldId == objectfield.Id && x.Stage == item.Stage && x.Legacy1 == item.Legacy1 && x.NewValue == x.NewValue, cancellationToken);
+                    if (valuemapping == null)
                     {
                         var createitem = _mapper.Map<FieldValueMapping>(item);
+                        createitem.Description = objectfield.Description;
+                        createitem.LegacySystem = objectfield.LegacySystem;
+                        createitem.ObjectFieldId = objectfield.Id;
+                        createitem.ObjectField= objectfield;
                         await _context.FieldValueMappings.AddAsync(createitem, cancellationToken);
                     }
                     else
                     {
-                        
+
                     }
                 }
                 else
@@ -115,7 +143,7 @@ public class ImportFieldValueMappingsCommandHandler :
         var fields = new string[] {
                    _localizer["Field"],
                    _localizer["Field Description"],
-                   _localizer["Target System"],
+                   _localizer["Stage"],
                    _localizer["Legacy 1"],
                    _localizer["Legacy 2"],
                    _localizer["Legacy 3"],

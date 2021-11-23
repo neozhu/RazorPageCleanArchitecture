@@ -7,8 +7,14 @@ namespace CleanArchitecture.Razor.Application.FieldValueMappings.Commands.Create
 
     public class CreateFieldValueMappingCommand: FieldValueMappingDto,IRequest<Result<int>>, IMapFrom<FieldValueMapping>
     {
-       
+    public void Mapping(Profile profile)
+    {
+        profile.CreateMap<FieldValueMapping, CreateFieldValueMappingCommand>()
+                    .ForMember(x => x.FieldName, y => y.MapFrom(z => z.ObjectField.Name));
+        profile.CreateMap<CreateFieldValueMappingCommand, FieldValueMapping>()
+                .ForMember(x => x.ObjectField, y => y.Ignore());
     }
+}
     
     public class CreateFieldValueMappingCommandHandler : IRequestHandler<CreateFieldValueMappingCommand, Result<int>>
     {

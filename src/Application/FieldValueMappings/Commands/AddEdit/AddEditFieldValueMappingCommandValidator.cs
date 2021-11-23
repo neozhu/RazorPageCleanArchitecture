@@ -9,7 +9,7 @@ public class AddEditFieldValueMappingCommandValidator : AbstractValidator<AddEdi
     {
         RuleFor(v => v.FieldName).MaximumLength(256)
           .NotEmpty();
-        RuleFor(v => v.Target).MaximumLength(256)
+        RuleFor(v => v.Stage).MaximumLength(256)
           .NotEmpty();
         RuleFor(v => v.Legacy1)
                  .MaximumLength(256)

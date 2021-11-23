@@ -47,7 +47,7 @@ namespace CleanArchitecture.Razor.Application.FieldValueMappings.Queries.Export;
                 {
                    { _localizer["Field"], item => item.FieldName },
                    { _localizer["Field Description"], item => item.Description },
-                   { _localizer["Target System"], item => item.Target },
+                   { _localizer["Stage"], item => item.Stage },
                    { _localizer["Legacy 1"], item => item.Legacy1 },
                    { _localizer["Legacy 2"], item => item.Legacy2 },
                    { _localizer["Legacy 3"], item => item.Legacy3 },

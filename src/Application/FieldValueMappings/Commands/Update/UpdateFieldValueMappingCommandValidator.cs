@@ -7,7 +7,7 @@ public class UpdateFieldValueMappingCommandValidator : AbstractValidator<UpdateF
 {
     public UpdateFieldValueMappingCommandValidator()
     {
-        RuleFor(v => v.Target).MaximumLength(256)
+        RuleFor(v => v.Stage).MaximumLength(256)
           .NotEmpty();
         RuleFor(v => v.Legacy1)
               .MaximumLength(256)

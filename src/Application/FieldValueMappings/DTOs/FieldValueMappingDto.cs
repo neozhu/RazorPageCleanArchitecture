@@ -6,11 +6,17 @@ namespace CleanArchitecture.Razor.Application.FieldValueMappings.DTOs;
 
 public class FieldValueMappingDto : IMapFrom<FieldValueMapping>
 {
-
+    public void Mapping(Profile profile)
+    {
+        profile.CreateMap<FieldValueMapping, FieldValueMappingDto>()
+                    .ForMember(x => x.FieldName, y => y.MapFrom(z => z.ObjectField.Name));
+        profile.CreateMap<FieldValueMappingDto, FieldValueMapping>()
+                .ForMember(x => x.ObjectField, y => y.Ignore());
+    }
     public int Id { get; set; }
     public int ObjectFieldId { get; set; }
     public string FieldName { get; set; }
-    public string Target { get; set; }
+    public string Stage { get; set; }
     public string Legacy1 { get; set; }
     public string Legacy2 { get; set; }
     public string Legacy3 { get; set; }
