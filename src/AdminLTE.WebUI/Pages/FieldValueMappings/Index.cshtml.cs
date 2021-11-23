@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
 using CleanArchitecture.Razor.Application.FieldValueMappings.Queries.Pagination;
 using CleanArchitecture.Razor.Application.FieldValueMappings.Commands.AcceptChanges;
+using CleanArchitecture.Razor.Application.ObjectFields.Queries.GetAll;
 
 namespace AdminLTE.WebUI.Pages.FieldValueMappings
 {
@@ -78,6 +79,13 @@ namespace AdminLTE.WebUI.Pages.FieldValueMappings
                 Data = stream.ToArray()
             };
             var result = await _mediator.Send(command);
+            return new JsonResult(result);
+        }
+
+        public async Task<IActionResult> OnGetObjectFields(string q = "")
+        {
+            var request = new GetAllObjectFieldsWithKeyQuery() { Key = q ?? "" };
+            var result= await _mediator.Send(request);
             return new JsonResult(result);
         }
 

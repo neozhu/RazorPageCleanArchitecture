@@ -168,6 +168,27 @@
                        onBeginEdit(index, row);
                     }
                 },
+                onBeginEdit: function (index, row) {
+                    const objectfieldid = row.ObjectFieldId;
+                    const objectfield = $(this).datagrid('getEditor', { index: index, field: 'ObjectFieldId' });
+                    const fielddescription = $(this).datagrid('getEditor', { index: index, field: 'Description' });
+                    const legacysystem = $(this).datagrid('getEditor', { index: index, field: 'LegacySystem' });
+                    $(objectfield.target).combobox({
+                        value: objectfieldid,
+                        url:'@Url.Page("/FieldValueMappings/Index")?handler=ObjectFields',
+                        method:'GET',
+                        valueField:'Id',
+                        textField:'Name',
+                        panelHeight:'auto',
+                        mode:'remote',
+                        onSelect: function (item) {
+
+                             $(fielddescription.target).textbox('setValue',item.Description);
+                             $(legacysystem.target).textbox('setValue',item.LegacySystem);
+                        }
+                    });
+                     
+                },
                 onEndEdit: function (index, row) {
                     onEndEdit(index,row)
                 },
@@ -198,11 +219,24 @@
                         }
                     },
                     {
-                        field: 'Target',
+                        field: 'Stage',
                         title: '@_localizer["Stage"]',
                         sortable: true,
                         width: 130,
-                        editor: { type: 'textbox', options: { required: true } }
+                        editor: { type: 'combobox',
+                           options: {
+                               valueField:'id',
+                               textField:'text',
+                               panelHeight:'auto',
+                               data:[{id:'Mock1',text:'Mock1'},
+                               {id:'Mock2',text:'Mock2'},
+                               {id:'Mock3',text:'Mock3'},
+                               {id:'IUC',text:'IUC'},
+                               {id:'Production',text:'Production'},
+                               {id:'Test',text:'Test'}],
+                               required: true
+                           }
+                        }
                     },
                    
                     {
@@ -265,7 +299,63 @@
                     }
                 ]]
             })
-                .datagrid('enableFilter', {})
+                .datagrid('enableFilter', [{
+                    field:'ObjectFieldId',
+                    type:'combobox',
+                    options:{
+                        value: '',
+                        url:'@Url.Page("/FieldValueMappings/Index")?handler=ObjectFields',
+                        method:'GET',
+                        valueField:'Id',
+                        textField:'Name',
+                        panelHeight:'auto',
+                        mode:'remote',
+                        onChange: function (item) {
+                         if(item){
+                           $dg.datagrid('addFilterRule', {
+	                           field: 'ObjectFieldId',
+	                           op: 'equal',
+	                           value: item
+                             });
+                             $dg.datagrid('doFilter');
+                         }else{
+                             $dg.datagrid('removeFilterRule', 'ObjectFieldId'	                          );
+                             $dg.datagrid('doFilter');
+                         }
+                        }
+            
+                    }
+                },
+                {
+                    field:'Stage',
+                    type:'combobox',
+                    options:{
+                        value: '',
+                       valueField:'id',
+                               textField:'text',
+                               panelHeight:'auto',
+                               data:[{id:'Mock1',text:'Mock1'},
+                               {id:'Mock2',text:'Mock2'},
+                               {id:'Mock3',text:'Mock3'},
+                               {id:'IUC',text:'IUC'},
+                               {id:'Production',text:'Production'},
+                               {id:'Test',text:'Test'}],
+                        onChange: function (item) {
+                         if(item){
+                             $dg.datagrid('addFilterRule', {
+	                           field: 'Stage',
+	                           op: 'equal',
+	                           value: item
+                             });
+                             $dg.datagrid('doFilter');
+                         }else{
+                             $dg.datagrid('removeFilterRule', 'Stage'	                          );
+                             $dg.datagrid('doFilter');
+                         }
+                        }
+            
+                    }
+                }])
                 .datagrid('load', '@Url.Page("/FieldValueMappings/Index")?handler=Data');
 
         }
@@ -293,8 +383,16 @@
         }
         var onAddRow = () => {
             if (onEndEditing()) {
+                var newitem={...currentItem};
+                newitem.Id=0;
+                newitem.Legacy1='';
+                newitem.Legacy2='';
+                newitem.Legacy3='';
+                newitem.NewValue='';
+                newitem.CreatedBy=null;
+                newitem.LastModifiedBy=null;
                 $dg.datagrid('insertRow', { index: 0,
-                    row:{ Name: currentItem.Name, Description: currentItem.Description }
+                    row:newitem
                     });
                 editIndex =0 ;
                 $dg.datagrid('selectRow', editIndex)
@@ -323,11 +421,11 @@
             }
         }
         var onEndEdit = (index, row)=> {
-            var ed = $dg.datagrid('getEditor', {
-                index: index,
-                field: 'Name'
-            });
-            row.Name = $(ed.target).textbox('getValue');
+            //var ed = $dg.datagrid('getEditor', {
+            //    index: index,
+            //    field: 'Name'
+            //});
+            //row.Name = $(ed.target).textbox('getValue');
             currentItem = row;
         }
 

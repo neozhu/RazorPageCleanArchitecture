@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Razor.Application.FieldValueMappings.DTOs;
@@ -30,9 +30,9 @@ namespace CleanArchitecture.Razor.Application.FieldValueMappings.Queries.GetAll;
 
         public async Task<IEnumerable<FieldValueMappingDto>> Handle(GetAllFieldValueMappingsQuery request, CancellationToken cancellationToken)
         {
-            //TODO:Implementing GetAllFieldValueMappingsQueryHandler method 
-            var data = await _context.FieldValueMappings
+             var data = await _context.FieldValueMappings
                          .ProjectTo<FieldValueMappingDto>(_mapper.ConfigurationProvider)
+                         .OrderBy(x => x.FieldName).ThenBy(x => x.Legacy1)
                          .ToListAsync(cancellationToken);
             return data;
         }

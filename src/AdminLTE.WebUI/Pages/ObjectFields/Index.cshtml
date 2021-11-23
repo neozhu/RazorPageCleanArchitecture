@@ -5,7 +5,7 @@
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
     ViewData["Title"] = _localizer["Object Fields"].Value;
-    ViewData["PageName"] = "migrationobjects_index";
+    ViewData["PageName"] = "objectfields_index";
     ViewData["Category1"] = _localizer["Migration Objects"].Value;
     ViewData["Heading"] = _localizer["Object Fields"].Value;
     ViewData["PageDescription"] = _localizer["See all available options"].Value;
@@ -203,7 +203,14 @@
                         field: 'Description',
                         title: '@_localizer["Field Description"]',
                         sortable: true,
-                        width: 230,
+                        width: 210,
+                        editor: { type: 'textbox', options: { required: false } }
+                    },
+                    {
+                        field: 'MigrationTemplate',
+                        title: '@_localizer["Migration Template File"]',
+                        sortable: true,
+                        width:220,
                         editor: { type: 'textbox', options: { required: false } }
                     },
                     {
@@ -237,7 +244,18 @@
                         title: '@_localizer["Relevant Migration Objects"]',
                         sortable: true,
                         width:260,
-                        editor: { type: 'textbox', options: { required: true } }
+                        editor: { type: 'combobox',
+                          options: {
+                              url:'@Url.Page("/ObjectFields/Index")?handler=MigrtionObjects',
+                              method:'GET',
+                              multiple:true,
+                              valueField:'Name',
+                              textField:'Name',
+                              panelHeight:'auto',
+                              mode:'remote',
+                              required: true
+                          }
+                        }
                     },
                     {
                         field: 'MasterDataRelevant',
@@ -346,7 +364,33 @@
                     }
                 ]]
             })
-                .datagrid('enableFilter', {})
+                .datagrid('enableFilter', [{
+                    field:'Status',
+                    type:'combobox',
+                    options:{
+                        value: '',
+                       valueField:'id',
+                               textField:'text',
+                               panelHeight:'auto',
+                               data:[{text:'Not started',id:'Not started'},
+                                    {text:'Ongoing',id:'Ongoing'},
+                                    {text:'Finished',id:'Finished'}],
+                        onChange: function (item) {
+                         if(item){
+                             $dg.datagrid('addFilterRule', {
+	                           field: 'Status',
+	                           op: 'equal',
+	                           value: item
+                             });
+                             $dg.datagrid('doFilter');
+                         }else{
+                             $dg.datagrid('removeFilterRule', 'Status'	                          );
+                             $dg.datagrid('doFilter');
+                         }
+                        }
+            
+                    }
+                }])
                 .datagrid('load', '@Url.Page("/ObjectFields/Index")?handler=Data');
 
         }

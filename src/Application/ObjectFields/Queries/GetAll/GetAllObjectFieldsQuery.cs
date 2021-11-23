@@ -5,37 +5,52 @@ using CleanArchitecture.Razor.Application.ObjectFields.DTOs;
 
 namespace CleanArchitecture.Razor.Application.ObjectFields.Queries.GetAll;
 
-    public class GetAllObjectFieldsQuery : IRequest<IEnumerable<ObjectFieldDto>>
-    {
-       
-    }
-    
-    public class GetAllObjectFieldsQueryHandler :
+public class GetAllObjectFieldsQuery : IRequest<IEnumerable<ObjectFieldDto>>
+{
+
+}
+
+public class GetAllObjectFieldsWithKeyQuery : IRequest<IEnumerable<ObjectFieldDto>>
+{
+    public string Key { get; set; } = string.Empty;
+}
+
+public class GetAllObjectFieldsQueryHandler :
+         IRequestHandler<GetAllObjectFieldsWithKeyQuery, IEnumerable<ObjectFieldDto>>,
          IRequestHandler<GetAllObjectFieldsQuery, IEnumerable<ObjectFieldDto>>
+{
+    private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
+    private readonly IStringLocalizer<GetAllObjectFieldsQueryHandler> _localizer;
+
+    public GetAllObjectFieldsQueryHandler(
+        IApplicationDbContext context,
+        IMapper mapper,
+        IStringLocalizer<GetAllObjectFieldsQueryHandler> localizer
+        )
     {
-        private readonly IApplicationDbContext _context;
-        private readonly IMapper _mapper;
-        private readonly IStringLocalizer<GetAllObjectFieldsQueryHandler> _localizer;
-
-        public GetAllObjectFieldsQueryHandler(
-            IApplicationDbContext context,
-            IMapper mapper,
-            IStringLocalizer<GetAllObjectFieldsQueryHandler> localizer
-            )
-        {
-            _context = context;
-            _mapper = mapper;
-            _localizer = localizer;
-        }
-
-        public async Task<IEnumerable<ObjectFieldDto>> Handle(GetAllObjectFieldsQuery request, CancellationToken cancellationToken)
-        {
-
-            var data = await _context.ObjectFields
-                         .ProjectTo<ObjectFieldDto>(_mapper.ConfigurationProvider)
-                         .ToListAsync(cancellationToken);
-            return data;
-        }
+        _context = context;
+        _mapper = mapper;
+        _localizer = localizer;
     }
+
+    public async Task<IEnumerable<ObjectFieldDto>> Handle(GetAllObjectFieldsQuery request, CancellationToken cancellationToken)
+    {
+
+        var data = await _context.ObjectFields
+                     .ProjectTo<ObjectFieldDto>(_mapper.ConfigurationProvider)
+                     .ToListAsync(cancellationToken);
+        return data;
+    }
+    public async Task<IEnumerable<ObjectFieldDto>> Handle(GetAllObjectFieldsWithKeyQuery request, CancellationToken cancellationToken)
+    {
+
+        var data = await _context.ObjectFields.Where(x => x.Name.Contains(request.Key) || x.Description.Contains(request.Key))
+                     .OrderBy(x => x.Name)
+                     .ProjectTo<ObjectFieldDto>(_mapper.ConfigurationProvider)
+                     .ToListAsync(cancellationToken);
+        return data;
+    }
+}
 
 
