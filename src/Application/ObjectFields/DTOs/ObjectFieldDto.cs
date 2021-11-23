@@ -23,7 +23,7 @@ public class ObjectFieldDto : IMapFrom<ObjectField>
     public string RelevantObjects { get; set; }
     public string Check { get; set; }
     public string Comments { get; set; }
-
+    public string MigrationTemplate { get; set; }
     public TrackingState TrackingState { get; set; }
     public DateTime Created { get; set; }
     public string CreatedBy { get; set; }

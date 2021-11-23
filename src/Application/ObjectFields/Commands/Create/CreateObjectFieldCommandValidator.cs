@@ -11,6 +11,7 @@ namespace CleanArchitecture.Razor.Application.ObjectFields.Commands.Create;
             RuleFor(v => v.Name)
                 .MaximumLength(256)
                  .NotEmpty();
+        
  
         }
     }

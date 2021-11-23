@@ -19,4 +19,9 @@ public class ObjectField : AuditableEntity, IAuditTrial
     public string RelevantObjects { get; set; }
     public string Check { get; set; }
     public string Comments { get; set; }
+
+    public string MigrationTemplate { get; set; }
+
+    public virtual ICollection<FieldValueMapping> FieldValueMappings { get; set; } = new HashSet<FieldValueMapping>();
+
 }
