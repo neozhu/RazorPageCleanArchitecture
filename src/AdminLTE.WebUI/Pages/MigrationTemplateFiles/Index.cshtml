@@ -19,15 +19,93 @@
 }
 @section HeadBlock {
 
-    <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
-    <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
-    <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
-    <style>
+<link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+<link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+<link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+<style>
 
-        .migrationtemplatefiles_dg_datagrid-cell-c1-_action {
-            overflow: visible !important
+    .migrationtemplatefiles_dg_datagrid-cell-c1-_action {
+        overflow: visible !important
+    }
+</style>
+<style>
+
+    .plfile_empty_div {
+        position: absolute;
+        left: 17%;
+        top: 43%;
+        z-index: 1;
+    }
+
+    ul#filelist {
+        width: 450px;
+        min-height: 100px;
+        background: #fff;
+        border-left: 0;
+        border-right: 0;
+        line-height: 24px;
+        overflow: hidden;
+        margin: 0 15px;
+        padding: 5px 0;
+        font-size: 12px;
+    }
+
+        ul#filelist li {
+            list-style-type: none;
+            margin: 4px 0;
+            padding: 0px 17px 0px 0px;
         }
-    </style>
+
+            ul#filelist li:hover {
+                background: #d6e7f9;
+            }
+
+    #filelist li {
+        clear: both;
+        line-height: 22px;
+        height: 22px;
+    }
+
+    .plupload_filename {
+        width: 230px;
+        display: block;
+        float: left;
+        word-wrap: break-word;
+        margin-right: 10px;
+        line-height: 22px;
+        margin-left: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .plupload_filesize {
+        width: 80px;
+        line-height: 22px;
+        display: block;
+        float: left;
+    }
+
+    .plupload_d-none {
+        display: none;
+    }
+
+    .plupload_fileremove {
+        float: right;
+        line-height: 22px;
+        display: block;
+        cursor: pointer;
+    }
+
+    .plupload_fileprogress {
+        display: block;
+        width: 60px;
+        line-height: 22px;
+        margin-right: 19px;
+        float: right;
+        text-align: right;
+    }
+</style>
 }
 <div id="js-page-content-demopanels" class="card mb-g">
     <div class="card-header bg-white d-flex align-items-center">
@@ -36,36 +114,36 @@
             <small>@_localizer["See all available options"]</small>
         </h4>
         <div class="ml-auto">
-            
-                <button class="btn btn-sm btn-outline-primary " id="addbutton">
-                    <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
-                    @_localizer["Add"]
-                </button>
-           
-                <button class="btn btn-sm btn-outline-danger" disabled id="deletebutton">
-                    <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
-                    @_localizer["Delete"]
-                </button>
-          
-                <button class="btn btn-sm btn-outline-secondary" disabled id="cancelbutton">
-                    <span class="@(Settings.Theme.IconPrefix) fa-stop mr-1"></span>
-                    @_localizer["Cancel"]
-                </button>
-                <button class="btn btn-sm btn-outline-primary" disabled id="savebutton">
-                    <span class="@(Settings.Theme.IconPrefix) fa-save mr-1"></span>
-                    @_localizer["Save"]
-                </button>
-            
-                <button class="btn btn-sm btn-outline-primary " id="searchbutton">
-                    <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
-                    @_localizer["Search"]
-                </button>
-          
-             
-                <button class="btn btn-sm btn-outline-primary " id="exportbutton">
-					<span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
-					@_localizer["Export Excel"]
-				</button>
+
+            <button class="btn btn-sm btn-outline-primary " id="addbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
+                @_localizer["Upload Template Files"]
+            </button>
+
+            <button class="btn btn-sm btn-outline-danger" disabled id="deletebutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
+                @_localizer["Delete"]
+            </button>
+
+            <button class="btn btn-sm btn-outline-secondary" disabled id="cancelbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-stop mr-1"></span>
+                @_localizer["Cancel"]
+            </button>
+            <button class="btn btn-sm btn-outline-primary" disabled id="savebutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-save mr-1"></span>
+                @_localizer["Save"]
+            </button>
+
+            <button class="btn btn-sm btn-outline-primary " id="searchbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
+                @_localizer["Search"]
+            </button>
+
+
+            <button class="btn btn-sm btn-outline-primary " id="exportbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                @_localizer["Export Excel"]
+            </button>
         </div>
     </div>
     <div class="card-body">
@@ -79,25 +157,55 @@
     </div>
 </div>
 
-@await Component.InvokeAsync("ImportExcel", new
-{
-    importUri = Url.Page("/MigrationTemplateFiles/Index") + "?handler=Import",
-    getTemplateUri = @Url.Page("/MigrationTemplateFiles/Index") + "?handler=CreateTemplate",
-    onImportedSucceeded = "reloadData()"
-})
-@section ScriptsBlock {
-    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
-    <script src="~/lib/axios/dist/axios.js"></script>
-    <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+<div class="modal fade" id="uploadfilesmodal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    @_localizer["Upload Migration Template Files"]
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body pb-0 pt-0">
+                <div id="slimscroll">
+                    <div id="file_empty_div" class="plfile_empty_div">
+                        <span style="color: Dodgerblue;"><i class="fal fa-exclamation-circle"></i></span> @_localizer["Please click [Choose Files] button to upload template files."]
+                    </div>
+                    <ul id="filelist"></ul>
+                </div>
+                <div id="plupload_max_size_alert" class="alert alert-primary mb-0  fw-300 fs-sm p-2  d-none" role="alert">
+                    <strong>@_localizer["Note"]</strong> @_localizer["The size of the uploaded photo must be less than 5MB."]
+                </div>
+                <input id="fileupload" type="file" name="fileupload" multiple style="display: none" />
 
-    <script type="text/javascript">
+            </div>
+            <div class="modal-footer">
+                <button id="selectuploadfilesbtn" type="button" class="btn btn-info">@_localizer["Choose Files"]</button>
+                <button id="postuploadfilesbtn" type="button" class="btn btn-primary">@_localizer["Upload"]</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section ScriptsBlock {
+<script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
+<script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
+<script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+<script src="~/lib/axios/dist/axios.js"></script>
+<script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+
+<script type="text/javascript">
         $('#searchbutton').click(function () {
             reloadData();
         });
         $('#addbutton').click(function () {
-            onAddRow(null);
+            //onAddRow(null);
+         
+		$('#uploadfilesmodal').modal('toggle');
+	 
         });
         $('#deletebutton').click(function () {
             onDeleteChecked();
@@ -177,7 +285,7 @@
                              $(legacysystem.target).textbox('setValue',item.LegacySystem);
                         }
                     });
-                     
+
                 },
                 onEndEdit: function (index, row) {
                     onEndEdit(index,row)
@@ -204,7 +312,7 @@
                         editor: { type: 'combobox',
                            options: { required: true}
                         },
-                         
+
                     },
                     {
                         field: 'Description',
@@ -292,9 +400,9 @@
                         onChange: function (item) {
                          if(item){
                            $dg.datagrid('addFilterRule', {
-	                           field: 'ObjectFieldId',
-	                           op: 'equal',
-	                           value: item
+                               field: 'ObjectFieldId',
+                               op: 'equal',
+                               value: item
                              });
                              $dg.datagrid('doFilter');
                          }else{
@@ -302,7 +410,7 @@
                              $dg.datagrid('doFilter');
                          }
                         }
-            
+
                     }
                 },
                 {
@@ -322,9 +430,9 @@
                         onChange: function (item) {
                          if(item){
                              $dg.datagrid('addFilterRule', {
-	                           field: 'Stage',
-	                           op: 'equal',
-	                           value: item
+                               field: 'Stage',
+                               op: 'equal',
+                               value: item
                              });
                              $dg.datagrid('doFilter');
                          }else{
@@ -332,7 +440,7 @@
                              $dg.datagrid('doFilter');
                          }
                         }
-            
+
                     }
                 }])
                 .datagrid('load', '@Url.Page("/MigrationTemplateFiles/Index")?handler=Data');
@@ -361,7 +469,7 @@
             }
         }
         var onAddRow = () => {
-            
+
         }
         var onBeginEdit = (index, field)=> {
             if (editIndex != index) {
@@ -522,6 +630,123 @@
 
         }
 
+         document.addEventListener("DOMContentLoaded", function () {
 
-    </script>
+        $('#slimscroll').slimScroll({
+            height: '100px',
+            railVisible: true,
+            alwaysVisible: false,
+        });
+        var headers = {
+            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+        }
+        var uploader = new plupload.Uploader({
+            runtimes: 'html5',
+            headers,
+            file_data_name:'UploadedFile',
+            filters: {
+                max_file_size: "15mb"
+            },
+            browse_button: 'selectuploadfilesbtn', // this can be an id of a DOM element or the DOM element itself
+            url: '@Url.Page("/MigrationTemplateFiles/index")?handler=Upload',
+        });
+        uploader.init();
+        //验证文件大小
+        plupload.addFileFilter('max_file_size', function (maxSize, file, cb) {
+            var undef;
+            if (file.size !== undef && maxSize && file.size > plupload.parseSize(maxSize)) {
+                this.trigger('Error', {
+                    code: plupload.FILE_SIZE_ERROR,
+                    message: plupload.translate('File size error.'),
+                    file: file
+                });
+                cb(false);
+            } else {
+                cb(true);
+            }
+        });
+        //初始化
+        uploader.bind('Init', function (up) {
+            $('#plupload_max_size_alert').addClass('d-none');
+        });
+        //设置post参数
+        uploader.bind('BeforeUpload', function (up) {
+
+            up.settings.multipart_params.tags = '';
+        });
+        //单击选择文件
+        uploader.bind('Browse', function () {
+            $('#plupload_max_size_alert').addClass('d-none');
+        });
+        //分段上传
+        uploader.bind('ChunkUploaded', function (up, file, info) {
+            console.log(up, file, info)
+        });
+        //捕获异常
+        uploader.bind('Error', function (up, error) {
+            console.log(up, error)
+            if (error.code == -600) {
+                $('#plupload_max_size_alert').removeClass('d-none')
+            } else {
+                bootbox.alert(`异常:${error.message}`);
+            }
+        });
+        //添加文件
+        uploader.bind('FilesAdded', function (up, files) {
+            $('#file_empty_div').hide()
+            var html = '';
+            plupload.each(files, function (file) {
+                html += ` <li id="${file.id}"  >
+                            <span class="plupload_filename">${file.name}</span>
+                            <span id="filesize" class="plupload_filesize">(大小:${plupload.formatSize(file.size)})</span>
+                            <span id="plfilesize" class="plupload_d-none">${plupload.formatSize(file.size)}</span>
+                            <span id="remove" class="plupload_fileremove">
+                                        <a href="javascript:void(0);" class="btn btn-outline-info btn-xs btn-icon waves-effect waves-themed">
+                                            <i class="fal fa-times"></i>
+                                        </a>
+                            </span>
+                            <span id="progress" class="plupload_fileprogress"></span>
+                            </li>`
+                //html += '<li id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></li>';
+            });
+            document.getElementById('filelist').innerHTML += html;
+        });
+        //删除队列中的文件
+        $(document).on('click', '#remove', function (e) {
+            var li = $(this).closest('li');
+            var fileid = li.attr('id');
+            uploader.removeFile(fileid);
+            li.remove()
+            if ($('ul#filelist li').length == 0) {
+                $('#file_empty_div').show();
+            }
+        });
+        //显示进度
+        uploader.bind('UploadProgress', function (up, file) {
+            $(`li#${file.id} > .plupload_fileprogress`).text(file.percent + " %")
+
+        });
+        uploader.bind('BeforeChunkUpload', function (up, file) {
+            //console.log('BeforeChunkUpload', up, file)
+
+        });
+
+        //完成上传
+        uploader.bind('UploadComplete', function (up, files) {
+            //console.log('UploadComplete', up.files)
+            $('#plupload_max_size_alert').addClass('d-none');
+            $('#uploadfilesmodal').modal('toggle')
+            uploader.files.forEach(function (item) {
+                uploader.removeFile(item);
+                $(`ul#filelist #${item.id}`).remove();
+            });
+            $('#file_empty_div').show();
+            reloadData()
+        });
+        //开始上传
+        $('#postuploadfilesbtn').click(function () {
+            uploader.start();
+        });
+    });
+</script>
 }

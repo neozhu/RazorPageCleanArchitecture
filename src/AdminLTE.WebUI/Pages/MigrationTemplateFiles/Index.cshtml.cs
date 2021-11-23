@@ -9,6 +9,7 @@ using Microsoft.Extensions.Localization;
 using CleanArchitecture.Razor.Application.MigrationTemplateFiles.Queries.Pagination;
 using CleanArchitecture.Razor.Application.MigrationTemplateFiles.Commands.AcceptChanges;
 using CleanArchitecture.Razor.Application.ObjectFields.Queries.GetAll;
+using CleanArchitecture.Razor.Application.MigrationTemplateFiles.Commands.Upload;
 
 namespace AdminLTE.WebUI.Pages.MigrationTemplateFiles
 {
@@ -86,6 +87,19 @@ namespace AdminLTE.WebUI.Pages.MigrationTemplateFiles
         {
             var request = new GetAllObjectFieldsWithKeyQuery() { Key = q ?? "" };
             var result= await _mediator.Send(request);
+            return new JsonResult(result);
+        }
+
+        public async Task<IActionResult> OnPostUploadAsync()
+        {
+            var stream = new MemoryStream();
+            await UploadedFile.CopyToAsync(stream);
+            var command = new UploadMigrationTemplateFilesCommand()
+            {
+                FileName = UploadedFile.FileName,
+                Data = stream.ToArray()
+            };
+            var result = await _mediator.Send(command);
             return new JsonResult(result);
         }
 
