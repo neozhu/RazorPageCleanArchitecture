@@ -1963,3 +1963,346 @@ System.FormatException: Input string was not in a correct format.
 2021-11-23 16:37:41.687 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
 2021-11-23 16:37:41.710 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
 2021-11-23 16:37:41.717 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:05.796 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-23 16:40:06.035 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.035 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.035 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.035 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.035 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.035 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.523 +08:00 [INF] The file /css/adminlte.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.523 +08:00 [INF] The file /plugins/fontawesome-free/css/all.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.536 +08:00 [INF] The file /plugins/icheck-bootstrap/icheck-bootstrap.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.536 +08:00 [INF] The file /plugins/summernote/summernote-bs4.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.543 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.543 +08:00 [INF] The file /plugins/toastr/toastr.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.550 +08:00 [INF] The file /plugins/jquery/jquery.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.550 +08:00 [INF] The file /plugins/bootstrap/js/bootstrap.bundle.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.553 +08:00 [INF] The file /js/adminlte.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.557 +08:00 [INF] The file /js/demo.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.557 +08:00 [INF] The file /plugins/summernote/summernote-bs4.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.560 +08:00 [INF] The file /plugins/toastr/toastr.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.560 +08:00 [INF] The file /plugins/moment/moment.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:06.567 +08:00 [INF] The file /img/codewithmukesh_logo.jpg was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:07.045 +08:00 [INF] The file /plugins/fontawesome-free/webfonts/fa-solid-900.woff2 was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:09.891 +08:00 [INF] The file /lib/easyui/jquery.easyui.component.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:10.597 +08:00 [INF] CleanArchitecture Request: FieldValueMappingsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldValueMappingsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:40:10.597 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllObjectFieldsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 16:40:11.098 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:11.457 +08:00 [WRN] CleanArchitecture Long Running Request: FieldValueMappingsWithPaginationQuery (830 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldValueMappingsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:40:11.458 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.FieldValueMappings.DTOs.FieldValueMappingDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:12.747 +08:00 [INF] The file /lib/filesize/filesize.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:12.760 +08:00 [INF] The file /lib/plupload/plupload.full.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:12.761 +08:00 [INF] The file /lib/plupload/jquery.plupload.queue/jquery.plupload.queue.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:12.767 +08:00 [INF] The file /lib/plupload/jquery.ui.plupload/jquery.ui.plupload.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:12.767 +08:00 [INF] The file /lib/fabric/fabric.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:13.253 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:40:13.278 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:29.707 +08:00 [INF] CleanArchitecture Request: UploadMigrationTemplateFilesCommand EURO1\zhuhua null {"FileName":"Mapping of Activity Type (LSTAR).xml","Data":"0D0A3C3F786D6C2076657273696F6E3D... (14000 bytes)","$type":"UploadMigrationTemplateFilesCommand"} 127.0.0.1 null
+2021-11-23 16:40:29.771 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:29.783 +08:00 [INF] CleanArchitecture Request: UploadMigrationTemplateFilesCommand EURO1\zhuhua null {"FileName":"Mapping of Plant.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (11288 bytes)","$type":"UploadMigrationTemplateFilesCommand"} 127.0.0.1 null
+2021-11-23 16:40:29.801 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:40:29.824 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:40:29.830 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.892 +08:00 [INF] The file /plugins/fontawesome-free/css/all.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.897 +08:00 [INF] The file /css/adminlte.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.904 +08:00 [INF] The file /plugins/icheck-bootstrap/icheck-bootstrap.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.907 +08:00 [INF] The file /plugins/summernote/summernote-bs4.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.911 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.914 +08:00 [INF] The file /plugins/toastr/toastr.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.916 +08:00 [INF] The file /plugins/jquery/jquery.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.919 +08:00 [INF] The file /plugins/bootstrap/js/bootstrap.bundle.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.922 +08:00 [INF] The file /js/adminlte.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.924 +08:00 [INF] The file /js/demo.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.927 +08:00 [INF] The file /plugins/summernote/summernote-bs4.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.930 +08:00 [INF] The file /plugins/moment/moment.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.933 +08:00 [INF] The file /plugins/toastr/toastr.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.935 +08:00 [INF] The file /lib/easyui/jquery.easyui.component.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.938 +08:00 [INF] The file /lib/filesize/filesize.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.940 +08:00 [INF] The file /lib/plupload/plupload.full.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.943 +08:00 [INF] The file /lib/plupload/jquery.plupload.queue/jquery.plupload.queue.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.946 +08:00 [INF] The file /lib/plupload/jquery.ui.plupload/jquery.ui.plupload.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.948 +08:00 [INF] The file /lib/fabric/fabric.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:52.953 +08:00 [INF] The file /img/codewithmukesh_logo.jpg was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:54.250 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:42:54.253 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:42:54.447 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\favicon.ico' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:43:01.021 +08:00 [INF] CleanArchitecture Request: UploadMigrationTemplateFilesCommand EURO1\zhuhua null {"FileName":"Mapping of Activity Type (LSTAR).xml","Data":"0D0A3C3F786D6C2076657273696F6E3D... (14000 bytes)","$type":"UploadMigrationTemplateFilesCommand"} 127.0.0.1 null
+2021-11-23 16:43:01.032 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:43:01.043 +08:00 [INF] CleanArchitecture Request: UploadMigrationTemplateFilesCommand EURO1\zhuhua null {"FileName":"Mapping of Plant.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (11288 bytes)","$type":"UploadMigrationTemplateFilesCommand"} 127.0.0.1 null
+2021-11-23 16:43:01.049 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:43:01.063 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:43:01.064 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:13.262 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-23 16:45:13.463 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:13.463 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:13.463 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:13.463 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:13.463 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:13.463 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:13.978 +08:00 [INF] The file /plugins/fontawesome-free/css/all.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:13.978 +08:00 [INF] The file /css/adminlte.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:13.984 +08:00 [INF] The file /plugins/icheck-bootstrap/icheck-bootstrap.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:13.986 +08:00 [INF] The file /plugins/summernote/summernote-bs4.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:13.990 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:13.999 +08:00 [INF] The file /plugins/toastr/toastr.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:13.999 +08:00 [INF] The file /plugins/jquery/jquery.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:14.007 +08:00 [INF] The file /js/adminlte.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:14.009 +08:00 [INF] The file /plugins/bootstrap/js/bootstrap.bundle.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:14.014 +08:00 [INF] The file /js/demo.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:14.014 +08:00 [INF] The file /plugins/summernote/summernote-bs4.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:14.021 +08:00 [INF] The file /plugins/toastr/toastr.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:14.022 +08:00 [INF] The file /plugins/moment/moment.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:14.025 +08:00 [INF] The file /img/codewithmukesh_logo.jpg was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:15.261 +08:00 [INF] The file /plugins/fontawesome-free/webfonts/fa-solid-900.woff2 was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:19.395 +08:00 [INF] The file /lib/easyui/jquery.easyui.component.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:19.401 +08:00 [INF] The file /lib/filesize/filesize.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:19.408 +08:00 [INF] The file /lib/plupload/plupload.full.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:19.408 +08:00 [INF] The file /lib/plupload/jquery.ui.plupload/jquery.ui.plupload.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:19.408 +08:00 [INF] The file /lib/plupload/jquery.plupload.queue/jquery.plupload.queue.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:19.415 +08:00 [INF] The file /lib/fabric/fabric.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:20.209 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:45:21.253 +08:00 [WRN] CleanArchitecture Long Running Request: MigrationTemplateFilesWithPaginationQuery (1013 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:45:21.256 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:28.863 +08:00 [INF] CleanArchitecture Request: UploadMigrationTemplateFilesCommand EURO1\zhuhua null {"FileName":"Mapping of Activity Type (LSTAR).xml","Data":"0D0A3C3F786D6C2076657273696F6E3D... (14000 bytes)","$type":"UploadMigrationTemplateFilesCommand"} 127.0.0.1 null
+2021-11-23 16:45:28.934 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:28.949 +08:00 [INF] CleanArchitecture Request: UploadMigrationTemplateFilesCommand EURO1\zhuhua null {"FileName":"Mapping of Plant.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (11288 bytes)","$type":"UploadMigrationTemplateFilesCommand"} 127.0.0.1 null
+2021-11-23 16:45:28.957 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:28.974 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:45:28.982 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:31.218 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllObjectFieldsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 16:45:31.240 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:36.123 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:36.123 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:36.140 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:36.152 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:36.170 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:36.232 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:36.301 +08:00 [INF] Sending file. Request path: '/css/adminlte.min.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.min.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:54.789 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:45:54.791 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:45:56.590 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllObjectFieldsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 16:45:56.590 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:36.781 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:36.914 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:36.916 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:36.935 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:36.962 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:37.004 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:37.087 +08:00 [INF] Sending file. Request path: '/css/adminlte.min.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.min.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:37.210 +08:00 [INF] CleanArchitecture Request: ObjectFieldsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"ObjectFieldsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:46:37.235 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:53.822 +08:00 [INF] CleanArchitecture Request: ImportObjectFieldsCommand EURO1\zhuhua null {"FileName":"ObjectFields.xlsx","Data":"504B03041400060008000000210062EE... (40026 bytes)","$type":"ImportObjectFieldsCommand"} 127.0.0.1 null
+2021-11-23 16:46:54.854 +08:00 [WRN] CleanArchitecture Long Running Request: ImportObjectFieldsCommand (1029 milliseconds) EURO1\zhuhua null {"FileName":"ObjectFields.xlsx","Data":"504B03041400060008000000210062EE... (40026 bytes)","$type":"ImportObjectFieldsCommand"} 127.0.0.1 null
+2021-11-23 16:46:54.854 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:54.873 +08:00 [INF] CleanArchitecture Request: ObjectFieldsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"ObjectFieldsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:46:54.877 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:56.685 +08:00 [INF] The file /plugins/fontawesome-free/css/all.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:56.701 +08:00 [INF] The file /css/adminlte.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:56.704 +08:00 [INF] The file /plugins/icheck-bootstrap/icheck-bootstrap.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:56.717 +08:00 [INF] The file /plugins/summernote/summernote-bs4.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:56.719 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:56.726 +08:00 [INF] The file /plugins/toastr/toastr.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:56.727 +08:00 [INF] The file /plugins/jquery/jquery.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:56.732 +08:00 [INF] The file /plugins/bootstrap/js/bootstrap.bundle.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:56.735 +08:00 [INF] The file /js/adminlte.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:56.736 +08:00 [INF] The file /js/demo.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:56.740 +08:00 [INF] The file /plugins/summernote/summernote-bs4.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:56.741 +08:00 [INF] The file /plugins/moment/moment.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:56.745 +08:00 [INF] The file /plugins/toastr/toastr.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:56.745 +08:00 [INF] The file /img/codewithmukesh_logo.jpg was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:57.040 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:57.139 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:57.141 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:57.145 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:57.148 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:57.263 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:57.385 +08:00 [INF] Sending file. Request path: '/css/adminlte.min.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.min.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:46:57.414 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:46:57.415 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:47:00.680 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllObjectFieldsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 16:47:00.687 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:47:59.778 +08:00 [INF] The file /lib/easyui/jquery.easyui.component.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:47:59.783 +08:00 [INF] The file /lib/filesize/filesize.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:47:59.788 +08:00 [INF] The file /lib/plupload/plupload.full.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:47:59.795 +08:00 [INF] The file /lib/plupload/jquery.plupload.queue/jquery.plupload.queue.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:47:59.801 +08:00 [INF] The file /lib/plupload/jquery.ui.plupload/jquery.ui.plupload.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:47:59.805 +08:00 [INF] The file /lib/fabric/fabric.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:04.003 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:48:04.023 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:04.132 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:04.149 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:04.215 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:04.220 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:04.265 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:04.279 +08:00 [INF] The file /favicon.ico was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:04.299 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:04.431 +08:00 [INF] Sending file. Request path: '/css/adminlte.min.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.min.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:05.141 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllObjectFieldsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 16:48:05.145 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:28.146 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:28.194 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:28.200 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:28.207 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:28.246 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:28.355 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:28.370 +08:00 [INF] Sending file. Request path: '/css/adminlte.min.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.min.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:28.518 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:48:28.520 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:30.149 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllObjectFieldsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 16:48:30.153 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:50.947 +08:00 [INF] The file /plugins/fontawesome-free/css/all.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:50.954 +08:00 [INF] The file /css/adminlte.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:50.961 +08:00 [INF] The file /plugins/icheck-bootstrap/icheck-bootstrap.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:50.968 +08:00 [INF] The file /plugins/summernote/summernote-bs4.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:50.973 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:50.979 +08:00 [INF] The file /plugins/toastr/toastr.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:50.982 +08:00 [INF] The file /plugins/jquery/jquery.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:50.985 +08:00 [INF] The file /plugins/bootstrap/js/bootstrap.bundle.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:50.988 +08:00 [INF] The file /js/adminlte.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:50.990 +08:00 [INF] The file /js/demo.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:50.997 +08:00 [INF] The file /plugins/summernote/summernote-bs4.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:51.000 +08:00 [INF] The file /plugins/moment/moment.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:51.003 +08:00 [INF] The file /plugins/toastr/toastr.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:51.006 +08:00 [INF] The file /img/codewithmukesh_logo.jpg was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:51.732 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:48:51.733 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:51.749 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:51.765 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:51.786 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:51.795 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:51.795 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:51.801 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:51.819 +08:00 [INF] Sending file. Request path: '/css/adminlte.min.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.min.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:48:53.180 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllObjectFieldsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 16:48:53.184 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:05.718 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:05.780 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:05.786 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:05.794 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:05.847 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:05.980 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:06.148 +08:00 [INF] Sending file. Request path: '/css/adminlte.min.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.min.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:06.302 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:49:06.304 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:07.885 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllObjectFieldsWithKeyQuery"} 127.0.0.1 null
+2021-11-23 16:49:07.890 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:33.628 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:33.635 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:33.649 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:33.661 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:33.677 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:33.767 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:33.779 +08:00 [INF] Sending file. Request path: '/css/adminlte.min.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.min.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:49:33.915 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:49:33.916 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:50:47.740 +08:00 [INF] The file /lib/easyui/jquery.easyui.component.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:50:47.747 +08:00 [INF] The file /lib/filesize/filesize.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:50:47.751 +08:00 [INF] The file /lib/plupload/plupload.full.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:50:47.757 +08:00 [INF] The file /lib/plupload/jquery.plupload.queue/jquery.plupload.queue.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:50:47.761 +08:00 [INF] The file /lib/plupload/jquery.ui.plupload/jquery.ui.plupload.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:50:47.767 +08:00 [INF] The file /lib/fabric/fabric.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:50:48.351 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:50:48.400 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:50:48.417 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:50:48.425 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:50:48.432 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:50:48.554 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:50:48.570 +08:00 [INF] Sending file. Request path: '/css/adminlte.min.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.min.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:50:48.691 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:50:48.693 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:50:48.908 +08:00 [INF] The file /favicon.ico was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:51:24.905 +08:00 [INF] CleanArchitecture Request: ExportMigrationTemplateFilesQuery EURO1\zhuhua null {"FilterRules":"[]","Sort":"Id","Order":"desc","$type":"ExportMigrationTemplateFilesQuery"} 127.0.0.1 null
+2021-11-23 16:51:25.871 +08:00 [WRN] CleanArchitecture Long Running Request: ExportMigrationTemplateFilesQuery (964 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Sort":"Id","Order":"desc","$type":"ExportMigrationTemplateFilesQuery"} 127.0.0.1 null
+2021-11-23 16:51:25.899 +08:00 [INF] Executing FileContentResult, sending file with download name 'MigrationTemplateFiles.xlsx' ... 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:51:42.744 +08:00 [INF] CleanArchitecture Request: ExportMigrationTemplateFilesQuery EURO1\zhuhua null {"FilterRules":"[]","Sort":"Id","Order":"desc","$type":"ExportMigrationTemplateFilesQuery"} 127.0.0.1 null
+2021-11-23 16:51:42.760 +08:00 [INF] Executing FileContentResult, sending file with download name 'MigrationTemplateFiles.xlsx' ... 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:53:28.156 +08:00 [INF] CleanArchitecture Request: ExportMigrationTemplateFilesQuery EURO1\zhuhua null {"FilterRules":"[]","Sort":"Id","Order":"desc","$type":"ExportMigrationTemplateFilesQuery"} 127.0.0.1 null
+2021-11-23 16:53:47.910 +08:00 [WRN] CleanArchitecture Long Running Request: ExportMigrationTemplateFilesQuery (15391 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Sort":"Id","Order":"desc","$type":"ExportMigrationTemplateFilesQuery"} 127.0.0.1 null
+2021-11-23 16:54:07.173 +08:00 [INF] Executing FileContentResult, sending file with download name 'MigrationTemplateFiles.xlsx' ... 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:43.613 +08:00 [INF] The file /plugins/fontawesome-free/css/all.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:43.624 +08:00 [INF] The file /css/adminlte.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:43.632 +08:00 [INF] The file /plugins/icheck-bootstrap/icheck-bootstrap.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:43.636 +08:00 [INF] The file /plugins/summernote/summernote-bs4.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:43.644 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:43.648 +08:00 [INF] The file /plugins/toastr/toastr.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:43.650 +08:00 [INF] The file /plugins/jquery/jquery.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:43.653 +08:00 [INF] The file /plugins/bootstrap/js/bootstrap.bundle.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:43.659 +08:00 [INF] The file /js/adminlte.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:43.662 +08:00 [INF] The file /js/demo.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:43.664 +08:00 [INF] The file /plugins/summernote/summernote-bs4.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:43.667 +08:00 [INF] The file /plugins/moment/moment.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:43.670 +08:00 [INF] The file /plugins/toastr/toastr.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:43.672 +08:00 [INF] The file /lib/easyui/jquery.easyui.component.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:43.675 +08:00 [INF] The file /img/codewithmukesh_logo.jpg was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:44.077 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:44.198 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:44.220 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:44.279 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:44.301 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:44.315 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:44.383 +08:00 [INF] Sending file. Request path: '/css/adminlte.min.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.min.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:44.478 +08:00 [INF] CleanArchitecture Request: ObjectFieldsWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"ObjectFieldsWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:54:44.481 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.ObjectFields.DTOs.ObjectFieldDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:54:46.119 +08:00 [INF] CleanArchitecture Request: ExportObjectFieldsQuery EURO1\zhuhua null {"FilterRules":"[]","Sort":"Id","Order":"desc","$type":"ExportObjectFieldsQuery"} 127.0.0.1 null
+2021-11-23 16:54:46.208 +08:00 [INF] Executing FileContentResult, sending file with download name 'ObjectFields.xlsx' ... 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:55:37.474 +08:00 [INF] The file /lib/filesize/filesize.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:55:37.476 +08:00 [INF] The file /lib/plupload/plupload.full.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:55:37.481 +08:00 [INF] The file /lib/plupload/jquery.ui.plupload/jquery.ui.plupload.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:55:37.482 +08:00 [INF] The file /lib/plupload/jquery.plupload.queue/jquery.plupload.queue.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:55:37.488 +08:00 [INF] The file /lib/fabric/fabric.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:55:37.696 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:55:37.794 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:55:37.816 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:55:37.829 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:55:37.835 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:55:37.942 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:55:37.964 +08:00 [INF] Sending file. Request path: '/css/adminlte.min.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.min.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:55:38.171 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:55:38.172 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:54.852 +08:00 [INF] The file /plugins/fontawesome-free/css/all.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:54.856 +08:00 [INF] The file /css/adminlte.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:54.862 +08:00 [INF] The file /plugins/icheck-bootstrap/icheck-bootstrap.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:54.869 +08:00 [INF] The file /plugins/summernote/summernote-bs4.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:54.873 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:54.876 +08:00 [INF] The file /plugins/toastr/toastr.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:54.879 +08:00 [INF] The file /plugins/jquery/jquery.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:54.882 +08:00 [INF] The file /plugins/bootstrap/js/bootstrap.bundle.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:54.886 +08:00 [INF] The file /js/adminlte.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:54.890 +08:00 [INF] The file /js/demo.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:54.892 +08:00 [INF] The file /plugins/summernote/summernote-bs4.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:54.895 +08:00 [INF] The file /plugins/moment/moment.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:54.901 +08:00 [INF] The file /plugins/toastr/toastr.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:54.905 +08:00 [INF] The file /lib/easyui/jquery.easyui.component.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:54.908 +08:00 [INF] The file /img/codewithmukesh_logo.jpg was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:55.285 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:55.512 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:55.512 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:55.512 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:55.518 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:55.624 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:55.648 +08:00 [INF] Sending file. Request path: '/css/adminlte.min.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.min.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:55.813 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:57:55.816 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:56.052 +08:00 [INF] The file /favicon.ico was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:57:59.371 +08:00 [INF] CleanArchitecture Request: ExportMigrationTemplateFilesQuery EURO1\zhuhua null {"FilterRules":"[]","Sort":"Id","Order":"desc","$type":"ExportMigrationTemplateFilesQuery"} 127.0.0.1 null
+2021-11-23 16:58:01.330 +08:00 [WRN] CleanArchitecture Long Running Request: ExportMigrationTemplateFilesQuery (1957 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Sort":"Id","Order":"desc","$type":"ExportMigrationTemplateFilesQuery"} 127.0.0.1 null
+2021-11-23 16:58:01.330 +08:00 [INF] Executing FileContentResult, sending file with download name 'MigrationTemplateFiles.xlsx' ... 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:59:52.830 +08:00 [INF] The file /AdminLTE.WebUI.styles.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:59:52.852 +08:00 [INF] The file /lib/plupload/plupload.full.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:59:52.858 +08:00 [INF] The file /lib/plupload/jquery.plupload.queue/jquery.plupload.queue.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:59:52.865 +08:00 [INF] The file /lib/plupload/jquery.ui.plupload/jquery.ui.plupload.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:59:52.869 +08:00 [INF] The file /lib/fabric/fabric.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:59:52.869 +08:00 [INF] The file /lib/filesize/filesize.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:59:53.259 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:59:53.408 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:59:53.437 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:59:53.443 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:59:53.447 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:59:53.658 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:59:53.686 +08:00 [INF] Sending file. Request path: '/css/adminlte.min.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.min.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:59:53.837 +08:00 [INF] CleanArchitecture Request: MigrationTemplateFilesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationTemplateFilesWithPaginationQuery"} 127.0.0.1 null
+2021-11-23 16:59:53.839 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MigrationTemplateFiles.DTOs.MigrationTemplateFileDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-23 16:59:54.946 +08:00 [INF] CleanArchitecture Request: ExportMigrationTemplateFilesQuery EURO1\zhuhua null {"FilterRules":"[]","Sort":"Id","Order":"desc","$type":"ExportMigrationTemplateFilesQuery"} 127.0.0.1 null
+2021-11-23 16:59:57.810 +08:00 [WRN] CleanArchitecture Long Running Request: ExportMigrationTemplateFilesQuery (2863 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Sort":"Id","Order":"desc","$type":"ExportMigrationTemplateFilesQuery"} 127.0.0.1 null
+2021-11-23 16:59:57.810 +08:00 [INF] Executing FileContentResult, sending file with download name 'MigrationTemplateFiles.xlsx' ... 127.0.0.1 EURO1\zhuhua

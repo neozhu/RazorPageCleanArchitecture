@@ -178,7 +178,7 @@
                 <div id="plupload_max_size_alert" class="alert alert-primary mb-0  fw-300 fs-sm p-2  d-none" role="alert">
                     <strong>@_localizer["Note"]</strong> @_localizer["The size of the uploaded photo must be less than 5MB."]
                 </div>
-                <input id="fileupload" type="file" name="fileupload" multiple style="display: none" />
+                <input id="fileupload" type="file" ccept=".xml" name="fileupload" multiple style="display: none" />
 
             </div>
             <div class="modal-footer">
@@ -274,19 +274,18 @@
                 },
                 onBeginEdit: function (index, row) {
                     const objectfieldid = row.ObjectFieldId;
-                    const objectfield = $(this).datagrid('getEditor', { index: index, field: 'ObjectFieldId' });
+                    const objectfield = $(this).datagrid('getEditor', { index: index, field: 'ObjectField' });
                     const fielddescription = $(this).datagrid('getEditor', { index: index, field: 'Description' });
                     const legacysystem = $(this).datagrid('getEditor', { index: index, field: 'LegacySystem' });
                     $(objectfield.target).combobox({
                         value: objectfieldid,
                         url:'@Url.Page("/MigrationTemplateFiles/Index")?handler=ObjectFields',
                         method:'GET',
-                        valueField:'Id',
+                        valueField:'Name',
                         textField:'Name',
-                        panelHeight:'auto',
+                        panelMaxHeight:'450',
                         mode:'remote',
                         onSelect: function (item) {
-
                              $(fielddescription.target).textbox('setValue',item.Description);
                              $(legacysystem.target).textbox('setValue',item.LegacySystem);
                         }
@@ -613,6 +612,7 @@
                     responseType: "blob"
                 })
                 .then(response => {
+                    console.log(response)
                     const filename = getFileName(response.headers['content-disposition']);
                     const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
                     const link = document.createElement('a');
@@ -651,6 +651,9 @@
             headers,
             file_data_name:'UploadedFile',
             filters: {
+                mime_types : [ //只允许上传xml
+                  { title : "Xml files", extensions : "xml" }, 
+                ],
                 max_file_size: "15mb"
             },
             browse_button: 'selectuploadfilesbtn', // this can be an id of a DOM element or the DOM element itself
@@ -754,5 +757,20 @@
             uploader.start();
         });
     });
+
+    var getFileName = (disposition) => {
+        const utf8FilenameRegex = /filename\*=UTF-8''([\w%\-\.]+)(?:; ?|$)/;
+        const asciiFilenameRegex = /filename=(["']?)(.*?[^\\])\1(?:; ?|$)/;
+        let fileName = '';
+        if (utf8FilenameRegex.test(disposition)) {
+            fileName = decodeURIComponent(utf8FilenameRegex.exec(disposition)[1]);
+        } else {
+            const matches = asciiFilenameRegex.exec(disposition);
+            if (matches != null && matches[2]) {
+                fileName = matches[2];
+            }
+        }
+        return fileName;
+    }
 </script>
 }
