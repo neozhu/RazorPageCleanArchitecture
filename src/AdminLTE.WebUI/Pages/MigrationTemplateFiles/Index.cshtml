@@ -268,7 +268,7 @@
                 onClickCell: function (index, field) {
                     const row=$dg.datagrid('getRows')[index];
                     currentItem = row;
-                    if(field!='_action'){
+                    if(field!='_action' && field!='FilePath'){
                        onBeginEdit(index, row);
                     }
                 },
@@ -358,6 +358,15 @@
                         sortable: true,
                         width: 180,
                         editor: { type: 'textbox', options: { required: true } }
+                    },
+                     {
+                        field: 'FilePath',
+                        title: '@_localizer["Template File"]',
+                        sortable: true,
+                        width:160,
+                        formatter:function(v,r,i){
+                            return `<button class="btn btn-sm btn-outline-primary " type="button" onclick='onDownload(${i})' >@_localizer["Download"]</button>`
+                        }
                     },
                     {
                         field: 'LegacySystem',
@@ -632,10 +641,18 @@
                         toastr["error"](`@_localizer["Export fail"],${error.response.data}`);
                     }
                 })
-
-
         }
-
+        var onDownload = (index) => {
+            const item = $dg.datagrid('getRows')[index];
+            const url = "/"+item.FilePath;
+            const filename = getFileName(url);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', filename);
+            document.body.appendChild(link);
+            link.click();
+            toastr["info"](`@_localizer["Download Success"]`);
+        }
          document.addEventListener("DOMContentLoaded", function () {
 
         $('#slimscroll').slimScroll({

@@ -5,6 +5,7 @@ public class ObjectField : AuditableEntity, IAuditTrial
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public string ProjectName { get; set; }
     public string Description { get; set; }
     public string MasterDataRelevant { get; set; }
     public string TechMockMasterData { get; set; }

@@ -12,5 +12,6 @@ public class MigrationTemplateFile:AuditableEntity, IAuditTrial
     public string Description { get; set; }
     public string FilePath { get; set; }
     public string LegacySystem { get; set; }
+    public string ProjectName { get; set; }
     public string Comments { get; set; }
 }
