@@ -12,3 +12,67 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small
     line-height: 1.5;
     margin: 2px 0 1.5rem;
 }
+
+/* left */
+.modal-dialog-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0 !important;
+}
+
+    .modal-dialog-left .modal-content {
+        min-height: 100%;
+        border-width: 0;
+        border-radius: 0;
+    }
+
+.modal.fade .modal-dialog-left {
+    -webkit-transform: translate(-25%, 0);
+    transform: translate(-25%, 0);
+}
+
+/* right */
+.modal-dialog-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0 !important;
+    border-width: 0px;
+}
+
+    .modal-dialog-right .modal-content {
+        min-height: 100%;
+        border-width: 0;
+        border-radius: 0;
+    }
+
+.modal.fade .modal-dialog-right {
+    -webkit-transform: translate(25%, 0);
+    transform: translate(25%, 0);
+}
+.modal.show .modal-dialog {
+    -webkit-transform: translate(0,0);
+    transform: translate(0,0);
+}
+
+
+.was-validated .form-control:invalid, .form-control.is-invalid, .form-control.input-validation-error {
+    border-color: #fd3995;
+    padding-right: calc(1.47em + 1rem);
+    background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23fd3995' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23fd3995' stroke='none'/%3e%3c/svg%3e);
+    background-repeat: no-repeat;
+    background-position: right calc(0.3675em + 0.25rem) center;
+    background-size: calc(0.735em + 0.5rem) calc(0.735em + 0.5rem);
+}
+.invalid-feedback.field-validation-error, .invalid-tooltip.field-validation-error {
+    display: block;
+}
+
+.form-control:valid{
+    
+}

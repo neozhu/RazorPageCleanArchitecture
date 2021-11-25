@@ -62,9 +62,9 @@ select.is-invalid ~ .select2-container--bootstrap4 .select2-selection,
 form.was-validated select:invalid ~ .select2-container--bootstrap4 .select2-selection {
   border-color: #dc3545; }
 
-select.is-valid ~ .select2-container--bootstrap4 .select2-selection,
+/*select.is-valid ~ .select2-container--bootstrap4 .select2-selection,
 form.was-validated select:valid ~ .select2-container--bootstrap4 .select2-selection {
-  border-color: #28a745; }
+  border-color: #28a745; }*/
 
 .select2-container--bootstrap4 .select2-search {
   width: 100%; }

@@ -32,8 +32,12 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
     }
     public async Task<Result<int>> Handle(AddEditMappingRuleCommand request, CancellationToken cancellationToken)
     {
-     
-        
+
+        var isexist = await this.IsExist(request.Id, request.LegacyField1, request.LegacyField2, request.LegacyField3, request.NewValueField);
+        if (isexist)
+        {
+            throw new Exception($"Duplicate rule:{request.Name} ");
+        }
 
         if (request.Id > 0)
         {
@@ -44,12 +48,12 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
                 var result = await _uploadService.UploadAsync(request.UploadRequest);
                 item.TemplateFile = result;
             }
-
             await _context.SaveChangesAsync(cancellationToken);
             return Result<int>.Success(item.Id);
         }
         else
         {
+           
             var item = _mapper.Map<MappingRule>(request);
             if (request.UploadRequest != null && request.UploadRequest.Data != null)
             {
@@ -61,6 +65,11 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
             return Result<int>.Success(item.Id);
         }
 
+    }
+
+    private async Task<bool> IsExist(int id,string legacyField1, string legacyField2, string legacyField3, string newValueField)
+    {
+        return await _context.MappingRules.AnyAsync(x =>x.Id!=id && x.LegacyField1 == legacyField1 && x.LegacyField2 == legacyField2 && x.LegacyField3 == legacyField3 && x.NewValueField == newValueField);
     }
 }
 

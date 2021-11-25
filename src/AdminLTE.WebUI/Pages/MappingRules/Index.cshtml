@@ -20,7 +20,7 @@
     <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="~/plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="~/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/select2-bootstrap4-theme/select2-bootstrap4.css">
     <style>
 
         .mappingrule_dg_datagrid-cell-c1-_action {
@@ -203,6 +203,26 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade default-example-modal-left-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-left modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4">Field Mapping Values</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 @await Component.InvokeAsync("ImportExcel", new
 {
     importUri = Url.Page("/MappingRules/Index") + "?handler=Import",
@@ -221,6 +241,8 @@
     <script src="~/plugins/select2/js/select2.full.min.js"></script>
 
     <script type="text/javascript">
+
+        
         $('#searchbutton').click(function () {
             reloadData();
         });
@@ -289,14 +311,16 @@
                         $('#mappingrules_modal').modal('toggle');
                         reloadData();
                 }).catch(error => {
+                    console.log(error.response)
                     if (error.response.data.errors) {
+                        
                         const errors = error.response.data.errors;
                         for (let [key, value] of Object.entries(errors)) {
                             toastr["error"](`${key}: ${value.toString()}`);
                         }
 
                     } else {
-                        toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
+                        toastr["error"](`@_localizer["Save fail"],${error.response.data.title}`);
                     }
                 })
 
@@ -402,6 +426,7 @@
                                      </a>
                                      <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
                                        <button class="dropdown-item" onclick="onEdit(${index})" > @_localizer["Edit"]</button>
+                                       <button class="dropdown-item" onclick="onShowMappingValues(${index})" > @_localizer["Field Mapping Values"]</button>
                                        <button class="dropdown-item" onclick="onDownload(${index})" > @_localizer["Download Template File"]</button>
                                        <button class="dropdown-item" onclick="onDelete('${row.Id}')"  > @_localizer["Delete"]</button>
                                      </div>
@@ -692,6 +717,10 @@
             document.body.appendChild(link);
             link.click();
             toastr["info"](`@_localizer["Download Success"]`);
+        }
+        var onShowMappingValues = (index) => {
+            const item = $dg.datagrid('getRows')[index];
+            $('.default-example-modal-left-lg').modal('toggle')
         }
 
 

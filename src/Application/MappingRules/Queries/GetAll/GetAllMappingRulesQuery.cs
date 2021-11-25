@@ -9,8 +9,13 @@ namespace CleanArchitecture.Razor.Application.MappingRules.Queries.GetAll;
     {
        
     }
-    
-    public class GetAllMappingRulesQueryHandler :
+public class GetAllMappingRulesWithKeyQuery : IRequest<IEnumerable<MappingRuleDto>>
+{
+    public string Key { get; set; }
+}
+
+public class GetAllMappingRulesQueryHandler :
+         IRequestHandler<GetAllMappingRulesWithKeyQuery, IEnumerable<MappingRuleDto>>,
          IRequestHandler<GetAllMappingRulesQuery, IEnumerable<MappingRuleDto>>
     {
         private readonly IApplicationDbContext _context;
@@ -35,6 +40,14 @@ namespace CleanArchitecture.Razor.Application.MappingRules.Queries.GetAll;
                          .ToListAsync(cancellationToken);
             return data;
         }
+    public async Task<IEnumerable<MappingRuleDto>> Handle(GetAllMappingRulesWithKeyQuery request, CancellationToken cancellationToken)
+    {
+        var data = await _context.MappingRules.Where(x=>x.Name.Contains(request.Key))
+                     .OrderBy(x=>x.Name)
+                     .ProjectTo<MappingRuleDto>(_mapper.ConfigurationProvider)
+                     .ToListAsync(cancellationToken);
+        return data;
     }
+}
 
 

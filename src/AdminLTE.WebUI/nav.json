@@ -28,20 +28,11 @@
           "roles": []
         },
         {
-          "title": "Migration Fields Status",
-          "href": "objectfields_index.html",
-          "roles": []
-        },
-        {
-          "title": "Migration Template",
-          "href": "migrationtemplatefiles_index.html",
-          "roles": []
-        },
-        {
-          "title": "Value Mapping",
-          "href": "fieldvaluemappings_index.html",
+          "title": "Field Mapping Values",
+          "href": "fieldmappingvalues_index.html",
           "roles": []
         }
+        
       ]
     },
     {
