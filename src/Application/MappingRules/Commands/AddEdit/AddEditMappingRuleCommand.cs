@@ -32,10 +32,19 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
     }
     public async Task<Result<int>> Handle(AddEditMappingRuleCommand request, CancellationToken cancellationToken)
     {
+     
+        
+
         if (request.Id > 0)
         {
             var item = await _context.MappingRules.FindAsync(new object[] { request.Id }, cancellationToken);
             item = _mapper.Map(request, item);
+            if (request.UploadRequest != null && request.UploadRequest.Data != null)
+            {
+                var result = await _uploadService.UploadAsync(request.UploadRequest);
+                item.TemplateFile = result;
+            }
+
             await _context.SaveChangesAsync(cancellationToken);
             return Result<int>.Success(item.Id);
         }
@@ -45,10 +54,8 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
             if (request.UploadRequest != null && request.UploadRequest.Data != null)
             {
                 var result = await _uploadService.UploadAsync(request.UploadRequest);
-
                 item.TemplateFile = result;
             }
-
             _context.MappingRules.Add(item);
             await _context.SaveChangesAsync(cancellationToken);
             return Result<int>.Success(item.Id);

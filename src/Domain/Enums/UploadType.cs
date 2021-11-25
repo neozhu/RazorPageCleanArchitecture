@@ -12,5 +12,7 @@ public enum UploadType : byte
     [Description(@"ProfilePictures")]
     ProfilePicture,
     [Description(@"Documents")]
-    Document
+    Document,
+    [Description(@"TemplateFiles")]
+    TemplateFile
 }

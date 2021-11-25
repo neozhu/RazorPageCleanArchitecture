@@ -18,6 +18,9 @@
     <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
     <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
     <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="~/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <style>
 
         .mappingrule_dg_datagrid-cell-c1-_action {
@@ -32,36 +35,36 @@
             <small>@_localizer["See all available options"]</small>
         </h4>
         <div class="ml-auto">
-      
-                <button class="btn btn-sm btn-outline-primary " id="addbutton">
-                    <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
-                    @_localizer["New"]
+
+            <button class="btn btn-sm btn-outline-primary " id="addbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
+                @_localizer["New"]
+            </button>
+
+            <button class="btn btn-sm btn-outline-danger" disabled id="deletebutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
+                @_localizer["Delete"]
+            </button>
+            <button class="btn btn-sm btn-outline-primary " id="searchbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
+                @_localizer["Search"]
+            </button>
+            <div class="btn-group" role="group">
+                <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
+                    <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>   @_localizer["Import Excel"]
                 </button>
-            
-                <button class="btn btn-sm btn-outline-danger" disabled id="deletebutton">
-                    <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
-                    @_localizer["Delete"]
+                <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
                 </button>
-                <button class="btn btn-sm btn-outline-primary " id="searchbutton">
-                    <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
-                    @_localizer["Search"]
-                </button>
-                <div class="btn-group" role="group">
-                    <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
-                        <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>   @_localizer["Import Excel"]
-                    </button>
-                    <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="importbutton">
-                        <button id="gettemplatebutton" class="dropdown-item">@_localizer["Download Template"]</button>
-                    </div>
+                <div class="dropdown-menu" aria-labelledby="importbutton">
+                    <button id="gettemplatebutton" class="dropdown-item">@_localizer["Download Template"]</button>
                 </div>
-                <button class="btn btn-sm btn-outline-primary " id="exportbutton">
-                    <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
-                    @_localizer["Export Excel"]
-                </button>
-            
+            </div>
+            <button class="btn btn-sm btn-outline-primary " id="exportbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                @_localizer["Export Excel"]
+            </button>
+
         </div>
     </div>
     <div class="card-body">
@@ -100,7 +103,7 @@
                         </div>
                         <div class="col-md-6 mb-2">
                             <label class="form-label" for="LegacyField1">@_localizer["Legacy Field Name 1"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.LegacyField1" class="form-control" placeholder="Legacy Field Name 1" required="required"/>
+                            <input type="text" asp-for="Input.LegacyField1" class="form-control" placeholder="Legacy Field Name 1" required="required" />
                             <span class="invalid-feedback" asp-validation-for="Input.LegacyField1">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6 mb-2">
@@ -130,7 +133,7 @@
                         </div>
                         <div class="col-md-6 mb-2">
                             <label class="form-label" for="NewValueField">@_localizer["New Field Name"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.NewValueField" class="form-control" placeholder="New Field Name"  required="required"/>
+                            <input type="text" asp-for="Input.NewValueField" class="form-control" placeholder="New Field Name" required="required" />
                             <span class="invalid-feedback" asp-validation-for="Input.NewValueField">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6 mb-2">
@@ -140,10 +143,10 @@
                         </div>
                         <div class="col-md-12">
                             <label class="form-label" for=""></label>
-                            <input type="file" asp-for="TemplateFile" style="display:none" required />
+                            <input type="file" asp-for="TemplateFile" style="display:none" required accept="text/xml" />
                             <div class="">
                                 <button name="uploadtemplatebutton" type="button" class="btn btn-primary btn-icon waves-effect waves-themed mr-2">
-                                    <i class="fal fa-paperclip"></i>
+                                    <i class="fal fa-paperclip"></i> Upload Template File
                                 </button><span class="text-danger">*</span>
                                 <div id="uploadtemplatefilename">
                                     <div class="alert alert-danger mt-2 mb-2" role="alert">
@@ -161,29 +164,36 @@
                         </div>
                         <div class="col-md-6 mb-2">
                             <label class="form-label" for="LegacySystem">@_localizer["Legacy System"] </label>
-                            <input type="text" asp-for="Input.LegacySystem" class="form-control" placeholder="Legacy System" />
-                            <span class="invalid-feedback" asp-validation-for="Input.LegacySystem">Sorry, you missed this one.</span>
-                        </div>
+              
+                                <select type="text" asp-for="Input.LegacySystem" class="select2bs4" multiple="multiple" asp-dictionaries-for="LegacySystem" data-placeholder="Choose Legacy System" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                    <option value="">@_localizer["Choose Legacy System"]</option>
+                                </select>
+                
+                                <span class="invalid-feedback" asp-validation-for="Input.LegacySystem">Sorry, you missed this one.</span>
+                            </div>
                         <div class="col-md-6 mb-2">
-                            <label class="form-label" for="ProjectName">@_localizer["Project Name"] </label>
-                            <input type="text" asp-for="Input.ProjectName" class="form-control" placeholder="Project Name" />
-                            <span class="invalid-feedback" asp-validation-for="Input.ProjectName">Sorry, you missed this one.</span>
+                            <label class="form-label" for="ProjectName">@_localizer["Migration Project Name"] </label>
+  
+                                <select type="text" asp-for="Input.ProjectName" class="select2bs4" multiple="multiple" asp-dictionaries-for="ProjectName" data-placeholder="Choose Project Name" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                    <option value="">@_localizer["Choose Migration Project Name"]</option>
+                                </select>
+                               <span class="invalid-feedback" asp-validation-for="Input.ProjectName">Sorry, you missed this one.</span>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label class="form-label" for="RelevantObjects">@_localizer["Relevant Objects"]  </label>
+                                <select asp-for="Input.RelevantObjects" asp-items="Model.MigrationObjects" class="select2bs4" multiple="multiple" placeholder="Relevant Objects" data-placeholder="Choose Relevant Objects" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                    <option value="">@_localizer["Choose Relevant Objects"]</option>
+                                </select>
+                                <span class="invalid-feedback" asp-validation-for="Input.RelevantObjects">Sorry, you missed this one.</span>
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <label class="form-label" for="Comments">@_localizer["Comments"] </label>
+                                <input type="text" asp-for="Input.Comments" class="form-control" placeholder="Comments" />
+                                <span class="invalid-feedback" asp-validation-for="Input.Comments">Sorry, you missed this one.</span>
+                            </div>
                         </div>
-                        <div class="col-md-6 mb-2">
-                            <label class="form-label" for="RelevantObjects">@_localizer["Relevant Objects"]  </label>
-                            <select type="text" asp-for="Input.RelevantObjects" asp-items="Model.MigrationObjects" class="custom-select" placeholder="Relevant Objects">
-                                <option value="">@_localizer["Choose Relevant Objects"]</option>
-                            </select>
-                            <span class="invalid-feedback" asp-validation-for="Input.RelevantObjects">Sorry, you missed this one.</span>
-                        </div>
-                        
-                        
-                        <div class="col-md-12">
-                            <label class="form-label" for="Comments">@_localizer["Comments"] </label>
-                            <input type="text" asp-for="Input.Comments" class="form-control" placeholder="Comments" />
-                            <span class="invalid-feedback" asp-validation-for="Input.Comments">Sorry, you missed this one.</span>
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
@@ -207,6 +217,8 @@
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
     <script src="~/lib/axios/dist/axios.js"></script>
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+    <!-- Select2 -->
+    <script src="~/plugins/select2/js/select2.full.min.js"></script>
 
     <script type="text/javascript">
         $('#searchbutton').click(function () {
@@ -227,6 +239,32 @@
         $('#gettemplatebutton').click(function () {
             onGetTemplate();
         });
+
+        var vaildatetemplatefile = () => {
+            return new  Promise((resolve, reject) => {
+                var form = document.querySelector('#mappingrule_form');
+                var formData = new FormData(form);
+                formData.set("TemplateFile", uploadtemplatefileinput.files[0]);
+                axios({
+                    url: '@Url.Page("/MappingRules/Index")?handler=VaildateTemplateFile',
+                    method: 'post',
+                    data: formData,
+                    processData: false,// 告诉axios不要去处理发送的数据(重要参数)
+                    contentType: false,   // 告诉axios不要去设置Content-Type请求头
+                }).then((response) => {
+                    if (response.data.Succeeded) {
+                        resolve(response.data.Data)
+                    } else {
+                        reject(response.data.Errors[0])
+                    }
+                }).catch(error => {
+                    reject('throw exception')
+                })
+            });
+
+
+        }
+
         $('#mappingrule_form :submit').click(function (e) {
             var form = document.querySelector('#mappingrule_form');
             if ($(form).valid() === false) {
@@ -235,8 +273,12 @@
                 event.preventDefault();
                 event.stopPropagation();
                 var request = $('#mappingrule_form').serialize();
+                console.log(request)
                 var formData = new FormData(form);
-                formData.append("TemplateFile", uploadtemplatefileinput.files[0]);
+                formData.set("Input.LegacySystem", $('#Input_LegacySystem').select2('val').toString());
+                formData.set("Input.ProjectName", $('#Input_ProjectName').select2('val').toString());
+                formData.set("Input.RelevantObjects", $('#Input_RelevantObjects').select2('val').toString());
+                formData.set("TemplateFile", uploadtemplatefileinput.files[0]);
                 axios({
                     url: '@Url.Page("/MappingRules/Index")',
                     method: 'post',
@@ -271,26 +313,48 @@
             uploadtemplatefileinput.click();
         })
         uploadtemplatefileinput.onchange = () => {
-            fileName = uploadtemplatefileinput.value.split('\\').pop();
-            uploadtemplatefilename.innerHTML = `
-              <div class="alert alert-info alert-dismissible fadeup show mb-2 mt-2" role="alert">
+
+            vaildatetemplatefile().then(res => {
+                const uploadfileName = uploadtemplatefileinput.value.split('\\').pop() + `<b>(${res})</b>`;
+                uploadtemplatefilename.innerHTML = `
+                 <div class="alert alert-info alert-dismissible fadeup show mb-2 mt-2" role="alert">
                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                          <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
                       </button>
                       <div class="d-flex align-items-center">
 							<div class="alert-icon">
-									<i class="@(Settings.Theme.IconPrefix) fa-upload fs-xl mr-2"></i>
+									<i class="@(Settings.Theme.IconPrefix) fa-file-signature fs-xl mr-2"></i>
 							</div>
 							<div class="flex-1">
-	    							${fileName}
+	    							${uploadfileName}
 							</div>
 					</div>
-             </div>`;
-            savebutton.disabled = false;
-            $('#uploadtemplatefilename .alert').on('closed.bs.alert', (e) => {
+                 </div>`;
+               savebutton.disabled = false;
+               $('#uploadtemplatefilename .alert').on('closed.bs.alert', (e) => {
+                 uploadtemplatefileinput.value = null;
+                 savebutton.disabled = true;
+               })
+            }).catch((error) => {
+                uploadtemplatefilename.innerHTML = `
+                  <div class="alert alert-warning alert-dismissible fadeup show mb-2 mt-2" role="alert">
+                         <div class="d-flex align-items-center">
+							<div class="alert-icon">
+									<i class="@(Settings.Theme.IconPrefix) fa-exclamation-triangle fs-xl mr-2"></i>
+							</div>
+							<div class="flex-1">
+	    							${error}
+							</div>
+					</div>
+                </div>
+                `;
                 uploadtemplatefileinput.value = null;
                 savebutton.disabled = true;
-            })
+                toastr["error"](`@_localizer["upload fail"],${error}`);
+            });
+
+
+
         };
         var $dg={};
         var initdatagrid = () => {
@@ -394,7 +458,7 @@
                           if(v){
                               return `<button class="btn btn-sm btn-outline-primary " type="button" onclick='onDownload(${i})' >@_localizer["Download"]</button>`
                           }else{
-                              return `<button class="btn btn-sm btn-outline-info " type="button" onclick='onUpload(${i})' >@_localizer["Upload"]</button>`
+                              return `<button class="btn btn-sm btn-outline-info " type="button" onclick='onEdit(${i})' >@_localizer["Upload"]</button>`
                           }
                       }
                     },
@@ -420,6 +484,10 @@
         }
 
         $(() => {
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
             initdatagrid();
         })
         var popupmodal = (document) => {
@@ -428,38 +496,71 @@
             $('#mappingrule_form').clearForm();
             $('#mappingrule_form')[0].reset();
             if (document) {
-                uploadtemplatebutton.disabled = true;
+                uploadtemplatebutton.disabled = false;
                 uploadtemplatefileinput.required = false;
                 $('#mappingrules_modal .modal-title').html('@_localizer["Edit Mapping Rule"]');
-                uploadtemplatefilename.innerHTML = `
-                  <div class="alert alert-info alert-dismissible fadeup show mb-2 mt-2" role="alert">
-                         <div class="d-flex align-items-center">
-							<div class="alert-icon">
-									<i class="@(Settings.Theme.IconPrefix) fa-upload fs-xl mr-2"></i>
-							</div>
-							<div class="flex-1">
-	    							${document.TemplateFile}
-							</div>
-					</div>
-                </div>
-                `
+
                 $('#mappingrule_form').jsonToForm(document, {
                     IsMock: function (value) {
                         if (value == true) {
-                            $('#mappingrule_form [name*="_IsMock"]').prop('checked', true);
+                            $('#Input_IsMock').prop('checked', true);
                         } else {
-                            $('#mappingrule_form [name*="_IsMock"]').prop('checked', false);
+                            $('#Input_IsMock').prop('checked', false);
+                        }
+                    },
+                    TemplateFile: function (value) {
+                        if (value) {
+                            uploadtemplatefilename.innerHTML = `
+                            <div class="alert alert-info alert-dismissible fadeup show mb-2 mt-2" role="alert">
+                              <div class="d-flex align-items-center">
+							    <div class="alert-icon">
+									<i class="@(Settings.Theme.IconPrefix) fa-upload fs-xl mr-2"></i>
+							    </div>
+							    <div class="flex-1">
+	    							${document.TemplateFile}
+							    </div>
+					          </div>
+                            </div>
+                            `
+                        } else {
+                            savebutton.disabled = true;
+                            uploadtemplatefilename.innerHTML = ` <div class="alert alert-danger mt-2 mb-2" role="alert">
+                                        <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a migration template file"].
+                                    </div>`;
+                        }
+                    },
+                    LegacySystem: function (value) {
+                        if (value) {
+                            $('#Input_LegacySystem').val(value.split(',')).change();
+                        } else {
+                            $('#Input_LegacySystem').val(null).change();
+                        }
+                    },
+                    ProjectName: function (value) {
+                        if (value) {
+                            $('#Input_ProjectName').val(value.split(',')).change();
+                        } else {
+                            $('#Input_ProjectName').val(null).change();
+                        }
+                    },
+                    RelevantObjects: function (value) {
+                        if (value) {
+                            $('#Input_RelevantObjects').val(value.split(',')).change();
+                        } else {
+                            $('#Input_RelevantObjects').val(null).change();
                         }
                     }
+
                 })
             } else {
+                savebutton.disabled = true;
                 uploadtemplatebutton.disabled = false;
                 uploadtemplatefileinput.required = true;
                 $('#mappingrule_form #Input_Id').val(0);
                 $('#mappingrule_form #Input_TemplateFile').val('');
                 $('#mappingrule_form #Input_Status').val('Not Started');
                 uploadtemplatefilename.innerHTML =`<div class="alert alert-danger mt-2 mb-2" role="alert">
-                                        <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a file"].
+                                        <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a migration template file"].
                              </div>`
             }
         }
@@ -584,8 +685,8 @@
         }
         var onDownload = (index) => {
             const item = $dg.datagrid('getRows')[index];
-            const url = item.URL;
-            const filename = getFileName(item.URL);
+            const url = item.TemplateFile;
+            const filename = getFileName(item.TemplateFile);
             const link = document.createElement('a');
             link.href = url;
             link.setAttribute('download', filename);

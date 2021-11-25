@@ -12,6 +12,8 @@ using CleanArchitecture.Razor.Application.Common.Models;
 using CleanArchitecture.Razor.Application.MappingRules.Queries.Pagination;
 using CleanArchitecture.Razor.Application.MigrationObjects.Queries.GetAll;
 using CleanArchitecture.Razor.Application.MappingRules.Commands.Import;
+using CleanArchitecture.Razor.Domain.Enums;
+using System.Xml.Linq;
 
 namespace AdminLTE.WebUI.Pages.MappingRules
 {
@@ -56,7 +58,7 @@ namespace AdminLTE.WebUI.Pages.MappingRules
             {
                 Input.UploadRequest = new  UploadRequest();
                 Input.UploadRequest.FileName = TemplateFile.FileName;
-                Input.UploadRequest.UploadType = CleanArchitecture.Razor.Domain.Enums.UploadType.Document;
+                Input.UploadRequest.UploadType = UploadType.TemplateFile;
                 var stream = new MemoryStream();
                 TemplateFile.CopyTo(stream);
                 Input.UploadRequest.Data = stream.ToArray();
@@ -100,6 +102,34 @@ namespace AdminLTE.WebUI.Pages.MappingRules
             };
             var result = await _mediator.Send(command);
             return new JsonResult(result);
+        }
+
+        public async Task<IActionResult> OnPostVaildateTemplateFile() {
+
+            var stream = new MemoryStream();
+            TemplateFile.CopyTo(stream);
+            stream.Position = 0;
+            try
+            {
+                var description = "";
+                var xdoc = XDocument.Load(stream);
+                var signature = xdoc.Descendants().Where(x => x.Name.LocalName == "Worksheet" && x.FirstAttribute.Value == "Signature").First();
+                var data = xdoc.Descendants().Where(x => x.Name.LocalName == "Worksheet" && x.FirstAttribute.Value == "Data").First();
+                var table = data.Descendants().Where(x => x.Name.LocalName == "Table");
+                foreach (var row in table.Descendants().Where(x => x.Name.LocalName == "Row").ToList())
+                {
+                    description = row.Descendants().Where(x => x.Name.LocalName == "Data").First().Value;
+                    if (description != "")
+                    {
+                        break;
+                    }
+                }
+                return new JsonResult(Result<string>.Success(description));
+            }catch (Exception ex)
+            {
+                return new JsonResult(Result.Failure(new string[] { "The uploaded template file is not valid" }));
+            }
+            
         }
 
     }

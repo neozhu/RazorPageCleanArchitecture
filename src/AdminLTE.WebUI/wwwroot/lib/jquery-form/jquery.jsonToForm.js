@@ -8,13 +8,12 @@ $.fn.jsonToForm = function (data, callbacks) {
 
     if (options.data != null) {
         $.each(options.data, function (k, v) {
-            var elements = $('[name$="' + k + '"]', formInstance);
 
+            var elements = $('[name$="' + k + '"]', formInstance).not(':input[type="file"]');
             if (options.callbacks != null && options.callbacks.hasOwnProperty(k)) {
                 options.callbacks[k](v);
                 return;
             }
-
             $(elements).each(function (index, element) {
                 if (Array.isArray(v)) {
                     v.forEach(function (val) {
@@ -30,7 +29,8 @@ $.fn.jsonToForm = function (data, callbacks) {
                     // checkbox group or radio group
                     $(element).val() == v ? $(element).prop("checked", true) : "";
                 } else {
-                    $('[name$="' + k + '"]', formInstance).val(v);
+                   $('[name$="' + k + '"]', formInstance).not(':input[type="file"]').val(v);
+       
                 }
             });
         });

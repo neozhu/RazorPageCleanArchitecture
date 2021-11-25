@@ -235,7 +235,7 @@
         var onAddRow = () => {
             if (onEndEditing()) {
                 $dg.datagrid('insertRow', { index: 0,
-                    row:{ Name: currentItem.Name, Description: currentItem.Description }
+                    row:{ Name: '', Description: '' }
                     });
                 editIndex =0 ;
                 $dg.datagrid('selectRow', editIndex)
