@@ -66,7 +66,7 @@ public class ImportFieldMappingValuesCommandHandler :
                 {
                     Check = item.Check,
                     Comments = item.Comments,
-                    MappingRuleId = item.MappingRuleId,
+                    MappingRuleId = -1,
                     MappingRule = item.MappingRule,
                     Mock = item.Mock,
                     Legacy1 = item.Legacy1,
