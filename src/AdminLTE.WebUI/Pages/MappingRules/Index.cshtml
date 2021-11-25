@@ -273,7 +273,6 @@
                 event.preventDefault();
                 event.stopPropagation();
                 var request = $('#mappingrule_form').serialize();
-                console.log(request)
                 var formData = new FormData(form);
                 formData.set("Input.LegacySystem", $('#Input_LegacySystem').select2('val').toString());
                 formData.set("Input.ProjectName", $('#Input_ProjectName').select2('val').toString());
