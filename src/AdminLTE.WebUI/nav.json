@@ -23,6 +23,11 @@
           "roles": []
         },
         {
+          "title": "Mapping Rules",
+          "href": "mappingrules_index.html",
+          "roles": []
+        },
+        {
           "title": "Migration Fields Status",
           "href": "objectfields_index.html",
           "roles": []

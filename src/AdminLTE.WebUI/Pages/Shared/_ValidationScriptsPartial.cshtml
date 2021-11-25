@@ -1,2 +1,38 @@
-﻿<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    (function ($) {
+        $.fn.clearForm = function (options) {
+            // This is the easiest way to have default options.
+            var settings = $.extend({
+                // These are the defaults.
+                formId: this.closest('form')
+
+            }, options);
+            var $form = $(settings.formId);
+            //reset jQuery Validate's internals
+            $form.validate().resetForm();
+            $form.removeClass("was-validated");
+            //reset unobtrusive validation summary, if it exists
+            $form.find("[data-valmsg-summary=true]")
+                .removeClass("validation-summary-errors")
+                .addClass("validation-summary-valid")
+                .find("ul").empty();
+            //reset unobtrusive field level, if it exists
+            $form.find("[data-valmsg-replace]")
+                .removeClass("field-validation-error")
+                
+            $form.find("[data-valmsg-replace]")
+                .removeClass("field-validation-valid")
+
+            $form.find("[data-val]")
+                .removeClass("input-validation-error")
+
+            $form.find("[data-val]")
+                .removeClass("valid")
+            return $form;
+        };
+
+    }(jQuery));
+</script>

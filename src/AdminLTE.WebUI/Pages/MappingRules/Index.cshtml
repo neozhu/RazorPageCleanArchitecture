@@ -1,0 +1,600 @@
+@page
+@using CleanArchitecture.Razor.Domain.Enums
+@using Microsoft.AspNetCore.Mvc.Localization
+@using CleanArchitecture.Razor.Application.Constants.Permission
+@model AdminLTE.WebUI.Pages.MappingRules.IndexModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
+@inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
+@{
+    ViewData["Title"] = _localizer["Mapping Rules"].Value;
+    ViewData["PageName"] = "mappingrules_index";
+    ViewData["Category1"] = _localizer["Migration Objects"].Value;
+    ViewData["Heading"] = _localizer["Mapping Rules"].Value;
+    ViewData["PageDescription"] = _localizer["See all available options"].Value;
+    ViewData["PreemptiveClass"] = "Default";
+}
+@section HeadBlock {
+
+    <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+    <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+    <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+    <style>
+
+        .mappingrule_dg_datagrid-cell-c1-_action {
+            overflow: visible !important
+        }
+    </style>
+}
+<div id="js-page-content-demopanels" class="card mb-g">
+    <div class="card-header bg-white d-flex align-items-center">
+        <h4 class="m-0">
+            @_localizer["Mapping Rules"]
+            <small>@_localizer["See all available options"]</small>
+        </h4>
+        <div class="ml-auto">
+      
+                <button class="btn btn-sm btn-outline-primary " id="addbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
+                    @_localizer["New"]
+                </button>
+            
+                <button class="btn btn-sm btn-outline-danger" disabled id="deletebutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
+                    @_localizer["Delete"]
+                </button>
+                <button class="btn btn-sm btn-outline-primary " id="searchbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
+                    @_localizer["Search"]
+                </button>
+                <div class="btn-group" role="group">
+                    <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
+                        <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>   @_localizer["Import Excel"]
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="importbutton">
+                        <button id="gettemplatebutton" class="dropdown-item">@_localizer["Download Template"]</button>
+                    </div>
+                </div>
+                <button class="btn btn-sm btn-outline-primary " id="exportbutton">
+                    <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                    @_localizer["Export Excel"]
+                </button>
+            
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table id="mappingrule_dg">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="mappingrules_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                </button>
+            </div>
+            <form id="mappingrule_form" class="needs-validation" novalidate="novalidate">
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="Input.Id" />
+                    <input type="hidden" asp-for="Input.TemplateFile" />
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <label class="form-label" for="Name">@_localizer["Mapping Rule Name"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.Name" class="form-control" placeholder="Name" required="required" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Name">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="Status">@_localizer["Status"] </label>
+                            <input type="text" asp-for="Input.Status" class="form-control" placeholder="Status" readonly="readonly" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Status">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="LegacyField1">@_localizer["Legacy Field Name 1"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.LegacyField1" class="form-control" placeholder="Legacy Field Name 1" required="required"/>
+                            <span class="invalid-feedback" asp-validation-for="Input.LegacyField1">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="LegacyDescription1">@_localizer["Legacy Field Description 1"] </label>
+                            <input type="text" asp-for="Input.LegacyDescription1" class="form-control" placeholder="Legacy Field Description 1" />
+                            <span class="invalid-feedback" asp-validation-for="Input.LegacyDescription1">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="LegacyField2">@_localizer["Legacy Field Name 2"] </label>
+                            <input type="text" asp-for="Input.LegacyField2" class="form-control" placeholder="Legacy Field Name 2" />
+                            <span class="invalid-feedback" asp-validation-for="Input.LegacyField2">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="LegacyDescription2">@_localizer["Legacy Field Description 2"] </label>
+                            <input type="text" asp-for="Input.LegacyDescription2" class="form-control" placeholder="Legacy Field Description 2" />
+                            <span class="invalid-feedback" asp-validation-for="Input.LegacyDescription2">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="LegacyField3">@_localizer["Legacy Field Name 3"]  </label>
+                            <input type="text" asp-for="Input.LegacyField3" class="form-control" placeholder="Legacy Field Name 3" />
+                            <span class="invalid-feedback" asp-validation-for="Input.LegacyField3">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="LegacyDescription3">@_localizer["Legacy Field Description 3"] </label>
+                            <input type="text" asp-for="Input.LegacyDescription3" class="form-control" placeholder="Legacy Field Description 3" />
+                            <span class="invalid-feedback" asp-validation-for="Input.LegacyDescription3">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="NewValueField">@_localizer["New Field Name"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.NewValueField" class="form-control" placeholder="New Field Name"  required="required"/>
+                            <span class="invalid-feedback" asp-validation-for="Input.NewValueField">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="NewFieldName">@_localizer["New Field Description"] </label>
+                            <input type="text" asp-for="Input.NewValueFieldDescription" class="form-control" placeholder="New Field Description" />
+                            <span class="invalid-feedback" asp-validation-for="Input.NewValueFieldDescription">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label" for=""></label>
+                            <input type="file" asp-for="TemplateFile" style="display:none" required />
+                            <div class="">
+                                <button name="uploadtemplatebutton" type="button" class="btn btn-primary btn-icon waves-effect waves-themed mr-2">
+                                    <i class="fal fa-paperclip"></i>
+                                </button><span class="text-danger">*</span>
+                                <div id="uploadtemplatefilename">
+                                    <div class="alert alert-danger mt-2 mb-2" role="alert">
+                                        <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a migration template file"].
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="IsMock"> </label>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" asp-for="Input.IsMock" class="custom-control-input" value="true">
+                                <label class="custom-control-label" for="Input_IsMock">@_localizer["Is Mock"]</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="LegacySystem">@_localizer["Legacy System"] </label>
+                            <input type="text" asp-for="Input.LegacySystem" class="form-control" placeholder="Legacy System" />
+                            <span class="invalid-feedback" asp-validation-for="Input.LegacySystem">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="ProjectName">@_localizer["Project Name"] </label>
+                            <input type="text" asp-for="Input.ProjectName" class="form-control" placeholder="Project Name" />
+                            <span class="invalid-feedback" asp-validation-for="Input.ProjectName">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="RelevantObjects">@_localizer["Relevant Objects"]  </label>
+                            <select type="text" asp-for="Input.RelevantObjects" asp-items="Model.MigrationObjects" class="custom-select" placeholder="Relevant Objects">
+                                <option value="">@_localizer["Choose Relevant Objects"]</option>
+                            </select>
+                            <span class="invalid-feedback" asp-validation-for="Input.RelevantObjects">Sorry, you missed this one.</span>
+                        </div>
+                        
+                        
+                        <div class="col-md-12">
+                            <label class="form-label" for="Comments">@_localizer["Comments"] </label>
+                            <input type="text" asp-for="Input.Comments" class="form-control" placeholder="Comments" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Comments">Sorry, you missed this one.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
+                    <button type="submit" name="savebutton" class="btn btn-primary">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@await Component.InvokeAsync("ImportExcel", new
+{
+    importUri = Url.Page("/MappingRules/Index") + "?handler=Import",
+    getTemplateUri = @Url.Page("/MappingRules/Index") + "?handler=CreateTemplate",
+    onImportedSucceeded = "reloadData()"
+})
+@section ScriptsBlock {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
+    <script src="~/lib/axios/dist/axios.js"></script>
+    <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+
+    <script type="text/javascript">
+        $('#searchbutton').click(function () {
+            reloadData();
+        });
+        $('#addbutton').click(function () {
+            popupmodal(null);
+        });
+        $('#deletebutton').click(function () {
+            onDeleteChecked();
+        });
+        $('#exportbutton').click(function () {
+            onExport();
+        });
+        $('#importbutton').click(function () {
+            showImportModal();
+        });
+        $('#gettemplatebutton').click(function () {
+            onGetTemplate();
+        });
+        $('#mappingrule_form :submit').click(function (e) {
+            var form = document.querySelector('#mappingrule_form');
+            if ($(form).valid() === false) {
+                form.classList.add('was-validated');
+            } else {
+                event.preventDefault();
+                event.stopPropagation();
+                var request = $('#mappingrule_form').serialize();
+                var formData = new FormData(form);
+                formData.append("TemplateFile", uploadtemplatefileinput.files[0]);
+                axios({
+                    url: '@Url.Page("/MappingRules/Index")',
+                    method: 'post',
+                    data: formData,
+                    processData: false,// 告诉axios不要去处理发送的数据(重要参数)
+                    contentType: false,   // 告诉axios不要去设置Content-Type请求头
+                }).then((response) => {
+                        toastr["info"]('@_localizer["Save Success"]');
+                        $('#mappingrules_modal').modal('toggle');
+                        reloadData();
+                }).catch(error => {
+                    if (error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        for (let [key, value] of Object.entries(errors)) {
+                            toastr["error"](`${key}: ${value.toString()}`);
+                        }
+
+                    } else {
+                        toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
+                    }
+                })
+
+            }
+            event.preventDefault();
+            event.stopPropagation();
+        })
+        var uploadtemplatefilename = document.querySelector("#uploadtemplatefilename");
+        var uploadtemplatebutton = document.querySelector("button[name='uploadtemplatebutton']");
+        var uploadtemplatefileinput = document.getElementById("TemplateFile");
+        var savebutton = document.querySelector("button[name='savebutton']");
+        uploadtemplatebutton.addEventListener('click', (e) => {
+            uploadtemplatefileinput.click();
+        })
+        uploadtemplatefileinput.onchange = () => {
+            fileName = uploadtemplatefileinput.value.split('\\').pop();
+            uploadtemplatefilename.innerHTML = `
+              <div class="alert alert-info alert-dismissible fadeup show mb-2 mt-2" role="alert">
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
+                      </button>
+                      <div class="d-flex align-items-center">
+							<div class="alert-icon">
+									<i class="@(Settings.Theme.IconPrefix) fa-upload fs-xl mr-2"></i>
+							</div>
+							<div class="flex-1">
+	    							${fileName}
+							</div>
+					</div>
+             </div>`;
+            savebutton.disabled = false;
+            $('#uploadtemplatefilename .alert').on('closed.bs.alert', (e) => {
+                uploadtemplatefileinput.value = null;
+                savebutton.disabled = true;
+            })
+        };
+        var $dg={};
+        var initdatagrid = () => {
+            $dg = $('#mappingrule_dg').datagrid({
+                height: 700,
+                method: 'GET',
+                rownumbers: false,
+                singleSelect: true,
+                selectOnCheck: false,
+                checkOnSelect: false,
+                pagination: true,
+                clientPaging: false,
+                remoteFilter: true,
+                sortName: 'Id',
+                sortOrder:'desc',
+                pageSize: 15,
+                pageList: [10, 15, 30, 50, 100, 1000],
+                onBeforeLoad: function () {
+                    $('#deletebutton').prop('disabled', true);
+                },
+                onCheckAll: function (rows) {
+                    const checked = $(this).datagrid('getChecked').length > 0;
+                    $('#deletebutton').prop('disabled', !checked);
+                },
+                onUncheckAll: function () {
+                    $('#deletebutton').prop('disabled', true);
+                },
+                onCheck: function () {
+                    $('#deletebutton').prop('disabled', false);
+                },
+                onUncheck: function () {
+                    const checked = $(this).datagrid('getChecked').length > 0;
+                    $('#deletebutton').prop('disabled', !checked);
+                },
+                columns: [[
+                    { field: 'ck', checkbox: true },
+                    {
+                        field: '_action',
+                        title: '@_localizer["Command"]',
+                        width: 100,
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            return `<div class="btn-group" role="group">
+                                      <a id="commandbtngroup" type="button"  class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
+                                     </a>
+                                     <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
+                                       <button class="dropdown-item" onclick="onEdit(${index})" > @_localizer["Edit"]</button>
+                                       <button class="dropdown-item" onclick="onDownload(${index})" > @_localizer["Download Template File"]</button>
+                                       <button class="dropdown-item" onclick="onDelete('${row.Id}')"  > @_localizer["Delete"]</button>
+                                     </div>
+                                  </div>`;
+                        }
+                    },
+                    { field: 'Name', title: '@_localizer["Mapping Rule Name"]', sortable: true, width: 200 },
+                    { field: 'Status',
+                        title: '@_localizer["Status"]',
+                        sortable: true,
+                        width: 150,
+                        formatter:function(value){
+                            return value;
+                        }
+                    },
+                    { field: 'LegacyField1',
+                      title: '@_localizer["Legacy Field Name 1"]',
+                      sortable: true,
+                      width: 220,
+                      formatter:function(value,row,index){
+                          return `<a> ${value??''} </a> <br> <small>${row.LegacyDescription1??''}</small>`;
+                      }
+                    },
+                    { field: 'LegacyField2',
+                      title: '@_localizer["Legacy Field Name 2"]',
+                      sortable: true,
+                      width: 220,
+                      formatter:function(value,row,index){
+                          return `<a> ${value??''} </a> <br> <small>${row.LegacyDescription2??''}</small>`;
+                      }
+                    },
+                    { field: 'LegacyField3',
+                      title: '@_localizer["Legacy Field Name 3"]',
+                      sortable: true,
+                      width: 220,
+                      formatter:function(value,row,index){
+                          return `<a> ${value??''} </a> <br> <small>${row.LegacyDescription3??''}</small>`;
+                      }
+                    },
+                    { field: 'NewValueField',
+                      title: '@_localizer["New Value Field"]',
+                      sortable: true,
+                      width: 220,
+                      formatter:function(value,row,index){
+                          return `<a> ${value??''} </a> <br> <small>${row.NewValueFieldDescription??''}</small>`;
+                      }
+                    },
+                    { field: 'TemplateFile',
+                      title: '@_localizer["Template File"]',
+                      sortable: true,
+                      width: 120,
+                      formatter:function(v,r,i){
+                          if(v){
+                              return `<button class="btn btn-sm btn-outline-primary " type="button" onclick='onDownload(${i})' >@_localizer["Download"]</button>`
+                          }else{
+                              return `<button class="btn btn-sm btn-outline-info " type="button" onclick='onUpload(${i})' >@_localizer["Upload"]</button>`
+                          }
+                      }
+                    },
+                    { field: 'IsMock', title: '@_localizer["Is Mock"]', sortable: true, width: 120 },
+                    { field: 'Team', title: '@_localizer["Team"]', sortable: true, width: 160 },
+                    { field: 'LegacySystem', title: '@_localizer["Legacy System"]', sortable: true, width: 220 },
+                    { field: 'ProjectName', title: '@_localizer["Project Name"]', sortable: true, width: 220 },
+                    { field: 'RelevantObjects', title: '@_localizer["Relevant Objects"]', sortable: true, width: 220 },
+                    { field: 'Comments', title: '@_localizer["Comments"]', sortable: true, width: 200 },
+
+                    { field: 'CreatedBy', title: '@_localizer["Created By"]', sortable: true, width: 160 },
+                    { field: 'LastModifiedBy', title: '@_localizer["Last Modified By"]',  sortable: true, width: 160 },
+
+                ]]
+            })
+                .datagrid('enableFilter', {})
+                .datagrid('load', '@Url.Page("/MappingRules/Index")?handler=Data');
+
+        }
+
+        var reloadData = () => {
+            $dg.datagrid('load', '@Url.Page("/MappingRules/Index")?handler=Data');
+        }
+
+        $(() => {
+            initdatagrid();
+        })
+        var popupmodal = (document) => {
+            $('#mappingrules_modal').modal('toggle');
+            $('#mappingrules_modal .modal-title').html('@_localizer["New Mapping Rule"]');
+            $('#mappingrule_form').clearForm();
+            $('#mappingrule_form')[0].reset();
+            if (document) {
+                uploadtemplatebutton.disabled = true;
+                uploadtemplatefileinput.required = false;
+                $('#mappingrules_modal .modal-title').html('@_localizer["Edit Mapping Rule"]');
+                uploadtemplatefilename.innerHTML = `
+                  <div class="alert alert-info alert-dismissible fadeup show mb-2 mt-2" role="alert">
+                         <div class="d-flex align-items-center">
+							<div class="alert-icon">
+									<i class="@(Settings.Theme.IconPrefix) fa-upload fs-xl mr-2"></i>
+							</div>
+							<div class="flex-1">
+	    							${document.TemplateFile}
+							</div>
+					</div>
+                </div>
+                `
+                $('#mappingrule_form').jsonToForm(document, {
+                    IsMock: function (value) {
+                        if (value == true) {
+                            $('#mappingrule_form [name*="_IsMock"]').prop('checked', true);
+                        } else {
+                            $('#mappingrule_form [name*="_IsMock"]').prop('checked', false);
+                        }
+                    }
+                })
+            } else {
+                uploadtemplatebutton.disabled = false;
+                uploadtemplatefileinput.required = true;
+                $('#mappingrule_form #Input_Id').val(0);
+                $('#mappingrule_form #Input_TemplateFile').val('');
+                $('#mappingrule_form #Input_Status').val('Not Started');
+                uploadtemplatefilename.innerHTML =`<div class="alert alert-danger mt-2 mb-2" role="alert">
+                                        <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a file"].
+                             </div>`
+            }
+        }
+
+        var onEdit = (index) => {
+            var document = $dg.datagrid('getRows')[index];
+            popupmodal(document);
+        }
+        var onDelete = (id) => {
+            bootbox.confirm({
+                message: "@_localizer["Are you sure delete a row?"]",
+                buttons: {
+                    confirm: {
+                        label: '@_localizer["Yes"]',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: '@_localizer["No"]',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        axios.get('@Url.Page("/MappingRules/Index")?handler=Delete&id=' + id).then(res => {
+                            toastr["info"]('@_localizer["Delete Success"]');
+                            reloadData();
+                        })
+                            .catch((error) => {
+                                if (error.response.data.errors) {
+                                    const errors = error.response.data.errors;
+                                    for (let [key, value] of Object.entries(errors)) {
+                                        toastr["error"](`${key}: ${value.toString()}`);
+                                    }
+
+                                } else {
+                                    toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                }
+                            });
+                    }
+                }
+            })
+        }
+        var onDeleteChecked = () => {
+            var checkedId = $dg.datagrid('getChecked').map(x => x.Id);
+            if (checkedId.length > 0) {
+                bootbox.confirm({
+                    message: "@_localizer["Are you sure delete checked rows?"]",
+                    buttons: {
+                        confirm: {
+                            label: '@_localizer["Yes"]',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: '@_localizer["No"]',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
+                            console.log(paras.toString())
+                            axios.get('@Url.Page("/MappingRules/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
+                                toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
+                                reloadData();
+                            })
+                                .catch((error) => {
+                                    if (error.response.data.errors) {
+                                        const errors = error.response.data.errors;
+                                        for (let [key, value] of Object.entries(errors)) {
+                                            toastr["error"](`${key}: ${value.toString()}`);
+                                        }
+
+                                    } else {
+                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                    }
+                                });
+                        }
+                    }
+                });
+
+            }
+        }
+        var onExport = () => {
+            var options = $dg.datagrid('options');
+            var data = {
+                filterRules: JSON.stringify(options.filterRules),
+                sort: options.sortName,
+                order: options.sortOrder,
+            }
+            console.log(options, data)
+            var headers = {
+                "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+            }
+            axios.post('@Url.Page("/MappingRules/Index")?handler=Export',
+                data,
+                {
+                    headers: headers,
+                    responseType: "blob"
+                })
+                .then(response => {
+                    const filename = getFileName(response.headers['content-disposition']);
+                    const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', filename);
+                    document.body.appendChild(link);
+                    link.click();
+                    toastr["info"](`@_localizer["Export Success"]`);
+                }).catch(error => {
+                    if (error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        for (let [key, value] of Object.entries(errors)) {
+                            toastr["error"](`${key}: ${value.toString()}`);
+                        }
+
+                    } else {
+                        toastr["error"](`@_localizer["Export fail"],${error.response.data}`);
+                    }
+                })
+
+
+        }
+        var onDownload = (index) => {
+            const item = $dg.datagrid('getRows')[index];
+            const url = item.URL;
+            const filename = getFileName(item.URL);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', filename);
+            document.body.appendChild(link);
+            link.click();
+            toastr["info"](`@_localizer["Download Success"]`);
+        }
+
+
+
+    </script>
+}

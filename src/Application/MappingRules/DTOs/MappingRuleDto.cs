@@ -1,8 +1,11 @@
-namespace CleanArchitecture.Razor.Domain.Entities;
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
-#nullable disable
-public class MappingRule:AuditableEntity, IAuditTrial
-{
+namespace CleanArchitecture.Razor.Application.MappingRules.DTOs;
+
+
+    public class MappingRuleDto:IMapFrom<MappingRule>
+    {
     public int Id { get; set; }
     public string Name { get; set; }
     public string Status { get; set; }
@@ -23,6 +26,12 @@ public class MappingRule:AuditableEntity, IAuditTrial
     public string Team { get; set; }
     public string Comments { get; set; }
     public string TemplateFile { get; set; }
+    public TrackingState TrackingState { get; set; }
 
-    public virtual ICollection<FieldMappingValue> FieldMappingValues { get; set; } = new HashSet<FieldMappingValue>();
+    public DateTime Created { get; set; }
+    public string CreatedBy { get; set; }
+    public DateTime? LastModified { get; set; }
+    public string LastModifiedBy { get; set; }
+
 }
+
