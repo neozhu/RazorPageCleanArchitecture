@@ -55,10 +55,10 @@ namespace AdminLTE.WebUI.Pages.MappingRules
             if (TemplateFile != null)
             {
                 Input.UploadRequest = new  UploadRequest();
-                Input.UploadRequest.FileName = UploadedFile.FileName;
+                Input.UploadRequest.FileName = TemplateFile.FileName;
                 Input.UploadRequest.UploadType = CleanArchitecture.Razor.Domain.Enums.UploadType.Document;
                 var stream = new MemoryStream();
-                UploadedFile.CopyTo(stream);
+                TemplateFile.CopyTo(stream);
                 Input.UploadRequest.Data = stream.ToArray();
             }
             var result = await _mediator.Send(Input);
