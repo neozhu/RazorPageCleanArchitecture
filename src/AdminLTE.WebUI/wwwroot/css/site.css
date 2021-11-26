@@ -59,8 +59,6 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small
     -webkit-transform: translate(0,0);
     transform: translate(0,0);
 }
-
-
 .was-validated .form-control:invalid, .form-control.is-invalid, .form-control.input-validation-error {
     border-color: #fd3995;
     padding-right: calc(1.47em + 1rem);

@@ -45,21 +45,15 @@ namespace CleanArchitecture.Razor.Application.ObjectFields.Queries.Export;
             var result = await _excelService.ExportAsync(data,
                 new Dictionary<string, Func<ObjectFieldDto, object>>()
                 {
-                    { _localizer["Field"], item => item.Name },
+                    { _localizer["Field Name"], item => item.Name },
                     { _localizer["Field Description"], item => item.Description },
-                    { _localizer["Master Data Relevant"], item => item.MasterDataRelevant },
-                    { _localizer["Tech Mock Master Data"], item => item.TechMockMasterData },
-                    { _localizer["Team"], item => item.Team },
-                    { _localizer["Status"], item => item.Status },
-                    { _localizer["Link"], item => item.Link },
-                    { _localizer["Legacy System"], item => item.LegacySystem },
-                    { _localizer["Is Used AK1"], item => item.IsUsedAK1 },
-                    { _localizer["Major Table where object is used"], item => item.MajorTable },
-                    { _localizer["Nr. of Cases where used"], item => item.Cases },
-                    { _localizer["Numbers if different values"], item => item.Numbers },
-                    { _localizer["Relevant Migration Objects"], item => item.RelevantObjects },
-                    { _localizer["Check"], item => item.Check },
-                    { _localizer["Comments"], item => item.Comments },
+                    { _localizer["Associated Type"], item => item.AssociatedType },
+                    { _localizer["Date Type"], item => item.DateType },
+                    { _localizer["Length"], item => item.Length },
+                    { _localizer["Direct"], item => item.Direct },
+                    { _localizer["Parameter Name"], item => item.ParameterName },
+                    { _localizer["Title"], item => item.Title },
+                    { _localizer["Source Template Name"], item => item.SourceTemplateName },
                 }
                 , _localizer["ObjectFields"]);
             return result;

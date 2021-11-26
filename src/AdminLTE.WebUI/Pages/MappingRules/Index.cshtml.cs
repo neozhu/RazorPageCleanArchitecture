@@ -14,6 +14,7 @@ using CleanArchitecture.Razor.Application.MigrationObjects.Queries.GetAll;
 using CleanArchitecture.Razor.Application.MappingRules.Commands.Import;
 using CleanArchitecture.Razor.Domain.Enums;
 using System.Xml.Linq;
+using CleanArchitecture.Razor.Application.FieldMappingValues.Commands.Import;
 
 namespace AdminLTE.WebUI.Pages.MappingRules
 {
@@ -26,6 +27,13 @@ namespace AdminLTE.WebUI.Pages.MappingRules
         public IFormFile UploadedFile { get; set; }
         [BindProperty]
         public IFormFile TemplateFile { get; set; }
+
+        [BindProperty]
+        public IFormFile FieldMappingDataFile { get; set; }
+        [BindProperty]
+        public int MappingRuleId { get; set; }
+        [BindProperty]
+        public string MappingRuleName { get; set; }
         public SelectList MigrationObjects { get; set; }
 
         private readonly ISender _mediator;
@@ -103,7 +111,24 @@ namespace AdminLTE.WebUI.Pages.MappingRules
             var result = await _mediator.Send(command);
             return new JsonResult(result);
         }
-
+        public async Task<FileResult> OnGetCreateDataTemplate(int mappingruleid,string mappingrulename)
+        {
+            var command = new CreateFieldMappingDataTemplateCommand();
+            command.MappingRuleId = mappingruleid;
+            var result = await _mediator.Send(command);
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer[$"FieldMappingValues({mappingrulename})"] + ".xlsx");
+        }
+        public async Task<IActionResult> OnPostUploadFieldMappingData() {
+            var stream = new MemoryStream();
+            await FieldMappingDataFile.CopyToAsync(stream);
+            var command = new ImportDataFieldMappingValuesCommand()
+            {
+                MappingRuleId = MappingRuleId,
+                Data = stream.ToArray()
+            };
+            var result = await _mediator.Send(command);
+            return new JsonResult(result);
+        }
         public async Task<IActionResult> OnPostVaildateTemplateFile() {
 
             var stream = new MemoryStream();

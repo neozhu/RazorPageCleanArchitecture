@@ -52,7 +52,6 @@ public class ApplicationDbContext : IdentityDbContext<
     public DbSet<ObjectField> ObjectFields { get; set; }
     public DbSet<MigrationTemplateFile> MigrationTemplateFiles { get; set; }
 
-    public DbSet<FieldValueMapping> FieldValueMappings { get; set; }
 
     public DbSet<MappingRule> MappingRules { get; set; }
     public DbSet<FieldMappingValue> FieldMappingValues { get; set; }

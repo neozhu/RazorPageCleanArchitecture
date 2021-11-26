@@ -26,6 +26,7 @@ namespace CleanArchitecture.Razor.Application.MappingRules.DTOs;
     public string Team { get; set; }
     public string Comments { get; set; }
     public string TemplateFile { get; set; }
+    public string TemplateDescription { get; set; }
     public TrackingState TrackingState { get; set; }
 
     public DateTime Created { get; set; }

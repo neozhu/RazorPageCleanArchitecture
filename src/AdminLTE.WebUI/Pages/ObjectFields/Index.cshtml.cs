@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
 using CleanArchitecture.Razor.Application.ObjectFields.Queries.Pagination;
 using CleanArchitecture.Razor.Application.ObjectFields.Commands.AcceptChanges;
-using CleanArchitecture.Razor.Application.MigrationObjects.Queries.GetAll;
+using CleanArchitecture.Razor.Application.ObjectFields.Commands.Upload;
 
 namespace AdminLTE.WebUI.Pages.ObjectFields
 {
@@ -82,10 +82,18 @@ namespace AdminLTE.WebUI.Pages.ObjectFields
             return new JsonResult(result);
         }
 
-        public async Task<IActionResult> OnGetMigrtionObjects(string q = "")
+
+
+        public async Task<IActionResult> OnPostUploadAsync()
         {
-            var request = new GetAllMigrationObjectsWithKeyQuery() { Key = q ?? "" };
-            var result = await _mediator.Send(request);
+            var stream = new MemoryStream();
+            await UploadedFile.CopyToAsync(stream);
+            var command = new UploadFieldTemplateFilesCommand()
+            {
+                FileName = UploadedFile.FileName,
+                Data = stream.ToArray()
+            };
+            var result = await _mediator.Send(command);
             return new JsonResult(result);
         }
 

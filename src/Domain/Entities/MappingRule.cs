@@ -23,6 +23,7 @@ public class MappingRule:AuditableEntity, IAuditTrial
     public string Team { get; set; }
     public string Comments { get; set; }
     public string TemplateFile { get; set; }
+    public string TemplateDescription { get; set; }
 
     public virtual ICollection<FieldMappingValue> FieldMappingValues { get; set; } = new HashSet<FieldMappingValue>();
 }

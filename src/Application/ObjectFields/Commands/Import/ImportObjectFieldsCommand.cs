@@ -46,21 +46,15 @@ public class ImportObjectFieldsCommandHandler :
 
         var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, ObjectField, object>>
             {
-                { _localizer["Field"], (row,item) => item.Name = row[_localizer["Field"]]?.ToString() },
+                { _localizer["Field Name"], (row,item) => item.Name = row[_localizer["Field Name"]]?.ToString() },
                 { _localizer["Field Description"], (row,item) => item.Description = row[_localizer["Field Description"]]?.ToString() },
-                { _localizer["Master Data Relevant"], (row,item) => item.MasterDataRelevant = row[_localizer["Master Data Relevant"]]?.ToString() },
-                { _localizer["Tech Mock Master Data"], (row,item) => item.TechMockMasterData = row[_localizer["Tech Mock Master Data"]]?.ToString() },
-                { _localizer["Team"], (row,item) => item.Team = row[_localizer["Team"]]?.ToString() },
-                { _localizer["Status"], (row,item) => item.Status = row[_localizer["Status"]]?.ToString() },
-                { _localizer["Link"], (row,item) => item.Link = row[_localizer["Link"]]?.ToString() },
-                { _localizer["Legacy System"], (row,item) => item.LegacySystem = row[_localizer["Legacy System"]]?.ToString() },
-                { _localizer["Is Used AK1"], (row,item) => item.IsUsedAK1 = row[_localizer["Is Used AK1"]]?.ToString() },
-                { _localizer["Major Table where object is used"], (row,item) => item.MajorTable = row[_localizer["Major Table where object is used"]]?.ToString() },
-                { _localizer["Nr. of Cases where used"], (row,item) => item.Cases = row[_localizer["Nr. of Cases where used"]]?.ToString() },
-                { _localizer["Numbers if different values"], (row,item) => item.Numbers = row[_localizer["Numbers if different values"]]?.ToString() },
-                { _localizer["Relevant Migration Objects"], (row,item) => item.RelevantObjects = row[_localizer["Relevant Migration Objects"]]?.ToString() },
-                { _localizer["Check"], (row,item) => item.Check = row[_localizer["Check"]]?.ToString() },
-                { _localizer["Comments"], (row,item) => item.Comments = row[_localizer["Comments"]]?.ToString() },
+                { _localizer["Associated Type"], (row,item) => item.AssociatedType = row[_localizer["Associated Type"]]?.ToString() },
+                { _localizer["Date Type"], (row,item) => item.DateType = row[_localizer["DateType"]]?.ToString() },
+                { _localizer["Length"], (row,item) => item.Length =row.IsNull(_localizer["Length"])?null: Convert.ToInt32(row[_localizer["Length"]]?.ToString()) },
+                { _localizer["Direct"], (row,item) => item.Direct = row[_localizer["Direct"]]?.ToString() },
+                { _localizer["Parameter Name"], (row,item) => item.ParameterName = row[_localizer["Parameter Name"]]?.ToString() },
+                { _localizer["Title"], (row,item) => item.Title = row[_localizer["Title"]]?.ToString() },
+                { _localizer["Source Template Name"], (row,item) => item.SourceTemplateName = row[_localizer["SourceTemplateName"]]?.ToString() },
             }, _localizer["ObjectFields"]);
         if (result.Succeeded)
         {
@@ -103,21 +97,16 @@ public class ImportObjectFieldsCommandHandler :
     {
       
         var fields = new string[] {
-            _localizer["Field"],
+            _localizer["Field Name"],
             _localizer["Field Description"],
-            _localizer["Master Data Relevant"],
-            _localizer["Tech Mock Master Data"],
-            _localizer["Team"],
-            _localizer["Status"],
-            _localizer["Link"],
-            _localizer["Legacy System"],
-            _localizer["Is Used AK1"],
-            _localizer["Major Table where object is used"],
-            _localizer["Nr. of Cases where used"],
-            _localizer["Numbers if different values"],
-            _localizer["Relevant Migration Objects"],
-            _localizer["Check"],
-            _localizer["Comments"]
+            _localizer["Associated Type"],
+            _localizer["Date Type"],
+            _localizer["Length"],
+            _localizer["Parameter Name"],
+            _localizer["Direct"],
+            _localizer["Title"],
+            _localizer["Source Template Name"],
+          
         };
         var result = await _excelService.CreateTemplateAsync(fields, _localizer["ObjectFields"]);
         return result;

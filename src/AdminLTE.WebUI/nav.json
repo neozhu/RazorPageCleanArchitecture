@@ -18,18 +18,18 @@
       "roles": [],
       "items": [
         {
-          "title": "Migration Objects",
-          "href": "migrationobjects_index.html",
-          "roles": []
-        },
-        {
-          "title": "Mapping Rules",
+          "title": "Value Mapping",
           "href": "mappingrules_index.html",
           "roles": []
         },
         {
-          "title": "Field Mapping Values",
+          "title": "Mapping Report",
           "href": "fieldmappingvalues_index.html",
+          "roles": []
+        },
+        {
+          "title": "Object Fields",
+          "href": "objectfields_index.html",
           "roles": []
         }
         
