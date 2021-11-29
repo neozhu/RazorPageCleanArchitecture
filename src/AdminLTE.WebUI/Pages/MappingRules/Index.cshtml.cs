@@ -49,7 +49,6 @@ namespace AdminLTE.WebUI.Pages.MappingRules
         }
         public async Task OnGetAsync()
         {
-
             var request = new GetAllMigrationObjectsQuery();
             var objectlist = await _mediator.Send(request);
             MigrationObjects = new SelectList(objectlist, "Name", "Name");

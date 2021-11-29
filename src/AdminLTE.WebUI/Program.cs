@@ -71,10 +71,6 @@ builder.Services
      {
          options.Conventions.AddPageRoute("/AspNetCore/Welcome", "");
      })
-     .AddMvcOptions(options =>
-     {
-         options.Filters.Add<ApiExceptionFilterAttribute>();
-     })
     .AddFluentValidation(fv =>
     {
         fv.DisableDataAnnotationsValidation = true;

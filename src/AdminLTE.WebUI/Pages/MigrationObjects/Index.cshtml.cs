@@ -31,6 +31,7 @@ namespace AdminLTE.WebUI.Pages.MigrationObjects
         }
         public Task OnGetAsync()
         {
+        
             return Task.CompletedTask;
         }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] MigrationObjectsWithPaginationQuery command)

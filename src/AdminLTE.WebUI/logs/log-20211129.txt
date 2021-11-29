@@ -1,0 +1,373 @@
+2021-11-29 09:17:16.530 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-29 09:17:16.824 +08:00 [ERR] An unhandled exception has occurred while executing the request. 127.0.0.1 
+System.InvalidOperationException: No service for type 'CleanArchitecture.Razor.Infrastructure.Middlewares.ExceptionMiddleware' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.AspNetCore.Http.MiddlewareFactory.Create(Type middlewareType)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at CleanArchitecture.Razor.Infrastructure.Middlewares.LocalizationCookiesMiddleware.InvokeAsync(HttpContext context, RequestDelegate next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Middlewares\LocalizationCookiesMiddleware.cs:line 41
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at CleanArchitecture.Razor.Infrastructure.Extensions.ApplicationBuilderExtensions.<>c.<<UseInfrastructure>b__0_1>d.MoveNext() in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-11-29 09:17:19.247 +08:00 [ERR] An unhandled exception has occurred while executing the request. 127.0.0.1 
+System.InvalidOperationException: No service for type 'CleanArchitecture.Razor.Infrastructure.Middlewares.ExceptionMiddleware' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.AspNetCore.Http.MiddlewareFactory.Create(Type middlewareType)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at CleanArchitecture.Razor.Infrastructure.Middlewares.LocalizationCookiesMiddleware.InvokeAsync(HttpContext context, RequestDelegate next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Middlewares\LocalizationCookiesMiddleware.cs:line 41
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at CleanArchitecture.Razor.Infrastructure.Extensions.ApplicationBuilderExtensions.<>c.<<UseInfrastructure>b__0_1>d.MoveNext() in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Extensions\ApplicationBuilderExtensions.cs:line 28
+--- End of stack trace from previous location ---
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-11-29 09:19:51.326 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-29 09:19:51.685 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:51.686 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:51.686 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:51.686 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:51.686 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:51.686 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.746 +08:00 [INF] The file /plugins/fontawesome-free/css/all.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.746 +08:00 [INF] The file /plugins/toastr/toastr.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.761 +08:00 [INF] The file /plugins/icheck-bootstrap/icheck-bootstrap.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.761 +08:00 [INF] The file /css/fa-light.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.772 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.772 +08:00 [INF] The file /css/adminlte.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.775 +08:00 [INF] The file /AdminLTE.WebUI.styles.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.776 +08:00 [INF] The file /plugins/summernote/summernote-bs4.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.832 +08:00 [INF] The file /plugins/jquery/jquery.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.866 +08:00 [INF] The file /js/demo.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.869 +08:00 [INF] The file /plugins/bootstrap/js/bootstrap.bundle.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.871 +08:00 [INF] The file /js/adminlte.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.873 +08:00 [INF] The file /plugins/summernote/summernote-bs4.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.895 +08:00 [INF] The file /plugins/moment/moment.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.895 +08:00 [INF] The file /plugins/toastr/toastr.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.964 +08:00 [INF] The file /img/codewithmukesh_logo.jpg was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:52.964 +08:00 [INF] The file /plugins/bootbox.js/bootbox.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:56.626 +08:00 [INF] The file /plugins/fontawesome-free/webfonts/fa-solid-900.woff2 was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:19:56.939 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\favicon.ico' 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:11.905 +08:00 [INF] CleanArchitecture Request: GetAllMigrationObjectsQuery EURO1\zhuhua null {"$type":"GetAllMigrationObjectsQuery"} 127.0.0.1 null
+2021-11-29 09:20:12.550 +08:00 [INF] CleanArchitecture Request: KeyValuesQueryByName EURO1\zhuhua null {"Name":"LegacySystem","CacheKey":"LegacySystem-keyvalues","Options":{"AbsoluteExpiration":null,"AbsoluteExpirationRelativeToNow":null,"SlidingExpiration":null,"ExpirationTokens":[{"ActiveChangeCallbacks":true,"HasChanged":false,"$type":"CancellationChangeToken"}],"PostEvictionCallbacks":[],"Priority":"Normal","Size":null,"$type":"MemoryCacheEntryOptions"},"$type":"KeyValuesQueryByName"} 127.0.0.1 null
+2021-11-29 09:20:12.556 +08:00 [INF] CleanArchitecture.Razor.Application.KeyValues.Queries.ByName.KeyValuesQueryByName is configured for caching. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:12.595 +08:00 [INF] CleanArchitecture Request: KeyValuesQueryByName EURO1\zhuhua null {"Name":"ProjectName","CacheKey":"ProjectName-keyvalues","Options":{"AbsoluteExpiration":null,"AbsoluteExpirationRelativeToNow":null,"SlidingExpiration":null,"ExpirationTokens":[{"ActiveChangeCallbacks":true,"HasChanged":false,"$type":"CancellationChangeToken"}],"PostEvictionCallbacks":[],"Priority":"Normal","Size":null,"$type":"MemoryCacheEntryOptions"},"$type":"KeyValuesQueryByName"} 127.0.0.1 null
+2021-11-29 09:20:12.595 +08:00 [INF] CleanArchitecture.Razor.Application.KeyValues.Queries.ByName.KeyValuesQueryByName is configured for caching. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:13.427 +08:00 [INF] The file /css/fa-solid.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:13.431 +08:00 [INF] The file /plugins/select2-bootstrap4-theme/select2-bootstrap4.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:13.432 +08:00 [INF] The file /css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:13.433 +08:00 [INF] The file /plugins/select2/css/select2.min.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:13.447 +08:00 [INF] The file /lib/easyui/themes/insdep/easyui.css was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:13.491 +08:00 [INF] The file /lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:13.491 +08:00 [INF] The file /lib/jquery-validation/dist/jquery.validate.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:13.498 +08:00 [INF] The file /lib/easyui/jquery.easyui.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:13.499 +08:00 [INF] The file /lib/easyui/plugins/datagrid-filter.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:13.523 +08:00 [INF] The file /lib/easyui/jquery.easyui.component.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:13.525 +08:00 [INF] The file /lib/axios/dist/axios.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:13.527 +08:00 [INF] The file /lib/jquery-form/jquery.jsonToForm.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:13.531 +08:00 [INF] The file /plugins/select2/js/select2.full.min.js was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:14.499 +08:00 [INF] The file /webfonts/fa-solid-900.woff2 was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:14.499 +08:00 [INF] The file /webfonts/fa-light-300.woff2 was not modified 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:14.771 +08:00 [INF] CleanArchitecture Request: MappingRulesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 null
+2021-11-29 09:20:15.393 +08:00 [WRN] CleanArchitecture Long Running Request: MappingRulesWithPaginationQuery (620 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 null
+2021-11-29 09:20:15.396 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MappingRules.DTOs.MappingRuleDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:19.917 +08:00 [INF] CleanArchitecture Request: ImportMappingRulesCommand EURO1\zhuhua null {"FileName":"Material Price Group.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (20514 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 null
+2021-11-29 09:20:21.713 +08:00 [ERR] CleanArchitecture Request: Unhandled Exception for Request ImportMappingRulesCommand {"FileName":"Material Price Group.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (20514 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 EURO1\zhuhua
+System.IO.FileFormatException: File contains corrupted data.
+   at System.IO.Packaging.ZipPackage..ctor(Stream s, FileMode packageFileMode, FileAccess packageFileAccess)
+   at System.IO.Packaging.Package.Open(Stream stream, FileMode packageMode, FileAccess packageAccess)
+   at DocumentFormat.OpenXml.Packaging.OpenXmlPackage.OpenCore(Stream stream, Boolean readWriteMode)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable, OpenSettings openSettings)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable)
+   at ClosedXML.Excel.XLWorkbook.LoadSheets(Stream stream)
+   at ClosedXML.Excel.XLWorkbook.Load(Stream stream)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream, XLEventTracking eventTracking)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream)
+   at CleanArchitecture.Razor.Infrastructure.Services.ExcelService.ImportAsync[TEntity](Byte[] data, Dictionary`2 mappers, String sheetName) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Services\ExcelService.cs:line 108
+   at CleanArchitecture.Razor.Application.MappingRules.Commands.Import.ImportMappingRulesCommandHandler.Handle(ImportMappingRulesCommand request, CancellationToken cancellationToken) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\MappingRules\Commands\Import\ImportMappingRulesCommand.cs:line 46
+   at CleanArchitecture.Razor.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\PerformanceBehaviour.cs:line 32
+   at CleanArchitecture.Razor.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\ValidationBehaviour.cs:line 36
+   at CleanArchitecture.Razor.Application.Common.Behaviours.AuthorizationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\AuthorizationBehaviour.cs:line 80
+   at CleanArchitecture.Razor.Application.Common.Behaviours.UnhandledExceptionBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\UnhandledExceptionBehaviour.cs:line 19
+2021-11-29 09:20:25.260 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:25.260 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:25.260 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:25.260 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:25.269 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:25.735 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:25.771 +08:00 [INF] Sending file. Request path: '/css/adminlte.css.map'. Physical path: 'C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.css.map' 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:20:36.705 +08:00 [INF] CleanArchitecture Request: ImportMappingRulesCommand EURO1\zhuhua null {"FileName":"Material Type.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (20960 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 null
+2021-11-29 09:20:37.081 +08:00 [ERR] CleanArchitecture Request: Unhandled Exception for Request ImportMappingRulesCommand {"FileName":"Material Type.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (20960 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 EURO1\zhuhua
+System.IO.FileFormatException: File contains corrupted data.
+   at System.IO.Packaging.ZipPackage..ctor(Stream s, FileMode packageFileMode, FileAccess packageFileAccess)
+   at System.IO.Packaging.Package.Open(Stream stream, FileMode packageMode, FileAccess packageAccess)
+   at DocumentFormat.OpenXml.Packaging.OpenXmlPackage.OpenCore(Stream stream, Boolean readWriteMode)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable, OpenSettings openSettings)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable)
+   at ClosedXML.Excel.XLWorkbook.LoadSheets(Stream stream)
+   at ClosedXML.Excel.XLWorkbook.Load(Stream stream)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream, XLEventTracking eventTracking)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream)
+   at CleanArchitecture.Razor.Infrastructure.Services.ExcelService.ImportAsync[TEntity](Byte[] data, Dictionary`2 mappers, String sheetName) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Services\ExcelService.cs:line 108
+   at CleanArchitecture.Razor.Application.MappingRules.Commands.Import.ImportMappingRulesCommandHandler.Handle(ImportMappingRulesCommand request, CancellationToken cancellationToken) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\MappingRules\Commands\Import\ImportMappingRulesCommand.cs:line 46
+   at CleanArchitecture.Razor.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\PerformanceBehaviour.cs:line 32
+   at CleanArchitecture.Razor.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\ValidationBehaviour.cs:line 36
+   at CleanArchitecture.Razor.Application.Common.Behaviours.AuthorizationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\AuthorizationBehaviour.cs:line 80
+   at CleanArchitecture.Razor.Application.Common.Behaviours.UnhandledExceptionBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\UnhandledExceptionBehaviour.cs:line 19
+2021-11-29 09:21:15.053 +08:00 [INF] CleanArchitecture Request: ImportMappingRulesCommand EURO1\zhuhua null {"FileName":"Material Price Group.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (20514 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 null
+2021-11-29 09:21:15.484 +08:00 [ERR] CleanArchitecture Request: Unhandled Exception for Request ImportMappingRulesCommand {"FileName":"Material Price Group.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (20514 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 EURO1\zhuhua
+System.IO.FileFormatException: File contains corrupted data.
+   at System.IO.Packaging.ZipPackage..ctor(Stream s, FileMode packageFileMode, FileAccess packageFileAccess)
+   at System.IO.Packaging.Package.Open(Stream stream, FileMode packageMode, FileAccess packageAccess)
+   at DocumentFormat.OpenXml.Packaging.OpenXmlPackage.OpenCore(Stream stream, Boolean readWriteMode)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable, OpenSettings openSettings)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable)
+   at ClosedXML.Excel.XLWorkbook.LoadSheets(Stream stream)
+   at ClosedXML.Excel.XLWorkbook.Load(Stream stream)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream, XLEventTracking eventTracking)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream)
+   at CleanArchitecture.Razor.Infrastructure.Services.ExcelService.ImportAsync[TEntity](Byte[] data, Dictionary`2 mappers, String sheetName) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Services\ExcelService.cs:line 108
+   at CleanArchitecture.Razor.Application.MappingRules.Commands.Import.ImportMappingRulesCommandHandler.Handle(ImportMappingRulesCommand request, CancellationToken cancellationToken) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\MappingRules\Commands\Import\ImportMappingRulesCommand.cs:line 46
+   at CleanArchitecture.Razor.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\PerformanceBehaviour.cs:line 32
+   at CleanArchitecture.Razor.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\ValidationBehaviour.cs:line 36
+   at CleanArchitecture.Razor.Application.Common.Behaviours.AuthorizationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\AuthorizationBehaviour.cs:line 80
+   at CleanArchitecture.Razor.Application.Common.Behaviours.UnhandledExceptionBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\UnhandledExceptionBehaviour.cs:line 19
+2021-11-29 09:22:30.420 +08:00 [INF] CleanArchitecture Request: ImportMappingRulesCommand EURO1\zhuhua null {"FileName":"MigrationObjects.xlsx","Data":"504B03041400060008000000210062EE... (8357 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 null
+2021-11-29 09:22:30.825 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:23:29.483 +08:00 [INF] CleanArchitecture Request: ImportMappingRulesCommand EURO1\zhuhua null {"FileName":"MigrationObjects.xlsx","Data":"504B03041400060008000000210062EE... (8357 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 null
+2021-11-29 09:23:29.490 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:23:33.729 +08:00 [INF] CleanArchitecture Request: ImportMappingRulesCommand EURO1\zhuhua null {"FileName":"MigrationObjects.xlsx","Data":"504B03041400060008000000210062EE... (8357 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 null
+2021-11-29 09:23:33.738 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:23:40.775 +08:00 [INF] CleanArchitecture Request: ImportMappingRulesCommand EURO1\zhuhua null {"FileName":"MappingRules (2).xlsx","Data":"504B030414000008080069737A533026... (6535 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 null
+2021-11-29 09:23:40.874 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:23:40.893 +08:00 [INF] CleanArchitecture Request: MappingRulesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 null
+2021-11-29 09:23:40.895 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MappingRules.DTOs.MappingRuleDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:23:47.873 +08:00 [INF] CleanArchitecture Request: ImportMappingRulesCommand EURO1\zhuhua null {"FileName":"All ObjectFields.xlsx","Data":"504B03041400060008000000210062EE... (109782 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 null
+2021-11-29 09:23:47.983 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:24:00.042 +08:00 [INF] CleanArchitecture Request: ImportMappingRulesCommand EURO1\zhuhua null {"FileName":"FieldMappingValues(MAP TO WEAK) (1).xlsx","Data":"504B03041400060008000000210062EE... (8639 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 null
+2021-11-29 09:24:00.048 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:24:07.122 +08:00 [INF] CleanArchitecture Request: ImportMappingRulesCommand EURO1\zhuhua null {"FileName":"filepond-4.28.2.zip","Data":"504B03040A00000000008F0DC9520000... (612206 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 null
+2021-11-29 09:24:14.893 +08:00 [ERR] CleanArchitecture Request: Unhandled Exception for Request ImportMappingRulesCommand {"FileName":"filepond-4.28.2.zip","Data":"504B03040A00000000008F0DC9520000... (612206 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 EURO1\zhuhua
+DocumentFormat.OpenXml.Packaging.OpenXmlPackageException: The specified package is invalid. The main part is missing.
+   at DocumentFormat.OpenXml.Packaging.OpenXmlPackage.Load()
+   at DocumentFormat.OpenXml.Packaging.OpenXmlPackage.OpenCore(Stream stream, Boolean readWriteMode)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable, OpenSettings openSettings)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable)
+   at ClosedXML.Excel.XLWorkbook.LoadSheets(Stream stream)
+   at ClosedXML.Excel.XLWorkbook.Load(Stream stream)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream, XLEventTracking eventTracking)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream)
+   at CleanArchitecture.Razor.Infrastructure.Services.ExcelService.ImportAsync[TEntity](Byte[] data, Dictionary`2 mappers, String sheetName) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Services\ExcelService.cs:line 108
+   at CleanArchitecture.Razor.Application.MappingRules.Commands.Import.ImportMappingRulesCommandHandler.Handle(ImportMappingRulesCommand request, CancellationToken cancellationToken) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\MappingRules\Commands\Import\ImportMappingRulesCommand.cs:line 46
+   at CleanArchitecture.Razor.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\PerformanceBehaviour.cs:line 32
+   at CleanArchitecture.Razor.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\ValidationBehaviour.cs:line 36
+   at CleanArchitecture.Razor.Application.Common.Behaviours.AuthorizationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\AuthorizationBehaviour.cs:line 80
+   at CleanArchitecture.Razor.Application.Common.Behaviours.UnhandledExceptionBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\UnhandledExceptionBehaviour.cs:line 19
+2021-11-29 09:45:29.177 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-29 09:45:29.911 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:45:29.911 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:45:29.911 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:45:29.912 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:45:29.912 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:45:29.912 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:45:38.438 +08:00 [INF] CleanArchitecture Request: GetAllMigrationObjectsQuery EURO1\zhuhua null {"$type":"GetAllMigrationObjectsQuery"} 127.0.0.1 null
+2021-11-29 09:45:38.984 +08:00 [WRN] CleanArchitecture Long Running Request: GetAllMigrationObjectsQuery (505 milliseconds) EURO1\zhuhua null {"$type":"GetAllMigrationObjectsQuery"} 127.0.0.1 null
+2021-11-29 09:45:39.202 +08:00 [INF] CleanArchitecture Request: KeyValuesQueryByName EURO1\zhuhua null {"Name":"LegacySystem","CacheKey":"LegacySystem-keyvalues","Options":{"AbsoluteExpiration":null,"AbsoluteExpirationRelativeToNow":null,"SlidingExpiration":null,"ExpirationTokens":[{"ActiveChangeCallbacks":true,"HasChanged":false,"$type":"CancellationChangeToken"}],"PostEvictionCallbacks":[],"Priority":"Normal","Size":null,"$type":"MemoryCacheEntryOptions"},"$type":"KeyValuesQueryByName"} 127.0.0.1 null
+2021-11-29 09:45:39.209 +08:00 [INF] CleanArchitecture.Razor.Application.KeyValues.Queries.ByName.KeyValuesQueryByName is configured for caching. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:45:39.254 +08:00 [INF] CleanArchitecture Request: KeyValuesQueryByName EURO1\zhuhua null {"Name":"ProjectName","CacheKey":"ProjectName-keyvalues","Options":{"AbsoluteExpiration":null,"AbsoluteExpirationRelativeToNow":null,"SlidingExpiration":null,"ExpirationTokens":[{"ActiveChangeCallbacks":true,"HasChanged":false,"$type":"CancellationChangeToken"}],"PostEvictionCallbacks":[],"Priority":"Normal","Size":null,"$type":"MemoryCacheEntryOptions"},"$type":"KeyValuesQueryByName"} 127.0.0.1 null
+2021-11-29 09:45:39.255 +08:00 [INF] CleanArchitecture.Razor.Application.KeyValues.Queries.ByName.KeyValuesQueryByName is configured for caching. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:45:42.527 +08:00 [INF] CleanArchitecture Request: MappingRulesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 null
+2021-11-29 09:45:43.450 +08:00 [WRN] CleanArchitecture Long Running Request: MappingRulesWithPaginationQuery (918 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 null
+2021-11-29 09:45:43.453 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MappingRules.DTOs.MappingRuleDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:45:47.660 +08:00 [INF] CleanArchitecture Request: ImportMappingRulesCommand EURO1\zhuhua null {"FileName":"All ObjectFields.xlsx","Data":"504B03041400060008000000210062EE... (109782 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 null
+2021-11-29 09:45:49.300 +08:00 [WRN] CleanArchitecture Long Running Request: ImportMappingRulesCommand (1603 milliseconds) EURO1\zhuhua null {"FileName":"All ObjectFields.xlsx","Data":"504B03041400060008000000210062EE... (109782 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 null
+2021-11-29 09:45:49.301 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:45:57.337 +08:00 [INF] CleanArchitecture Request: ImportMappingRulesCommand EURO1\zhuhua null {"FileName":"filepond-4.28.2.zip","Data":"504B03040A00000000008F0DC9520000... (612206 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 null
+2021-11-29 09:46:02.235 +08:00 [ERR] CleanArchitecture Request: Unhandled Exception for Request ImportMappingRulesCommand {"FileName":"filepond-4.28.2.zip","Data":"504B03040A00000000008F0DC9520000... (612206 bytes)","$type":"ImportMappingRulesCommand"} 127.0.0.1 EURO1\zhuhua
+DocumentFormat.OpenXml.Packaging.OpenXmlPackageException: The specified package is invalid. The main part is missing.
+   at DocumentFormat.OpenXml.Packaging.OpenXmlPackage.Load()
+   at DocumentFormat.OpenXml.Packaging.OpenXmlPackage.OpenCore(Stream stream, Boolean readWriteMode)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable, OpenSettings openSettings)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable)
+   at ClosedXML.Excel.XLWorkbook.LoadSheets(Stream stream)
+   at ClosedXML.Excel.XLWorkbook.Load(Stream stream)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream, XLEventTracking eventTracking)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream)
+   at CleanArchitecture.Razor.Infrastructure.Services.ExcelService.ImportAsync[TEntity](Byte[] data, Dictionary`2 mappers, String sheetName) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Services\ExcelService.cs:line 108
+   at CleanArchitecture.Razor.Application.MappingRules.Commands.Import.ImportMappingRulesCommandHandler.Handle(ImportMappingRulesCommand request, CancellationToken cancellationToken) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\MappingRules\Commands\Import\ImportMappingRulesCommand.cs:line 46
+   at CleanArchitecture.Razor.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\PerformanceBehaviour.cs:line 32
+   at CleanArchitecture.Razor.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\ValidationBehaviour.cs:line 36
+   at CleanArchitecture.Razor.Application.Common.Behaviours.AuthorizationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\AuthorizationBehaviour.cs:line 80
+   at CleanArchitecture.Razor.Application.Common.Behaviours.UnhandledExceptionBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\UnhandledExceptionBehaviour.cs:line 19
+2021-11-29 09:46:04.246 +08:00 [ERR] Request failed with Status Code 500 and Error Id e80de810-8cfd-410b-aebc-558e248eb15d. 127.0.0.1 EURO1\zhuhua
+DocumentFormat.OpenXml.Packaging.OpenXmlPackageException: The specified package is invalid. The main part is missing.
+   at DocumentFormat.OpenXml.Packaging.OpenXmlPackage.Load()
+   at DocumentFormat.OpenXml.Packaging.OpenXmlPackage.OpenCore(Stream stream, Boolean readWriteMode)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable, OpenSettings openSettings)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable)
+   at ClosedXML.Excel.XLWorkbook.LoadSheets(Stream stream)
+   at ClosedXML.Excel.XLWorkbook.Load(Stream stream)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream, XLEventTracking eventTracking)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream)
+   at CleanArchitecture.Razor.Infrastructure.Services.ExcelService.ImportAsync[TEntity](Byte[] data, Dictionary`2 mappers, String sheetName) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Services\ExcelService.cs:line 108
+   at CleanArchitecture.Razor.Application.MappingRules.Commands.Import.ImportMappingRulesCommandHandler.Handle(ImportMappingRulesCommand request, CancellationToken cancellationToken) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\MappingRules\Commands\Import\ImportMappingRulesCommand.cs:line 46
+   at CleanArchitecture.Razor.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\PerformanceBehaviour.cs:line 32
+   at CleanArchitecture.Razor.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\ValidationBehaviour.cs:line 36
+   at CleanArchitecture.Razor.Application.Common.Behaviours.AuthorizationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\AuthorizationBehaviour.cs:line 80
+   at CleanArchitecture.Razor.Application.Common.Behaviours.UnhandledExceptionBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\UnhandledExceptionBehaviour.cs:line 19
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next)
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next)
+   at MediatR.Pipeline.RequestPostProcessorBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next)
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next)
+   at AdminLTE.WebUI.Pages.MappingRules.IndexModel.OnPostImportAsync() in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\Pages\MappingRules\Index.cshtml.cs:line 111
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.ExecutorFactory.GenericTaskHandlerMethod.Convert[T](Object taskAsObject)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.ExecutorFactory.GenericTaskHandlerMethod.Execute(Object receiver, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeHandlerMethodAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeNextPageFilterAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.Rethrow(PageHandlerExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at CleanArchitecture.Razor.Infrastructure.Middlewares.UnhandledExceptionMiddleware.InvokeAsync(HttpContext context, RequestDelegate next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Middlewares\UnhandledExceptionMiddleware.cs:line 29
+2021-11-29 09:56:46.326 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-29 09:56:46.837 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:56:46.837 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:56:46.837 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:56:46.838 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:56:46.838 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:56:46.838 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:56:54.758 +08:00 [INF] CleanArchitecture Request: GetAllMigrationObjectsQuery EURO1\zhuhua null {"$type":"GetAllMigrationObjectsQuery"} 127.0.0.1 null
+2021-11-29 09:56:55.329 +08:00 [WRN] CleanArchitecture Long Running Request: GetAllMigrationObjectsQuery (525 milliseconds) EURO1\zhuhua null {"$type":"GetAllMigrationObjectsQuery"} 127.0.0.1 null
+2021-11-29 09:56:55.602 +08:00 [INF] CleanArchitecture Request: KeyValuesQueryByName EURO1\zhuhua null {"Name":"LegacySystem","CacheKey":"LegacySystem-keyvalues","Options":{"AbsoluteExpiration":null,"AbsoluteExpirationRelativeToNow":null,"SlidingExpiration":null,"ExpirationTokens":[{"ActiveChangeCallbacks":true,"HasChanged":false,"$type":"CancellationChangeToken"}],"PostEvictionCallbacks":[],"Priority":"Normal","Size":null,"$type":"MemoryCacheEntryOptions"},"$type":"KeyValuesQueryByName"} 127.0.0.1 null
+2021-11-29 09:56:55.609 +08:00 [INF] CleanArchitecture.Razor.Application.KeyValues.Queries.ByName.KeyValuesQueryByName is configured for caching. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:56:55.656 +08:00 [INF] CleanArchitecture Request: KeyValuesQueryByName EURO1\zhuhua null {"Name":"ProjectName","CacheKey":"ProjectName-keyvalues","Options":{"AbsoluteExpiration":null,"AbsoluteExpirationRelativeToNow":null,"SlidingExpiration":null,"ExpirationTokens":[{"ActiveChangeCallbacks":true,"HasChanged":false,"$type":"CancellationChangeToken"}],"PostEvictionCallbacks":[],"Priority":"Normal","Size":null,"$type":"MemoryCacheEntryOptions"},"$type":"KeyValuesQueryByName"} 127.0.0.1 null
+2021-11-29 09:56:55.656 +08:00 [INF] CleanArchitecture.Razor.Application.KeyValues.Queries.ByName.KeyValuesQueryByName is configured for caching. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:56:59.350 +08:00 [INF] CleanArchitecture Request: MappingRulesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 null
+2021-11-29 09:56:59.970 +08:00 [WRN] CleanArchitecture Long Running Request: MappingRulesWithPaginationQuery (618 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 null
+2021-11-29 09:56:59.973 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MappingRules.DTOs.MappingRuleDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:57:16.829 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result`1[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:57:23.171 +08:00 [INF] CleanArchitecture Request: AddEditMappingRuleCommand EURO1\zhuhua null {"UploadRequest":{"FileName":"Plant.xml","Extension":null,"UploadType":"TemplateFile","Data":"3C3F786D6C2076657273696F6E3D2231... (11319 bytes)","$type":"UploadRequest"},"Id":0,"Name":"4324234","Status":"Not Started","LegacyField1":"34334234","LegacyDescription1":null,"LegacyField2":"32423","LegacyDescription2":null,"LegacyField3":"32423","LegacyDescription3":null,"LegacyField4":null,"LegacyDescription4":null,"NewValueField":"23423","NewValueFieldDescription":null,"IsMock":false,"LegacySystem":"AP1","ProjectName":"Z_Migration_Staging","RelevantObjects":"Customer","Team":null,"Comments":"34","TemplateFile":null,"TemplateDescription":"Mapping Values For: Mapping of Plant ( MAP_WERKS )","TrackingState":"Unchanged","Created":"0001-01-01T00:00:00.0000000","CreatedBy":null,"LastModified":null,"LastModifiedBy":null,"$type":"AddEditMappingRuleCommand"} 127.0.0.1 null
+2021-11-29 09:57:23.345 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result`1[[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:57:23.371 +08:00 [INF] CleanArchitecture Request: MappingRulesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 null
+2021-11-29 09:57:23.378 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MappingRules.DTOs.MappingRuleDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:59:07.536 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-29 09:59:07.860 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:59:07.861 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:59:07.861 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:59:07.861 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:59:07.861 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:59:07.861 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:59:17.583 +08:00 [INF] CleanArchitecture Request: GetAllMigrationObjectsQuery EURO1\zhuhua null {"$type":"GetAllMigrationObjectsQuery"} 127.0.0.1 null
+2021-11-29 09:59:18.437 +08:00 [WRN] CleanArchitecture Long Running Request: GetAllMigrationObjectsQuery (818 milliseconds) EURO1\zhuhua null {"$type":"GetAllMigrationObjectsQuery"} 127.0.0.1 null
+2021-11-29 09:59:18.698 +08:00 [INF] CleanArchitecture Request: KeyValuesQueryByName EURO1\zhuhua null {"Name":"LegacySystem","CacheKey":"LegacySystem-keyvalues","Options":{"AbsoluteExpiration":null,"AbsoluteExpirationRelativeToNow":null,"SlidingExpiration":null,"ExpirationTokens":[{"ActiveChangeCallbacks":true,"HasChanged":false,"$type":"CancellationChangeToken"}],"PostEvictionCallbacks":[],"Priority":"Normal","Size":null,"$type":"MemoryCacheEntryOptions"},"$type":"KeyValuesQueryByName"} 127.0.0.1 null
+2021-11-29 09:59:18.706 +08:00 [INF] CleanArchitecture.Razor.Application.KeyValues.Queries.ByName.KeyValuesQueryByName is configured for caching. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:59:18.862 +08:00 [INF] CleanArchitecture Request: KeyValuesQueryByName EURO1\zhuhua null {"Name":"ProjectName","CacheKey":"ProjectName-keyvalues","Options":{"AbsoluteExpiration":null,"AbsoluteExpirationRelativeToNow":null,"SlidingExpiration":null,"ExpirationTokens":[{"ActiveChangeCallbacks":true,"HasChanged":false,"$type":"CancellationChangeToken"}],"PostEvictionCallbacks":[],"Priority":"Normal","Size":null,"$type":"MemoryCacheEntryOptions"},"$type":"KeyValuesQueryByName"} 127.0.0.1 null
+2021-11-29 09:59:18.863 +08:00 [INF] CleanArchitecture.Razor.Application.KeyValues.Queries.ByName.KeyValuesQueryByName is configured for caching. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:59:21.001 +08:00 [INF] CleanArchitecture Request: MappingRulesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 null
+2021-11-29 09:59:22.017 +08:00 [WRN] CleanArchitecture Long Running Request: MappingRulesWithPaginationQuery (1014 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 null
+2021-11-29 09:59:22.020 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MappingRules.DTOs.MappingRuleDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:59:28.307 +08:00 [INF] CleanArchitecture Request: GetAllMappingRulesWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllMappingRulesWithKeyQuery"} 127.0.0.1 null
+2021-11-29 09:59:28.352 +08:00 [INF] CleanArchitecture Request: FieldMappingValuesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldMappingValuesWithPaginationQuery"} 127.0.0.1 null
+2021-11-29 09:59:28.501 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.MappingRules.DTOs.MappingRuleDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 09:59:28.588 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.FieldMappingValues.DTOs.FieldMappingValueDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:00:42.399 +08:00 [INF] CleanArchitecture Request: GetAllMappingRulesWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllMappingRulesWithKeyQuery"} 127.0.0.1 null
+2021-11-29 10:00:42.418 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.MappingRules.DTOs.MappingRuleDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:00:42.430 +08:00 [INF] CleanArchitecture Request: FieldMappingValuesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldMappingValuesWithPaginationQuery"} 127.0.0.1 null
+2021-11-29 10:00:42.468 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.FieldMappingValues.DTOs.FieldMappingValueDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:00:50.508 +08:00 [ERR] Request failed with Status Code 500 and Error Id be3eec17-43a5-4231-b4c5-10500d88f0f7. 127.0.0.1 EURO1\zhuhua
+System.Exception: new ex
+   at AdminLTE.WebUI.Pages.MappingRules.IndexModel.OnGetAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.ExecutorFactory.NonGenericTaskHandlerMethod.Execute(Object receiver, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeHandlerMethodAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeNextPageFilterAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.Rethrow(PageHandlerExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at CleanArchitecture.Razor.Infrastructure.Middlewares.UnhandledExceptionMiddleware.InvokeAsync(HttpContext context, RequestDelegate next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Middlewares\UnhandledExceptionMiddleware.cs:line 29
+2021-11-29 10:16:16.059 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-29 10:16:16.324 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:16:16.324 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:16:16.324 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:16:16.324 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:16:16.324 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:16:16.324 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:18:37.646 +08:00 [ERR] Request failed with Status Code 500 and Error Id 6c306193-7c9d-43c5-a6af-30cb31497bf8. 127.0.0.1 EURO1\zhuhua
+System.Exception: new ex
+   at AdminLTE.WebUI.Pages.MappingRules.IndexModel.OnGetAsync() in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\Pages\MappingRules\Index.cshtml.cs:line 52
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.ExecutorFactory.NonGenericTaskHandlerMethod.Execute(Object receiver, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeHandlerMethodAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeNextPageFilterAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.Rethrow(PageHandlerExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at CleanArchitecture.Razor.Infrastructure.Middlewares.UnhandledExceptionMiddleware.InvokeAsync(HttpContext context, RequestDelegate next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Middlewares\UnhandledExceptionMiddleware.cs:line 29
+2021-11-29 10:18:39.872 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:18:39.872 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:18:39.872 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:18:39.872 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:18:39.872 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:18:39.873 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:18:46.093 +08:00 [INF] CleanArchitecture Request: GetAllMappingRulesWithKeyQuery EURO1\zhuhua null {"Key":"","$type":"GetAllMappingRulesWithKeyQuery"} 127.0.0.1 null
+2021-11-29 10:18:46.389 +08:00 [INF] CleanArchitecture Request: FieldMappingValuesWithPaginationQuery EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldMappingValuesWithPaginationQuery"} 127.0.0.1 null
+2021-11-29 10:18:46.547 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.MappingRules.DTOs.MappingRuleDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:18:46.909 +08:00 [WRN] CleanArchitecture Long Running Request: FieldMappingValuesWithPaginationQuery (519 milliseconds) EURO1\zhuhua null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldMappingValuesWithPaginationQuery"} 127.0.0.1 null
+2021-11-29 10:18:46.910 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.FieldMappingValues.DTOs.FieldMappingValueDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:18:50.768 +08:00 [INF] CleanArchitecture Request: ImportFieldMappingValuesCommand EURO1\zhuhua null {"FileName":"MappingRules (2).xlsx","Data":"504B030414000008080069737A533026... (6535 bytes)","$type":"ImportFieldMappingValuesCommand"} 127.0.0.1 null
+2021-11-29 10:18:51.423 +08:00 [WRN] CleanArchitecture Long Running Request: ImportFieldMappingValuesCommand (637 milliseconds) EURO1\zhuhua null {"FileName":"MappingRules (2).xlsx","Data":"504B030414000008080069737A533026... (6535 bytes)","$type":"ImportFieldMappingValuesCommand"} 127.0.0.1 null
+2021-11-29 10:18:51.423 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result'. 127.0.0.1 EURO1\zhuhua
+2021-11-29 10:19:02.089 +08:00 [INF] CleanArchitecture Request: ImportFieldMappingValuesCommand EURO1\zhuhua null {"FileName":"filepond-plugin-file-validate-type-master.zip","Data":"504B03040A0000000000104473520000... (61853 bytes)","$type":"ImportFieldMappingValuesCommand"} 127.0.0.1 null
+2021-11-29 10:19:04.985 +08:00 [ERR] CleanArchitecture Request: Unhandled Exception for Request ImportFieldMappingValuesCommand {"FileName":"filepond-plugin-file-validate-type-master.zip","Data":"504B03040A0000000000104473520000... (61853 bytes)","$type":"ImportFieldMappingValuesCommand"} 127.0.0.1 EURO1\zhuhua
+DocumentFormat.OpenXml.Packaging.OpenXmlPackageException: The specified package is invalid. The main part is missing.
+   at DocumentFormat.OpenXml.Packaging.OpenXmlPackage.Load()
+   at DocumentFormat.OpenXml.Packaging.OpenXmlPackage.OpenCore(Stream stream, Boolean readWriteMode)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable, OpenSettings openSettings)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable)
+   at ClosedXML.Excel.XLWorkbook.LoadSheets(Stream stream)
+   at ClosedXML.Excel.XLWorkbook.Load(Stream stream)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream, XLEventTracking eventTracking)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream)
+   at CleanArchitecture.Razor.Infrastructure.Services.ExcelService.ImportAsync[TEntity](Byte[] data, Dictionary`2 mappers, String sheetName) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Services\ExcelService.cs:line 108
+   at CleanArchitecture.Razor.Application.FieldMappingValues.Commands.Import.ImportFieldMappingValuesCommandHandler.Handle(ImportFieldMappingValuesCommand request, CancellationToken cancellationToken) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\FieldMappingValues\Commands\Import\ImportFieldMappingValuesCommand.cs:line 60
+   at CleanArchitecture.Razor.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\PerformanceBehaviour.cs:line 32
+   at CleanArchitecture.Razor.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\ValidationBehaviour.cs:line 36
+   at CleanArchitecture.Razor.Application.Common.Behaviours.AuthorizationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\AuthorizationBehaviour.cs:line 80
+   at CleanArchitecture.Razor.Application.Common.Behaviours.UnhandledExceptionBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\UnhandledExceptionBehaviour.cs:line 19

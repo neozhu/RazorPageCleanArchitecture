@@ -298,8 +298,8 @@
                             $dg.datagrid('acceptChanges');
                             reloadData();
                         }).catch(error => {
-                            if (error.response.data.errors) {
-                                const errors = error.response.data.errors;
+                            if (error.response.data.Errors) {
+                                const errors = error.response.data.Errors;
                                 for (let [key, value] of Object.entries(errors)) {
                                     toastr["error"](`${key}: ${value.toString()}`);
                                 }
@@ -339,8 +339,8 @@
                                 reloadData();
                             })
                                 .catch((error) => {
-                                    if (error.response.data.errors) {
-                                        const errors = error.response.data.errors;
+                                    if (error.response.data.Errors) {
+                                        const errors = error.response.data.Errors;
                                         for (let [key, value] of Object.entries(errors)) {
                                             toastr["error"](`${key}: ${value.toString()}`);
                                         }
@@ -382,8 +382,8 @@
                     link.click();
                     toastr["info"](`@_localizer["Export Success"]`);
                 }).catch(error => {
-                    if (error.response.data.errors) {
-                        const errors = error.response.data.errors;
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
                         for (let [key, value] of Object.entries(errors)) {
                             toastr["error"](`${key}: ${value.toString()}`);
                         }
