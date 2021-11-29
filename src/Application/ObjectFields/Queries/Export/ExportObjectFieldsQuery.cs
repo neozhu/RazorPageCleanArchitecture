@@ -48,12 +48,7 @@ namespace CleanArchitecture.Razor.Application.ObjectFields.Queries.Export;
                     { _localizer["Field Name"], item => item.Name },
                     { _localizer["Field Description"], item => item.Description },
                     { _localizer["Associated Type"], item => item.AssociatedType },
-                    { _localizer["Date Type"], item => item.DateType },
                     { _localizer["Length"], item => item.Length },
-                    { _localizer["Direct"], item => item.Direct },
-                    { _localizer["Parameter Name"], item => item.ParameterName },
-                    { _localizer["Title"], item => item.Title },
-                    { _localizer["Source Template Name"], item => item.SourceTemplateName },
                 }
                 , _localizer["ObjectFields"]);
             return result;

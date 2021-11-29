@@ -10,14 +10,19 @@ namespace CleanArchitecture.Razor.Application.MappingRules.DTOs;
     public string Name { get; set; }
     public string Status { get; set; }
     public string LegacyField1 { get; set; }
+    public string ImportParameterField1 { get; set; }
     public string LegacyDescription1 { get; set; }
     public string LegacyField2 { get; set; }
+    public string ImportParameterField2 { get; set; }
     public string LegacyDescription2 { get; set; }
     public string LegacyField3 { get; set; }
+    public string ImportParameterField3 { get; set; }
     public string LegacyDescription3 { get; set; }
     public string LegacyField4 { get; set; }
+    public string ImportParameterField4 { get; set; }
     public string LegacyDescription4 { get; set; }
     public string NewValueField { get; set; }
+    public string ExportParameterField { get; set; }
     public string NewValueFieldDescription { get; set; }
     public bool IsMock { get; set; }
     public string LegacySystem { get; set; }

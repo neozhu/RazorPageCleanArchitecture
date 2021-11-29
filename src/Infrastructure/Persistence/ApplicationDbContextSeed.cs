@@ -70,6 +70,13 @@ public static class ApplicationDbContextSeed
     public static async Task SeedSampleDataAsync(ApplicationDbContext context)
     {
         //Seed, if necessary
+        if (!context.MigrationProjects.Any())
+        {
+            context.MigrationProjects.Add(new Domain.Entities.MigrationProject() { Name = "VT", Status="Ongoing", Description = "VT",BeginDateTime=DateTime.Now, Progress=0 });
+            await context.SaveChangesAsync();
+
+        }
+
         if (!context.MigrationObjects.Any())
         {
             context.MigrationObjects.Add(new Domain.Entities.MigrationObject() { Name = "BOM", Description = "BOM" });

@@ -49,12 +49,7 @@ public class ImportObjectFieldsCommandHandler :
                 { _localizer["Field Name"], (row,item) => item.Name = row[_localizer["Field Name"]]?.ToString() },
                 { _localizer["Field Description"], (row,item) => item.Description = row[_localizer["Field Description"]]?.ToString() },
                 { _localizer["Associated Type"], (row,item) => item.AssociatedType = row[_localizer["Associated Type"]]?.ToString() },
-                { _localizer["Date Type"], (row,item) => item.DateType = row[_localizer["DateType"]]?.ToString() },
                 { _localizer["Length"], (row,item) => item.Length =row.IsNull(_localizer["Length"])?null: Convert.ToInt32(row[_localizer["Length"]]?.ToString()) },
-                { _localizer["Direct"], (row,item) => item.Direct = row[_localizer["Direct"]]?.ToString() },
-                { _localizer["Parameter Name"], (row,item) => item.ParameterName = row[_localizer["Parameter Name"]]?.ToString() },
-                { _localizer["Title"], (row,item) => item.Title = row[_localizer["Title"]]?.ToString() },
-                { _localizer["Source Template Name"], (row,item) => item.SourceTemplateName = row[_localizer["SourceTemplateName"]]?.ToString() },
             }, _localizer["ObjectFields"]);
         if (result.Succeeded)
         {
@@ -100,13 +95,7 @@ public class ImportObjectFieldsCommandHandler :
             _localizer["Field Name"],
             _localizer["Field Description"],
             _localizer["Associated Type"],
-            _localizer["Date Type"],
             _localizer["Length"],
-            _localizer["Parameter Name"],
-            _localizer["Direct"],
-            _localizer["Title"],
-            _localizer["Source Template Name"],
-          
         };
         var result = await _excelService.CreateTemplateAsync(fields, _localizer["ObjectFields"]);
         return result;

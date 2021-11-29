@@ -1,13 +1,13 @@
 @page
 @using CleanArchitecture.Razor.Application.Constants.Permission
-@model AdminLTE.WebUI.Pages.ObjectFields.IndexModel
+@model AdminLTE.WebUI.Pages.MigrationProjects.IndexModel
 @inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
-    ViewData["Title"] = _localizer["Object Fields"].Value;
-    ViewData["PageName"] = "objectfields_index";
+    ViewData["Title"] = _localizer["Migration Projects"].Value;
+    ViewData["PageName"] = "migrationprojects_index";
     ViewData["Category1"] = _localizer["Migration Objects"].Value;
-    ViewData["Heading"] = _localizer["Object Fields"].Value;
+    ViewData["Heading"] = _localizer["Migration Projects"].Value;
     ViewData["PageDescription"] = _localizer["See all available options"].Value;
     ViewData["PreemptiveClass"] = "Default";
     //var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Dictionaries.Create);
@@ -24,100 +24,19 @@
     <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
     <style>
 
-        .objectfields_dg_datagrid-cell-c1-_action {
+        .migrationprojects_dg_datagrid-cell-c1-_action {
             overflow: visible !important
         }
     </style>
-    <style>
-
-    .plfile_empty_div {
-        position: absolute;
-        left: 17%;
-        top: 43%;
-        z-index: 1;
-    }
-
-    ul#filelist {
-        width: 450px;
-        min-height: 100px;
-        background: #fff;
-        border-left: 0;
-        border-right: 0;
-        line-height: 24px;
-        overflow: hidden;
-        margin: 0 15px;
-        padding: 5px 0;
-        font-size: 12px;
-    }
-
-        ul#filelist li {
-            list-style-type: none;
-            margin: 4px 0;
-            padding: 0px 17px 0px 0px;
-        }
-
-            ul#filelist li:hover {
-                background: #d6e7f9;
-            }
-
-    #filelist li {
-        clear: both;
-        line-height: 22px;
-        height: 22px;
-    }
-
-    .plupload_filename {
-        width: 230px;
-        display: block;
-        float: left;
-        word-wrap: break-word;
-        margin-right: 10px;
-        line-height: 22px;
-        margin-left: 5px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .plupload_filesize {
-        width: 80px;
-        line-height: 22px;
-        display: block;
-        float: left;
-    }
-
-    .plupload_d-none {
-        display: none;
-    }
-
-    .plupload_fileremove {
-        float: right;
-        line-height: 22px;
-        display: block;
-        cursor: pointer;
-    }
-
-    .plupload_fileprogress {
-        display: block;
-        width: 60px;
-        line-height: 22px;
-        margin-right: 19px;
-        float: right;
-        text-align: right;
-    }
-</style>
 }
 <div id="js-page-content-demopanels" class="card mb-g">
     <div class="card-header bg-white d-flex align-items-center">
         <h4 class="m-0">
-            @_localizer["Object Fields"]
+            @_localizer["Migration Projects"]
             <small>@_localizer["See all available options"]</small>
         </h4>
         <div class="ml-auto">
-            <button class="btn btn-sm btn-outline-primary " id="uploadfieldbutton">
-                <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
-                @_localizer["Upload Template Files"]
-            </button>
+            
                 <button class="btn btn-sm btn-outline-primary " id="addbutton">
                     <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
                     @_localizer["Add"]
@@ -163,47 +82,17 @@
         <div class="row">
             <div class="col-md-12">
                 @Html.AntiForgeryToken()
-                <table id="objectfields_dg">
+                <table id="migrationprojects_dg">
                 </table>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="uploadfilesmodal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">
-                    @_localizer["Upload Migration Template Files"]
-                </h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
-                </button>
-            </div>
-            <div class="modal-body pb-0 pt-0">
-                <div id="slimscroll">
-                    <div id="file_empty_div" class="plfile_empty_div">
-                        <span style="color: Dodgerblue;"><i class="fal fa-exclamation-circle"></i></span> @_localizer["Please click [Choose Files] button to upload template files."]
-                    </div>
-                    <ul id="filelist"></ul>
-                </div>
-                <div id="plupload_max_size_alert" class="alert alert-primary mb-0  fw-300 fs-sm p-2  d-none" role="alert">
-                    <strong>@_localizer["Note"]</strong> @_localizer["The size of the uploaded photo must be less than 5MB."]
-                </div>
-                <input id="fileupload" type="file" ccept=".xml" name="fileupload" multiple style="display: none" />
 
-            </div>
-            <div class="modal-footer">
-                <button id="selectuploadfilesbtn" type="button" class="btn btn-info">@_localizer["Choose Files"]</button>
-                <button id="postuploadfilesbtn" type="button" class="btn btn-primary">@_localizer["Upload"]</button>
-            </div>
-        </div>
-    </div>
-</div>
 @await Component.InvokeAsync("ImportExcel", new
 {
-    importUri = Url.Page("/ObjectFields/Index") + "?handler=Import",
-    getTemplateUri = @Url.Page("/ObjectFields/Index") + "?handler=CreateTemplate",
+    importUri = Url.Page("/MigrationProjects/Index") + "?handler=Import",
+    getTemplateUri = @Url.Page("/MigrationProjects/Index") + "?handler=CreateTemplate",
     onImportedSucceeded = "reloadData()"
 })
 @section ScriptsBlock {
@@ -212,12 +101,7 @@
     <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
     <script src="~/lib/axios/dist/axios.js"></script>
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
-    <script src="~/lib/filesize/filesize.js"></script>
-    <script src="~/lib/plupload/plupload.full.min.js"></script>
-    <script src="~/lib/plupload/jquery.plupload.queue/jquery.plupload.queue.js"></script>
-    <script src="~/lib/plupload/jquery.ui.plupload/jquery.ui.plupload.js"></script>
-    <script src="~/lib/fabric/fabric.min.js"></script>
-    <script src="~/lib/slimScroll/jquery.slimscroll.min.js"></script>
+
     <script type="text/javascript">
         $('#searchbutton').click(function () {
             reloadData();
@@ -245,7 +129,7 @@
         });
         var $dg={};
         var initdatagrid = () => {
-            $dg = $('#objectfields_dg').datagrid({
+            $dg = $('#migrationprojects_dg').datagrid({
                 height: 700,
                 method: 'GET',
                 rownumbers: false,
@@ -291,41 +175,90 @@
                     { field: 'ck', checkbox: true },
                     {
                         field: 'Name',
-                        title: '@_localizer["Field Name"]',
+                        title: '@_localizer["Project Name"]',
                         sortable: true,
                         width: 180,
-                        editor: { type: 'textbox', options: { required: true} }
-                    },
-                    {
-                        field: 'Description',
-                        title: '@_localizer["Field Description"]',
-                        sortable: true,
-                        width: 300,
                         editor: { type: 'textbox', options: { required: true } }
                     },
+                     
                     {
-                        field: 'AssociatedType',
-                        title: '@_localizer["Associated Type"]',
+                        field: 'Status',
+                        title: '@_localizer["Status"]',
                         sortable: true,
-                        width:160,
+                        width: 180,
                         editor: { type: 'textbox', options: { required: false } }
                     },
                     {
-                        field: 'Length',
-                        title: '@_localizer["Length"]',
+                        field: 'BeginDateTime',
+                        title: '@_localizer["Begin Date"]',
+                        sortable: true,
+                        width: 160,
+                        formatter:dateformatter,
+                        editor: { type: 'datebox', options: { required: true } }
+                    },
+                    {
+                        field: 'FinishedDateTime',
+                        title: '@_localizer["Finished Date"]',
+                        sortable: true,
+                        width: 160,
+                        formatter:dateformatter,
+                        editor: { type: 'datebox', options: { required: false } }
+                    },
+                    {
+                        field: 'Progress',
+                        title: '@_localizer["Progress"]',
                         sortable: true,
                         width: 130,
-                        editor: { type: 'numberbox', options: { required: false } }
+                        editor: { type: 'numberbox', options: { required: true } }
                     },
+                    {
+                        field: 'Description',
+                        title: '@_localizer["Description"]',
+                        sortable: true,
+                        width:160,
+                        editor: { type: 'textbox', options: {
+                            required: false,
+                            readonly: false
+                            }
+                        }
+                    }
+                   
                 ]]
             })
-                .datagrid('enableFilter', [ ])
-                .datagrid('load', '@Url.Page("/ObjectFields/Index")?handler=Data');
+                .datagrid('enableFilter', [{
+                    field:'MappingRuleId',
+                    type:'combobox',
+                    options:{
+                        value: '',
+                        url:'@Url.Page("/MigrationProjects/Index")?handler=MappingRules',
+                        method:'GET',
+                        valueField:'Id',
+                        textField:'Name',
+                        panelHeight:'auto',
+                        mode:'remote',
+                        onChange: function (item) {
+                         if(item){
+                             $dg.datagrid('MappingRuleId', {
+	                           field: 'ObjectFieldId',
+	                           op: 'equal',
+	                           value: item
+                             });
+                             $dg.datagrid('doFilter');
+                         }else{
+                             $dg.datagrid('removeFilterRule', 'MappingRuleId'	                          );
+                             $dg.datagrid('doFilter');
+                         }
+                        }
+
+                    }
+                },
+                ])
+                .datagrid('load', '@Url.Page("/MigrationProjects/Index")?handler=Data');
 
         }
 
         var reloadData = () => {
-            $dg.datagrid('load', '@Url.Page("/ObjectFields/Index")?handler=Data');
+            $dg.datagrid('load', '@Url.Page("/MigrationProjects/Index")?handler=Data');
         }
 
         $(() => {
@@ -347,8 +280,16 @@
         }
         var onAddRow = () => {
             if (onEndEditing()) {
+                var newitem={...currentItem};
+                newitem.Id=0;
+                newitem.Legacy1='';
+                newitem.Legacy2='';
+                newitem.Legacy3='';
+                newitem.NewValue='';
+                newitem.CreatedBy=null;
+                newitem.LastModifiedBy=null;
                 $dg.datagrid('insertRow', { index: 0,
-                    row:{ Length:0 }
+                    row:newitem
                     });
                 editIndex =0 ;
                 $dg.datagrid('selectRow', editIndex)
@@ -377,11 +318,11 @@
             }
         }
         var onEndEdit = (index, row)=> {
-            var ed = $dg.datagrid('getEditor', {
-                index: index,
-                field: 'Name'
-            });
-            row.Name = $(ed.target).textbox('getValue');
+            //var ed = $dg.datagrid('getEditor', {
+            //    index: index,
+            //    field: 'Name'
+            //});
+            //row.Name = $(ed.target).textbox('getValue');
             currentItem = row;
         }
 
@@ -410,7 +351,7 @@
                     const changed = inserted.concat(updated.filter(item => {
                         return !deleted.includes(item);
                     })).concat(deleted);
-                    axios.post('@Url.Page("/ObjectFields/Index")', { Items: changed }, {
+                    axios.post('@Url.Page("/MigrationProjects/Index")', { Items: changed }, {
                         headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() }
                     })
                         .then(response => {
@@ -454,7 +395,7 @@
                         if (result) {
                             var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
                             console.log(paras.toString())
-                            axios.get('@Url.Page("/ObjectFields/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
+                            axios.get('@Url.Page("/MigrationProjects/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
                                 toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
                                 reloadData();
                             })
@@ -486,7 +427,7 @@
             var headers = {
                 "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
             }
-            axios.post('@Url.Page("/ObjectFields/Index")?handler=Export',
+            axios.post('@Url.Page("/MigrationProjects/Index")?handler=Export',
                 data,
                 {
                     headers: headers,
@@ -517,132 +458,5 @@
         }
 
 
-    </script>
-    <script>
-
-        $('#uploadfieldbutton').click(function(){
-            $('#uploadfilesmodal').modal('toggle');
-        })
-        document.addEventListener("DOMContentLoaded", function () {
-
-        $('#slimscroll').slimScroll({
-            height: '100px',
-            railVisible: true,
-            alwaysVisible: false,
-        });
-        var headers = {
-            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
-        }
-        var uploader = new plupload.Uploader({
-            runtimes: 'html5',
-            headers,
-            file_data_name:'UploadedFile',
-            filters: {
-                mime_types : [ //只允许上传xml
-                  { title : "Xml files", extensions : "xml" }, 
-                ],
-                max_file_size: "15mb"
-            },
-            browse_button: 'selectuploadfilesbtn', // this can be an id of a DOM element or the DOM element itself
-            url: '@Url.Page("/ObjectFields/index")?handler=Upload',
-        });
-        uploader.init();
-        //验证文件大小
-        plupload.addFileFilter('max_file_size', function (maxSize, file, cb) {
-            var undef;
-            if (file.size !== undef && maxSize && file.size > plupload.parseSize(maxSize)) {
-                this.trigger('Error', {
-                    code: plupload.FILE_SIZE_ERROR,
-                    message: plupload.translate('File size error.'),
-                    file: file
-                });
-                cb(false);
-            } else {
-                cb(true);
-            }
-        });
-        //初始化
-        uploader.bind('Init', function (up) {
-            $('#plupload_max_size_alert').addClass('d-none');
-        });
-        //设置post参数
-        uploader.bind('BeforeUpload', function (up) {
-
-            up.settings.multipart_params.tags = '';
-        });
-        //单击选择文件
-        uploader.bind('Browse', function () {
-            $('#plupload_max_size_alert').addClass('d-none');
-        });
-        //分段上传
-        uploader.bind('ChunkUploaded', function (up, file, info) {
-            console.log(up, file, info)
-        });
-        //捕获异常
-        uploader.bind('Error', function (up, error) {
-            console.log(up, error)
-            if (error.code == -600) {
-                $('#plupload_max_size_alert').removeClass('d-none')
-            } else {
-                bootbox.alert(`异常:${error.message}`);
-            }
-        });
-        //添加文件
-        uploader.bind('FilesAdded', function (up, files) {
-            $('#file_empty_div').hide()
-            var html = '';
-            plupload.each(files, function (file) {
-                html += ` <li id="${file.id}"  >
-                            <span class="plupload_filename">${file.name}</span>
-                            <span id="filesize" class="plupload_filesize">(大小:${plupload.formatSize(file.size)})</span>
-                            <span id="plfilesize" class="plupload_d-none">${plupload.formatSize(file.size)}</span>
-                            <span id="remove" class="plupload_fileremove">
-                                        <a href="javascript:void(0);" class="btn btn-outline-info btn-xs btn-icon waves-effect waves-themed">
-                                            <i class="fal fa-times"></i>
-                                        </a>
-                            </span>
-                            <span id="progress" class="plupload_fileprogress"></span>
-                            </li>`
-                //html += '<li id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></li>';
-            });
-            document.getElementById('filelist').innerHTML += html;
-        });
-        //删除队列中的文件
-        $(document).on('click', '#remove', function (e) {
-            var li = $(this).closest('li');
-            var fileid = li.attr('id');
-            uploader.removeFile(fileid);
-            li.remove()
-            if ($('ul#filelist li').length == 0) {
-                $('#file_empty_div').show();
-            }
-        });
-        //显示进度
-        uploader.bind('UploadProgress', function (up, file) {
-            $(`li#${file.id} > .plupload_fileprogress`).text(file.percent + " %")
-
-        });
-        uploader.bind('BeforeChunkUpload', function (up, file) {
-            //console.log('BeforeChunkUpload', up, file)
-
-        });
-
-        //完成上传
-        uploader.bind('UploadComplete', function (up, files) {
-            //console.log('UploadComplete', up.files)
-            $('#plupload_max_size_alert').addClass('d-none');
-            $('#uploadfilesmodal').modal('toggle')
-            uploader.files.forEach(function (item) {
-                uploader.removeFile(item);
-                $(`ul#filelist #${item.id}`).remove();
-            });
-            $('#file_empty_div').show();
-            reloadData()
-        });
-        //开始上传
-        $('#postuploadfilesbtn').click(function () {
-            uploader.start();
-        });
-    });
     </script>
 }

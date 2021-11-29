@@ -52,7 +52,7 @@ public class ApplicationDbContext : IdentityDbContext<
     public DbSet<ObjectField> ObjectFields { get; set; }
     public DbSet<MigrationTemplateFile> MigrationTemplateFiles { get; set; }
 
-
+    public DbSet<MigrationProject> MigrationProjects { get; set; }
     public DbSet<MappingRule> MappingRules { get; set; }
     public DbSet<FieldMappingValue> FieldMappingValues { get; set; }
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

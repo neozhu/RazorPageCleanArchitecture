@@ -15,6 +15,7 @@ using CleanArchitecture.Razor.Application.MappingRules.Commands.Import;
 using CleanArchitecture.Razor.Domain.Enums;
 using System.Xml.Linq;
 using CleanArchitecture.Razor.Application.FieldMappingValues.Commands.Import;
+using CleanArchitecture.Razor.Application.Common.Interfaces;
 
 namespace AdminLTE.WebUI.Pages.MappingRules
 {
@@ -36,14 +37,17 @@ namespace AdminLTE.WebUI.Pages.MappingRules
         public string MappingRuleName { get; set; }
         public SelectList MigrationObjects { get; set; }
 
+        private readonly ICurrentUserService _currentUserService;
         private readonly ISender _mediator;
         private readonly IStringLocalizer<IndexModel> _localizer;
 
         public IndexModel(
+            ICurrentUserService currentUserService,
                 ISender mediator,
             IStringLocalizer<IndexModel> localizer
             )
         {
+            _currentUserService = currentUserService;
             _mediator = mediator;
             _localizer = localizer;
         }

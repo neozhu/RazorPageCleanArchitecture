@@ -9,6 +9,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Serilog;
 using Serilog.Events;
 using Serilog.Filters;
@@ -60,7 +61,8 @@ builder.WebHost.UseSerilog((context, configuration) =>
 
 builder.Services.AddInfrastructure(builder.Configuration)
         .AddApplication()
-        .AddWorkflow(builder.Configuration);
+        .AddWorkflow(builder.Configuration); ;
+ 
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -81,6 +83,8 @@ builder.Services
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.PropertyNamingPolicy = null;
+        //options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Include;
+        //options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
 
     });
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)

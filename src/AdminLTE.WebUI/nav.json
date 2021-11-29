@@ -17,6 +17,7 @@
       "icon": "nav-icon fas fa-tools",
       "roles": [],
       "items": [
+        
         {
           "title": "Value Mapping",
           "href": "mappingrules_index.html",
@@ -32,7 +33,7 @@
           "href": "objectfields_index.html",
           "roles": []
         }
-        
+
       ]
     },
     {
@@ -40,6 +41,11 @@
       "icon": "nav-icon fas fa-cogs",
       "roles": [],
       "items": [
+        {
+          "title": "Migration Projects",
+          "href": "migrationprojects_index.html",
+          "roles": []
+        },
         {
           "title": "Dictionaries",
           "href": "keyvalues_index.html",

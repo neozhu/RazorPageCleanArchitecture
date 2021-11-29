@@ -22,6 +22,7 @@ public interface IApplicationDbContext
     DbSet<ObjectField> ObjectFields { get; set; }
     DbSet<MigrationTemplateFile> MigrationTemplateFiles { get; set; }
 
+    DbSet<MigrationProject> MigrationProjects { get; set; }
     DbSet<MappingRule> MappingRules { get; set; }
     DbSet<FieldMappingValue> FieldMappingValues { get; set; }
 

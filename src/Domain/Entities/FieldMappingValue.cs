@@ -16,4 +16,7 @@ public class FieldMappingValue : AuditableEntity, IAuditTrial
     public string Team { get; set; }
     public string Check { get; set; }
     public string Comments { get; set; }
+
+    public int MigrationProjectId { get; set; }
+    public virtual MigrationProject MigrationProject { get; set; }
 }
