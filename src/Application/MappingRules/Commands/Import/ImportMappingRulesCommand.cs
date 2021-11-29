@@ -79,25 +79,25 @@ public class ImportMappingRulesCommandHandler :
                     Comments = array[0].Title,
                     NewValueField = exportfield.Name,
                     ExportParameterField = exportfield.ParameterName,
-                    NewValueFieldDescription = exportfielddesc.Description
+                    NewValueFieldDescription = exportfielddesc?.Description
                 };
                 var index = 0;
                 foreach(var field in importfields)
                 {
                     var importfielddesc = await _context.ObjectFields.Where(x => x.Name == field.Name).FirstOrDefaultAsync();
-                    index++;
+                    ++index ;
                     switch (index) {
-                        case 0:
+                        case 1:
                             item.LegacyField1 = field.Name;
                             item.ImportParameterField1 = field.ParameterName;
                             item.LegacyDescription1 = importfielddesc?.Description;
                             break;
-                        case 1:
+                        case 2:
                             item.LegacyField2 = field.Name;
                             item.ImportParameterField2 = field.ParameterName;
                             item.LegacyDescription2 = importfielddesc?.Description;
                             break;
-                        case 2:
+                        case 3:
                             item.LegacyField3 = field.Name;
                             item.ImportParameterField3 = field.ParameterName;
                             item.LegacyDescription3 = importfielddesc?.Description;

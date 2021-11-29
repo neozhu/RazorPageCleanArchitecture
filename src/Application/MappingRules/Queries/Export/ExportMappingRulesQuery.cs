@@ -57,6 +57,7 @@ public class ExportMappingRulesQueryHandler :
                     { _localizer["Import Parameter Field Name 3"], item => item.ImportParameterField3 },
                     { _localizer["Legacy Field Description 3"], item => item.LegacyDescription3 },
                     { _localizer["New Field Name"], item => item.NewValueField },
+                    { _localizer["Export Parameter Field"], item => item.ExportParameterField },
                     { _localizer["New Field Description"], item => item.NewValueFieldDescription },
                     { _localizer["Is Mock"], item => item.IsMock },
                     { _localizer["Team"], item => item.Team },
