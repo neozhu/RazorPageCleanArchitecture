@@ -72,14 +72,15 @@ public class ImportMappingRulesCommandHandler :
                 var defafultproject = await _context.MigrationProjects.FirstAsync();
                 var item = new MappingRule()
                 {
-                    Name = exportfield.Name,
+                    Name = g.Key.Remove(g.Key.LastIndexOf(".")),
                     MigrationProjectId = defafultproject.Id,
-                    TemplateFile = "Files/TemplateFiles/" + g,
+                    TemplateFile = "Files/TemplateFiles/" + g.Key,
                     Status = "Ongoing",
                     Comments = array[0].Title,
                     NewValueField = exportfield.Name,
                     ExportParameterField = exportfield.ParameterName,
-                    NewValueFieldDescription = exportfielddesc?.Description
+                    NewValueFieldDescription = exportfielddesc?.Description,
+                    TemplateDescription = array[0].Title
                 };
                 var index = 0;
                 foreach(var field in importfields)

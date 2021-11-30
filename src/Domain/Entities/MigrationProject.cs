@@ -15,4 +15,6 @@ public  class MigrationProject: AuditableEntity
     public DateTime? FinishedDateTime { get; set; }
     public int Progress { get; set; }
     public string Description { get; set; }
+
+    public virtual ICollection<MigrationObject> MigrationObjects { get; set; } = new HashSet<MigrationObject>();
 }

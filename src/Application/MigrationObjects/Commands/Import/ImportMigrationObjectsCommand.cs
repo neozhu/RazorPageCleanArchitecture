@@ -44,9 +44,11 @@ namespace CleanArchitecture.Razor.Application.MigrationObjects.Commands.Import;
         public async Task<Result> Handle(ImportMigrationObjectsCommand request, CancellationToken cancellationToken)
         {
    
-           var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, MigrationObject, object>>
+           var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, MigrationObjectDto, object>>
             {
-                { _localizer["Object Name"], (row,item) => item.Name = row[_localizer["Object Name"]]?.ToString() },
+                { _localizer["Project Name"], (row,item) => item.ProjectName = row[_localizer["Project Name"]]?.ToString() },
+                { _localizer["Conversion Object Name"], (row,item) => item.Name = row[_localizer["Conversion Object Name"]]?.ToString() },
+                { _localizer["Object Name"], (row,item) => item.ObjectName = row[_localizer["Object Name"]]?.ToString() },
                 { _localizer["Team"], (row,item) => item.Team = row[_localizer["Team"]]?.ToString() },
                 { _localizer["Description"], (row,item) => item.Description = row[_localizer["Description"]]?.ToString() },
 
@@ -58,14 +60,29 @@ namespace CleanArchitecture.Razor.Application.MigrationObjects.Commands.Import;
             var errorsOccurred = false;
             foreach (var item in importItems)
             {
-                var validationResult = await _addValidator.ValidateAsync(_mapper.Map<CreateMigrationObjectCommand>(item), cancellationToken);
+                var migrationProject =await _context.MigrationProjects.FirstOrDefaultAsync(x => x.Name == item.ProjectName);
+                if (migrationProject == null)
+                {
+                    errorsOccurred = true;
+                    errors.Add($"not found migration project by name:{item.ProjectName}");
+                    break;
+                }
+                var createdto = new CreateMigrationObjectCommand() {
+                     ProjectName = item.ProjectName,
+                     Name = item.Name,
+                     Team=item.Team,
+                     Description=item.Description
+                    };
+                var validationResult = await _addValidator.ValidateAsync(createdto, cancellationToken);
                 if (validationResult.IsValid)
                 {
                     var exist = await _context.MigrationObjects.AnyAsync(x => x.Name == item.Name , cancellationToken);
                     if (!exist)
                     {
-                 
-                        await _context.MigrationObjects.AddAsync(item, cancellationToken);
+                        var newitem = _mapper.Map<MigrationObject>(item);
+                        newitem.MigrationProjectId = migrationProject.Id;
+                        newitem.MigrationProject = migrationProject;
+                        await _context.MigrationObjects.AddAsync(newitem, cancellationToken);
                     }
                 }
                 else
@@ -92,10 +109,11 @@ namespace CleanArchitecture.Razor.Application.MigrationObjects.Commands.Import;
         {
 
             var fields = new string[] {
-                  
+                   _localizer["Project Name"],
+                   _localizer["Conversion Object Name"],
                    _localizer["Object Name"],
-                   _localizer["Team"],
                    _localizer["Description"],
+                   _localizer["Team"],
                 };
             var result = await _excelService.CreateTemplateAsync(fields, _localizer["MigrationObjects"]);
             return result;

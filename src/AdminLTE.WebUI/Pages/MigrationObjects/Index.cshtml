@@ -169,10 +169,46 @@
                 onEndEdit: function (index, row) {
                     onEndEdit(index,row)
                 },
+                onBeginEdit: function (index, row) {
+                    const projectid = row.MigrationProjectId;
+                    const projectfield = $(this).datagrid('getEditor', { index: index, field: 'MigrationProjectId' });
+                    $(projectfield.target).combobox({
+                        required: true,
+                        value: projectid,
+                        url:'@Url.Page("/MigrationObjects/Index")?handler=MigrationProjects',
+                        method:'GET',
+                        valueField:'Id',
+                        textField:'Name',
+                        panelHeight:'auto',
+                        mode:'remote',
+                        onSelect: function (item) {
+                        }
+                    });
+                     
+                },
                 columns: [[
                     { field: 'ck', checkbox: true },
                     {
+                        field: 'MigrationProjectId',
+                        title: '@_localizer["Project Name"]',
+                        sortable: true,
+                        width: 180,
+                        formatter:function(v,r,i){return r.ProjectName},
+                        editor: { type: 'combobox',
+                           options: {
+                               required: true
+                           }
+                        }
+                    },
+                    {
                         field: 'Name',
+                        title: '@_localizer["Conversion Object Name"]',
+                        sortable: true,
+                        width: 230,
+                        editor: { type: 'textbox', options: { required: true} }
+                    },
+                    {
+                        field: 'ObjectName',
                         title: '@_localizer["Object Name"]',
                         sortable: true,
                         width: 180,
@@ -189,7 +225,7 @@
                         field: 'Description',
                         title: '@_localizer["Description"]',
                         sortable: true,
-                        width: 260,
+                        width: 280,
                         editor: { type: 'textbox', options: { required: false } }
                     },
                     {

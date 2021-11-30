@@ -11,6 +11,7 @@ public class FieldMappingValueDto : IMapFrom<FieldMappingValue>
         profile.CreateMap<FieldMappingValue, FieldMappingValueDto>()
                  .ForMember(x => x.MappingRule, y => y.MapFrom(z => z.MappingRule.Name))
                  .ForMember(x => x.LegacySystem, y => y.MapFrom(z => z.MappingRule.LegacySystem));
+
         profile.CreateMap<FieldMappingValueDto, FieldMappingValue>()
                 .ForMember(x => x.MappingRule, y => y.Ignore());
 

@@ -16,6 +16,8 @@ using CleanArchitecture.Razor.Domain.Enums;
 using System.Xml.Linq;
 using CleanArchitecture.Razor.Application.FieldMappingValues.Commands.Import;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Application.MappingRules.Commands.Parse;
+using CleanArchitecture.Razor.Application.MigrationProjects.Queries.GetAll;
 
 namespace AdminLTE.WebUI.Pages.MappingRules
 {
@@ -36,6 +38,7 @@ namespace AdminLTE.WebUI.Pages.MappingRules
         [BindProperty]
         public string MappingRuleName { get; set; }
         public SelectList MigrationObjects { get; set; }
+        public SelectList MigrationProjects { get; set; }
 
         private readonly ICurrentUserService _currentUserService;
         private readonly ISender _mediator;
@@ -56,6 +59,10 @@ namespace AdminLTE.WebUI.Pages.MappingRules
             var request = new GetAllMigrationObjectsQuery();
             var objectlist = await _mediator.Send(request);
             MigrationObjects = new SelectList(objectlist, "Name", "Name");
+
+            var requestproject = new GetAllMigrationProjectsQuery();
+            var projectlist = await _mediator.Send(requestproject);
+            MigrationProjects = new SelectList(projectlist, "Id", "Name");
         }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] MappingRulesWithPaginationQuery command)
         {
@@ -133,31 +140,39 @@ namespace AdminLTE.WebUI.Pages.MappingRules
             return new JsonResult(result);
         }
         public async Task<IActionResult> OnPostVaildateTemplateFile() {
-
             var stream = new MemoryStream();
-            TemplateFile.CopyTo(stream);
-            stream.Position = 0;
-            try
-            {
-                var description = "";
-                var xdoc = XDocument.Load(stream);
-                var signature = xdoc.Descendants().Where(x => x.Name.LocalName == "Worksheet" && x.FirstAttribute.Value == "Signature").First();
-                var data = xdoc.Descendants().Where(x => x.Name.LocalName == "Worksheet" && x.FirstAttribute.Value == "Data").First();
-                var table = data.Descendants().Where(x => x.Name.LocalName == "Table");
-                foreach (var row in table.Descendants().Where(x => x.Name.LocalName == "Row").ToList())
-                {
-                    description = row.Descendants().Where(x => x.Name.LocalName == "Data").First().Value;
-                    if (description != "")
-                    {
-                        break;
-                    }
-                }
-                return new JsonResult(Result<string>.Success(description));
-            }catch (Exception ex)
-            {
-                return new JsonResult(Result.Failure(new string[] { "The uploaded template file is not valid" }));
-            }
-            
+            await TemplateFile.CopyToAsync(stream);
+            var command = new ParseTemplateFileCommand() {
+                FileName = TemplateFile.FileName,
+                Data = stream.ToArray()
+             };
+            var result = await _mediator.Send(command);
+            return new JsonResult(result);
+
+            //var stream = new MemoryStream();
+            //TemplateFile.CopyTo(stream);
+            //stream.Position = 0;
+            //try
+            //{
+            //    var description = "";
+            //    var xdoc = XDocument.Load(stream);
+            //    var signature = xdoc.Descendants().Where(x => x.Name.LocalName == "Worksheet" && x.FirstAttribute.Value == "Signature").First();
+            //    var data = xdoc.Descendants().Where(x => x.Name.LocalName == "Worksheet" && x.FirstAttribute.Value == "Data").First();
+            //    var table = data.Descendants().Where(x => x.Name.LocalName == "Table");
+            //    foreach (var row in table.Descendants().Where(x => x.Name.LocalName == "Row").ToList())
+            //    {
+            //        description = row.Descendants().Where(x => x.Name.LocalName == "Data").First().Value;
+            //        if (description != "")
+            //        {
+            //            break;
+            //        }
+            //    }
+            //    return new JsonResult(Result<string>.Success(description));
+            //}catch (Exception ex)
+            //{
+            //    return new JsonResult(Result.Failure(new string[] { "The uploaded template file is not valid" }));
+            //}
+
         }
 
     }

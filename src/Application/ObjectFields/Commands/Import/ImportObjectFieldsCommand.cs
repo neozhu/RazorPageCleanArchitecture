@@ -48,8 +48,6 @@ public class ImportObjectFieldsCommandHandler :
             {
                 { _localizer["Field Name"], (row,item) => item.Name = row[_localizer["Field Name"]]?.ToString() },
                 { _localizer["Field Description"], (row,item) => item.Description = row[_localizer["Field Description"]]?.ToString() },
-                { _localizer["Associated Type"], (row,item) => item.AssociatedType = row[_localizer["Associated Type"]]?.ToString() },
-                { _localizer["Length"], (row,item) => item.Length =row.IsNull(_localizer["Length"])?null: Convert.ToInt32(row[_localizer["Length"]]?.ToString()) },
             }, _localizer["ObjectFields"]);
         if (result.Succeeded)
         {
@@ -93,9 +91,8 @@ public class ImportObjectFieldsCommandHandler :
       
         var fields = new string[] {
             _localizer["Field Name"],
-            _localizer["Field Description"],
-            _localizer["Associated Type"],
-            _localizer["Length"],
+            _localizer["Field Description"]
+
         };
         var result = await _excelService.CreateTemplateAsync(fields, _localizer["ObjectFields"]);
         return result;

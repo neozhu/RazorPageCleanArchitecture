@@ -72,7 +72,7 @@ public static class ApplicationDbContextSeed
         //Seed, if necessary
         if (!context.MigrationProjects.Any())
         {
-            context.MigrationProjects.Add(new Domain.Entities.MigrationProject() { Name = "VT", Status="Ongoing", Description = "VT",BeginDateTime=DateTime.Now, Progress=0 });
+            context.MigrationProjects.Add(new Domain.Entities.MigrationProject() { Name = "MOVE-VT", Status="Ongoing", Description = "MOVE-VT", BeginDateTime=DateTime.Now, Progress=0 });
             await context.SaveChangesAsync();
 
         }

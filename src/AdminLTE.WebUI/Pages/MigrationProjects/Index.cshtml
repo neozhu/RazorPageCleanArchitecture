@@ -202,7 +202,11 @@
                         sortable: true,
                         width: 160,
                         formatter:dateformatter,
-                        editor: { type: 'datebox', options: { required: false } }
+                        editor: { type: 'datebox',
+                            options: {
+                              required: false,
+                            }
+                        }
                     },
                     {
                         field: 'Progress',
@@ -337,14 +341,20 @@
                 if ($dg.datagrid("getChanges").length) {
                     const inserted = $dg.datagrid('getChanges', 'inserted').map(item => {
                         item.TrackingState = 1;
+                        item.FinishedDateTime = item.FinishedDateTime==''?null:item.FinishedDateTime;
+                        item.Progress = item.Progress==''?null:item.Progress;
                         return item;
                     });
                     const updated = $dg.datagrid('getChanges', 'updated').map(item => {
-                        item.TrackingState = 2
+                        item.TrackingState = 2;
+                        item.FinishedDateTime = item.FinishedDateTime==''?null:item.FinishedDateTime;
+                        item.Progress = item.Progress==''?null:item.Progress;
                         return item;
                     });
                     const deleted = $dg.datagrid('getChanges', 'deleted').map(item => {
-                        item.TrackingState = 3
+                        item.TrackingState = 3;
+                        item.FinishedDateTime = item.FinishedDateTime==''?null:item.FinishedDateTime;
+                        item.Progress = item.Progress==''?null:item.Progress;
                         return item;
                     });
                     //Deleting duplicate items

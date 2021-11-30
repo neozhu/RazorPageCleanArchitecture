@@ -4,8 +4,17 @@
 namespace CleanArchitecture.Razor.Application.MappingRules.DTOs;
 
 
-    public class MappingRuleDto:IMapFrom<MappingRule>
+public class MappingRuleDto : IMapFrom<MappingRule>
+{
+    public void Mapping(Profile profile)
     {
+        profile.CreateMap<MappingRule, MappingRuleDto>()
+                 .ForMember(x => x.ProjectName, y => y.MapFrom(z => z.MigrationProject.Name));
+
+        profile.CreateMap<MappingRuleDto, MappingRule>()
+                .ForMember(x => x.MigrationProject, y => y.Ignore());
+
+    }
     public int Id { get; set; }
     public string Name { get; set; }
     public string Status { get; set; }
@@ -27,6 +36,7 @@ namespace CleanArchitecture.Razor.Application.MappingRules.DTOs;
     public bool IsMock { get; set; }
     public string LegacySystem { get; set; }
     public string ProjectName { get; set; }
+    public int MigrationProjectId { get; set; }
     public string RelevantObjects { get; set; }
     public string Team { get; set; }
     public string Comments { get; set; }

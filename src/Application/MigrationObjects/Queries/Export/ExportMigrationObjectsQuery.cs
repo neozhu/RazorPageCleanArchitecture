@@ -39,15 +39,18 @@ namespace CleanArchitecture.Razor.Application.MigrationObjects.Queries.Export;
          
             var filters = PredicateBuilder.FromFilter<MigrationObject>(request.FilterRules);
             var data = await _context.MigrationObjects.Where(filters)
+                       .Include(x=>x.MigrationProject)
                        .OrderBy($"{request.Sort} {request.Order}")
                        .ProjectTo<MigrationObjectDto>(_mapper.ConfigurationProvider)
                        .ToListAsync(cancellationToken);
             var result = await _excelService.ExportAsync(data,
                 new Dictionary<string, Func<MigrationObjectDto, object>>()
                 {
-                    { _localizer["Object Name"], item => item.Name },
-                    { _localizer["Team"], item => item.Team },
+                    { _localizer["Project Name"], item => item.ProjectName },
+                    { _localizer["Conversion Object Name"], item => item.Name },
+                    { _localizer["Object Name"], item => item.ObjectName },
                     { _localizer["Description"], item => item.Description },
+                    { _localizer["Team"], item => item.Team },
                 }
                 , _localizer["MigrationObjects"]);
             return result;

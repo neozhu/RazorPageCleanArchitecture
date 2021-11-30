@@ -114,10 +114,10 @@
             <small>@_localizer["See all available options"]</small>
         </h4>
         <div class="ml-auto">
-            <button class="btn btn-sm btn-outline-primary " id="uploadfieldbutton">
+          @*  <button class="btn btn-sm btn-outline-primary " id="uploadfieldbutton">
                 <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
                 @_localizer["Upload Template Files"]
-            </button>
+            </button>*@
                 <button class="btn btn-sm btn-outline-primary " id="addbutton">
                     <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
                     @_localizer["Add"]
@@ -293,30 +293,16 @@
                         field: 'Name',
                         title: '@_localizer["Field Name"]',
                         sortable: true,
-                        width: 180,
+                        width:260,
                         editor: { type: 'textbox', options: { required: true} }
                     },
                     {
                         field: 'Description',
                         title: '@_localizer["Field Description"]',
                         sortable: true,
-                        width: 300,
+                        width: 320,
                         editor: { type: 'textbox', options: { required: true } }
-                    },
-                    {
-                        field: 'AssociatedType',
-                        title: '@_localizer["Associated Type"]',
-                        sortable: true,
-                        width:160,
-                        editor: { type: 'textbox', options: { required: false } }
-                    },
-                    {
-                        field: 'Length',
-                        title: '@_localizer["Length"]',
-                        sortable: true,
-                        width: 130,
-                        editor: { type: 'numberbox', options: { required: false } }
-                    },
+                    }
                 ]]
             })
                 .datagrid('enableFilter', [ ])

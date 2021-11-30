@@ -47,6 +47,11 @@
           "roles": []
         },
         {
+          "title": "Migration Objects",
+          "href": "migrationobjects_index.html",
+          "roles": []
+        },
+        {
           "title": "Dictionaries",
           "href": "keyvalues_index.html",
           "roles": []

@@ -93,57 +93,7 @@
                     <input type="hidden" asp-for="Input.TemplateFile" />
                     <input type="hidden" asp-for="Input.TemplateDescription" />
                     <div class="form-row">
-                        <div class="col-md-6 mb-2">
-                            <label class="form-label" for="Name">@_localizer["Mapping Rule Name"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.Name" class="form-control" placeholder="Name" required="required" />
-                            <span class="invalid-feedback" asp-validation-for="Input.Name">Sorry, you missed this one.</span>
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <label class="form-label" for="Status">@_localizer["Status"] </label>
-                            <input type="text" asp-for="Input.Status" class="form-control" placeholder="Status" readonly="readonly" />
-                            <span class="invalid-feedback" asp-validation-for="Input.Status">Sorry, you missed this one.</span>
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <label class="form-label" for="LegacyField1">@_localizer["Legacy Field Name 1"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.LegacyField1" class="form-control" placeholder="Legacy Field Name 1" required="required" />
-                            <span class="invalid-feedback" asp-validation-for="Input.LegacyField1">Sorry, you missed this one.</span>
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <label class="form-label" for="LegacyDescription1">@_localizer["Legacy Field Description 1"] </label>
-                            <input type="text" asp-for="Input.LegacyDescription1" class="form-control" placeholder="Legacy Field Description 1" />
-                            <span class="invalid-feedback" asp-validation-for="Input.LegacyDescription1">Sorry, you missed this one.</span>
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <label class="form-label" for="LegacyField2">@_localizer["Legacy Field Name 2"] </label>
-                            <input type="text" asp-for="Input.LegacyField2" class="form-control" placeholder="Legacy Field Name 2" />
-                            <span class="invalid-feedback" asp-validation-for="Input.LegacyField2">Sorry, you missed this one.</span>
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <label class="form-label" for="LegacyDescription2">@_localizer["Legacy Field Description 2"] </label>
-                            <input type="text" asp-for="Input.LegacyDescription2" class="form-control" placeholder="Legacy Field Description 2" />
-                            <span class="invalid-feedback" asp-validation-for="Input.LegacyDescription2">Sorry, you missed this one.</span>
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <label class="form-label" for="LegacyField3">@_localizer["Legacy Field Name 3"]  </label>
-                            <input type="text" asp-for="Input.LegacyField3" class="form-control" placeholder="Legacy Field Name 3" />
-                            <span class="invalid-feedback" asp-validation-for="Input.LegacyField3">Sorry, you missed this one.</span>
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <label class="form-label" for="LegacyDescription3">@_localizer["Legacy Field Description 3"] </label>
-                            <input type="text" asp-for="Input.LegacyDescription3" class="form-control" placeholder="Legacy Field Description 3" />
-                            <span class="invalid-feedback" asp-validation-for="Input.LegacyDescription3">Sorry, you missed this one.</span>
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <label class="form-label" for="NewValueField">@_localizer["New Field Name"] <span class="text-danger">*</span></label>
-                            <input type="text" asp-for="Input.NewValueField" class="form-control" placeholder="New Field Name" required="required" />
-                            <span class="invalid-feedback" asp-validation-for="Input.NewValueField">Sorry, you missed this one.</span>
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <label class="form-label" for="NewFieldName">@_localizer["New Field Description"] </label>
-                            <input type="text" asp-for="Input.NewValueFieldDescription" class="form-control" placeholder="New Field Description" />
-                            <span class="invalid-feedback" asp-validation-for="Input.NewValueFieldDescription">Sorry, you missed this one.</span>
-                        </div>
-                        <div class="col-md-12">
+                             <div class="col-md-12">
                             <label class="form-label" for=""></label>
                             <input type="file" asp-for="TemplateFile" style="display:none" required accept="text/xml" />
                             <div class="">
@@ -157,6 +107,77 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6 mb-2">
+                            <label class="form-label" for="Name">@_localizer["Mapping Rule Name"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.Name" class="form-control" placeholder="Name" required="required" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Name">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label class="form-label" for="Status">@_localizer["Status"] </label>
+                            <input type="text" asp-for="Input.Status" class="form-control" placeholder="Status" readonly="readonly" />
+                            <span class="invalid-feedback" asp-validation-for="Input.Status">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label class="form-label" for="ImportParameterField1">@_localizer["Import Parameter Name 1"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.ImportParameterField1" class="form-control" placeholder="" required="required" readonly="readonly" />
+                            <span class="invalid-feedback" asp-validation-for="Input.ImportParameterField1">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label class="form-label" for="LegacyField1">@_localizer["Legacy Field Name 1"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.LegacyField1" class="form-control" placeholder="" required="required" />
+                            <span class="invalid-feedback" asp-validation-for="Input.LegacyField1">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label class="form-label" for="LegacyDescription1">@_localizer["Legacy Field Description 1"] </label>
+                            <input type="text" asp-for="Input.LegacyDescription1" class="form-control" placeholder="" />
+                            <span class="invalid-feedback" asp-validation-for="Input.LegacyDescription1">Sorry, you missed this one.</span>
+                        </div>
+                         <div class="col-md-4 mb-2">
+                            <label class="form-label" for="ImportParameterField2">@_localizer["Import Parameter Name 2"] </label>
+                            <input type="text" asp-for="Input.ImportParameterField2" class="form-control" placeholder=""  readonly="readonly" />
+                            <span class="invalid-feedback" asp-validation-for="Input.ImportParameterField2">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label class="form-label" for="LegacyField2">@_localizer["Legacy Field Name 2"] </label>
+                            <input type="text" asp-for="Input.LegacyField2" class="form-control" placeholder="" />
+                            <span class="invalid-feedback" asp-validation-for="Input.LegacyField2">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label class="form-label" for="LegacyDescription2">@_localizer["Legacy Field Description 2"] </label>
+                            <input type="text" asp-for="Input.LegacyDescription2" class="form-control" placeholder="" />
+                            <span class="invalid-feedback" asp-validation-for="Input.LegacyDescription2">Sorry, you missed this one.</span>
+                        </div>
+                         <div class="col-md-4 mb-2">
+                            <label class="form-label" for="ImportParameterField3">@_localizer["Import Parameter Name 3"] </label>
+                            <input type="text" asp-for="Input.ImportParameterField3" class="form-control" placeholder=""  readonly="readonly" />
+                            <span class="invalid-feedback" asp-validation-for="Input.ImportParameterField3">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label class="form-label" for="LegacyField3">@_localizer["Legacy Field Name 3"]  </label>
+                            <input type="text" asp-for="Input.LegacyField3" class="form-control" placeholder="" />
+                            <span class="invalid-feedback" asp-validation-for="Input.LegacyField3">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label class="form-label" for="LegacyDescription3">@_localizer["Legacy Field Description 3"] </label>
+                            <input type="text" asp-for="Input.LegacyDescription3" class="form-control" placeholder="" />
+                            <span class="invalid-feedback" asp-validation-for="Input.LegacyDescription3">Sorry, you missed this one.</span>
+                        </div>
+                         <div class="col-md-4 mb-2">
+                            <label class="form-label" for="ExportParameterField">@_localizer["Export Parameter Name"] </label>
+                            <input type="text" asp-for="Input.ExportParameterField" class="form-control" placeholder=""  readonly="readonly" />
+                            <span class="invalid-feedback" asp-validation-for="Input.ExportParameterField">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label class="form-label" for="NewValueField">@_localizer["New Field Name"] <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="Input.NewValueField" class="form-control" placeholder="" required="required" />
+                            <span class="invalid-feedback" asp-validation-for="Input.NewValueField">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label class="form-label" for="NewFieldName">@_localizer["New Field Description"] </label>
+                            <input type="text" asp-for="Input.NewValueFieldDescription" class="form-control" placeholder="" />
+                            <span class="invalid-feedback" asp-validation-for="Input.NewValueFieldDescription">Sorry, you missed this one.</span>
+                        </div>
+                   
                         <div class="col-md-6 mb-2">
                             <label class="form-label" for="IsMock"> </label>
                             <div class="custom-control custom-checkbox">
@@ -174,16 +195,8 @@
                             <span class="invalid-feedback" asp-validation-for="Input.LegacySystem">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6 mb-2">
-                            <label class="form-label" for="ProjectName">@_localizer["Migration Project Name"] </label>
-
-                            <select type="text" asp-for="Input.ProjectName" class="select2bs4" multiple="multiple" asp-dictionaries-for="ProjectName" data-placeholder="Choose Project Name" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                                
-                            </select>
-                            <span class="invalid-feedback" asp-validation-for="Input.ProjectName">Sorry, you missed this one.</span>
-                        </div>
-                        <div class="col-md-6 mb-2">
                             <label class="form-label" for="RelevantObjects">@_localizer["Relevant Objects"]  </label>
-                            <select asp-for="Input.RelevantObjects" asp-items="Model.MigrationObjects" class="select2bs4" multiple="multiple" placeholder="Relevant Objects" data-placeholder="Choose Relevant Objects" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                            <select asp-for="Input.RelevantObjects" asp-items="Model.MigrationObjects" class="select2bs4" multiple="multiple" placeholder="Relevant Objects" data-placeholder="Choose Relevant Objects"  style="width: 100%;">
                                
                             </select>
                             <span class="invalid-feedback" asp-validation-for="Input.RelevantObjects">Sorry, you missed this one.</span>
@@ -192,7 +205,7 @@
 
                         <div class="col-md-12">
                             <label class="form-label" for="Comments">@_localizer["Comments"] </label>
-                            <input type="text" asp-for="Input.Comments" class="form-control" placeholder="Comments" />
+                            <input type="text" asp-for="Input.Comments" class="form-control" placeholder="Comments" autocomplete="off" />
                             <span class="invalid-feedback" asp-validation-for="Input.Comments">Sorry, you missed this one.</span>
                         </div>
                     </div>
@@ -291,7 +304,7 @@
          if(currentMappingRuleItem.LegacyField1){
              columments.push({
                         field: 'Legacy1',
-                        title: `${currentMappingRuleItem.LegacyField1}`,
+                         title: `${currentMappingRuleItem.LegacyField1}<br><small>${currentMappingRuleItem.ImportParameterField1}<br>${currentMappingRuleItem.LegacyDescription1}</small>`,
                         sortable: true,
                         width: 180,
                         editor: { type: 'textbox', options: { required: true } }
@@ -300,7 +313,7 @@
          if(currentMappingRuleItem.LegacyField2){
              columments.push({
                         field: 'Legacy2',
-                        title: `${currentMappingRuleItem.LegacyField2}`,
+                         title: `${currentMappingRuleItem.LegacyField2}<br><small>${currentMappingRuleItem.ImportParameterField2}<br>${currentMappingRuleItem.LegacyDescription2}</small>`,
                         sortable: true,
                         width: 180,
                         editor: { type: 'textbox', options: { required: true } }
@@ -309,7 +322,7 @@
          if(currentMappingRuleItem.LegacyField3){
              columments.push({
                         field: 'Legacy3',
-                        title: `${currentMappingRuleItem.LegacyField3}`,
+                        title: `${currentMappingRuleItem.LegacyField3}<br><small>${currentMappingRuleItem.ImportParameterField3}<br>${currentMappingRuleItem.LegacyDescription3}</small>`,
                         sortable: true,
                         width: 180,
                         editor: { type: 'textbox', options: { required: true } }
@@ -318,7 +331,7 @@
          if(currentMappingRuleItem.NewValueField){
              columments.push({
                         field: 'NewValue',
-                        title: `${currentMappingRuleItem.NewValueField}`,
+                        title: `${currentMappingRuleItem.NewValueField}<br><small>${currentMappingRuleItem.ExportParameterField}<br>${currentMappingRuleItem.NewValueFieldDescription}</small>`,
                         sortable: true,
                         width: 180,
                         editor: { type: 'textbox', options: { required: true } }
@@ -483,6 +496,7 @@
         var onAddDataRow = () => {
             if (onEndEditing()) {
                 var newitem={...currentItem};
+                newitem.MappingRuleId = currentMappingRuleId;
                 newitem.Id=0;
                 newitem.Legacy1='';
                 newitem.Legacy2='';
@@ -623,7 +637,6 @@
             console.log(request)
             var formData = new FormData(form);
             formData.set("Input.LegacySystem", $('#Input_LegacySystem').select2('val').toString());
-            formData.set("Input.ProjectName", $('#Input_ProjectName').select2('val').toString());
             formData.set("Input.RelevantObjects", $('#Input_RelevantObjects').select2('val').toString());
             formData.set("Input.TemplateFile", $('#Input_TemplateFile').val());
             formData.set("TemplateFile", uploadtemplatefileinput.files[0]);
@@ -665,8 +678,23 @@
     uploadtemplatefileinput.onchange = () => {
 
         vaildatetemplatefile().then(res => {
-            $('#Input_TemplateDescription').val(res);
-            const uploadfileName = uploadtemplatefileinput.value.split('\\').pop() + `<b>(${res})</b>`;
+            console.log(res)
+            $('#Input_TemplateDescription').val(res.TemplateDescription);
+            $('#Input_Name').val(res.Name);
+            $('#Input_LegacyField1').val(res.LegacyField1);
+            $('#Input_LegacyField2').val(res.LegacyField2);
+            $('#Input_LegacyField3').val(res.LegacyField3);
+            $('#Input_ImportParameterField1').val(res.ImportParameterField1);
+            $('#Input_ImportParameterField2').val(res.ImportParameterField2);
+            $('#Input_ImportParameterField3').val(res.ImportParameterField3);
+            $('#Input_LegacyDescription1').val(res.LegacyDescription1);
+            $('#Input_LegacyDescription2').val(res.LegacyDescription2);
+            $('#Input_LegacyDescription3').val(res.LegacyDescription3);
+            $('#Input_NewValueField').val(res.NewValueField);
+            $('#Input_ExportParameterField').val(res.ExportParameterField);
+            $('#Input_NewValueFieldDescription').val(res.NewValueFieldDescription);
+            $('#Input_Comments').val(res.TemplateDescription);
+            const uploadfileName = uploadtemplatefileinput.value.split('\\').pop() + `<b>(${res.TemplateDescription})</b>`;
             uploadtemplatefilename.innerHTML = `
              <div class="alert alert-info alert-dismissible fadeup show mb-2 mt-2" role="alert">
                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -761,7 +789,14 @@
                               </div>`;
                     }
                 },
-                { field: 'Name', title: '@_localizer["Mapping Rule Name"]', sortable: true, width: 200 },
+                { field: 'Name',
+                  title: '@_localizer["Mapping Rule Name"]',
+                  sortable: true,
+                  formatter:function(value,row,index){
+                      return `<a> ${value??''} </a> <br> <small>${row.Comments??''}</small> `;
+                  },
+                  width: 250
+                },
                 { field: 'Status',
                     title: '@_localizer["Status"]',
                     sortable: true,
@@ -782,7 +817,7 @@
                   sortable: true,
                   width: 220,
                   formatter:function(value,row,index){
-                      return `<a> ${value??''} </a> <br> <small>${row.LegacyDescription1??''}</small>`;
+                      return `<a> ${value??''} </a> <br> <small>${row.ImportParameterField1??''}</small> <br> <small>${row.LegacyDescription1??''}</small>`;
                   }
                 },
                 { field: 'LegacyField2',
@@ -790,7 +825,7 @@
                   sortable: true,
                   width: 220,
                   formatter:function(value,row,index){
-                      return `<a> ${value??''} </a> <br> <small>${row.LegacyDescription2??''}</small>`;
+                      return `<a> ${value??''} </a> <br> <small>${row.ImportParameterField2??''}</small> <br> <small>${row.LegacyDescription2??''}</small>`;
                   }
                 },
                 { field: 'LegacyField3',
@@ -798,7 +833,7 @@
                   sortable: true,
                   width: 220,
                   formatter:function(value,row,index){
-                      return `<a> ${value??''} </a> <br> <small>${row.LegacyDescription3??''}</small>`;
+                      return `<a> ${value??''} </a> <br> <small>${row.ImportParameterField3??''}</small> <br> <small>${row.LegacyDescription3??''}</small>`;
                   }
                 },
                 { field: 'NewValueField',
@@ -806,7 +841,7 @@
                   sortable: true,
                   width: 220,
                   formatter:function(value,row,index){
-                      return `<a> ${value??''} </a> <br> <small>${row.NewValueFieldDescription??''}</small>`;
+                      return `<a> ${value??''} </a> <br> <small>${row.ExportParameterField??''}</small> <br> <small>${row.NewValueFieldDescription??''}</small>`;
                   }
                 },
                 { field: 'TemplateFile',
@@ -824,10 +859,7 @@
                 { field: 'IsMock', title: '@_localizer["Is Mock"]', sortable: true, width: 120 },
                 { field: 'Team', title: '@_localizer["Team"]', sortable: true, width: 160 },
                 { field: 'LegacySystem', title: '@_localizer["Legacy System"]', sortable: true, width: 220 },
-                { field: 'ProjectName', title: '@_localizer["Project Name"]', sortable: true, width: 220 },
                 { field: 'RelevantObjects', title: '@_localizer["Relevant Objects"]', sortable: true, width: 220 },
-                { field: 'Comments', title: '@_localizer["Comments"]', sortable: true, width: 200 },
-
                 { field: 'CreatedBy', title: '@_localizer["Created By"]', sortable: true, width: 160 },
                 { field: 'LastModifiedBy', title: '@_localizer["Last Modified By"]',  sortable: true, width: 160 },
 
@@ -898,13 +930,6 @@
                         $('#Input_LegacySystem').val(value.split(',')).change();
                     } else {
                         $('#Input_LegacySystem').val(null).change();
-                    }
-                },
-                ProjectName: function (value) {
-                    if (value) {
-                        $('#Input_ProjectName').val(value.split(',')).change();
-                    } else {
-                        $('#Input_ProjectName').val(null).change();
                     }
                 },
                 RelevantObjects: function (value) {
@@ -1049,7 +1074,7 @@
     }
     var onDownload = (index) => {
         const item = $dg.datagrid('getRows')[index];
-        const url = item.TemplateFile;
+        const url ="/" + item.TemplateFile;
         const filename = getFileName(item.TemplateFile);
         const link = document.createElement('a');
         link.href = url;

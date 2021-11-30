@@ -46,9 +46,8 @@ namespace CleanArchitecture.Razor.Application.ObjectFields.Queries.Export;
                 new Dictionary<string, Func<ObjectFieldDto, object>>()
                 {
                     { _localizer["Field Name"], item => item.Name },
-                    { _localizer["Field Description"], item => item.Description },
-                    { _localizer["Associated Type"], item => item.AssociatedType },
-                    { _localizer["Length"], item => item.Length },
+                    { _localizer["Field Description"], item => item.Description }
+           
                 }
                 , _localizer["ObjectFields"]);
             return result;

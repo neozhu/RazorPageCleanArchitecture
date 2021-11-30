@@ -33,6 +33,7 @@ namespace CleanArchitecture.Razor.Application.MigrationObjects.Queries.Paginatio
           
            var filters = PredicateBuilder.FromFilter<MigrationObject>(request.FilterRules);
            var data = await _context.MigrationObjects.Where(filters)
+                .Include(x => x.MigrationProject)
                 .OrderBy($"{request.Sort} {request.Order}")
                 .ProjectTo<MigrationObjectDto>(_mapper.ConfigurationProvider)
                 .PaginatedDataAsync(request.Page, request.Rows);

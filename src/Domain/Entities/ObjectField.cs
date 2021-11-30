@@ -8,7 +8,7 @@ public class ObjectField : AuditableEntity, IAuditTrial
     public string ParameterName { get; set; }
     public string Direct { get; set; }
     public string AssociatedType { get; set; }
-    public string DateType { get; set; }
+    public string DataType { get; set; }
     public int? Length { get; set; }
     public string Description { get; set; }
     public string Title { get; set; }
