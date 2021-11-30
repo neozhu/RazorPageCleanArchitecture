@@ -11,10 +11,15 @@ namespace CleanArchitecture.Razor.Infrastructure.Services;
 public class CurrentUserService : ICurrentUserService
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
+ 
 
-    public CurrentUserService(IHttpContextAccessor httpContextAccessor)
+    public CurrentUserService(
+        IHttpContextAccessor httpContextAccessor
+
+        )
     {
         _httpContextAccessor = httpContextAccessor;
+
     }
 
     public bool IsInRole(string roleName) {
@@ -36,6 +41,28 @@ public class CurrentUserService : ICurrentUserService
         }
         return groups.Any(x=>x==roleName);
     }
+    public int ProjectId() {
+        if (_httpContextAccessor.HttpContext.Request.Cookies.TryGetValue("SELECTEDPROJECTID", out string projectId))
+        {
+            return int.Parse(projectId);
+        }
+        else
+        {
+            return 0;
+        }
 
+    }
+    public string ProjectName()
+    {
+        if (_httpContextAccessor.HttpContext.Request.Cookies.TryGetValue("SELECTEDPROJECTNAME", out string projectName))
+        {
+            return projectName;
+        }
+        else
+        {
+            return "";
+        }
+
+    }
     public string UserId => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Name);
 }

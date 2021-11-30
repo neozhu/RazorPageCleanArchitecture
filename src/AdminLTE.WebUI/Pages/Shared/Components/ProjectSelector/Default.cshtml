@@ -1,0 +1,12 @@
+@model AdminLTE.WebUI.Pages.Shared.Components.ProjectSelector.DefaultModel
+<div class="dropdown-menu">
+        @foreach (var item in Model.Projects)
+        {
+           <form method="GET">
+             <input type="hidden" name="setProjectName" value="@item.Name" />
+             <input type="hidden" name="setProjectId" value="@item.Id" />
+             <a href="javascript:void()" onclick="this.parentElement.submit();" class="dropdown-item" >@projectName</a>
+           </form>
+        }
+</div>
+

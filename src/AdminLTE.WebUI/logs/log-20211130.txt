@@ -1713,3 +1713,49 @@ CleanArchitecture.Razor.Application.Common.Exceptions.ValidationException: One o
 2021-11-30 15:50:15.290 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MappingRules.DTOs.MappingRuleDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
 2021-11-30 15:50:30.435 +08:00 [INF] CleanArchitecture Request: ParseTemplateFileCommand EURO1\zhuhua null {"FileName":"Accounting Document Number.xml","Data":"3C3F786D6C2076657273696F6E3D2231... (29400 bytes)","$type":"ParseTemplateFileCommand"} 127.0.0.1 null
 2021-11-30 15:50:30.452 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.Result`1[[CleanArchitecture.Razor.Application.MappingRules.DTOs.MappingRuleDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:18:11.724 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-30 16:18:12.059 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:18:12.060 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:18:12.060 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:18:12.060 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:18:12.060 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:18:12.060 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:19:38.913 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:19:38.914 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:19:38.914 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:19:38.914 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:19:38.914 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:19:38.914 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:21:39.582 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:21:39.583 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:21:39.583 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:21:39.583 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:21:39.583 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-30 16:21:39.583 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:05:16.306 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-30 17:05:17.306 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:05:17.307 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:05:17.307 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:05:17.307 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:05:17.307 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:05:17.308 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:18:37.627 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-30 17:18:38.259 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:18:38.259 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:18:38.259 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:18:38.260 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:18:38.260 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:18:38.260 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:20:29.668 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-30 17:20:30.223 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:20:30.224 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:20:30.224 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:20:30.224 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:20:30.225 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:20:30.225 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:20:52.224 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:20:52.224 +08:00 [INF] Welcome. 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:20:52.224 +08:00 [INF] Home Page 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:20:52.224 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:20:52.224 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
+2021-11-30 17:20:52.225 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
