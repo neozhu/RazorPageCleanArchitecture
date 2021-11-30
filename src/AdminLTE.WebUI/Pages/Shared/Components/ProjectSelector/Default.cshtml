@@ -2,10 +2,10 @@
 <div class="dropdown-menu">
         @foreach (var item in Model.Projects)
         {
-           <form method="GET">
-             <input type="hidden" name="setProjectName" value="@item.Name" />
-             <input type="hidden" name="setProjectId" value="@item.Id" />
-             <a href="javascript:void()" onclick="this.parentElement.submit();" class="dropdown-item" >@projectName</a>
+           <form method="GET" >
+             <input type="hidden" name="projectName" value="@item.Name" />
+             <input type="hidden" name="projectId" value="@item.Id" />
+             <a href="javascript:void()" onclick="this.parentElement.submit();" class="dropdown-item" >@item.Name</a>
            </form>
         }
 </div>

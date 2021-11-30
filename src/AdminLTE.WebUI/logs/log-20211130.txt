@@ -1759,3 +1759,226 @@ CleanArchitecture.Razor.Application.Common.Exceptions.ValidationException: One o
 2021-11-30 17:20:52.224 +08:00 [ERR] Error 127.0.0.1 EURO1\zhuhua
 2021-11-30 17:20:52.224 +08:00 [WRN] Warning 127.0.0.1 EURO1\zhuhua
 2021-11-30 17:20:52.225 +08:00 [FTL] Critical 127.0.0.1 EURO1\zhuhua
+2021-11-30 20:40:12.185 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-30 20:40:12.371 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:12.372 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:12.372 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:12.372 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:12.372 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:12.372 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:12.988 +08:00 [INF] Sending file. Request path: '/css/fa-light.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\fa-light.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:12.997 +08:00 [INF] Sending file. Request path: '/plugins/fontawesome-free/css/all.min.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\fontawesome-free\css\all.min.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.016 +08:00 [INF] Sending file. Request path: '/plugins/icheck-bootstrap/icheck-bootstrap.min.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\icheck-bootstrap\icheck-bootstrap.min.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.028 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.040 +08:00 [INF] Sending file. Request path: '/css/adminlte.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.046 +08:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\site.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.056 +08:00 [INF] Sending file. Request path: '/plugins/toastr/toastr.min.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\toastr\toastr.min.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.058 +08:00 [INF] Sending file. Request path: '/AdminLTE.WebUI.styles.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\obj\Debug\net6.0\scopedcss\bundle\AdminLTE.WebUI.styles.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.090 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.092 +08:00 [INF] Sending file. Request path: '/plugins/jquery/jquery.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\jquery\jquery.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.120 +08:00 [INF] Sending file. Request path: '/js/demo.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\demo.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.127 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.145 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.153 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.161 +08:00 [INF] Sending file. Request path: '/plugins/toastr/toastr.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\toastr\toastr.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.169 +08:00 [INF] Sending file. Request path: '/plugins/bootbox.js/bootbox.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootbox.js\bootbox.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.179 +08:00 [INF] Sending file. Request path: '/img/codewithmukesh_logo.jpg'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\img\codewithmukesh_logo.jpg' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.678 +08:00 [INF] Sending file. Request path: '/plugins/fontawesome-free/webfonts/fa-solid-900.woff2'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\fontawesome-free\webfonts\fa-solid-900.woff2' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:13.916 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\favicon.ico' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:49.470 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-30 20:40:49.612 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:49.612 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:49.613 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:49.613 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:49.613 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:49.613 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:56.810 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:56.810 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:56.810 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:56.810 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:56.810 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:40:56.810 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:00.065 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:00.065 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:00.065 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:00.065 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:00.066 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:00.066 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:01.788 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:01.788 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:01.788 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:01.788 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:01.788 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:01.788 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:03.042 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:03.042 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:03.042 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:03.042 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:03.042 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:03.042 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:04.423 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:04.423 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:04.424 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:04.424 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:04.424 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:04.424 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:05.484 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:05.484 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:05.484 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:05.484 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:05.484 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:05.484 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:39.660 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-30 20:41:39.825 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:39.825 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:39.825 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:39.826 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:39.826 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:39.826 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:41:44.753 +08:00 [INF] Executing JsonResult, writing value of type 'System.String'. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:09.935 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-30 20:46:10.105 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:10.105 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:10.105 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:10.105 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:10.105 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:10.105 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:10.610 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:12.703 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:12.703 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:12.703 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:12.703 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:12.704 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:12.704 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:36.831 +08:00 [INF] CleanArchitecture Request: GetAllMigrationObjectsQuery DESKTOP-408FOJP\home null {"$type":"GetAllMigrationObjectsQuery"} 127.0.0.1 null
+2021-11-30 20:46:36.862 +08:00 [INF] CleanArchitecture Request: GetAllMigrationProjectsQuery DESKTOP-408FOJP\home null {"$type":"GetAllMigrationProjectsQuery"} 127.0.0.1 null
+2021-11-30 20:46:36.945 +08:00 [INF] CleanArchitecture Request: KeyValuesQueryByName DESKTOP-408FOJP\home null {"Name":"LegacySystem","CacheKey":"LegacySystem-keyvalues","Options":{"AbsoluteExpiration":null,"AbsoluteExpirationRelativeToNow":null,"SlidingExpiration":null,"ExpirationTokens":[{"ActiveChangeCallbacks":true,"HasChanged":false,"$type":"CancellationChangeToken"}],"PostEvictionCallbacks":[],"Priority":"Normal","Size":null,"$type":"MemoryCacheEntryOptions"},"$type":"KeyValuesQueryByName"} 127.0.0.1 null
+2021-11-30 20:46:36.948 +08:00 [INF] CleanArchitecture.Razor.Application.KeyValues.Queries.ByName.KeyValuesQueryByName is configured for caching. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:37.145 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:37.153 +08:00 [INF] Sending file. Request path: '/css/fa-solid.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\fa-solid.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:37.163 +08:00 [INF] Sending file. Request path: '/lib/easyui/themes/insdep/easyui.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\easyui\themes\insdep\easyui.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:37.173 +08:00 [INF] Sending file. Request path: '/plugins/select2/css/select2.min.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\select2\css\select2.min.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:37.176 +08:00 [INF] Sending file. Request path: '/plugins/select2-bootstrap4-theme/select2-bootstrap4.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\select2-bootstrap4-theme\select2-bootstrap4.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:37.195 +08:00 [INF] Sending file. Request path: '/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:37.202 +08:00 [INF] Sending file. Request path: '/lib/jquery-validation/dist/jquery.validate.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:37.212 +08:00 [INF] Sending file. Request path: '/lib/easyui/jquery.easyui.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\easyui\jquery.easyui.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:37.212 +08:00 [INF] Sending file. Request path: '/lib/easyui/plugins/datagrid-filter.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\easyui\plugins\datagrid-filter.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:37.216 +08:00 [INF] Sending file. Request path: '/lib/easyui/jquery.easyui.component.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\easyui\jquery.easyui.component.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:37.229 +08:00 [INF] Sending file. Request path: '/lib/jquery-form/jquery.jsonToForm.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\jquery-form\jquery.jsonToForm.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:37.233 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:37.258 +08:00 [INF] Sending file. Request path: '/plugins/select2/js/select2.full.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\select2\js\select2.full.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:37.297 +08:00 [INF] Sending file. Request path: '/webfonts/fa-light-300.woff2'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\webfonts\fa-light-300.woff2' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:37.365 +08:00 [INF] Sending file. Request path: '/webfonts/fa-solid-900.woff2'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\webfonts\fa-solid-900.woff2' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:37.404 +08:00 [INF] CleanArchitecture Request: MappingRulesWithPaginationQuery DESKTOP-408FOJP\home null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 null
+2021-11-30 20:46:37.688 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.MappingRules.DTOs.MappingRuleDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:39.133 +08:00 [INF] CleanArchitecture Request: GetAllMappingRulesWithKeyQuery DESKTOP-408FOJP\home null {"Key":"","$type":"GetAllMappingRulesWithKeyQuery"} 127.0.0.1 null
+2021-11-30 20:46:39.150 +08:00 [INF] CleanArchitecture Request: FieldMappingValuesWithPaginationQuery DESKTOP-408FOJP\home null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldMappingValuesWithPaginationQuery"} 127.0.0.1 null
+2021-11-30 20:46:39.157 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.MappingRules.DTOs.MappingRuleDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:46:39.173 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.FieldMappingValues.DTOs.FieldMappingValueDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:37.881 +08:00 [INF] CleanArchitecture Request: GetAllMappingRulesWithKeyQuery DESKTOP-408FOJP\home null {"Key":"","$type":"GetAllMappingRulesWithKeyQuery"} 127.0.0.1 null
+2021-11-30 20:49:37.898 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.MappingRules.DTOs.MappingRuleDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:37.905 +08:00 [INF] CleanArchitecture Request: FieldMappingValuesWithPaginationQuery DESKTOP-408FOJP\home null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldMappingValuesWithPaginationQuery"} 127.0.0.1 null
+2021-11-30 20:49:37.923 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.FieldMappingValues.DTOs.FieldMappingValueDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:41.354 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:41.356 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:41.368 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:41.375 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:41.385 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:41.388 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:41.408 +08:00 [INF] Sending file. Request path: '/css/adminlte.css.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.css.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.773 +08:00 [INF] Sending file. Request path: '/css/fa-light.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\fa-light.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.775 +08:00 [INF] Sending file. Request path: '/plugins/fontawesome-free/css/all.min.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\fontawesome-free\css\all.min.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.780 +08:00 [INF] Sending file. Request path: '/plugins/toastr/toastr.min.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\toastr\toastr.min.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.782 +08:00 [INF] Sending file. Request path: '/AdminLTE.WebUI.styles.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\obj\Debug\net6.0\scopedcss\bundle\AdminLTE.WebUI.styles.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.790 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.790 +08:00 [INF] Sending file. Request path: '/plugins/icheck-bootstrap/icheck-bootstrap.min.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\icheck-bootstrap\icheck-bootstrap.min.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.805 +08:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\site.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.805 +08:00 [INF] Sending file. Request path: '/css/adminlte.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.815 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.823 +08:00 [INF] Sending file. Request path: '/css/fa-solid.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\fa-solid.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.834 +08:00 [INF] Sending file. Request path: '/plugins/jquery/jquery.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\jquery\jquery.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.838 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.838 +08:00 [INF] Sending file. Request path: '/lib/easyui/themes/insdep/easyui.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\easyui\themes\insdep\easyui.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.839 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.852 +08:00 [INF] Sending file. Request path: '/js/demo.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\demo.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.853 +08:00 [INF] Sending file. Request path: '/plugins/toastr/toastr.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\toastr\toastr.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.854 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.856 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.860 +08:00 [INF] Sending file. Request path: '/plugins/bootbox.js/bootbox.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootbox.js\bootbox.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.864 +08:00 [INF] Sending file. Request path: '/lib/easyui/jquery.easyui.component.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\easyui\jquery.easyui.component.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.875 +08:00 [INF] Sending file. Request path: '/lib/easyui/jquery.easyui.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\easyui\jquery.easyui.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.876 +08:00 [INF] Sending file. Request path: '/lib/easyui/plugins/datagrid-filter.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\easyui\plugins\datagrid-filter.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.879 +08:00 [INF] Sending file. Request path: '/img/codewithmukesh_logo.jpg'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\img\codewithmukesh_logo.jpg' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.879 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:53.880 +08:00 [INF] Sending file. Request path: '/lib/jquery-form/jquery.jsonToForm.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\jquery-form\jquery.jsonToForm.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:54.065 +08:00 [INF] Sending file. Request path: '/webfonts/fa-solid-900.woff2'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\webfonts\fa-solid-900.woff2' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:54.069 +08:00 [INF] Sending file. Request path: '/webfonts/fa-light-300.woff2'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\webfonts\fa-light-300.woff2' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:54.120 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:54.120 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:54.125 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:54.125 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:54.127 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:54.137 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:54.147 +08:00 [INF] Sending file. Request path: '/css/adminlte.css.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.css.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:54.190 +08:00 [INF] CleanArchitecture Request: GetAllMappingRulesWithKeyQuery DESKTOP-408FOJP\home null {"Key":"","$type":"GetAllMappingRulesWithKeyQuery"} 127.0.0.1 null
+2021-11-30 20:49:54.190 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.MappingRules.DTOs.MappingRuleDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:49:54.204 +08:00 [INF] CleanArchitecture Request: FieldMappingValuesWithPaginationQuery DESKTOP-408FOJP\home null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldMappingValuesWithPaginationQuery"} 127.0.0.1 null
+2021-11-30 20:49:54.205 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.FieldMappingValues.DTOs.FieldMappingValueDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.182 +08:00 [INF] Sending file. Request path: '/css/fa-light.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\fa-light.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.183 +08:00 [INF] Sending file. Request path: '/plugins/fontawesome-free/css/all.min.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\fontawesome-free\css\all.min.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.187 +08:00 [INF] Sending file. Request path: '/plugins/icheck-bootstrap/icheck-bootstrap.min.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\icheck-bootstrap\icheck-bootstrap.min.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.189 +08:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\site.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.190 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.197 +08:00 [INF] Sending file. Request path: '/plugins/toastr/toastr.min.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\toastr\toastr.min.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.198 +08:00 [INF] Sending file. Request path: '/AdminLTE.WebUI.styles.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\obj\Debug\net6.0\scopedcss\bundle\AdminLTE.WebUI.styles.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.202 +08:00 [INF] Sending file. Request path: '/css/adminlte.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.203 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.205 +08:00 [INF] Sending file. Request path: '/css/fa-solid.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\fa-solid.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.208 +08:00 [INF] Sending file. Request path: '/lib/easyui/themes/insdep/easyui.css'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\easyui\themes\insdep\easyui.css' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.231 +08:00 [INF] Sending file. Request path: '/plugins/jquery/jquery.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\jquery\jquery.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.234 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.235 +08:00 [INF] Sending file. Request path: '/js/demo.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\demo.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.237 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.237 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.246 +08:00 [INF] Sending file. Request path: '/plugins/toastr/toastr.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\toastr\toastr.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.246 +08:00 [INF] Sending file. Request path: '/plugins/bootbox.js/bootbox.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootbox.js\bootbox.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.247 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.252 +08:00 [INF] Sending file. Request path: '/lib/easyui/jquery.easyui.component.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\easyui\jquery.easyui.component.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.255 +08:00 [INF] Sending file. Request path: '/lib/easyui/plugins/datagrid-filter.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\easyui\plugins\datagrid-filter.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.255 +08:00 [INF] Sending file. Request path: '/lib/easyui/jquery.easyui.min.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\easyui\jquery.easyui.min.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.258 +08:00 [INF] Sending file. Request path: '/lib/jquery-form/jquery.jsonToForm.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\jquery-form\jquery.jsonToForm.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.259 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.js'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.js' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.263 +08:00 [INF] Sending file. Request path: '/img/codewithmukesh_logo.jpg'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\img\codewithmukesh_logo.jpg' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.523 +08:00 [INF] Sending file. Request path: '/webfonts/fa-solid-900.woff2'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\webfonts\fa-solid-900.woff2' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.526 +08:00 [INF] Sending file. Request path: '/webfonts/fa-light-300.woff2'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\webfonts\fa-light-300.woff2' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.573 +08:00 [INF] Sending file. Request path: '/js/adminlte.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\js\adminlte.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.576 +08:00 [INF] Sending file. Request path: '/plugins/bootstrap/js/bootstrap.bundle.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\bootstrap\js\bootstrap.bundle.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.577 +08:00 [INF] Sending file. Request path: '/plugins/summernote/summernote-bs4.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\summernote\summernote-bs4.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.577 +08:00 [INF] Sending file. Request path: '/plugins/moment/moment.min.js.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\plugins\moment\moment.min.js.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.579 +08:00 [INF] Sending file. Request path: '/lib/axios/dist/axios.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\lib\axios\dist\axios.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.591 +08:00 [INF] Sending file. Request path: '/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\formplugins\bootstrap-daterangepicker\bootstrap-daterangepicker.css.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.591 +08:00 [INF] Sending file. Request path: '/css/adminlte.css.map'. Physical path: 'D:\github\RazorPageCleanArchitecture\src\AdminLTE.WebUI\wwwroot\css\adminlte.css.map' 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.635 +08:00 [INF] CleanArchitecture Request: GetAllMappingRulesWithKeyQuery DESKTOP-408FOJP\home null {"Key":"","$type":"GetAllMappingRulesWithKeyQuery"} 127.0.0.1 null
+2021-11-30 20:50:00.635 +08:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[CleanArchitecture.Razor.Application.MappingRules.DTOs.MappingRuleDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:50:00.648 +08:00 [INF] CleanArchitecture Request: FieldMappingValuesWithPaginationQuery DESKTOP-408FOJP\home null {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldMappingValuesWithPaginationQuery"} 127.0.0.1 null
+2021-11-30 20:50:00.648 +08:00 [INF] Executing JsonResult, writing value of type 'CleanArchitecture.Razor.Application.Common.Models.PaginatedData`1[[CleanArchitecture.Razor.Application.FieldMappingValues.DTOs.FieldMappingValueDto, CleanArchitecture.Razor.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:55:47.985 +08:00 [INF] Deferring to the server's implementation of Windows Authentication.  
+2021-11-30 20:55:48.120 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:55:48.120 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:55:48.120 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:55:48.120 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:55:48.120 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:55:48.120 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:55:48.635 +08:00 [INF] The file /css/site.css was not modified 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:55:59.665 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:55:59.665 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:55:59.665 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:55:59.665 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:55:59.665 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:55:59.665 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:56:02.806 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:56:02.806 +08:00 [INF] Welcome. 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:56:02.806 +08:00 [INF] Home Page 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:56:02.806 +08:00 [ERR] Error 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:56:02.806 +08:00 [WRN] Warning 127.0.0.1 DESKTOP-408FOJP\home
+2021-11-30 20:56:02.806 +08:00 [FTL] Critical 127.0.0.1 DESKTOP-408FOJP\home
