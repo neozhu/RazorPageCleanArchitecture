@@ -24,7 +24,7 @@ public class ApplicationDbContext : IdentityDbContext<
     private readonly ICurrentUserService _currentUserService;
     private readonly IDateTime _dateTime;
     private readonly IDomainEventService _domainEventService;
-
+    private readonly int _projectId;
     public ApplicationDbContext() : base()
     {
     }
@@ -38,6 +38,8 @@ public class ApplicationDbContext : IdentityDbContext<
         _currentUserService = currentUserService;
         _domainEventService = domainEventService;
         _dateTime = dateTime;
+        _projectId = _currentUserService.ProjectId();
+      
     }
     public DbSet<Logger> Loggers { get; set; }
     public DbSet<AuditTrail> AuditTrails { get; set; }
@@ -66,6 +68,10 @@ public class ApplicationDbContext : IdentityDbContext<
                 case EntityState.Added:
                     entry.Entity.CreatedBy = _currentUserService.UserId;
                     entry.Entity.Created = _dateTime.Now;
+                    if(entry.Entity is IProjectId project)
+                    {
+                        project.MigrationProjectId = _projectId;
+                    }
                     break;
 
                 case EntityState.Modified:
@@ -100,6 +106,7 @@ public class ApplicationDbContext : IdentityDbContext<
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         builder.ApplyGlobalFilters<ISoftDelete>(s => s.Deleted == null);
+        builder.ApplyGlobalFilters<IProjectId>(s => s.MigrationProjectId == _projectId);
     }
 
     private async Task DispatchEvents(DomainEvent[] events)

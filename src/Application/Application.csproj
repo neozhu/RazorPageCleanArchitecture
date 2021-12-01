@@ -9,8 +9,11 @@
 
   <ItemGroup>
     <Compile Remove="Customers\Import\**" />
+    <Compile Remove="ObjectFields\Commands\Upload\**" />
     <EmbeddedResource Remove="Customers\Import\**" />
+    <EmbeddedResource Remove="ObjectFields\Commands\Upload\**" />
     <None Remove="Customers\Import\**" />
+    <None Remove="ObjectFields\Commands\Upload\**" />
   </ItemGroup>
 
   <ItemGroup>

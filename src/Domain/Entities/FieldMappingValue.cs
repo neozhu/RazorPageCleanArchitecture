@@ -1,6 +1,6 @@
 namespace CleanArchitecture.Razor.Domain.Entities;
 
-public class FieldMappingValue : AuditableEntity, IAuditTrial
+public class FieldMappingValue : AuditableEntity, IAuditTrial, IProjectId
 {
     public int Id { get; set; }
     public int MappingRuleId { get; set; }

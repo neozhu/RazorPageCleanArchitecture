@@ -1,7 +1,7 @@
 namespace CleanArchitecture.Razor.Domain.Entities;
 
 #nullable disable
-public class MappingRule:AuditableEntity, IAuditTrial
+public class MappingRule:AuditableEntity, IAuditTrial, IProjectId
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -29,6 +29,8 @@ public class MappingRule:AuditableEntity, IAuditTrial
     public string Comments { get; set; }
     public string TemplateFile { get; set; }
     public string TemplateDescription { get; set; }
+
+    public string Active { get; set; } = "Active";
 
     public virtual ICollection<FieldMappingValue> FieldMappingValues { get; set; } = new HashSet<FieldMappingValue>();
 

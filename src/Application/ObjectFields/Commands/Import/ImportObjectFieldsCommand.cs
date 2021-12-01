@@ -44,8 +44,9 @@ public class ImportObjectFieldsCommandHandler :
     public async Task<Result> Handle(ImportObjectFieldsCommand request, CancellationToken cancellationToken)
     {
 
-        var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, ObjectField, object>>
+        var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, ObjectFieldDto, object>>
             {
+                { _localizer["Project Name"], (row,item) => item.ProjectName = row[_localizer["Project Name"]]?.ToString() },
                 { _localizer["Field Name"], (row,item) => item.Name = row[_localizer["Field Name"]]?.ToString() },
                 { _localizer["Field Description"], (row,item) => item.Description = row[_localizer["Field Description"]]?.ToString() },
             }, _localizer["ObjectFields"]);
@@ -56,14 +57,29 @@ public class ImportObjectFieldsCommandHandler :
             var errorsOccurred = false;
             foreach (var item in importItems)
             {
-                var validationResult = await _addValidator.ValidateAsync(_mapper.Map<CreateObjectFieldCommand>(item), cancellationToken);
+                var migrationProject = await _context.MigrationProjects.FirstOrDefaultAsync(x => x.Name == item.ProjectName);
+                if (migrationProject == null)
+                {
+                    errorsOccurred = true;
+                    errors.Add($"not found migration project by name:{item.ProjectName}");
+                    break;
+                }
+                var createdto = new CreateObjectFieldCommand()
+                {
+                    ProjectName = item.ProjectName,
+                    Name = item.Name,
+                    Description = item.Description
+                };
+                var validationResult = await _addValidator.ValidateAsync(createdto, cancellationToken);
                 if (validationResult.IsValid)
                 {
                     var exist = await _context.ObjectFields.AnyAsync(x => x.Name == item.Name, cancellationToken);
                     if (!exist)
                     {
-
-                        await _context.ObjectFields.AddAsync(item, cancellationToken);
+                        var newitem = _mapper.Map<ObjectField>(item);
+                        newitem.MigrationProjectId = migrationProject.Id;
+                        newitem.MigrationProject = migrationProject;
+                        await _context.ObjectFields.AddAsync(newitem, cancellationToken);
                     }
                 }
                 else
@@ -90,6 +106,7 @@ public class ImportObjectFieldsCommandHandler :
     {
       
         var fields = new string[] {
+            _localizer["Project Name"],
             _localizer["Field Name"],
             _localizer["Field Description"]
 

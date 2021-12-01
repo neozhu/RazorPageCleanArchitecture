@@ -6,17 +6,21 @@ namespace CleanArchitecture.Razor.Application.ObjectFields.DTOs;
 
 public class ObjectFieldDto : IMapFrom<ObjectField>
 {
+    public void Mapping(Profile profile)
+    {
+        profile.CreateMap<ObjectField, ObjectFieldDto>()
+                 .ForMember(x => x.ProjectName, y => y.MapFrom(z => z.MigrationProject.Name));
 
+        profile.CreateMap<ObjectFieldDto, ObjectField>()
+                .ForMember(x => x.MigrationProject, y => y.Ignore());
+
+    }
     public int Id { get; set; }
     public string Name { get; set; }
-    public string ParameterName { get; set; }
-    public string Direct { get; set; }
-    public string AssociatedType { get; set; }
-    public string DataType { get; set; }
-    public int? Length { get; set; }
+ 
     public string Description { get; set; }
-    public string Title { get; set; }
-    public string SourceTemplateName { get; set; }
+    public string ProjectName { get; set; }
+    public int MigrationProjectId { get; set; }
     public TrackingState TrackingState { get; set; }
     public DateTime Created { get; set; }
     public string CreatedBy { get; set; }

@@ -43,7 +43,7 @@ public class ImportMappingRulesCommandHandler :
     }
     public async Task<Result> Handle(ImportMappingRulesCommand request, CancellationToken cancellationToken)
     {
-        var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, ObjectField, object>>
+        var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, TempFieldDto, object>>
             {
                 { _localizer["Field Name"], (row,item) => item.Name = row[_localizer["Field Name"]]?.ToString() },
                 { _localizer["Field Description"], (row,item) => item.Description = row[_localizer["Field Description"]]?.ToString() },

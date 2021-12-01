@@ -27,13 +27,7 @@
           "title": "Mapping Report",
           "href": "fieldmappingvalues_index.html",
           "roles": []
-        },
-        {
-          "title": "Object Fields",
-          "href": "objectfields_index.html",
-          "roles": []
         }
-
       ]
     },
     {
@@ -49,6 +43,11 @@
         {
           "title": "Migration Objects",
           "href": "migrationobjects_index.html",
+          "roles": []
+        },
+        {
+          "title": "Object Fields",
+          "href": "objectfields_index.html",
           "roles": []
         },
         {

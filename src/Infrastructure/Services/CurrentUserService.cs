@@ -42,7 +42,7 @@ public class CurrentUserService : ICurrentUserService
         return groups.Any(x=>x==roleName);
     }
     public int ProjectId() {
-        if (_httpContextAccessor.HttpContext.Request.Cookies.TryGetValue("SELECTEDPROJECTID", out string projectId))
+        if (_httpContextAccessor.HttpContext?.Request?.Cookies?.TryGetValue("SELECTEDPROJECTID", out string projectId)??false)
         {
             return int.Parse(projectId);
         }
@@ -54,7 +54,7 @@ public class CurrentUserService : ICurrentUserService
     }
     public string ProjectName()
     {
-        if (_httpContextAccessor.HttpContext.Request.Cookies.TryGetValue("SELECTEDPROJECTNAME", out string projectName))
+        if (_httpContextAccessor.HttpContext?.Request?.Cookies?.TryGetValue("SELECTEDPROJECTNAME", out string projectName)??false)
         {
             return projectName;
         }

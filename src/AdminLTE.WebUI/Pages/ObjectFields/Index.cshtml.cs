@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
 using CleanArchitecture.Razor.Application.ObjectFields.Queries.Pagination;
 using CleanArchitecture.Razor.Application.ObjectFields.Commands.AcceptChanges;
-using CleanArchitecture.Razor.Application.ObjectFields.Commands.Upload;
 
 namespace AdminLTE.WebUI.Pages.ObjectFields
 {
@@ -74,21 +73,6 @@ namespace AdminLTE.WebUI.Pages.ObjectFields
             var stream = new MemoryStream();
             await UploadedFile.CopyToAsync(stream);
             var command = new ImportObjectFieldsCommand()
-            {
-                FileName = UploadedFile.FileName,
-                Data = stream.ToArray()
-            };
-            var result = await _mediator.Send(command);
-            return new JsonResult(result);
-        }
-
-
-
-        public async Task<IActionResult> OnPostUploadAsync()
-        {
-            var stream = new MemoryStream();
-            await UploadedFile.CopyToAsync(stream);
-            var command = new UploadFieldTemplateFilesCommand()
             {
                 FileName = UploadedFile.FileName,
                 Data = stream.ToArray()

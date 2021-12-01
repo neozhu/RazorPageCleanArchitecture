@@ -242,7 +242,35 @@
                     }
                 ]]
             })
-                .datagrid('enableFilter', {})
+                .datagrid('enableFilter', [
+                    {
+                    field:'MigrationProjectId',
+                    type:'combobox',
+                    options:{
+                        value: '',
+                        url:'@Url.Page("/MigrationObjects/Index")?handler=MigrationProjects',
+                        method:'GET',
+                        valueField:'Id',
+                        textField:'Name',
+                        panelHeight:'auto',
+                        mode:'remote',
+                        onChange: function (item) {
+                         if(item){
+                             $dg.datagrid('addFilterRule', {
+	                           field: 'MigrationProjectId',
+	                           op: 'equal',
+	                           value: item
+                             });
+                             $dg.datagrid('doFilter');
+                         }else{
+                             $dg.datagrid('removeFilterRule', 'MigrationProjectId'	                          );
+                             $dg.datagrid('doFilter');
+                         }
+                        }
+
+                    }
+                },
+                ])
                 .datagrid('load', '@Url.Page("/MigrationObjects/Index")?handler=Data');
 
         }

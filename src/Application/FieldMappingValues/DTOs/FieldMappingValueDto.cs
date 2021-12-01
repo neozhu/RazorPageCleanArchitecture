@@ -30,7 +30,7 @@ public class FieldMappingValueDto : IMapFrom<FieldMappingValue>
     public string Team { get; set; }
     public string Check { get; set; }
     public string Comments { get; set; }
-
+    public string Active { get; set; } = "Active";
     public TrackingState TrackingState { get; set; }
 
     public DateTime Created { get; set; }
