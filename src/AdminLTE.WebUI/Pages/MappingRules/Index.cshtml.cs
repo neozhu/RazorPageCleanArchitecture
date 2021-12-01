@@ -18,6 +18,8 @@ using CleanArchitecture.Razor.Application.FieldMappingValues.Commands.Import;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.MappingRules.Commands.Parse;
 using CleanArchitecture.Razor.Application.MigrationProjects.Queries.GetAll;
+using CleanArchitecture.Razor.Application.ObjectFields.Queries.GetAll;
+using CleanArchitecture.Razor.Application.ObjectFields.DTOs;
 
 namespace AdminLTE.WebUI.Pages.MappingRules
 {
@@ -43,7 +45,7 @@ namespace AdminLTE.WebUI.Pages.MappingRules
         private readonly ICurrentUserService _currentUserService;
         private readonly ISender _mediator;
         private readonly IStringLocalizer<IndexModel> _localizer;
-
+        public  IEnumerable<ObjectFieldDto> FieldList { get; set; }
         public IndexModel(
             ICurrentUserService currentUserService,
                 ISender mediator,
@@ -58,11 +60,9 @@ namespace AdminLTE.WebUI.Pages.MappingRules
         {
             var request = new GetAllMigrationObjectsQuery();
             var objectlist = await _mediator.Send(request);
-            MigrationObjects = new SelectList(objectlist, "Name", "Name");
-
-            var requestproject = new GetAllMigrationProjectsQuery();
-            var projectlist = await _mediator.Send(requestproject);
-            MigrationProjects = new SelectList(projectlist, "Id", "Name");
+            MigrationObjects = new SelectList(objectlist, "Description", "Description");
+                        var requestfield = new GetAllObjectFieldsQuery();
+            FieldList = await _mediator.Send(requestfield);
         }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] MappingRulesWithPaginationQuery command)
         {

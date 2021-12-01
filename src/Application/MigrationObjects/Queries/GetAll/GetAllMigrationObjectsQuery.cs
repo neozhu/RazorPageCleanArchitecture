@@ -20,22 +20,26 @@ public class GetAllMigrationObjectsQueryHandler :
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
+    private readonly ICurrentUserService _currentUserService;
     private readonly IStringLocalizer<GetAllMigrationObjectsQueryHandler> _localizer;
 
     public GetAllMigrationObjectsQueryHandler(
         IApplicationDbContext context,
         IMapper mapper,
+        ICurrentUserService currentUserService,
         IStringLocalizer<GetAllMigrationObjectsQueryHandler> localizer
         )
     {
         _context = context;
         _mapper = mapper;
+        _currentUserService = currentUserService;
         _localizer = localizer;
     }
 
     public async Task<IEnumerable<MigrationObjectDto>> Handle(GetAllMigrationObjectsQuery request, CancellationToken cancellationToken)
     {
-        var data = await _context.MigrationObjects
+        var projectId = _currentUserService.ProjectId();
+        var data = await _context.MigrationObjects.Where(x=>x.MigrationProjectId== projectId)
                      .ProjectTo<MigrationObjectDto>(_mapper.ConfigurationProvider)
                      .ToListAsync(cancellationToken);
         return data;

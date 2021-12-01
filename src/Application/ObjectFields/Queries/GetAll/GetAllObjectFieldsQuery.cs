@@ -21,23 +21,27 @@ public class GetAllObjectFieldsQueryHandler :
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
+    private readonly ICurrentUserService _userService;
     private readonly IStringLocalizer<GetAllObjectFieldsQueryHandler> _localizer;
 
     public GetAllObjectFieldsQueryHandler(
         IApplicationDbContext context,
         IMapper mapper,
+        ICurrentUserService userService,
         IStringLocalizer<GetAllObjectFieldsQueryHandler> localizer
         )
     {
         _context = context;
         _mapper = mapper;
+        _userService = userService;
         _localizer = localizer;
     }
 
     public async Task<IEnumerable<ObjectFieldDto>> Handle(GetAllObjectFieldsQuery request, CancellationToken cancellationToken)
     {
+        var currentProjectId = _userService.ProjectId();
 
-        var data = await _context.ObjectFields
+        var data = await _context.ObjectFields.Where(x=>x.MigrationProjectId==currentProjectId)
                      .ProjectTo<ObjectFieldDto>(_mapper.ConfigurationProvider)
                      .ToListAsync(cancellationToken);
         return data;

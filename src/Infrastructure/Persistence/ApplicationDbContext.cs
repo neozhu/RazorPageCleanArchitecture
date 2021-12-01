@@ -68,21 +68,29 @@ public class ApplicationDbContext : IdentityDbContext<
                 case EntityState.Added:
                     entry.Entity.CreatedBy = _currentUserService.UserId;
                     entry.Entity.Created = _dateTime.Now;
-                    if(entry.Entity is IProjectId project)
+                    if(entry.Entity is IProjectId addproject)
                     {
-                        project.MigrationProjectId = _projectId;
+                        addproject.MigrationProjectId = _projectId;
                     }
                     break;
 
                 case EntityState.Modified:
                     entry.Entity.LastModifiedBy = _currentUserService.UserId;
                     entry.Entity.LastModified = _dateTime.Now;
+                    if (entry.Entity is IProjectId editproject)
+                    {
+                        editproject.MigrationProjectId = _projectId;
+                    }
                     break;
                 case EntityState.Deleted:
                     if (entry.Entity is ISoftDelete softDelete)
                     {
                         softDelete.DeletedBy = _currentUserService.UserId;
                         softDelete.Deleted = _dateTime.Now;
+                        if (entry.Entity is IProjectId delproject)
+                        {
+                            delproject.MigrationProjectId = _projectId;
+                        }
                         entry.State = EntityState.Modified;
                     }
                     break;

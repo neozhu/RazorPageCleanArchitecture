@@ -24,6 +24,7 @@ public class GetAllMigrationProjectsQueryHandler :
     public GetAllMigrationProjectsQueryHandler(
         IApplicationDbContext context,
         IMapper mapper,
+
         IStringLocalizer<GetAllMigrationProjectsQueryHandler> localizer
         )
     {
@@ -34,6 +35,7 @@ public class GetAllMigrationProjectsQueryHandler :
 
     public async Task<IEnumerable<MigrationProjectDto>> Handle(GetAllMigrationProjectsQuery request, CancellationToken cancellationToken)
     {
+  
 
         var data = await _context.MigrationProjects
                      .ProjectTo<MigrationProjectDto>(_mapper.ConfigurationProvider)
