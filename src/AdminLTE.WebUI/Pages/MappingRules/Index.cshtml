@@ -298,6 +298,15 @@
 <script src="~/plugins/select2/js/select2.full.min.js"></script>
 
 <script>
+
+    $('#Input_LegacyField1').change(function(){
+         const selectedval = $("#Input_LegacyField1").val();
+         const option_length = $("#fieldlist").find("option").length;
+         for(var i = 0; i < option_length; i++){
+         var option_text = $("option").eq(i).attr('data-value');
+         }
+    })
+
      var $fieldmappingvalues_dg = {};
 
     $('.default-example-modal-right-lg').on('shown.bs.modal', function () {
