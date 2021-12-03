@@ -6,10 +6,10 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
-    ViewData["Title"] = _localizer["Mapping Rules"].Value;
+    ViewData["Title"] = _localizer["Value Mapping"].Value;
     ViewData["PageName"] = "mappingrules_index";
     ViewData["Category1"] = _localizer["Migration Objects"].Value;
-    ViewData["Heading"] = _localizer["Mapping Rules"].Value;
+    ViewData["Heading"] = _localizer["Value Mapping"].Value;
     ViewData["PageDescription"] = _localizer["See all available options"].Value;
     ViewData["PreemptiveClass"] = "Default";
 }
@@ -32,8 +32,8 @@
 <div id="js-page-content-demopanels" class="card mb-g">
     <div class="card-header bg-white d-flex align-items-center">
         <h4 class="m-0">
-            @_localizer["Mapping Rules"]
-            <small>@_localizer["See all available options"]</small>
+            @_localizer["Value Mapping"]
+            <small>&nbsp;</small>
         </h4>
         <div class="ml-auto">
 
@@ -46,9 +46,13 @@
                 <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
                 @_localizer["Delete"]
             </button>
-            <button class="btn btn-sm btn-outline-primary " id="searchbutton">
-                <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
-                @_localizer["Search"]
+           <button class="btn btn-sm btn-outline-primary " id="downloadtemplatebutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                @_localizer["Download Value Mapping"]
+            </button>
+            <button class="btn btn-sm btn-outline-primary " id="downloadtemplatebutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>
+                @_localizer["Upload Value Mapping"]
             </button>
             <div class="btn-group" role="group">
                 <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
@@ -118,28 +122,28 @@
                             <span class="invalid-feedback" asp-validation-for="Input.Status">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4 mb-2">
-                            <label class="form-label" for="ImportParameterField1">@_localizer["Import Parameter Name 1"] <span class="text-danger">*</span></label>
+                            <label class="form-label" for="ImportParameterField1">@_localizer["Import Parameter 1 Name"] <span class="text-danger">*</span></label>
                             <input type="text" asp-for="Input.ImportParameterField1" class="form-control" placeholder="" required="required" readonly="readonly" />
                             <span class="invalid-feedback" asp-validation-for="Input.ImportParameterField1">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4 mb-2">
-                            <label class="form-label" for="LegacyField1">@_localizer["Legacy Field Name 1"] <span class="text-danger">*</span></label>
+                            <label class="form-label" for="LegacyField1">@_localizer["Legacy Field 1 Name"] <span class="text-danger">*</span></label>
                             <input type="text" list="fieldlist" asp-for="Input.LegacyField1" class="form-control" placeholder="" required="required" autocomplete="off" />
                             
                             <span class="invalid-feedback" asp-validation-for="Input.LegacyField1">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4 mb-2">
-                            <label class="form-label" for="LegacyDescription1">@_localizer["Legacy Field Description 1"] </label>
+                            <label class="form-label" for="LegacyDescription1">@_localizer["Legacy Field 1 Description"] </label>
                             <input type="text" asp-for="Input.LegacyDescription1" class="form-control" placeholder="" autocomplete="off"/>
                             <span class="invalid-feedback" asp-validation-for="Input.LegacyDescription1">Sorry, you missed this one.</span>
                         </div>
                          <div class="col-md-4 mb-2">
-                            <label class="form-label" for="ImportParameterField2">@_localizer["Import Parameter Name 2"] </label>
+                            <label class="form-label" for="ImportParameterField2">@_localizer["Legacy Field 2 Description"] </label>
                             <input type="text" asp-for="Input.ImportParameterField2" class="form-control" placeholder=""  readonly="readonly" />
                             <span class="invalid-feedback" asp-validation-for="Input.ImportParameterField2">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4 mb-2">
-                            <label class="form-label" for="LegacyField2">@_localizer["Legacy Field Name 2"] </label>
+                            <label class="form-label" for="LegacyField2">@_localizer["Legacy Field 2 Name"] </label>
                             <input type="text" list="fieldlist" asp-for="Input.LegacyField2" class="form-control" placeholder="" autocomplete="off"/>
                             <span class="invalid-feedback" asp-validation-for="Input.LegacyField2">Sorry, you missed this one.</span>
                         </div>
@@ -154,12 +158,12 @@
                             <span class="invalid-feedback" asp-validation-for="Input.ImportParameterField3">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4 mb-2">
-                            <label class="form-label" for="LegacyField3">@_localizer["Legacy Field Name 3"]  </label>
+                            <label class="form-label" for="LegacyField3">@_localizer["Legacy Field 3 Name"]  </label>
                             <input type="text" list="fieldlist" asp-for="Input.LegacyField3" class="form-control" placeholder="" autocomplete="off"/>
                             <span class="invalid-feedback" asp-validation-for="Input.LegacyField3">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4 mb-2">
-                            <label class="form-label" for="LegacyDescription3">@_localizer["Legacy Field Description 3"] </label>
+                            <label class="form-label" for="LegacyDescription3">@_localizer["Legacy Field 3 Description"] </label>
                             <input type="text"  asp-for="Input.LegacyDescription3" class="form-control" placeholder="" autocomplete="off"/>
                             <span class="invalid-feedback" asp-validation-for="Input.LegacyDescription3">Sorry, you missed this one.</span>
                         </div>
@@ -183,7 +187,7 @@
                             <label class="form-label" for="IsMock"> </label>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" asp-for="Input.IsMock" class="custom-control-input" value="true">
-                                <label class="custom-control-label" for="Input_IsMock">@_localizer["Is Mock"]</label>
+                                <label class="custom-control-label" for="Input_IsMock">@_localizer["Mock Relevant"]</label>
                             </div>
                         </div>
                         <div class="col-md-6 mb-2">
@@ -242,23 +246,9 @@
                     <button type="button" id="adddatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Add"] </button>
                     <button type="button" id="deletedatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Delete"] </button>
                     <button type="button" id="canceldatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Cancel"] </button>
-                    <button type="button" id="savedatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Save"] </button>
-                    <button type="button" id="downloadmigrationbutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Download Migration Template"] </button>
-
-                    <div class="btn-group" role="group">
-                        <button id="importdatabutton" type="button" class="btn  btn-sm  btn-outline-primary">
-                            @_localizer["Import Data"]
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="importbutton">
-                            <button id="downloaddatatemplatebutton" class="dropdown-item">@_localizer["Download Data Template"]</button>
-                            <button id="downloaddatabutton" class="dropdown-item">@_localizer["Download Data"]</button>
-                        </div>
-                       
-                    </div>
-                     <input type="file" id="uploaddatafile"
+                    <button type="button" id="importdatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Upload Data"] </button>
+                    <button type="button" id="downloaddatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Download Data"] </button>
+                    <input type="file" id="uploaddatafile"
                             style="display:none">
                 </div>
                 <div class="d-flex flex-row mt-2">
@@ -269,6 +259,7 @@
                 </div>
             </div>
             <div class="modal-footer">
+                 <button type="button" id="savedatabutton" class="btn   btn-primary mr-1">@_localizer["Save"] </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
 
             </div>
@@ -362,7 +353,7 @@
                         field: 'Mock',
                         title: '@_localizer["Mock"]',
                         sortable: true,
-                        width: 230,
+                        width: 150,
                         editor: { type: 'textbox',
                         options: {
                             required: false,
@@ -958,7 +949,7 @@
                     }
                 },
                 { field: 'LegacyField1',
-                  title: '@_localizer["Legacy Field Name 1"]',
+                  title: '@_localizer["Legacy Field 1 Name"]',
                   sortable: true,
                   width: 220,
                   formatter:function(value,row,index){
@@ -966,7 +957,7 @@
                   }
                 },
                 { field: 'LegacyField2',
-                  title: '@_localizer["Legacy Field Name 2"]',
+                  title: '@_localizer["Legacy Field 2 Name"]',
                   sortable: true,
                   width: 220,
                   formatter:function(value,row,index){
@@ -974,7 +965,7 @@
                   }
                 },
                 { field: 'LegacyField3',
-                  title: '@_localizer["Legacy Field Name 3"]',
+                  title: '@_localizer["Legacy Field 3 Name"]',
                   sortable: true,
                   width: 220,
                   formatter:function(value,row,index){
@@ -989,19 +980,7 @@
                       return `<a> ${value??''} </a> <br> <small>${row.ExportParameterField??''}</small> <br> <small>${row.NewValueFieldDescription??''}</small>`;
                   }
                 },
-                { field: 'TemplateFile',
-                  title: '@_localizer["Template File"]',
-                  sortable: true,
-                  width: 120,
-                  formatter:function(v,r,i){
-                      if(v){
-                          return `<button class="btn btn-sm btn-outline-primary " type="button" onclick='onDownload(${i})' >@_localizer["Download"]</button>`
-                      }else{
-                          return `<button class="btn btn-sm btn-outline-info " type="button" onclick='onEdit(${i})' >@_localizer["Upload"]</button>`
-                      }
-                  }
-                },
-                { field: 'IsMock', title: '@_localizer["Is Mock"]', sortable: true, width: 120 },
+                { field: 'IsMock', title: '@_localizer["Mock Relevant"]', sortable: true, width: 120 },
                 { field: 'Team', title: '@_localizer["Team"]', sortable: true, width: 160 },
                 { field: 'LegacySystem', title: '@_localizer["Legacy System"]', sortable: true, width: 220 },
                 { field: 'RelevantObjects', title: '@_localizer["Relevant Objects"]', sortable: true, width: 220 },
@@ -1133,7 +1112,7 @@
             $('#mappingrule_form #Input_Id').val(0);
             $('#mappingrule_form #Input_TemplateFile').val('');
             $('#mappingrule_form #Input_Status').val('Not Started');
-            $('#Input_Active').prop('checked', true);
+            $('#Input_Active').prop('checked', false);
             uploadtemplatefilename.innerHTML =`<div class="alert alert-danger mt-2 mb-2" role="alert">
                                     <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a migration template file"].
                          </div>`

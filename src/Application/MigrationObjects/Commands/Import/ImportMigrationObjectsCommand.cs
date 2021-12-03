@@ -49,7 +49,6 @@ namespace CleanArchitecture.Razor.Application.MigrationObjects.Commands.Import;
                 { _localizer["Project Name"], (row,item) => item.ProjectName = row[_localizer["Project Name"]]?.ToString() },
                 { _localizer["Conversion Object Name"], (row,item) => item.Name = row[_localizer["Conversion Object Name"]]?.ToString() },
                 { _localizer["Object Name"], (row,item) => item.ObjectName = row[_localizer["Object Name"]]?.ToString() },
-                { _localizer["Team"], (row,item) => item.Team = row[_localizer["Team"]]?.ToString() },
                 { _localizer["Description"], (row,item) => item.Description = row[_localizer["Description"]]?.ToString() },
 
             }, _localizer["MigrationObjects"]);
@@ -113,7 +112,6 @@ namespace CleanArchitecture.Razor.Application.MigrationObjects.Commands.Import;
                    _localizer["Conversion Object Name"],
                    _localizer["Object Name"],
                    _localizer["Description"],
-                   _localizer["Team"],
                 };
             var result = await _excelService.CreateTemplateAsync(fields, _localizer["MigrationObjects"]);
             return result;

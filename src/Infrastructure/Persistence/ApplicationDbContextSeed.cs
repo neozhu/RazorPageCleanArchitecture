@@ -100,10 +100,10 @@ public static class ApplicationDbContextSeed
         {
             context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "LegacySystem", Value = "AP1", Text = "AP1", Description = "Legacy System" });
             context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "LegacySystem", Value = "NAVISION", Text = "NAVISION", Description = "Legacy System" });
-            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "ProjectName", Value = "Z_Migration_Direct", Text = "Z_Migration_Direct", Description = "Project Name" });
-            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "ProjectName", Value = "Z_Migration_Staging", Text = "Z_Migration_Staging", Description = "Project Name" });
-            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "ProjectName", Value = "Z_Test", Text = "Z_Test", Description = "Project Name" });
-            
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "SD", Text = "SD", Description = "Team Name" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "PP", Text = "PP", Description = "Team Name" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "MM", Text = "MM", Description = "Team Name" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "FI", Text = "FI", Description = "Team Name" });
             await context.SaveChangesAsync();
 
      

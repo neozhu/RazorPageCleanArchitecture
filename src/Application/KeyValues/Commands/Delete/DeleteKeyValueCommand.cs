@@ -1,15 +1,23 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using CleanArchitecture.Razor.Application.KeyValues.Caching;
+
 namespace CleanArchitecture.Razor.Application.KeyValues.Commands.Delete
 {
-    public class DeleteKeyValueCommand: IRequest<Result>
+    public class DeleteKeyValueCommand: IRequest<Result>, ICacheInvalidator
     {
         public int Id { get; set; }
+        public string CacheKey => KeyValueCacheKey.GetAllCacheKey;
+
+        public CancellationTokenSource ResetCacheToken => KeyValueCacheTokenSource.ResetCacheToken;
     }
-    public class DeleteCheckedKeyValuesCommand : IRequest<Result>
+    public class DeleteCheckedKeyValuesCommand : IRequest<Result>, ICacheInvalidator
     {
         public int[] Id { get; set; }
+        public string CacheKey => KeyValueCacheKey.GetAllCacheKey;
+
+        public CancellationTokenSource ResetCacheToken => KeyValueCacheTokenSource.ResetCacheToken;
     }
 
     public class DeleteKeyValueCommandHandler : IRequestHandler<DeleteKeyValueCommand, Result>,

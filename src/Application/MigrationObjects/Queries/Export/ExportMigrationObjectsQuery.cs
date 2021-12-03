@@ -50,7 +50,6 @@ namespace CleanArchitecture.Razor.Application.MigrationObjects.Queries.Export;
                     { _localizer["Conversion Object Name"], item => item.Name },
                     { _localizer["Object Name"], item => item.ObjectName },
                     { _localizer["Description"], item => item.Description },
-                    { _localizer["Team"], item => item.Team },
                 }
                 , _localizer["MigrationObjects"]);
             return result;
