@@ -20,6 +20,8 @@ using CleanArchitecture.Razor.Application.MappingRules.Commands.Parse;
 using CleanArchitecture.Razor.Application.MigrationProjects.Queries.GetAll;
 using CleanArchitecture.Razor.Application.ObjectFields.Queries.GetAll;
 using CleanArchitecture.Razor.Application.ObjectFields.DTOs;
+using CleanArchitecture.Razor.Infrastructure.Extensions;
+using CleanArchitecture.Razor.Application.FieldMappingValues.Queries.Export;
 
 namespace AdminLTE.WebUI.Pages.MappingRules
 {
@@ -58,6 +60,10 @@ namespace AdminLTE.WebUI.Pages.MappingRules
         }
         public async Task OnGetAsync()
         {
+            //var role = _currentUserService.IsInRole("DSC IT SAP");
+            //var displayname = this.User.GetDisplayName();
+    
+
             var request = new GetAllMigrationObjectsQuery();
             var objectlist = await _mediator.Send(request);
             MigrationObjects = new SelectList(objectlist, "Description", "Description");
@@ -138,6 +144,15 @@ namespace AdminLTE.WebUI.Pages.MappingRules
             };
             var result = await _mediator.Send(command);
             return new JsonResult(result);
+        }
+        public async Task<IActionResult> OnPostDownloadData(int mappingruleid, string mappingrulename)
+        {
+            var command = new ExportFieldMmappingValuesDataQuery()
+            {
+                MappingRuleId = mappingruleid,
+            };
+            var result = await _mediator.Send(command);
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer[$"FieldMappingValues({mappingrulename})"] + ".xlsx");
         }
         public async Task<IActionResult> OnPostVaildateTemplateFile() {
             var stream = new MemoryStream();

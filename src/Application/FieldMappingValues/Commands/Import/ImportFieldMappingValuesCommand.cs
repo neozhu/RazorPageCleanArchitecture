@@ -161,24 +161,24 @@ public class ImportFieldMappingValuesCommandHandler :
         }
         if (!string.IsNullOrEmpty(mappingrule.LegacyField1))
         {
-            dic.Add(mappingrule.LegacyField1, (row, item) => item.Legacy1 = row[mappingrule.LegacyField1]?.ToString());
+            dic.Add($"{mappingrule.LegacyField1}(Legacy)", (row, item) => item.Legacy1 = row[$"{mappingrule.LegacyField1}(Legacy)"]?.ToString());
         }
         if (!string.IsNullOrEmpty(mappingrule.LegacyField2))
         {
-            dic.Add(mappingrule.LegacyField2, (row, item) => item.Legacy2 = row[mappingrule.LegacyField2]?.ToString());
+            dic.Add($"{mappingrule.LegacyField2}(Legacy)", (row, item) => item.Legacy2 = row[$"{mappingrule.LegacyField2}(Legacy)"]?.ToString());
         }
         if (!string.IsNullOrEmpty(mappingrule.LegacyField3))
         {
-            dic.Add(mappingrule.LegacyField3, (row, item) => item.Legacy3 = row[mappingrule.LegacyField3]?.ToString());
+            dic.Add($"{mappingrule.LegacyField3}(Legacy)", (row, item) => item.Legacy3 = row[$"{mappingrule.LegacyField3}(Legacy)"]?.ToString());
         }
         if (!string.IsNullOrEmpty(mappingrule.NewValueField))
         {
-            dic.Add(mappingrule.NewValueField, (row, item) => item.NewValue = row[mappingrule.NewValueField]?.ToString());
+            dic.Add($"{mappingrule.NewValueField}(New)", (row, item) => item.NewValue = row[$"{mappingrule.NewValueField}(New)"]?.ToString());
         }
         dic.Add(_localizer["Comments"], (row, item) => item.Comments = row[_localizer["Comments"]]?.ToString());
 
         var result = await _excelService.ImportAsync(request.Data, mappers: dic
-            , _localizer[mappingrule.Name]);
+            , "Data");
         if (result.Succeeded)
         {
             var importItems = result.Data;
@@ -187,6 +187,16 @@ public class ImportFieldMappingValuesCommandHandler :
             var rulelist = new List<MappingRule>();
             foreach (var item in importItems)
             {
+
+                var exist = await _context.FieldMappingValues.AnyAsync(x => x.MappingRuleId == mappingrule.Id
+                                                         && x.NewValue == item.NewValue
+                                                         && x.Legacy1 == item.Legacy1
+                                                         && x.Legacy2 == item.Legacy2
+                                                         && x.Legacy3 == item.Legacy3);
+                if (exist)
+                {
+                    continue;
+                }
                 var validateitem = new CreateFieldMappingValueCommand()
                 {
                     Check = item.Check,
@@ -263,22 +273,22 @@ public class ImportFieldMappingValuesCommandHandler :
         }
         if (!string.IsNullOrEmpty(mappingrule.LegacyField1))
         {
-            fields.Add(mappingrule.LegacyField1);
+            fields.Add($"{mappingrule.LegacyField1}(Legacy)");
         }
         if (!string.IsNullOrEmpty(mappingrule.LegacyField2))
         {
-            fields.Add(mappingrule.LegacyField2);
+            fields.Add($"{mappingrule.LegacyField2}(Legacy)");
         }
         if (!string.IsNullOrEmpty(mappingrule.LegacyField3))
         {
-            fields.Add(mappingrule.LegacyField3);
+            fields.Add($"{mappingrule.LegacyField3}(Legacy)");
         }
         if (!string.IsNullOrEmpty(mappingrule.NewValueField))
         {
-            fields.Add(mappingrule.NewValueField);
+            fields.Add($"{mappingrule.NewValueField}(New)");
         }
         fields.Add(_localizer["Comments"]);
-        var result = await _excelService.CreateTemplateAsync(fields, mappingrule.Name);
+        var result = await _excelService.CreateTemplateAsync(fields, "Data");
         return result;
     }
 }

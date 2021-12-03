@@ -253,8 +253,10 @@
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="importbutton">
-                            <button id="downloaddatatemplatebutton" class="dropdown-item">@_localizer["Download Import Data Template"]</button>
+                            <button id="downloaddatatemplatebutton" class="dropdown-item">@_localizer["Download Data Template"]</button>
+                            <button id="downloaddatabutton" class="dropdown-item">@_localizer["Download Data"]</button>
                         </div>
+                       
                     </div>
                      <input type="file" id="uploaddatafile"
                             style="display:none">
@@ -303,10 +305,54 @@
          const selectedval = $("#Input_LegacyField1").val();
          const option_length = $("#fieldlist").find("option").length;
          for(var i = 0; i < option_length; i++){
-         var option_text = $("option").eq(i).attr('data-value');
+           var option_value = $("#fieldlist > option").eq(i).attr('value');
+           var option_text = $("#fieldlist > option").eq(i).text();
+           if(option_value == selectedval)
+           {
+               $("#Input_LegacyDescription1").val(option_text)
+               break;
+           }  
          }
     })
-
+    $('#Input_LegacyField2').change(function(){
+         const selectedval = $("#Input_LegacyField2").val();
+         const option_length = $("#fieldlist").find("option").length;
+         for(var i = 0; i < option_length; i++){
+           var option_value = $("#fieldlist > option").eq(i).attr('value');
+           var option_text = $("#fieldlist > option").eq(i).text();
+           if(option_value == selectedval)
+           {
+               $("#Input_LegacyDescription2").val(option_text)
+               break;
+           }  
+         }
+    })
+    $('#Input_LegacyField3').change(function(){
+         const selectedval = $("#Input_LegacyField3").val();
+         const option_length = $("#fieldlist").find("option").length;
+         for(var i = 0; i < option_length; i++){
+           var option_value = $("#fieldlist > option").eq(i).attr('value');
+           var option_text = $("#fieldlist > option").eq(i).text();
+           if(option_value == selectedval)
+           {
+               $("#Input_LegacyDescription3").val(option_text)
+               break;
+           }  
+         }
+    })
+    $('#Input_NewValueField').change(function(){
+         const selectedval = $("#Input_NewValueField").val();
+         const option_length = $("#fieldlist").find("option").length;
+         for(var i = 0; i < option_length; i++){
+           var option_value = $("#fieldlist > option").eq(i).attr('value');
+           var option_text = $("#fieldlist > option").eq(i).text();
+           if(option_value == selectedval)
+           {
+               $("#Input_NewValueFieldDescription").val(option_text)
+               break;
+           }  
+         }
+    })
      var $fieldmappingvalues_dg = {};
 
     $('.default-example-modal-right-lg').on('shown.bs.modal', function () {
@@ -330,7 +376,7 @@
                         field: 'Legacy1',
                          title: `${currentMappingRuleItem.LegacyField1}(Legacy)<br><small>${currentMappingRuleItem.LegacyDescription1??''}</small>`,
                         sortable: true,
-                        width: 180,
+                        width: 220,
                         editor: { type: 'textbox', options: { required: true } }
                     });
          }
@@ -339,7 +385,7 @@
                         field: 'Legacy2',
                          title: `${currentMappingRuleItem.LegacyField2}(Legacy)<br><small>${currentMappingRuleItem.LegacyDescription2??''}</small>`,
                         sortable: true,
-                        width: 180,
+                        width: 220,
                         editor: { type: 'textbox', options: { required: true } }
                     });
          }
@@ -348,16 +394,16 @@
                         field: 'Legacy3',
                         title: `${currentMappingRuleItem.LegacyField3}(Legacy)<br><small>${currentMappingRuleItem.LegacyDescription3??''}</small>`,
                         sortable: true,
-                        width: 180,
+                        width: 220,
                         editor: { type: 'textbox', options: { required: true } }
                     });
          }
          if(currentMappingRuleItem.NewValueField){
              columments.push({
                         field: 'NewValue',
-                        title: `${currentMappingRuleItem.NewValueField}(New)<br>${currentMappingRuleItem.NewValueFieldDescription??''}</small>`,
+                        title: `${currentMappingRuleItem.NewValueField}(New)<br><small>${currentMappingRuleItem.NewValueFieldDescription??''}</small>`,
                         sortable: true,
-                        width: 180,
+                        width: 220,
                         editor: { type: 'textbox', options: { required: true } }
                     });
          }
@@ -365,7 +411,7 @@
                         field: 'Comments',
                         title: '@_localizer["Comments"]',
                         sortable: true,
-                        width:190,
+                        width:200,
                         editor: { type: 'textbox', options: { required: false } }
                     });
         columments.push({
@@ -462,6 +508,37 @@
     }
     $('#importdatabutton').click(function () {
          uploaddatainput.click();
+    });
+    $('#downloaddatabutton').click(function(){
+        var headers = {
+            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+        }
+        axios.post('@Url.Page("/MappingRules/Index")?handler=DownloadData&MappingRuleId=' + currentMappingRuleId +'&MappingRuleName=' + currentMappingRuleName ,
+            null,
+            {
+                headers: headers,
+                responseType: "blob"
+            })
+            .then(response => {
+                const filename = getFileName(response.headers['content-disposition']);
+                const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', filename);
+                document.body.appendChild(link);
+                link.click();
+                toastr["info"](`@_localizer["Download data success"]`);
+            }).catch(error => {
+                if (error.response.data.Errors) {
+                    const errors = error.response.data.Errors;
+                    for (let [key, value] of Object.entries(errors)) {
+                        toastr["error"](`${key}: ${value.toString()}`);
+                    }
+
+                } else {
+                    toastr["error"](`@_localizer["download fail"],${error.response.data}`);
+                }
+            })
     });
     $('#downloaddatatemplatebutton').click(function(){
         axios.get('@Url.Page("/MappingRules/Index")?handler=CreateDataTemplate&MappingRuleId=' + currentMappingRuleId +'&MappingRuleName=' + currentMappingRuleName ,
@@ -658,7 +735,7 @@
             event.preventDefault();
             event.stopPropagation();
             var request = $('#mappingrule_form').serialize();
-            console.log(request)
+            //console.log(request)
             var formData = new FormData(form);
             formData.set("Input.LegacySystem", $('#Input_LegacySystem').select2('val').toString());
             formData.set("Input.RelevantObjects", $('#Input_RelevantObjects').select2('val').toString());
@@ -703,7 +780,8 @@
     uploadtemplatefileinput.onchange = () => {
 
         vaildatetemplatefile().then(res => {
-            console.log(res)
+            //console.log(res)
+
             $('#Input_TemplateDescription').val(res.TemplateDescription);
             $('#Input_Name').val(res.Name);
             $('#Input_LegacyField1').val(res.LegacyField1);
@@ -719,6 +797,28 @@
             $('#Input_ExportParameterField').val(res.ExportParameterField);
             $('#Input_NewValueFieldDescription').val(res.NewValueFieldDescription);
             $('#Input_Comments').val(res.TemplateDescription);
+
+            if(res.LegacyField1){
+                $('#Input_LegacyField1').prop("readonly", false)
+                $('#Input_LegacyDescription1').prop("readonly", false)
+            }else{
+                $('#Input_LegacyField1').prop("readonly", true)
+                $('#Input_LegacyDescription1').prop("readonly", true)
+            }
+            if(res.LegacyField2){
+                $('#Input_LegacyField2').prop("readonly", false)
+                $('#Input_LegacyDescription2').prop("readonly", false)
+            }else{
+                $('#Input_LegacyField2').prop("readonly", true)
+                $('#Input_LegacyDescription2').prop("readonly", true)
+            }
+            if(res.LegacyField3){
+                $('#Input_LegacyField3').prop("readonly", false)
+                $('#Input_LegacyDescription3').prop("readonly", false)
+            }else{
+                $('#Input_LegacyField3').prop("readonly", true)
+                $('#Input_LegacyDescription3').prop("readonly", true)
+            }
             const uploadfileName = uploadtemplatefileinput.value.split('\\').pop() + `<b>(${res.TemplateDescription})</b>`;
             uploadtemplatefilename.innerHTML = `
              <div class="alert alert-info alert-dismissible fadeup show mb-2 mt-2" role="alert">
@@ -734,11 +834,26 @@
                         </div>
                 </div>
              </div>`;
-           savebutton.disabled = false;
-           $('#uploadtemplatefilename .alert').on('closed.bs.alert', (e) => {
-             uploadtemplatefileinput.value = null;
-             savebutton.disabled = true;
-           })
+            savebutton.disabled = false;
+            $('#uploadtemplatefilename .alert').on('closed.bs.alert', (e) => {
+               uploadtemplatefileinput.value = null;
+               savebutton.disabled = true;
+               $('#Input_TemplateDescription').val('');
+               $('#Input_Name').val('');
+               $('#Input_LegacyField1').val('');
+               $('#Input_LegacyField2').val('');
+               $('#Input_LegacyField3').val('');
+               $('#Input_ImportParameterField1').val('');
+               $('#Input_ImportParameterField2').val('');
+               $('#Input_ImportParameterField3').val('');
+               $('#Input_LegacyDescription1').val('');
+               $('#Input_LegacyDescription2').val('');
+               $('#Input_LegacyDescription3').val('');
+               $('#Input_NewValueField').val('');
+               $('#Input_ExportParameterField').val('');
+               $('#Input_NewValueFieldDescription').val('');
+               $('#Input_Comments').val('');
+            })
         }).catch((error) => {
             uploadtemplatefilename.innerHTML = `
               <div class="alert alert-warning alert-dismissible fadeup show mb-2 mt-2" role="alert">
@@ -975,7 +1090,40 @@
                     } else {
                         $('#Input_RelevantObjects').val(null).change();
                     }
+                },
+                LegacyField1:function(value){
+                     $('#Input_LegacyField1').val(value);
+                     if(value){
+                       $('#Input_LegacyField1').prop("readonly", false)
+                       $('#Input_LegacyDescription1').prop("readonly", false)
+                     }else{
+                       $('#Input_LegacyField1').prop("readonly", true)
+                       $('#Input_LegacyDescription1').prop("readonly", true)
+                     }
+                },
+                LegacyField2:function(value){
+                    $('#Input_LegacyField2').val(value);
+                    if(value){
+                      $('#Input_LegacyField2').prop("readonly", false)
+                      $('#Input_LegacyDescription2').prop("readonly", false)
+                    }else{
+                      $('#Input_LegacyField2').prop("readonly", true)
+                      $('#Input_LegacyDescription2').prop("readonly", true)
+                    }
+                },
+                LegacyField3:function(value){
+                    $('#Input_LegacyField3').val(value);
+                    if(value){
+                       $('#Input_LegacyField3').prop("readonly", false)
+                       $('#Input_LegacyDescription3').prop("readonly", false)
+                    }else{
+                       $('#Input_LegacyField3').prop("readonly", true)
+                       $('#Input_LegacyDescription3').prop("readonly", true)
+                    }
                 }
+                
+            
+            
 
             })
         } else {
@@ -985,6 +1133,7 @@
             $('#mappingrule_form #Input_Id').val(0);
             $('#mappingrule_form #Input_TemplateFile').val('');
             $('#mappingrule_form #Input_Status').val('Not Started');
+            $('#Input_Active').prop('checked', true);
             uploadtemplatefilename.innerHTML =`<div class="alert alert-danger mt-2 mb-2" role="alert">
                                     <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a migration template file"].
                          </div>`
@@ -1076,7 +1225,7 @@
             sort: options.sortName,
             order: options.sortOrder,
         }
-        console.log(options, data)
+        //console.log(options, data)
         var headers = {
             "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
         }

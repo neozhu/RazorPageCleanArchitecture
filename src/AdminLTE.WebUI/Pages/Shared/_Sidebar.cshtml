@@ -20,10 +20,10 @@
 
 
 
-            <div class="info">
+            <div class="info flex-fill">
                 <a href="#" class="d-block">
-                    @(User.Identity.Name)
-                    <span class="badge badge-success">BASIC</span>
+                    @(User.GetDisplayName())
+                    <span class="badge badge-success float-right"> @(User.GetDefaultGroup())</span>
 
                 </a>
             </div>

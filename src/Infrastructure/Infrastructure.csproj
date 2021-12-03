@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -22,6 +22,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
     <PackageReference Include="MimeKit" Version="3.0.0-preview1" />
     <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

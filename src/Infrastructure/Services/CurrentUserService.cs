@@ -2,7 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Razor.Application.Common.Interfaces;
+using Duende.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Http;
+using System.DirectoryServices.AccountManagement;
 using System.Security.Claims;
 using System.Security.Principal;
 
@@ -22,24 +24,10 @@ public class CurrentUserService : ICurrentUserService
 
     }
 
-    public bool IsInRole(string roleName) {
-        var groups = new List<string>();
-        var wi = (WindowsIdentity)_httpContextAccessor.HttpContext.User.Identity;
-        if (wi.Groups != null)
-        {
-            foreach (var group in wi.Groups)
-            {
-                try
-                {
-                    groups.Add(group.Translate(typeof(NTAccount)).ToString());
-                }
-                catch (Exception)
-                {
-                    // ignored
-                }
-            }
-        }
-        return groups.Any(x=>x==roleName);
+    public bool IsInRole(params string[] roleName) {
+        var group = UserPrincipal.Current.GetAuthorizationGroups();
+        return group.Any(x => roleName.Contains(x.Name));
+       
     }
     public int ProjectId() {
         if (_httpContextAccessor.HttpContext?.Request?.Cookies?.TryGetValue("SELECTEDPROJECTID", out string projectId)??false)
@@ -64,5 +52,6 @@ public class CurrentUserService : ICurrentUserService
         }
 
     }
-    public string UserId => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Name);
+    public string DisplayName => UserPrincipal.Current.DisplayName;
+    public string UserId => UserPrincipal.Current.SamAccountName;
 }

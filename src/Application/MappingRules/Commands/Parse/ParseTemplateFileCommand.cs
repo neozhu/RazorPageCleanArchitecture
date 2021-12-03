@@ -97,7 +97,21 @@ public class ParseTemplateFileCommandHandler:
                     mappingruledto.NewValueFieldDescription= fielddescription?.Description;
                 }
             }
-            return Result<MappingRuleDto>.Success(mappingruledto);
+            var exists = await _context.MappingRules.AnyAsync(x=>
+                      x.LegacyField1== mappingruledto.LegacyField1
+                      && x.LegacyField2 == mappingruledto.LegacyField2
+                      && x.LegacyField3 == mappingruledto.LegacyField3
+                      && x.NewValueField == mappingruledto.NewValueField
+                      );
+            if (exists)
+            {
+                return Result<MappingRuleDto>.Failure(new string[] { $"the {mappingruledto.Name} already exists." });
+            }
+            else
+            {
+                return Result<MappingRuleDto>.Success(mappingruledto);
+            }
+           
         }
         catch(Exception e)
         {

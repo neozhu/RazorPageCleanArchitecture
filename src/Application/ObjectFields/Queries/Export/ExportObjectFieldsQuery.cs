@@ -49,7 +49,7 @@ namespace CleanArchitecture.Razor.Application.ObjectFields.Queries.Export;
                     { _localizer["Field Description"], item => item.Description }
            
                 }
-                , _localizer["ObjectFields"]);
+                , _localizer["DataElement"]);
             return result;
         }
     }

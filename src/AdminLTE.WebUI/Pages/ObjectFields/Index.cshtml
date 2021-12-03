@@ -4,11 +4,11 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
-    ViewData["Title"] = _localizer["Object Fields"].Value;
+    ViewData["Title"] = _localizer["Data Element S4"].Value;
     ViewData["PageName"] = "objectfields_index";
     ViewData["Category1"] = _localizer["Migration Objects"].Value;
-    ViewData["Heading"] = _localizer["Object Fields"].Value;
-    ViewData["PageDescription"] = _localizer["See all available options"].Value;
+    ViewData["Heading"] = _localizer["Data Element S4"].Value;
+    ViewData["PageDescription"] = "";
     ViewData["PreemptiveClass"] = "Default";
     //var _canCreate = await _authorizationService.AuthorizeAsync(User, null, Permissions.Dictionaries.Create);
     //var _canEdit = await _authorizationService.AuthorizeAsync(User, null, Permissions.Dictionaries.Edit);
@@ -110,8 +110,8 @@
 <div id="js-page-content-demopanels" class="card mb-g">
     <div class="card-header bg-white d-flex align-items-center">
         <h4 class="m-0">
-            @_localizer["Object Fields"]
-            <small>@_localizer["See all available options"]</small>
+            @_localizer["Data Element S4"]
+            <small></small>
         </h4>
         <div class="ml-auto">
           @*  <button class="btn btn-sm btn-outline-primary " id="uploadfieldbutton">
@@ -144,7 +144,7 @@
           
                 <div class="btn-group" role="group">
                     <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
-                        <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>   @_localizer["Import Excel"]
+                        <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>   @_localizer["Import Data"]
                     </button>
                     <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="sr-only">Toggle Dropdown</span>
@@ -155,7 +155,7 @@
                 </div>
            <button class="btn btn-sm btn-outline-primary " id="exportbutton">
 					<span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
-					@_localizer["Export Excel"]
+					@_localizer["Export Data"]
 				</button>
         </div>
     </div>

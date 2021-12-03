@@ -60,13 +60,13 @@ namespace AdminLTE.WebUI.Pages.ObjectFields
         public async Task<FileResult> OnPostExportAsync([FromBody] ExportObjectFieldsQuery command)
         {
             var result = await _mediator.Send(command);
-            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["ObjectFields"] + ".xlsx");
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["DataElementS4"] + ".xlsx");
         }
         public async Task<FileResult> OnGetCreateTemplate()
         {
             var command = new CreateObjectFieldsTemplateCommand();
             var result = await _mediator.Send(command);
-            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["ObjectFields"] + ".xlsx");
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["DataElementS4"] + ".xlsx");
         }
         public async Task<IActionResult> OnPostImportAsync()
         {

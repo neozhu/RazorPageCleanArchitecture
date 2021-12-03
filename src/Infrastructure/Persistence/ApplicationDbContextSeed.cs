@@ -72,18 +72,18 @@ public static class ApplicationDbContextSeed
         //Seed, if necessary
         if (!context.MigrationProjects.Any())
         {
-            context.MigrationProjects.Add(new Domain.Entities.MigrationProject() { Name = "MOVE-VT", Status="Ongoing", Description = "MOVE-VT", BeginDateTime=DateTime.Now, Progress=0 });
+            context.MigrationProjects.Add(new Domain.Entities.MigrationProject() { Name = "MOVE-VT-PILOT", Status="Ongoing", Description = "MOVE-VT", BeginDateTime=DateTime.Now, Progress=0 });
             await context.SaveChangesAsync();
 
         }
 
         if (!context.MigrationObjects.Any())
         {
-            context.MigrationObjects.Add(new Domain.Entities.MigrationObject() { Name = "BOM", Description = "BOM" });
-            context.MigrationObjects.Add(new Domain.Entities.MigrationObject() { Name = "Customer", Description = "Customer" });
-            context.MigrationObjects.Add(new Domain.Entities.MigrationObject() { Name = "Supplier", Description = "Supplier" });
-            context.MigrationObjects.Add(new Domain.Entities.MigrationObject() { Name = "Production", Description = "Production" });
-            await context.SaveChangesAsync();
+            //context.MigrationObjects.Add(new Domain.Entities.MigrationObject() { Name = "BOM", Description = "BOM" });
+            //context.MigrationObjects.Add(new Domain.Entities.MigrationObject() { Name = "Customer", Description = "Customer" });
+            //context.MigrationObjects.Add(new Domain.Entities.MigrationObject() { Name = "Supplier", Description = "Supplier" });
+            //context.MigrationObjects.Add(new Domain.Entities.MigrationObject() { Name = "Production", Description = "Production" });
+            //await context.SaveChangesAsync();
 
         }
 

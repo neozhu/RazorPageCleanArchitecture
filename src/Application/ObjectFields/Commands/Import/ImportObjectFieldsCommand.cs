@@ -49,7 +49,7 @@ public class ImportObjectFieldsCommandHandler :
                 { _localizer["Project Name"], (row,item) => item.ProjectName = row[_localizer["Project Name"]]?.ToString() },
                 { _localizer["Field Name"], (row,item) => item.Name = row[_localizer["Field Name"]]?.ToString() },
                 { _localizer["Field Description"], (row,item) => item.Description = row[_localizer["Field Description"]]?.ToString() },
-            }, _localizer["ObjectFields"]);
+            }, _localizer["DataElement"]);
         if (result.Succeeded)
         {
             var importItems = result.Data;
@@ -111,7 +111,7 @@ public class ImportObjectFieldsCommandHandler :
             _localizer["Field Description"]
 
         };
-        var result = await _excelService.CreateTemplateAsync(fields, _localizer["ObjectFields"]);
+        var result = await _excelService.CreateTemplateAsync(fields, _localizer["DataElement"]);
         return result;
     }
 }

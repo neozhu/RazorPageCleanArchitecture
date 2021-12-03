@@ -137,6 +137,7 @@ public class ImportMappingRulesCommandHandler :
     //    var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, MappingRule, object>>
     //        {
     //            { _localizer["Mapping Rule Name"], (row,item) => item.Name = row[_localizer["Mapping Rule Name"]]?.ToString() },
+    //            { _localizer["Active"], (row, item) => item.Active = row[_localizer["Active"]]?.ToString() },
     //            { _localizer["Legacy Field Name 1"], (row,item) => item.LegacyField1 = row[_localizer["Legacy Field Name 1"]]?.ToString() },
     //            { _localizer["Legacy Field Description 1"], (row,item) => item.LegacyDescription1 = row[_localizer["Legacy Field Description 1"]]?.ToString() },
     //            { _localizer["Legacy Field Name 2"], (row,item) => item.LegacyField2 = row[_localizer["Legacy Field Name 2"]]?.ToString() },
@@ -219,12 +220,17 @@ public class ImportMappingRulesCommandHandler :
 
         var fields = new string[] {
                    _localizer["Mapping Rule Name"],
+                   _localizer["Active"],
+                   _localizer["Import Parameter Field Name 1"],
                    _localizer["Legacy Field Name 1"],
                    _localizer["Legacy Field Description 1"],
+                   _localizer["Import Parameter Field Name 2"],
                    _localizer["Legacy Field Name 2"],
                    _localizer["Legacy Field Description 2"],
+                   _localizer["Import Parameter Field Name 3"],
                    _localizer["Legacy Field Name 3"],
                    _localizer["Legacy Field Description 3"],
+                   _localizer["Export Parameter Field"],
                    _localizer["New Field Name"],
                    _localizer["New Field Description"],
                    _localizer["Is Mock"],

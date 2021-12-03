@@ -46,6 +46,7 @@ public class ExportMappingRulesQueryHandler :
             new Dictionary<string, Func<MappingRuleDto, object>>()
             {
                     { _localizer["Mapping Rule Name"], item => item.Name },
+                    { _localizer["Active"], item => item.Active },
                     { _localizer["Status"], item => item.Status },
                     { _localizer["Legacy Field Name 1"], item => item.LegacyField1 },
                     { _localizer["Import Parameter Field Name 1"], item => item.ImportParameterField1 },
