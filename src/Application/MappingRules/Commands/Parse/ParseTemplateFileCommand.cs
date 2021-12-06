@@ -102,10 +102,11 @@ public class ParseTemplateFileCommandHandler:
                       && x.LegacyField2 == mappingruledto.LegacyField2
                       && x.LegacyField3 == mappingruledto.LegacyField3
                       && x.NewValueField == mappingruledto.NewValueField
+                      && x.LegacySystem == mappingruledto.LegacySystem
                       );
             if (exists)
             {
-                return Result<MappingRuleDto>.Failure(new string[] { $"the {mappingruledto.Name} already exists." });
+                return Result<MappingRuleDto>.Warning(mappingruledto, new string[] { $"the {mappingruledto.Name} already exists." });
             }
             else
             {

@@ -201,6 +201,74 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                     b.ToTable("DocumentTypes");
                 });
 
+            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.FieldMappingValue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Check")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Legacy1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Legacy2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Legacy3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Legacy4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LegacySystem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MappingRuleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MigrationProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Mock")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Team")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MappingRuleId");
+
+                    b.HasIndex("MigrationProjectId");
+
+                    b.ToTable("FieldMappingValues");
+                });
+
             modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.KeyValue", b =>
                 {
                     b.Property<int>("Id")
@@ -279,6 +347,293 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Loggers");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.MappingRule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Active")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExportParameterField")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImportParameterField1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImportParameterField2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImportParameterField3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImportParameterField4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsMock")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LegacyDescription1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LegacyDescription2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LegacyDescription3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LegacyDescription4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LegacyField1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LegacyField2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LegacyField3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LegacyField4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LegacySystem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MigrationProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewValueField")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewValueFieldDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProjectName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RelevantObjects")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Team")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TemplateDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TemplateFile")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MigrationProjectId");
+
+                    b.ToTable("MappingRules");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.MigrationObject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MigrationProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ObjectName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Team")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MigrationProjectId");
+
+                    b.ToTable("MigrationObjects");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.MigrationProject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("BeginDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("FinishedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Progress")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MigrationProjects");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.MigrationTemplateFile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Legacy1Field")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Legacy2Field")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Legacy3Field")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LegacySystem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewValueField")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ObjectField")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProjectName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MigrationTemplateFiles");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.ObjectField", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MigrationProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MigrationProjectId");
+
+                    b.ToTable("ObjectFields");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.Product", b =>
@@ -610,6 +965,58 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                     b.Navigation("DocumentType");
                 });
 
+            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.FieldMappingValue", b =>
+                {
+                    b.HasOne("CleanArchitecture.Razor.Domain.Entities.MappingRule", "MappingRule")
+                        .WithMany("FieldMappingValues")
+                        .HasForeignKey("MappingRuleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CleanArchitecture.Razor.Domain.Entities.MigrationProject", "MigrationProject")
+                        .WithMany()
+                        .HasForeignKey("MigrationProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MappingRule");
+
+                    b.Navigation("MigrationProject");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.MappingRule", b =>
+                {
+                    b.HasOne("CleanArchitecture.Razor.Domain.Entities.MigrationProject", "MigrationProject")
+                        .WithMany()
+                        .HasForeignKey("MigrationProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MigrationProject");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.MigrationObject", b =>
+                {
+                    b.HasOne("CleanArchitecture.Razor.Domain.Entities.MigrationProject", "MigrationProject")
+                        .WithMany("MigrationObjects")
+                        .HasForeignKey("MigrationProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MigrationProject");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.ObjectField", b =>
+                {
+                    b.HasOne("CleanArchitecture.Razor.Domain.Entities.MigrationProject", "MigrationProject")
+                        .WithMany()
+                        .HasForeignKey("MigrationProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MigrationProject");
+                });
+
             modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationRoleClaim", b =>
                 {
                     b.HasOne("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationRole", "Role")
@@ -671,6 +1078,16 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.MappingRule", b =>
+                {
+                    b.Navigation("FieldMappingValues");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Razor.Domain.Entities.MigrationProject", b =>
+                {
+                    b.Navigation("MigrationObjects");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Razor.Infrastructure.Identity.ApplicationRole", b =>

@@ -33,7 +33,7 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
     public async Task<Result<int>> Handle(AddEditMappingRuleCommand request, CancellationToken cancellationToken)
     {
 
-        var isexist = await this.IsExist(request.Id, request.LegacyField1, request.LegacyField2, request.LegacyField3, request.NewValueField);
+        var isexist = await isExist(request.Id, request.LegacyField1, request.LegacyField2, request.LegacyField3, request.NewValueField,request.LegacySystem);
         if (isexist)
         {
             throw new Exception($"Duplicate rule:{request.Name} ");
@@ -67,9 +67,9 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
 
     }
 
-    private async Task<bool> IsExist(int id,string legacyField1, string legacyField2, string legacyField3, string newValueField)
+    private async Task<bool> isExist(int id,string legacyField1, string legacyField2, string legacyField3, string newValueField,string legacySystem)
     {
-        return await _context.MappingRules.AnyAsync(x =>x.Id!=id && x.LegacyField1 == legacyField1 && x.LegacyField2 == legacyField2 && x.LegacyField3 == legacyField3 && x.NewValueField == newValueField);
+        return await _context.MappingRules.AnyAsync(x =>x.Id!=id && x.LegacyField1 == legacyField1 && x.LegacyField2 == legacyField2 && x.LegacyField3 == legacyField3 && x.NewValueField == newValueField && x.LegacySystem ==legacySystem);
     }
 }
 

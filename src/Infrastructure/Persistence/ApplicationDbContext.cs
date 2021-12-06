@@ -112,6 +112,7 @@ public class ApplicationDbContext : IdentityDbContext<
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+        //builder.UseCollation("SQL_Latin1_General_CP1_CS_AS");
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         builder.ApplyGlobalFilters<ISoftDelete>(s => s.Deleted == null);
         builder.ApplyGlobalFilters<IProjectId>(s => s.MigrationProjectId == _projectId);
@@ -220,7 +221,7 @@ public class ApplicationDbContext : IdentityDbContext<
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CleanArchitecture.RazorDb;Trusted_Connection=True;MultipleActiveResultSets=true;");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=MigrationCockpitToolDb;Trusted_Connection=True;MultipleActiveResultSets=true;");
         }
     }
 }

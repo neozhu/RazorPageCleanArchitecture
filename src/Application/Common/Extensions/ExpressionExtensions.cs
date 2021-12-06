@@ -29,7 +29,15 @@ public static class PredicateBuilder
                 if (Enum.TryParse(filter.op, out OperationExpression op) && !string.IsNullOrEmpty(filter.value))
                 {
                     var expression = GetCriteriaWhere<T>(filter.field, op, filter.value);
-                    any = any.And(expression);
+                    any = typeof(T) switch
+                    {
+                        Type t1 when t1 == typeof(MappingRule) && filter.field == "Name" => any.And(expression.Or(GetCriteriaWhere<T>("Comments", op, filter.value))),
+                        Type t2 when t2 == typeof(MappingRule) && filter.field == "LegacyField1" => any.And(expression.Or(GetCriteriaWhere<T>("LegacyDescription1", op, filter.value))),
+                        Type t3 when t3 == typeof(MappingRule) && filter.field == "LegacyField2" => any.And(expression.Or(GetCriteriaWhere<T>("LegacyDescription2", op, filter.value))),
+                        Type t4 when t4 == typeof(MappingRule) && filter.field == "LegacyField3" => any.And(expression.Or(GetCriteriaWhere<T>("LegacyDescription3", op, filter.value))),
+                        Type t5 when t5 == typeof(MappingRule) && filter.field == "NewValueField" => any.And(expression.Or(GetCriteriaWhere<T>("NewValueFieldDescription", op, filter.value))),
+                        _ =>   any.And(expression)
+                    };
                 }
             }
         }

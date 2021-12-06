@@ -27,6 +27,7 @@
     .mappingrule_dg_datagrid-cell-c1-_action {
         overflow: visible !important
     }
+
 </style>
 }
 <div id="js-page-content-demopanels" class="card mb-g">
@@ -174,7 +175,8 @@
                         </div>
                         <div class="col-md-4 mb-2">
                             <label class="form-label" for="NewValueField">@_localizer["New Field Name"] <span class="text-danger">*</span></label>
-                            <input type="text" list="fieldlist" asp-for="Input.NewValueField" class="form-control" placeholder="" required="required" autocomplete="off"/>
+                            <select asp-for="Input.NewValueField" asp-items="Model.DataElements" class="select2bs4"  placeholder="Data Element" data-placeholder="Choose Data Element"  style="width: 100%;">
+                            </select>
                             <span class="invalid-feedback" asp-validation-for="Input.NewValueField">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4 mb-2">
@@ -183,19 +185,28 @@
                             <span class="invalid-feedback" asp-validation-for="Input.NewValueFieldDescription">Sorry, you missed this one.</span>
                         </div>
                    
-                        <div class="col-md-6 mb-2">
+                        <div class="col-md-4 mb-2">
                             <label class="form-label" for="IsMock"> </label>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" asp-for="Input.IsMock" class="custom-control-input" value="true">
                                 <label class="custom-control-label" for="Input_IsMock">@_localizer["Mock Relevant"]</label>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-2">
+                        <div class="col-md-4 mb-2">
                             <label class="form-label" for="Active"> </label>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" asp-for="Input.Active" class="custom-control-input" value="Active">
                                 <label class="custom-control-label" for="Input_Active">@_localizer["Active"]</label>
                             </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label class="form-label" for="Team">@_localizer["Team"] </label>
+
+                            <select type="text" asp-for="Input.Team" class="select2bs4" multiple="multiple" asp-dictionaries-for="Team" data-placeholder="Choose Team" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                            
+                            </select>
+
+                            <span class="invalid-feedback" asp-validation-for="Input.Team">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6 mb-2">
                             <label class="form-label" for="LegacySystem">@_localizer["Legacy System"] </label>
@@ -248,7 +259,7 @@
                     <button type="button" id="canceldatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Cancel"] </button>
                     <button type="button" id="importdatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Upload Data"] </button>
                     <button type="button" id="downloaddatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Download Data"] </button>
-                    <input type="file" id="uploaddatafile"
+                    <input type="file" id="uploaddatafile" accept="text/xml"
                             style="display:none">
                 </div>
                 <div class="d-flex flex-row mt-2">
@@ -398,13 +409,6 @@
                         editor: { type: 'textbox', options: { required: true } }
                     });
          }
-         columments.push({
-                        field: 'Comments',
-                        title: '@_localizer["Comments"]',
-                        sortable: true,
-                        width:200,
-                        editor: { type: 'textbox', options: { required: false } }
-                    });
         columments.push({
                         field: 'CreatedBy',
                         title: '@_localizer["Created By"]',
@@ -487,9 +491,14 @@
                 contentType: false,   // 告诉axios不要去设置Content-Type请求头
             }).then((response) => {
                 if (response.data.Succeeded) {
+                    toastr["info"](`@_localizer["Upload successful."]`);
                    $fieldmappingvalues_dg.datagrid('load', '@Url.Page("/FieldMappingValues/Index")?handler=Data');
                 } else {
-                   
+                   if(response.data.Errors){
+                       response.data.Errors.map(err=>{
+                           toastr["error"](`${err}`);
+                       });
+                   }
                 }
                 uploaddatainput.value = null;
             }).catch(error => {
@@ -705,7 +714,10 @@
                 processData: false,// 告诉axios不要去处理发送的数据(重要参数)
                 contentType: false,   // 告诉axios不要去设置Content-Type请求头
             }).then((response) => {
-                if (response.data.Succeeded) {
+                if (response.data.Data) {
+                    if(response.data.Warnings){
+                        toastr["warning"](response.data.Warnings[0]);
+                    }
                     resolve(response.data.Data)
                 } else {
                     reject(response.data.Errors[0])
@@ -730,6 +742,7 @@
             var formData = new FormData(form);
             formData.set("Input.LegacySystem", $('#Input_LegacySystem').select2('val').toString());
             formData.set("Input.RelevantObjects", $('#Input_RelevantObjects').select2('val').toString());
+            formData.set("Input.Team", $('#Input_Team').select2('val').toString());
             formData.set("Input.TemplateFile", $('#Input_TemplateFile').val());
             formData.set("Input.Active", $('#Input_Active').prop('checked')?'Active':'Inactive');
             formData.set("TemplateFile", uploadtemplatefileinput.files[0]);
@@ -920,25 +933,17 @@
                               </div>`;
                     }
                 },
-                { field: 'Name',
-                  title: '@_localizer["Mapping Rule Name"]',
-                  sortable: true,
-                  formatter:function(value,row,index){
-                      return `<a> ${value??''} </a> <br> <small>${row.Comments??''}</small> `;
-                  },
-                  width: 250
-                },
                 { field: 'Active',
                   title: '@_localizer["Active"]',
                   sortable: true,
-                  width: 250
+                  width: 100
                 },
                 { field: 'Status',
                     title: '@_localizer["Status"]',
                     sortable: true,
-                    width: 150,
+                    width: 120,
                     formatter:function(value){
-                        if(value=='Not Started'){
+                        if(value=='Not started'){
                             return `<span class="right badge badge-secondary">${value}</span>`
                         }else if(value=='Ongoing'){
                             return `<span class="right badge badge-info">${value}</span>`
@@ -948,12 +953,20 @@
                         
                     }
                 },
+                { field: 'Name',
+                  title: '@_localizer["Mapping Rule Name"]',
+                  sortable: true,
+                  formatter:function(value,row,index){
+                      return `<a> ${value??''} </a> <br> <small>${row.Comments??''}</small> `;
+                  },
+                  width: 250
+                },
                 { field: 'LegacyField1',
                   title: '@_localizer["Legacy Field 1 Name"]',
                   sortable: true,
                   width: 220,
                   formatter:function(value,row,index){
-                      return `<a> ${value??''} </a> <br> <small>${row.ImportParameterField1??''}</small> <br> <small>${row.LegacyDescription1??''}</small>`;
+                      return `<a> ${value??''} </a> <br> <small>${row.LegacyDescription1??''}</small>`;
                   }
                 },
                 { field: 'LegacyField2',
@@ -961,7 +974,7 @@
                   sortable: true,
                   width: 220,
                   formatter:function(value,row,index){
-                      return `<a> ${value??''} </a> <br> <small>${row.ImportParameterField2??''}</small> <br> <small>${row.LegacyDescription2??''}</small>`;
+                      return `<a> ${value??''} </a> <br> <small>${row.LegacyDescription2??''}</small>`;
                   }
                 },
                 { field: 'LegacyField3',
@@ -969,7 +982,7 @@
                   sortable: true,
                   width: 220,
                   formatter:function(value,row,index){
-                      return `<a> ${value??''} </a> <br> <small>${row.ImportParameterField3??''}</small> <br> <small>${row.LegacyDescription3??''}</small>`;
+                      return `<a> ${value??''} </a> <br> <small>${row.LegacyDescription3??''}</small>`;
                   }
                 },
                 { field: 'NewValueField',
@@ -977,7 +990,7 @@
                   sortable: true,
                   width: 220,
                   formatter:function(value,row,index){
-                      return `<a> ${value??''} </a> <br> <small>${row.ExportParameterField??''}</small> <br> <small>${row.NewValueFieldDescription??''}</small>`;
+                      return `<a> ${value??''} </a> <br> <small>${row.NewValueFieldDescription??''}</small>`;
                   }
                 },
                 { field: 'IsMock', title: '@_localizer["Mock Relevant"]', sortable: true, width: 120 },
@@ -989,7 +1002,61 @@
 
             ]]
         })
-            .datagrid('enableFilter', {})
+            .datagrid('enableFilter', [{
+                field:'Active',
+                type:'combobox',
+                options:{
+                    valueField:'id',
+                    textField:'text',
+                    panelHeight:'auto',
+                    data:[
+                        {id:'',text:'ALL'},
+                        {id:'Active',text:'Active'},
+                        {id:'Inactive',text:'Inactive'}
+                     ],
+                    onChange: function (item) {
+                         if(item){
+                             $dg.datagrid('addFilterRule', {
+	                           field: 'Active',
+	                           op: 'equal',
+	                           value: item
+                             });
+                             $dg.datagrid('doFilter');
+                         }else{
+                             $dg.datagrid('removeFilterRule', 'Active'	                          );
+                             $dg.datagrid('doFilter');
+                         }
+                        }
+                }
+            },
+            {
+                field:'Status',
+                type:'combobox',
+                options:{
+                    valueField:'id',
+                    textField:'text',
+                    panelHeight:'auto',
+                    data:[
+                        {id:'',text:'ALL'},
+                        {id:'Not started',text:'Not started'},
+                        {id:'Ongoing',text:'Ongoing'},
+                        {id:'Finished',text:'Finished'},
+                     ],
+                    onChange: function (item) {
+                         if(item){
+                             $dg.datagrid('addFilterRule', {
+	                           field: 'Status',
+	                           op: 'equal',
+	                           value: item
+                             });
+                             $dg.datagrid('doFilter');
+                         }else{
+                             $dg.datagrid('removeFilterRule', 'Status'	                          );
+                             $dg.datagrid('doFilter');
+                         }
+                        }
+                }
+            }])
             .datagrid('load', '@Url.Page("/MappingRules/Index")?handler=Data');
 
     }
@@ -1001,8 +1068,12 @@
     $(() => {
         //Initialize Select2 Elements
         $('.select2bs4').select2({
-            theme: 'bootstrap4'
+            theme: 'bootstrap4',
+            dropdownParent: $('#mappingrules_modal')
         })
+        //$('.select2').select2({
+        //    dropdownParent: $('#mappingrules_modal')
+        //})
         initdatagrid();
     })
     var popupmodal = (document) => {
@@ -1068,6 +1139,20 @@
                         $('#Input_RelevantObjects').val(value.split(',')).change();
                     } else {
                         $('#Input_RelevantObjects').val(null).change();
+                    }
+                },
+                Team: function (value) {
+                    if (value) {
+                        $('#Input_Team').val(value.split(',')).change();
+                    } else {
+                        $('#Input_Team').val(null).change();
+                    }
+                },
+                NewValueField: function (value) {
+                    if (value) {
+                        $('#Input_NewValueField').val(value).change();
+                    } else {
+                        $('#Input_Team').val(null).change();
                     }
                 },
                 LegacyField1:function(value){

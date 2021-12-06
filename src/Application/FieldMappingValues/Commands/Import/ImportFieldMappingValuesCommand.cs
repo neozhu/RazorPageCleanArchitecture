@@ -1,6 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Xml.Linq;
 using CleanArchitecture.Razor.Application.FieldMappingValues.Commands.Create;
 using CleanArchitecture.Razor.Application.FieldMappingValues.DTOs;
 
@@ -150,99 +151,203 @@ public class ImportFieldMappingValuesCommandHandler :
 
     public async Task<Result> Handle(ImportDataFieldMappingValuesCommand request, CancellationToken cancellationToken)
     {
-        var mappingrule =await _context.MappingRules.FirstAsync(x => x.Id == request.MappingRuleId);
-        mappingrule.Status = "Ongoing";
-        _context.MappingRules.Update(mappingrule);
-
-        var dic = new Dictionary<string, Func<DataRow, FieldMappingValueDto, object>>();
-        if (mappingrule.IsMock)
+        try
         {
-            dic.Add(_localizer["Mock"], (row, item) => item.Mock = row[_localizer["Mock"]]?.ToString());
-        }
-        if (!string.IsNullOrEmpty(mappingrule.LegacyField1))
-        {
-            dic.Add($"{mappingrule.LegacyField1}(Legacy)", (row, item) => item.Legacy1 = row[$"{mappingrule.LegacyField1}(Legacy)"]?.ToString());
-        }
-        if (!string.IsNullOrEmpty(mappingrule.LegacyField2))
-        {
-            dic.Add($"{mappingrule.LegacyField2}(Legacy)", (row, item) => item.Legacy2 = row[$"{mappingrule.LegacyField2}(Legacy)"]?.ToString());
-        }
-        if (!string.IsNullOrEmpty(mappingrule.LegacyField3))
-        {
-            dic.Add($"{mappingrule.LegacyField3}(Legacy)", (row, item) => item.Legacy3 = row[$"{mappingrule.LegacyField3}(Legacy)"]?.ToString());
-        }
-        if (!string.IsNullOrEmpty(mappingrule.NewValueField))
-        {
-            dic.Add($"{mappingrule.NewValueField}(New)", (row, item) => item.NewValue = row[$"{mappingrule.NewValueField}(New)"]?.ToString());
-        }
-        dic.Add(_localizer["Comments"], (row, item) => item.Comments = row[_localizer["Comments"]]?.ToString());
-
-        var result = await _excelService.ImportAsync(request.Data, mappers: dic
-            , "Data");
-        if (result.Succeeded)
-        {
-            var importItems = result.Data;
             var errors = new List<string>();
-            var errorsOccurred = false;
-            var rulelist = new List<MappingRule>();
-            foreach (var item in importItems)
+            var mappingrule = await _context.MappingRules.FirstAsync(x => x.Id == request.MappingRuleId);
+            mappingrule.Status = "Ongoing";
+            _context.MappingRules.Update(mappingrule);
+
+            var xmlstring = System.Text.Encoding.UTF8.GetString(request.Data).Trim();
+
+            var xdoc = XDocument.Parse(xmlstring);
+
+            var data = xdoc.Descendants().Where(x => x.Name.LocalName == "Worksheet" && x.FirstAttribute.Value == "Data").First();
+            var datatable = data.Descendants().Where(x => x.Name.LocalName == "Table");
+            var index = 0;
+            var dt = new DataTable();
+            foreach (var row in datatable.Descendants().Where(x => x.Name.LocalName == "Row").Skip(3).ToList())
             {
-
-                var exist = await _context.FieldMappingValues.AnyAsync(x => x.MappingRuleId == mappingrule.Id
-                                                         && x.NewValue == item.NewValue
-                                                         && x.Legacy1 == item.Legacy1
-                                                         && x.Legacy2 == item.Legacy2
-                                                         && x.Legacy3 == item.Legacy3);
-                if (exist)
+                index++;
+                var cells = row.Descendants().Where(x => x.Name.LocalName == "Cell").ToList();
+                if (index == 1)
                 {
-                    continue;
-                }
-                var validateitem = new CreateFieldMappingValueCommand()
-                {
-                    Check = item.Check,
-                    Comments = item.Comments,
-                    MappingRuleId = request.MappingRuleId,
-                    MappingRule = item.MappingRule,
-                    Mock = item.Mock,
-                    Legacy1 = item.Legacy1,
-                    Legacy2 = item.Legacy2,
-                    Legacy3 = item.Legacy3,
-                    NewValue = item.NewValue,
-                    LegacySystem = item.LegacySystem,
-                    Description = item.Description,
-                    Team = item.Team,
-                };
-                var validationResult = await _validator.ValidateAsync(validateitem, cancellationToken);
-                if (validationResult.IsValid)
-                {
-                     
-                     
-                        var newitem = _mapper.Map<FieldMappingValue>(item);
-                        newitem.MappingRuleId = mappingrule.Id;
-                        newitem.LegacySystem = mappingrule.LegacySystem;
-                        await _context.FieldMappingValues.AddAsync(newitem, cancellationToken);
-                    
-
+                    foreach (var cell in cells)
+                    {
+                        dt.Columns.Add(cell.Value);
+                    }
                 }
                 else
                 {
-                    errorsOccurred = true;
-                    errors.AddRange(validationResult.Errors.Select(e => $"{(!string.IsNullOrWhiteSpace(item.MappingRule) ? $"{item.MappingRule} - " : "Mapping Rule Name")}{e.ErrorMessage}"));
+                    var dr = dt.Rows.Add();
+                    var c1 = 0;
+                    foreach (var cell in cells)
+                    {
+                        dr[c1] = cell.Value;
+                        c1++;
+                    }
+                    //dt.Rows.Add(dr);
                 }
+                Console.WriteLine(row);
             }
-
-            if (errorsOccurred)
+            if (dt.Rows.Count > 0)
             {
-                return await Result.FailureAsync(errors);
+
+                if (!dt.Columns.Contains(mappingrule.ImportParameterField1))
+                {
+                    errors.Add($"Not found import parameter 1:{mappingrule.ImportParameterField1}");
+                }
+                
+                if (!string.IsNullOrEmpty(mappingrule.ImportParameterField2)
+                    &&
+                    !dt.Columns.Contains(mappingrule.ImportParameterField2)
+                    )
+                {
+                    errors.Add($"Not found import parameter 2:{mappingrule.ImportParameterField2}");
+                }
+                if (!string.IsNullOrEmpty(mappingrule.ImportParameterField3)
+                   &&
+                   !dt.Columns.Contains(mappingrule.ImportParameterField3)
+                   )
+                {
+                    errors.Add($"Not found import parameter 3:{mappingrule.ImportParameterField3}");
+                }
+                if (!dt.Columns.Contains(mappingrule.ExportParameterField))
+                {
+                    errors.Add($"Not found export parameter:{mappingrule.ExportParameterField}");
+                }
+                if (!errors.Any())
+                {
+                    //delete exist data
+                    var items = await _context.FieldMappingValues.Where(x => x.MappingRuleId == mappingrule.Id).ToListAsync();
+                    _context.FieldMappingValues.RemoveRange(items);
+                     foreach (DataRow row in dt.Rows)
+                    {
+                        var newitem = new FieldMappingValue();
+                        newitem.MappingRuleId = mappingrule.Id;
+                        newitem.LegacySystem = mappingrule.LegacySystem;
+                        newitem.Legacy1 = row[mappingrule.ImportParameterField1].ToString();
+                        newitem.NewValue = row[mappingrule.ExportParameterField].ToString();
+                        if (!string.IsNullOrEmpty(mappingrule.ImportParameterField2))
+                        {
+                            newitem.Legacy2 = row[mappingrule.ImportParameterField2].ToString();
+                        }
+                        if (!string.IsNullOrEmpty(mappingrule.ImportParameterField3))
+                        {
+                            newitem.Legacy3 = row[mappingrule.ImportParameterField3].ToString();
+                        }
+                        await _context.FieldMappingValues.AddAsync(newitem, cancellationToken);
+                    }
+                    await _context.SaveChangesAsync(cancellationToken);
+                }
+                else
+                {
+                    return Result.Failure(errors.ToArray());
+                }
+
+
+            }
+            else
+            {
+                return Result.Failure(new string[] {$"Not found data" });
             }
 
-            await _context.SaveChangesAsync(cancellationToken);
-            return await Result.SuccessAsync();
+            return Result.Success();
         }
-        else
+        catch (Exception ex)
         {
-            return await Result.FailureAsync(result.Errors);
+            return Result.Failure(new string[] { $"{request.FileName} is not a valid SAP template file." });
         }
+
+        //var dic = new Dictionary<string, Func<DataRow, FieldMappingValueDto, object>>();
+        //if (mappingrule.IsMock)
+        //{
+        //    dic.Add(_localizer["Mock"], (row, item) => item.Mock = row[_localizer["Mock"]]?.ToString());
+        //}
+        //if (!string.IsNullOrEmpty(mappingrule.LegacyField1))
+        //{
+        //    dic.Add($"{mappingrule.LegacyField1}(Legacy)", (row, item) => item.Legacy1 = row[$"{mappingrule.LegacyField1}(Legacy)"]?.ToString());
+        //}
+        //if (!string.IsNullOrEmpty(mappingrule.LegacyField2))
+        //{
+        //    dic.Add($"{mappingrule.LegacyField2}(Legacy)", (row, item) => item.Legacy2 = row[$"{mappingrule.LegacyField2}(Legacy)"]?.ToString());
+        //}
+        //if (!string.IsNullOrEmpty(mappingrule.LegacyField3))
+        //{
+        //    dic.Add($"{mappingrule.LegacyField3}(Legacy)", (row, item) => item.Legacy3 = row[$"{mappingrule.LegacyField3}(Legacy)"]?.ToString());
+        //}
+        //if (!string.IsNullOrEmpty(mappingrule.NewValueField))
+        //{
+        //    dic.Add($"{mappingrule.NewValueField}(New)", (row, item) => item.NewValue = row[$"{mappingrule.NewValueField}(New)"]?.ToString());
+        //}
+        //dic.Add(_localizer["Comments"], (row, item) => item.Comments = row[_localizer["Comments"]]?.ToString());
+
+        //var result = await _excelService.ImportAsync(request.Data, mappers: dic
+        //    , "Data");
+        //if (result.Succeeded)
+        //{
+        //    var importItems = result.Data;
+        //    var errors = new List<string>();
+        //    var errorsOccurred = false;
+        //    var rulelist = new List<MappingRule>();
+        //    foreach (var item in importItems)
+        //    {
+
+        //        var exist = await _context.FieldMappingValues.AnyAsync(x => x.MappingRuleId == mappingrule.Id
+        //                                                 && x.NewValue == item.NewValue
+        //                                                 && x.Legacy1 == item.Legacy1
+        //                                                 && x.Legacy2 == item.Legacy2
+        //                                                 && x.Legacy3 == item.Legacy3);
+        //        if (exist)
+        //        {
+        //            continue;
+        //        }
+        //        var validateitem = new CreateFieldMappingValueCommand()
+        //        {
+        //            Check = item.Check,
+        //            Comments = item.Comments,
+        //            MappingRuleId = request.MappingRuleId,
+        //            MappingRule = item.MappingRule,
+        //            Mock = item.Mock,
+        //            Legacy1 = item.Legacy1,
+        //            Legacy2 = item.Legacy2,
+        //            Legacy3 = item.Legacy3,
+        //            NewValue = item.NewValue,
+        //            LegacySystem = item.LegacySystem,
+        //            Description = item.Description,
+        //            Team = item.Team,
+        //        };
+        //        var validationResult = await _validator.ValidateAsync(validateitem, cancellationToken);
+        //        if (validationResult.IsValid)
+        //        {
+
+
+        //                var newitem = _mapper.Map<FieldMappingValue>(item);
+        //                newitem.MappingRuleId = mappingrule.Id;
+        //                newitem.LegacySystem = mappingrule.LegacySystem;
+        //                await _context.FieldMappingValues.AddAsync(newitem, cancellationToken);
+
+
+        //        }
+        //        else
+        //        {
+        //            errorsOccurred = true;
+        //            errors.AddRange(validationResult.Errors.Select(e => $"{(!string.IsNullOrWhiteSpace(item.MappingRule) ? $"{item.MappingRule} - " : "Mapping Rule Name")}{e.ErrorMessage}"));
+        //        }
+        //    }
+
+        //    if (errorsOccurred)
+        //    {
+        //        return await Result.FailureAsync(errors);
+        //    }
+
+        //    await _context.SaveChangesAsync(cancellationToken);
+        //    return await Result.SuccessAsync();
+        //}
+        //else
+        //{
+        //    return await Result.FailureAsync(result.Errors);
+        //}
 
     }
 
@@ -265,7 +370,7 @@ public class ImportFieldMappingValuesCommandHandler :
 
     public async Task<byte[]> Handle(CreateFieldMappingDataTemplateCommand request, CancellationToken cancellationToken)
     {
-        var mappingrule =await _context.MappingRules.FirstAsync(x => x.Id == request.MappingRuleId);
+        var mappingrule = await _context.MappingRules.FirstAsync(x => x.Id == request.MappingRuleId);
         var fields = new List<string>();
         if (mappingrule.IsMock)
         {

@@ -75,7 +75,7 @@ public class ImportMappingRulesCommandHandler :
                     Name = g.Key.Remove(g.Key.LastIndexOf(".")),
                     MigrationProjectId = defafultproject.Id,
                     TemplateFile = "Files/TemplateFiles/" + g.Key,
-                    Status = "Ongoing",
+                    Status = "Not started",
                     Comments = array[0].Title,
                     NewValueField = exportfield.Name,
                     ExportParameterField = exportfield.ParameterName,

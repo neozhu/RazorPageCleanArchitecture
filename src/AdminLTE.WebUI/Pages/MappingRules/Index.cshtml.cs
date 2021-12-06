@@ -43,6 +43,7 @@ namespace AdminLTE.WebUI.Pages.MappingRules
         public string MappingRuleName { get; set; }
         public SelectList MigrationObjects { get; set; }
         public SelectList MigrationProjects { get; set; }
+        public SelectList DataElements { get; set; }
 
         private readonly ICurrentUserService _currentUserService;
         private readonly ISender _mediator;
@@ -67,8 +68,9 @@ namespace AdminLTE.WebUI.Pages.MappingRules
             var request = new GetAllMigrationObjectsQuery();
             var objectlist = await _mediator.Send(request);
             MigrationObjects = new SelectList(objectlist, "Description", "Description");
-                        var requestfield = new GetAllObjectFieldsQuery();
+            var requestfield = new GetAllObjectFieldsQuery();
             FieldList = await _mediator.Send(requestfield);
+            DataElements = new SelectList(FieldList, "Name", "Name");
         }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] MappingRulesWithPaginationQuery command)
         {

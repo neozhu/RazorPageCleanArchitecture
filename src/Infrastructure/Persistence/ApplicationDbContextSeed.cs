@@ -100,10 +100,19 @@ public static class ApplicationDbContextSeed
         {
             context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "LegacySystem", Value = "AP1", Text = "AP1", Description = "Legacy System" });
             context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "LegacySystem", Value = "NAVISION", Text = "NAVISION", Description = "Legacy System" });
-            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "SD", Text = "SD", Description = "Team Name" });
-            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "PP", Text = "PP", Description = "Team Name" });
-            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "MM", Text = "MM", Description = "Team Name" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "CO", Text = "CO", Description = "Team Name" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "EN", Text = "EN", Description = "Team Name" });
             context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "FI", Text = "FI", Description = "Team Name" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "LO-MM", Text = "LO-MM", Description = "Team Name" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "LO-SH", Text = "LO-SH", Description = "Team Name" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "OP-PM", Text = "OP-PM", Description = "Team Name" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "OP-PP", Text = "OP-PP", Description = "Team Name" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "OP-PS", Text = "OP-PS", Description = "Team Name" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "OP-SE", Text = "OP-SE", Description = "Team Name" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "PU", Text = "PU", Description = "Team Name" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "QM", Text = "QM", Description = "Team Name" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "SA", Text = "SA", Description = "Team Name" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "SA-CM", Text = "SA-CM", Description = "Team Name" });
             await context.SaveChangesAsync();
 
      

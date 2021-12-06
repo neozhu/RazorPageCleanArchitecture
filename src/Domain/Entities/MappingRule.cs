@@ -30,7 +30,7 @@ public class MappingRule:AuditableEntity, IAuditTrial, IProjectId
     public string TemplateFile { get; set; }
     public string TemplateDescription { get; set; }
 
-    public string Active { get; set; } = "Active";
+    public string Active { get; set; } = "Inactive";
 
     public virtual ICollection<FieldMappingValue> FieldMappingValues { get; set; } = new HashSet<FieldMappingValue>();
 

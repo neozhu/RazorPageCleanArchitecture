@@ -18,6 +18,7 @@ public class Result : IResult
     public bool Succeeded { get; set; }
 
     public string[] Errors { get; set; }
+    public string[] Warnings { get; set; }
 
     public static Result Success()
     {
@@ -51,6 +52,14 @@ public class Result<T> : Result, IResult<T>
     public static Result<T> Success(T data)
     {
         return new Result<T> { Succeeded = true, Data = data };
+    }
+    public static Result<T> Warning(T data, IEnumerable<string> warnings)
+    {
+        return new Result<T> { Succeeded = false, Data = data, Warnings = warnings.ToArray() };
+    }
+    public static async Task<Result<T>> WarningAsync(T data, IEnumerable<string> warnings)
+    {
+        return await Task.FromResult(Warning(data, warnings));
     }
     public static async Task<Result<T>> SuccessAsync(T data)
     {
