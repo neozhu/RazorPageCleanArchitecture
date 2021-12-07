@@ -25,6 +25,7 @@ public class AcceptChangesFieldMappingValuesCommandHandler : IRequestHandler<Acc
     }
     public async Task<Result> Handle(AcceptChangesFieldMappingValuesCommand request, CancellationToken cancellationToken)
     {
+        var array_id = request.Items.Select(x => x.MappingRuleId).Distinct().ToArray();
         foreach (var item in request.Items)
         {
             switch (item.TrackingState)
@@ -48,6 +49,22 @@ public class AcceptChangesFieldMappingValuesCommandHandler : IRequestHandler<Acc
             }
         }
 
+        await _context.SaveChangesAsync(cancellationToken);
+
+        var mappingrules = await _context.MappingRules.Where(x => array_id.Contains(x.Id)).ToListAsync();
+        foreach(var item in mappingrules)
+        {
+            var hasdata = await _context.FieldMappingValues.AnyAsync(x => x.MappingRuleId == item.Id);
+            if (hasdata)
+            {
+                item.Active = "Active";
+            }
+            else
+            {
+                item.Active = "Inactive";
+            }
+            _context.MappingRules.Update(item);
+        }
         await _context.SaveChangesAsync(cancellationToken);
         return Result.Success();
 

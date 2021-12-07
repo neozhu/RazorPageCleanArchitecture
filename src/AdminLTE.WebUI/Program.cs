@@ -2,31 +2,15 @@ using System.Net;
 using CleanArchitecture.Razor.Application;
 using CleanArchitecture.Razor.Infrastructure;
 using CleanArchitecture.Razor.Infrastructure.Extensions;
-using CleanArchitecture.Razor.Infrastructure.Filters;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Persistence;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using Serilog;
 using Serilog.Events;
-using Serilog.Filters;
 
-string[] filters = new string[] { "Microsoft.EntityFrameworkCore.Model.Validation",
-    "WorkflowCore.Services.WorkflowHost",
-    "WorkflowCore.Services.BackgroundTasks.RunnablePoller",
-    "Microsoft.Hosting.Lifetime",
-    "Microsoft.EntityFrameworkCore.Infrastructure",
-    "Microsoft.EntityFrameworkCore.Update",
-    "Microsoft.AspNetCore.Routing.EndpointMiddleware",
-    "Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager",
-    "Microsoft.AspNetCore.Hosting.Diagnostics",
-    "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker",
-    "Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler",
-    "Microsoft.AspNetCore.Authorization.DefaultAuthorizationService",
-    "Serilog.AspNetCore.RequestLoggingMiddleware" };
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,23 +23,12 @@ builder.WebHost.ConfigureKestrel((context, options) =>
 });
 builder.WebHost.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration)
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
+                .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Error)
+                .MinimumLevel.Override("Serilog", LogEventLevel.Error)
           .Enrich.FromLogContext()
           .Enrich.WithClientIp()
           .Enrich.WithClientAgent()
-          .Filter.ByExcluding(
-                  //(logevent) =>
-                  //{
-                  //    Console.WriteLine(logevent);
-                  //    var cxt = logevent.Properties.Where(x => x.Key == "SourceContext").Select(x => x.Value.ToString()).ToArray();
-                  //    if (cxt.Any(x => filters.Contains(x)))
-                  //    {
-                  //        return false;
-                  //    }
-                  //    return true;
-                  //}
-                  Matching.WithProperty<string>("SourceContext", p => filters.Contains(p))
-            )
           .WriteTo.Console()
     );
 

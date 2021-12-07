@@ -7,7 +7,7 @@
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
     ViewData["Title"] = _localizer["Value Mapping"].Value;
-    ViewData["PageName"] = "mappingrules_index";
+    ViewData["PageNam!importantmportant"] = "mappingrules_index";
     ViewData["Category1"] = _localizer["Migration Objects"].Value;
     ViewData["Heading"] = _localizer["Value Mapping"].Value;
     ViewData["PageDescription"] = _localizer["See all available options"].Value;
@@ -26,6 +26,11 @@
 
     .mappingrule_dg_datagrid-cell-c1-_action {
         overflow: visible !important
+    }
+    .small::before,
+    small::before
+    {
+        content:none !important;
     }
 
 </style>
@@ -51,25 +56,7 @@
                 <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
                 @_localizer["Download Value Mapping"]
             </button>
-            <button class="btn btn-sm btn-outline-primary " id="downloadtemplatebutton">
-                <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>
-                @_localizer["Upload Value Mapping"]
-            </button>
-            <div class="btn-group" role="group">
-                <button id="importbutton" type="button" class="btn btn-sm  btn-outline-primary waves-effect waves-themed">
-                    <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>   @_localizer["Import Excel"]
-                </button>
-                <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="importbutton">
-                    <button id="gettemplatebutton" class="dropdown-item">@_localizer["Download Template"]</button>
-                </div>
-            </div>
-            <button class="btn btn-sm btn-outline-primary " id="exportbutton">
-                <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
-                @_localizer["Export Excel"]
-            </button>
+             
 
         </div>
     </div>
@@ -242,9 +229,10 @@
     </div>
 </div>
 
-<div class="modal fade default-example-modal-right-lg" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="mappingvalue-modal-right-lg" class="modal fade default-example-modal-right-lg" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-right modal-lg">
         <div class="modal-content">
+            <div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i><div class="pt-2 pl-2 text-gray">Waiting...</div></div>
             <div class="modal-header">
                 <h5 class="modal-title h4">Field Mapping Values</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -302,7 +290,10 @@
 <script src="~/plugins/select2/js/select2.full.min.js"></script>
 
 <script>
-
+    var uploaddatainput = document.getElementById("uploaddatafile");
+    const rightmodalcontent= document.querySelector("#mappingvalue-modal-right-lg > div > .modal-content");
+    const rightoverlay = document.querySelector("#mappingvalue-modal-right-lg > div > .modal-content > .overlay");
+    rightoverlay.style.display="none";
     $('#Input_LegacyField1').change(function(){
          const selectedval = $("#Input_LegacyField1").val();
          const option_length = $("#fieldlist").find("option").length;
@@ -358,6 +349,7 @@
      var $fieldmappingvalues_dg = {};
 
     $('.default-example-modal-right-lg').on('shown.bs.modal', function () {
+        
          var columments=[{ field: 'ck', checkbox: true }];
          if(currentMappingRuleItem.IsMock){
              columments.push({
@@ -477,8 +469,10 @@
     })
 
 
-    var uploaddatainput = document.getElementById("uploaddatafile");
+   
     uploaddatainput.onchange = () => {
+        rightmodalcontent.classList.add("overlay-wrapper");
+        rightoverlay.style.display="flex";
         var form = document.querySelector('#mappingrule_form');
         var formData=new FormData(form);
         formData.set("FieldMappingDataFile", uploaddatainput.files[0]);
@@ -490,10 +484,13 @@
                 processData: false,// 告诉axios不要去处理发送的数据(重要参数)
                 contentType: false,   // 告诉axios不要去设置Content-Type请求头
             }).then((response) => {
+                rightmodalcontent.classList.remove("overlay-wrapper");
+                rightoverlay.style.display="none";
                 if (response.data.Succeeded) {
-                    toastr["info"](`@_localizer["Upload successful."]`);
-                   $fieldmappingvalues_dg.datagrid('load', '@Url.Page("/FieldMappingValues/Index")?handler=Data');
-                } else {
+                   toastr["info"](`@_localizer["Upload successful."]`);
+                   reloadData();
+                   onReloadFieldData()
+               } else {
                    if(response.data.Errors){
                        response.data.Errors.map(err=>{
                            toastr["error"](`${err}`);
@@ -502,50 +499,30 @@
                 }
                 uploaddatainput.value = null;
             }).catch(error => {
+                rightmodalcontent.classList.remove("overlay-wrapper");
+                rightoverlay.style.display="none";
                 uploaddatainput.value = null;
-               toastr["error"](`@_localizer["upload data fail"],${error}`);
+                error.response.data.text().then(text=>{
+                      const data=JSON.parse(text);
+                      const err=data.Errors.toString();
+                      bootbox.alert(err);
+                  })
             })
     }
+   
     $('#importdatabutton').click(function () {
          uploaddatainput.click();
     });
     $('#downloaddatabutton').click(function(){
-        var headers = {
-            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
-        }
-        axios.post('@Url.Page("/MappingRules/Index")?handler=DownloadData&MappingRuleId=' + currentMappingRuleId +'&MappingRuleName=' + currentMappingRuleName ,
-            null,
-            {
-                headers: headers,
-                responseType: "blob"
-            })
-            .then(response => {
-                const filename = getFileName(response.headers['content-disposition']);
-                const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute('download', filename);
-                document.body.appendChild(link);
-                link.click();
-                toastr["info"](`@_localizer["Download data success"]`);
-            }).catch(error => {
-                if (error.response.data.Errors) {
-                    const errors = error.response.data.Errors;
-                    for (let [key, value] of Object.entries(errors)) {
-                        toastr["error"](`${key}: ${value.toString()}`);
-                    }
-
-                } else {
-                    toastr["error"](`@_localizer["download fail"],${error.response.data}`);
-                }
-            })
-    });
-    $('#downloaddatatemplatebutton').click(function(){
-        axios.get('@Url.Page("/MappingRules/Index")?handler=CreateDataTemplate&MappingRuleId=' + currentMappingRuleId +'&MappingRuleName=' + currentMappingRuleName ,
+        rightmodalcontent.classList.add("overlay-wrapper");
+        rightoverlay.style.display="flex";
+         axios.get('@Url.Page("/MappingRules/Index")?handler=DownloadData&MappingRuleId=' + currentMappingRuleId +'&MappingRuleName=' + currentMappingRuleName ,
             {
                 responseType: "blob"
             })
            .then(response => {
+                rightmodalcontent.classList.remove("overlay-wrapper");
+                rightoverlay.style.display="none";
                     //console.log(getFileName(response.headers['content-disposition']));
                     const filename = getFileName(response.headers['content-disposition']);
                     const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
@@ -555,11 +532,19 @@
                     document.body.appendChild(link);
                     link.click();
                 })
-                .catch(error => {
-                    console.log(error)
+                .catch((error) => {
+                     rightmodalcontent.classList.remove("overlay-wrapper");
+                     rightoverlay.style.display="none";
+                  //console.log(error.response.data.text())
+                  error.response.data.text().then(text=>{
+                      const data=JSON.parse(text);
+                      const err=data.Errors.toString();
+                      bootbox.alert(err);
+                  })
+                   
                 })
+    });
     
-    })
 
     $('#refreshbutton').click(function(){
         onReloadFieldData()
@@ -569,8 +554,49 @@
         onAddDataRow();
     })
     $('#deletedatabutton').click(function(){
+        var checkedId = $fieldmappingvalues_dg.datagrid('getChecked').filter(x=>x.Id>0).map(x => x.Id);
+        if (checkedId.length > 0) {
+                bootbox.confirm({
+                    message: "@_localizer["Are you sure delete checked field values?"]",
+                    buttons: {
+                        confirm: {
+                            label: '@_localizer["Yes"]',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: '@_localizer["No"]',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
+                            axios.get('@Url.Page("/FieldMappingValues/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
+                                toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
+                                onReloadFieldData()
+                                reloadData();
+                            })
+                                .catch((error) => {
+                                    if (error.response.data.Errors) {
+                                        const errors = error.response.data.Errors;
+                                        for (let [key, value] of Object.entries(errors)) {
+                                            toastr["error"](`${key}: ${value.toString()}`);
+                                        }
 
+                                    } else {
+                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                    }
+                                });
+                        }
+                    }
+                });
+
+            }
     })
+    $('#canceldatabutton').click(function(){
+         $fieldmappingvalues_dg.datagrid('rejectChanges');
+         editIndex = undefined
+    });
     $('#savedatabutton').click(function(){
         onSaveChanged();
     })
@@ -594,7 +620,7 @@
                 return false;
             }
         }
-        var onAddDataRow = () => {
+    var onAddDataRow = () => {
             if (onEndEditing()) {
                 var newitem={...currentItem};
                 newitem.MappingRuleId = currentMappingRuleId;

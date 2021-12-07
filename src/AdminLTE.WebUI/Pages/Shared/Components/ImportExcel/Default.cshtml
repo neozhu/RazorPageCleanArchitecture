@@ -73,7 +73,7 @@
             overlay.style.display="none";
             modalcontent.classList.remove("overlay-wrapper");
             $('#default-import-modal').modal('toggle');
-            toastr["error"](`@_localizer["Import data fail."]${error.response.data.Errors.toString()}}`);
+            toastr["error"](`${error.response.data.Errors.toString()}`);
         })
 
     })

@@ -6,6 +6,7 @@ namespace CleanArchitecture.Razor.Application.Common.Interfaces;
 public interface ICurrentUserService
 {
     string UserId { get; }
+    string DisplayName { get; }
     bool IsInRole(params string[] roleName);
     int ProjectId();
     string ProjectName();

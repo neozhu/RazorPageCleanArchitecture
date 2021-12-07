@@ -156,6 +156,7 @@ public class ImportFieldMappingValuesCommandHandler :
             var errors = new List<string>();
             var mappingrule = await _context.MappingRules.FirstAsync(x => x.Id == request.MappingRuleId);
             mappingrule.Status = "Ongoing";
+            mappingrule.Active = "Active";
             _context.MappingRules.Update(mappingrule);
 
             var xmlstring = System.Text.Encoding.UTF8.GetString(request.Data).Trim();

@@ -22,6 +22,7 @@ using CleanArchitecture.Razor.Application.ObjectFields.Queries.GetAll;
 using CleanArchitecture.Razor.Application.ObjectFields.DTOs;
 using CleanArchitecture.Razor.Infrastructure.Extensions;
 using CleanArchitecture.Razor.Application.FieldMappingValues.Queries.Export;
+using CleanArchitecture.Razor.Application.MappingRules.Commands.Download;
 
 namespace AdminLTE.WebUI.Pages.MappingRules
 {
@@ -136,6 +137,13 @@ namespace AdminLTE.WebUI.Pages.MappingRules
             var result = await _mediator.Send(command);
             return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer[$"FieldMappingValues({mappingrulename})"] + ".xlsx");
         }
+        public async Task<FileResult> OnGetDownloadData(int mappingruleid,string mappingrulename)
+        {
+            var command = new DownloadMappingValueFileCommand();
+            command.MappingRuleId = mappingruleid;
+            var result = await _mediator.Send(command);
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{mappingrulename}.xml");
+        }
         public async Task<IActionResult> OnPostUploadFieldMappingData() {
             var stream = new MemoryStream();
             await FieldMappingDataFile.CopyToAsync(stream);
@@ -147,15 +155,15 @@ namespace AdminLTE.WebUI.Pages.MappingRules
             var result = await _mediator.Send(command);
             return new JsonResult(result);
         }
-        public async Task<IActionResult> OnPostDownloadData(int mappingruleid, string mappingrulename)
-        {
-            var command = new ExportFieldMmappingValuesDataQuery()
-            {
-                MappingRuleId = mappingruleid,
-            };
-            var result = await _mediator.Send(command);
-            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer[$"FieldMappingValues({mappingrulename})"] + ".xlsx");
-        }
+        //public async Task<IActionResult> OnPostDownloadData(int mappingruleid, string mappingrulename)
+        //{
+        //    var command = new ExportFieldMmappingValuesDataQuery()
+        //    {
+        //        MappingRuleId = mappingruleid,
+        //    };
+        //    var result = await _mediator.Send(command);
+        //    return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer[$"FieldMappingValues({mappingrulename})"] + ".xlsx");
+        //}
         public async Task<IActionResult> OnPostVaildateTemplateFile() {
             var stream = new MemoryStream();
             await TemplateFile.CopyToAsync(stream);

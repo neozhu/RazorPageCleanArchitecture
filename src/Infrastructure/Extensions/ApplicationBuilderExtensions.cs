@@ -1,3 +1,4 @@
+using System.DirectoryServices.AccountManagement;
 using CleanArchitecture.Razor.Application.Hubs;
 using CleanArchitecture.Razor.Application.Hubs.Constants;
 using Microsoft.AspNetCore.Builder;
@@ -17,13 +18,13 @@ public static class ApplicationBuilderExtensions
         {
             options.EnrichDiagnosticContext = (diagnosticContext, httpContext) => {
                 //This didn't work when tested
-                diagnosticContext.Set("UserName", httpContext.User?.Identity?.Name ?? "Anonymous");
+                diagnosticContext.Set("UserName", UserPrincipal.Current.DisplayName);
             };
         });
         app.Use(async (httpContext, next) =>
         {
             //This is the correct implementation 
-            var userName = httpContext.User?.Identity?.Name ?? "Anonymous"; //Gets user Name from user Identity
+            var userName = UserPrincipal.Current.DisplayName; //Gets user Name from user Identity
             LogContext.PushProperty("UserName", userName); //Push user in LogContext;
             await next.Invoke();
         });
