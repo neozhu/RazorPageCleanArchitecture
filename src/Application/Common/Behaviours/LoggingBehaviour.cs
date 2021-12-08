@@ -28,7 +28,7 @@ public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest> where T
 
 
 
-        _logger.LogInformation("CleanArchitecture Request: {Name} {@UserId} {@UserName} {@Request}",
-            requestName, userId, userName, request);
+        //_logger.LogInformation("CleanArchitecture Request: {Name} {@UserId} {@UserName} {@Request}",
+        //    requestName, userId, userName, request);
     }
 }

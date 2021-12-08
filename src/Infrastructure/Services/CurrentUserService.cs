@@ -4,6 +4,7 @@
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using Duende.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Http;
+using System.DirectoryServices;
 using System.DirectoryServices.AccountManagement;
 using System.Security.Claims;
 using System.Security.Principal;
@@ -25,8 +26,12 @@ public class CurrentUserService : ICurrentUserService
     }
 
     public bool IsInRole(params string[] roleName) {
-        var group = UserPrincipal.Current.GetAuthorizationGroups();
-        return group.Any(x => roleName.Contains(x.Name));
+        var identity = _httpContextAccessor.HttpContext.User.Identity as WindowsIdentity;
+        var groupNames = from id in identity.Groups
+                         select id.Translate(typeof(NTAccount)).Value;
+        var group = groupNames.Where(x => x.StartsWith("EURO1\\"))
+            .Select(x => x.Split("\\")[1]);
+        return group.Any(x => roleName.Contains(x));
        
     }
     public int ProjectId() {
@@ -52,6 +57,32 @@ public class CurrentUserService : ICurrentUserService
         }
 
     }
-    public string DisplayName => UserPrincipal.Current.DisplayName;
-    public string UserId => UserPrincipal.Current.SamAccountName;
+    public string DisplayName { get {
+            var identity = _httpContextAccessor.HttpContext.User.Identity as WindowsIdentity;
+            var domain = identity.Name.Split("\\")[0];
+            var displayname = identity.Name.Split("\\")[1];
+        
+                using (var entry = new DirectoryEntry($"LDAP://{domain}"))
+                {
+                    using (var searcher = new DirectorySearcher(entry))
+                    {
+                        searcher.Filter = $"(sAMAccountName={displayname})";
+                        searcher.PropertiesToLoad.Add("displayName");
+                        var searchResult = searcher.FindOne();
+                        if (searchResult != null && searchResult.Properties.Contains("displayName"))
+                        {
+                            displayname = (string)searchResult.Properties["displayName"][0];
+                        }
+                        else
+                        {
+                            // user not found
+                        }
+                    }
+                }
+
+
+            return displayname;
+        }
+        }
+    public string UserId => _httpContextAccessor.HttpContext.User.Identity.Name.Split("\\")[1];
 }

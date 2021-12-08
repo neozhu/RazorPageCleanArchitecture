@@ -18,14 +18,13 @@ public static class ApplicationBuilderExtensions
         {
             options.EnrichDiagnosticContext = (diagnosticContext, httpContext) => {
                 //This didn't work when tested
-                diagnosticContext.Set("UserName", UserPrincipal.Current.DisplayName);
+                diagnosticContext.Set("UserName", httpContext.User.GetDisplayName());
             };
         });
         app.Use(async (httpContext, next) =>
         {
             //This is the correct implementation 
-            var userName = UserPrincipal.Current.DisplayName; //Gets user Name from user Identity
-            LogContext.PushProperty("UserName", userName); //Push user in LogContext;
+            LogContext.PushProperty("UserName", httpContext.User.GetDisplayName()); //Push user in LogContext;
             await next.Invoke();
         });
         app.UseMiddlewares();

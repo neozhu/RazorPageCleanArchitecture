@@ -15,7 +15,7 @@
 
 }
 @section HeadBlock {
-<link href="~/css/statistics/chartist/chartist.css" rel="stylesheet" />
+
 <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
 <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
 <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
@@ -96,7 +96,7 @@
                 labels: piedata.map(item => item.level),
                 datasets: [{
                     label: "log classification",
-                    backgroundColor: ["#868e96", "#fe6bb0", "#EE2727", "#2697FF", "#a4cdff","#FFCF26"],
+                    backgroundColor: [ "#fe6bb0", "#EE2727", "#2697FF","#868e96", "#a4cdff","#FFCF26"],
                     data: piedata
                 }]
             },

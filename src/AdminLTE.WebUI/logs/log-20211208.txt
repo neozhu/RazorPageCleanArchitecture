@@ -1,0 +1,142 @@
+2021-12-08 08:40:45.954 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 Zhu, Hualin
+2021-12-08 08:40:46.050 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-08 08:40:46.050 +08:00 [INF] Home Page 127.0.0.1 Zhu, Hualin
+2021-12-08 08:40:46.050 +08:00 [ERR] Error 127.0.0.1 Zhu, Hualin
+2021-12-08 08:40:46.050 +08:00 [WRN] Warning 127.0.0.1 Zhu, Hualin
+2021-12-08 08:40:46.051 +08:00 [FTL] Critical 127.0.0.1 Zhu, Hualin
+2021-12-08 08:41:01.051 +08:00 [INF] CleanArchitecture Request: GetAllMigrationObjectsQuery zhuhua Zhu, Hualin {"$type":"GetAllMigrationObjectsQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:41:01.325 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsQuery zhuhua Zhu, Hualin {"$type":"GetAllObjectFieldsQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:41:01.651 +08:00 [INF] CleanArchitecture Request: KeyValuesQueryByName zhuhua Zhu, Hualin {"Name":"Team","CacheKey":"Team-keyvalues","Options":{"AbsoluteExpiration":null,"AbsoluteExpirationRelativeToNow":null,"SlidingExpiration":null,"ExpirationTokens":[{"ActiveChangeCallbacks":true,"HasChanged":false,"$type":"CancellationChangeToken"}],"PostEvictionCallbacks":[],"Priority":"Normal","Size":null,"$type":"MemoryCacheEntryOptions"},"$type":"KeyValuesQueryByName"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:41:01.656 +08:00 [INF] CleanArchitecture Cache Request:CleanArchitecture.Razor.Application.KeyValues.Queries.ByName.KeyValuesQueryByName. 127.0.0.1 Zhu, Hualin
+2021-12-08 08:41:01.820 +08:00 [INF] CleanArchitecture Request: KeyValuesQueryByName zhuhua Zhu, Hualin {"Name":"LegacySystem","CacheKey":"LegacySystem-keyvalues","Options":{"AbsoluteExpiration":null,"AbsoluteExpirationRelativeToNow":null,"SlidingExpiration":null,"ExpirationTokens":[{"ActiveChangeCallbacks":true,"HasChanged":false,"$type":"CancellationChangeToken"}],"PostEvictionCallbacks":[],"Priority":"Normal","Size":null,"$type":"MemoryCacheEntryOptions"},"$type":"KeyValuesQueryByName"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:41:01.820 +08:00 [INF] CleanArchitecture Cache Request:CleanArchitecture.Razor.Application.KeyValues.Queries.ByName.KeyValuesQueryByName. 127.0.0.1 Zhu, Hualin
+2021-12-08 08:41:03.840 +08:00 [INF] CleanArchitecture Request: MappingRulesWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:41:04.599 +08:00 [WRN] CleanArchitecture Long Running Request: MappingRulesWithPaginationQuery (557 milliseconds) zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:41:07.626 +08:00 [INF] CleanArchitecture Request: FieldMappingValuesWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[{\"field\":\"MappingRuleId\",\"op\":\"equal\",\"value\":1848}]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldMappingValuesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:42:37.037 +08:00 [INF] CleanArchitecture Request: MappingRulesWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[{\"field\":\"Name\",\"op\":\"contains\",\"value\":\"abc\"}]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:42:43.744 +08:00 [INF] CleanArchitecture Request: MappingRulesWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:43:15.914 +08:00 [INF] CleanArchitecture Request: FieldMappingValuesWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":null,"Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldMappingValuesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:43:16.286 +08:00 [INF] CleanArchitecture Request: FieldMappingValuesWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[{\"field\":\"MappingRuleId\",\"op\":\"equal\",\"value\":1848}]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldMappingValuesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:43:16.740 +08:00 [INF] CleanArchitecture Request: FieldMappingValuesWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[{\"field\":\"MappingRuleId\",\"op\":\"equal\",\"value\":1848}]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldMappingValuesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:43:19.113 +08:00 [INF] CleanArchitecture Request: DownloadMappingValueFileCommand zhuhua Zhu, Hualin {"MappingRuleId":1848,"$type":"DownloadMappingValueFileCommand"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:43:20.843 +08:00 [WRN] CleanArchitecture Long Running Request: DownloadMappingValueFileCommand (1388 milliseconds) zhuhua Zhu, Hualin {"MappingRuleId":1848,"$type":"DownloadMappingValueFileCommand"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:44:12.323 +08:00 [INF] CleanArchitecture Request: ImportDataFieldMappingValuesCommand zhuhua Zhu, Hualin {"MappingRuleId":1848,"FileName":null,"Data":"3C3F786D6C2076657273696F6E3D2231... (21828 bytes)","$type":"ImportDataFieldMappingValuesCommand"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:44:19.503 +08:00 [WRN] CleanArchitecture Long Running Request: ImportDataFieldMappingValuesCommand (6836 milliseconds) zhuhua Zhu, Hualin {"MappingRuleId":1848,"FileName":null,"Data":"3C3F786D6C2076657273696F6E3D2231... (21828 bytes)","$type":"ImportDataFieldMappingValuesCommand"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:44:20.040 +08:00 [INF] CleanArchitecture Request: MappingRulesWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:44:20.096 +08:00 [INF] CleanArchitecture Request: FieldMappingValuesWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[{\"field\":\"MappingRuleId\",\"op\":\"equal\",\"value\":1848}]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldMappingValuesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:44:58.000 +08:00 [INF] CleanArchitecture Request: AcceptChangesFieldMappingValuesCommand zhuhua Zhu, Hualin {"Items":[{"Id":294,"MappingRuleId":1848,"MappingRule":"Activity Description Type","Mock":null,"Legacy1":"114","Legacy2":null,"Legacy3":null,"Legacy4":null,"NewValue":"3019","LegacySystem":null,"Description":null,"Team":null,"Check":null,"Comments":null,"Active":"Active","TrackingState":"Modified","Created":"2021-12-08T08:44:17.3503908","CreatedBy":"zhuhua","LastModified":null,"LastModifiedBy":null,"$type":"FieldMappingValueDto"}],"$type":"AcceptChangesFieldMappingValuesCommand"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:45:00.303 +08:00 [WRN] CleanArchitecture Long Running Request: AcceptChangesFieldMappingValuesCommand (1815 milliseconds) zhuhua Zhu, Hualin {"Items":[{"Id":294,"MappingRuleId":1848,"MappingRule":"Activity Description Type","Mock":null,"Legacy1":"114","Legacy2":null,"Legacy3":null,"Legacy4":null,"NewValue":"3019","LegacySystem":null,"Description":null,"Team":null,"Check":null,"Comments":null,"Active":"Active","TrackingState":"Modified","Created":"2021-12-08T08:44:17.3503908","CreatedBy":"zhuhua","LastModified":null,"LastModifiedBy":null,"$type":"FieldMappingValueDto"}],"$type":"AcceptChangesFieldMappingValuesCommand"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:45:00.823 +08:00 [INF] CleanArchitecture Request: FieldMappingValuesWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[{\"field\":\"MappingRuleId\",\"op\":\"equal\",\"value\":1848}]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"FieldMappingValuesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:46:18.463 +08:00 [INF] CleanArchitecture Request: MappingRulesWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[{\"field\":\"RelevantObjects\",\"op\":\"contains\",\"value\":\"custo\"}]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:46:26.012 +08:00 [INF] CleanArchitecture Request: MappingRulesWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[{\"field\":\"RelevantObjects\",\"op\":\"contains\",\"value\":\"custo\"}]","Page":1,"Rows":100,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 08:46:35.131 +08:00 [INF] CleanArchitecture Request: MappingRulesWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":100,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:46:32.203 +08:00 [INF] CleanArchitecture Request: GetAllMigrationObjectsQuery zhuhua Zhu, Hualin {"$type":"GetAllMigrationObjectsQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:46:32.449 +08:00 [INF] CleanArchitecture Request: GetAllObjectFieldsQuery zhuhua Zhu, Hualin {"$type":"GetAllObjectFieldsQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:46:32.742 +08:00 [INF] CleanArchitecture Request: KeyValuesQueryByName zhuhua Zhu, Hualin {"Name":"Team","CacheKey":"Team-keyvalues","Options":{"AbsoluteExpiration":null,"AbsoluteExpirationRelativeToNow":null,"SlidingExpiration":null,"ExpirationTokens":[{"ActiveChangeCallbacks":true,"HasChanged":false,"$type":"CancellationChangeToken"}],"PostEvictionCallbacks":[],"Priority":"Normal","Size":null,"$type":"MemoryCacheEntryOptions"},"$type":"KeyValuesQueryByName"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:46:32.743 +08:00 [INF] CleanArchitecture Cache Request:CleanArchitecture.Razor.Application.KeyValues.Queries.ByName.KeyValuesQueryByName. 127.0.0.1 Zhu, Hualin
+2021-12-08 09:46:32.898 +08:00 [INF] CleanArchitecture Request: KeyValuesQueryByName zhuhua Zhu, Hualin {"Name":"LegacySystem","CacheKey":"LegacySystem-keyvalues","Options":{"AbsoluteExpiration":null,"AbsoluteExpirationRelativeToNow":null,"SlidingExpiration":null,"ExpirationTokens":[{"ActiveChangeCallbacks":true,"HasChanged":false,"$type":"CancellationChangeToken"}],"PostEvictionCallbacks":[],"Priority":"Normal","Size":null,"$type":"MemoryCacheEntryOptions"},"$type":"KeyValuesQueryByName"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:46:32.898 +08:00 [INF] CleanArchitecture Cache Request:CleanArchitecture.Razor.Application.KeyValues.Queries.ByName.KeyValuesQueryByName. 127.0.0.1 Zhu, Hualin
+2021-12-08 09:46:35.867 +08:00 [INF] CleanArchitecture Request: MappingRulesWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:49:38.514 +08:00 [INF] CleanArchitecture Request: MigrationProjectsWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationProjectsWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:49:44.618 +08:00 [INF] CleanArchitecture Request: LogsLevelChatDataQuery zhuhua Zhu, Hualin {"LastDateTime":"2021-12-05T09:49:44.3816465+08:00","$type":"LogsLevelChatDataQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:49:44.689 +08:00 [INF] CleanArchitecture Request: LogsWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"TimeStamp","Order":"desc","$type":"LogsWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:49:45.439 +08:00 [WRN] CleanArchitecture Long Running Request: LogsWithPaginationQuery (585 milliseconds) zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"TimeStamp","Order":"desc","$type":"LogsWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:49:46.127 +08:00 [WRN] CleanArchitecture Long Running Request: LogsLevelChatDataQuery (1322 milliseconds) zhuhua Zhu, Hualin {"LastDateTime":"2021-12-05T09:49:44.3816465+08:00","$type":"LogsLevelChatDataQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:49:46.406 +08:00 [INF] CleanArchitecture Request: LogsTimeLineChatDataQuery zhuhua Zhu, Hualin {"LastDateTime":"2021-12-05T09:49:46.2504579+08:00","$type":"LogsTimeLineChatDataQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:56:22.788 +08:00 [INF] CleanArchitecture Request: LogsLevelChatDataQuery zhuhua Zhu, Hualin {"LastDateTime":"2021-12-05T09:56:22.4246272+08:00","$type":"LogsLevelChatDataQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:56:22.997 +08:00 [INF] CleanArchitecture Request: LogsWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"TimeStamp","Order":"desc","$type":"LogsWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:56:23.190 +08:00 [INF] CleanArchitecture Request: LogsTimeLineChatDataQuery zhuhua Zhu, Hualin {"LastDateTime":"2021-12-05T09:56:23.0075806+08:00","$type":"LogsTimeLineChatDataQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:56:41.543 +08:00 [INF] CleanArchitecture Request: LogsLevelChatDataQuery zhuhua Zhu, Hualin {"LastDateTime":"2021-12-05T09:56:41.1357435+08:00","$type":"LogsLevelChatDataQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:56:41.553 +08:00 [INF] CleanArchitecture Request: LogsWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"TimeStamp","Order":"desc","$type":"LogsWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 09:56:41.860 +08:00 [INF] CleanArchitecture Request: LogsTimeLineChatDataQuery zhuhua Zhu, Hualin {"LastDateTime":"2021-12-05T09:56:41.6937145+08:00","$type":"LogsTimeLineChatDataQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 10:04:43.954 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 Zhu, Hualin
+2021-12-08 10:04:44.217 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-08 10:04:44.219 +08:00 [INF] Home Page 127.0.0.1 Zhu, Hualin
+2021-12-08 10:04:44.220 +08:00 [ERR] Error 127.0.0.1 Zhu, Hualin
+2021-12-08 10:04:44.221 +08:00 [WRN] Warning 127.0.0.1 Zhu, Hualin
+2021-12-08 10:04:44.222 +08:00 [FTL] Critical 127.0.0.1 Zhu, Hualin
+2021-12-08 10:46:57.691 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 Zhu, Hualin
+2021-12-08 10:46:57.693 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-08 10:46:57.693 +08:00 [INF] Home Page 127.0.0.1 Zhu, Hualin
+2021-12-08 10:46:57.694 +08:00 [ERR] Error 127.0.0.1 Zhu, Hualin
+2021-12-08 10:46:57.694 +08:00 [WRN] Warning 127.0.0.1 Zhu, Hualin
+2021-12-08 10:46:57.695 +08:00 [FTL] Critical 127.0.0.1 Zhu, Hualin
+2021-12-08 11:15:46.397 +08:00 [INF] CleanArchitecture Request: LogsLevelChatDataQuery zhuhua Zhu, Hualin {"LastDateTime":"2021-12-05T11:15:46.0049247+08:00","$type":"LogsLevelChatDataQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 11:15:46.534 +08:00 [INF] CleanArchitecture Request: LogsWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"TimeStamp","Order":"desc","$type":"LogsWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 11:15:47.310 +08:00 [INF] CleanArchitecture Request: LogsTimeLineChatDataQuery zhuhua Zhu, Hualin {"LastDateTime":"2021-12-05T11:15:47.0107544+08:00","$type":"LogsTimeLineChatDataQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 11:15:47.624 +08:00 [WRN] CleanArchitecture Long Running Request: LogsWithPaginationQuery (875 milliseconds) zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"TimeStamp","Order":"desc","$type":"LogsWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 11:19:32.476 +08:00 [INF] CleanArchitecture Request: GetAllMigrationProjectsWithkeyQuery zhuhua Zhu, Hualin {"Key":"","$type":"GetAllMigrationProjectsWithkeyQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 11:19:32.502 +08:00 [INF] CleanArchitecture Request: MigrationObjectsWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MigrationObjectsWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 11:19:47.822 +08:00 [INF] CleanArchitecture Request: MigrationObjectsWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":100,"Sort":"Id","Order":"desc","$type":"MigrationObjectsWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 11:21:05.534 +08:00 [INF] CleanArchitecture Request: GetAllMigrationProjectsWithkeyQuery zhuhua Zhu, Hualin {"Key":"","$type":"GetAllMigrationProjectsWithkeyQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 11:21:05.709 +08:00 [INF] CleanArchitecture Request: ObjectFieldsWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"ObjectFieldsWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 11:25:03.691 +08:00 [INF] CleanArchitecture Request: AuditTrailsWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"DateTime","Order":"desc","$type":"AuditTrailsWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 11:25:12.421 +08:00 [WRN] CleanArchitecture Long Running Request: AuditTrailsWithPaginationQuery (8394 milliseconds) zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"DateTime","Order":"desc","$type":"AuditTrailsWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 11:25:36.862 +08:00 [INF] CleanArchitecture Request: AuditTrailsWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":100,"Sort":"DateTime","Order":"desc","$type":"AuditTrailsWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 11:27:00.067 +08:00 [INF] CleanArchitecture Request: AuditTrailsWithPaginationQuery zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"DateTime","Order":"desc","$type":"AuditTrailsWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 11:36:21.523 +08:00 [INF] CleanArchitecture Request: KeyValuesWithPaginationQuery zhuhua Zhu, Hualin {"CacheKey":"KeyValuesWithPaginationQuery,page:1,rows:15,sort:Id,order:desc,filterRule:[]","Options":{"AbsoluteExpiration":null,"AbsoluteExpirationRelativeToNow":null,"SlidingExpiration":null,"ExpirationTokens":[{"ActiveChangeCallbacks":true,"HasChanged":false,"$type":"CancellationChangeToken"}],"PostEvictionCallbacks":[],"Priority":"Normal","Size":null,"$type":"MemoryCacheEntryOptions"},"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"KeyValuesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 11:36:21.542 +08:00 [INF] CleanArchitecture Cache Request:CleanArchitecture.Razor.Application.KeyValues.Queries.PaginationQuery.KeyValuesWithPaginationQuery. 127.0.0.1 Zhu, Hualin
+2021-12-08 14:50:42.757 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 Zhu, Hualin
+2021-12-08 14:50:42.830 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-08 14:50:42.830 +08:00 [INF] Home Page 127.0.0.1 Zhu, Hualin
+2021-12-08 14:50:42.830 +08:00 [ERR] Error 127.0.0.1 Zhu, Hualin
+2021-12-08 14:50:42.831 +08:00 [WRN] Warning 127.0.0.1 Zhu, Hualin
+2021-12-08 14:50:42.831 +08:00 [FTL] Critical 127.0.0.1 Zhu, Hualin
+2021-12-08 14:50:55.451 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 Zhu, Hualin
+2021-12-08 14:50:55.451 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-08 14:50:55.451 +08:00 [INF] Home Page 127.0.0.1 Zhu, Hualin
+2021-12-08 14:50:55.451 +08:00 [ERR] Error 127.0.0.1 Zhu, Hualin
+2021-12-08 14:50:55.451 +08:00 [WRN] Warning 127.0.0.1 Zhu, Hualin
+2021-12-08 14:50:55.451 +08:00 [FTL] Critical 127.0.0.1 Zhu, Hualin
+2021-12-08 14:53:41.588 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 Zhu, Hualin
+2021-12-08 14:53:41.642 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-08 14:53:41.646 +08:00 [INF] Home Page 127.0.0.1 Zhu, Hualin
+2021-12-08 14:53:41.646 +08:00 [ERR] Error 127.0.0.1 Zhu, Hualin
+2021-12-08 14:53:41.646 +08:00 [WRN] Warning 127.0.0.1 Zhu, Hualin
+2021-12-08 14:53:41.646 +08:00 [FTL] Critical 127.0.0.1 Zhu, Hualin
+2021-12-08 15:10:22.098 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 Zhu, Hualin
+2021-12-08 15:10:22.292 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-08 15:10:22.295 +08:00 [INF] Home Page 127.0.0.1 Zhu, Hualin
+2021-12-08 15:10:22.295 +08:00 [ERR] Error 127.0.0.1 Zhu, Hualin
+2021-12-08 15:10:22.296 +08:00 [WRN] Warning 127.0.0.1 Zhu, Hualin
+2021-12-08 15:10:22.296 +08:00 [FTL] Critical 127.0.0.1 Zhu, Hualin
+2021-12-08 15:19:55.914 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 Zhu, Hualin
+2021-12-08 15:19:56.074 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-08 15:19:56.078 +08:00 [INF] Home Page 127.0.0.1 Zhu, Hualin
+2021-12-08 15:19:56.078 +08:00 [ERR] Error 127.0.0.1 Zhu, Hualin
+2021-12-08 15:19:56.078 +08:00 [WRN] Warning 127.0.0.1 Zhu, Hualin
+2021-12-08 15:19:56.078 +08:00 [FTL] Critical 127.0.0.1 Zhu, Hualin
+2021-12-08 15:23:26.473 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 Zhu, Hualin
+2021-12-08 15:23:26.473 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-08 15:23:26.473 +08:00 [INF] Home Page 127.0.0.1 Zhu, Hualin
+2021-12-08 15:23:26.474 +08:00 [ERR] Error 127.0.0.1 Zhu, Hualin
+2021-12-08 15:23:26.474 +08:00 [WRN] Warning 127.0.0.1 Zhu, Hualin
+2021-12-08 15:23:26.474 +08:00 [FTL] Critical 127.0.0.1 Zhu, Hualin
+2021-12-08 15:27:07.122 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 Zhu, Hualin
+2021-12-08 15:27:07.185 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-08 15:27:07.186 +08:00 [INF] Home Page 127.0.0.1 Zhu, Hualin
+2021-12-08 15:27:07.334 +08:00 [ERR] Error 127.0.0.1 Zhu, Hualin
+2021-12-08 15:27:07.334 +08:00 [WRN] Warning 127.0.0.1 Zhu, Hualin
+2021-12-08 15:27:07.334 +08:00 [FTL] Critical 127.0.0.1 Zhu, Hualin
+2021-12-08 15:29:11.367 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 Zhu, Hualin
+2021-12-08 15:29:11.421 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-08 15:29:11.423 +08:00 [INF] Home Page 127.0.0.1 Zhu, Hualin
+2021-12-08 15:29:11.425 +08:00 [ERR] Error 127.0.0.1 Zhu, Hualin
+2021-12-08 15:29:11.425 +08:00 [WRN] Warning 127.0.0.1 Zhu, Hualin
+2021-12-08 15:29:11.425 +08:00 [FTL] Critical 127.0.0.1 Zhu, Hualin
+2021-12-08 15:39:14.045 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 Zhu, Hualin
+2021-12-08 15:39:14.106 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-08 15:39:14.110 +08:00 [INF] Home Page 127.0.0.1 Zhu, Hualin
+2021-12-08 15:39:14.111 +08:00 [ERR] Error 127.0.0.1 Zhu, Hualin
+2021-12-08 15:39:14.111 +08:00 [WRN] Warning 127.0.0.1 Zhu, Hualin
+2021-12-08 15:39:14.111 +08:00 [FTL] Critical 127.0.0.1 Zhu, Hualin
+2021-12-08 15:54:59.622 +08:00 [INF] ea753b0b0f357a41491408307ade445e 127.0.0.1 zhuhua
+2021-12-08 15:54:59.700 +08:00 [INF] Welcome. 127.0.0.1 zhuhua
+2021-12-08 15:54:59.704 +08:00 [INF] Home Page 127.0.0.1 zhuhua
+2021-12-08 15:54:59.704 +08:00 [ERR] Error 127.0.0.1 zhuhua
+2021-12-08 15:54:59.704 +08:00 [WRN] Warning 127.0.0.1 zhuhua
+2021-12-08 15:54:59.704 +08:00 [FTL] Critical 127.0.0.1 zhuhua
+2021-12-08 15:56:26.817 +08:00 [INF] Welcome. 127.0.0.1 zhuhua
+2021-12-08 16:37:26.530 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-08 16:37:34.058 +08:00 [WRN] CleanArchitecture Long Running Request: MappingRulesWithPaginationQuery (588 milliseconds) zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-08 16:37:40.469 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin

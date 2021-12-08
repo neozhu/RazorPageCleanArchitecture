@@ -22,7 +22,7 @@ public class CacheInvalidationBehaviour<TRequest, TResponse> : IPipelineBehavior
     public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
     {
         var requestName = request.GetType();
-        _logger.LogInformation("CleanArchitecture Cache Invalidation Request:{Name}", requestName);
+        //_logger.LogInformation("CleanArchitecture Cache Invalidation Request:{Name}", requestName);
 
         var response = await next();
         if (!string.IsNullOrEmpty(request.CacheKey))

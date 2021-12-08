@@ -22,7 +22,7 @@ public class CachingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest,
     public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
     {
         var requestName = request.GetType();
-        _logger.LogInformation("CleanArchitecture Cache Request:{Name}.", requestName);
+        //_logger.LogInformation("CleanArchitecture Cache Request:{Name}.", requestName);
 
         var response = await _cache.GetOrAddAsync(
             request.CacheKey,
