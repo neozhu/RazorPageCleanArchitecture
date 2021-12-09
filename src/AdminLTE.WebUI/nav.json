@@ -1,11 +1,8 @@
 {
   "version": "4.5",
   "lists": [
-   
-    {
-      "title": "SAP Migration Tools",
-      "roles": []
-    },
+
+
     {
       "title": "Welcome",
       "href": "aspnetcore_welcome.html",
@@ -13,18 +10,30 @@
       "roles": []
     },
     {
-      "title": "Migration Projects",
+      "title": "Value Mapping Matrix",
       "icon": "nav-icon fas fa-tools",
       "roles": [ "MOVE-VT-MIG", "Manager" ],
       "items": [
-        
+
         {
-          "title": "Value Mapping",
+          "title": "Value Mapping Rule",
           "href": "mappingrules_index.html",
           "roles": []
         },
         {
-          "title": "Mapping Report",
+          "title": "Value Mapping Overview",
+          "href": "fieldmappingvalues_index.html",
+          "roles": []
+        }
+      ]
+    },
+    {
+      "title": "Migration Result",
+      "icon": "nav-icon fas fa-file-signature",
+      "roles": [ "MOVE-VT-MIG", "Manager" ],
+      "items": [
+        {
+          "title": "Result Overview",
           "href": "fieldmappingvalues_index.html",
           "roles": []
         }

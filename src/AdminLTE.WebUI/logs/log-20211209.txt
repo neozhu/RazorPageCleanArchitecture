@@ -7,3 +7,79 @@
 2021-12-09 09:56:27.925 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
 2021-12-09 10:31:01.975 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
 2021-12-09 10:50:23.093 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 14:51:06.132 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 14:54:12.158 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 14:55:09.462 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 14:58:26.996 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 14:59:01.890 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:01:33.196 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:03:45.733 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:05:13.842 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:05:17.616 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:11:09.359 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:11:16.144 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:13:16.695 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:15:41.192 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:17:09.319 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:18:37.518 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:24:50.327 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:25:34.303 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:25:59.702 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:43:05.878 +08:00 [WRN] CleanArchitecture Long Running Request: GetAllMigrationObjectsQuery (1220 milliseconds) zhuhua Zhu, Hualin {"$type":"GetAllMigrationObjectsQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-09 15:49:06.609 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:50:14.262 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:50:32.749 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:51:12.703 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 15:54:31.667 +08:00 [WRN] CleanArchitecture Long Running Request: GetAllMappingRulesWithKeyQuery (916 milliseconds) zhuhua Zhu, Hualin {"Key":"","$type":"GetAllMappingRulesWithKeyQuery"} 127.0.0.1 Zhu, Hualin
+2021-12-09 16:48:31.353 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 16:56:24.316 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 16:58:17.817 +08:00 [ERR] An error occurred while migrating or seeding the database.  
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at CleanArchitecture.Razor.Infrastructure.Services.CurrentUserService.get_UserId() in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Services\CurrentUserService.cs:line 100
+   at CleanArchitecture.Razor.Infrastructure.Persistence.ApplicationDbContext.SaveChangesAsync(CancellationToken cancellationToken) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Persistence\ApplicationDbContext.cs:line 62
+   at CleanArchitecture.Razor.Infrastructure.Persistence.ApplicationDbContextSeed.SeedSampleDataAsync(ApplicationDbContext context) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Persistence\ApplicationDbContextSeed.cs:line 122
+   at Program.<Main>$(String[] args) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\AdminLTE.WebUI\Program.cs:line 87
+2021-12-09 16:59:53.771 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 17:02:27.376 +08:00 [ERR] CleanArchitecture Request: Unhandled Exception for Request DownloadMappingValueFileCommand {"MappingRuleId":1852,"$type":"DownloadMappingValueFileCommand"} 127.0.0.1 Zhu, Hualin
+System.Exception: Not found mapping value template file:Files/TemplateFiles/ABC Indicator for Technical Object.xml
+   at CleanArchitecture.Razor.Application.MappingRules.Commands.Download.DownloadMappingValueFileCommandHandler.Handle(DownloadMappingValueFileCommand request, CancellationToken cancellationToken) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\MappingRules\Commands\Download\DownloadMappingValueFileCommand.cs:line 34
+   at CleanArchitecture.Razor.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\PerformanceBehaviour.cs:line 32
+   at CleanArchitecture.Razor.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\ValidationBehaviour.cs:line 36
+   at CleanArchitecture.Razor.Application.Common.Behaviours.AuthorizationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\AuthorizationBehaviour.cs:line 80
+   at CleanArchitecture.Razor.Application.Common.Behaviours.UnhandledExceptionBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\UnhandledExceptionBehaviour.cs:line 19
+2021-12-09 17:02:27.759 +08:00 [ERR] Request failed with Status Code 500 and Error Id 3bbdf0e2-05d4-4123-ab8f-7ce629b41836. 127.0.0.1 Zhu, Hualin
+System.Exception: Not found mapping value template file:Files/TemplateFiles/ABC Indicator for Technical Object.xml
+   at CleanArchitecture.Razor.Application.MappingRules.Commands.Download.DownloadMappingValueFileCommandHandler.Handle(DownloadMappingValueFileCommand request, CancellationToken cancellationToken) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\MappingRules\Commands\Download\DownloadMappingValueFileCommand.cs:line 34
+   at CleanArchitecture.Razor.Application.Common.Behaviours.PerformanceBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\PerformanceBehaviour.cs:line 32
+   at CleanArchitecture.Razor.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\ValidationBehaviour.cs:line 36
+   at CleanArchitecture.Razor.Application.Common.Behaviours.AuthorizationBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\AuthorizationBehaviour.cs:line 80
+   at CleanArchitecture.Razor.Application.Common.Behaviours.UnhandledExceptionBehaviour`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Application\Common\Behaviours\UnhandledExceptionBehaviour.cs:line 19
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next)
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next)
+   at MediatR.Pipeline.RequestPostProcessorBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next)
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next)
+   at AdminLTE.WebUI.Pages.MappingRules.IndexModel.OnGetDownloadData(Int32 mappingruleid, String mappingrulename)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.ExecutorFactory.GenericTaskHandlerMethod.Convert[T](Object taskAsObject)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.ExecutorFactory.GenericTaskHandlerMethod.Execute(Object receiver, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeHandlerMethodAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeNextPageFilterAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.Rethrow(PageHandlerExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at CleanArchitecture.Razor.Infrastructure.Middlewares.UnhandledExceptionMiddleware.InvokeAsync(HttpContext context, RequestDelegate next) in C:\Users\zhuhua\Documents\GitHub\RazorPageCleanArchitecture\src\Infrastructure\Middlewares\UnhandledExceptionMiddleware.cs:line 29
+2021-12-09 17:02:27.785 +08:00 [ERR] HTTP GET /MappingRules?handler=DownloadData&MappingRuleId=1852&MappingRuleName=ABC%20Indicator%20for%20Technical%20Object responded 500 in 742.2086 ms 127.0.0.1 Zhu, Hualin
+2021-12-09 17:14:08.032 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-09 17:14:16.602 +08:00 [WRN] CleanArchitecture Long Running Request: MappingRulesWithPaginationQuery (561 milliseconds) zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin

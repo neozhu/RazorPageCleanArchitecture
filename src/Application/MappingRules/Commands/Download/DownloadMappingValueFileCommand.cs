@@ -31,7 +31,7 @@ public class DownloadMappingValueFileCommandHandler :
         var path = Path.Combine(Directory.GetCurrentDirectory(), mappingrule.TemplateFile);
         if (!File.Exists(path))
         {
-            throw new Exception($"Not found mapping value template file:{mappingrule.TemplateFile}");
+            throw new Exception($"Not found value mapping template file:{mappingrule.TemplateFile}");
         }
         var buffer = File.ReadAllBytes(path);
         if (values.Count > 0)

@@ -43,7 +43,8 @@ public class MappingRuleDto : IMapFrom<MappingRule>
     public string TemplateFile { get; set; }
     public string TemplateDescription { get; set; }
     public TrackingState TrackingState { get; set; }
-    public string Active { get; set; } = "Active";
+    public string Active { get; set; } = "Inactive";
+    public string MigrationApproach { get; set; }
     public DateTime Created { get; set; }
     public string CreatedBy { get; set; }
     public DateTime? LastModified { get; set; }

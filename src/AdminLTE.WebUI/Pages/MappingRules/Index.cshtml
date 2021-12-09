@@ -6,9 +6,9 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
 @inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
 @{
-    ViewData["Title"] = _localizer["Value Mapping"].Value;
+    ViewData["Title"] = _localizer["Value Mapping Rule"].Value;
     ViewData["PageName"] = "mappingrules_index";
-    ViewData["Category1"] = _localizer["Migration Objects"].Value;
+    ViewData["Category1"] = _localizer["Value Mapping Matrix"].Value;
     ViewData["Heading"] = _localizer["Value Mapping"].Value;
     ViewData["PageDescription"] = _localizer["See all available options"].Value;
     ViewData["PreemptiveClass"] = "Default";
@@ -38,7 +38,7 @@
 <div id="js-page-content-demopanels" class="card mb-g">
     <div class="card-header bg-white d-flex align-items-center">
         <h4 class="m-0">
-            @_localizer["Value Mapping"]
+            @_localizer["Value Mapping Rule"]
             <small>&nbsp;</small>
         </h4>
         <div class="ml-auto">
@@ -171,14 +171,6 @@
                             <input type="text" asp-for="Input.NewValueFieldDescription" class="form-control" placeholder="" autocomplete="off" />
                             <span class="invalid-feedback" asp-validation-for="Input.NewValueFieldDescription">Sorry, you missed this one.</span>
                         </div>
-
-                        <div class="col-md-4 mb-2">
-                            <label class="form-label" for="IsMock"> </label>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" asp-for="Input.IsMock" class="custom-control-input" value="true">
-                                <label class="custom-control-label" for="Input_IsMock">@_localizer["Mock Relevant"]</label>
-                            </div>
-                        </div>
                         <div class="col-md-4 mb-2">
                             <label class="form-label" for="Active"> </label>
                             <div class="custom-control custom-checkbox">
@@ -190,6 +182,14 @@
                             <label class="form-label" for="Team">@_localizer["Team"] </label>
 
                             <select type="text" asp-for="Input.Team" class="select2bs4" multiple="multiple" asp-dictionaries-for="Team" data-placeholder="Choose Team" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                            </select>
+
+                            <span class="invalid-feedback" asp-validation-for="Input.Team">Sorry, you missed this one.</span>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label class="form-label" for="MigrationApproach">@_localizer["Migration Approach"] </label>
+
+                            <select type="text" asp-for="Input.MigrationApproach" class="select2bs4"   asp-dictionaries-for="MigrationApproach" data-placeholder="Choose Migration Approach" data-dropdown-css-class="select2-purple" style="width: 100%;">
                             </select>
 
                             <span class="invalid-feedback" asp-validation-for="Input.Team">Sorry, you missed this one.</span>
@@ -966,9 +966,9 @@
                     sortable: true,
                     width: 120,
                     formatter:function(value){
-                        if(value=='Not started'){
+                        if(value=='Not started') {
                             return `<span class="right badge badge-secondary">${value}</span>`
-                        }else if(value=='Ongoing'){
+                        }else if(value=='Ongoing') {
                             return `<span class="right badge badge-info">${value}</span>`
                         }else{
                             return `<span class="right badge badge-success">${value}</span>`
@@ -976,6 +976,8 @@
 
                     }
                 },
+                { field: 'Team', title: '@_localizer["Team"]', sortable: true, width: 160 },
+                { field: 'LegacySystem', title: '@_localizer["Legacy System"]', sortable: true, width: 180 },
                 { field: 'Name',
                   title: '@_localizer["Mapping Rule Name"]',
                   sortable: true,
@@ -1016,9 +1018,7 @@
                       return `<a> ${value??''} </a> <br> <small>${row.NewValueFieldDescription??''}</small>`;
                   }
                 },
-                { field: 'IsMock', title: '@_localizer["Mock Relevant"]', sortable: true, width: 120 },
-                { field: 'Team', title: '@_localizer["Team"]', sortable: true, width: 160 },
-                { field: 'LegacySystem', title: '@_localizer["Legacy System"]', sortable: true, width: 220 },
+                { field: 'MigrationApproach', title: '@_localizer["Migration Approach"]', sortable: true, width: 130 },
                 { field: 'RelevantObjects', title: '@_localizer["Relevant Objects"]', sortable: true, width: 220 },
                 { field: 'CreatedBy', title: '@_localizer["Created By"]', sortable: true, width: 160 },
                 { field: 'LastModifiedBy', title: '@_localizer["Last Modified By"]',  sortable: true, width: 160 },

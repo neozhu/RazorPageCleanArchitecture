@@ -113,6 +113,12 @@ public static class ApplicationDbContextSeed
             context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "QM", Text = "QM", Description = "Team Name" });
             context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "SA", Text = "SA", Description = "Team Name" });
             context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Team", Value = "SA-CM", Text = "SA-CM", Description = "Team Name" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "MigrationApproach", Value = "Direct", Text = "Direct", Description = "Migration Approach" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "MigrationApproach", Value = "Staging", Text = "Staging", Description = "Migration Approach" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Itinerary", Value = "Mock 2", Text = "Mock 2", Description = "Itinerary" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Itinerary", Value = "Mock 3", Text = "Mock 3", Description = "Itinerary" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Itinerary", Value = "Mock 4", Text = "Mock 4", Description = "Itinerary" });
+            context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "Itinerary", Value = "Prod. Load", Text = "Prod. Load", Description = "Itinerary" });
             await context.SaveChangesAsync();
 
      

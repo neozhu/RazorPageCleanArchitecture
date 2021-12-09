@@ -2,31 +2,35 @@
 @model WelcomeModel
 @{
   ViewData["Title"] = "Welcome";
-  ViewData["Category1"] = "SAP Migration Tool";
+  ViewData["Category1"] = "Value Mapping Cockpit";
   ViewData["PageName"] = "aspnetcore_welcome";
   ViewData["Heading"] = "<i class='fal fa-graduation-cap'></i> Welcome: <span class='fw-300'>SmartAdmin for .NET Core</span>";
 }
 
 <div class="row">
-    <div class="col-xl-12">
-        <div class="panel">
-            <div class="panel-hdr">
-                <h2>
-                    Introducing @Settings.App for @Settings.AppFlavor
-                </h2>
+    <div class="card card-solid">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 ">
+              <div class="col-12">
+                <img src="~/img/project.png" class="product-image" alt="Product Image">
+              </div>
+             
             </div>
-            <div class="panel-container show">
-                <div class="panel-content">
-                    <p>
-                        After the great success of our previous version of @Settings.App we knew we had to do our utmost best to deliver you the latest and greatest when it comes to Bootstrap based theming.
-                        Our journey has not been without challenges and at one point we concluded that the best approach was to completely reboot our framework, not only on how we wanted to setup the template, but also provide a much better customer journey with a strong focus on getting you started quickly, hassle-free!
-                        Whether you are a seasoned @Settings.App veteran or a new customer of @Settings.App, we got you covered! And to start off with that we retained the unique look and feel of @Settings.App but brought it up to the newest industry standards, supporting the latest capabilities of your favorite frameworks and plugins.
-                    </p>
-                    
-                </div>
+            <div class="col-12 ">
+              <h3 class="my-3"> Value Mapping Cockpit </h3>
+              <p>
+                  Value Mapping Cockpit is a central platform to maintain all necessary legacy value to new value mapping for defined fields(e.g. customized fields, payment terms), these value mappings should be maintained before actual data migration in order to have proper transformation to the newly defined values. Additionally all mapping result after migration for created objects(e.g. account document number) will be uploaded to this platform for data validation.
+              </p>
+
+              
+
             </div>
+          </div>
+          
         </div>
-    </div>
+
+      </div>
 </div>
  
 @Html.AntiForgeryToken()

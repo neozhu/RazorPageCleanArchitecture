@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using System.Data;
 using CleanArchitecture.Razor.Application.Constants.Permission;
+using CleanArchitecture.Razor.Infrastructure.Extensions;
 #nullable disable
 namespace SmartAdmin.WebUI.Areas.Authorization.Pages
 {

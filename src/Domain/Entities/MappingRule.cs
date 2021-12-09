@@ -1,7 +1,7 @@
 namespace CleanArchitecture.Razor.Domain.Entities;
 
 #nullable disable
-public class MappingRule:AuditableEntity, IAuditTrial, IProjectId
+public class MappingRule : AuditableEntity, IAuditTrial, IProjectId
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -36,4 +36,6 @@ public class MappingRule:AuditableEntity, IAuditTrial, IProjectId
 
     public int MigrationProjectId { get; set; }
     public virtual MigrationProject MigrationProject { get; set; }
+
+    public string MigrationApproach{get;set;}
 }

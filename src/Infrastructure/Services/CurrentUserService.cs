@@ -97,5 +97,5 @@ public class CurrentUserService : ICurrentUserService
             return displayname;
         }
         }
-    public string UserId => _httpContextAccessor.HttpContext.User.Identity.Name.Split("\\")[1];
+    public string UserId => _httpContextAccessor.HttpContext?.User?.Identity?.Name.Split("\\")[1];
 }
