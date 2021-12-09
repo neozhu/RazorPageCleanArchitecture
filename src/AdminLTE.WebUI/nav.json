@@ -15,7 +15,7 @@
     {
       "title": "Migration Projects",
       "icon": "nav-icon fas fa-tools",
-      "roles": [],
+      "roles": [ "MOVE-VT-MIG", "Manager" ],
       "items": [
         
         {
@@ -33,7 +33,7 @@
     {
       "title": "System",
       "icon": "nav-icon fas fa-cogs",
-      "roles": [],
+      "roles": [ "Manager" ],
       "items": [
         {
           "title": "Migration Projects",

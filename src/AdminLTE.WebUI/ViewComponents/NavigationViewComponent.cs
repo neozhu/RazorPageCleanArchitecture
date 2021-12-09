@@ -5,31 +5,41 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AdminLTE.WebUI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AdminLTE.WebUI.ViewComponents;
 
 public class NavigationViewComponent : ViewComponent
 {
-    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IAuthorizationService _authorizationService;
     private readonly ICurrentUserService _currentUserService;
     private readonly IIdentityService _identityService;
+    private readonly bool _isManager;
     private readonly string[] _roles;
     public NavigationViewComponent(
-        UserManager<ApplicationUser> userManager,
+        IHttpContextAccessor httpContextAccessor,
+        IAuthorizationService authorizationService,
         ICurrentUserService currentUserService,
         IIdentityService identityService
         )
     {
-        _userManager = userManager;
+        _httpContextAccessor = httpContextAccessor;
+        _authorizationService = authorizationService;
         _currentUserService = currentUserService;
         _identityService = identityService;
         var userId = _currentUserService.UserId;
-        _roles = _userManager.Users.Where(x => x.Id == userId).Include(x => x.UserRoles).ThenInclude(x => x.Role).SelectMany(x => x.UserRoles).Select(x => x.Role.Name).ToArray();
+        _roles = _currentUserService.GetRoles().ToArray();
+
+        _isManager = _authorizationService.AuthorizeAsync(_httpContextAccessor.HttpContext.User, "Manager").Result.Succeeded;
     }
     public IViewComponentResult Invoke()
     {
 
-        var items = NavigationModel.GetNavigation(x => !x.Roles.Any() || (x.Roles.Any() && _roles.Any() && x.Roles.Where(x => _roles.Contains(x)).Any()));
+        var items = NavigationModel.GetNavigation(x => !x.Roles.Any() ||
+                    (x.Roles.Any() && _roles.Any() && x.Roles.Where(x => _roles.Contains(x)).Any()) ||
+                    (x.Roles.Any(x=>x=="Manager") && _isManager)
+                    );
 
         return View(items);
     }

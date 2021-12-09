@@ -11,7 +11,7 @@ using CleanArchitecture.Razor.Application.ObjectFields.Commands.AcceptChanges;
 
 namespace AdminLTE.WebUI.Pages.ObjectFields
 {
-    [Authorize()]
+    [Authorize(Policy = "Manager")]
     public class IndexModel : PageModel
     {
 

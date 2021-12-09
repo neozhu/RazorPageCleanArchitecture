@@ -27,10 +27,10 @@
     .mappingrule_dg_datagrid-cell-c1-_action {
         overflow: visible !important
     }
+
     .small::before,
-    small::before
-    {
-        content:none !important;
+    small::before {
+        content: none !important;
     }
 
 </style>
@@ -52,11 +52,11 @@
                 <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
                 @_localizer["Delete"]
             </button>
-           <button class="btn btn-sm btn-outline-primary " id="downloadtemplatebutton">
+            <button class="btn btn-sm btn-outline-primary " id="downloadtemplatebutton">
                 <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
                 @_localizer["Download Value Mapping"]
             </button>
-             
+
 
         </div>
     </div>
@@ -85,7 +85,7 @@
                     <input type="hidden" asp-for="Input.TemplateFile" />
                     <input type="hidden" asp-for="Input.TemplateDescription" />
                     <div class="form-row">
-                             <div class="col-md-12">
+                        <div class="col-md-12">
                             <label class="form-label" for=""></label>
                             <input type="file" asp-for="TemplateFile" style="display:none" required accept="text/xml" />
                             <div class="">
@@ -117,61 +117,61 @@
                         <div class="col-md-4 mb-2">
                             <label class="form-label" for="LegacyField1">@_localizer["Legacy Field 1 Name"] <span class="text-danger">*</span></label>
                             <input type="text" list="fieldlist" asp-for="Input.LegacyField1" class="form-control" placeholder="" required="required" autocomplete="off" />
-                            
+
                             <span class="invalid-feedback" asp-validation-for="Input.LegacyField1">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4 mb-2">
                             <label class="form-label" for="LegacyDescription1">@_localizer["Legacy Field 1 Description"] </label>
-                            <input type="text" asp-for="Input.LegacyDescription1" class="form-control" placeholder="" autocomplete="off"/>
+                            <input type="text" asp-for="Input.LegacyDescription1" class="form-control" placeholder="" autocomplete="off" />
                             <span class="invalid-feedback" asp-validation-for="Input.LegacyDescription1">Sorry, you missed this one.</span>
                         </div>
-                         <div class="col-md-4 mb-2">
+                        <div class="col-md-4 mb-2">
                             <label class="form-label" for="ImportParameterField2">@_localizer["Legacy Field 2 Description"] </label>
-                            <input type="text" asp-for="Input.ImportParameterField2" class="form-control" placeholder=""  readonly="readonly" />
+                            <input type="text" asp-for="Input.ImportParameterField2" class="form-control" placeholder="" readonly="readonly" />
                             <span class="invalid-feedback" asp-validation-for="Input.ImportParameterField2">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4 mb-2">
                             <label class="form-label" for="LegacyField2">@_localizer["Legacy Field 2 Name"] </label>
-                            <input type="text" list="fieldlist" asp-for="Input.LegacyField2" class="form-control" placeholder="" autocomplete="off"/>
+                            <input type="text" list="fieldlist" asp-for="Input.LegacyField2" class="form-control" placeholder="" autocomplete="off" />
                             <span class="invalid-feedback" asp-validation-for="Input.LegacyField2">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4 mb-2">
                             <label class="form-label" for="LegacyDescription2">@_localizer["Legacy Field Description 2"] </label>
-                            <input type="text" asp-for="Input.LegacyDescription2" class="form-control" placeholder="" autocomplete="off"/>
+                            <input type="text" asp-for="Input.LegacyDescription2" class="form-control" placeholder="" autocomplete="off" />
                             <span class="invalid-feedback" asp-validation-for="Input.LegacyDescription2">Sorry, you missed this one.</span>
                         </div>
-                         <div class="col-md-4 mb-2">
+                        <div class="col-md-4 mb-2">
                             <label class="form-label" for="ImportParameterField3">@_localizer["Import Parameter Name 3"] </label>
-                            <input type="text" asp-for="Input.ImportParameterField3" class="form-control" placeholder=""  readonly="readonly" />
+                            <input type="text" asp-for="Input.ImportParameterField3" class="form-control" placeholder="" readonly="readonly" />
                             <span class="invalid-feedback" asp-validation-for="Input.ImportParameterField3">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4 mb-2">
                             <label class="form-label" for="LegacyField3">@_localizer["Legacy Field 3 Name"]  </label>
-                            <input type="text" list="fieldlist" asp-for="Input.LegacyField3" class="form-control" placeholder="" autocomplete="off"/>
+                            <input type="text" list="fieldlist" asp-for="Input.LegacyField3" class="form-control" placeholder="" autocomplete="off" />
                             <span class="invalid-feedback" asp-validation-for="Input.LegacyField3">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4 mb-2">
                             <label class="form-label" for="LegacyDescription3">@_localizer["Legacy Field 3 Description"] </label>
-                            <input type="text"  asp-for="Input.LegacyDescription3" class="form-control" placeholder="" autocomplete="off"/>
+                            <input type="text" asp-for="Input.LegacyDescription3" class="form-control" placeholder="" autocomplete="off" />
                             <span class="invalid-feedback" asp-validation-for="Input.LegacyDescription3">Sorry, you missed this one.</span>
                         </div>
-                         <div class="col-md-4 mb-2">
+                        <div class="col-md-4 mb-2">
                             <label class="form-label" for="ExportParameterField">@_localizer["Export Parameter Name"] </label>
-                            <input type="text" asp-for="Input.ExportParameterField" class="form-control" placeholder=""  readonly="readonly" />
+                            <input type="text" asp-for="Input.ExportParameterField" class="form-control" placeholder="" readonly="readonly" />
                             <span class="invalid-feedback" asp-validation-for="Input.ExportParameterField">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4 mb-2">
                             <label class="form-label" for="NewValueField">@_localizer["New Field Name"] <span class="text-danger">*</span></label>
-                            <select asp-for="Input.NewValueField" asp-items="Model.DataElements" class="select2bs4"  placeholder="Data Element" data-placeholder="Choose Data Element"  style="width: 100%;">
+                            <select asp-for="Input.NewValueField" asp-items="Model.DataElements" class="select2bs4" placeholder="Data Element" data-placeholder="Choose Data Element" style="width: 100%;">
                             </select>
                             <span class="invalid-feedback" asp-validation-for="Input.NewValueField">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-4 mb-2">
                             <label class="form-label" for="NewFieldName">@_localizer["New Field Description"] </label>
-                            <input type="text" asp-for="Input.NewValueFieldDescription" class="form-control" placeholder="" autocomplete="off"/>
+                            <input type="text" asp-for="Input.NewValueFieldDescription" class="form-control" placeholder="" autocomplete="off" />
                             <span class="invalid-feedback" asp-validation-for="Input.NewValueFieldDescription">Sorry, you missed this one.</span>
                         </div>
-                   
+
                         <div class="col-md-4 mb-2">
                             <label class="form-label" for="IsMock"> </label>
                             <div class="custom-control custom-checkbox">
@@ -190,7 +190,6 @@
                             <label class="form-label" for="Team">@_localizer["Team"] </label>
 
                             <select type="text" asp-for="Input.Team" class="select2bs4" multiple="multiple" asp-dictionaries-for="Team" data-placeholder="Choose Team" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                            
                             </select>
 
                             <span class="invalid-feedback" asp-validation-for="Input.Team">Sorry, you missed this one.</span>
@@ -199,15 +198,13 @@
                             <label class="form-label" for="LegacySystem">@_localizer["Legacy System"] </label>
 
                             <select type="text" asp-for="Input.LegacySystem" class="select2bs4" multiple="multiple" asp-dictionaries-for="LegacySystem" data-placeholder="Choose Legacy System" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                            
                             </select>
 
                             <span class="invalid-feedback" asp-validation-for="Input.LegacySystem">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6 mb-2">
                             <label class="form-label" for="RelevantObjects">@_localizer["Relevant Objects"]  </label>
-                            <select asp-for="Input.RelevantObjects" asp-items="Model.MigrationObjects" class="select2bs4" multiple="multiple" placeholder="Relevant Objects" data-placeholder="Choose Relevant Objects"  style="width: 100%;">
-                               
+                            <select asp-for="Input.RelevantObjects" asp-items="Model.MigrationObjects" class="select2bs4" multiple="multiple" placeholder="Relevant Objects" data-placeholder="Choose Relevant Objects" style="width: 100%;">
                             </select>
                             <span class="invalid-feedback" asp-validation-for="Input.RelevantObjects">Sorry, you missed this one.</span>
                         </div>
@@ -248,17 +245,17 @@
                     <button type="button" id="importdatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Upload Data"] </button>
                     <button type="button" id="downloaddatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Download Data"] </button>
                     <input type="file" id="uploaddatafile" accept="text/xml"
-                            style="display:none">
+                           style="display:none">
                 </div>
                 <div class="d-flex flex-row mt-2">
                     <div class="flex-fill">
-                     <table id="fieldmappingvalues_dg">
-                     </table>
+                        <table id="fieldmappingvalues_dg">
+                        </table>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                 <button type="button" id="savedatabutton" class="btn   btn-primary mr-1">@_localizer["Save"] </button>
+                <button type="button" id="savedatabutton" class="btn   btn-primary mr-1">@_localizer["Save"] </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
 
             </div>
@@ -267,10 +264,11 @@
 </div>
 
 <datalist id="fieldlist">
- @foreach(var item in Model.FieldList){
-     <option value="@item.Name">@item.Description</option>
- }
- </datalist>
+    @foreach (var item in Model.FieldList)
+    {
+        <option value="@item.Name">@item.Description</option>
+    }
+</datalist>
 
 @await Component.InvokeAsync("ImportExcel", new
 {
@@ -304,7 +302,7 @@
            {
                $("#Input_LegacyDescription1").val(option_text)
                break;
-           }  
+           }
          }
     })
     $('#Input_LegacyField2').change(function(){
@@ -317,7 +315,7 @@
            {
                $("#Input_LegacyDescription2").val(option_text)
                break;
-           }  
+           }
          }
     })
     $('#Input_LegacyField3').change(function(){
@@ -330,7 +328,7 @@
            {
                $("#Input_LegacyDescription3").val(option_text)
                break;
-           }  
+           }
          }
     })
     $('#Input_NewValueField').change(function(){
@@ -343,13 +341,13 @@
            {
                $("#Input_NewValueFieldDescription").val(option_text)
                break;
-           }  
+           }
          }
     })
      var $fieldmappingvalues_dg = {};
 
     $('.default-example-modal-right-lg').on('shown.bs.modal', function () {
-        
+
          var columments=[{ field: 'ck', checkbox: true }];
          if(currentMappingRuleItem.IsMock){
              columments.push({
@@ -469,7 +467,7 @@
     })
 
 
-   
+
     uploaddatainput.onchange = () => {
         rightmodalcontent.classList.add("overlay-wrapper");
         rightoverlay.style.display="flex";
@@ -509,14 +507,14 @@
                   })
             })
     }
-   
+
     $('#importdatabutton').click(function () {
          uploaddatainput.click();
     });
     $('#downloaddatabutton').click(function(){
         rightmodalcontent.classList.add("overlay-wrapper");
         rightoverlay.style.display="flex";
-         axios.get('@Url.Page("/MappingRules/Index")?handler=DownloadData&MappingRuleId=' + currentMappingRuleId +'&MappingRuleName=' + currentMappingRuleName ,
+        axios.get('@Url.Page("/MappingRules/Index")?handler=DownloadData&MappingRuleId=' + currentMappingRuleId +'&MappingRuleName=' + currentMappingRuleName ,
             {
                 responseType: "blob"
             })
@@ -541,14 +539,14 @@
                       const err=data.Errors.toString();
                       bootbox.alert(err);
                   })
-                   
+
                 })
     });
-    
+
 
     $('#refreshbutton').click(function(){
         onReloadFieldData()
-        
+
     })
     $('#adddatabutton').click(function(){
         onAddDataRow();
@@ -638,7 +636,7 @@
                 $fieldmappingvalues_dg.datagrid('selectRow', editIndex)
                     .datagrid('beginEdit', editIndex);
                 $('#savedatabutton').prop('disabled', false);
-                
+
             }
         }
          var onBeginEdit = (index, field)=> {
@@ -657,7 +655,7 @@
                     }, 1);
                 }
                 $('#savedatabutton').prop('disabled', false);
-              
+
             }
         }
         var onEndEdit = (index, row)=> {
@@ -953,8 +951,7 @@
                                  <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
                                    <button class="dropdown-item" onclick="onEdit(${index})" > @_localizer["Edit Mapping Rule"]</button>
                                    <button class="dropdown-item" onclick="onShowMappingValues(${index})" > @_localizer["Field Mapping Values"]</button>
-                                   <button class="dropdown-item" onclick="onDownload(${index})" > @_localizer["Download Template File"]</button>
-                                   <button class="dropdown-item" onclick="onDelete('${row.Id}')"  > @_localizer["Delete"]</button>
+                                   <button class="dropdown-item" onclick="onDownload(${index})" > @_localizer["Download Value Mapping"]</button>
                                  </div>
                               </div>`;
                     }
@@ -976,7 +973,7 @@
                         }else{
                             return `<span class="right badge badge-success">${value}</span>`
                         }
-                        
+
                     }
                 },
                 { field: 'Name',
@@ -1043,9 +1040,9 @@
                     onChange: function (item) {
                          if(item){
                              $dg.datagrid('addFilterRule', {
-	                           field: 'Active',
-	                           op: 'equal',
-	                           value: item
+                               field: 'Active',
+                               op: 'equal',
+                               value: item
                              });
                              $dg.datagrid('doFilter');
                          }else{
@@ -1071,9 +1068,9 @@
                     onChange: function (item) {
                          if(item){
                              $dg.datagrid('addFilterRule', {
-	                           field: 'Status',
-	                           op: 'equal',
-	                           value: item
+                               field: 'Status',
+                               op: 'equal',
+                               value: item
                              });
                              $dg.datagrid('doFilter');
                          }else{
@@ -1211,9 +1208,9 @@
                        $('#Input_LegacyDescription3').prop("readonly", true)
                     }
                 }
-                
-            
-            
+
+
+
 
             })
         } else {
@@ -1349,15 +1346,31 @@
 
     }
     var onDownload = (index) => {
-        const item = $dg.datagrid('getRows')[index];
-        const url ="/" + item.TemplateFile;
-        const filename = getFileName(item.TemplateFile);
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', filename);
-        document.body.appendChild(link);
-        link.click();
-        toastr["info"](`@_localizer["Download Success"]`);
+       const item = $dg.datagrid('getRows')[index];
+       currentMappingRuleItem = item;
+       currentMappingRuleId = item.Id;
+       currentMappingRuleName = item.Name;
+       axios.get('@Url.Page("/MappingRules/Index")?handler=DownloadData&MappingRuleId=' + currentMappingRuleId +'&MappingRuleName=' + currentMappingRuleName ,
+            {
+                responseType: "blob"
+            })
+           .then(response => {
+                    const filename = getFileName(response.headers['content-disposition']);
+                    const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', filename );
+                    document.body.appendChild(link);
+                    link.click();
+                })
+                .catch((error) => {
+                  error.response.data.text().then(text=>{
+                      const data=JSON.parse(text);
+                      const err=data.Errors.toString();
+                      bootbox.alert(err);
+                  })
+
+                })
     }
     var currentMappingRuleId=0;
     var currentMappingRuleName='';

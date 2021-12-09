@@ -13,7 +13,7 @@ using CleanArchitecture.Razor.Application.MappingRules.Queries.GetAll;
 
 namespace AdminLTE.WebUI.Pages.MigrationProjects
 {
-    [Authorize()]
+    [Authorize(Policy = "Manager")]
     public class IndexModel : PageModel
     {
 

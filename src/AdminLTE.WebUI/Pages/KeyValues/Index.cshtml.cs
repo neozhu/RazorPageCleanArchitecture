@@ -12,7 +12,7 @@ using Microsoft.Extensions.Localization;
 
 namespace AdminLTE.WebUI.Pages.KeyValues
 {
-    [Authorize()]
+    [Authorize(Policy = "Manager")]
     public class IndexModel : PageModel
     {
 

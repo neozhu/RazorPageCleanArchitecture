@@ -4,7 +4,7 @@
 using CleanArchitecture.Razor.Application.Common.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace CleanArchitecture.Razor.Infrastructure.Identity;
+namespace CleanArchitecture.Razor.Infrastructure.Extensions;
 
 public static class IdentityResultExtensions
 {

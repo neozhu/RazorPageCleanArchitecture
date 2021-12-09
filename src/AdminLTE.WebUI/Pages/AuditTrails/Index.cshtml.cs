@@ -9,7 +9,7 @@ using CleanArchitecture.Razor.Application.Features.AuditTrails.Queries.Export;
 
 namespace AdminLTE.WebUI.Pages.AuditTrails
 {
-    [Authorize()]
+    [Authorize(Policy = "Manager")]
     public class IndexModel : PageModel
     {
         private readonly ISender _mediator;

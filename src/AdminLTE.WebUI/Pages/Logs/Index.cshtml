@@ -28,12 +28,10 @@
 
 
 <div class="row mb-2">
-    <div class="col-sm-12 col-md-8" style="position: relative;height:160px">
+    <div class="col-sm-12 col-md-12" style="position: relative;height:160px">
         <canvas id='timebar' style="height: 100%;"></canvas>
     </div>
-    <div class="col-sm-12 col-md-4" style="position: relative;height:160px">
-        <canvas id='levelpie' class="m-auto" style="height: 100%;"></canvas>
-    </div>
+  
 </div>
 
 <div id="js-page-content-demopanels" class="card mb-g">
@@ -88,40 +86,7 @@
 <script>
     $(async () => {
 
-        var piedata = (await axios.get('@Url.Page("/Logs/Index")?handler=LogsLevelData')).data;
-        console.log(piedata)
-        var piechart= new Chart(document.getElementById("levelpie").getContext('2d'), {
-            type: 'doughnut',
-            data: {
-                labels: piedata.map(item => item.level),
-                datasets: [{
-                    label: "log classification",
-                    backgroundColor: [ "#fe6bb0", "#EE2727", "#2697FF","#868e96", "#a4cdff","#FFCF26"],
-                    data: piedata
-                }]
-            },
-            options: {
-               hoverBorderColor:'#2ba1ff',
-               hoverBorderWidth:3,
-                maintainAspectRatio: false,
-                responsive: false,
-                parsing: {
-                   xAxisKey: 'level',
-                   key: 'total'
-                },
-                plugins: {
-                 //   colorschemes: {
-                //        scheme: 'brewer.Paired12'
-                //    },
-                    legend: {
-                        position:'left',
-                        display: true,
-                        
-                    }
-                }
-                
-            }
-        });
+         
 
         var linedata = (await axios.get('@Url.Page("/Logs/Index")?handler=LogsTimeLineData')).data;
         console.log(linedata)

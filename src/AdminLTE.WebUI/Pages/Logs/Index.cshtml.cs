@@ -10,7 +10,7 @@ using CleanArchitecture.Razor.Application.Features.Logs.Queries.ChatData;
 
 namespace AdminLTE.WebUI.Pages.Logs
 {
-    [Authorize()]
+    [Authorize(Policy = "Manager")]
     public class IndexModel : PageModel
     {
         private readonly ISender _mediator;

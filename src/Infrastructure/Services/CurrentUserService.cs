@@ -34,6 +34,8 @@ public class CurrentUserService : ICurrentUserService
         return group.Any(x => roleName.Contains(x));
        
     }
+
+    
     public int ProjectId() {
         if (_httpContextAccessor.HttpContext?.Request?.Cookies?.TryGetValue("SELECTEDPROJECTID", out string projectId)??false)
         {
@@ -57,6 +59,17 @@ public class CurrentUserService : ICurrentUserService
         }
 
     }
+
+    public IEnumerable<string> GetRoles()
+    {
+        var identity = _httpContextAccessor.HttpContext.User.Identity as WindowsIdentity;
+        var groupNames = from id in identity.Groups
+                         select id.Translate(typeof(NTAccount)).Value;
+        var group = groupNames.Where(x => x.StartsWith("EURO1\\"))
+            .Select(x => x.Split("\\")[1]);
+        return group;
+    }
+
     public string DisplayName { get {
             var identity = _httpContextAccessor.HttpContext.User.Identity as WindowsIdentity;
             var domain = identity.Name.Split("\\")[0];

@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
 using CleanArchitecture.Razor.Application.FieldMappingValues.Queries.Pagination;
 using CleanArchitecture.Razor.Application.FieldMappingValues.Commands.AcceptChanges;
-using CleanArchitecture.Razor.Application.ObjectFields.Queries.GetAll;
 using CleanArchitecture.Razor.Application.MappingRules.Queries.GetAll;
 
 namespace AdminLTE.WebUI.Pages.FieldMappingValues
 {
-    [Authorize()]
+    //[Authorize(Roles = "MOVE-VT-MIG")]
+    [Authorize(Policy = "ProjectUsers")]
     public class IndexModel : PageModel
     {
 

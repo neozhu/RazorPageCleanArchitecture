@@ -6,27 +6,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Authorization;
-
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CleanArchitecture.Razor.Application.Common.Models;
 using CleanArchitecture.Razor.Application.MappingRules.Queries.Pagination;
 using CleanArchitecture.Razor.Application.MigrationObjects.Queries.GetAll;
 using CleanArchitecture.Razor.Application.MappingRules.Commands.Import;
 using CleanArchitecture.Razor.Domain.Enums;
-using System.Xml.Linq;
 using CleanArchitecture.Razor.Application.FieldMappingValues.Commands.Import;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.MappingRules.Commands.Parse;
-using CleanArchitecture.Razor.Application.MigrationProjects.Queries.GetAll;
 using CleanArchitecture.Razor.Application.ObjectFields.Queries.GetAll;
 using CleanArchitecture.Razor.Application.ObjectFields.DTOs;
-using CleanArchitecture.Razor.Infrastructure.Extensions;
-using CleanArchitecture.Razor.Application.FieldMappingValues.Queries.Export;
 using CleanArchitecture.Razor.Application.MappingRules.Commands.Download;
 
 namespace AdminLTE.WebUI.Pages.MappingRules
 {
-    [Authorize()]
+    [Authorize(Policy = "ProjectUsers")]
     public class IndexModel : PageModel
     {
         [BindProperty]

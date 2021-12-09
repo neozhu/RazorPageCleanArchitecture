@@ -24,6 +24,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using WorkflowCore.Interface;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication;
+using CleanArchitecture.Razor.Infrastructure.Security;
 
 namespace CleanArchitecture.Razor.Infrastructure;
 
@@ -50,6 +52,7 @@ public static class DependencyInjection
         services.AddSingleton(s => s.GetRequiredService<IOptions<SmartSettings>>().Value);
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddSingleton<ICurrentUserService, CurrentUserService>();
+        services.AddSingleton<IClaimsTransformation, ClaimsTransformer>();
         services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
         services.AddScoped<IDomainEventService, DomainEventService>();
 
@@ -83,16 +86,15 @@ public static class DependencyInjection
                 opt.TokenLifespan = TimeSpan.FromHours(2));
         services.AddAuthorization(options =>
         {
-            options.AddPolicy("CanPurge", policy => policy.RequireRole("Administrator"));
-                // Here I stored necessary permissions/roles in a constant
-                foreach (var prop in typeof(Permissions).GetNestedTypes().SelectMany(c => c.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)))
-            {
-                var propertyValue = prop.GetValue(null);
-                if (propertyValue is not null)
-                {
-                    options.AddPolicy(propertyValue.ToString(), policy => policy.RequireClaim(ApplicationClaimTypes.Permission, propertyValue.ToString()));
-                }
-            }
+            options.AddPolicy("Administrate", policy => policy.RequireUserName("euro1\\zhuhua"));
+            options.AddPolicy("Manager", policy => policy.RequireAssertion(context =>
+                       context.User.Identity.Name.ToLower() == "euro1\\zhuhua" ||
+                       context.User.Identity.Name.ToLower() == "euro1\\chenjun"));
+            options.AddPolicy("ProjectUsers", policy => policy.RequireAssertion(context =>
+                       context.User.IsInRole("MOVE-VT-MIG") ||
+                       context.User.Identity.Name.ToLower() == "euro1\\zhuhua" ||
+                       context.User.Identity.Name.ToLower() == "euro1\\chenjun"));
+
         });
         services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationClaimsIdentityFactory>();
         // Localization

@@ -10,4 +10,5 @@ public interface ICurrentUserService
     bool IsInRole(params string[] roleName);
     int ProjectId();
     string ProjectName();
+    IEnumerable<string> GetRoles();
 }

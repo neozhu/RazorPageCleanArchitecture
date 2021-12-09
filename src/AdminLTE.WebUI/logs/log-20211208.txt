@@ -140,3 +140,5 @@
 2021-12-08 16:37:26.530 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
 2021-12-08 16:37:34.058 +08:00 [WRN] CleanArchitecture Long Running Request: MappingRulesWithPaginationQuery (588 milliseconds) zhuhua Zhu, Hualin {"FilterRules":"[]","Page":1,"Rows":15,"Sort":"Id","Order":"desc","$type":"MappingRulesWithPaginationQuery"} 127.0.0.1 Zhu, Hualin
 2021-12-08 16:37:40.469 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-08 17:09:00.099 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
+2021-12-08 17:11:44.598 +08:00 [INF] Welcome. 127.0.0.1 Zhu, Hualin
