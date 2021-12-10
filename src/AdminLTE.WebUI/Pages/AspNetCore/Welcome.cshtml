@@ -6,7 +6,11 @@
   ViewData["PageName"] = "aspnetcore_welcome";
   ViewData["Heading"] = "<i class='fal fa-graduation-cap'></i> Welcome: <span class='fw-300'>SmartAdmin for .NET Core</span>";
 }
-
+@section HeadBlock {
+    <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+    <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+    <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
+}
 <div class="row">
     <div class="card card-solid">
         <div class="card-body">

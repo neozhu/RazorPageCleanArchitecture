@@ -1,0 +1,377 @@
+@page
+@using CleanArchitecture.Razor.Domain.Enums
+@using Microsoft.AspNetCore.Mvc.Localization
+@using CleanArchitecture.Razor.Application.Constants.Permission
+@model AdminLTE.WebUI.Pages.MappingRules.OverviewModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<OverviewModel> _localizer
+@inject Microsoft.AspNetCore.Authorization.IAuthorizationService _authorizationService
+@{
+    ViewData["Title"] = _localizer["Value Mapping Overview"].Value;
+    ViewData["PageName"] = "mappingrules_overview";
+    ViewData["Category1"] = _localizer["Value Mapping Matrix"].Value;
+    ViewData["Heading"] = _localizer["Value Mapping Overview"].Value;
+    ViewData["PageDescription"] = _localizer["See all available options"].Value;
+    ViewData["PreemptiveClass"] = "Default";
+}
+@section HeadBlock {
+
+<link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+<link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+<link rel="stylesheet" media="screen, print" href="~/lib/easyui/themes/insdep/easyui.css">
+
+<style>
+
+    .mappingrule_dg_datagrid-cell-c1-_action {
+        overflow: visible !important
+    }
+
+    .small::before,
+    small::before {
+        content: none !important;
+    }
+
+</style>
+}
+<div id="js-page-content-demopanels" class="card mb-g">
+    <div class="card-header bg-white d-flex align-items-center">
+        <h4 class="m-0">
+            @_localizer["Value Mapping Overview"]
+            <small>&nbsp;</small>
+        </h4>
+        <div class="ml-auto">
+
+            <button class="btn btn-sm btn-outline-primary " id="refreshbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-refresh mr-1"></span>
+                @_localizer["Refresh"]
+            </button>
+            <button class="btn btn-sm btn-outline-primary " id="downloadtemplatebutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                @_localizer["Download Value Mapping File"]
+            </button>
+
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table id="mappingrule_dg">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section ScriptsBlock {
+
+
+<script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
+<script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+<script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
+<script src="~/lib/easyui/plugins/datagrid-detailview.js"></script>
+<script src="~/lib/axios/dist/axios.js"></script>
+<script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+
+
+
+<script type="text/javascript">
+
+
+    $('#refreshbutton').click(function () {
+        reloadData();
+    });
+    
+    $('#downloadtemplatebutton').click(function () {
+     onDownloadTemplateFile();
+    });
+    
+
+    
+
+    
+    var $dg={};
+    var initdatagrid = () => {
+        $dg = $('#mappingrule_dg').datagrid({
+            method: 'GET',
+            rownumbers: false,
+            singleSelect: true,
+            selectOnCheck: false,
+            checkOnSelect: false,
+            pagination: true,
+            clientPaging: false,
+            remoteFilter: true,
+            sortName: 'Id',
+            sortOrder:'desc',
+            pageSize: 15,
+            pageList: [10, 15, 30, 50, 100, 1000],
+            view: detailview,
+            detailFormatter:function(index,row){
+              const width = window.screen.width-380;
+              const container=`<div class="p-3" style="height:620px;width:${width}px;position:relative;"><div class="card card-primary card-outline direct-chat direct-chat-primary">
+              <div class="card-header">
+                <h3 class="card-title">${row.Name}</h3>
+                <div class="card-tools">
+                </div>
+              </div>
+              <div class="card-body">
+                <table class="mappingvalues_dg"></table>
+              </div>
+              </div></div>`
+                    return container;
+                },
+            onExpandRow: function(index,row){
+                const columns = getcolumens(row);
+                var subgrid = $(this).datagrid('getRowDetail',index).find('table.mappingvalues_dg');
+                console.log(subgrid.width());
+                const suburl='@Url.Page("/MappingRules/Overview")?handler=FieldMappingValues&MappingRuleId=' + row.Id;
+                subgrid.datagrid({
+                     width:window.screen.width-400,
+                     height: 510,
+                     method: 'GET',
+                     singleSelect: true,
+                     rownumbers: false,
+                     pagination: true,
+                     clientPaging: false,
+                     remoteFilter: true,
+                     sortName: 'Id',
+                     sortOrder:'asc',
+                     pageSize: 10,
+                     pageList: [10, 30, 50, 100, 1000],
+                     columns: [columns]
+                }).datagrid('enableFilter', [{}])
+                   .datagrid('load',suburl);
+
+            },
+            columns: [[
+                { field: 'ck', checkbox: true },
+                { field: 'Active',
+                  title: '@_localizer["Active"]',
+                  sortable: true,
+                  width: 100
+                },
+                { field: 'Status',
+                    title: '@_localizer["Status"]',
+                    sortable: true,
+                    width: 120,
+                    formatter:function(value){
+                        if(value=='Not started') {
+                            return `<span class="right badge badge-secondary">${value}</span>`
+                        }else if(value=='Ongoing') {
+                            return `<span class="right badge badge-info">${value}</span>`
+                        }else{
+                            return `<span class="right badge badge-success">${value}</span>`
+                        }
+
+                    }
+                },
+                { field: 'Team', title: '@_localizer["Team"]', sortable: true, width: 160 },
+                { field: 'LegacySystem', title: '@_localizer["Legacy System"]', sortable: true, width: 180 },
+                { field: 'Name',
+                  title: '@_localizer["Mapping Rule Name"]',
+                  sortable: true,
+                  formatter:function(value,row,Overview){
+                      return `<a> ${value??''} </a> <br> <small>${row.Comments??''}</small> `;
+                  },
+                  width: 250
+                },
+                { field: 'LegacyField1',
+                  title: '@_localizer["Legacy Field 1 Name"]',
+                  sortable: true,
+                  width: 220,
+                  formatter:function(value,row,Overview){
+                      return `<a> ${value??''} </a> <br> <small>${row.LegacyDescription1??''}</small>`;
+                  }
+                },
+                { field: 'LegacyField2',
+                  title: '@_localizer["Legacy Field 2 Name"]',
+                  sortable: true,
+                  width: 220,
+                  formatter:function(value,row,Overview){
+                      return `<a> ${value??''} </a> <br> <small>${row.LegacyDescription2??''}</small>`;
+                  }
+                },
+                { field: 'LegacyField3',
+                  title: '@_localizer["Legacy Field 3 Name"]',
+                  sortable: true,
+                  width: 220,
+                  formatter:function(value,row,Overview){
+                      return `<a> ${value??''} </a> <br> <small>${row.LegacyDescription3??''}</small>`;
+                  }
+                },
+                { field: 'NewValueField',
+                  title: '@_localizer["New Value Field"]',
+                  sortable: true,
+                  width: 220,
+                  formatter:function(value,row,Overview){
+                      return `<a> ${value??''} </a> <br> <small>${row.NewValueFieldDescription??''}</small>`;
+                  }
+                },
+                { field: 'MigrationApproach', title: '@_localizer["Migration Approach"]', sortable: true, width: 130 },
+                { field: 'RelevantObjects', title: '@_localizer["Relevant Objects"]', sortable: true, width: 220 },
+                { field: 'CreatedBy', title: '@_localizer["Created By"]', sortable: true, width: 160 },
+                { field: 'LastModifiedBy', title: '@_localizer["Last Modified By"]',  sortable: true, width: 160 },
+
+            ]]
+        })
+            .datagrid('enableFilter', [{
+                field:'Active',
+                type:'combobox',
+                options:{
+                    valueField:'id',
+                    textField:'text',
+                    panelHeight:'auto',
+                    data:[
+                        {id:'',text:'ALL'},
+                        {id:'Active',text:'Active'},
+                        {id:'Inactive',text:'Inactive'}
+                     ],
+                    onChange: function (item) {
+                         if(item){
+                             $dg.datagrid('addFilterRule', {
+                               field: 'Active',
+                               op: 'equal',
+                               value: item
+                             });
+                             $dg.datagrid('doFilter');
+                         }else{
+                             $dg.datagrid('removeFilterRule', 'Active'	                          );
+                             $dg.datagrid('doFilter');
+                         }
+                        }
+                }
+            },
+            {
+                field:'Status',
+                type:'combobox',
+                options:{
+                    valueField:'id',
+                    textField:'text',
+                    panelHeight:'auto',
+                    data:[
+                        {id:'',text:'ALL'},
+                        {id:'Not started',text:'Not started'},
+                        {id:'Ongoing',text:'Ongoing'},
+                        {id:'Finished',text:'Finished'},
+                     ],
+                    onChange: function (item) {
+                         if(item){
+                             $dg.datagrid('addFilterRule', {
+                               field: 'Status',
+                               op: 'equal',
+                               value: item
+                             });
+                             $dg.datagrid('doFilter');
+                         }else{
+                             $dg.datagrid('removeFilterRule', 'Status'	                          );
+                             $dg.datagrid('doFilter');
+                         }
+                        }
+                }
+            }])
+            .datagrid('load', '@Url.Page("/MappingRules/Overview")?handler=Data');
+
+    }
+    var getcolumens = (row) =>{
+         let columns=[];
+         if(row.LegacyField1) {
+             columns.push({
+                        field: 'Legacy1',
+                         title: `${row.LegacyField1}(Legacy)<br><small>${row.LegacyDescription1??''}</small>`,
+                        sortable: true,
+                        width: 220,
+                        editor: { type: 'textbox', options: { required: true } }
+                    });
+         }
+         if(row.LegacyField2) {
+             columns.push({
+                        field: 'Legacy2',
+                         title: `${row.LegacyField2}(Legacy)<br><small>${row.LegacyDescription2??''}</small>`,
+                        sortable: true,
+                        width: 220,
+                        editor: { type: 'textbox', options: { required: true } }
+                    });
+         }
+         if(row.LegacyField3) {
+             columns.push({
+                        field: 'Legacy3',
+                        title: `${row.LegacyField3}(Legacy)<br><small>${row.LegacyDescription3??''}</small>`,
+                        sortable: true,
+                        width: 220,
+                        editor: { type: 'textbox', options: { required: true } }
+                    });
+         }
+         if(row.NewValueField) {
+             columns.push({
+                        field: 'NewValue',
+                        title: `${row.NewValueField}(New)<br><small>${row.NewValueFieldDescription??''}</small>`,
+                        sortable: true,
+                        width: 220,
+                        editor: { type: 'textbox', options: { required: true } }
+                    });
+         }
+        columns.push({
+                        field: 'CreatedBy',
+                        title: '@_localizer["Created By"]',
+                        sortable: true,
+                        width: 160,
+                    }
+                    );
+       columns.push({
+                        field: 'LastModifiedBy',
+                        title: '@_localizer["Modified By"]',
+                        sortable: true,
+                        width: 160,
+                    }
+                    );
+       return columns;
+    }
+
+    var reloadData = () => {
+        $dg.datagrid('load', '@Url.Page("/MappingRules/Overview")?handler=Data');
+    }
+
+    $(() => {
+        initdatagrid();
+    })
+
+ 
+
+
+    var onDownloadTemplateFile = ()=> {
+        const items = $dg.datagrid('getChecked');
+        if(items.length==0){
+             bootbox.alert({
+               message: "@_localizer["Please check the record to download."]"
+             });
+        }
+        items.map(item=>{
+            axios.get('@Url.Page("/MappingRules/Index")?handler=DownloadData&MappingRuleId=' + item.Id +'&MappingRuleName=' + item.Name ,
+            {
+                responseType: "blob"
+            })
+           .then(response => {
+                    const filename = getFileName(response.headers['content-disposition']);
+                    const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', filename );
+                    document.body.appendChild(link);
+                    link.click();
+                })
+                .catch((error) => {
+                  error.response.data.text().then(text=>{
+                      const data=JSON.parse(text);
+                      const err=data.Errors.toString();
+                      bootbox.alert(err);
+                  })
+
+                })
+        });
+    }
+
+</script>
+}

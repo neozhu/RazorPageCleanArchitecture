@@ -63,6 +63,7 @@ public class AcceptChangesFieldMappingValuesCommandHandler : IRequestHandler<Acc
             {
                 item.Active = "Inactive";
             }
+            item.Status = "Ongoing";
             _context.MappingRules.Update(item);
         }
         await _context.SaveChangesAsync(cancellationToken);

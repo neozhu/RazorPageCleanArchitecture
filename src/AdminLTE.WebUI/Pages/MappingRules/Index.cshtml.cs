@@ -18,6 +18,8 @@ using CleanArchitecture.Razor.Application.MappingRules.Commands.Parse;
 using CleanArchitecture.Razor.Application.ObjectFields.Queries.GetAll;
 using CleanArchitecture.Razor.Application.ObjectFields.DTOs;
 using CleanArchitecture.Razor.Application.MappingRules.Commands.Download;
+using CleanArchitecture.Razor.Application.FieldMappingValues.Queries.Pagination;
+using CleanArchitecture.Razor.Application.MappingRules.Commands.ChangeStatus;
 
 namespace AdminLTE.WebUI.Pages.MappingRules
 {
@@ -150,15 +152,7 @@ namespace AdminLTE.WebUI.Pages.MappingRules
             var result = await _mediator.Send(command);
             return new JsonResult(result);
         }
-        //public async Task<IActionResult> OnPostDownloadData(int mappingruleid, string mappingrulename)
-        //{
-        //    var command = new ExportFieldMmappingValuesDataQuery()
-        //    {
-        //        MappingRuleId = mappingruleid,
-        //    };
-        //    var result = await _mediator.Send(command);
-        //    return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer[$"FieldMappingValues({mappingrulename})"] + ".xlsx");
-        //}
+
         public async Task<IActionResult> OnPostVaildateTemplateFile() {
             var stream = new MemoryStream();
             await TemplateFile.CopyToAsync(stream);
@@ -169,30 +163,19 @@ namespace AdminLTE.WebUI.Pages.MappingRules
             var result = await _mediator.Send(command);
             return new JsonResult(result);
 
-            //var stream = new MemoryStream();
-            //TemplateFile.CopyTo(stream);
-            //stream.Position = 0;
-            //try
-            //{
-            //    var description = "";
-            //    var xdoc = XDocument.Load(stream);
-            //    var signature = xdoc.Descendants().Where(x => x.Name.LocalName == "Worksheet" && x.FirstAttribute.Value == "Signature").First();
-            //    var data = xdoc.Descendants().Where(x => x.Name.LocalName == "Worksheet" && x.FirstAttribute.Value == "Data").First();
-            //    var table = data.Descendants().Where(x => x.Name.LocalName == "Table");
-            //    foreach (var row in table.Descendants().Where(x => x.Name.LocalName == "Row").ToList())
-            //    {
-            //        description = row.Descendants().Where(x => x.Name.LocalName == "Data").First().Value;
-            //        if (description != "")
-            //        {
-            //            break;
-            //        }
-            //    }
-            //    return new JsonResult(Result<string>.Success(description));
-            //}catch (Exception ex)
-            //{
-            //    return new JsonResult(Result.Failure(new string[] { "The uploaded template file is not valid" }));
-            //}
+   
 
+        }
+        public async Task<IActionResult> OnGetFieldMappingValuesAsync([FromQuery] FieldMappingValuesByMappingIdWithPaginationQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return new JsonResult(result);
+        }
+
+        public async Task<IActionResult> OnGetFinished([FromQuery] FinishedMappingRuleStatusCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return new JsonResult(result);
         }
 
     }

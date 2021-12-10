@@ -49,6 +49,7 @@ public class DeleteFieldMappingValueCommandHandler :
             {
                 ruleitem.Active = "Inactive";
             }
+            ruleitem.Status = "Ongoing";
             _context.MappingRules.Update(ruleitem);
         }
         await _context.SaveChangesAsync(cancellationToken);
@@ -77,6 +78,7 @@ public class DeleteFieldMappingValueCommandHandler :
             {
                 ruleitem.Active = "Inactive";
             }
+            ruleitem.Status = "Ongoing";
             _context.MappingRules.Update(ruleitem);
         }
         await _context.SaveChangesAsync(cancellationToken);

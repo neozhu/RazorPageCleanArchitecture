@@ -242,6 +242,7 @@
                     <button type="button" id="adddatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Add"] </button>
                     <button type="button" id="deletedatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Delete"] </button>
                     <button type="button" id="canceldatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Cancel"] </button>
+                    <button type="button" id="finisheddatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Finished"] </button>
                     <button type="button" id="importdatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Upload Data"] </button>
                     <button type="button" id="downloaddatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Download Data"] </button>
                     <input type="file" id="uploaddatafile" accept="text/xml"
@@ -284,6 +285,7 @@
 <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
 <script src="~/lib/axios/dist/axios.js"></script>
 <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
+<script src="~/lib/easyui/plugins/datagrid-detailview.js"></script>
 <!-- Select2 -->
 <script src="~/plugins/select2/js/select2.full.min.js"></script>
 
@@ -348,71 +350,8 @@
 
     $('.default-example-modal-right-lg').on('shown.bs.modal', function () {
 
-         var columments=[{ field: 'ck', checkbox: true }];
-         if(currentMappingRuleItem.IsMock){
-             columments.push({
-                        field: 'Mock',
-                        title: '@_localizer["Mock"]',
-                        sortable: true,
-                        width: 150,
-                        editor: { type: 'textbox',
-                        options: {
-                            required: false,
-                            readonly: false
-                        }
-                        }
-                    });
-         }
-         if(currentMappingRuleItem.LegacyField1){
-             columments.push({
-                        field: 'Legacy1',
-                         title: `${currentMappingRuleItem.LegacyField1}(Legacy)<br><small>${currentMappingRuleItem.LegacyDescription1??''}</small>`,
-                        sortable: true,
-                        width: 220,
-                        editor: { type: 'textbox', options: { required: true } }
-                    });
-         }
-         if(currentMappingRuleItem.LegacyField2){
-             columments.push({
-                        field: 'Legacy2',
-                         title: `${currentMappingRuleItem.LegacyField2}(Legacy)<br><small>${currentMappingRuleItem.LegacyDescription2??''}</small>`,
-                        sortable: true,
-                        width: 220,
-                        editor: { type: 'textbox', options: { required: true } }
-                    });
-         }
-         if(currentMappingRuleItem.LegacyField3){
-             columments.push({
-                        field: 'Legacy3',
-                        title: `${currentMappingRuleItem.LegacyField3}(Legacy)<br><small>${currentMappingRuleItem.LegacyDescription3??''}</small>`,
-                        sortable: true,
-                        width: 220,
-                        editor: { type: 'textbox', options: { required: true } }
-                    });
-         }
-         if(currentMappingRuleItem.NewValueField){
-             columments.push({
-                        field: 'NewValue',
-                        title: `${currentMappingRuleItem.NewValueField}(New)<br><small>${currentMappingRuleItem.NewValueFieldDescription??''}</small>`,
-                        sortable: true,
-                        width: 220,
-                        editor: { type: 'textbox', options: { required: true } }
-                    });
-         }
-        columments.push({
-                        field: 'CreatedBy',
-                        title: '@_localizer["Created By"]',
-                        sortable: true,
-                        width: 160,
-                    }
-                    );
-       columments.push({
-                        field: 'LastModifiedBy',
-                        title: '@_localizer["Modified By"]',
-                        sortable: true,
-                        width: 160,
-                    }
-                    );
+        
+         const suburl='@Url.Page("/MappingRules/Index")?handler=FieldMappingValues&MappingRuleId=' + currentMappingRuleItem.Id;
          $fieldmappingvalues_dg = $('#fieldmappingvalues_dg').datagrid({
                 height: 700,
                 method: 'GET',
@@ -425,11 +364,6 @@
                 remoteFilter: true,
                 sortName: 'Id',
                 sortOrder:'desc',
-                filterRules:[{
-                    field:'MappingRuleId',
-                    op:'equal',
-                    value:currentMappingRuleId
-                }],
                 pageSize: 15,
                 pageList: [10, 15, 30, 50, 100, 1000],
                 onBeforeLoad: function () {
@@ -460,13 +394,67 @@
                 onEndEdit: function (index, row) {
                     onEndEdit(index,row)
                 },
-                columns: [columments]
+                columns: [getcolumns()]
             })
             .datagrid('enableFilter', [  ])
-            .datagrid('load', '@Url.Page("/FieldMappingValues/Index")?handler=Data');
+            .datagrid('load', suburl);
     })
 
-
+    var getcolumns =()=>{
+         var columns=[{ field: 'ck', checkbox: true }];
+     
+         if(currentMappingRuleItem.LegacyField1){
+             columns.push({
+                        field: 'Legacy1',
+                         title: `${currentMappingRuleItem.LegacyField1}(Legacy)<br><small>${currentMappingRuleItem.LegacyDescription1??''}</small>`,
+                        sortable: true,
+                        width: 220,
+                        editor: { type: 'textbox', options: { required: true } }
+                    });
+         }
+         if(currentMappingRuleItem.LegacyField2){
+             columns.push({
+                        field: 'Legacy2',
+                         title: `${currentMappingRuleItem.LegacyField2}(Legacy)<br><small>${currentMappingRuleItem.LegacyDescription2??''}</small>`,
+                        sortable: true,
+                        width: 220,
+                        editor: { type: 'textbox', options: { required: true } }
+                    });
+         }
+         if(currentMappingRuleItem.LegacyField3){
+             columns.push({
+                        field: 'Legacy3',
+                        title: `${currentMappingRuleItem.LegacyField3}(Legacy)<br><small>${currentMappingRuleItem.LegacyDescription3??''}</small>`,
+                        sortable: true,
+                        width: 220,
+                        editor: { type: 'textbox', options: { required: true } }
+                    });
+         }
+         if(currentMappingRuleItem.NewValueField){
+             columns.push({
+                        field: 'NewValue',
+                        title: `${currentMappingRuleItem.NewValueField}(New)<br><small>${currentMappingRuleItem.NewValueFieldDescription??''}</small>`,
+                        sortable: true,
+                        width: 220,
+                        editor: { type: 'textbox', options: { required: true } }
+                    });
+         }
+        columns.push({
+                        field: 'CreatedBy',
+                        title: '@_localizer["Created By"]',
+                        sortable: true,
+                        width: 160,
+                    }
+                    );
+       columns.push({
+                        field: 'LastModifiedBy',
+                        title: '@_localizer["Modified By"]',
+                        sortable: true,
+                        width: 160,
+                    }
+                    );
+                    return columns;
+    }
 
     uploaddatainput.onchange = () => {
         rightmodalcontent.classList.add("overlay-wrapper");
@@ -543,7 +531,24 @@
                 })
     });
 
+    $('#finisheddatabutton').click(function(){
+        const url= '@Url.Page("/MappingRules/Index")?handler=Finished&Id=' + currentMappingRuleItem.Id;
+        axios.get(url).then(res => {
+                                toastr["info"](`@_localizer["Finished"]`);
+                                reloadData();
+                            })
+                                .catch((error) => {
+                                    if (error.response.data.Errors) {
+                                        const errors = error.response.data.Errors;
+                                        for (let [key, value] of Object.entries(errors)) {
+                                            toastr["error"](`${key}: ${value.toString()}`);
+                                        }
 
+                                    } else {
+                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                    }
+                                });
+    });
     $('#refreshbutton').click(function(){
         onReloadFieldData()
 
@@ -604,7 +609,8 @@
     var editIndex = undefined;
     var currentItem = {};
     var onReloadFieldData=()=>{
-        $fieldmappingvalues_dg.datagrid('load', '@Url.Page("/FieldMappingValues/Index")?handler=Data');
+        const suburl='@Url.Page("/MappingRules/Index")?handler=FieldMappingValues&MappingRuleId=' + currentMappingRuleItem.Id;
+        $fieldmappingvalues_dg.datagrid('load', suburl);
     }
     var onEndEditing = () => {
             if (editIndex == undefined) {
@@ -687,6 +693,7 @@
                             toastr["info"]('@_localizer["Save Success"]');
                             $fieldmappingvalues_dg.datagrid('acceptChanges');
                             onReloadFieldData();
+                            reloadData();
                         }).catch(error => {
                             if (error.response.data.Errors) {
                                 const errors = error.response.data.Errors;
@@ -725,6 +732,10 @@
     $('#gettemplatebutton').click(function () {
         onGetTemplate();
     });
+
+    $('#downloadtemplatebutton').click(function(){
+        onDownloadTemplateFile();
+    })
 
     var vaildatetemplatefile = () => {
         return new  Promise((resolve, reject) => {
@@ -906,7 +917,6 @@
     var $dg={};
     var initdatagrid = () => {
         $dg = $('#mappingrule_dg').datagrid({
-            height: 700,
             method: 'GET',
             rownumbers: false,
             singleSelect: true,
@@ -919,6 +929,44 @@
             sortOrder:'desc',
             pageSize: 15,
             pageList: [10, 15, 30, 50, 100, 1000],
+            view: detailview,
+            detailFormatter:function(index,row){
+              const width = window.screen.width-380;
+              const container=`<div class="p-3" style="height:620px;width:${width}px;position:relative;"><div class="card card-primary card-outline direct-chat direct-chat-primary">
+              <div class="card-header">
+                <h3 class="card-title">${row.Name}</h3>
+                <div class="card-tools">
+                </div>
+              </div>
+              <div class="card-body">
+                <table class="mappingvalues_dg"></table>
+              </div>
+              </div></div>`
+                    return container;
+                },
+            onExpandRow: function(index,row){
+                const columns = getgridcolumns(row);
+                var subgrid = $(this).datagrid('getRowDetail',index).find('table.mappingvalues_dg');
+                console.log(subgrid.width());
+                const suburl='@Url.Page("/MappingRules/Index")?handler=FieldMappingValues&MappingRuleId=' + row.Id;
+                subgrid.datagrid({
+                     width:window.screen.width-400,
+                     height: 510,
+                     method: 'GET',
+                     singleSelect: true,
+                     rownumbers: false,
+                     pagination: true,
+                     clientPaging: false,
+                     remoteFilter: true,
+                     sortName: 'Id',
+                     sortOrder:'asc',
+                     pageSize: 10,
+                     pageList: [10, 30, 50, 100, 1000],
+                     columns: [columns]
+                }).datagrid('enableFilter', [{}])
+                   .datagrid('load',suburl);
+
+            },
             onBeforeLoad: function () {
                 $('#deletebutton').prop('disabled', true);
             },
@@ -1083,7 +1131,60 @@
             .datagrid('load', '@Url.Page("/MappingRules/Index")?handler=Data');
 
     }
-
+    var getgridcolumns = (row) =>{
+         let columns=[];
+         if(row.LegacyField1) {
+             columns.push({
+                        field: 'Legacy1',
+                         title: `${row.LegacyField1}(Legacy)<br><small>${row.LegacyDescription1??''}</small>`,
+                        sortable: true,
+                        width: 220,
+                        editor: { type: 'textbox', options: { required: true } }
+                    });
+         }
+         if(row.LegacyField2) {
+             columns.push({
+                        field: 'Legacy2',
+                         title: `${row.LegacyField2}(Legacy)<br><small>${row.LegacyDescription2??''}</small>`,
+                        sortable: true,
+                        width: 220,
+                        editor: { type: 'textbox', options: { required: true } }
+                    });
+         }
+         if(row.LegacyField3) {
+             columns.push({
+                        field: 'Legacy3',
+                        title: `${row.LegacyField3}(Legacy)<br><small>${row.LegacyDescription3??''}</small>`,
+                        sortable: true,
+                        width: 220,
+                        editor: { type: 'textbox', options: { required: true } }
+                    });
+         }
+         if(row.NewValueField) {
+             columns.push({
+                        field: 'NewValue',
+                        title: `${row.NewValueField}(New)<br><small>${row.NewValueFieldDescription??''}</small>`,
+                        sortable: true,
+                        width: 220,
+                        editor: { type: 'textbox', options: { required: true } }
+                    });
+         }
+        columns.push({
+                        field: 'CreatedBy',
+                        title: '@_localizer["Created By"]',
+                        sortable: true,
+                        width: 160,
+                    }
+                    );
+       columns.push({
+                        field: 'LastModifiedBy',
+                        title: '@_localizer["Modified By"]',
+                        sortable: true,
+                        width: 160,
+                    }
+                    );
+       return columns;
+    }
     var reloadData = () => {
         $dg.datagrid('load', '@Url.Page("/MappingRules/Index")?handler=Data');
     }
@@ -1383,7 +1484,37 @@
         $('.default-example-modal-right-lg').modal('toggle')
     }
 
+    var onDownloadTemplateFile = ()=> {
+        const items = $dg.datagrid('getChecked');
+        if(items.length==0){
+             bootbox.alert({
+               message: "@_localizer["Please check the record to download."]"
+             });
+        }
+        items.map(item=>{
+            axios.get('@Url.Page("/MappingRules/Index")?handler=DownloadData&MappingRuleId=' + item.Id +'&MappingRuleName=' + item.Name ,
+            {
+                responseType: "blob"
+            })
+           .then(response => {
+                    const filename = getFileName(response.headers['content-disposition']);
+                    const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', filename );
+                    document.body.appendChild(link);
+                    link.click();
+                })
+                .catch((error) => {
+                  error.response.data.text().then(text=>{
+                      const data=JSON.parse(text);
+                      const err=data.Errors.toString();
+                      bootbox.alert(err);
+                  })
 
+                })
+        });
+    }
 
 </script>
 }

@@ -5,37 +5,52 @@ using CleanArchitecture.Razor.Application.FieldMappingValues.DTOs;
 
 namespace CleanArchitecture.Razor.Application.FieldMappingValues.Queries.Pagination;
 
-    public class FieldMappingValuesWithPaginationQuery : PaginationRequest, IRequest<PaginatedData<FieldMappingValueDto>>
+public class FieldMappingValuesByMappingIdWithPaginationQuery : PaginationRequest, IRequest<PaginatedData<FieldMappingValueDto>>
+{
+    public int MappingRuleId { get; set; }
+}
+public class FieldMappingValuesWithPaginationQuery : PaginationRequest, IRequest<PaginatedData<FieldMappingValueDto>>
+{
+
+}
+
+public class FieldMappingValuesWithPaginationQueryHandler :
+     IRequestHandler<FieldMappingValuesByMappingIdWithPaginationQuery, PaginatedData<FieldMappingValueDto>>,
+     IRequestHandler<FieldMappingValuesWithPaginationQuery, PaginatedData<FieldMappingValueDto>>
+{
+    private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
+    private readonly IStringLocalizer<FieldMappingValuesWithPaginationQueryHandler> _localizer;
+
+    public FieldMappingValuesWithPaginationQueryHandler(
+        IApplicationDbContext context,
+        IMapper mapper,
+        IStringLocalizer<FieldMappingValuesWithPaginationQueryHandler> localizer
+        )
     {
-       
+        _context = context;
+        _mapper = mapper;
+        _localizer = localizer;
     }
-    
-    public class FieldMappingValuesWithPaginationQueryHandler :
-         IRequestHandler<FieldMappingValuesWithPaginationQuery, PaginatedData<FieldMappingValueDto>>
+
+    public async Task<PaginatedData<FieldMappingValueDto>> Handle(FieldMappingValuesWithPaginationQuery request, CancellationToken cancellationToken)
     {
-        private readonly IApplicationDbContext _context;
-        private readonly IMapper _mapper;
-        private readonly IStringLocalizer<FieldMappingValuesWithPaginationQueryHandler> _localizer;
 
-        public FieldMappingValuesWithPaginationQueryHandler(
-            IApplicationDbContext context,
-            IMapper mapper,
-            IStringLocalizer<FieldMappingValuesWithPaginationQueryHandler> localizer
-            )
-        {
-            _context = context;
-            _mapper = mapper;
-            _localizer = localizer;
-        }
-
-        public async Task<PaginatedData<FieldMappingValueDto>> Handle(FieldMappingValuesWithPaginationQuery request, CancellationToken cancellationToken)
-        {
-    
-           var filters = PredicateBuilder.FromFilter<FieldMappingValue>(request.FilterRules);
-           var data = await _context.FieldMappingValues.Where(filters)
-                .OrderBy($"{request.Sort} {request.Order}")
-                .ProjectTo<FieldMappingValueDto>(_mapper.ConfigurationProvider)
-                .PaginatedDataAsync(request.Page, request.Rows);
-            return data;
-        }
-   }
+        var filters = PredicateBuilder.FromFilter<FieldMappingValue>(request.FilterRules);
+        var data = await _context.FieldMappingValues.Where(filters)
+             .OrderBy($"{request.Sort} {request.Order}")
+             .ProjectTo<FieldMappingValueDto>(_mapper.ConfigurationProvider)
+             .PaginatedDataAsync(request.Page, request.Rows);
+        return data;
+    }
+    public async Task<PaginatedData<FieldMappingValueDto>> Handle(FieldMappingValuesByMappingIdWithPaginationQuery request, CancellationToken cancellationToken)
+    {
+        var filters = PredicateBuilder.FromFilter<FieldMappingValue>(request.FilterRules);
+        var data = await _context.FieldMappingValues
+             .Where(x=>x.MappingRuleId==request.MappingRuleId).Where(filters)
+             .OrderBy($"{request.Sort} {request.Order}")
+             .ProjectTo<FieldMappingValueDto>(_mapper.ConfigurationProvider)
+             .PaginatedDataAsync(request.Page, request.Rows);
+        return data;
+    }
+}
