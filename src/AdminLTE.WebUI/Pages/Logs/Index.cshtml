@@ -240,16 +240,19 @@
                     <div class="d-flex flex-row mb-1">
                      <div class="p-2 ">@_localizer["Exception"]</div>
                      <div class="p-2 ">${rowData.Exception}</div>
+                    </div>
+                     <div class="d-flex flex-row mb-1">
+                     <div class="p-2 ">@_localizer["Client Agent"]</div>
+                     <div class="p-2 ">${rowData.ClientAgent}</div>
                     </div>`;
                 },
                 columns: [[
                     { field: 'TimeStamp', title: '@_localizer["Time Stamp"]', sortable: true, width: 165, formatter: datetimeformatter },
                     { field: 'Level', title: '@_localizer["Level"]', sortable: true, width: 130 },
-                    { field: 'Message', title: '@_localizer["Message"]', sortable: true, width: 200 },
+                    { field: 'Message', title: '@_localizer["Message"]', sortable: true, width: 460 },
                     { field: 'UserName', title: '@_localizer["User Name"]', sortable: true, width: 120 },
-                    { field: 'Exception', title: '@_localizer["Exception"]', sortable: true, width: 200 },
-                    { field: 'Properties', title: '@_localizer["Properties"]', sortable: true, width: 200 },
-                    { field: 'MessageTemplate', title: '@_localizer["Message Template"]', sortable: true, width: 200 },
+                    { field: 'ClientIP', title: '@_localizer["Client Ip"]', sortable: true, width: 120 },
+                    { field: 'Exception', title: '@_localizer["Exception"]', sortable: true, width: 260 },
                 ]]
             })
                 .datagrid('enableFilter', [
