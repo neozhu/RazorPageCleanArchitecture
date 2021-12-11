@@ -60,8 +60,8 @@ builder.Services
         //options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
 
     });
-builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-   .AddNegotiate();
+//builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+//   .AddNegotiate();
 
 builder.Services.AddSignalR();
 

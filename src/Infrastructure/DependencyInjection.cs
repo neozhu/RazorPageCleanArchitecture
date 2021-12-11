@@ -26,6 +26,7 @@ using WorkflowCore.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
 using CleanArchitecture.Razor.Infrastructure.Security;
+using Microsoft.AspNetCore.Authentication.Negotiate;
 
 namespace CleanArchitecture.Razor.Infrastructure;
 
@@ -71,7 +72,8 @@ public static class DependencyInjection
         services.Configure<MailSettings>(configuration.GetSection("MailSettings"));
         services.AddTransient<IMailService, SMTPMailService>();
         services.AddTransient<IDictionaryService, DictionaryService>();
-        services.AddAuthentication();
+        services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+   .AddNegotiate();
         services.Configure<IdentityOptions>(options =>
         {
                 // Default SignIn settings.
