@@ -23,6 +23,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using WorkflowCore.Interface;
+using Microsoft.AspNetCore.Http;
+using FluentValidation.AspNetCore;
 
 namespace CleanArchitecture.Razor.Infrastructure;
 
@@ -34,7 +36,7 @@ public static class DependencyInjection
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseInMemoryDatabase("CleanArchitecture.RazorDb")
-                ); ;
+                ); 
         }
         else
         {
@@ -44,7 +46,14 @@ public static class DependencyInjection
                     b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName))
 
                 );
+            services.AddDatabaseDeveloperPageExceptionFilter();
         }
+        services.Configure<CookiePolicyOptions>(options =>
+        {
+            // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+            options.CheckConsentNeeded = context => true;
+            options.MinimumSameSitePolicy = SameSiteMode.None;
+        });
         services.Configure<SmartSettings>(configuration.GetSection(SmartSettings.SectionName));
         services.AddSingleton(s => s.GetRequiredService<IOptions<SmartSettings>>().Value);
         services.AddSingleton<ICurrentUserService, CurrentUserService>();
@@ -69,11 +78,11 @@ public static class DependencyInjection
         services.AddAuthentication();
         services.Configure<IdentityOptions>(options =>
         {
-                // Default SignIn settings.
-                options.SignIn.RequireConfirmedEmail = true;
+            // Default SignIn settings.
+            options.SignIn.RequireConfirmedEmail = true;
             options.SignIn.RequireConfirmedPhoneNumber = false;
-                // Default Lockout settings.
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            // Default Lockout settings.
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
             options.Lockout.MaxFailedAccessAttempts = 5;
             options.Lockout.AllowedForNewUsers = true;
         });
@@ -96,12 +105,37 @@ public static class DependencyInjection
         // Localization
         services.AddLocalization(options => options.ResourcesPath = LocalizationConstants.ResourcesPath);
         services.AddScoped<LocalizationCookiesMiddleware>();
+        services.AddScoped<ExceptionMiddleware>();
         services.Configure<RequestLocalizationOptions>(options =>
         {
             options.AddSupportedUICultures(LocalizationConstants.SupportedLanguages.Select(x => x.Code).ToArray());
             options.FallBackToParentUICultures = true;
         });
+        services.AddControllers();
+        services.AddSignalR();
+        services.AddRazorPages(options =>
+                 {
+                     options.Conventions.AddPageRoute("/AspNetCore/Welcome", "");
+                 })
+                .AddFluentValidation(fv =>
+                 {
+                     fv.DisableDataAnnotationsValidation = true;
+                     fv.ImplicitlyValidateChildProperties = true;
+                     fv.ImplicitlyValidateRootCollectionElements = true;
+                 })
+                 .AddViewLocalization()
+                 .AddJsonOptions(options =>
+                 {
+                     options.JsonSerializerOptions.PropertyNamingPolicy = null;
 
+                 }) ;
+
+
+        services.ConfigureApplicationCookie(options => {
+            options.LoginPath = "/Identity/Account/Login";
+            options.LogoutPath = "/Identity/Account/Logout";
+            options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+        });
         return services;
     }
 

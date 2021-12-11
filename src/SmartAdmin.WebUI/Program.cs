@@ -3,30 +3,11 @@ using CleanArchitecture.Razor.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using Serilog.Filters;
 using Serilog.Events;
 using CleanArchitecture.Razor.Infrastructure;
 using CleanArchitecture.Razor.Application;
-using FluentValidation.AspNetCore;
 using CleanArchitecture.Razor.Infrastructure.Extensions;
 using System.Net;
-using CleanArchitecture.Razor.Infrastructure.Filters;
-
-string[] filters = new string[] { "Microsoft.EntityFrameworkCore.Model.Validation",
-    "WorkflowCore.Services.WorkflowHost",
-    "WorkflowCore.Services.BackgroundTasks.RunnablePoller",
-    "Microsoft.Hosting.Lifetime",
-    "Microsoft.EntityFrameworkCore.Infrastructure",
-    "Microsoft.EntityFrameworkCore.Update",
-    "Microsoft.AspNetCore.Routing.EndpointMiddleware",
-    "Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager",
-    "Microsoft.AspNetCore.Hosting.Diagnostics",
-    "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker",
-    "Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler",
-    "Microsoft.AspNetCore.Authorization.DefaultAuthorizationService",
-    "Serilog.AspNetCore.RequestLoggingMiddleware" };
-
-
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,77 +20,33 @@ builder.WebHost.ConfigureKestrel((context, options) =>
     });
 });
 
-builder.WebHost.UseSerilog((context, configuration) => 
+builder.WebHost.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration)
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
+                .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Error)
+                .MinimumLevel.Override("Serilog", LogEventLevel.Error)
           .Enrich.FromLogContext()
           .Enrich.WithClientIp()
           .Enrich.WithClientAgent()
-          .Filter.ByExcluding(
-                  //(logevent) =>
-                  //{
-                  //    Console.WriteLine(logevent);
-                  //    var cxt = logevent.Properties.Where(x => x.Key == "SourceContext").Select(x => x.Value.ToString()).ToArray();
-                  //    if (cxt.Any(x => filters.Contains(x)))
-                  //    {
-                  //        return false;
-                  //    }
-                  //    return true;
-                  //}
-                  Matching.WithProperty<string>("SourceContext", p => filters.Contains(p))
-            )
           .WriteTo.Console()
     );
 
 
 
-builder.Services.Configure<CookiePolicyOptions>(options =>
-{
-    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-    options.CheckConsentNeeded = context => true;
-    options.MinimumSameSitePolicy = SameSiteMode.None;
-});
+
 
 builder.Services.AddInfrastructure(builder.Configuration)
         .AddApplication()
         .AddWorkflow(builder.Configuration);
 
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-builder.Services.AddControllers();
-
-builder.Services
-     .AddRazorPages(options =>
-     {
-         options.Conventions.AddPageRoute("/AspNetCore/Welcome", "");
-     })
-     .AddMvcOptions(options =>
-     {
-         options.Filters.Add<ApiExceptionFilterAttribute>();
-     })
-    .AddFluentValidation(fv =>
-    {
-        fv.DisableDataAnnotationsValidation = true;
-        fv.ImplicitlyValidateChildProperties = true;
-        fv.ImplicitlyValidateRootCollectionElements = true;
-    })
-    .AddViewLocalization()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.PropertyNamingPolicy = null;
-
-    })
-    .AddRazorRuntimeCompilation();
 
 
-builder.Services.ConfigureApplicationCookie(options => {
-    options.LoginPath = "/Identity/Account/Login";
-    options.LogoutPath = "/Identity/Account/Logout";
-    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-});
 
 
-builder.Services.AddSignalR();
+
+
+
+
 
 var app = builder.Build();
 
