@@ -176,7 +176,7 @@ public class ImportMappingRulesCommandHandler :
     //                if (exist == null)
     //                {
     //                    //var newitem = _mapper.Map<MappingRule>(item);
-    //                    item.Status = "Not Started";
+    //                    item.Status = "Not started";
     //                    await _context.MappingRules.AddAsync(item, cancellationToken);
     //                }
     //                else

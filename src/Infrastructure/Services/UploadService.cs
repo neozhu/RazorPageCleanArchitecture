@@ -4,6 +4,7 @@
 using CleanArchitecture.Razor.Application.Common.Extensions;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Models;
+using CleanArchitecture.Razor.Domain.Enums;
 
 namespace CleanArchitecture.Razor.Infrastructure.Services;
 
@@ -17,6 +18,10 @@ public class UploadService : IUploadService
         {
             var folder = request.UploadType.ToDescriptionString();
             var folderName = Path.Combine("Files", folder);
+            if (folder == UploadType.FieldMappingValueFile.ToDescriptionString())
+            {
+                folderName = Path.Combine(folderName, DateTime.Now.ToString("yyyyMMdd"));
+            }
             var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
             bool exists = Directory.Exists(pathToSave);
             if (!exists) Directory.CreateDirectory(pathToSave);

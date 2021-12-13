@@ -92,9 +92,10 @@
     onImportedSucceeded = "reloadData()"
 })
 @section ScriptsBlock {
+    <script src="~/js/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.js"></script>
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
     <script src="~/lib/axios/dist/axios.js"></script>
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
 
@@ -251,6 +252,14 @@
                         }
 
                     }
+                },
+                {
+                        field: 'BeginDateTime',
+                        type: 'dateRange'
+                },
+                {
+                        field: 'FinishedDateTime',
+                        type: 'dateRange'
                 },
                 ])
                 .datagrid('load', '@Url.Page("/MigrationProjects/Index")?handler=Data');

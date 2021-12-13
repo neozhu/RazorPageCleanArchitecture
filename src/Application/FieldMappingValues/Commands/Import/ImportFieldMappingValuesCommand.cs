@@ -4,6 +4,7 @@
 using System.Xml.Linq;
 using CleanArchitecture.Razor.Application.FieldMappingValues.Commands.Create;
 using CleanArchitecture.Razor.Application.FieldMappingValues.DTOs;
+using CleanArchitecture.Razor.Domain.Enums;
 
 namespace CleanArchitecture.Razor.Application.FieldMappingValues.Commands.Import;
 
@@ -41,10 +42,12 @@ public class ImportFieldMappingValuesCommandHandler :
     private readonly IStringLocalizer<ImportFieldMappingValuesCommandHandler> _localizer;
     private readonly IValidator<CreateFieldMappingValueCommand> _validator;
     private readonly IExcelService _excelService;
+    private readonly IUploadService _uploadService;
 
     public ImportFieldMappingValuesCommandHandler(
         IApplicationDbContext context,
         IExcelService excelService,
+        IUploadService uploadService,
         IStringLocalizer<ImportFieldMappingValuesCommandHandler> localizer,
         IValidator<CreateFieldMappingValueCommand> validator,
         IMapper mapper
@@ -54,6 +57,7 @@ public class ImportFieldMappingValuesCommandHandler :
         _localizer = localizer;
         _validator = validator;
         _excelService = excelService;
+        _uploadService = uploadService;
         _mapper = mapper;
     }
     public async Task<Result> Handle(ImportFieldMappingValuesCommand request, CancellationToken cancellationToken)
@@ -153,6 +157,14 @@ public class ImportFieldMappingValuesCommandHandler :
     {
         try
         {
+            //backup upload file;
+            var uploadrequest = new UploadRequest()
+            {
+                Data = request.Data,
+                FileName = request.FileName,
+                UploadType = UploadType.FieldMappingValueFile
+            };
+            var savedfile = await _uploadService.UploadAsync(uploadrequest);
             var errors = new List<string>();
             var mappingrule = await _context.MappingRules.FirstAsync(x => x.Id == request.MappingRuleId);
             mappingrule.Status = "Ongoing";
@@ -225,6 +237,7 @@ public class ImportFieldMappingValuesCommandHandler :
                      foreach (DataRow row in dt.Rows)
                     {
                         var newitem = new FieldMappingValue();
+                        newitem.Comments = savedfile;
                         newitem.MappingRuleId = mappingrule.Id;
                         newitem.LegacySystem = mappingrule.LegacySystem;
                         newitem.Legacy1 = row[mappingrule.ImportParameterField1].ToString();
@@ -252,6 +265,9 @@ public class ImportFieldMappingValuesCommandHandler :
             {
                 return Result.Failure(new string[] {$"Not found data" });
             }
+
+           
+          
 
             return Result.Success();
         }

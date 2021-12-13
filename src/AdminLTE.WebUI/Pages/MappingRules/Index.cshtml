@@ -15,7 +15,7 @@
 }
 @section HeadBlock {
 
-<link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+
 <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
 <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
 <!-- Select2 -->
@@ -497,7 +497,32 @@
     }
 
     $('#importdatabutton').click(function () {
+        const total=$fieldmappingvalues_dg.datagrid('getData').total;
+        console.log($fieldmappingvalues_dg.datagrid('getData'))
+        if(total>0){
+             bootbox.confirm({
+                    message: "@_localizer["Note: The new data will overwrites existing data, Are you sure continue uploading new data"]",
+                    buttons: {
+                        confirm: {
+                            label: '@_localizer["Yes"]',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: '@_localizer["No"]',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+
+                            uploaddatainput.click();
+                        }
+                    }
+                 });
+        }
+        else{
          uploaddatainput.click();
+        }
     });
     $('#downloaddatabutton').click(function(){
         rightmodalcontent.classList.add("overlay-wrapper");
@@ -1320,7 +1345,7 @@
             uploadtemplatefileinput.required = true;
             $('#mappingrule_form #Input_Id').val(0);
             $('#mappingrule_form #Input_TemplateFile').val('');
-            $('#mappingrule_form #Input_Status').val('Not Started');
+            $('#mappingrule_form #Input_Status').val('Not started');
             $('#Input_Active').prop('checked', false);
             uploadtemplatefilename.innerHTML =`<div class="alert alert-danger mt-2 mb-2" role="alert">
                                     <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a migration template file"].

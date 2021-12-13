@@ -19,7 +19,7 @@
 }
 @section HeadBlock {
 
-    <link rel="stylesheet" media="screen, print" href="~/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+ 
     <link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
     <link rel="stylesheet" media="screen,print" href="~/lib/easyui/themes/insdep/easyui.css">
     <style>
@@ -28,84 +28,8 @@
             overflow: visible !important
         }
     </style>
-    <style>
+    
 
-    .plfile_empty_div {
-        position: absolute;
-        left: 17%;
-        top: 43%;
-        z-index: 1;
-    }
-
-    ul#filelist {
-        width: 450px;
-        min-height: 100px;
-        background: #fff;
-        border-left: 0;
-        border-right: 0;
-        line-height: 24px;
-        overflow: hidden;
-        margin: 0 15px;
-        padding: 5px 0;
-        font-size: 12px;
-    }
-
-        ul#filelist li {
-            list-style-type: none;
-            margin: 4px 0;
-            padding: 0px 17px 0px 0px;
-        }
-
-            ul#filelist li:hover {
-                background: #d6e7f9;
-            }
-
-    #filelist li {
-        clear: both;
-        line-height: 22px;
-        height: 22px;
-    }
-
-    .plupload_filename {
-        width: 230px;
-        display: block;
-        float: left;
-        word-wrap: break-word;
-        margin-right: 10px;
-        line-height: 22px;
-        margin-left: 5px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .plupload_filesize {
-        width: 80px;
-        line-height: 22px;
-        display: block;
-        float: left;
-    }
-
-    .plupload_d-none {
-        display: none;
-    }
-
-    .plupload_fileremove {
-        float: right;
-        line-height: 22px;
-        display: block;
-        cursor: pointer;
-    }
-
-    .plupload_fileprogress {
-        display: block;
-        width: 60px;
-        line-height: 22px;
-        margin-right: 19px;
-        float: right;
-        text-align: right;
-    }
-</style>
 }
 <div id="js-page-content-demopanels" class="card mb-g">
     <div class="card-header bg-white d-flex align-items-center">
@@ -164,37 +88,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="uploadfilesmodal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">
-                    @_localizer["Upload Migration Template Files"]
-                </h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
-                </button>
-            </div>
-            <div class="modal-body pb-0 pt-0">
-                <div id="slimscroll">
-                    <div id="file_empty_div" class="plfile_empty_div">
-                        <span style="color: Dodgerblue;"><i class="fal fa-exclamation-circle"></i></span> @_localizer["Please click [Choose Files] button to upload template files."]
-                    </div>
-                    <ul id="filelist"></ul>
-                </div>
-                <div id="plupload_max_size_alert" class="alert alert-primary mb-0  fw-300 fs-sm p-2  d-none" role="alert">
-                    <strong>@_localizer["Note"]</strong> @_localizer["The size of the uploaded photo must be less than 5MB."]
-                </div>
-                <input id="fileupload" type="file" ccept=".xml" name="fileupload" multiple style="display: none" />
 
-            </div>
-            <div class="modal-footer">
-                <button id="selectuploadfilesbtn" type="button" class="btn btn-info">@_localizer["Choose Files"]</button>
-                <button id="postuploadfilesbtn" type="button" class="btn btn-primary">@_localizer["Upload"]</button>
-            </div>
-        </div>
-    </div>
-</div>
 @await Component.InvokeAsync("ImportExcel", new
 {
     importUri = Url.Page("/ObjectFields/Index") + "?handler=Import",

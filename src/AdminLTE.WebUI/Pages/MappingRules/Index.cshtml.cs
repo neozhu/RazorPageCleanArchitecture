@@ -147,6 +147,7 @@ namespace AdminLTE.WebUI.Pages.MappingRules
             var command = new ImportDataFieldMappingValuesCommand()
             {
                 MappingRuleId = MappingRuleId,
+                FileName = FieldMappingDataFile.FileName,
                 Data = stream.ToArray()
             };
             var result = await _mediator.Send(command);

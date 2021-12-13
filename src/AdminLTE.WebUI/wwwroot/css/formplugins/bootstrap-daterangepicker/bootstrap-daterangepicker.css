@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900");
+/*@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900");*/
 .daterangepicker {
   position: absolute;
   color: inherit;
@@ -581,12 +581,12 @@ aside.page-sidebar ($nav-width, $nav-background)
 /* ACCESSIBILITIES */
 /* SHORTCUT BUTTON (appears on bottom right of the page) */
 /* GULP WARNINGS */
-body {
+/*body {
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial;
   font-size: 0.8125rem;
-  letter-spacing: 0.1px; }
+  letter-spacing: 0.1px; }*/
 
-.page-content {
+/*.page-content {
   color: #666666; }
 
 h1, h2, h3, h4, h5, h6 {
@@ -628,7 +628,7 @@ h5 small,
 h6 small,
 .h5 small,
 .h6 small {
-  font-size: 0.8125rem; }
+  font-size: 0.8125rem; }*/
 
 /* contrast text */
 .text-contrast {
@@ -638,7 +638,7 @@ h6 small,
 .text-gradient {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(25%, #6e4e9e), color-stop(50%, #62468d), color-stop(75%, #0c7cd5), to(#0960a5));
   background: linear-gradient(180deg, #6e4e9e 25%, #62468d 50%, #0c7cd5 75%, #0960a5 100%);
-  color: #886ab5;
+  color: #2D4275;
   background-clip: text;
   text-fill-color: transparent;
   -webkit-background-clip: text;
@@ -804,6 +804,6 @@ RESULT:
   font-size: 0.8125rem;
   padding: 0.75rem 1rem; }
   .daterangepicker .ranges li.active {
-    background-color: #886ab5; }
+    background-color: #2D4275; }
 
 /*# sourceMappingURL=bootstrap-daterangepicker.css.map */

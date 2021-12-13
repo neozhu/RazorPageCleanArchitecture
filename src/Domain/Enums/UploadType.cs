@@ -14,5 +14,7 @@ public enum UploadType : byte
     [Description(@"Documents")]
     Document,
     [Description(@"TemplateFiles")]
-    TemplateFile
+    TemplateFile,
+    [Description(@"FieldMappingValueFile")]
+    FieldMappingValueFile
 }
