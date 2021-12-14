@@ -20,6 +20,8 @@ internal class TempFieldDto
         public string Description { get; set; }
         public string Title { get; set; }
         public string SourceTemplateName { get; set; }
-       
-  
+    public string CreatedBy { get; set; }
+    public string LastModifiedBy { get; set; }
+
+
 }

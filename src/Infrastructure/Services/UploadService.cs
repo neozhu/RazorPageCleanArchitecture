@@ -22,6 +22,10 @@ public class UploadService : IUploadService
             {
                 folderName = Path.Combine(folderName, DateTime.Now.ToString("yyyyMMdd"));
             }
+            if (!string.IsNullOrEmpty(request.Folder))
+            {
+                folderName = Path.Combine(folderName, request.Folder);
+            }
             var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
             bool exists = Directory.Exists(pathToSave);
             if (!exists) Directory.CreateDirectory(pathToSave);

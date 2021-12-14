@@ -42,6 +42,10 @@
             <small>&nbsp;</small>
         </h4>
         <div class="ml-auto">
+            <button class="btn btn-sm btn-outline-primary " id="refreshbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-sync mr-1"></span>
+                @_localizer["Refresh"]
+            </button>
 
             <button class="btn btn-sm btn-outline-primary " id="addbutton">
                 <span class="@(Settings.Theme.IconPrefix) fa-plus mr-1"></span>
@@ -238,7 +242,7 @@
             </div>
             <div class="modal-body">
                 <div class="d-flex flex-row">
-                    <button type="button" id="refreshbutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Refresh"] </button>
+                    <button type="button" id="refreshdatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Refresh"] </button>
                     <button type="button" id="adddatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Add"] </button>
                     <button type="button" id="deletedatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Delete"] </button>
                     <button type="button" id="canceldatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Cancel"] </button>
@@ -574,7 +578,7 @@
                                     }
                                 });
     });
-    $('#refreshbutton').click(function(){
+    $('#refreshdatabutton').click(function(){
         onReloadFieldData()
 
     })
@@ -739,7 +743,7 @@
 <script type="text/javascript">
 
 
-    $('#searchbutton').click(function () {
+    $('#refreshbutton').click(function () {
         reloadData();
     });
     $('#addbutton').click(function () {

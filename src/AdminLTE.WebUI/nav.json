@@ -10,35 +10,18 @@
       "roles": []
     },
     {
-      "title": "Value Mapping Matrix",
+      "title": "Value Mapping Rule",
+      "href": "mappingrules_index.html",
       "icon": "nav-icon fas fa-tools",
-      "roles": [ "MOVE-VT-MIG", "Manager" ],
-      "items": [
-
-        {
-          "title": "Value Mapping Rule",
-          "href": "mappingrules_index.html",
-          "roles": []
-        },
-        {
-          "title": "Value Mapping Overview",
-          "href": "mappingrules_overview.html",
-          "roles": []
-        }
-      ]
+      "roles": [ "MOVE-VT-MIG", "Manager" ]
     },
     {
       "title": "Migration Result",
+      "href": "resultmappings_overview.html",
       "icon": "nav-icon fas fa-file-signature",
-      "roles": [ "MOVE-VT-MIG", "Manager" ],
-      "items": [
-        {
-          "title": "Result Overview",
-          "href": "fieldmappingvalues_index.html",
-          "roles": []
-        }
-      ]
+      "roles": [ "MOVE-VT-MIG", "Manager" ]
     },
+    
     {
       "title": "System",
       "icon": "nav-icon fas fa-cogs",

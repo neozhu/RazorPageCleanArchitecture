@@ -4,6 +4,7 @@ using CleanArchitecture.Razor.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211213050531_ResultMapping")]
+    partial class ResultMapping
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -729,12 +731,6 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                     b.Property<string>("TemplateFile")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Total")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Verified")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("MigrationProjectId");
@@ -757,66 +753,6 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field10")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field11")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field12")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field13")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field14")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field15")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field16")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field17")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field18")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field19")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field20")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field4")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field5")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field6")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field7")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field8")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field9")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FieldData")

@@ -26,5 +26,8 @@ public interface IApplicationDbContext
     DbSet<MappingRule> MappingRules { get; set; }
     DbSet<FieldMappingValue> FieldMappingValues { get; set; }
 
+    DbSet<ResultMapping> ResultMappings { get; set; }
+    DbSet<ResultMappingData> ResultMappingDatas { get; set; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

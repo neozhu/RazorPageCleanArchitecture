@@ -57,6 +57,9 @@ public class ApplicationDbContext : IdentityDbContext<
     public DbSet<MigrationProject> MigrationProjects { get; set; }
     public DbSet<MappingRule> MappingRules { get; set; }
     public DbSet<FieldMappingValue> FieldMappingValues { get; set; }
+
+    public DbSet<ResultMapping> ResultMappings { get; set; }
+    public DbSet<ResultMappingData> ResultMappingDatas { get; set; }
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
         var auditEntries = OnBeforeSaveChanges(_currentUserService.UserId);
@@ -75,6 +78,8 @@ public class ApplicationDbContext : IdentityDbContext<
                     break;
 
                 case EntityState.Modified:
+                    entry.Property(x => x.Created).IsModified = false;
+                    entry.Property(x => x.CreatedBy).IsModified = false;
                     entry.Entity.LastModifiedBy = _currentUserService.UserId;
                     entry.Entity.LastModified = _dateTime.Now;
                     if (entry.Entity is IProjectId editproject)
