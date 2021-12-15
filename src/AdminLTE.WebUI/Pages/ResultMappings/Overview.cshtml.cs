@@ -15,6 +15,8 @@ using CleanArchitecture.Razor.Application.Common.Models;
 using CleanArchitecture.Razor.Domain.Enums;
 using CleanArchitecture.Razor.Application.ResultMappings.Commands.Delete;
 using CleanArchitecture.Razor.Application.ResultMappings.Commands.ChangeStatus;
+using CleanArchitecture.Razor.Application.ResultMappings.Queries.GetAll;
+using CleanArchitecture.Razor.Application.ResultMappings.DTOs;
 
 namespace AdminLTE.WebUI.Pages.ResultMappings
 {
@@ -31,7 +33,7 @@ namespace AdminLTE.WebUI.Pages.ResultMappings
         private readonly ISender _mediator;
         private readonly IStringLocalizer<OverviewModel> _localizer;
         public SelectList MigrationObjects { get; set; }
-
+        public List<StatusSummarizingDto> Summarizing { get; set; }
 
         public OverviewModel(
             ICurrentUserService currentUserService,
@@ -48,7 +50,11 @@ namespace AdminLTE.WebUI.Pages.ResultMappings
             var request = new GetAllMigrationObjectsQuery();
             var objectlist = await _mediator.Send(request);
             MigrationObjects = new SelectList(objectlist, "Description", "Description");
- 
+
+            var summarizingrequest = new SummarizingByStatusQuery();
+            var summarizing = await _mediator.Send(summarizingrequest);
+            Summarizing = summarizing.ToList();
+
         }
         public async Task<IActionResult> OnGetDeleteCheckedAsync([FromQuery] int[] id)
         {

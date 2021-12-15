@@ -39,7 +39,12 @@
     <div class="card-header bg-white d-flex align-items-center">
         <h4 class="m-0">
             @_localizer["Migration Result Overview"]
-            <small>&nbsp;</small>
+   
+           <div class="progress mb-3">
+                <div class="progress-bar progress-bar bg-primary" role="progressbar" style="width: @(Model.Summarizing.First(x=>x.Status=="Not started").Percentage)%">@Model.Summarizing.First(x=>x.Status=="Not started").Total Not started</div>
+                <div class="progress-bar progress-bar bg-info" role="progressbar" style="width:  @(Model.Summarizing.First(x=>x.Status=="Ongoing").Percentage)%">@Model.Summarizing.First(x=>x.Status=="Ongoing").Total Ongoing</div>
+                <div class="progress-bar progress-bar bg-success" role="progressbar" style="width: @(Model.Summarizing.First(x=>x.Status=="Finished").Percentage)%">@Model.Summarizing.First(x=>x.Status=="Finished").Total Finished</div>
+           </div>
         </h4>
         <div class="ml-auto">
 
@@ -289,7 +294,7 @@
        });
 
        $('#downloadtemplatebutton').click(function () {
-        onDownloadTemplateFile();
+           onDownloadFile();
        });
        $('#addbutton').click(function(){
             popupmodal(null);
@@ -445,12 +450,13 @@
                    { field: 'RelevantMock',
                      title: '@_localizer["Relevant Mock"]',
                      sortable: true,
-                     width: 160
+                     width: 140
                    },
-                   { field: 'Status',
+                   {   field: 'Status',
                        title: '@_localizer["Status"]',
                        sortable: true,
                        width: 120,
+                       align:'center',
                        formatter:function(value){
                            if(value=='Not started') {
                                return `<span class="right badge badge-secondary">${value}</span>`
@@ -470,21 +476,24 @@
                      formatter:function(value,row,index){
                          return `<a> ${value??''} </a> <br> <small>${row.Description??''}</small> `;
                      },
-                     width: 260
+                     width: 280
                    },
                    { field: 'Verify',
-                     title: '@_localizer["Verify"]',
+                     title: '@_localizer["Verify Progress"]',
                      sortable: true,
-                     width: 200,
+                     align:'center',
+                     width: 180,
                      formatter:function(v,row,index){
                          const total = row.Total;
                          let verified=0;
                          if(row.Total>0){
-                             verified = (row.Verified/total)*100
+                             verified = Math.round((row.Verified/total)*100);
                          }
-                         return `<div class="progress">
+                         return `<div class="progress mt-1 mb-1">
                                    <div class="progress-bar bg-success" role="progressbar" style="width: ${verified}%" aria-valuenow="${verified}" aria-valuemin="0" aria-valuemax="100">${row.Verified} / ${row.Total}</div>
-                                 </div>`
+                                 </div>
+                                 <small>${verified}% Verified</small>
+                                 `
                      }
                    },
                    { field: 'MigrationApproach', title: '@_localizer["Migration Approach"]', sortable: true, width: 180 },
@@ -531,7 +540,15 @@
                    {field: 'Verify',
                      title: '@_localizer["Verify"]',
                      sortable: true,
-                     width: 150,}
+                     width: 100,
+                     align:'center',
+                     formatter:function(v){
+                         if(v=='Verified')
+                           return '<i class="nav-icon far fa-circle text-success text-lg"></i>';
+                         else
+                          return '';
+                     }
+                   }
             ];
             row.FieldParameters.map((item,index)=>{
                columns.push({
@@ -744,7 +761,7 @@
                                     }
                                 });
        }
-       var onDownloadTemplateFile = ()=> {
+       var onDownloadFile = ()=> {
            const items = $dg.datagrid('getChecked');
            if(items.length==0){
                 bootbox.alert({
@@ -752,29 +769,41 @@
                 });
            }
            items.map(item=>{
-               axios.get('@Url.Page("/ResultMappings/Overview")?handler=DownloadData&MappingRuleId=' + item.Id +'&MappingRuleName=' + item.Name ,
-               {
-                   responseType: "blob"
-               })
-              .then(response => {
-                       const filename = getFileName(response.headers['content-disposition']);
-                       const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+
+                       const filename = getFileName(item.TemplateFile);
+                       const url = '/' + item.TemplateFile;
                        const link = document.createElement('a');
                        link.href = url;
                        link.setAttribute('download', filename );
                        document.body.appendChild(link);
                        link.click();
-                   })
-                   .catch((error) => {
-                     error.response.data.text().then(text=>{
-                         const data=JSON.parse(text);
-                         const err=data.Errors.toString();
-                         bootbox.alert(err);
-                     })
 
-                   })
            });
        }
 
+       var onDownload=(index)=>{
+            const item = $dg.datagrid('getRows')[index];
+            const filename = getFileName(item.TemplateFile);
+                       const url = '/' + item.TemplateFile;
+                       const link = document.createElement('a');
+                       link.href = url;
+                       link.setAttribute('download', filename );
+                       document.body.appendChild(link);
+                       link.click();
+       }
+       var getFileName = (disposition) => {
+          const utf8FilenameRegex = /filename\*=UTF-8''([\w%\-\.]+)(?:; ?|$)/;
+          const asciiFilenameRegex = /filename=(["']?)(.*?[^\\])\1(?:; ?|$)/;
+          let fileName = '';
+          if (utf8FilenameRegex.test(disposition)) {
+            fileName = decodeURIComponent(utf8FilenameRegex.exec(disposition)[1]);
+          } else {
+            const matches = asciiFilenameRegex.exec(disposition);
+            if (matches != null && matches[2]) {
+                fileName = matches[2];
+            }
+        }
+        return fileName;
+    }
 </script>
 }

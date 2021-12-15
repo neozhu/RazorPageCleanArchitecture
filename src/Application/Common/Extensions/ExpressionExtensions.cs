@@ -36,6 +36,7 @@ public static class PredicateBuilder
                         Type t3 when t3 == typeof(MappingRule) && filter.field == "LegacyField2" => any.And(expression.Or(GetCriteriaWhere<T>("LegacyDescription2", op, filter.value))),
                         Type t4 when t4 == typeof(MappingRule) && filter.field == "LegacyField3" => any.And(expression.Or(GetCriteriaWhere<T>("LegacyDescription3", op, filter.value))),
                         Type t5 when t5 == typeof(MappingRule) && filter.field == "NewValueField" => any.And(expression.Or(GetCriteriaWhere<T>("NewValueFieldDescription", op, filter.value))),
+                        Type t5 when t5 == typeof(ResultMapping) && filter.field == "Name" => any.And(expression.Or(GetCriteriaWhere<T>("Description", op, filter.value))),
                         _ =>   any.And(expression)
                     };
                 }

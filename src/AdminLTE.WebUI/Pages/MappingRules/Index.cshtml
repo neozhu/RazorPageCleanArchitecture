@@ -39,7 +39,11 @@
     <div class="card-header bg-white d-flex align-items-center">
         <h4 class="m-0">
             @_localizer["Value Mapping Rule"]
-            <small>&nbsp;</small>
+           <div class="progress mb-3">
+                <div class="progress-bar progress-bar bg-primary" role="progressbar" style="width: @(Model.Summarizing.First(x=>x.Status=="Not started").Percentage)%">@Model.Summarizing.First(x=>x.Status=="Not started").Total Not started</div>
+                <div class="progress-bar progress-bar bg-info" role="progressbar" style="width:  @(Model.Summarizing.First(x=>x.Status=="Ongoing").Percentage)%">@Model.Summarizing.First(x=>x.Status=="Ongoing").Total Ongoing</div>
+                <div class="progress-bar progress-bar bg-success" role="progressbar" style="width: @(Model.Summarizing.First(x=>x.Status=="Finished").Percentage)%">@Model.Summarizing.First(x=>x.Status=="Finished").Total Finished</div>
+           </div>
         </h4>
         <div class="ml-auto">
             <button class="btn btn-sm btn-outline-primary " id="refreshbutton">

@@ -20,6 +20,8 @@ using CleanArchitecture.Razor.Application.ObjectFields.DTOs;
 using CleanArchitecture.Razor.Application.MappingRules.Commands.Download;
 using CleanArchitecture.Razor.Application.FieldMappingValues.Queries.Pagination;
 using CleanArchitecture.Razor.Application.MappingRules.Commands.ChangeStatus;
+using CleanArchitecture.Razor.Application.ResultMappings.DTOs;
+using CleanArchitecture.Razor.Application.MappingRules.Queries.GetAll;
 
 namespace AdminLTE.WebUI.Pages.MappingRules
 {
@@ -47,6 +49,7 @@ namespace AdminLTE.WebUI.Pages.MappingRules
         private readonly ISender _mediator;
         private readonly IStringLocalizer<IndexModel> _localizer;
         public  IEnumerable<ObjectFieldDto> FieldList { get; set; }
+        public List<StatusSummarizingDto> Summarizing { get; set; }
         public IndexModel(
             ICurrentUserService currentUserService,
                 ISender mediator,
@@ -69,6 +72,9 @@ namespace AdminLTE.WebUI.Pages.MappingRules
             var requestfield = new GetAllObjectFieldsQuery();
             FieldList = await _mediator.Send(requestfield);
             DataElements = new SelectList(FieldList, "Name", "Name");
+            var summarizingrequest = new SummarizingByStatusQuery();
+            var summarizing = await _mediator.Send(summarizingrequest);
+            Summarizing = summarizing.ToList();
         }
         public async Task<IActionResult> OnGetDataAsync([FromQuery] MappingRulesWithPaginationQuery command)
         {
