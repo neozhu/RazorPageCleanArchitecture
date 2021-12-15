@@ -15,12 +15,15 @@ public class VerifyResultMappingStatusCommandHandler :
     IRequestHandler<VerifyResultMappingStatusCommand, Result>
 {
     private readonly IApplicationDbContext _context;
+    private readonly ILogger<VerifyResultMappingStatusCommandHandler> _logger;
 
     public VerifyResultMappingStatusCommandHandler(
-        IApplicationDbContext context
+        IApplicationDbContext context,
+        ILogger<VerifyResultMappingStatusCommandHandler> logger
         )
     {
         _context = context;
+        _logger = logger;
     }
 
     public async Task<Result> Handle(VerifyResultMappingStatusCommand request, CancellationToken cancellationToken)
@@ -42,6 +45,8 @@ public class VerifyResultMappingStatusCommandHandler :
         mapping.Status = "Ongoing";
         _context.ResultMappings.Update(mapping);
         await _context.SaveChangesAsync(cancellationToken);
+
+        _logger.LogInformation("Set the status of result mapping data to verified:{@Request}",request);
         return Result.Success();
 
     }

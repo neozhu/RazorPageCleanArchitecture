@@ -12,7 +12,7 @@ public class ResultMappingDataDto: IMapFrom<ResultMappingData>
     public int MigrationProjectId { get; set; }
     public int ResultMappingId { get; set; }
     public Dictionary<string, string> FieldData { get; set; } = new Dictionary<string, string>();
-    public string Verify { get; set; }
+    public string Verify { get; set; } = "Unverified";
     public DateTime? VerifiedDate { get; set; }
     public string Comments { get; set; }
 

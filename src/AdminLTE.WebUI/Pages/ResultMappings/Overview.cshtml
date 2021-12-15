@@ -407,7 +407,33 @@
                         pageSize: 10,
                         pageList: [10, 30, 50, 100, 1000],
                         columns: [columns]
-                   }).datagrid('enableFilter', [{}])
+                   }).datagrid('enableFilter', [{
+                        field:'Verify',
+                        type:'combobox',
+                        options:{
+                          valueField:'id',
+                          textField:'text',
+                          panelHeight:'auto',
+                          data:[
+                             {id:'',text:'ALL'},
+                             {id:'Verified',text:'Verified'},
+                             {id:'Unverified',text:'Unverified'},
+                          ],
+                         onChange: function (item) {
+                            if(item){
+                                subgrid.datagrid('addFilterRule', {
+                                  field: 'Verify',
+                                  op: 'equal',
+                                  value: item
+                                });
+                                 subgrid.datagrid('doFilter');
+                            }else{
+                                 subgrid.datagrid('removeFilterRule', 'Verify'	                          );
+                                 subgrid.datagrid('doFilter');
+                            }
+                           }
+                   }
+               }])
                       .datagrid('load',suburl);
 
                },

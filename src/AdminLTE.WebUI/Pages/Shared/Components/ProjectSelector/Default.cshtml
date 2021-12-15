@@ -1,7 +1,8 @@
 @model AdminLTE.WebUI.Pages.Shared.Components.ProjectSelector.DefaultModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<SmartNavigation> _localizer
  <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="selectedproject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Selected Project:@Model.DefaultProjectName
+          @_localizer["Selected Project"]:@Model.DefaultProjectName
         </a>
 <div class="dropdown-menu">
         @foreach (var item in Model.Projects)

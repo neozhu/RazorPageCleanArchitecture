@@ -37,7 +37,7 @@ public class DownloadMappingValueFileCommandHandler :
         if (values.Count > 0)
         {
             var xmlstr = Encoding.UTF8.GetString(buffer).Trim();
-            var xdoc = XDocument.Parse(xmlstr);
+            var xdoc = XDocument.Parse(xmlstr,LoadOptions.PreserveWhitespace);
             var namespaces = xdoc.Root.Attributes().
                              Where(a => a.IsNamespaceDeclaration).
                                  GroupBy(a => a.Name.Namespace == XNamespace.None ? String.Empty : a.Name.LocalName,
@@ -110,12 +110,13 @@ public class DownloadMappingValueFileCommandHandler :
                     break;
             }
             expandedRowCount.Value = (rowCount + valueCount).ToString();
-            using (TextWriter writer = new StringWriter())
+            using (TextWriter writer = new Utf8StringWriter())
             {
-                xdoc.Save(writer);
+                xdoc.Save(writer, SaveOptions.None);
                 var output = writer.ToString();
                 // replace default namespace prefix:<ss:
                 string result = Regex.Replace(Regex.Replace(output, "<ss:", "<"), "</ss:", "</");
+                _logger.LogInformation("Download the value mapping file:{@Request}",request);
                 return Encoding.UTF8.GetBytes(result);
             }
         }
@@ -124,5 +125,9 @@ public class DownloadMappingValueFileCommandHandler :
             return buffer;
         }
 
+    }
+    public class Utf8StringWriter : StringWriter
+    {
+        public override Encoding Encoding { get { return Encoding.UTF8; } }
     }
 }

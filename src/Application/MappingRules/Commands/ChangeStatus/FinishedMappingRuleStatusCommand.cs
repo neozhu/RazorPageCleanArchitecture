@@ -15,12 +15,15 @@ public class FinishedMappingRuleStatusCommandHandler:
     IRequestHandler<FinishedMappingRuleStatusCommand, Result>
 {
     private readonly IApplicationDbContext _context;
+    private readonly ILogger<FinishedMappingRuleStatusCommandHandler> _logger;
 
     public FinishedMappingRuleStatusCommandHandler(
-        IApplicationDbContext context
+        IApplicationDbContext context,
+        ILogger<FinishedMappingRuleStatusCommandHandler> logger
         )
     {
         _context = context;
+        _logger = logger;
     }
 
     public async Task<Result> Handle(FinishedMappingRuleStatusCommand request, CancellationToken cancellationToken)
@@ -32,6 +35,7 @@ public class FinishedMappingRuleStatusCommandHandler:
         }
         item.Status = "Finished";
         await _context.SaveChangesAsync(cancellationToken);
+        _logger.LogInformation("Set the status of value mapping rule to finished:{@Request}",request);
         return Result.Success();
 
     }

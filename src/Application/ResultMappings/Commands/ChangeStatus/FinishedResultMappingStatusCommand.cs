@@ -15,12 +15,15 @@ public class FinishedResultMappingStatusCommandHandler :
     IRequestHandler<FinishedResultMappingStatusCommand, Result>
 {
     private readonly IApplicationDbContext _context;
+    private readonly ILogger<FinishedResultMappingStatusCommandHandler> _logger;
 
     public FinishedResultMappingStatusCommandHandler(
-        IApplicationDbContext context
+        IApplicationDbContext context,
+        ILogger<FinishedResultMappingStatusCommandHandler> logger
         )
     {
         _context = context;
+        _logger = logger;
     }
 
     public async Task<Result> Handle(FinishedResultMappingStatusCommand request, CancellationToken cancellationToken)
@@ -32,6 +35,8 @@ public class FinishedResultMappingStatusCommandHandler :
         }
         item.Status = "Finished";
         await _context.SaveChangesAsync(cancellationToken);
+
+        _logger.LogInformation("Set the status of result mapping to finished:{@Request}",request);
         return Result.Success();
 
     }

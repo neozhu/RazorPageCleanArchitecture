@@ -1058,14 +1058,22 @@
                     }
                 },
                 { field: 'Team', title: '@_localizer["Team"]', sortable: true, width: 160 },
-                { field: 'LegacySystem', title: '@_localizer["Legacy System"]', sortable: true, width: 180 },
+                { field: 'LegacySystem', title: '@_localizer["Legacy System"]', sortable: true, width: 140 },
                 { field: 'Name',
                   title: '@_localizer["Mapping Rule Name"]',
                   sortable: true,
                   formatter:function(value,row,index){
                       return `<a> ${value??''} </a> <br> <small>${row.Comments??''}</small> `;
                   },
-                  width: 250
+                  width: 280
+                },
+                { field: 'NewValueField',
+                  title: '@_localizer["New Value Field"]',
+                  sortable: true,
+                  width: 220,
+                  formatter:function(value,row,index){
+                      return `<a> ${value??''} </a> <br> <small>${row.NewValueFieldDescription??''}</small>`;
+                  }
                 },
                 { field: 'LegacyField1',
                   title: '@_localizer["Legacy Field 1 Name"]',
@@ -1089,14 +1097,6 @@
                   width: 220,
                   formatter:function(value,row,index){
                       return `<a> ${value??''} </a> <br> <small>${row.LegacyDescription3??''}</small>`;
-                  }
-                },
-                { field: 'NewValueField',
-                  title: '@_localizer["New Value Field"]',
-                  sortable: true,
-                  width: 220,
-                  formatter:function(value,row,index){
-                      return `<a> ${value??''} </a> <br> <small>${row.NewValueFieldDescription??''}</small>`;
                   }
                 },
                 { field: 'MigrationApproach', title: '@_localizer["Migration Approach"]', sortable: true, width: 130 },
