@@ -1,4 +1,4 @@
-﻿@page
+@page
 @using CleanArchitecture.Razor.Application.Constants.Permission
 @model SmartAdmin.WebUI.Pages.Logs.IndexModel
 @inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
@@ -86,7 +86,6 @@
 
 <script src="~/lib/easyui/plugins/datagrid-detailview.js"></script>
 <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
-<script src="~/lib/axios/dist/axios.js"></script>
 <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
 <script>
     $(async () => {
@@ -354,16 +353,6 @@
                 document.body.appendChild(link);
                 link.click();
                 toastr["info"](`@_localizer["Export Success"]`);
-            }).catch(error => {
-                if (error.response.data.errors) {
-                    const errors = error.response.data.errors;
-                    for (let [key, value] of Object.entries(errors)) {
-                        toastr["error"](`${key}: ${value.toString()}`);
-                    }
-
-                } else {
-                    toastr["error"](`@_localizer["Export fail"],${error.response.data}`);
-                }
             })
 
 

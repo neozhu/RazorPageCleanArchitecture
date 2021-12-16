@@ -1,9 +1,10 @@
-﻿<script src="~/js/vendors.bundle.js"></script>
+<script src="~/js/vendors.bundle.js"></script>
 <script src="~/js/app.bundle.js"></script>
 <script src="~/js/site.js"></script>
 <script src="~/js/dependency/moment/moment.js"></script>
 <script src="~/lib/numeral/min/numeral.min.js"></script>
 <script type="text/javascript" src="~/js/notifications/toastr/toastr.js" asp-append-version="true"></script>
+<script src="~/lib/axios/dist/axios.js"></script>
 <script>
     var bootstrapTooltip = jQuery.fn.tooltip;
     toastr.options = {
@@ -23,4 +24,23 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
+
+
+    axios.defaults.headers.common = {
+            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+        };
+    axios.interceptors.response.use(function (response) {
+       return response;
+    }, function (error) {
+       if(error.response.data instanceof Blob){
+           error.response.data.text().then(text=>{
+               const errors=JSON.parse(text).Errors.toString();
+               toastr["error"](`${errors}`);
+           })
+       }else{
+            var errors = error.response.data.Errors.toString();
+            toastr["error"](`${errors}`);
+       }
+       return Promise.reject(error);
+    });
 </script>

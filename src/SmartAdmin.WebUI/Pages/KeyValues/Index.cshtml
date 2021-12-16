@@ -114,13 +114,10 @@
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
     <script>//jQuery.fn.tooltip = bootstrapTooltip;</script>
-    <script src="~/lib/axios/dist/axios.js"></script>
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
 
     <script type="text/javascript">
-        axios.defaults.headers.common = {
-            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
-        };
+
         $('#searchbutton').click(function () {
             reloadData();
         });
@@ -316,18 +313,7 @@
                             toastr["info"]('@_localizer["Save Success"]');
                             $dg.datagrid('acceptChanges');
                             reloadData();
-                        }).catch(error => {
-                            if (error.response.data.errors) {
-                                const errors = error.response.data.errors;
-                                for (let [key, value] of Object.entries(errors)) {
-                                    toastr["error"](`${key}: ${value.toString()}`);
-                                }
-
-                            } else {
-                                toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
-                            }
-
-                        });
+                        })
 
                 }
             }
@@ -355,17 +341,7 @@
                                 toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
                                 reloadData();
                             })
-                                .catch((error) => {
-                                    if (error.response.data.errors) {
-                                        const errors = error.response.data.errors;
-                                        for (let [key, value] of Object.entries(errors)) {
-                                            toastr["error"](`${key}: ${value.toString()}`);
-                                        }
-
-                                    } else {
-                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
-                                    }
-                                });
+                               
                         }
                     }
                 });
@@ -398,16 +374,6 @@
                     document.body.appendChild(link);
                     link.click();
                     toastr["info"](`@_localizer["Export Success"]`);
-                }).catch(error => {
-                    if (error.response.data.errors) {
-                        const errors = error.response.data.errors;
-                        for (let [key, value] of Object.entries(errors)) {
-                            toastr["error"](`${key}: ${value.toString()}`);
-                        }
-
-                    } else {
-                        toastr["error"](`@_localizer["Export fail"],${error.response.data}`);
-                    }
                 })
 
 

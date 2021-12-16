@@ -1,4 +1,4 @@
-﻿@page
+@page
 @using CleanArchitecture.Razor.Application.Constants.Permission
 @model SmartAdmin.WebUI.Pages.Approval.IndexModel
 @inject Microsoft.Extensions.Localization.IStringLocalizer<IndexModel> _localizer
@@ -101,7 +101,6 @@
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
     
     <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
-    <script src="~/lib/axios/dist/axios.js"></script>
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
 
     <script type="text/javascript">
@@ -213,16 +212,7 @@
                     toastr["error"]('@_localizer["Rejected"]');
                     $('#approval_modal').modal('toggle');
                     reload();
-                }).catch((error) => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
-
-                });
+                })
             }
 
         })
@@ -239,16 +229,7 @@
                     toastr["info"]('@_localizer["Approved"]');
                     $('#approval_modal').modal('toggle');
                     reload();
-                }).catch((error) => {
-                    var msg = error.response.data;
-                    bootbox.alert({
-                        size: "small",
-                        title: "@_localizer["Error"]",
-                        message: msg,
-                        callback: function () { /* your callback code */ }
-                    })
-
-                });
+                })
             }
         })
 

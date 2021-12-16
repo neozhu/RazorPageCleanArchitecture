@@ -200,13 +200,10 @@
 <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
 
 <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
-<script src="~/lib/axios/dist/axios.js"></script>
+
 <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
 
 <script type="text/javascript">
-    axios.defaults.headers.common = {
-            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
-        };
 	$('#searchbutton').click(function () {
 		reloadData();
 	});
@@ -235,17 +232,7 @@
 				toastr["info"]('@_localizer["Save Success."]');
 				$('#customer_modal').modal('toggle');
 				reloadData();
-			}).catch(error => {
-                if (error.response.data.errors) {
-					const errors = error.response.data.errors;
-                    for (let [key, value] of Object.entries(errors)) {
-                        toastr["error"](`${key}: ${value.toString()}`);
-                    }
-					 
-				} else {
-					toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
-				}
-			});
+			})
 		}
 		event.preventDefault();
 		event.stopPropagation();
@@ -376,17 +363,7 @@
 						toastr["info"]('@_localizer["Delete Success"]');
 						reloadData();
 					})
-						.catch(error => {
-                            if (error.response.data.errors) {
-                                const errors = error.response.data.errors;
-                                for (let [key, value] of Object.entries(errors)) {
-                                    toastr["error"](`${key}: ${value.toString()}`);
-                                }
-
-                            } else {
-								toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
-							}
-						});
+						
 				}
 			}
 		})
@@ -412,17 +389,7 @@
 							toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
 							reloadData();
 						})
-							.catch(error => {
-								if (error.response.data.errors) {
-									const errors = error.response.data.errors;
-									for (let [key, value] of Object.entries(errors)) {
-										toastr["error"](`${key}: ${value.toString()}`);
-									}
-
-								} else {
-									toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
-								}
-							});
+							
 					}
 				}
 			});
@@ -454,15 +421,6 @@
 				link.setAttribute('download', filename);
 				document.body.appendChild(link);
 				link.click();
-			}).catch(error => {
-				if (error.response.data.errors) {
-					const errors = error.response.data.errors;
-                    for (let [key, value] of Object.entries(errors)) {
-                        toastr["error"](`${key}: ${value.toString()}`);
-                    }
-				} else {
-					toastr["error"](`@_localizer["Export fail"],${error.response.data}`);
-				}
 			})
 
 

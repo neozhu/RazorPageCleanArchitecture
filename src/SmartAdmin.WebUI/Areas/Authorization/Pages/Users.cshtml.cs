@@ -134,7 +134,7 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
             }
             return new JsonResult(Result.Success());
         }
-        public async Task<IActionResult> OnGetDeleteCheckedAsync([FromQuery] string[] id)
+        public async Task<IActionResult> OnPostDeleteCheckedAsync([FromQuery] string[] id)
         {
             foreach(var key in id)
             {

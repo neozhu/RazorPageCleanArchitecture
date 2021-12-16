@@ -227,12 +227,12 @@
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
     <script>jQuery.fn.tooltip = bootstrapTooltip;</script>
-    <script src="~/lib/axios/dist/axios.js"></script>
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
     <script src="~/js/formplugins/select2/select2.bundle.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.27.0/min/vs/loader.min.js"></script>
     <script>
+
         var containerheight = window.innerHeight - 250;
         document.querySelector('#editor-container').setAttribute("style", `height:${containerheight}px`);
         var editor = {};
@@ -411,16 +411,7 @@
                             toastr["info"]('@_localizer["Delete success"]');
                             reload();
                         })
-                            .catch((error) => {
-                                if (error.response.data.Errors) {
-                                        const errors = error.response.data.Errors;
-                                        errors.forEach(item => {
-                                            toastr["error"](item);
-                                        });
-                                    } else {
-                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
-                                    }
-                            });
+                            
                     }
                 }
             })
@@ -443,20 +434,11 @@
                     callback: function (result) {
                         if (result) {
                             var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
-                            axios.get('/authorization/roles?handler=DeleteChecked&' + paras.toString()).then(res => {
+                            axios.post('/authorization/roles?handler=DeleteChecked&' + paras.toString()).then(res => {
                                 toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
                                 reload();
                             })
-                                .catch((error) => {
-                                    if (error.response.data.Errors) {
-                                        const errors = error.response.data.Errors;
-                                        errors.forEach(item => {
-                                            toastr["error"](item);
-                                        });
-                                    } else {
-                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
-                                    }
-                                });
+                               
                         }
                     }
                 });
@@ -476,7 +458,6 @@
             axios.post('/authorization/roles?handler=Export',
                 data,
                 {
-                    headers: headers,
                     responseType: "blob"
                 })
                 .then(response => {
@@ -487,8 +468,6 @@
                     link.setAttribute('download', filename);
                     document.body.appendChild(link);
                     link.click();
-                }).catch(error => {
-                    console.log(error)
                 })
 
 
@@ -505,16 +484,7 @@
                 })
                 $('#managepermissions_form #RoleId').val(role.Id)
                 $('#managepermissions_modal').modal('toggle');
-            }).catch((error) => {
-                if (error.response.data.Errors) {
-                    const errors = error.response.data.Errors;
-                    errors.forEach(item => {
-                        toastr["error"](item);
-                    });
-                } else {
-                    toastr["error"](`@_localizer["Load permissions fail"],${error.response.data}`);
-                }
-            });
+            })
         }
         var popupmodal = (role) => {
             $('#editrole_modal').modal('toggle');
@@ -547,17 +517,7 @@
                         })
 
                     }
-                }).catch((error) => {
-                    if (error.response.data.Errors) {
-                        const errors = error.response.data.Errors;
-                        errors.forEach(item => {
-                            toastr["error"](item);
-                        });
-                    } else {
-                        toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
-                    }
-
-                });
+                })
             }
             event.preventDefault();
             event.stopPropagation();
@@ -569,22 +529,12 @@
                 form.classList.add('was-validated');
             } else {
                 var request = $('#managepermissions_form').serialize();
-                console.log(request)
+
                 axios.post('/authorization/roles?handler=AssignPermissions', request).then(res => {
                     toastr["info"]('@_localizer["Authorize success"]');
                     $('#managepermissions_modal').modal('toggle');
                     reload();
-                }).catch((error) => {
-                    if (error.response.data.Errors) {
-                        const errors = error.response.data.Errors;
-                        errors.forEach(item => {
-                            toastr["error"](item);
-                        });
-                    } else {
-                        toastr["error"](`@_localizer["Authorize fail"],${error.response.data}`);
-                    }
-
-                });
+                })
             }
             event.preventDefault();
             event.stopPropagation();

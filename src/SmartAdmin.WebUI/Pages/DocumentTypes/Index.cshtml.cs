@@ -50,7 +50,7 @@ namespace SmartAdmin.WebUI.Pages.DocumentTypes
 
         public async Task<IActionResult> OnPostDeleteCheckedAsync([FromBody] DeleteCheckedDocumentTypesCommand command)
         {
-         
+            throw new NotImplementedException();
             var result = await _mediator.Send(command);
             return new JsonResult("");
         }
@@ -62,6 +62,7 @@ namespace SmartAdmin.WebUI.Pages.DocumentTypes
         }
         public async Task<FileResult> OnPostExportAsync([FromBody] ExportDocumentTypesQuery command)
         {
+            throw new NotImplementedException();
             var result = await _mediator.Send(command);
             return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer["DocumentTypes"] + ".xlsx");
         }

@@ -131,7 +131,7 @@ namespace SmartAdmin.WebUI.Areas.Authorization.Pages
             var result = await _roleManager.DeleteAsync(role);
             return new JsonResult(result.ToApplicationResult());
         }
-        public async Task<IActionResult> OnGetDeleteCheckedAsync([FromQuery] string[] id)
+        public async Task<IActionResult> OnPostDeleteCheckedAsync([FromQuery] string[] id)
         {
             foreach (var key in id)
             {
