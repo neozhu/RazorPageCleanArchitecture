@@ -121,16 +121,16 @@
     <value>欢迎</value>
   </data>
   <data name="Audit Trails" xml:space="preserve">
-    <value>审计跟踪</value>
+    <value>Audit Trails</value>
   </data>
   <data name="Logs" xml:space="preserve">
-    <value>日志</value>
+    <value>Logs</value>
   </data>
   <data name="Dictionaries" xml:space="preserve">
-    <value>数据字典</value>
+    <value>Dictionaries</value>
   </data>
   <data name="System" xml:space="preserve">
-    <value>系统设置</value>
+    <value>System</value>
   </data>
   <data name="Value Mapping Cockpit" xml:space="preserve">
     <value>Value Mapping Cockpit</value>
@@ -151,6 +151,6 @@
     <value>Data Element S4</value>
   </data>
   <data name="Selected Project" xml:space="preserve">
-    <value>当前项目</value>
+    <value>Selected Project</value>
   </data>
 </root>

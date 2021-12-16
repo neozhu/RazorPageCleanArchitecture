@@ -84,9 +84,13 @@ namespace AdminLTE.WebUI.Pages.ResultMappings
             var result = await _mediator.Send(command);
             return new JsonResult(result);
         }
-        
 
-  
+        public async Task<IActionResult> OnGetSummarizingVerifiedAsync([FromQuery]SummarizingVerifiedByIdQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return new JsonResult(result);
+        }
+
         public async Task<IActionResult> OnPostVaildateResultMappingFile()
         {
             var stream = new MemoryStream();

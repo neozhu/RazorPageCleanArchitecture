@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Cancel" xml:space="preserve">
-    <value>取消</value>
+    <value>Cancel</value>
   </data>
   <data name="Command" xml:space="preserve">
     <value>Command</value>
@@ -145,13 +145,13 @@
     <value>Mapping Rule Name</value>
   </data>
   <data name="New" xml:space="preserve">
-    <value>新增</value>
+    <value>New</value>
   </data>
   <data name="Refresh" xml:space="preserve">
-    <value>刷新</value>
+    <value>Refresh</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>保存</value>
+    <value>Save</value>
   </data>
   <data name="Team" xml:space="preserve">
     <value>Team</value>
@@ -193,16 +193,16 @@
     <value>Download Value Mapping</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>删除</value>
+    <value>Delete</value>
   </data>
   <data name="Comments" xml:space="preserve">
     <value>Comments</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>关闭</value>
+    <value>Close</value>
   </data>
   <data name="Add" xml:space="preserve">
-    <value>新增</value>
+    <value>Add</value>
   </data>
   <data name="Active" xml:space="preserve">
     <value>Active</value>

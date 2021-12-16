@@ -166,7 +166,7 @@
     <value>Result Mapping Fields</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>保存</value>
+    <value>Save</value>
   </data>
   <data name="Team" xml:space="preserve">
     <value>Team</value>
@@ -199,10 +199,10 @@
     <value>Relevant Objects</value>
   </data>
   <data name="Refresh" xml:space="preserve">
-    <value>刷新</value>
+    <value>Refresh</value>
   </data>
   <data name="New" xml:space="preserve">
-    <value>新增</value>
+    <value>New</value>
   </data>
   <data name="Migration Result Overview" xml:space="preserve">
     <value>Migration Result Overview</value>
@@ -229,15 +229,15 @@
     <value>Download Result Mapping</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>删除</value>
+    <value>Delete</value>
   </data>
   <data name="Comments" xml:space="preserve">
     <value>Comments</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>关闭</value>
+    <value>Close</value>
   </data>
   <data name="Add" xml:space="preserve">
-    <value>新增</value>
+    <value>Add</value>
   </data>
 </root>

@@ -15,9 +15,13 @@ public class SummarizingByStatusQuery : IRequest<IEnumerable<StatusSummarizingDt
 
 }
 
-
+public class SummarizingVerifiedByIdQuery : IRequest<int[]>
+{
+    public int Id { get; set; }
+}
 
 public class GetAllResultMappingsQueryHandler :
+     IRequestHandler<SummarizingVerifiedByIdQuery, int[]>,
      IRequestHandler<SummarizingByStatusQuery, IEnumerable<StatusSummarizingDto>>,
      IRequestHandler<GetAllResultMappingsQuery, IEnumerable<ResultMappingDto>>
 {
@@ -68,6 +72,21 @@ public class GetAllResultMappingsQueryHandler :
             new StatusSummarizingDto(){Status="Ongoing" },
             new StatusSummarizingDto(){Status="Finished" },
             };
+    }
+
+    public async Task<int[]> Handle(SummarizingVerifiedByIdQuery request, CancellationToken cancellationToken)
+    {
+        var verified = await _context.ResultMappingDatas.CountAsync(x=>x.Verify == "Verified" && x.ResultMappingId==request.Id);
+        var total = await _context.ResultMappingDatas.CountAsync(x=>x.ResultMappingId == request.Id);
+        if (total > 0)
+        {
+            return new int[] { ((int)Math.Round( Convert.ToDecimal(verified) * 100.00m / Convert.ToDecimal(total))),verified, total };
+        }
+        else
+        {
+            return new int[] { 0, 0, 0 };
+        }
+
     }
 }
 

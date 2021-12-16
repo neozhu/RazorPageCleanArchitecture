@@ -375,8 +375,11 @@
                      <span class="@(Settings.Theme.IconPrefix) fa-check-square mr-1"></span>
                      Finished
                    </a>
-                   <div class="card-tools">
-
+                   <div class="card-tools" style="width:300px">
+                    <div class="progress" id="progress_${row.Id}">
+                      <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                    </div>
+                    <small class="progress_labe">0% Verified</small>
                    </div>
                  </div>
                  <div class="card-body">
@@ -388,7 +391,9 @@
                onExpandRow: function(index,row){
                    //console.log(row);
                    const columns = getcolumens(row);
-                   var subgrid = $(this).datagrid('getRowDetail',index).find(`#datatable_${row.Id}`);
+                   const subgrid = $(this).datagrid('getRowDetail',index).find(`#datatable_${row.Id}`);
+                   const progressbar = $(this).datagrid('getRowDetail',index).find(`.progress-bar`);
+                   const label = $(this).datagrid('getRowDetail',index).find(`.progress_labe`);
                    //console.log(subgrid.width());
                    const suburl='@Url.Page("/ResultMappings/Overview")?handler=ResultMappingData&Id=' + row.Id;
                    subgrid.datagrid({
@@ -406,7 +411,15 @@
                         sortOrder:'asc',
                         pageSize: 10,
                         pageList: [10, 30, 50, 100, 1000],
-                        columns: [columns]
+                        columns: [columns],
+                        onLoadSuccess:function() {
+                             const getverifiedurl='@Url.Page("/ResultMappings/Overview")?handler=SummarizingVerified&Id=' + row.Id;
+                             axios.get(getverifiedurl).then(result=>{
+                                 progressbar.css('width',result.data[0] +"%");
+                                 progressbar.attr('aria-valuenow',result.data[0]);
+                                 label.text(`${result.data[0]}% Verified`)
+                             })
+                        }
                    }).datagrid('enableFilter', [{
                         field:'Verify',
                         type:'combobox',
@@ -433,8 +446,7 @@
                             }
                            }
                    }
-               }])
-                      .datagrid('load',suburl);
+                   }]).datagrid('load',suburl);
 
                },
                onBeforeLoad: function () {

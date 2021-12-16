@@ -121,18 +121,36 @@
     <value>いらっしゃいませ</value>
   </data>
   <data name="System" xml:space="preserve">
-    <value>システム</value>
+    <value>System</value>
   </data>
   <data name="Selected Project" xml:space="preserve">
-    <value>選択されたプロジェクト</value>
+    <value>Selected Project</value>
   </data>
   <data name="Logs" xml:space="preserve">
-    <value>ログ</value>
+    <value>Logs</value>
   </data>
   <data name="Dictionaries" xml:space="preserve">
-    <value>辞書</value>
+    <value>Dictionaries</value>
   </data>
   <data name="Audit Trails" xml:space="preserve">
-    <value>監査証跡</value>
+    <value>Audit Trails</value>
+  </data>
+  <data name="Value Mapping Rule" xml:space="preserve">
+    <value>Value Mapping Rule</value>
+  </data>
+  <data name="Migration Objects" xml:space="preserve">
+    <value>Migration Objects</value>
+  </data>
+  <data name="Data Element S4" xml:space="preserve">
+    <value>Data Element S4</value>
+  </data>
+  <data name="Migration Projects" xml:space="preserve">
+    <value>Migration Projects</value>
+  </data>
+  <data name="Migration Result" xml:space="preserve">
+    <value>Migration Result</value>
+  </data>
+  <data name="Value Mapping Cockpit" xml:space="preserve">
+    <value>Value Mapping Cockpit</value>
   </data>
 </root>

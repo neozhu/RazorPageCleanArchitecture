@@ -118,21 +118,126 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Save" xml:space="preserve">
-    <value>保存する </value>
+    <value>Save</value>
   </data>
   <data name="Refresh" xml:space="preserve">
-    <value>更新</value>
+    <value>Refresh</value>
   </data>
   <data name="New" xml:space="preserve">
-    <value>新しい </value>
+    <value>New</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>消去 </value>
+    <value>Delete</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>選ぶ</value>
+    <value>Close</value>
   </data>
   <data name="Add" xml:space="preserve">
-    <value>追加 </value>
+    <value>Add</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Command" xml:space="preserve">
+    <value>Command</value>
+  </data>
+  <data name="Created By" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="Download Data" xml:space="preserve">
+    <value>Download Data</value>
+  </data>
+  <data name="Download Value Mapping" xml:space="preserve">
+    <value>Download Value Mapping</value>
+  </data>
+  <data name="Edit Result Mapping" xml:space="preserve">
+    <value>Edit Result Mapping</value>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>Finished</value>
+  </data>
+  <data name="Legacy Field 1 Name" xml:space="preserve">
+    <value>Legacy Field 1 Name</value>
+  </data>
+  <data name="Legacy Field 3 Name" xml:space="preserve">
+    <value>Legacy Field 3 Name</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Migration Approach" xml:space="preserve">
+    <value>Migration Approach</value>
+  </data>
+  <data name="Modified By" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="New Value Field" xml:space="preserve">
+    <value>New Value Field</value>
+  </data>
+  <data name="Relevant Mock" xml:space="preserve">
+    <value>Relevant Mock</value>
+  </data>
+  <data name="Result Mapping Fields" xml:space="preserve">
+    <value>Result Mapping Fields</value>
+  </data>
+  <data name="Team" xml:space="preserve">
+    <value>Team</value>
+  </data>
+  <data name="Upload Result Mapping File" xml:space="preserve">
+    <value>Upload Result Mapping File</value>
+  </data>
+  <data name="Value Mapping Rule" xml:space="preserve">
+    <value>Value Mapping Rule</value>
+  </data>
+  <data name="Verify Progress" xml:space="preserve">
+    <value>Verify Progress</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="Upload Template File" xml:space="preserve">
+    <value>Upload Template File</value>
+  </data>
+  <data name="Upload Data" xml:space="preserve">
+    <value>Upload Data</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Result Mapping Name" xml:space="preserve">
+    <value>Result Mapping Name</value>
+  </data>
+  <data name="Relevant Objects" xml:space="preserve">
+    <value>Relevant Objects</value>
+  </data>
+  <data name="Migration Result Overview" xml:space="preserve">
+    <value>Migration Result Overview</value>
+  </data>
+  <data name="Mapping Rule Name" xml:space="preserve">
+    <value>Mapping Rule Name</value>
+  </data>
+  <data name="Legacy System" xml:space="preserve">
+    <value>Legacy System</value>
+  </data>
+  <data name="Legacy Field 2 Name" xml:space="preserve">
+    <value>Legacy Field 2 Name</value>
+  </data>
+  <data name="Last Modified By" xml:space="preserve">
+    <value>Last Modified By</value>
+  </data>
+  <data name="Field Mapping Values" xml:space="preserve">
+    <value>Field Mapping Values</value>
+  </data>
+  <data name="Edit Mapping Rule" xml:space="preserve">
+    <value>Edit Mapping Rule</value>
+  </data>
+  <data name="Download Result Mapping" xml:space="preserve">
+    <value>Download Result Mapping</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments</value>
   </data>
 </root>
