@@ -98,9 +98,9 @@ namespace AdminLTE.WebUI.Pages.MappingRules
 
         }
 
-        public async Task<IActionResult> OnGetDeleteCheckedAsync([FromQuery] int[] id)
+        public async Task<IActionResult> OnPostDeleteCheckedAsync([FromBody] DeleteCheckedMappingRulesCommand command)
         {
-            var command = new DeleteCheckedMappingRulesCommand() { Id = id };
+          ;
             var result = await _mediator.Send(command);
             return new JsonResult("");
         }

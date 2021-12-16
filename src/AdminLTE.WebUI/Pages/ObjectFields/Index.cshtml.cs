@@ -45,9 +45,8 @@ namespace AdminLTE.WebUI.Pages.ObjectFields
 
         }
 
-        public async Task<IActionResult> OnGetDeleteCheckedAsync([FromQuery] int[] id)
+        public async Task<IActionResult> OnPostDeleteCheckedAsync([FromBody] DeleteCheckedObjectFieldsCommand command)
         {
-            var command = new DeleteCheckedObjectFieldsCommand() { Id = id };
             var result = await _mediator.Send(command);
             return new JsonResult("");
         }

@@ -192,6 +192,9 @@
 <script src="~/plugins/select2/js/select2.full.min.js"></script>
 
 <script type="text/javascript">
+      axios.defaults.headers.common = {
+            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+        };
        var uploadresultmappingbutton = document.querySelector("button[name='uploadresultmappingbutton']");
        var uploadresultmappingfilename = document.querySelector("#uploadresultmappingfilename");
        var resultmappingfileinput = document.getElementById("ResultMappingFile");
@@ -728,9 +731,8 @@
                    },
                    callback: function (result) {
                        if (result) {
-                           var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
-                           console.log(paras.toString())
-                           axios.get('@Url.Page("/ResultMappings/Overview")?handler=DeleteChecked&' + paras.toString()).then(res => {
+                         
+                           axios.post('@Url.Page("/ResultMappings/Overview")?handler=DeleteChecked',{id:checkedId}).then(res => {
                                toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
                                reloadData();
                            })

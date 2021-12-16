@@ -298,6 +298,9 @@
 <script src="~/plugins/select2/js/select2.full.min.js"></script>
 
 <script>
+    axios.defaults.headers.common = {
+            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+        };
     var uploaddatainput = document.getElementById("uploaddatafile");
     const rightmodalcontent= document.querySelector("#mappingvalue-modal-right-lg > div > .modal-content");
     const rightoverlay = document.querySelector("#mappingvalue-modal-right-lg > div > .modal-content > .overlay");
@@ -606,8 +609,8 @@
                     },
                     callback: function (result) {
                         if (result) {
-                            var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
-                            axios.get('@Url.Page("/FieldMappingValues/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
+
+                            axios.post('@Url.Page("/FieldMappingValues/Index")?handler=DeleteChecked',{id:checkedId}).then(res => {
                                 toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
                                 onReloadFieldData()
                                 reloadData();

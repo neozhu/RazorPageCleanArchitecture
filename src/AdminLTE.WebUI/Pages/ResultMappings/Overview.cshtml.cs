@@ -56,9 +56,9 @@ namespace AdminLTE.WebUI.Pages.ResultMappings
             Summarizing = summarizing.ToList();
 
         }
-        public async Task<IActionResult> OnGetDeleteCheckedAsync([FromQuery] int[] id)
+        public async Task<IActionResult> OnPostDeleteCheckedAsync([FromBody] DeleteCheckedResultMappingsCommand command)
         {
-            var command = new DeleteCheckedResultMappingsCommand() { Id = id };
+            
             var result = await _mediator.Send(command);
             return new JsonResult("");
         }
