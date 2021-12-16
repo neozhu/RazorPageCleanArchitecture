@@ -63,9 +63,9 @@ namespace SmartAdmin.WebUI.Pages.Documents
 
         }
 
-        public async Task<IActionResult> OnGetDeleteCheckedAsync([FromQuery] int[] id)
+        public async Task<IActionResult> OnPostDeleteCheckedAsync([FromBody] DeleteCheckedDocumentsCommand command)
         {
-            var command = new DeleteCheckedDocumentsCommand() { Id = id };
+           
             var result = await _mediator.Send(command);
             return new JsonResult("");
         }

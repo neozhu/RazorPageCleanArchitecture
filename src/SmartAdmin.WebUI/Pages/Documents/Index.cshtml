@@ -1,4 +1,4 @@
-﻿@page
+@page
 @using CleanArchitecture.Razor.Domain.Enums
 @using Microsoft.AspNetCore.Mvc.Localization
 @using CleanArchitecture.Razor.Application.Constants.Permission
@@ -162,6 +162,9 @@
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
 
     <script type="text/javascript">
+        axios.defaults.headers.common = {
+            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+        };
         $('#searchbutton').click(function () {
             reloadData();
         });
@@ -409,9 +412,7 @@
                     },
                     callback: function (result) {
                         if (result) {
-                            var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
-                            console.log(paras.toString())
-                            axios.get('@Url.Page("/Documents/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
+                            axios.post('@Url.Page("/Documents/Index")?handler=DeleteChecked' ,{id:checkedId}).then(res => {
                                 toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
                                 reloadData();
                             })
@@ -439,14 +440,10 @@
                 sort: options.sortName,
                 order: options.sortOrder,
             }
-            console.log(options, data)
-            var headers = {
-                "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
-            }
+
             axios.post('@Url.Page("/Documents/Index")?handler=Export',
                 data,
                 {
-                    headers: headers,
                     responseType: "blob"
                 })
                 .then(response => {

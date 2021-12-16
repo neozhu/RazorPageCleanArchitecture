@@ -46,10 +46,9 @@ namespace SmartAdmin.WebUI.Pages.KeyValues
 
         }
 
-        public async Task<IActionResult> OnGetDeleteCheckedAsync([FromQuery] int[] id)
+        public async Task<IActionResult> OnPostDeleteCheckedAsync([FromBody] DeleteCheckedKeyValuesCommand command)
         {
-            var command = new DeleteCheckedKeyValuesCommand() { Id = id };
-            var result = await _mediator.Send(command);
+               var result = await _mediator.Send(command);
             return new JsonResult("");
         }
         public async Task<IActionResult> OnGetDeleteAsync([FromQuery] int id)
