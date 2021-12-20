@@ -77,11 +77,7 @@
 <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
 <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
 <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
-
-
 <script src="~/lib/easyui/plugins/datagrid-detailview.js"></script>
-
-<script src="~/lib/axios/dist/axios.js"></script>
 <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
 <script>
     $(async () => {
@@ -154,7 +150,7 @@
                     delay: (context) => {
                         let delay = 0;
                         if (context.type === 'data' && context.mode === 'default' && !delayed) {
-                            delay = context.dataIndex * 200 + context.datasetIndex * 100;
+                            delay = context.dataIndex * 50 + context.datasetIndex * 100;
                         }
                         return delay;
                     },
@@ -176,11 +172,13 @@
                         stacked: true,
                         offset: true,
                         type: "timeseries",
+                        unitStepSize: 1,
                         time: {
                             displayFormats: {
-                                'hour': 'ah:mm',
+                                'hour': 'ah',
                             },
-                          unit: 'hour'
+                            unitStepSize: 1,
+                            unit: 'hour'
                         },
                     },
                     y: {
@@ -301,14 +299,9 @@
             sort: options.sortName,
             order: options.sortOrder,
         }
-        console.log(options, data)
-        var headers = {
-            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
-        }
         axios.post('@Url.Page("/Logs/Index")?handler=Export',
             data,
             {
-                headers: headers,
                 responseType: "blob"
             })
             .then(response => {

@@ -77,14 +77,15 @@ public class GetAllResultMappingsQueryHandler :
     public async Task<int[]> Handle(SummarizingVerifiedByIdQuery request, CancellationToken cancellationToken)
     {
         var verified = await _context.ResultMappingDatas.CountAsync(x=>x.Verify == "Verified" && x.ResultMappingId==request.Id);
-        var total = await _context.ResultMappingDatas.CountAsync(x=>x.ResultMappingId == request.Id);
-        if (total > 0)
+        var unverified = await _context.ResultMappingDatas.CountAsync(x=> (x.Verify == "Verified" || x.Verify == "Scoped") && x.ResultMappingId == request.Id);
+        var total = await _context.ResultMappingDatas.CountAsync(x => x.ResultMappingId == request.Id);
+        if (unverified > 0)
         {
-            return new int[] { ((int)Math.Round( Convert.ToDecimal(verified) * 100.00m / Convert.ToDecimal(total))),verified, total };
+            return new int[] { ((int)Math.Round( Convert.ToDecimal(verified) * 100.00m / Convert.ToDecimal(unverified))),verified, unverified, total };
         }
         else
         {
-            return new int[] { 0, 0, 0 };
+            return new int[] { 0, 0, 0, total };
         }
 
     }

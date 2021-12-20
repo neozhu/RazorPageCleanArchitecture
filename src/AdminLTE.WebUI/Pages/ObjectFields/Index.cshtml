@@ -99,7 +99,6 @@
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
-    <script src="~/lib/axios/dist/axios.js"></script>
     <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
     <script src="~/lib/filesize/filesize.js"></script>
     <script src="~/lib/plupload/plupload.full.min.js"></script>
@@ -108,11 +107,6 @@
     <script src="~/lib/fabric/fabric.min.js"></script>
     <script src="~/lib/slimScroll/jquery.slimscroll.min.js"></script>
     <script type="text/javascript">
-        axios.defaults.headers.common = {
-            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
-        };
-
-
         $('#searchbutton').click(function () {
             reloadData();
         });
@@ -414,14 +408,9 @@
                 sort: options.sortName,
                 order: options.sortOrder,
             }
-            console.log(options,data)
-            var headers = {
-                "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
-            }
             axios.post('@Url.Page("/ObjectFields/Index")?handler=Export',
                 data,
                 {
-                    headers: headers,
                     responseType: "blob"
                 })
                 .then(response => {

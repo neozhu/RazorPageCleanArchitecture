@@ -6,49 +6,53 @@ using System.Threading.Tasks;
 
 namespace CleanArchitecture.Razor.Application.ResultMappings.Commands.ChangeStatus;
 
-public record VerifyResultMappingStatusCommand: IRequest<Result>
+public record ScopedResultMappingStatusCommand : IRequest<Result>
 {
     public int[] Id { get; set; }
 }
 
-public class VerifyResultMappingStatusCommandHandler :
-    IRequestHandler<VerifyResultMappingStatusCommand, Result>
+public class ScopedResultMappingStatusCommandHandler :
+    IRequestHandler<ScopedResultMappingStatusCommand, Result>
 {
     private readonly IApplicationDbContext _context;
-    private readonly ILogger<VerifyResultMappingStatusCommandHandler> _logger;
+    private readonly ICurrentUserService _userService;
+    private readonly ILogger<ScopedResultMappingStatusCommand> _logger;
 
-    public VerifyResultMappingStatusCommandHandler(
+    public ScopedResultMappingStatusCommandHandler(
         IApplicationDbContext context,
-        ILogger<VerifyResultMappingStatusCommandHandler> logger
+        ICurrentUserService userService,
+        ILogger<ScopedResultMappingStatusCommand> logger
         )
     {
         _context = context;
+        _userService = userService;
         _logger = logger;
     }
 
-    public async Task<Result> Handle(VerifyResultMappingStatusCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(ScopedResultMappingStatusCommand request, CancellationToken cancellationToken)
     {
         var items = await _context.ResultMappingDatas.Where(x=>request.Id.Contains(x.Id)).ToListAsync();
         var resultId = items[0].ResultMappingId;
         foreach (var item in items)
         {
-            if(item.Verify == "Verified")
+            if(item.Verify!= "Scoped")
             {
                 item.Verify = "Scoped";
-                item.VerifiedDate = null;
+                item.Owner = _userService.UserId;
             }
             else
             {
-                item.Verify = "Verified";
-                item.VerifiedDate = DateTime.UtcNow;
+                item.Verify = "Unset";
+                item.Owner = null;
             }
             
+            //item.VerifiedDate = DateTime.UtcNow;
             _context.ResultMappingDatas.Update(item);    
         }
        
         await _context.SaveChangesAsync(cancellationToken);
 
-        var count = await _context.ResultMappingDatas.CountAsync(x=>x.ResultMappingId==resultId && x.Verify== "Verified");
+        var count = await _context.ResultMappingDatas.CountAsync(x => x.ResultMappingId == resultId && x.Verify == "Verified");
         var total = await _context.ResultMappingDatas.CountAsync(x => x.ResultMappingId == resultId && (x.Verify == "Verified" || x.Verify == "Scoped"));
         var mapping = await _context.ResultMappings.FindAsync(resultId);
         mapping.Verified = count;
@@ -57,7 +61,7 @@ public class VerifyResultMappingStatusCommandHandler :
         _context.ResultMappings.Update(mapping);
         await _context.SaveChangesAsync(cancellationToken);
 
-        _logger.LogInformation("Set the status of result mapping data to verified:{@Request}",request);
+        _logger.LogInformation("Set the verify scope:{@Request}", request);
         return Result.Success();
 
     }

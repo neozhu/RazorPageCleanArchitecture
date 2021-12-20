@@ -145,21 +145,7 @@
 
                             <span class="invalid-feedback" asp-validation-for="Input.Team">Sorry, you missed this one.</span>
                         </div>
-                        <div class="col-md-4 mb-2">
-                            <label class="form-label" for="MigrationApproach">@_localizer["Migration Approach"] </label>
-
-                            <select type="text" asp-for="Input.MigrationApproach" class="select2bs4" asp-dictionaries-for="MigrationApproach" data-placeholder="Choose Migration Approach" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                            </select>
-
-                            <span class="invalid-feedback" asp-validation-for="Input.Team">Sorry, you missed this one.</span>
-                        </div>
-
-                        <div class="col-md-8 mb-2">
-                            <label class="form-label" for="RelevantObjects">@_localizer["Relevant Objects"]  </label>
-                            <select asp-for="Input.RelevantObjects" asp-items="Model.MigrationObjects" class="select2bs4" multiple="multiple" placeholder="Relevant Objects" data-placeholder="Choose Relevant Objects" style="width: 100%;">
-                            </select>
-                            <span class="invalid-feedback" asp-validation-for="Input.RelevantObjects">Sorry, you missed this one.</span>
-                        </div>
+                        
 
                     </div>
                     <div class="form-row">
@@ -184,7 +170,6 @@
 <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
 <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
 <script src="~/lib/easyui/plugins/datagrid-detailview.js"></script>
-<script src="~/lib/axios/dist/axios.js"></script>
 <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
 
 <script src="~/lib/easyui/plugins/datagrid-detailview.js"></script>
@@ -192,9 +177,6 @@
 <script src="~/plugins/select2/js/select2.full.min.js"></script>
 
 <script type="text/javascript">
-      axios.defaults.headers.common = {
-            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
-        };
        var uploadresultmappingbutton = document.querySelector("button[name='uploadresultmappingbutton']");
        var uploadresultmappingfilename = document.querySelector("#uploadresultmappingfilename");
        var resultmappingfileinput = document.getElementById("ResultMappingFile");
@@ -315,7 +297,7 @@
                event.stopPropagation();
                var request = $('#resultmapping_form').serialize();
                var formData = new FormData(form);
-               formData.set("Input.RelevantObjects", $('#Input_RelevantObjects').select2('val').toString());
+               //formData.set("Input.RelevantObjects", $('#Input_RelevantObjects').select2('val').toString());
                formData.set("Input.Team", $('#Input_Team').select2('val').toString());
                formData.set("Input.RelevantMock ", $('#Input_RelevantMock').select2('val').toString());
                formData.set("Input.TemplateFile", $('#Input_TemplateFile').val());
@@ -370,14 +352,19 @@
                  const container=`<div class="p-3" style="height:620px;width:${width}px;position:relative;"><div class="card card-primary card-outline direct-chat direct-chat-primary">
                  <div class="card-header">
                    <h3 class="card-title">${row.Name}</h3>
-                   <a href="javascript:onVerify(${row.Id})" class="ml-2 btn btn-sm  btn-outline-primary">
+                   <a href="javascript:onSetScope(${row.Id})" class="ml-2 btn btn-sm  btn-outline-danger">
                      <span class="@(Settings.Theme.IconPrefix) fa-flag mr-1"></span>
-                     Verify
+                     Set Scope/Unset
+                   </a>
+                   <a href="javascript:onVerify(${row.Id})" class="ml-2 btn btn-sm  btn-outline-primary">
+                     <span class="@(Settings.Theme.IconPrefix) fa-calendar-check mr-1"></span>
+                     Verify/Unverified
                    </a>
                    <a href="javascript:onFinished(${row.Id})" class="ml-2 btn btn-sm  btn-outline-primary">
                      <span class="@(Settings.Theme.IconPrefix) fa-check-square mr-1"></span>
                      Finished
                    </a>
+          
                    <div class="card-tools" style="width:300px">
                     <div class="progress" id="progress_${row.Id}">
                       <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
@@ -405,7 +392,7 @@
                         method: 'GET',
                         selectOnCheck: false,
                         checkOnSelect: false,
-                        singleSelect:true,
+                        singleSelect:false,
                         rownumbers: false,
                         pagination: true,
                         clientPaging: false,
@@ -422,6 +409,12 @@
                                  progressbar.attr('aria-valuenow',result.data[0]);
                                  label.text(`${result.data[0]}% Verified`)
                              })
+                        },
+                        onBeforeSelect:function(index,row){
+                            console.log(row);
+                        },
+                        onBeforeUnselect:function(index,row){
+                            console.log(row);
                         }
                    }).datagrid('enableFilter', [{
                         field:'Verify',
@@ -433,7 +426,8 @@
                           data:[
                              {id:'',text:'ALL'},
                              {id:'Verified',text:'Verified'},
-                             {id:'Unverified',text:'Unverified'},
+                             {id:'Scoped',text:'Scoped'},
+                             {id:'Unset',text:'Unset'},
                           ],
                          onChange: function (item) {
                             if(item){
@@ -517,7 +511,7 @@
                      formatter:function(value,row,index){
                          return `<a> ${value??''} </a> <br> <small>${row.Description??''}</small> `;
                      },
-                     width: 280
+                     width: 300
                    },
                    { field: 'Verify',
                      title: '@_localizer["Verify Progress"]',
@@ -537,8 +531,6 @@
                                  `
                      }
                    },
-                   { field: 'MigrationApproach', title: '@_localizer["Migration Approach"]', sortable: true, width: 180 },
-                   { field: 'RelevantObjects', title: '@_localizer["Relevant Objects"]', sortable: true, width: 220 },
                    { field: 'CreatedBy', title: '@_localizer["Created By"]', sortable: true, width: 160 },
                    { field: 'LastModifiedBy', title: '@_localizer["Last Modified By"]',  sortable: true, width: 160 },
 
@@ -586,6 +578,8 @@
                      formatter:function(v){
                          if(v=='Verified')
                            return '<i class="nav-icon far fa-circle text-success text-lg"></i>';
+                         else if(v=='Scoped')
+                           return '<i class="nav-icon far fa-circle text-danger text-lg"></i>';
                          else
                           return '';
                      }
@@ -600,19 +594,20 @@
                        });
            });
            columns.push({
+                           field: 'Owner',
+                           title: '@_localizer["Owner"]',
+                           sortable: true,
+                           width: 160,
+                       }
+                       );
+           columns.push({
                            field: 'CreatedBy',
                            title: '@_localizer["Created By"]',
                            sortable: true,
                            width: 160,
                        }
                        );
-          columns.push({
-                           field: 'LastModifiedBy',
-                           title: '@_localizer["Modified By"]',
-                           sortable: true,
-                           width: 160,
-                       }
-                       );
+          
           return columns;
        }
 
@@ -674,13 +669,6 @@
                            $('#Input_RelevantMock').val(value.split(',')).change();
                        } else {
                            $('#Input_RelevantMock').val(null).change();
-                       }
-                   },
-                   RelevantObjects: function (value) {
-                       if (value) {
-                           $('#Input_RelevantObjects').val(value.split(',')).change();
-                       } else {
-                           $('#Input_RelevantObjects').val(null).change();
                        }
                    },
                    Team: function (value) {
@@ -755,14 +743,19 @@
        }
 
        var onVerify =(id)=>{
-           var selected=$(`#datatable_${id}`).datagrid('getChecked').map(x=>x.Id);
-           if(selected.length>0){
+           var selected=$(`#datatable_${id}`).datagrid('getChecked');
+           if(selected.length>0) {
+               if(selected.filter(x=>x.Verify == "Unset").length>0){
+                   bootbox.alert({
+                      message: "@_localizer["Please set scoped record first."]"
+                   });
+                   return false;
+               }
+               const selectedId=selected.map(x=>x.Id);
                const url= '@Url.Page("/ResultMappings/Overview")?handler=Verify';
-               axios.post(url, {Id:selected }, {
-                        headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() }
-                    })
+               axios.post(url, {Id:selectedId })
                         .then(response => {
-                            toastr["info"]('@_localizer["Verified Success"]');
+                            toastr["info"]('@_localizer["Verified success"]');
                              const suburl='@Url.Page("/ResultMappings/Overview")?handler=ResultMappingData&Id=' + id;
                             $(`#datatable_${id}`).datagrid('load',suburl);
                         }).catch(error => {
@@ -783,6 +776,41 @@
                 });
            }
        }
+       var onSetScope =(id) =>{
+           var selected=$(`#datatable_${id}`).datagrid('getChecked');
+           if(selected.length>0){
+               if(selected.filter(x=> x.Verify == "Verified").length>0){
+                   bootbox.alert({
+                      message: "@_localizer["Please check the unverified record."]"
+                   });
+                   return false;
+               }
+               const url= '@Url.Page("/ResultMappings/Overview")?handler=Scoped';
+               const selectedId=selected.map(x=>x.Id);
+               axios.post(url, {Id:selectedId })
+                        .then(response => {
+                            toastr["info"]('@_localizer["Set scoped success"]');
+                             const suburl='@Url.Page("/ResultMappings/Overview")?handler=ResultMappingData&Id=' + id;
+                             $(`#datatable_${id}`).datagrid('load',suburl);
+                        }).catch(error => {
+                            if (error.response.data.Errors) {
+                                const errors = error.response.data.Errors;
+                                for (let [key, value] of Object.entries(errors)) {
+                                    toastr["error"](`${key}: ${value.toString()}`);
+                                }
+
+                            } else {
+                                toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
+                            }
+
+                        });
+           }else{
+                bootbox.alert({
+                  message: "@_localizer["Please check the record to verify."]"
+                });
+           }
+       }
+
        var onFinished =(id)=>{
           const url= '@Url.Page("/ResultMappings/Overview")?handler=Finished&Id=' + id;
          axios.get(url).then(res => {

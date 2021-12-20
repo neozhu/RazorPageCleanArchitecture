@@ -122,5 +122,10 @@ namespace AdminLTE.WebUI.Pages.ResultMappings
             var result = await _mediator.Send(command);
             return new JsonResult(result);
         }
+        public async Task<IActionResult> OnPostScoped([FromBody]ScopedResultMappingStatusCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return new JsonResult(result);
+        }
     }
 }

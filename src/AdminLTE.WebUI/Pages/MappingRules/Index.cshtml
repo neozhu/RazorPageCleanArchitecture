@@ -291,16 +291,12 @@
 <script type="text/javascript" src="~/lib/easyui/jquery.easyui.min.js" asp-append-version="true"></script>
 <script type="text/javascript" src="~/lib/easyui/plugins/datagrid-filter.js" asp-append-version="true"></script>
 <script type="text/javascript" src="~/lib/easyui/jquery.easyui.component.js" asp-append-version="true"></script>
-<script src="~/lib/axios/dist/axios.js"></script>
 <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
 <script src="~/lib/easyui/plugins/datagrid-detailview.js"></script>
 <!-- Select2 -->
 <script src="~/plugins/select2/js/select2.full.min.js"></script>
 
 <script>
-    axios.defaults.headers.common = {
-            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
-        };
     var uploaddatainput = document.getElementById("uploaddatafile");
     const rightmodalcontent= document.querySelector("#mappingvalue-modal-right-lg > div > .modal-content");
     const rightoverlay = document.querySelector("#mappingvalue-modal-right-lg > div > .modal-content > .overlay");
@@ -722,9 +718,7 @@
                     const changed = inserted.concat(updated.filter(item => {
                         return !deleted.includes(item);
                     })).concat(deleted);
-                    axios.post('@Url.Page("/FieldMappingValues/Index")', { Items: changed }, {
-                        headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() }
-                    })
+                    axios.post('@Url.Page("/FieldMappingValues/Index")', { Items: changed })
                         .then(response => {
                             toastr["info"]('@_localizer["Save Success"]');
                             $fieldmappingvalues_dg.datagrid('acceptChanges');
@@ -1449,14 +1443,9 @@
             sort: options.sortName,
             order: options.sortOrder,
         }
-        //console.log(options, data)
-        var headers = {
-            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
-        }
         axios.post('@Url.Page("/MappingRules/Index")?handler=Export',
             data,
             {
-                headers: headers,
                 responseType: "blob"
             })
             .then(response => {

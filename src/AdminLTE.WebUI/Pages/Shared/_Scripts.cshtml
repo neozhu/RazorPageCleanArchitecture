@@ -16,8 +16,12 @@
 <script src="~/plugins/bootbox.js/bootbox.min.js"></script>
 <!-- numeral -->
 <script src="~/lib/numeral/min/numeral.min.js"></script>
+<!-- axios -->
+<script src="~/lib/axios/dist/axios.js"></script>
 <script>
-
+    axios.defaults.headers.common = {
+            "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+        };
     toastr.options = {
         "closeButton": false,
         "debug": false,

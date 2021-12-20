@@ -94,7 +94,7 @@ public class AddEditResultMappingCommandHandler : IRequestHandler<AddEditResultM
                 item.FieldParameters = fieldparaters.ToList();
                 item.ResultMappingDatas = mappingdata.ToList();
                 item.Verified = 0;
-                item.Total = item.ResultMappingDatas.Count;
+                item.Total = 0;
             }
             _context.ResultMappings.Add(item);
             await _context.SaveChangesAsync(cancellationToken);
