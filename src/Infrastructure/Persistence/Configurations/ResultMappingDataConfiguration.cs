@@ -21,9 +21,6 @@ public class ResultMappingDataConfiguration : IEntityTypeConfiguration<ResultMap
                  v => JsonSerializer.Deserialize<Dictionary<string,string>>(v, (JsonSerializerOptions)null)
                 );
 
-        builder.HasOne(d => d.ResultMapping)
-               .WithMany(p => p.ResultMappingDatas)
-               .HasForeignKey(d => d.ResultMappingId)
-               .OnDelete(DeleteBehavior.Cascade);
+    
     }
 }

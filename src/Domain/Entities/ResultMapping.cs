@@ -19,7 +19,7 @@ public class ResultMapping : AuditableEntity, IAuditTrial, IProjectId
     public int Verified { get; set; }
     public int Total { get; set; }
     public List<FieldParameter> FieldParameters { get; set; }=new List<FieldParameter>();
-    public virtual ICollection<ResultMappingData> ResultMappingDatas { get; set; } = new HashSet<ResultMappingData>();
+    //public virtual ICollection<ResultMappingData> ResultMappingDatas { get; set; } = new HashSet<ResultMappingData>();
     
 
 }

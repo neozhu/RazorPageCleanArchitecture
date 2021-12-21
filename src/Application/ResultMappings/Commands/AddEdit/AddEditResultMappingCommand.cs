@@ -92,7 +92,13 @@ public class AddEditResultMappingCommandHandler : IRequestHandler<AddEditResultM
                 var fieldparaters = readFieldParameter(request.UploadRequest.Data);
                 var mappingdata = readResultMappingData(request.UploadRequest.Data);
                 item.FieldParameters = fieldparaters.ToList();
-                item.ResultMappingDatas = mappingdata.ToList();
+                var details = mappingdata.ToList();
+                foreach(var detail in details)
+                {
+                    detail.ResultMappingId = item.Id;
+                    detail.ResultMapping = item;
+                    await _context.ResultMappingDatas.AddAsync(detail, cancellationToken);
+                }
                 item.Verified = 0;
                 item.Total = 0;
             }

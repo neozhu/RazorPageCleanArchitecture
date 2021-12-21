@@ -13,7 +13,7 @@ public  class ResultMappingData : AuditableEntity, IAuditTrial, IProjectId
     public int ResultMappingId { get; set;}
     public virtual ResultMapping ResultMapping { get; set; }
     public Dictionary<string,string> FieldData { get; set; }= new Dictionary<string,string>();  
-    public string Verify { get; set; } = "Unset";
+    public string Verify { get; set; } = "Unselected";
     public string Owner { get; set; }
     public string Scoped { get; set; }
     public DateTime? VerifiedDate { get; set; }

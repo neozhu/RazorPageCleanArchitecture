@@ -53,11 +53,18 @@ public class VerifyResultMappingStatusCommandHandler :
         var mapping = await _context.ResultMappings.FindAsync(resultId);
         mapping.Verified = count;
         mapping.Total = total;
-        mapping.Status = "Ongoing";
+        if (count == total)
+        {
+            mapping.Status = "Finished";
+        }
+        else
+        {
+            mapping.Status = "Ongoing";
+        }
         _context.ResultMappings.Update(mapping);
         await _context.SaveChangesAsync(cancellationToken);
 
-        _logger.LogInformation("Set the status of result mapping data to verified:{@Request}",request);
+        _logger.LogInformation("Set the status to verified:{@Request}",request);
         return Result.Success();
 
     }

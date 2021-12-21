@@ -15,13 +15,18 @@ public class SummarizingByStatusQuery : IRequest<IEnumerable<StatusSummarizingDt
 
 }
 
-public class SummarizingVerifiedByIdQuery : IRequest<int[]>
+public class SummarizingVerifiedByIdQuery : IRequest<Dictionary<string,int[]>>
+{
+    public int Id { get; set; }
+}
+public class GetOwnerListByIdQuery : IRequest<IEnumerable<object>>
 {
     public int Id { get; set; }
 }
 
 public class GetAllResultMappingsQueryHandler :
-     IRequestHandler<SummarizingVerifiedByIdQuery, int[]>,
+     IRequestHandler<GetOwnerListByIdQuery, IEnumerable<object>>,
+     IRequestHandler<SummarizingVerifiedByIdQuery, Dictionary<string, int[]>>,
      IRequestHandler<SummarizingByStatusQuery, IEnumerable<StatusSummarizingDto>>,
      IRequestHandler<GetAllResultMappingsQuery, IEnumerable<ResultMappingDto>>
 {
@@ -74,20 +79,36 @@ public class GetAllResultMappingsQueryHandler :
             };
     }
 
-    public async Task<int[]> Handle(SummarizingVerifiedByIdQuery request, CancellationToken cancellationToken)
+    public async Task<Dictionary<string, int[]>> Handle(SummarizingVerifiedByIdQuery request, CancellationToken cancellationToken)
     {
-        var verified = await _context.ResultMappingDatas.CountAsync(x=>x.Verify == "Verified" && x.ResultMappingId==request.Id);
-        var unverified = await _context.ResultMappingDatas.CountAsync(x=> (x.Verify == "Verified" || x.Verify == "Scoped") && x.ResultMappingId == request.Id);
-        var total = await _context.ResultMappingDatas.CountAsync(x => x.ResultMappingId == request.Id);
-        if (unverified > 0)
+        var total = await _context.ResultMappingDatas
+            .Where(x=>x.ResultMappingId==request.Id && x.Owner!=null && (x.Verify=="Scoped" || x.Verify == "Verified"))
+            .GroupBy(x=>x.Owner)
+            .Select(x => new {Owner =x.Key, Total=x.Count() })
+            .ToListAsync();
+        var verified = await _context.ResultMappingDatas
+            .Where(x => x.ResultMappingId == request.Id && x.Owner != null && x.Verify == "Verified")
+            .GroupBy(x => x.Owner)
+            .Select(x => new { Owner = x.Key, Verified = x.Count() })
+            .ToListAsync();
+        var result = new Dictionary<string, int[]>();
+        foreach(var item in total)
         {
-            return new int[] { ((int)Math.Round( Convert.ToDecimal(verified) * 100.00m / Convert.ToDecimal(unverified))),verified, unverified, total };
-        }
-        else
-        {
-            return new int[] { 0, 0, 0, total };
+            var verifiedcount = verified.Where(x => x.Owner == item.Owner).FirstOrDefault()?.Verified??0;
+            var percentage =(int)Math.Round(verifiedcount * 100m / item.Total);
+            result.Add(item.Owner, new int[] { percentage, verifiedcount, item.Total });
         }
 
+        return result;
+
+    }
+
+    public async Task<IEnumerable<object>> Handle(GetOwnerListByIdQuery request, CancellationToken cancellationToken)
+    {
+        var result = await _context.ResultMappingDatas.
+                         Where(x => x.Owner != null && x.ResultMappingId==request.Id)
+                         .Select(x=>new {text = x.Owner }).Distinct().ToListAsync();
+        return result.ToArray();
     }
 }
 

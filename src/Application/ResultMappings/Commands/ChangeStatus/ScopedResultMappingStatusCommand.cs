@@ -57,7 +57,14 @@ public class ScopedResultMappingStatusCommandHandler :
         var mapping = await _context.ResultMappings.FindAsync(resultId);
         mapping.Verified = count;
         mapping.Total = total;
-        mapping.Status = "Ongoing";
+        if(count == total)
+        {
+            mapping.Status = "Finished";
+        }
+        else
+        {
+            mapping.Status = "Ongoing";
+        }
         _context.ResultMappings.Update(mapping);
         await _context.SaveChangesAsync(cancellationToken);
 

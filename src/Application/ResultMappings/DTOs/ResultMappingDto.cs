@@ -26,7 +26,7 @@ public class ResultMappingDto : IMapFrom<ResultMapping>
     public string TemplateFile { get; set; }
     public string TemplateDescription { get; set; }
     public List<FieldParameter> FieldParameters { get; set; } = new List<FieldParameter>();
-    public virtual ICollection<ResultMappingData> ResultMappingDatas { get; set; } = new HashSet<ResultMappingData>();
+    //public virtual ICollection<ResultMappingData> ResultMappingDatas { get; set; } = new HashSet<ResultMappingData>();
     public string CreatedBy { get; set; }
     public string LastModifiedBy { get; set; }
     public int Verified { get; set; }

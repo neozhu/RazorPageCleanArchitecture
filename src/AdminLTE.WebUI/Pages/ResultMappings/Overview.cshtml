@@ -61,10 +61,7 @@
                 <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
                 @_localizer["Delete"]
             </button>
-            <button class="btn btn-sm btn-outline-primary " id="downloadtemplatebutton">
-                <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
-                @_localizer["Download Result Mapping"]
-            </button>
+      
 
 
         </div>
@@ -83,6 +80,7 @@
 <div class="modal fade" id="resultmapping_modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
+            <div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i><div class="pt-2 pl-2 text-gray">Waiting...</div></div>
             <div class="modal-header">
                 <h5 class="modal-title">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -181,6 +179,10 @@
        var uploadresultmappingfilename = document.querySelector("#uploadresultmappingfilename");
        var resultmappingfileinput = document.getElementById("ResultMappingFile");
        var savebutton = document.querySelector("button[name='savebutton']");
+       const modalcontent= document.querySelector("#resultmapping_modal > div > .modal-content");
+       const overlay = document.querySelector("#resultmapping_modal > div > .modal-content > .overlay");
+       overlay.style.display="none";
+
        uploadresultmappingbutton.addEventListener('click', (e) => {
            resultmappingfileinput.click();
        })
@@ -295,6 +297,8 @@
            } else {
                event.preventDefault();
                event.stopPropagation();
+               modalcontent.classList.add("overlay-wrapper");
+               overlay.style.display="flex";
                var request = $('#resultmapping_form').serialize();
                var formData = new FormData(form);
                //formData.set("Input.RelevantObjects", $('#Input_RelevantObjects').select2('val').toString());
@@ -309,11 +313,14 @@
                    processData: false,// 告诉axios不要去处理发送的数据(重要参数)
                    contentType: false,   // 告诉axios不要去设置Content-Type请求头
                }).then((response) => {
+                    modalcontent.classList.remove("overlay-wrapper");
+                    overlay.style.display="none";
                        toastr["info"]('@_localizer["Save Success"]');
                        $('#resultmapping_modal').modal('toggle');
                        reloadData();
                }).catch(error => {
-                   console.log(error.response)
+                    modalcontent.classList.remove("overlay-wrapper");
+                    overlay.style.display="none";
                    if (error.response.data.Errors) {
 
                        const errors = error.response.data.Errors;
@@ -345,27 +352,29 @@
                sortName: 'Id',
                sortOrder:'desc',
                pageSize: 15,
+               fitColumns:true,
                pageList: [10, 15, 30, 50, 100, 1000],
                view: detailview,
                detailFormatter:function(index,row){
                  const width = window.screen.width-380;
-                 const container=`<div class="p-3" style="height:620px;width:${width}px;position:relative;"><div class="card card-primary card-outline direct-chat direct-chat-primary">
+                 const container=`<div class="p-3" style="height:680px;width:${width}px;position:relative;"><div class="card card-primary card-outline direct-chat direct-chat-primary">
                  <div class="card-header">
                    <h3 class="card-title">${row.Name}</h3>
+                   <div class="card-tools">
                    <a href="javascript:onSetScope(${row.Id})" class="ml-2 btn btn-sm  btn-outline-danger">
                      <span class="@(Settings.Theme.IconPrefix) fa-flag mr-1"></span>
-                     Set Scope/Unset
+                     Select Scope/Unselect
                    </a>
                    <a href="javascript:onVerify(${row.Id})" class="ml-2 btn btn-sm  btn-outline-primary">
                      <span class="@(Settings.Theme.IconPrefix) fa-calendar-check mr-1"></span>
                      Verify/Unverified
                    </a>
-                   <a href="javascript:onFinished(${row.Id})" class="ml-2 btn btn-sm  btn-outline-primary">
-                     <span class="@(Settings.Theme.IconPrefix) fa-check-square mr-1"></span>
-                     Finished
+                   <a href="javascript:onDownloadWithDatagrid(${row.Id},${index})" class="ml-2 btn btn-sm  btn-outline-primary">
+                     <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                     Download Data
                    </a>
-          
-                   <div class="card-tools" style="width:300px">
+                   </div>
+                   <div  class="d-flex progress-container " >
                     <div class="progress" id="progress_${row.Id}">
                       <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
                     </div>
@@ -374,6 +383,17 @@
                  </div>
                  <div class="card-body">
                    <table id="datatable_${row.Id}" class="resultmappingdata_dg"></table>
+                   <div class="d-flex flex-row">
+                      <div class="p-2">
+                        Tooltip:
+                     </div>
+                     <div class="p-2">
+                       <i class="nav-icon far fa-circle text-danger text-lg"></i> Selected scope
+                     </div>
+                     <div class="p-2">
+                       <i class="nav-icon far fa-circle text-success text-lg"></i> Verified
+                     </div>
+                   </div>
                  </div>
                  </div></div>`
                        return container;
@@ -382,12 +402,11 @@
                    //console.log(row);
                    const columns = getcolumens(row);
                    const subgrid = $(this).datagrid('getRowDetail',index).find(`#datatable_${row.Id}`);
-                   const progressbar = $(this).datagrid('getRowDetail',index).find(`.progress-bar`);
-                   const label = $(this).datagrid('getRowDetail',index).find(`.progress_labe`);
+                   const tools = $(this).datagrid('getRowDetail',index).find(`.progress-container`);
                    //console.log(subgrid.width());
                    const suburl='@Url.Page("/ResultMappings/Overview")?handler=ResultMappingData&Id=' + row.Id;
                    subgrid.datagrid({
-                        width:window.screen.width-400,
+                        width:window.screen.width-405,
                         height: 510,
                         method: 'GET',
                         selectOnCheck: false,
@@ -405,10 +424,19 @@
                         onLoadSuccess:function() {
                              const getverifiedurl='@Url.Page("/ResultMappings/Overview")?handler=SummarizingVerified&Id=' + row.Id;
                              axios.get(getverifiedurl).then(result=>{
-                                 progressbar.css('width',result.data[0] +"%");
-                                 progressbar.attr('aria-valuenow',result.data[0]);
-                                 label.text(`${result.data[0]}% Verified`)
-                             })
+                                 tools.empty();
+                                 for (const [ key, value ] of Object.entries(result.data)) {
+                                   tools.append(`<div class="pl-2" style="width:150px" ><div class="progress" id="progress_${row.Id}">
+                                                   <div class="progress-bar progress-bar bg-success" role="progressbar" aria-valuenow="${value[0]}" aria-valuemin="0" aria-valuemax="100" style="width: ${value[0]}%"></div>
+                                                 </div>
+                                                 <small class="progress_labe">
+                                                   ${value[0]}% Verified By ${key}
+                                                 </small></div>`)
+                                 }
+                                 
+                             });
+                             const ownerfilter = subgrid.datagrid('getFilterComponent','Owner');
+                             ownerfilter.combobox('reload')
                         },
                         onBeforeSelect:function(index,row){
                             console.log(row);
@@ -416,7 +444,32 @@
                         onBeforeUnselect:function(index,row){
                             console.log(row);
                         }
-                   }).datagrid('enableFilter', [{
+                   }).datagrid('enableFilter', [
+                       {
+                           field:'Owner',
+                           type:'combobox',
+                           options:{
+                               url:'@Url.Page("/ResultMappings/Overview")?handler=OwnerList&id=' + row.Id,
+                               panelHeight:'auto',
+                               valueField:'text',
+                               textField:'text',
+                               method:'GET',
+                               onChange: function (item) {
+                               if(item){
+                                subgrid.datagrid('addFilterRule', {
+                                  field: 'Owner',
+                                  op: 'equal',
+                                  value: item
+                                });
+                                 subgrid.datagrid('doFilter');
+                               }else{
+                                 subgrid.datagrid('removeFilterRule', 'Owner'	                          );
+                                 subgrid.datagrid('doFilter');
+                               }
+                              }
+                           }
+                       },
+                       {
                         field:'Verify',
                         type:'combobox',
                         options:{
@@ -427,7 +480,7 @@
                              {id:'',text:'ALL'},
                              {id:'Verified',text:'Verified'},
                              {id:'Scoped',text:'Scoped'},
-                             {id:'Unset',text:'Unset'},
+                             {id:'Unselected',text:'Unselected'},
                           ],
                          onChange: function (item) {
                             if(item){
@@ -477,9 +530,9 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
                                       <button class="dropdown-item" onclick="onEdit(${index})" > @_localizer["Edit Result Mapping"]</button>
-                                      <button class="dropdown-item" onclick="onDownload(${index})" > @_localizer["Download Result Mapping"]</button>
+                                      <button class="dropdown-item" onclick="onDownload(${index})" > @_localizer["Download Data"]</button>
                                     </div>
-                                 </div>`;
+                                  </div>`;
                        }
                    },
                    { field: 'RelevantMock',
@@ -745,9 +798,9 @@
        var onVerify =(id)=>{
            var selected=$(`#datatable_${id}`).datagrid('getChecked');
            if(selected.length>0) {
-               if(selected.filter(x=>x.Verify == "Unset").length>0){
+               if(selected.filter(x=>x.Verify == "Unselected").length>0){
                    bootbox.alert({
-                      message: "@_localizer["Please set scoped record first."]"
+                      message: "@_localizer["Please select scoped first."]"
                    });
                    return false;
                }
@@ -848,16 +901,79 @@
 
            });
        }
+       var onDownloadWithDatagrid = (id,index) => {
+            const item = $dg.datagrid('getRows')[index];
+            var options = $(`#datatable_${id}`).datagrid('options');
+            var data = {
+                filterRules: JSON.stringify(options.filterRules),
+                sort: options.sortName,
+                order: options.sortOrder,
+                Id:item.Id,
+                Name:item.Name
+            }
+            axios.post('@Url.Page("/ResultMappings/Overview")?handler=DownloadData',
+                data,
+                {
+                    responseType: "blob"
+                })
+                .then(response => {
+                    const filename = getFileName(response.headers['content-disposition']);
+                    const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', filename);
+                    document.body.appendChild(link);
+                    link.click();
+                    toastr["info"](`@_localizer["Download success"]`);
+                }).catch(error => {
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        for (let [key, value] of Object.entries(errors)) {
+                            toastr["error"](`${value.toString()}`);
+                        }
 
+                    } else {
+                        toastr["error"](`@_localizer["Export fail"]`);
+                    }
+                })
+
+
+        
+       }
        var onDownload=(index)=>{
             const item = $dg.datagrid('getRows')[index];
-            const filename = getFileName(item.TemplateFile);
-                       const url = '/' + item.TemplateFile;
-                       const link = document.createElement('a');
-                       link.href = url;
-                       link.setAttribute('download', filename );
-                       document.body.appendChild(link);
-                       link.click();
+            var data = {
+                Id:item.Id,
+                Name:item.Name
+            }
+            axios.post('@Url.Page("/ResultMappings/Overview")?handler=DownloadData',
+                data,
+                {
+                    responseType: "blob"
+                })
+                .then(response => {
+                    const filename = getFileName(response.headers['content-disposition']);
+                    const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', filename);
+                    document.body.appendChild(link);
+                    link.click();
+                    toastr["info"](`@_localizer["Download success"]`);
+                }).catch(error => {
+                    if (error.response.data.Errors) {
+                        const errors = error.response.data.Errors;
+                        for (let [key, value] of Object.entries(errors)) {
+                            toastr["error"](`${value.toString()}`);
+                        }
+
+                    } else {
+                        toastr["error"](`@_localizer["Download fail"]`);
+                    }
+                })
+
+
+        
        }
        var getFileName = (disposition) => {
           const utf8FilenameRegex = /filename\*=UTF-8''([\w%\-\.]+)(?:; ?|$)/;

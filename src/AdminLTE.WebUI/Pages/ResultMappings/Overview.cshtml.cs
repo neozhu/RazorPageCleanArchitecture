@@ -17,6 +17,7 @@ using CleanArchitecture.Razor.Application.ResultMappings.Commands.Delete;
 using CleanArchitecture.Razor.Application.ResultMappings.Commands.ChangeStatus;
 using CleanArchitecture.Razor.Application.ResultMappings.Queries.GetAll;
 using CleanArchitecture.Razor.Application.ResultMappings.DTOs;
+using CleanArchitecture.Razor.Application.ResultMappings.Queries.Export;
 
 namespace AdminLTE.WebUI.Pages.ResultMappings
 {
@@ -116,6 +117,11 @@ namespace AdminLTE.WebUI.Pages.ResultMappings
             var result = await _mediator.Send(command);
             return new JsonResult(result);
         }
+        public async Task<IActionResult> OnGetOwnerList([FromQuery] GetOwnerListByIdQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return new JsonResult(result);
+        }
 
         public async Task<IActionResult> OnPostVerify([FromBody]VerifyResultMappingStatusCommand command)
         {
@@ -126,6 +132,12 @@ namespace AdminLTE.WebUI.Pages.ResultMappings
         {
             var result = await _mediator.Send(command);
             return new JsonResult(result);
+        }
+
+        public async Task<IActionResult> OnPostDownloadData([FromBody]ExportResultMappingDataQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", _localizer[command.Name] + ".xlsx");
         }
     }
 }
