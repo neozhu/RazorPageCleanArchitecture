@@ -110,6 +110,7 @@ public static class DependencyInjection
         {
             options.AddSupportedUICultures(LocalizationConstants.SupportedLanguages.Select(x => x.Code).ToArray());
             options.FallBackToParentUICultures = true;
+
         });
         services.AddControllers();
         services.AddSignalR();

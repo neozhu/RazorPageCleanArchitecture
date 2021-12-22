@@ -39,15 +39,6 @@ builder.Services.AddInfrastructure(builder.Configuration)
         .AddApplication()
         .AddWorkflow(builder.Configuration);
 
-
-
-
-
-
-
-
-
-
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
