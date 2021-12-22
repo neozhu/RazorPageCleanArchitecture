@@ -115,8 +115,9 @@ public static class DependencyInjection
         {
             options.AddSupportedUICultures(LocalizationConstants.SupportedLanguages.Select(x => x.Code).ToArray());
             options.FallBackToParentUICultures = true;
+
             options.RequestCultureProviders
-                .Remove(typeof(AcceptLanguageHeaderRequestCultureProvider));
+                .Remove(options.RequestCultureProviders.FirstOrDefault(x=>x.GetType()== typeof(AcceptLanguageHeaderRequestCultureProvider)));
         });
  
         return services;
