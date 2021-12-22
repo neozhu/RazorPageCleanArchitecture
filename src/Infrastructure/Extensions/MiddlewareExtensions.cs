@@ -11,7 +11,7 @@ internal static class MiddlewareExtensions
     public static IApplicationBuilder UseMiddlewares(this IApplicationBuilder app)
     {
         app.UseMiddleware<LocalizationCookiesMiddleware>();
-        app.UseMiddleware<UnhandledExceptionMiddleware>();
+        app.UseMiddleware<ExceptionHandlerMiddleware>();
         return app;
     }
 }

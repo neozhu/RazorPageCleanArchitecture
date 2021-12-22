@@ -8,14 +8,14 @@ using Serilog.Context;
 
 namespace CleanArchitecture.Razor.Infrastructure.Middlewares;
 
-internal class UnhandledExceptionMiddleware : IMiddleware
+internal class ExceptionHandlerMiddleware : IMiddleware
 {
     private readonly ICurrentUserService _currentUserService;
-    private readonly ILogger<UnhandledExceptionMiddleware> _logger;
+    private readonly ILogger<ExceptionHandlerMiddleware> _logger;
 
-    public UnhandledExceptionMiddleware(
+    public ExceptionHandlerMiddleware(
         ICurrentUserService currentUserService,
-        ILogger<UnhandledExceptionMiddleware> logger
+        ILogger<ExceptionHandlerMiddleware> logger
        )
     {
         _currentUserService = currentUserService;

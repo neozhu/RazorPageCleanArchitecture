@@ -27,6 +27,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
 using CleanArchitecture.Razor.Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.AspNetCore.Localization;
+using CleanArchitecture.Razor.Infrastructure.Extensions;
 
 namespace CleanArchitecture.Razor.Infrastructure;
 
@@ -73,16 +75,22 @@ public static class DependencyInjection
         services.AddTransient<IMailService, SMTPMailService>();
         services.AddTransient<IDictionaryService, DictionaryService>();
         services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-   .AddNegotiate();
+                .AddNegotiate();
         services.Configure<IdentityOptions>(options =>
         {
                 // Default SignIn settings.
                 options.SignIn.RequireConfirmedEmail = true;
-            options.SignIn.RequireConfirmedPhoneNumber = false;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
                 // Default Lockout settings.
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            options.Lockout.MaxFailedAccessAttempts = 5;
-            options.Lockout.AllowedForNewUsers = true;
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+        });
+        services.Configure<CookiePolicyOptions>(options =>
+        {
+            // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+            options.CheckConsentNeeded = context => true;
+            options.MinimumSameSitePolicy = SameSiteMode.None;
         });
         services.Configure<DataProtectionTokenProviderOptions>(opt =>
                 opt.TokenLifespan = TimeSpan.FromHours(2));
@@ -102,13 +110,15 @@ public static class DependencyInjection
         // Localization
         services.AddLocalization(options => options.ResourcesPath = LocalizationConstants.ResourcesPath);
         services.AddScoped<LocalizationCookiesMiddleware>();
-        services.AddScoped<UnhandledExceptionMiddleware>();
+        services.AddScoped<ExceptionHandlerMiddleware>();
         services.Configure<RequestLocalizationOptions>(options =>
         {
             options.AddSupportedUICultures(LocalizationConstants.SupportedLanguages.Select(x => x.Code).ToArray());
             options.FallBackToParentUICultures = true;
+            options.RequestCultureProviders
+                .Remove(typeof(AcceptLanguageHeaderRequestCultureProvider));
         });
-
+ 
         return services;
     }
 
