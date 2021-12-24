@@ -604,7 +604,7 @@
                                     if (error.response.data.Errors) {
                                         const errors = error.response.data.Errors;
                                         for (let [key, value] of Object.entries(errors)) {
-                                            toastr["error"](`${key}: ${value.toString()}`);
+                                            toastr["error"](`${value.toString()}`);
                                         }
 
                                     } else {
@@ -642,8 +642,8 @@
                     callback: function (result) {
                         if (result) {
 
-                            axios.post('@Url.Page("/FieldMappingValues/Index")?handler=DeleteChecked',{id:checkedId}).then(res => {
-                                toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
+                            axios.post('@Url.Page("/MappingRules/Index")?handler=DeleteCheckedFieldValue',{id:checkedId}).then(res => {
+                                toastr["info"](`@_localizer["Deleted ${checkedId.length} rows"]`);
                                 onReloadFieldData()
                                 reloadData();
                             })
@@ -651,11 +651,11 @@
                                     if (error.response.data.Errors) {
                                         const errors = error.response.data.Errors;
                                         for (let [key, value] of Object.entries(errors)) {
-                                            toastr["error"](`${key}: ${value.toString()}`);
+                                            toastr["error"](`${value.toString()}`);
                                         }
 
                                     } else {
-                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                        toastr["error"](`${error.response.data}`);
                                     }
                                 });
                         }
@@ -863,11 +863,11 @@
 
                     const errors = error.response.data.Errors;
                     for (let [key, value] of Object.entries(errors)) {
-                        toastr["error"](`${key}: ${value.toString()}`);
+                        toastr["error"](`${value.toString()}`);
                     }
 
                 } else {
-                    toastr["error"](`@_localizer["Save fail"],${error.response.data.title}`);
+                    toastr["error"](`${error.response.data.title}`);
                 }
             })
 
@@ -974,7 +974,7 @@
             `;
             uploadtemplatefileinput.value = null;
             savebutton.disabled = true;
-            toastr["error"](`@_localizer["upload fail"],${error}`);
+            toastr["error"](`${error}`);
         });
 
 
@@ -1004,7 +1004,7 @@
                 <div class="card-tools">
                     <a href="javascript:onDownload(${index})" class="ml-2 btn btn-sm  btn-outline-primary">
                      <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
-                     Download Data
+                     Download Value Mapping
                    </a>
                 </div>
               </div>
@@ -1439,18 +1439,18 @@
             callback: function (result) {
                 if (result) {
                     axios.get('@Url.Page("/MappingRules/Index")?handler=Delete&id=' + id).then(res => {
-                        toastr["info"]('@_localizer["Delete Success"]');
+                        toastr["info"]('@_localizer["Deleted success"]');
                         reloadData();
                     })
                         .catch((error) => {
                             if (error.response.data.Errors) {
                                 const errors = error.response.data.Errors;
                                 for (let [key, value] of Object.entries(errors)) {
-                                    toastr["error"](`${key}: ${value.toString()}`);
+                                    toastr["error"](`${value.toString()}`);
                                 }
 
                             } else {
-                                toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                toastr["error"](`${error.response.data}`);
                             }
                         });
                 }
@@ -1477,18 +1477,18 @@
                         var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
                         console.log(paras.toString())
                         axios.get('@Url.Page("/MappingRules/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
-                            toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
+                            toastr["info"](`@_localizer["Deleted ${checkedId.length} rows"]`);
                             reloadData();
                         })
                             .catch((error) => {
                                 if (error.response.data.Errors) {
                                     const errors = error.response.data.Errors;
                                     for (let [key, value] of Object.entries(errors)) {
-                                        toastr["error"](`${key}: ${value.toString()}`);
+                                        toastr["error"](`${value.toString()}`);
                                     }
 
                                 } else {
-                                    toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                    toastr["error"](`${error.response.data}`);
                                 }
                             });
                     }
@@ -1517,16 +1517,16 @@
                 link.setAttribute('download', filename);
                 document.body.appendChild(link);
                 link.click();
-                toastr["info"](`@_localizer["Export Success"]`);
+                toastr["info"](`@_localizer["Export success"]`);
             }).catch(error => {
                 if (error.response.data.Errors) {
                     const errors = error.response.data.Errors;
                     for (let [key, value] of Object.entries(errors)) {
-                        toastr["error"](`${key}: ${value.toString()}`);
+                        toastr["error"](`${value.toString()}`);
                     }
 
                 } else {
-                    toastr["error"](`@_localizer["Export fail"],${error.response.data}`);
+                    toastr["error"](`${error.response.data}`);
                 }
             })
 

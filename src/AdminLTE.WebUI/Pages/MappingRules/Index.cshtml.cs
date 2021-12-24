@@ -22,6 +22,7 @@ using CleanArchitecture.Razor.Application.FieldMappingValues.Queries.Pagination;
 using CleanArchitecture.Razor.Application.MappingRules.Commands.ChangeStatus;
 using CleanArchitecture.Razor.Application.ResultMappings.DTOs;
 using CleanArchitecture.Razor.Application.MappingRules.Queries.GetAll;
+using CleanArchitecture.Razor.Application.FieldMappingValues.Commands.Delete;
 
 namespace AdminLTE.WebUI.Pages.MappingRules
 {
@@ -180,6 +181,12 @@ namespace AdminLTE.WebUI.Pages.MappingRules
         }
 
         public async Task<IActionResult> OnPostFinished([FromBody]FinishedMappingRuleStatusCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return new JsonResult(result);
+        }
+
+        public async Task<IActionResult> OnPostDeleteCheckedFieldValue([FromBody] DeleteCheckedFieldMappingValuesCommand command)
         {
             var result = await _mediator.Send(command);
             return new JsonResult(result);

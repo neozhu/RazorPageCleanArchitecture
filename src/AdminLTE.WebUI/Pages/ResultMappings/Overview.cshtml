@@ -268,7 +268,7 @@
                `;
                resultmappingfileinput.value = null;
                savebutton.disabled = true;
-               toastr["error"](`@_localizer["upload fail"],${error}`);
+               toastr["error"](`${error}`);
            });
 
 
@@ -314,7 +314,7 @@
                }).then((response) => {
                     modalcontent.classList.remove("overlay-wrapper");
                     overlay.style.display="none";
-                       toastr["info"]('@_localizer["Save Success"]');
+                       toastr["info"]('@_localizer["Saved success"]');
                        $('#resultmapping_modal').modal('toggle');
                        reloadData();
                }).catch(error => {
@@ -324,11 +324,11 @@
 
                        const errors = error.response.data.Errors;
                        for (let [key, value] of Object.entries(errors)) {
-                           toastr["error"](`${key}: ${value.toString()}`);
+                           toastr["error"](`${value.toString()}`);
                        }
 
                    } else {
-                       toastr["error"](`@_localizer["Save fail"],${error.response.data.title}`);
+                       toastr["error"](`${error.response.data.title}`);
                    }
                })
 
@@ -782,18 +782,18 @@
                        if (result) {
                          
                            axios.post('@Url.Page("/ResultMappings/Overview")?handler=DeleteChecked',{id:checkedId}).then(res => {
-                               toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
+                               toastr["info"](`@_localizer["Deleted ${checkedId.length} rows"]`);
                                reloadData();
                            })
                                .catch((error) => {
                                    if (error.response.data.Errors) {
                                        const errors = error.response.data.Errors;
                                        for (let [key, value] of Object.entries(errors)) {
-                                           toastr["error"](`${key}: ${value.toString()}`);
+                                           toastr["error"](`${value.toString()}`);
                                        }
 
                                    } else {
-                                       toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                       toastr["error"](`${error.response.data}`);
                                    }
                                });
                        }
@@ -823,11 +823,11 @@
                             if (error.response.data.Errors) {
                                 const errors = error.response.data.Errors;
                                 for (let [key, value] of Object.entries(errors)) {
-                                    toastr["error"](`${key}: ${value.toString()}`);
+                                    toastr["error"](`${value.toString()}`);
                                 }
 
                             } else {
-                                toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
+                                toastr["error"](`${error.response.data}`);
                             }
 
                         });
@@ -857,11 +857,11 @@
                             if (error.response.data.Errors) {
                                 const errors = error.response.data.Errors;
                                 for (let [key, value] of Object.entries(errors)) {
-                                    toastr["error"](`${key}: ${value.toString()}`);
+                                    toastr["error"](`${value.toString()}`);
                                 }
 
                             } else {
-                                toastr["error"](`@_localizer["Save fail"],${error.response.data}`);
+                                toastr["error"](`${error.response.data}`);
                             }
 
                         });
@@ -882,11 +882,11 @@
                                     if (error.response.data.Errors) {
                                         const errors = error.response.data.Errors;
                                         for (let [key, value] of Object.entries(errors)) {
-                                            toastr["error"](`${key}: ${value.toString()}`);
+                                            toastr["error"](`${value.toString()}`);
                                         }
 
                                     } else {
-                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                        toastr["error"](`${error.response.data}`);
                                     }
                                 });
        }
