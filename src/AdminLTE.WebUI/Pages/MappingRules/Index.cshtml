@@ -60,6 +60,10 @@
                 <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
                 @_localizer["Delete"]
             </button>
+            <button type="button" id="finishedbutton" class="btn btn-sm btn-outline-primary mr-1">
+                <span class="@(Settings.Theme.IconPrefix) fa-check mr-1"></span>
+                @_localizer["Finished"]
+            </button>
             <button class="btn btn-sm btn-outline-primary " id="downloadtemplatebutton">
                 <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
                 @_localizer["Download Value Mapping"]
@@ -250,7 +254,6 @@
                     <button type="button" id="adddatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Add"] </button>
                     <button type="button" id="deletedatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Delete"] </button>
                     <button type="button" id="canceldatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Cancel"] </button>
-                    <button type="button" id="finisheddatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Finished"] </button>
                     <button type="button" id="importdatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Upload Data"] </button>
                     <button type="button" id="downloaddatabutton" class="btn btn-sm btn-outline-primary mr-1">@_localizer["Download Data"] </button>
                     <input type="file" id="uploaddatafile" accept="text/xml"
@@ -258,8 +261,7 @@
                 </div>
                 <div class="d-flex flex-row mt-2">
                     <div class="flex-fill">
-                        <table id="fieldmappingvalues_dg">
-                        </table>
+                        
                     </div>
                 </div>
             </div>
@@ -353,13 +355,13 @@
            }
          }
     })
-     var $fieldmappingvalues_dg = {};
-
+     var $fieldmappingvalues_dg ={};
+      $('.default-example-modal-right-lg').on('shown.bs.modal', function () {
+          $('.default-example-modal-right-lg .flex-fill').html('<table id="fieldmappingvalues_dg"></table>')
+      });
     $('.default-example-modal-right-lg').on('shown.bs.modal', function () {
-
-        
          const suburl='@Url.Page("/MappingRules/Index")?handler=FieldMappingValues&MappingRuleId=' + currentMappingRuleItem.Id;
-         $fieldmappingvalues_dg = $('#fieldmappingvalues_dg').datagrid({
+         $fieldmappingvalues_dg=$('#fieldmappingvalues_dg').datagrid({
                 height: 700,
                 method: 'GET',
                 rownumbers: false,
@@ -372,6 +374,7 @@
                 sortName: 'Id',
                 sortOrder:'desc',
                 pageSize: 15,
+                filterRules:[],
                 pageList: [10, 15, 30, 50, 100, 1000],
                 onBeforeLoad: function () {
                     editIndex = undefined;
@@ -401,10 +404,21 @@
                 onEndEdit: function (index, row) {
                     onEndEdit(index,row)
                 },
+                onLoadSuccess:function() {
+                        const td= $('.flex-fill tr.datagrid-filter-row > td').eq(0);
+                       td.html('<i class="ml-2 fal fa-filter"></i>')
+                    },
                 columns: [getcolumns()]
-            })
-            .datagrid('enableFilter', [  ])
-            .datagrid('load', suburl);
+            }).datagrid('enableFilter', [  ])
+              .datagrid('load', suburl);
+  
+    })
+
+    $('.default-example-modal-right-lg').on('hidden.bs.modal', function () {
+        //console.log('hidden.bs.modal')
+        const panel = $('#fieldmappingvalues_dg').datagrid('getPanel');
+            panel.panel('destroy');
+      
     })
 
     var getcolumns =()=>{
@@ -563,10 +577,27 @@
                 })
     });
 
-    $('#finisheddatabutton').click(function(){
-        const url= '@Url.Page("/MappingRules/Index")?handler=Finished&Id=' + currentMappingRuleItem.Id;
-        axios.get(url).then(res => {
-                                toastr["info"](`@_localizer["Finished"]`);
+    $('#finishedbutton').click(function(){
+        const url= '@Url.Page("/MappingRules/Index")?handler=Finished';
+        var checkedId = $dg.datagrid('getChecked').filter(x=>x.Id>0).map(x => x.Id);
+        if (checkedId.length > 0) {
+                bootbox.confirm({
+                    message: "@_localizer["Are you sure finished selected value mapping rules?"]",
+                    buttons: {
+                        confirm: {
+                            label: '@_localizer["Yes"]',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: '@_localizer["No"]',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+
+                            axios.post(url,{id:checkedId}).then(res => {
+                                toastr["info"](`@_localizer["Finished ${checkedId.length} success"]`);
                                 reloadData();
                             })
                                 .catch((error) => {
@@ -577,9 +608,14 @@
                                         }
 
                                     } else {
-                                        toastr["error"](`@_localizer["Delete fail"],${error.response.data}`);
+                                        toastr["error"](`${error.response.data}`);
                                     }
                                 });
+                        }
+                    }
+                });
+
+            }
     });
     $('#refreshdatabutton').click(function(){
         onReloadFieldData()
@@ -592,7 +628,7 @@
         var checkedId = $fieldmappingvalues_dg.datagrid('getChecked').filter(x=>x.Id>0).map(x => x.Id);
         if (checkedId.length > 0) {
                 bootbox.confirm({
-                    message: "@_localizer["Are you sure delete checked field values?"]",
+                    message: "@_localizer["Are you sure delete selected field values?"]",
                     buttons: {
                         confirm: {
                             label: '@_localizer["Yes"]',
@@ -862,7 +898,7 @@
             $('#Input_LegacyDescription1').val(res.LegacyDescription1);
             $('#Input_LegacyDescription2').val(res.LegacyDescription2);
             $('#Input_LegacyDescription3').val(res.LegacyDescription3);
-            $('#Input_NewValueField').val(res.NewValueField);
+            $('#Input_NewValueField').val(res.NewValueField).change();
             $('#Input_ExportParameterField').val(res.ExportParameterField);
             $('#Input_NewValueFieldDescription').val(res.NewValueFieldDescription);
             $('#Input_Comments').val(res.TemplateDescription);
@@ -918,7 +954,7 @@
                $('#Input_LegacyDescription1').val('');
                $('#Input_LegacyDescription2').val('');
                $('#Input_LegacyDescription3').val('');
-               $('#Input_NewValueField').val('');
+               $('#Input_NewValueField').val(null).change();
                $('#Input_ExportParameterField').val('');
                $('#Input_NewValueFieldDescription').val('');
                $('#Input_Comments').val('');
@@ -996,9 +1032,9 @@
                      sortOrder:'asc',
                      pageSize: 10,
                      pageList: [10, 30, 50, 100, 1000],
-                     columns: [columns]
-                }).datagrid('enableFilter', [{}])
-                   .datagrid('load',suburl);
+                     columns: [columns],
+                    }).datagrid('enableFilter', [{}])
+                      .datagrid('load',suburl);
 
             },
             onBeforeLoad: function () {
@@ -1018,6 +1054,10 @@
                 const checked = $(this).datagrid('getChecked').length > 0;
                 $('#deletebutton').prop('disabled', !checked);
             },
+            onLoadSuccess:function(){
+               const td= $('.card-body tr.datagrid-filter-row > td').eq(1);
+               td.html('<i class="ml-2 fal fa-filter"></i>')
+            },
             columns: [[
                 { field: 'ck', checkbox: true },
                 {
@@ -1026,7 +1066,8 @@
                     width: 100,
                     align: 'center',
                     formatter: function (value, row, index) {
-                        return `<div class="btn-group" role="group">
+                        if(row.Active=="Active"){
+                          return `<div class="btn-group" role="group">
                                   <a id="commandbtngroup" type="button"  class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
                                  </a>
@@ -1036,6 +1077,18 @@
                                    <button class="dropdown-item" onclick="onDownload(${index})" > @_localizer["Download Value Mapping"]</button>
                                  </div>
                               </div>`;
+                        }
+                        else {
+                           return `<div class="btn-group" role="group">
+                                  <a id="commandbtngroup" type="button"  class="btn btn-outline-primary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
+                                 </a>
+                                 <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
+                                   <button class="dropdown-item" onclick="onEdit(${index})" > @_localizer["Edit Mapping Rule"]</button>
+                                   <button class="dropdown-item" onclick="onShowMappingValues(${index})" > @_localizer["Field Mapping Values"]</button>
+                                 </div>
+                              </div>`;
+                        }
                     }
                 },
                 { field: 'Active',
@@ -1100,7 +1153,7 @@
                       return `<a> ${value??''} </a> <br> <small>${row.LegacyDescription3??''}</small>`;
                   }
                 },
-                { field: 'MigrationApproach', title: '@_localizer["Migration Approach"]', sortable: true, width: 130 },
+                { field: 'MigrationApproach', title: '@_localizer["Migration Approach"]', sortable: true, width: 180 },
                 { field: 'RelevantObjects', title: '@_localizer["Relevant Objects"]', sortable: true, width: 220 },
                 { field: 'CreatedBy', title: '@_localizer["Created By"]', sortable: true, width: 160 },
                 { field: 'LastModifiedBy', title: '@_localizer["Last Modified By"]',  sortable: true, width: 160 },
@@ -1236,13 +1289,13 @@
     })
     var popupmodal = (document) => {
         $('#mappingrules_modal').modal('toggle');
-        $('#mappingrules_modal .modal-title').html('@_localizer["New Mapping Rule"]');
+        $('#mappingrules_modal .modal-title').html('@_localizer["New Value Mapping Rule"]');
         $('#mappingrule_form').clearForm();
         $('#mappingrule_form')[0].reset();
         if (document) {
             uploadtemplatebutton.disabled = false;
             uploadtemplatefileinput.required = false;
-            $('#mappingrules_modal .modal-title').html('@_localizer["Edit Mapping Rule"]');
+            $('#mappingrules_modal .modal-title').html('@_localizer["Edit Value Mapping Rule"]');
 
             $('#mappingrule_form').jsonToForm(document, {
                 IsMock: function (value) {
@@ -1310,7 +1363,7 @@
                     if (value) {
                         $('#Input_NewValueField').val(value).change();
                     } else {
-                        $('#Input_Team').val(null).change();
+                        $('#Input_NewValueField').val(null).change();
                     }
                 },
                 LegacyField1:function(value){
@@ -1355,6 +1408,10 @@
             $('#mappingrule_form #Input_Id').val(0);
             $('#mappingrule_form #Input_TemplateFile').val('');
             $('#mappingrule_form #Input_Status').val('Not started');
+            $('#Input_NewValueField').val(null).change();
+            $('#Input_RelevantObjects').val(null).change();
+            $('#Input_LegacySystem').val(null).change();
+            $('#Input_Team').val(null).change();
             $('#Input_Active').prop('checked', false);
             uploadtemplatefilename.innerHTML =`<div class="alert alert-danger mt-2 mb-2" role="alert">
                                     <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a migration template file"].
@@ -1404,7 +1461,7 @@
         var checkedId = $dg.datagrid('getChecked').map(x => x.Id);
         if (checkedId.length > 0) {
             bootbox.confirm({
-                message: "@_localizer["Are you sure delete checked rows?"]",
+                message: "@_localizer["Are you sure delete selected rows?"]",
                 buttons: {
                     confirm: {
                         label: '@_localizer["Yes"]',
@@ -1517,15 +1574,16 @@
         const items = $dg.datagrid('getChecked');
         if(items.length==0){
              bootbox.alert({
-               message: "@_localizer["Please check the record to download."]"
+               message: "@_localizer["Please select the record to download."]"
              });
         }
         items.map(item=>{
-            axios.get('@Url.Page("/MappingRules/Index")?handler=DownloadData&MappingRuleId=' + item.Id +'&MappingRuleName=' + item.Name ,
-            {
-                responseType: "blob"
-            })
-           .then(response => {
+            if(item.Active=='Active') {
+              axios.get('@Url.Page("/MappingRules/Index")?handler=DownloadData&MappingRuleId=' + item.Id +'&MappingRuleName=' + item.Name ,
+              {
+                 responseType: "blob"
+              })
+              .then(response => {
                     const filename = getFileName(response.headers['content-disposition']);
                     const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
                     const link = document.createElement('a');
@@ -1542,6 +1600,9 @@
                   })
 
                 })
+             } else {
+                  toastr["warning"](`${item.Name} is Inactive.`);
+             }
         });
     }
 

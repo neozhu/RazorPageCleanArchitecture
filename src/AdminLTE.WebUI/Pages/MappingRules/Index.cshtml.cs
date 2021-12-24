@@ -179,7 +179,7 @@ namespace AdminLTE.WebUI.Pages.MappingRules
             return new JsonResult(result);
         }
 
-        public async Task<IActionResult> OnGetFinished([FromQuery] FinishedMappingRuleStatusCommand command)
+        public async Task<IActionResult> OnPostFinished([FromBody]FinishedMappingRuleStatusCommand command)
         {
             var result = await _mediator.Send(command);
             return new JsonResult(result);

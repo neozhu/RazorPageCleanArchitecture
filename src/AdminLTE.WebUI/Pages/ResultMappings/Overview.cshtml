@@ -381,7 +381,9 @@
                    </div>
                  </div>
                  <div class="card-body">
+                   <div class="table-responsive">
                    <table id="datatable_${row.Id}" class="resultmappingdata_dg"></table>
+                   </div>
                    <div class="d-flex flex-row">
                       <div class="p-2">
                         Tooltip:
@@ -435,7 +437,9 @@
                                  
                              });
                              const ownerfilter = subgrid.datagrid('getFilterComponent','Owner');
-                             ownerfilter.combobox('reload')
+                             ownerfilter.combobox('reload');
+                              const td= $('.table-responsive tr.datagrid-filter-row > td').eq(0);
+                          td.html('<i class="ml-2 fal fa-filter"></i>')
                         },
                         onBeforeSelect:function(index,row){
                             console.log(row);
@@ -443,6 +447,7 @@
                         onBeforeUnselect:function(index,row){
                             console.log(row);
                         }
+       
                    }).datagrid('enableFilter', [
                        {
                            field:'Owner',
@@ -514,6 +519,10 @@
                onUncheck: function () {
                    const checked = $(this).datagrid('getChecked').length > 0;
                    $('#deletebutton').prop('disabled', !checked);
+               },
+               onLoadSuccess:function(){
+                  const td= $('.card-body tr.datagrid-filter-row > td').eq(1);
+                  td.html('<i class="ml-2 fal fa-filter"></i>')
                },
                columns: [[
                    { field: 'ck', checkbox: true },
@@ -758,7 +767,7 @@
            var checkedId = $dg.datagrid('getChecked').map(x => x.Id);
            if (checkedId.length > 0) {
                bootbox.confirm({
-                   message: "@_localizer["Are you sure delete checked rows?"]",
+                   message: "@_localizer["Are you sure delete selected rows?"]",
                    buttons: {
                        confirm: {
                            label: '@_localizer["Yes"]',

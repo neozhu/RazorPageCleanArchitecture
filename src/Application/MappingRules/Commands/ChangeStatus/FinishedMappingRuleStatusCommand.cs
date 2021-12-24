@@ -8,7 +8,7 @@ namespace CleanArchitecture.Razor.Application.MappingRules.Commands.ChangeStatus
 
 public record FinishedMappingRuleStatusCommand: IRequest<Result>
 {
-    public int Id { get; set; }
+    public int[] Id { get; set; }
 }
 
 public class FinishedMappingRuleStatusCommandHandler:
@@ -28,14 +28,14 @@ public class FinishedMappingRuleStatusCommandHandler:
 
     public async Task<Result> Handle(FinishedMappingRuleStatusCommand request, CancellationToken cancellationToken)
     {
-        var item = await _context.MappingRules.FindAsync(request.Id);
-        if (item == null)
+        var items = await _context.MappingRules.Where(x=>request.Id.Contains(x.Id)).ToListAsync();
+        foreach (var item in items)
         {
-            return Result.Failure(new string[] { $"Not found value mapping rule." });
+            item.Status = "Finished";
+            _context.MappingRules.Update(item);
         }
-        item.Status = "Finished";
         await _context.SaveChangesAsync(cancellationToken);
-        _logger.LogInformation("Set the status of value mapping rule to finished:{@Request}",request);
+        _logger.LogInformation("Set the value mapping rule status to finished:{@Request}", request);
         return Result.Success();
 
     }
