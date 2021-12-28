@@ -60,13 +60,16 @@ public class DownloadMappingValueFileCommandHandler :
                     {
                         table.Add(new XElement(namespaces.First().Value + "Row",
                            new XAttribute(namespaces["ss"] + "AutoFitHeight", 0),
+                               "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
                                    new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy1)
                                ),
-                               new XElement(namespaces.First().Value + "Cell",
-                               new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.NewValue)
-                               )
-                          ));
+                              "\r\n",
+                               new XElement( namespaces.First().Value + "Cell",
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.NewValue)
+                               ),
+                               "\r\n"
+                          ), "\r\n");
                     }
                     break;
                 case 3:
@@ -74,16 +77,20 @@ public class DownloadMappingValueFileCommandHandler :
                     {
                         table.Add(new XElement(namespaces.First().Value + "Row",
                            new XAttribute(namespaces["ss"] + "AutoFitHeight", 0),
+                              "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
                                    new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy1)
                                ),
+                               "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
                                    new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy2)
                                ),
+                               "\r\n",
                               new XElement(namespaces.First().Value + "Cell",
-                               new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.NewValue)
-                               )
-                          ));
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.NewValue)
+                               ),
+                              "\r\n"
+                          ), "\r\n");
                     }
 
                     break;
@@ -92,19 +99,24 @@ public class DownloadMappingValueFileCommandHandler :
                     {
                         table.Add(new XElement(namespaces.First().Value + "Row",
                            new XAttribute(namespaces["ss"] + "AutoFitHeight", 0),
+                               "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
                                    new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy1)
                                ),
+                               "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
                                    new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy2)
                                ),
+                              "\r\n",
                               new XElement(namespaces.First().Value + "Cell",
                                    new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy3)
                                ),
+                               "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
                                    new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.NewValue)
-                               )
-                          ));
+                               ),
+                               "\r\n"
+                          ),"\r\n");
                     }
 
                     break;
@@ -112,7 +124,7 @@ public class DownloadMappingValueFileCommandHandler :
             expandedRowCount.Value = (rowCount + valueCount).ToString();
             using (TextWriter writer = new Utf8StringWriter())
             {
-                xdoc.Save(writer, SaveOptions.None);
+                xdoc.Save(writer, SaveOptions.DisableFormatting);
                 var output = writer.ToString();
                 // replace default namespace prefix:<ss:
                 string result = Regex.Replace(Regex.Replace(output, "<ss:", "<"), "</ss:", "</");

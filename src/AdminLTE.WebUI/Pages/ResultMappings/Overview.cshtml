@@ -102,7 +102,7 @@
                                 </button><span class="text-danger">*</span>
                                 <div id="uploadresultmappingfilename">
                                     <div class="alert alert-danger mt-2 mb-2" role="alert">
-                                        <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload the result mapping file"].
+                                        <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a migration result mapping file."].
                                     </div>
                                 </div>
                             </div>
@@ -314,7 +314,7 @@
                }).then((response) => {
                     modalcontent.classList.remove("overlay-wrapper");
                     overlay.style.display="none";
-                       toastr["info"]('@_localizer["Saved success"]');
+                       toastr["info"]('@_localizer["Saved successfully"]');
                        $('#resultmapping_modal').modal('toggle');
                        reloadData();
                }).catch(error => {
@@ -362,7 +362,7 @@
                    <div class="card-tools">
                    <a href="javascript:onSetScope(${row.Id})" class="ml-2 btn btn-sm  btn-outline-danger">
                      <span class="@(Settings.Theme.IconPrefix) fa-flag mr-1"></span>
-                     Select Scope/Unselect
+                     Select/Unselect scope
                    </a>
                    <a href="javascript:onVerify(${row.Id})" class="ml-2 btn btn-sm  btn-outline-primary">
                      <span class="@(Settings.Theme.IconPrefix) fa-calendar-check mr-1"></span>
@@ -389,7 +389,7 @@
                         Tooltip:
                      </div>
                      <div class="p-2">
-                       <i class="nav-icon far fa-circle text-danger text-lg"></i> Selected scope
+                       <i class="nav-icon far fa-circle text-danger text-lg"></i> Selected
                      </div>
                      <div class="p-2">
                        <i class="nav-icon far fa-circle text-success text-lg"></i> Verified
@@ -399,6 +399,11 @@
                  </div></div>`
                        return container;
                    },
+               onCollapseRow:function(index,row){
+                  const panel = $(`#datatable_${row.Id}`).datagrid('getPanel');
+                  panel.panel('destroy');
+                  $(this).datagrid('getRowDetail',index).find(`.table-responsive`).html(`<table id="datatable_${row.Id}"></table>`);
+               },
                onExpandRow: function(index,row){
                    //console.log(row);
                    const columns = getcolumens(row);
@@ -483,7 +488,7 @@
                           data:[
                              {id:'',text:'ALL'},
                              {id:'Verified',text:'Verified'},
-                             {id:'Scoped',text:'Scoped'},
+                             {id:'Selected',text:'Selected'},
                              {id:'Unselected',text:'Unselected'},
                           ],
                          onChange: function (item) {
@@ -544,7 +549,7 @@
                        }
                    },
                    { field: 'RelevantMock',
-                     title: '@_localizer["Relevant Mock"]',
+                     title: '@_localizer["Mock"]',
                      sortable: true,
                      width: 140
                    },
@@ -639,12 +644,19 @@
                      formatter:function(v){
                          if(v=='Verified')
                            return '<i class="nav-icon far fa-circle text-success text-lg"></i>';
-                         else if(v=='Scoped')
+                         else if(v=='Selected')
                            return '<i class="nav-icon far fa-circle text-danger text-lg"></i>';
                          else
                           return '';
                      }
-                   }
+                   },
+                   {
+                           field: 'Owner',
+                           title: '@_localizer["Owner"]',
+                           sortable: true,
+                           width: 140,
+                       }
+                       
             ];
             row.FieldParameters.map((item,index)=>{
                columns.push({
@@ -654,13 +666,6 @@
                            width: 160
                        });
            });
-           columns.push({
-                           field: 'Owner',
-                           title: '@_localizer["Owner"]',
-                           sortable: true,
-                           width: 160,
-                       }
-                       );
            columns.push({
                            field: 'CreatedBy',
                            title: '@_localizer["Created By"]',
@@ -673,7 +678,7 @@
        }
 
        var reloadData = () => {
-           $dg.datagrid('load', '@Url.Page("/ResultMappings/Overview")?handler=Data');
+           $dg.datagrid('reload');
        }
 
        $(() => {
@@ -721,7 +726,7 @@
                        } else {
                            savebutton.disabled = true;
                            uploadresultmappingfilename.innerHTML = ` <div class="alert alert-danger mt-2 mb-2" role="alert">
-                                       <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a migration template file"].
+                                       <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a migration result mapping file."].
                                    </div>`;
                        }
                    },
@@ -759,7 +764,7 @@
                $('#resultmapping_form #Input_TemplateFile').val('');
                $('#resultmapping_form #Input_Status').val('Not started');
                uploadresultmappingfilename.innerHTML =`<div class="alert alert-danger mt-2 mb-2" role="alert">
-                                       <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload the result mapping file"].
+                                       <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a migration result mapping file."].
                             </div>`
            }
        }
@@ -767,7 +772,7 @@
            var checkedId = $dg.datagrid('getChecked').map(x => x.Id);
            if (checkedId.length > 0) {
                bootbox.confirm({
-                   message: "@_localizer["Are you sure delete selected rows?"]",
+                   message: "@_localizer["Are you sure to delete the selected result mapping?"]",
                    buttons: {
                        confirm: {
                            label: '@_localizer["Yes"]',
@@ -808,7 +813,15 @@
            if(selected.length>0) {
                if(selected.filter(x=>x.Verify == "Unselected").length>0){
                    bootbox.alert({
-                      message: "@_localizer["Please select scoped first."]"
+                      message: "@_localizer["Please select the status 'selected' records to verify."]"
+                   });
+                   return false;
+               }
+               const userid='@User.GetUserId()';
+       
+               if(selected.filter(x=>x.Owner != userid).length>0){
+                   bootbox.alert({
+                      message: "@_localizer["Please select your owner record"]"
                    });
                    return false;
                }
@@ -816,9 +829,9 @@
                const url= '@Url.Page("/ResultMappings/Overview")?handler=Verify';
                axios.post(url, {Id:selectedId })
                         .then(response => {
-                            toastr["info"]('@_localizer["Verified success"]');
-                             const suburl='@Url.Page("/ResultMappings/Overview")?handler=ResultMappingData&Id=' + id;
-                            $(`#datatable_${id}`).datagrid('load',suburl);
+                            toastr["info"]('@_localizer["Verified successfully"]');
+                            const suburl='@Url.Page("/ResultMappings/Overview")?handler=ResultMappingData&Id=' + id;
+                            $(`#datatable_${id}`).datagrid('reload');
                         }).catch(error => {
                             if (error.response.data.Errors) {
                                 const errors = error.response.data.Errors;
@@ -833,7 +846,7 @@
                         });
            }else{
                 bootbox.alert({
-                  message: "@_localizer["Please check the record to verify."]"
+                  message: "@_localizer["Please select the status 'selected' records to verify."]"
                 });
            }
        }
@@ -842,7 +855,7 @@
            if(selected.length>0){
                if(selected.filter(x=> x.Verify == "Verified").length>0){
                    bootbox.alert({
-                      message: "@_localizer["Please check the unverified record."]"
+                      message: "@_localizer["Please select the status 'unselected' records."]"
                    });
                    return false;
                }
@@ -850,9 +863,9 @@
                const selectedId=selected.map(x=>x.Id);
                axios.post(url, {Id:selectedId })
                         .then(response => {
-                            toastr["info"]('@_localizer["Set scoped success"]');
+                            toastr["info"]('@_localizer["Selected successfully"]');
                              const suburl='@Url.Page("/ResultMappings/Overview")?handler=ResultMappingData&Id=' + id;
-                             $(`#datatable_${id}`).datagrid('load',suburl);
+                             $(`#datatable_${id}`).datagrid('reload');
                         }).catch(error => {
                             if (error.response.data.Errors) {
                                 const errors = error.response.data.Errors;
@@ -867,7 +880,7 @@
                         });
            }else{
                 bootbox.alert({
-                  message: "@_localizer["Please check the record to verify."]"
+                  message: "@_localizer["Please select the status 'unselected' records."]"
                 });
            }
        }
@@ -894,7 +907,7 @@
            const items = $dg.datagrid('getChecked');
            if(items.length==0){
                 bootbox.alert({
-                  message: "@_localizer["Please check the record to download."]"
+                  message: "@_localizer["Please select the records to download."]"
                 });
            }
            items.map(item=>{
@@ -932,7 +945,7 @@
                     link.setAttribute('download', filename);
                     document.body.appendChild(link);
                     link.click();
-                    toastr["info"](`@_localizer["Download success"]`);
+                    toastr["info"](`@_localizer["Download successfully"]`);
                 }).catch(error => {
                     if (error.response.data.Errors) {
                         const errors = error.response.data.Errors;
@@ -967,7 +980,7 @@
                     link.setAttribute('download', filename);
                     document.body.appendChild(link);
                     link.click();
-                    toastr["info"](`@_localizer["Download success"]`);
+                    toastr["info"](`@_localizer["Download successfully"]`);
                 }).catch(error => {
                     if (error.response.data.Errors) {
                         const errors = error.response.data.Errors;

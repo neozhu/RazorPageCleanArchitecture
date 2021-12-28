@@ -35,14 +35,14 @@ public class ScopedResultMappingStatusCommandHandler :
         var resultId = items[0].ResultMappingId;
         foreach (var item in items)
         {
-            if(item.Verify!= "Scoped")
+            if(item.Verify== "Unselected")
             {
-                item.Verify = "Scoped";
+                item.Verify = "Selected";
                 item.Owner = _userService.UserId;
             }
-            else
+            else if(item.Verify == "Selected")
             {
-                item.Verify = "Unset";
+                item.Verify = "Unselected";
                 item.Owner = null;
             }
             
@@ -53,7 +53,7 @@ public class ScopedResultMappingStatusCommandHandler :
         await _context.SaveChangesAsync(cancellationToken);
 
         var count = await _context.ResultMappingDatas.CountAsync(x => x.ResultMappingId == resultId && x.Verify == "Verified");
-        var total = await _context.ResultMappingDatas.CountAsync(x => x.ResultMappingId == resultId && (x.Verify == "Verified" || x.Verify == "Scoped"));
+        var total = await _context.ResultMappingDatas.CountAsync(x => x.ResultMappingId == resultId && (x.Verify == "Verified" || x.Verify == "Selected"));
         var mapping = await _context.ResultMappings.FindAsync(resultId);
         mapping.Verified = count;
         mapping.Total = total;
@@ -68,7 +68,7 @@ public class ScopedResultMappingStatusCommandHandler :
         _context.ResultMappings.Update(mapping);
         await _context.SaveChangesAsync(cancellationToken);
 
-        _logger.LogInformation("Set the verify scope:{@Request}", request);
+        _logger.LogInformation("select/unselect the verify status:{@Request}", request);
         return Result.Success();
 
     }

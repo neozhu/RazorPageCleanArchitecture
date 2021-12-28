@@ -34,10 +34,10 @@ public class VerifyResultMappingStatusCommandHandler :
         {
             if(item.Verify == "Verified")
             {
-                item.Verify = "Scoped";
+                item.Verify = "Selected";
                 item.VerifiedDate = null;
             }
-            else
+            else if(item.Verify=="Selected")
             {
                 item.Verify = "Verified";
                 item.VerifiedDate = DateTime.UtcNow;
@@ -49,7 +49,7 @@ public class VerifyResultMappingStatusCommandHandler :
         await _context.SaveChangesAsync(cancellationToken);
 
         var count = await _context.ResultMappingDatas.CountAsync(x=>x.ResultMappingId==resultId && x.Verify== "Verified");
-        var total = await _context.ResultMappingDatas.CountAsync(x => x.ResultMappingId == resultId && (x.Verify == "Verified" || x.Verify == "Scoped"));
+        var total = await _context.ResultMappingDatas.CountAsync(x => x.ResultMappingId == resultId && (x.Verify == "Verified" || x.Verify == "Selected"));
         var mapping = await _context.ResultMappings.FindAsync(resultId);
         mapping.Verified = count;
         mapping.Total = total;
@@ -64,7 +64,7 @@ public class VerifyResultMappingStatusCommandHandler :
         _context.ResultMappings.Update(mapping);
         await _context.SaveChangesAsync(cancellationToken);
 
-        _logger.LogInformation("Set the status to verified:{@Request}",request);
+        _logger.LogInformation("verified/unverified the status:{@Request}", request);
         return Result.Success();
 
     }

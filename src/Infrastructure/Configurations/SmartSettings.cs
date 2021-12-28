@@ -12,6 +12,7 @@ public class SmartSettings
     public string AppName { get; set; }
     public string AppFlavor { get; set; }
     public string AppFlavorSubscript { get; set; }
+    public string Company { get; set; }
     public Theme Theme { get; set; }
     public Features Features { get; set; }
 }

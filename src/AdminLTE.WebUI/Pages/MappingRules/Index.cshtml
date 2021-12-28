@@ -106,7 +106,7 @@
                                 </button><span class="text-danger">*</span>
                                 <div id="uploadtemplatefilename">
                                     <div class="alert alert-danger mt-2 mb-2" role="alert">
-                                        <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a migration template file"].
+                                        <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a value mapping template file."].
                                     </div>
                                 </div>
                             </div>
@@ -243,7 +243,7 @@
         <div class="modal-content">
             <div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i><div class="pt-2 pl-2 text-gray">Waiting...</div></div>
             <div class="modal-header">
-                <h5 class="modal-title h4">Field Mapping Values</h5>
+                <h5 class="modal-title h4">Add Value Mapping</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
                 </button>
@@ -522,7 +522,7 @@
         console.log($fieldmappingvalues_dg.datagrid('getData'))
         if(total>0){
              bootbox.confirm({
-                    message: "@_localizer["Note: The new data will overwrites existing data, Are you sure continue uploading new data"]",
+                    message: "@_localizer["Warning: The new data will overwrites existing data, Are you sure continue uploading new data?"]",
                     buttons: {
                         confirm: {
                             label: '@_localizer["Yes"]',
@@ -582,7 +582,7 @@
         var checkedId = $dg.datagrid('getChecked').filter(x=>x.Id>0).map(x => x.Id);
         if (checkedId.length > 0) {
                 bootbox.confirm({
-                    message: "@_localizer["Are you sure finished selected value mapping rules?"]",
+                    message: "@_localizer["Are you sure to finish the selected value mapping rules?"]",
                     buttons: {
                         confirm: {
                             label: '@_localizer["Yes"]',
@@ -597,7 +597,7 @@
                         if (result) {
 
                             axios.post(url,{id:checkedId}).then(res => {
-                                toastr["info"](`@_localizer["Finished ${checkedId.length} success"]`);
+                                toastr["info"](`@_localizer["Finished ${checkedId.length} successfully"]`);
                                 reloadData();
                             })
                                 .catch((error) => {
@@ -628,7 +628,7 @@
         var checkedId = $fieldmappingvalues_dg.datagrid('getChecked').filter(x=>x.Id>0).map(x => x.Id);
         if (checkedId.length > 0) {
                 bootbox.confirm({
-                    message: "@_localizer["Are you sure delete selected field values?"]",
+                    message: "@_localizer["Are you sure to delete the selected value mappings?"]",
                     buttons: {
                         confirm: {
                             label: '@_localizer["Yes"]',
@@ -756,7 +756,7 @@
                     })).concat(deleted);
                     axios.post('@Url.Page("/FieldMappingValues/Index")', { Items: changed })
                         .then(response => {
-                            toastr["info"]('@_localizer["Save Success"]');
+                            toastr["info"]('@_localizer["Save successfully"]');
                             $fieldmappingvalues_dg.datagrid('acceptChanges');
                             onReloadFieldData();
                             reloadData();
@@ -854,7 +854,7 @@
                 processData: false,// 告诉axios不要去处理发送的数据(重要参数)
                 contentType: false,   // 告诉axios不要去设置Content-Type请求头
             }).then((response) => {
-                    toastr["info"]('@_localizer["Save Success"]');
+                    toastr["info"]('@_localizer["Save successfully"]');
                     $('#mappingrules_modal').modal('toggle');
                     reloadData();
             }).catch(error => {
@@ -1009,17 +1009,21 @@
                 </div>
               </div>
               <div class="card-body">
-                <table class="mappingvalues_dg"></table>
+                <table id="mappingvalues_dg_${row.Id}"></table>
               </div>
               </div></div>`
                     return container;
                 },
+            onCollapseRow:function(index,row){
+                const panel = $(`#mappingvalues_dg_${row.Id}`).datagrid('getPanel');
+                panel.panel('destroy');
+                $(this).datagrid('getRowDetail',index).find(`.card-body`).html(`<table id="mappingvalues_dg_${row.Id}"></table>`);
+            },
             onExpandRow: function(index,row){
                 const columns = getgridcolumns(row);
-                var subgrid = $(this).datagrid('getRowDetail',index).find('table.mappingvalues_dg');
-                console.log(subgrid.width());
+               // var subgrid = $(this).datagrid('getRowDetail',index).find(`#mappingvalues_dg_${row.Id}`);
                 const suburl='@Url.Page("/MappingRules/Index")?handler=FieldMappingValues&MappingRuleId=' + row.Id;
-                subgrid.datagrid({
+                $(`#mappingvalues_dg_${row.Id}`).datagrid({
                      width:window.screen.width-400,
                      height: 510,
                      method: 'GET',
@@ -1072,8 +1076,8 @@
                                     <i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
                                  </a>
                                  <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
-                                   <button class="dropdown-item" onclick="onEdit(${index})" > @_localizer["Edit Mapping Rule"]</button>
-                                   <button class="dropdown-item" onclick="onShowMappingValues(${index})" > @_localizer["Field Mapping Values"]</button>
+                                   <button class="dropdown-item" onclick="onEdit(${index})" > @_localizer["Edit Value Mapping Rule"]</button>
+                                   <button class="dropdown-item" onclick="onShowMappingValues(${index})" > @_localizer["Add Value Mapping"]</button>
                                    <button class="dropdown-item" onclick="onDownload(${index})" > @_localizer["Download Value Mapping"]</button>
                                  </div>
                               </div>`;
@@ -1084,8 +1088,8 @@
                                     <i class="@(Settings.Theme.IconPrefix) fa-edit"></i>
                                  </a>
                                  <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
-                                   <button class="dropdown-item" onclick="onEdit(${index})" > @_localizer["Edit Mapping Rule"]</button>
-                                   <button class="dropdown-item" onclick="onShowMappingValues(${index})" > @_localizer["Field Mapping Values"]</button>
+                                   <button class="dropdown-item" onclick="onEdit(${index})" > @_localizer["Edit Value Mapping Rule"]</button>
+                                   <button class="dropdown-item" onclick="onShowMappingValues(${index})" > @_localizer["Add Value Mapping"]</button>
                                  </div>
                               </div>`;
                         }
@@ -1154,7 +1158,23 @@
                   }
                 },
                 { field: 'MigrationApproach', title: '@_localizer["Migration Approach"]', sortable: true, width: 180 },
-                { field: 'RelevantObjects', title: '@_localizer["Relevant Objects"]', sortable: true, width: 220 },
+                { field: 'RelevantObjects',
+                  title: '@_localizer["Relevant Objects"]',
+                  sortable: true,
+                  width: 240,
+                  formatter:function(value) {
+                      if(value){
+                        const word = value.split(',');
+                        if(word.length>1){
+                            let label ='';
+                            word.map(item => label =  label + "<small>" + item + "</small>" + "<br>" );
+                            return label;
+                        }else{
+                          return value;
+                        }
+                      }
+                  }
+                },
                 { field: 'CreatedBy', title: '@_localizer["Created By"]', sortable: true, width: 160 },
                 { field: 'LastModifiedBy', title: '@_localizer["Last Modified By"]',  sortable: true, width: 160 },
 
@@ -1273,7 +1293,7 @@
        return columns;
     }
     var reloadData = () => {
-        $dg.datagrid('load', '@Url.Page("/MappingRules/Index")?handler=Data');
+        $dg.datagrid('reload');
     }
 
     $(() => {
@@ -1334,7 +1354,7 @@
                     } else {
                         savebutton.disabled = true;
                         uploadtemplatefilename.innerHTML = ` <div class="alert alert-danger mt-2 mb-2" role="alert">
-                                    <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a migration template file"].
+                                    <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a value mapping template file."].
                                 </div>`;
                     }
                 },
@@ -1414,7 +1434,7 @@
             $('#Input_Team').val(null).change();
             $('#Input_Active').prop('checked', false);
             uploadtemplatefilename.innerHTML =`<div class="alert alert-danger mt-2 mb-2" role="alert">
-                                    <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a migration template file"].
+                                    <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a value mapping template file."].
                          </div>`
         }
     }
@@ -1425,7 +1445,7 @@
     }
     var onDelete = (id) => {
         bootbox.confirm({
-            message: "@_localizer["Are you sure delete a row?"]",
+            message: "@_localizer["Are you sure to delete a value mapping rule?"]",
             buttons: {
                 confirm: {
                     label: '@_localizer["Yes"]',
@@ -1439,7 +1459,7 @@
             callback: function (result) {
                 if (result) {
                     axios.get('@Url.Page("/MappingRules/Index")?handler=Delete&id=' + id).then(res => {
-                        toastr["info"]('@_localizer["Deleted success"]');
+                        toastr["info"]('@_localizer["Deleted successfully"]');
                         reloadData();
                     })
                         .catch((error) => {
@@ -1461,7 +1481,7 @@
         var checkedId = $dg.datagrid('getChecked').map(x => x.Id);
         if (checkedId.length > 0) {
             bootbox.confirm({
-                message: "@_localizer["Are you sure delete selected rows?"]",
+                message: "@_localizer["Are you sure to delete the selected value mapping rules?"]",
                 buttons: {
                     confirm: {
                         label: '@_localizer["Yes"]',
@@ -1517,7 +1537,7 @@
                 link.setAttribute('download', filename);
                 document.body.appendChild(link);
                 link.click();
-                toastr["info"](`@_localizer["Export success"]`);
+                toastr["info"](`@_localizer["Export successfully"]`);
             }).catch(error => {
                 if (error.response.data.Errors) {
                     const errors = error.response.data.Errors;
@@ -1574,7 +1594,7 @@
         const items = $dg.datagrid('getChecked');
         if(items.length==0){
              bootbox.alert({
-               message: "@_localizer["Please select the record to download."]"
+               message: "@_localizer["Please select the records to download."]"
              });
         }
         items.map(item=>{

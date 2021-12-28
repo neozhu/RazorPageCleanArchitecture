@@ -82,12 +82,16 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
     private byte[] RemoveDataIfExists(byte[] buffer)
     {
         var xmlstring = System.Text.Encoding.UTF8.GetString(buffer).Trim();
-        var xdoc = XDocument.Parse(xmlstring);
+        var xdoc = XDocument.Parse(xmlstring, LoadOptions.PreserveWhitespace);
         var data = xdoc.Descendants().Where(x => x.Name.LocalName == "Worksheet" && x.FirstAttribute.Value == "Data").First();
         var datatable = data.Descendants().Where(x => x.Name.LocalName == "Table");
         var expandedRowCount = datatable.Attributes().Where(x => x.Name.LocalName == "ExpandedRowCount").First();
+        var count = Convert.ToInt32(expandedRowCount.Value);
+        if (count == 5)
+        {
+            return buffer;
+        }
         var dt = new DataTable();
-        var index = 0;
         foreach (var row in datatable.Descendants().Where(x => x.Name.LocalName == "Row").Skip(4).ToList())
         {
             row.Remove();
@@ -95,7 +99,7 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
         expandedRowCount.Value = "5";
         using (TextWriter writer = new StringWriter())
         {
-            xdoc.Save(writer);
+            xdoc.Save(writer, SaveOptions.DisableFormatting);
             var output = writer.ToString();
             // replace default namespace prefix:<ss:
             string result = Regex.Replace(Regex.Replace(output, "<ss:", "<"), "</ss:", "</");

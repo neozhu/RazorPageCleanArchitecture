@@ -25,11 +25,15 @@
             <vc:language-selector />
 
         </li>*@
-       
+        @if(Context.Request.Host.Host!="kunx0590" && Context.Request.Host.Host!="kunx0590.euro1.voith.net") {
+           <li class="nav-item">
+            <a class="nav-link"  href="#" role="button"><div class="text-danger"><strong>TEST @(Settings.Version)</strong></div></a>
+           </li>
+        }
        <li class="nav-item" style="border-left: 1px solid #DDDDDD;">
         <a class="nav-link "  href="#" role="button">
          <div style="font-weight:900;font-size: large; ">
-            <span class="brand-text text-primary">VOITH</span>
+            <span class="brand-text text-primary">@(Settings.Company)</span>
         </div>
         </a>
       </li>

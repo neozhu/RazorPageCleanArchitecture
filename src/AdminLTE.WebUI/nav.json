@@ -12,13 +12,13 @@
     {
       "title": "Value Mapping Rule",
       "href": "mappingrules_index.html",
-      "icon": "nav-icon fas fa-tools",
+      "icon": "nav-icon fas fa-object-group",
       "roles": [ "MOVE-VT-MIG", "Manager" ]
     },
     {
       "title": "Migration Result",
       "href": "resultmappings_overview.html",
-      "icon": "nav-icon fas fa-file-signature",
+      "icon": "nav-icon fas fa-database",
       "roles": [ "MOVE-VT-MIG", "Manager" ]
     },
     

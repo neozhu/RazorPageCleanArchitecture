@@ -255,7 +255,7 @@
         }
 
         var reloadData = () => {
-            $dg.datagrid('load', '@Url.Page("/ObjectFields/Index")?handler=Data');
+            $dg.datagrid('reload');
         }
 
         $(() => {
@@ -342,7 +342,7 @@
                     })).concat(deleted);
                     axios.post('@Url.Page("/ObjectFields/Index")', { Items: changed })
                         .then(response => {
-                            toastr["info"]('@_localizer["Save Success"]');
+                            toastr["info"]('@_localizer["Save successfully"]');
                             $dg.datagrid('acceptChanges');
                             reloadData();
                         }).catch(error => {
@@ -381,7 +381,7 @@
                     callback: function (result) {
                         if (result) {
                             axios.post('@Url.Page("/ObjectFields/Index")?handler=DeleteChecked',{id:checkedId}).then(res => {
-                                toastr["info"](`@_localizer["Delete ${checkedId.length} Success"]`);
+                                toastr["info"](`@_localizer["Delete ${checkedId.length} successfully"]`);
                                 reloadData();
                             })
                                 .catch((error) => {
@@ -421,7 +421,7 @@
                     link.setAttribute('download', filename);
                     document.body.appendChild(link);
                     link.click();
-                    toastr["info"](`@_localizer["Export Success"]`);
+                    toastr["info"](`@_localizer["Export successfully"]`);
                 }).catch(error => {
                     if (error.response.data.Errors) {
                         const errors = error.response.data.Errors;

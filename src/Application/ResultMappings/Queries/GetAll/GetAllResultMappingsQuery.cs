@@ -82,7 +82,7 @@ public class GetAllResultMappingsQueryHandler :
     public async Task<Dictionary<string, int[]>> Handle(SummarizingVerifiedByIdQuery request, CancellationToken cancellationToken)
     {
         var total = await _context.ResultMappingDatas
-            .Where(x=>x.ResultMappingId==request.Id && x.Owner!=null && (x.Verify=="Scoped" || x.Verify == "Verified"))
+            .Where(x=>x.ResultMappingId==request.Id && x.Owner!=null && (x.Verify=="Selected" || x.Verify == "Verified"))
             .GroupBy(x=>x.Owner)
             .Select(x => new {Owner =x.Key, Total=x.Count() })
             .ToListAsync();

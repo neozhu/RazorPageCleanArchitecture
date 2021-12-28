@@ -59,7 +59,7 @@
             modalcontent.classList.remove("overlay-wrapper");
             overlay.style.display="none";
             if (response.data.Succeeded) {
-                toastr["info"](`@_localizer["Import data success."]`);
+                toastr["info"](`@_localizer["Import data successfully."]`);
                 $('#default-import-modal').modal('toggle');
                 @Html.Raw(Model.OnImportedSucceeded)
             } else {
