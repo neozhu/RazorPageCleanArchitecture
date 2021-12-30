@@ -33,6 +33,8 @@ public class ParseTemplateFileCommandHandler:
             var mappingruledto = new MappingRuleDto() {
                 Name = filename.Remove(filename.LastIndexOf("."))
             };
+            var objectname= xdoc.Descendants().Where(x => x.Name.LocalName == "Object_name").First().Value;
+            mappingruledto.ObjectName = objectname;
             var signature = xdoc.Descendants().Where(x => x.Name.LocalName == "Worksheet" && x.FirstAttribute.Value == "Signature").First();
             var signaturetable = signature.Descendants().Where(x => x.Name.LocalName == "Table");
             var data = xdoc.Descendants().Where(x => x.Name.LocalName == "Worksheet" && x.FirstAttribute.Value == "Data").First();

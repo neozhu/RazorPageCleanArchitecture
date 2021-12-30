@@ -569,13 +569,31 @@
 
                        }
                    },
-                   { field: 'Team', title: '@_localizer["Team"]', sortable: true, width: 160 },
+                   { field: 'Team',
+                     title: '@_localizer["Team"]',
+                     sortable: true,
+                     width: 160,
+                     formatter:function(value){
+                      if(value){
+                          const word = value.split(',');
+                          let label ='';
+                          for(i=0;i<word.length;i++){
+                              if(i==0){
+                                  label =`<span style="text-decoration: underline!important;">${word[i]}</span>`
+                              } else {
+                                  label+= `, <small>${word[i]}</small>`
+                              }
+                          }
+                          return label;
+                      }
+                  }
+                   },
                    { field: 'LegacySystem', title: '@_localizer["Location"]', sortable: true, width: 180 },
                    { field: 'Name',
                      title: '@_localizer["Result Mapping Name"]',
                      sortable: true,
                      formatter:function(value,row,index){
-                         return `<a> ${value??''} </a> <br> <small>${row.Description??''}</small> `;
+                         return `<a> ${value??''} </a> <br> <small data-toggle="tooltip" title="${row.Description}">${row.Description??''}</small> `;
                      },
                      width: 300
                    },
@@ -757,6 +775,8 @@
                $('#fieldtable').append(`<thead><tr>${td1}</tr></thead>`)
                $('#fieldtable').append(`<tr>${td2}</tr>`)
            } else {
+               $('#fieldtable').empty();
+               $('#Input_Team').val(null).change();
                savebutton.disabled = true;
                uploadresultmappingbutton.disabled = false;
                resultmappingfileinput.required = true;

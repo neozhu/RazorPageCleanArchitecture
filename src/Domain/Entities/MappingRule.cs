@@ -38,4 +38,6 @@ public class MappingRule : AuditableEntity, IAuditTrial, IProjectId
     public virtual MigrationProject MigrationProject { get; set; }
 
     public string MigrationApproach{get;set;}
+
+    public string ObjectName { get; set; }
 }

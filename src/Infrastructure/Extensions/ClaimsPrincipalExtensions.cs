@@ -118,11 +118,14 @@ public static class ClaimsPrincipalExtensions
         var group = groupNames.Where(x => x.StartsWith("EURO1\\"))
             .Select(x => x.Split("\\")[1]);
 
-        if (group.Any(x => x.ToUpper().Contains("MIG")))
+        if (group.Any(x => x.ToUpper().Contains("MOVE-VT-MIG")))
+        {
+            return group.First(x => x.ToUpper().Contains("MOVE-VT-MIG"));
+        }else if(group.Any(x => x.ToUpper().Contains("MIG")))
         {
             return group.First(x => x.ToUpper().Contains("MIG"));
         }
-        if (group.Any(x => x.ToUpper().Contains("DSC IT SAP")))
+        else if (group.Any(x => x.ToUpper().Contains("DSC IT SAP")))
         {
             return group.First(x => x.ToUpper().Contains("DSC IT SAP"));
         }

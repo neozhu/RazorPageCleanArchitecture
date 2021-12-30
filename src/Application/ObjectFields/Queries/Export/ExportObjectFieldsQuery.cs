@@ -45,6 +45,7 @@ namespace CleanArchitecture.Razor.Application.ObjectFields.Queries.Export;
             var result = await _excelService.ExportAsync(data,
                 new Dictionary<string, Func<ObjectFieldDto, object>>()
                 {
+                    { _localizer["Project Name"], item => item.ProjectName },
                     { _localizer["Field Name"], item => item.Name },
                     { _localizer["Field Description"], item => item.Description }
            

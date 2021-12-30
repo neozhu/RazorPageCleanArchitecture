@@ -45,6 +45,7 @@ public class MappingRuleDto : IMapFrom<MappingRule>
     public TrackingState TrackingState { get; set; }
     public string Active { get; set; } = "Inactive";
     public string MigrationApproach { get; set; }
+    public string ObjectName { get; set; }
     public DateTime Created { get; set; }
     public string CreatedBy { get; set; }
     public DateTime? LastModified { get; set; }
