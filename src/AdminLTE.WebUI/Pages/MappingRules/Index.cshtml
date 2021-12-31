@@ -955,6 +955,7 @@
                savebutton.disabled = true;
                $('#Input_ObjectName').val('');
                $('#Input_TemplateDescription').val('');
+
                $('#Input_Name').val('');
                $('#Input_LegacyField1').val('');
                $('#Input_LegacyField2').val('');
@@ -995,6 +996,7 @@
     var initdatagrid = () => {
         $dg = $('#mappingrule_dg').datagrid({
             method: 'GET',
+            minHeight:380,
             rownumbers: false,
             singleSelect: true,
             selectOnCheck: false,
@@ -1465,7 +1467,7 @@
             $('#Input_RelevantObjects').val(null).change();
             $('#Input_LegacySystem').val(null).change();
             $('#Input_Team').val(null).change();
-            $('#Input_Active').prop('checked', false);
+            $('#Input_Active').val('Inactive');
             uploadtemplatefilename.innerHTML =`<div class="alert alert-danger mt-2 mb-2" role="alert">
                                     <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a value mapping template file."].
                          </div>`
