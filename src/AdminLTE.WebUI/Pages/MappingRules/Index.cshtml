@@ -419,7 +419,7 @@
     })
 
     var blankformatter=(value,row,index)=>{
-        if(value.trim()==""){
+        if(value==null || value.trim()==""){
              return `<span class="fst-italic fw-lighter">Blank</span>`;
         }else{
             return value;
