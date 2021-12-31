@@ -1,0 +1,36 @@
+@model AdminLTE.WebUI.Pages.Shared.Components.Chart.DefaultModel
+
+<div class="card m-2">
+   <div class="card-body">
+         <div class="chartjs-size-monitor">
+             <div id="chart-container" data-item="@Model.data"></div>
+         </div>
+   </div>
+</div>
+
+<script>
+ const { Bar } = G2Plot;
+ var elem = document.getElementById('chart-container');
+ const data = JSON.parse(elem.getAttribute('data-item'));
+const barPlot = new Bar('chart-container', {
+  data,
+  xField: 'Percent',
+  yField: 'Team',
+  seriesField: 'Status',
+  isPercent: true,
+  isStack: true,
+  /** 自定义颜色 */
+  // color: ['#2582a1', '#f88c24', '#c52125', '#87f4d0'],
+  label: {
+    position: 'middle',
+    content: (item) => {
+      return item.Total;
+    },
+    style: {
+      fill: '#fff',
+    },
+  },
+});
+
+barPlot.render();
+</script>

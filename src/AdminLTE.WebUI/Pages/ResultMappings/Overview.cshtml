@@ -274,7 +274,13 @@
 
 
        };
-
+       var blankformatter=(value,row,index)=>{
+        if(value.trim()==""){
+             return `<span class="fst-italic fw-lighter">Blank</span>`;
+        }else{
+            return value;
+        }
+       }
        $('#refreshbutton').click(function () {
            reloadData();
        });
@@ -681,7 +687,8 @@
                            field: `Field${index+1}`,
                            title: `${item.FieldName}<br><small>${item.Description??''}</small>`,
                            sortable: true,
-                           width: 160
+                           width: 160,
+                           formatter:blankformatter
                        });
            });
            columns.push({

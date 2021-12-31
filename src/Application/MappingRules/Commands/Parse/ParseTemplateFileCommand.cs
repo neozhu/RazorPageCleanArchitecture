@@ -50,53 +50,72 @@ public class ParseTemplateFileCommandHandler:
                 }
             }
             int index = 0;
-            foreach (var row in signaturetable.Descendants().Where(x => x.Name.LocalName == "Row" && x.Nodes().Count() == 7).Skip(1).ToList())
+            if (objectname.Contains("_FIX_"))
             {
-               
-                var cells = row.Nodes().ToArray();
-                var paraname = ((XElement)cells[0]).Elements().Where(x => x.Name.LocalName == "Data").First().Value;
-                var direct = ((XElement)cells[1]).Elements().Where(x => x.Name.LocalName == "Data").First().Value;
-                var associatedtype = ((XElement)cells[3]).Elements().Where(x => x.Name.LocalName == "Data").First().Value;
-                var datatype = ((XElement)cells[4]).Elements().Where(x => x.Name.LocalName == "Data").First().Value;
-                var length = ((XElement)cells[5]).Elements().Where(x => x.Name.LocalName == "Data").First().Value;
-                var name = paraname;
-               
-                if (paraname.IndexOf("_") > 0)
+                var header = datatable.Descendants().Where(x => x.Name.LocalName == "Row").Skip(3).First();
+                var cells = header.Descendants().Where(x => x.Name.LocalName == "Data").ToList();
+                var first = cells.First();
+                var last=cells.Last();
+                var fielddescription1 = await _context.ObjectFields.FirstOrDefaultAsync(x => x.Name == first.Value);
+                mappingruledto.LegacyField1 = first.Value;
+                mappingruledto.ImportParameterField1 = first.Value;
+                mappingruledto.LegacyDescription1 = fielddescription1?.Description;
+                var fielddescription2 = await _context.ObjectFields.FirstOrDefaultAsync(x => x.Name == last.Value);
+                mappingruledto.NewValueField = last.Value;
+                mappingruledto.ExportParameterField = last.Value;
+                mappingruledto.NewValueFieldDescription = fielddescription2?.Description;
+            }
+            else
+            {
+                foreach (var row in signaturetable.Descendants().Where(x => x.Name.LocalName == "Row" && x.Nodes().Count() == 7).Skip(1).ToList())
                 {
-                    name = paraname.Substring(paraname.IndexOf("_") +1);
-                }
-                var fielddescription = await _context.ObjectFields.FirstOrDefaultAsync(x => x.Name == name);
-                if (direct == "Import Parameter")
-                {
-                    index++;
-                    switch (index)
+
+                    var cells = row.Nodes().ToArray();
+                    var paraname = ((XElement)cells[0]).Elements().Where(x => x.Name.LocalName == "Data").First().Value;
+                    var direct = ((XElement)cells[1]).Elements().Where(x => x.Name.LocalName == "Data").First().Value;
+                    var associatedtype = ((XElement)cells[3]).Elements().Where(x => x.Name.LocalName == "Data").First().Value;
+                    var datatype = ((XElement)cells[4]).Elements().Where(x => x.Name.LocalName == "Data").First().Value;
+                    var length = ((XElement)cells[5]).Elements().Where(x => x.Name.LocalName == "Data").First().Value;
+                    var name = paraname;
+
+                    if (paraname.IndexOf("_") > 0)
                     {
-                        case 1:
-                            mappingruledto.LegacyField1 = name;
-                            mappingruledto.ImportParameterField1 = paraname;
-                            mappingruledto.LegacyDescription1 = fielddescription?.Description;
-                            break;
-                        case 2:
-                            mappingruledto.LegacyField2 = name;
-                            mappingruledto.ImportParameterField2 = paraname;
-                            mappingruledto.LegacyDescription2 = fielddescription?.Description;
-                            break;
-                        case 3:
-                            mappingruledto.LegacyField3 = name;
-                            mappingruledto.ImportParameterField3 = paraname;
-                            mappingruledto.LegacyDescription3 = fielddescription?.Description;
-                            break;
-                        default:
-                            mappingruledto.LegacyField4 = name;
-                            mappingruledto.ImportParameterField4 = paraname;
-                            mappingruledto.LegacyDescription4 = fielddescription?.Description;
-                            break;
+                        name = paraname.Substring(paraname.IndexOf("_") + 1);
                     }
-                }else if(direct == "Export Parameter")
-                {
-                    mappingruledto.NewValueField = name;
-                    mappingruledto.ExportParameterField = paraname;
-                    mappingruledto.NewValueFieldDescription= fielddescription?.Description;
+                    var fielddescription = await _context.ObjectFields.FirstOrDefaultAsync(x => x.Name == name);
+                    if (direct == "Import Parameter")
+                    {
+                        index++;
+                        switch (index)
+                        {
+                            case 1:
+                                mappingruledto.LegacyField1 = name;
+                                mappingruledto.ImportParameterField1 = paraname;
+                                mappingruledto.LegacyDescription1 = fielddescription?.Description;
+                                break;
+                            case 2:
+                                mappingruledto.LegacyField2 = name;
+                                mappingruledto.ImportParameterField2 = paraname;
+                                mappingruledto.LegacyDescription2 = fielddescription?.Description;
+                                break;
+                            case 3:
+                                mappingruledto.LegacyField3 = name;
+                                mappingruledto.ImportParameterField3 = paraname;
+                                mappingruledto.LegacyDescription3 = fielddescription?.Description;
+                                break;
+                            default:
+                                mappingruledto.LegacyField4 = name;
+                                mappingruledto.ImportParameterField4 = paraname;
+                                mappingruledto.LegacyDescription4 = fielddescription?.Description;
+                                break;
+                        }
+                    }
+                    else if (direct == "Export Parameter")
+                    {
+                        mappingruledto.NewValueField = name;
+                        mappingruledto.ExportParameterField = paraname;
+                        mappingruledto.NewValueFieldDescription = fielddescription?.Description;
+                    }
                 }
             }
             var exists = await _context.MappingRules.AnyAsync(x=>

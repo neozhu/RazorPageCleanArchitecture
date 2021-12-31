@@ -234,6 +234,7 @@ public class ImportFieldMappingValuesCommandHandler :
                     //delete exist data
                     var items = await _context.FieldMappingValues.Where(x => x.MappingRuleId == mappingrule.Id).ToListAsync();
                     _context.FieldMappingValues.RemoveRange(items);
+                    var list = new List<FieldMappingValue>();
                      foreach (DataRow row in dt.Rows)
                     {
                         var newitem = new FieldMappingValue();
@@ -250,8 +251,12 @@ public class ImportFieldMappingValuesCommandHandler :
                         {
                             newitem.Legacy3 = row[mappingrule.ImportParameterField3].ToString();
                         }
-                        await _context.FieldMappingValues.AddAsync(newitem, cancellationToken);
+                        list.Add(newitem);
+                       
                     }
+                    // remove duplicates
+                    var inputlist = list.DistinctBy(x => new { x.Legacy1, x.Legacy2, x.Legacy3, x.NewValue });
+                    await _context.FieldMappingValues.AddRangeAsync(inputlist,cancellationToken);
                     await _context.SaveChangesAsync(cancellationToken);
                 }
                 else

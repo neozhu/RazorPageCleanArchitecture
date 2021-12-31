@@ -26,13 +26,21 @@ public class AcceptChangesFieldMappingValuesCommandHandler : IRequestHandler<Acc
     public async Task<Result> Handle(AcceptChangesFieldMappingValuesCommand request, CancellationToken cancellationToken)
     {
         var array_id = request.Items.Select(x => x.MappingRuleId).Distinct().ToArray();
-        foreach (var item in request.Items)
+        foreach (var item in request.Items.DistinctBy(x => new {x.Legacy1,x.Legacy2,x.Legacy3,x.NewValue }))
         {
             switch (item.TrackingState)
             {
                 case TrackingState.Added:
                     var newitem = _mapper.Map<FieldMappingValue>(item);
-                    await _context.FieldMappingValues.AddAsync(newitem, cancellationToken);
+                    var isexists = await _context.FieldMappingValues.AnyAsync(x => x.MappingRuleId == newitem.MappingRuleId &&
+                                                                              x.Legacy1 == newitem.Legacy1 &&
+                                                                              x.Legacy2 == newitem.Legacy2 &&
+                                                                              x.Legacy3 == newitem.Legacy3 &&
+                                                                              x.NewValue == newitem.NewValue);
+                    if (!isexists)
+                    {
+                        await _context.FieldMappingValues.AddAsync(newitem, cancellationToken);
+                    }
                     break;
                 case TrackingState.Deleted:
                     var delitem = await _context.FieldMappingValues.FindAsync(new object[] { item.Id }, cancellationToken);

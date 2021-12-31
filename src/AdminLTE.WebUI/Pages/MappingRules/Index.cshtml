@@ -97,6 +97,8 @@
                     <input type="hidden" asp-for="Input.TemplateFile" />
                     <input type="hidden" asp-for="Input.TemplateDescription" />
                     <input type="hidden" asp-for="Input.ObjectName" />
+                    <input type="hidden" asp-for="Input.Active" />
+                    <input type="hidden" asp-for="Input.IsMock" />
                     <div class="form-row">
                         <div class="col-md-12">
                             <label class="form-label" for=""></label>
@@ -184,14 +186,8 @@
                             <input type="text" asp-for="Input.NewValueFieldDescription" class="form-control" placeholder="" autocomplete="off" />
                             <span class="invalid-feedback" asp-validation-for="Input.NewValueFieldDescription">Sorry, you missed this one.</span>
                         </div>
-                        <div class="col-md-4 mb-2">
-                            <label class="form-label" for="Active"> </label>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" asp-for="Input.Active" class="custom-control-input" value="Active">
-                                <label class="custom-control-label" for="Input_Active">@_localizer["Active"]</label>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-2">
+             
+                        <div class="col-md-6 mb-2">
                             <label class="form-label" for="Team">@_localizer["Team"] </label>
 
                             <select type="text" asp-for="Input.Team" class="select2bs4" multiple="multiple" asp-dictionaries-for="Team" data-placeholder="Choose Team" data-dropdown-css-class="select2-purple" style="width: 100%;">
@@ -199,7 +195,7 @@
 
                             <span class="invalid-feedback" asp-validation-for="Input.Team">Sorry, you missed this one.</span>
                         </div>
-                        <div class="col-md-4 mb-2">
+                        <div class="col-md-6 mb-2">
                             <label class="form-label" for="MigrationApproach">@_localizer["Migration Approach"] </label>
 
                             <select type="text" asp-for="Input.MigrationApproach" class="select2bs4"   asp-dictionaries-for="MigrationApproach" data-placeholder="Choose Migration Approach" data-dropdown-css-class="select2-purple" style="width: 100%;">
@@ -422,16 +418,26 @@
       
     })
 
+    var blankformatter=(value,row,index)=>{
+        if(value.trim()==""){
+             return `<span class="fst-italic fw-lighter">Blank</span>`;
+        }else{
+            return value;
+        }
+    }
+
+
     var getcolumns =()=>{
          var columns=[{ field: 'ck', checkbox: true }];
      
          if(currentMappingRuleItem.LegacyField1){
              columns.push({
                         field: 'Legacy1',
-                         title: `${currentMappingRuleItem.LegacyField1}(Legacy)<br><small>${currentMappingRuleItem.LegacyDescription1??''}</small>`,
+                        title: `${currentMappingRuleItem.LegacyField1}(Legacy)<br><small>${currentMappingRuleItem.LegacyDescription1??''}</small>`,
                         sortable: true,
                         width: 220,
-                        editor: { type: 'textbox', options: { required: true } }
+                        editor: { type: 'textbox', options: { required: true }},
+                        formatter:blankformatter
                     });
          }
          if(currentMappingRuleItem.LegacyField2){
@@ -440,7 +446,8 @@
                          title: `${currentMappingRuleItem.LegacyField2}(Legacy)<br><small>${currentMappingRuleItem.LegacyDescription2??''}</small>`,
                         sortable: true,
                         width: 220,
-                        editor: { type: 'textbox', options: { required: true } }
+                        editor: { type: 'textbox', options: { required: true }},
+                        formatter:blankformatter
                     });
          }
          if(currentMappingRuleItem.LegacyField3){
@@ -449,7 +456,8 @@
                         title: `${currentMappingRuleItem.LegacyField3}(Legacy)<br><small>${currentMappingRuleItem.LegacyDescription3??''}</small>`,
                         sortable: true,
                         width: 220,
-                        editor: { type: 'textbox', options: { required: true } }
+                        editor: { type: 'textbox', options: { required: true } },
+                        formatter:blankformatter
                     });
          }
          if(currentMappingRuleItem.NewValueField){
@@ -458,7 +466,8 @@
                         title: `${currentMappingRuleItem.NewValueField}(New)<br><small>${currentMappingRuleItem.NewValueFieldDescription??''}</small>`,
                         sortable: true,
                         width: 220,
-                        editor: { type: 'textbox', options: { required: true } }
+                        editor: { type: 'textbox', options: { required: true } },
+                        formatter:blankformatter
                     });
          }
         columns.push({
@@ -846,7 +855,6 @@
             formData.set("Input.RelevantObjects", $('#Input_RelevantObjects').select2('val').toString());
             formData.set("Input.Team", $('#Input_Team').select2('val').toString());
             formData.set("Input.TemplateFile", $('#Input_TemplateFile').val());
-            formData.set("Input.Active", $('#Input_Active').prop('checked')?'Active':'Inactive');
             formData.set("TemplateFile", uploadtemplatefileinput.files[0]);
             axios({
                 url: '@Url.Page("/MappingRules/Index")',
@@ -1273,7 +1281,8 @@
                          title: `${row.LegacyField1}(Legacy)<br><small>${row.LegacyDescription1??''}</small>`,
                         sortable: true,
                         width: 220,
-                        editor: { type: 'textbox', options: { required: true } }
+                        editor: { type: 'textbox', options: { required: true } },
+                        formatter:blankformatter
                     });
          }
          if(row.LegacyField2) {
@@ -1282,7 +1291,8 @@
                          title: `${row.LegacyField2}(Legacy)<br><small>${row.LegacyDescription2??''}</small>`,
                         sortable: true,
                         width: 220,
-                        editor: { type: 'textbox', options: { required: true } }
+                        editor: { type: 'textbox', options: { required: true } },
+                        formatter:blankformatter
                     });
          }
          if(row.LegacyField3) {
@@ -1291,7 +1301,8 @@
                         title: `${row.LegacyField3}(Legacy)<br><small>${row.LegacyDescription3??''}</small>`,
                         sortable: true,
                         width: 220,
-                        editor: { type: 'textbox', options: { required: true } }
+                        editor: { type: 'textbox', options: { required: true } },
+                        formatter:blankformatter
                     });
          }
          if(row.NewValueField) {
@@ -1300,7 +1311,8 @@
                         title: `${row.NewValueField}(New)<br><small>${row.NewValueFieldDescription??''}</small>`,
                         sortable: true,
                         width: 220,
-                        editor: { type: 'textbox', options: { required: true } }
+                        editor: { type: 'textbox', options: { required: true } },
+                        formatter:blankformatter
                     });
          }
         columns.push({
@@ -1345,20 +1357,7 @@
             $('#mappingrules_modal .modal-title').html('@_localizer["Edit Value Mapping Rule"]');
 
             $('#mappingrule_form').jsonToForm(document, {
-                IsMock: function (value) {
-                    if (value == true) {
-                        $('#Input_IsMock').prop('checked', true);
-                    } else {
-                        $('#Input_IsMock').prop('checked', false);
-                    }
-                },
-                Active:function(value){
-                     if (value == 'Active') {
-                        $('#Input_Active').prop('checked', true);
-                    } else {
-                        $('#Input_Active').prop('checked', false);
-                    }
-                },
+                
                 TemplateDescription:function(value){
                      $('#Input_TemplateDescription').val(value)
                 },
@@ -1528,9 +1527,7 @@
                 },
                 callback: function (result) {
                     if (result) {
-                        var paras = new URLSearchParams(checkedId.map(s => ['id', s]));
-                        console.log(paras.toString())
-                        axios.get('@Url.Page("/MappingRules/Index")?handler=DeleteChecked&' + paras.toString()).then(res => {
+                        axios.post('@Url.Page("/MappingRules/Index")?handler=DeleteChecked'  ,{id:checkedId}).then(res => {
                             toastr["info"](`@_localizer["Deleted ${checkedId.length} rows"]`);
                             reloadData();
                         })
