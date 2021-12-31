@@ -77,10 +77,18 @@ public class ParseTemplateFileCommandHandler:
                     var datatype = ((XElement)cells[4]).Elements().Where(x => x.Name.LocalName == "Data").First().Value;
                     var length = ((XElement)cells[5]).Elements().Where(x => x.Name.LocalName == "Data").First().Value;
                     var name = paraname;
-
-                    if (paraname.IndexOf("_") > 0)
+                    if (string.IsNullOrEmpty(associatedtype))
                     {
-                        name = paraname.Substring(paraname.IndexOf("_") + 1);
+                        if (paraname.IndexOf("_") > 0)
+                        {
+                            name = paraname.Substring(paraname.IndexOf("_") + 1);
+                        }
+                        mappingruledto.MigrationApproach = "Staging";
+                    }
+                    else
+                    {
+                        name = associatedtype;
+                        mappingruledto.MigrationApproach = "Direct";
                     }
                     var fielddescription = await _context.ObjectFields.FirstOrDefaultAsync(x => x.Name == name);
                     if (direct == "Import Parameter")
