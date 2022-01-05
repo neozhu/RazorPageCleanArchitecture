@@ -18,6 +18,8 @@ public class FieldMappingValueDto : IMapFrom<FieldMappingValue>
     }
     public int Id { get; set; }
     public int MappingRuleId { get; set; }
+    public string ObjectName { get; set; }
+    public string MigrationApproach { get; set; }
     public string MappingRule { get; set; }
     public string Mock { get; set; }
     public string Legacy1 { get; set; }

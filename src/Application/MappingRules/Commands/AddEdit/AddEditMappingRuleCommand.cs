@@ -45,7 +45,7 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
             request.MigrationApproach);
         if (isexist)
         {
-            throw new Exception($"Duplicate rule:{request.Name} ");
+            throw new Exception($"Duplicate mapping rule:{request.Name} ");
         }
         
         if (request.Id > 0)
@@ -58,6 +58,11 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
                 request.UploadRequest.Data= buffer;
                 var result = await _uploadService.UploadAsync(request.UploadRequest);
                 item.TemplateFile = result;
+            }
+            var hasdata = await _context.FieldMappingValues.AnyAsync(x => x.MappingRuleId == item.Id);
+            if (hasdata && item.Status== "Not started")
+            {
+                item.Status = "Ongoing";
             }
             await _context.SaveChangesAsync(cancellationToken);
             return Result<int>.Success(item.Id);

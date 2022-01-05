@@ -1,6 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using CleanArchitecture.Razor.Application.FieldMappingValues.DTOs;
 using CleanArchitecture.Razor.Application.MappingRules.Commands.Create;
 using CleanArchitecture.Razor.Application.MappingRules.DTOs;
 
@@ -23,6 +24,7 @@ public class ImportMappingRulesCommandHandler :
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
+    private readonly ILogger<ImportMappingRulesCommandHandler> _logger;
     private readonly IStringLocalizer<ImportMappingRulesCommandHandler> _localizer;
     private readonly IValidator<CreateMappingRuleCommand> _validator;
     private readonly IExcelService _excelService;
@@ -32,7 +34,8 @@ public class ImportMappingRulesCommandHandler :
         IExcelService excelService,
         IStringLocalizer<ImportMappingRulesCommandHandler> localizer,
         IValidator<CreateMappingRuleCommand> validator,
-        IMapper mapper
+        IMapper mapper,
+        ILogger<ImportMappingRulesCommandHandler> logger
         )
     {
         _context = context;
@@ -40,6 +43,7 @@ public class ImportMappingRulesCommandHandler :
         _validator = validator;
         _excelService = excelService;
         _mapper = mapper;
+        _logger = logger;
     }
     //public async Task<Result> Handle(ImportMappingRulesCommand request, CancellationToken cancellationToken)
     //{
@@ -132,57 +136,57 @@ public class ImportMappingRulesCommandHandler :
     //}
 
 
-    public async Task<Result> Handle(ImportMappingRulesCommand request, CancellationToken cancellationToken)
-    {
-        var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, MappingRule, object>>
-            {
-                { _localizer["Name"], (row,item) => item.Name = row[_localizer["Name"]]?.ToString() },
-                { _localizer["Status"], (row,item) => item.Status = row[_localizer["Status"]]?.ToString() },
-                { _localizer["Active"], (row, item) => item.Active = row[_localizer["Active"]]?.ToString() },
-                { _localizer["ImportParameterField1"], (row,item) => item.ImportParameterField1 = row[_localizer["ImportParameterField1"]]?.ToString() },
-                { _localizer["LegacyField1"], (row,item) => item.LegacyField1 = row[_localizer["LegacyField1"]]?.ToString() },
-                { _localizer["LegacyDescription1"], (row,item) => item.LegacyDescription1 = row[_localizer["LegacyDescription1"]]?.ToString() },
-                { _localizer["ImportParameterField2"], (row,item) => item.ImportParameterField2 = row[_localizer["ImportParameterField2"]]?.ToString() },
-                { _localizer["LegacyField2"], (row,item) => item.LegacyField2 = row[_localizer["LegacyField2"]]?.ToString() },
-                { _localizer["LegacyDescription2"], (row,item) => item.LegacyDescription2 = row[_localizer["LegacyDescription2"]]?.ToString() },
-                { _localizer["ImportParameterField3"], (row,item) => item.ImportParameterField3 = row[_localizer["ImportParameterField3"]]?.ToString() },
-                { _localizer["LegacyField3"], (row,item) => item.LegacyField3 = row[_localizer["LegacyField3"]]?.ToString() },
-                { _localizer["LegacyDescription3"], (row,item) => item.LegacyDescription3 = row[_localizer["LegacyDescription3"]]?.ToString() },
-                { _localizer["ExportParameterField"], (row,item) => item.ExportParameterField = row[_localizer["ExportParameterField"]]?.ToString() },
-                { _localizer["NewValueField"], (row,item) => item.NewValueField = row[_localizer["NewValueField"]]?.ToString() },
-                { _localizer["NewValueFieldDescription"], (row,item) => item.NewValueFieldDescription = row[_localizer["NewValueFieldDescription"]]?.ToString() },
-                { _localizer["Team"], (row,item) => item.Team = row[_localizer["Team"]]?.ToString() },
-                { _localizer["LegacySystem"], (row,item) => item.LegacySystem = row[_localizer["LegacySystem"]]?.ToString() },
-                { _localizer["ProjectName"], (row,item) => item.ProjectName = row[_localizer["ProjectName"]]?.ToString() },
-                { _localizer["RelevantObjects"], (row,item) => item.RelevantObjects = row[_localizer["RelevantObjects"]]?.ToString() },
-                { _localizer["Comments"], (row,item) => item.Comments = row[_localizer["Comments"]]?.ToString() },
-                { _localizer["TemplateFile"], (row,item) => item.TemplateFile = row[_localizer["TemplateFile"]]?.ToString() },
-                { _localizer["TemplateDescription"], (row,item) => item.TemplateDescription = row[_localizer["TemplateDescription"]]?.ToString() },
-                { _localizer["MigrationApproach"], (row,item) => item.MigrationApproach = row[_localizer["MigrationApproach"]]?.ToString() },
-                { _localizer["ObjectName"], (row,item) => item.ObjectName = row[_localizer["ObjectName"]]?.ToString() },
+    //public async Task<Result> Handle(ImportMappingRulesCommand request, CancellationToken cancellationToken)
+    //{
+    //    var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, MappingRule, object>>
+    //        {
+    //            { _localizer["Name"], (row,item) => item.Name = row[_localizer["Name"]]?.ToString() },
+    //            { _localizer["Status"], (row,item) => item.Status = row[_localizer["Status"]]?.ToString() },
+    //            { _localizer["Active"], (row, item) => item.Active = row[_localizer["Active"]]?.ToString() },
+    //            { _localizer["ImportParameterField1"], (row,item) => item.ImportParameterField1 = row[_localizer["ImportParameterField1"]]?.ToString() },
+    //            { _localizer["LegacyField1"], (row,item) => item.LegacyField1 = row[_localizer["LegacyField1"]]?.ToString() },
+    //            { _localizer["LegacyDescription1"], (row,item) => item.LegacyDescription1 = row[_localizer["LegacyDescription1"]]?.ToString() },
+    //            { _localizer["ImportParameterField2"], (row,item) => item.ImportParameterField2 = row[_localizer["ImportParameterField2"]]?.ToString() },
+    //            { _localizer["LegacyField2"], (row,item) => item.LegacyField2 = row[_localizer["LegacyField2"]]?.ToString() },
+    //            { _localizer["LegacyDescription2"], (row,item) => item.LegacyDescription2 = row[_localizer["LegacyDescription2"]]?.ToString() },
+    //            { _localizer["ImportParameterField3"], (row,item) => item.ImportParameterField3 = row[_localizer["ImportParameterField3"]]?.ToString() },
+    //            { _localizer["LegacyField3"], (row,item) => item.LegacyField3 = row[_localizer["LegacyField3"]]?.ToString() },
+    //            { _localizer["LegacyDescription3"], (row,item) => item.LegacyDescription3 = row[_localizer["LegacyDescription3"]]?.ToString() },
+    //            { _localizer["ExportParameterField"], (row,item) => item.ExportParameterField = row[_localizer["ExportParameterField"]]?.ToString() },
+    //            { _localizer["NewValueField"], (row,item) => item.NewValueField = row[_localizer["NewValueField"]]?.ToString() },
+    //            { _localizer["NewValueFieldDescription"], (row,item) => item.NewValueFieldDescription = row[_localizer["NewValueFieldDescription"]]?.ToString() },
+    //            { _localizer["Team"], (row,item) => item.Team = row[_localizer["Team"]]?.ToString() },
+    //            { _localizer["LegacySystem"], (row,item) => item.LegacySystem = row[_localizer["LegacySystem"]]?.ToString() },
+    //            { _localizer["ProjectName"], (row,item) => item.ProjectName = row[_localizer["ProjectName"]]?.ToString() },
+    //            { _localizer["RelevantObjects"], (row,item) => item.RelevantObjects = row[_localizer["RelevantObjects"]]?.ToString() },
+    //            { _localizer["Comments"], (row,item) => item.Comments = row[_localizer["Comments"]]?.ToString() },
+    //            { _localizer["TemplateFile"], (row,item) => item.TemplateFile = row[_localizer["TemplateFile"]]?.ToString() },
+    //            { _localizer["TemplateDescription"], (row,item) => item.TemplateDescription = row[_localizer["TemplateDescription"]]?.ToString() },
+    //            { _localizer["MigrationApproach"], (row,item) => item.MigrationApproach = row[_localizer["MigrationApproach"]]?.ToString() },
+    //            { _localizer["ObjectName"], (row,item) => item.ObjectName = row[_localizer["ObjectName"]]?.ToString() },
 
-            }, _localizer["MappingRules"]);
-        if (result.Succeeded)
-        {
-            var importItems = result.Data;
-            foreach (var item in importItems)
-            {
-                var exist = await _context.MappingRules.AnyAsync(x => x.Name == item.Name
-                                , cancellationToken);
-                if (!exist)
-                {
-                    await _context.MappingRules.AddAsync(item, cancellationToken);
-                }
+    //        }, _localizer["MappingRules"]);
+    //    if (result.Succeeded)
+    //    {
+    //        var importItems = result.Data;
+    //        foreach (var item in importItems)
+    //        {
+    //            var exist = await _context.MappingRules.AnyAsync(x => x.Name == item.Name
+    //                            , cancellationToken);
+    //            if (!exist)
+    //            {
+    //                await _context.MappingRules.AddAsync(item, cancellationToken);
+    //            }
 
-            }
-            await _context.SaveChangesAsync(cancellationToken);
-            return await Result.SuccessAsync();
-        }
-        else
-        {
-            return await Result.FailureAsync(result.Errors);
-        }
-    }
+    //        }
+    //        await _context.SaveChangesAsync(cancellationToken);
+    //        return await Result.SuccessAsync();
+    //    }
+    //    else
+    //    {
+    //        return await Result.FailureAsync(result.Errors);
+    //    }
+    //}
 
     public async Task<byte[]> Handle(CreateMappingRulesTemplateCommand request, CancellationToken cancellationToken)
     {
@@ -215,6 +219,106 @@ public class ImportMappingRulesCommandHandler :
             };
         var result = await _excelService.CreateTemplateAsync(fields, _localizer["MappingRules"]);
         return result;
+    }
+
+    public async Task<Result> Handle(ImportMappingRulesCommand request, CancellationToken cancellationToken)
+    {
+        var result = await _excelService.ImportAsync(request.Data, mappers: new Dictionary<string, Func<DataRow, FieldMappingValueDto, object>>
+            {
+                { _localizer["Matched Rule Name"], (row,item) => item.ObjectName = row[_localizer["Matched Rule Name"]]?.ToString() },
+                { _localizer["Confirmed Approach"], (row,item) => item.MigrationApproach = row[_localizer["Confirmed Approach"]]?.ToString() },
+                { _localizer["New"], (row, item) => item.NewValue = row[_localizer["New"]]?.ToString() },
+                { _localizer["Legacy1"], (row,item) => item.Legacy1 = row[_localizer["Legacy1"]]?.ToString() },
+                { _localizer["Legacy2"], (row,item) => item.Legacy2 = row[_localizer["Legacy2"]]?.ToString() },
+                { _localizer["Legacy3"], (row,item) => item.Legacy3 = row[_localizer["Legacy3"]]?.ToString() },
+             }, _localizer["Sheet1"]);
+        if (result.Succeeded) {
+            var items = result.Data;
+            var group = items.GroupBy(x => new { x.ObjectName, x.MigrationApproach })
+                             .Select(g => new { g.Key.MigrationApproach, g.Key.ObjectName, Count = g.Count() })
+                             .ToList();
+            foreach(var g in group)
+            {
+                if (g.Count > 1)
+                {
+                    var rule = await _context.MappingRules.Where(x => x.ObjectName == g.ObjectName
+                                                               && x.MigrationApproach == g.MigrationApproach)
+                                                        .FirstOrDefaultAsync();
+                    if (rule != null)
+                    {
+                        var exist = await _context.FieldMappingValues.AnyAsync(x => x.MappingRuleId == rule.Id);
+                        if (exist)
+                        {
+                            _logger.LogWarning($"{g.ObjectName}-{g.MigrationApproach}:has maintained value");
+                            continue;
+                        }
+                        foreach (var item in items.Where(x => x.MigrationApproach == g.MigrationApproach && x.ObjectName == g.ObjectName).ToList())
+                        {
+                            var mappingvalue = new FieldMappingValue()
+                            {
+                                MappingRuleId = rule.Id,
+                                Legacy1 = item.Legacy1,
+                                Legacy2 = item.Legacy2,
+                                Legacy3 = item.Legacy3,
+                                Legacy4 = item.Legacy4,
+                                NewValue = item.NewValue,
+                            };
+
+                            await _context.FieldMappingValues.AddAsync(mappingvalue,cancellationToken);
+                          
+                        }
+                        rule.Active = "Active";
+                        _context.MappingRules.Update(rule);
+                    }
+                    else
+                    {
+                        _logger.LogWarning($"{g.ObjectName}-{g.MigrationApproach}:not found maping rule");
+                    }
+                }
+                else
+                {
+                    var rule = await _context.MappingRules.Where(x => x.ObjectName == g.ObjectName
+                                                              && x.MigrationApproach == g.MigrationApproach)
+                                                       .FirstOrDefaultAsync();
+                    if (rule != null)
+                    {
+                        var exist = await _context.FieldMappingValues.AnyAsync(x => x.MappingRuleId == rule.Id);
+                        if (exist)
+                        {
+                            _logger.LogWarning($"{g.ObjectName}-{g.MigrationApproach}:has maintained value");
+                            continue;
+                        }
+
+                        var item = items.Where(x => x.MigrationApproach == g.MigrationApproach && x.ObjectName == g.ObjectName).FirstOrDefault();
+                        if (!string.IsNullOrEmpty(item.Legacy1))
+                        {
+                            var mappingvalue = new FieldMappingValue()
+                            {
+                                MappingRuleId = rule.Id,
+                                Legacy1 = item.Legacy1,
+                                Legacy2 = item.Legacy2,
+                                Legacy3 = item.Legacy3,
+                                Legacy4 = item.Legacy4,
+                                NewValue = item.NewValue,
+                            };
+
+                            await _context.FieldMappingValues.AddAsync(mappingvalue, cancellationToken);
+                            rule.Active = "Active";
+                            _context.MappingRules.Update(rule);
+                        }
+                    }
+                    else
+                    {
+                        _logger.LogWarning($"{g.ObjectName}-{g.MigrationApproach}:not found maping rule");
+                    }
+                }
+            }
+            await _context.SaveChangesAsync(cancellationToken);
+            return Result.Success();
+        }
+        else {
+            return await Result.FailureAsync(result.Errors);
+        }
     }
 }
 

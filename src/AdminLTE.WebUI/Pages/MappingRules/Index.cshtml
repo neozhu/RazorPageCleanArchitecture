@@ -39,11 +39,11 @@
     <div class="card-header bg-white d-flex align-items-center">
         <h4 class="m-0">
             @_localizer["Value Mapping Rule"]
-           <div class="progress mb-3">
+            <div class="progress mb-3">
                 <div class="progress-bar progress-bar bg-primary" role="progressbar" style="width: @(Model.Summarizing.First(x=>x.Status=="Not started").Percentage)%">@Model.Summarizing.First(x=>x.Status=="Not started").Total Not started</div>
                 <div class="progress-bar progress-bar bg-info" role="progressbar" style="width:  @(Model.Summarizing.First(x=>x.Status=="Ongoing").Percentage)%">@Model.Summarizing.First(x=>x.Status=="Ongoing").Total Ongoing</div>
                 <div class="progress-bar progress-bar bg-success" role="progressbar" style="width: @(Model.Summarizing.First(x=>x.Status=="Finished").Percentage)%">@Model.Summarizing.First(x=>x.Status=="Finished").Total Finished</div>
-           </div>
+            </div>
         </h4>
         <div class="ml-auto">
             <button class="btn btn-sm btn-outline-primary " id="refreshbutton">
@@ -68,7 +68,10 @@
                 <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
                 @_localizer["Download Value Mapping"]
             </button>
-
+           @* <button class="btn btn-sm btn-outline-primary " id="importbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-upload mr-1"></span>
+                @_localizer["Import Data"]
+            </button>*@
 
         </div>
     </div>
@@ -186,7 +189,7 @@
                             <input type="text" asp-for="Input.NewValueFieldDescription" class="form-control" placeholder="" autocomplete="off" />
                             <span class="invalid-feedback" asp-validation-for="Input.NewValueFieldDescription">Sorry, you missed this one.</span>
                         </div>
-             
+
                         <div class="col-md-6 mb-2">
                             <label class="form-label" for="Team">@_localizer["Team"] </label>
 
@@ -198,7 +201,7 @@
                         <div class="col-md-6 mb-2">
                             <label class="form-label" for="MigrationApproach">@_localizer["Migration Approach"] </label>
 
-                            <select type="text" asp-for="Input.MigrationApproach" class="select2bs4"   asp-dictionaries-for="MigrationApproach" data-placeholder="Choose Migration Approach" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                            <select type="text" asp-for="Input.MigrationApproach" class="select2bs4" asp-dictionaries-for="MigrationApproach" data-placeholder="Choose Migration Approach" data-dropdown-css-class="select2-purple" style="width: 100%;">
                             </select>
 
                             <span class="invalid-feedback" asp-validation-for="Input.Team">Sorry, you missed this one.</span>
@@ -256,11 +259,11 @@
                     <input type="file" id="uploaddatafile" accept="text/xml"
                            style="display:none">
                 </div>
-                <div class="d-flex flex-row mt-2">
+                <div class="d-flex flex-row mt-2 mb-2">
                     <div class="flex-fill">
-                        
                     </div>
                 </div>
+            
             </div>
             <div class="modal-footer">
                 <button type="button" id="savedatabutton" class="btn   btn-primary mr-1">@_localizer["Save"] </button>
@@ -408,14 +411,14 @@
                 columns: [getcolumns()]
             }).datagrid('enableFilter', [  ])
               .datagrid('load', suburl);
-  
+
     })
 
     $('.default-example-modal-right-lg').on('hidden.bs.modal', function () {
         //console.log('hidden.bs.modal')
         const panel = $('#fieldmappingvalues_dg').datagrid('getPanel');
             panel.panel('destroy');
-      
+
     })
 
     var blankformatter=(value,row,index)=>{
@@ -429,7 +432,7 @@
 
     var getcolumns =()=>{
          var columns=[{ field: 'ck', checkbox: true }];
-     
+
          if(currentMappingRuleItem.LegacyField1){
              columns.push({
                         field: 'Legacy1',
@@ -1139,7 +1142,7 @@
                           let label ='';
                           for(i=0;i<word.length;i++){
                               if(i==0){
-                                  label =`<span style="text-decoration: underline!important;">${word[i]}</span>`
+                                  label =`<span style="text-decoration: underline!important;" title="Leader team">${word[i]}</span>`
                               } else {
                                   label+= `, <small>${word[i]}</small>`
                               }
@@ -1153,17 +1156,17 @@
                   title: '@_localizer["Mapping Rule Name"]',
                   sortable: true,
                   formatter:function(value,row,index){
-                      return `<a> ${value??''} </a> <br> <small data-toggle="tooltip" title="${row.Comments}")> ${row.Comments??''}</small> `;
+                      return `<a  title="${row.Comments}"> ${value??''} </a> <br> <small data-toggle="tooltip" title="${row.Comments}")> ${row.Comments??''}</small> `;
                   },
                   width: 280
                 },
-                
+
                 { field: 'LegacyField1',
                   title: '@_localizer["Legacy Field 1"]',
                   sortable: true,
                   width: 190,
                   formatter:function(value,row,index){
-                      return `<a> ${value??''} </a> <br> <small data-toggle="tooltip" title="${row.LegacyDescription1}" >${row.LegacyDescription1??''}</small>`;
+                      return `<a title="${row.LegacyDescription1??''}"> ${value??''} </a> <br> <small data-toggle="tooltip" title="${row.LegacyDescription1??''}" >${row.LegacyDescription1??''}</small>`;
                   }
                 },
                 { field: 'LegacyField2',
@@ -1171,7 +1174,7 @@
                   sortable: true,
                   width: 180,
                   formatter:function(value,row,index){
-                      return `<a> ${value??''} </a> <br> <small data-toggle="tooltip" title="${row.LegacyDescription2}">${row.LegacyDescription2??''}</small>`;
+                      return `<a title="${row.LegacyDescription2??''}"> ${value??''} </a> <br> <small data-toggle="tooltip" title="${row.LegacyDescription2??''}">${row.LegacyDescription2??''}</small>`;
                   }
                 },
                 { field: 'LegacyField3',
@@ -1179,7 +1182,7 @@
                   sortable: true,
                   width: 180,
                   formatter:function(value,row,index){
-                      return `<a> ${value??''} </a> <br> <small data-toggle="tooltip" title="${row.LegacyDescription3}">${row.LegacyDescription3??''}</small>`;
+                      return `<a title="${row.LegacyDescription3??''}"> ${value??''} </a> <br> <small data-toggle="tooltip" title="${row.LegacyDescription3??''}">${row.LegacyDescription3??''}</small>`;
                   }
                 },
                 { field: 'NewValueField',
@@ -1187,7 +1190,7 @@
                   sortable: true,
                   width: 190,
                   formatter:function(value,row,index){
-                      return `<a> ${value??''} </a> <br> <small data-toggle="tooltip" title="${row.NewValueFieldDescription}">${row.NewValueFieldDescription??''}</small>`;
+                      return `<a title="${row.NewValueFieldDescription??''}"> ${value??''} </a> <br> <small data-toggle="tooltip" title="${row.NewValueFieldDescription??''}">${row.NewValueFieldDescription??''}</small>`;
                   }
                 },
                 { field: 'MigrationApproach', title: '@_localizer["Migration Approach"]', sortable: true, width: 180 },
@@ -1204,7 +1207,7 @@
                             word.map((item,index)=> {
                                       title = title + item + ", ";
                                 }
-                               
+
                              );
                             return `<small style="text-overflow: ellipsis;" data-toggle="tooltip" title="${title.replace(/,\s*$/, "")}">${title.replace(/,\s*$/, "")}</small>`;
                         }else{
@@ -1360,7 +1363,7 @@
             $('#mappingrules_modal .modal-title').html('@_localizer["Edit Value Mapping Rule"]');
 
             $('#mappingrule_form').jsonToForm(document, {
-                
+
                 TemplateDescription:function(value){
                      $('#Input_TemplateDescription').val(value)
                 },

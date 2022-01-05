@@ -255,8 +255,32 @@ public class ImportFieldMappingValuesCommandHandler :
                        
                     }
                     // remove duplicates
-                    var inputlist = list.DistinctBy(x => new { x.Legacy1, x.Legacy2, x.Legacy3, x.NewValue });
-                    await _context.FieldMappingValues.AddRangeAsync(inputlist,cancellationToken);
+                    //var inputlist = list.DistinctBy(x => new { x.Legacy1, x.Legacy2, x.Legacy3 });
+                    var duplicates = list.GroupBy(x => new { x.Legacy1, x.Legacy2, x.Legacy3 })
+                                         .Where(g => g.Count() > 1)
+                                         .Select(g => g.Key)
+                                         .ToArray();
+                    if (duplicates.Count()>0)
+                    {
+                        foreach(var d in duplicates)
+                        {
+                            if(!string.IsNullOrEmpty(d.Legacy2) && !string.IsNullOrEmpty(d.Legacy3))
+                            {
+                                errors.Add($"Duplicate values with Legacy1:{d.Legacy1},Legacy2:{d.Legacy2},Legacy3:{d.Legacy3}.");
+                            }else if (!string.IsNullOrEmpty(d.Legacy2))
+                            {
+                                errors.Add($"Duplicate values with Legacy1:{d.Legacy1},Legacy2:{d.Legacy2}.");
+                            }
+                            else
+                            {
+                                errors.Add($"Duplicate values with Legacy1:{d.Legacy1}.");
+                            }
+                          
+                        }
+                        return Result.Failure(errors.ToArray());
+
+                    }
+                    await _context.FieldMappingValues.AddRangeAsync(list, cancellationToken);
                     await _context.SaveChangesAsync(cancellationToken);
                 }
                 else
