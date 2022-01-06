@@ -517,11 +517,11 @@
                        });
                    }
                 }
-                uploaddatainput.value = null;
+                uploaddatainput.value = '';
             }).catch(error => {
                 rightmodalcontent.classList.remove("overlay-wrapper");
                 rightoverlay.style.display="none";
-                uploaddatainput.value = null;
+                uploaddatainput.value = '';
                 error.response.data.text().then(text=>{
                       const data=JSON.parse(text);
                       const err=data.Errors.toString();
@@ -895,7 +895,6 @@
         uploadtemplatefileinput.click();
     })
     uploadtemplatefileinput.onchange = () => {
-
         vaildatetemplatefile().then(res => {
             //console.log(res)
 
@@ -955,11 +954,10 @@
              </div>`;
             savebutton.disabled = false;
             $('#uploadtemplatefilename .alert').on('closed.bs.alert', (e) => {
-               uploadtemplatefileinput.value = null;
+               uploadtemplatefileinput.value = '';
                savebutton.disabled = true;
                $('#Input_ObjectName').val('');
                $('#Input_TemplateDescription').val('');
-
                $('#Input_Name').val('');
                $('#Input_LegacyField1').val('');
                $('#Input_LegacyField2').val('');
@@ -988,7 +986,7 @@
                 </div>
             </div>
             `;
-            uploadtemplatefileinput.value = null;
+            uploadtemplatefileinput.value = '';
             savebutton.disabled = true;
             toastr["error"](`${error}`);
         });
@@ -1370,7 +1368,6 @@
             uploadtemplatebutton.disabled = false;
             uploadtemplatefileinput.required = false;
             $('#mappingrules_modal .modal-title').html('@_localizer["Edit Value Mapping Rule"]');
-            console.log(document)
             $('#mappingrule_form').jsonToForm(document, {
                 TemplateDescription:function(value){
                      $('#Input_TemplateDescription').val(value)
@@ -1378,6 +1375,7 @@
                 TemplateFile: function (value) {
                     const description= document.TemplateDescription;
                     $('#Input_TemplateFile').val(value)
+                    savebutton.disabled = false;
                     if (value && value.length > 0) {
                         uploadtemplatefilename.innerHTML = `
                         <div class="alert alert-info alert-dismissible fadeup show mb-2 mt-2" role="alert">
@@ -1463,11 +1461,8 @@
                        $('#Input_LegacyDescription3').prop("readonly", true)
                     }
                 }
-
-
-
-
             })
+            savebutton.disabled = false;
         } else {
             savebutton.disabled = true;
             uploadtemplatebutton.disabled = false;
@@ -1614,6 +1609,7 @@
                     link.setAttribute('download', filename );
                     document.body.appendChild(link);
                     link.click();
+                    toastr["info"](`@_localizer["Download successfully"]`);
                 })
                 .catch((error) => {
                   error.response.data.text().then(text=>{
@@ -1658,6 +1654,7 @@
                     link.setAttribute('download', filename );
                     document.body.appendChild(link);
                     link.click();
+                    toastr["info"](`@_localizer["Download successfully"]`);
                 })
                 .catch((error) => {
                   error.response.data.text().then(text=>{

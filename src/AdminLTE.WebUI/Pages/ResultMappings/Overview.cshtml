@@ -38,12 +38,12 @@
     <div class="card-header bg-white d-flex align-items-center">
         <h4 class="m-0">
             @_localizer["Migration Result Overview"]
-   
-           <div class="progress mb-3">
+
+            <div class="progress mb-3">
                 <div class="progress-bar progress-bar bg-primary" role="progressbar" style="width: @(Model.Summarizing.First(x=>x.Status=="Not started").Percentage)%">@Model.Summarizing.First(x=>x.Status=="Not started").Total Not started</div>
                 <div class="progress-bar progress-bar bg-info" role="progressbar" style="width:  @(Model.Summarizing.First(x=>x.Status=="Ongoing").Percentage)%">@Model.Summarizing.First(x=>x.Status=="Ongoing").Total Ongoing</div>
                 <div class="progress-bar progress-bar bg-success" role="progressbar" style="width: @(Model.Summarizing.First(x=>x.Status=="Finished").Percentage)%">@Model.Summarizing.First(x=>x.Status=="Finished").Total Finished</div>
-           </div>
+            </div>
         </h4>
         <div class="ml-auto">
 
@@ -60,7 +60,7 @@
                 <span class="@(Settings.Theme.IconPrefix) fa-trash-alt mr-1"></span>
                 @_localizer["Delete"]
             </button>
-      
+
 
 
         </div>
@@ -142,7 +142,7 @@
 
                             <span class="invalid-feedback" asp-validation-for="Input.Team">Sorry, you missed this one.</span>
                         </div>
-                        
+
 
                     </div>
                     <div class="form-row">
@@ -248,7 +248,7 @@
                 </div>`;
                savebutton.disabled = false;
                $('#uploadresultmappingfilename .alert').on('closed.bs.alert', (e) => {
-                  resultmappingfileinput.value = null;
+                  resultmappingfileinput.value = '';
                   savebutton.disabled = true;
                   $('#Input_TemplateDescription').val('');
                   $('#Input_Name').val('');
@@ -266,7 +266,7 @@
                    </div>
                </div>
                `;
-               resultmappingfileinput.value = null;
+               resultmappingfileinput.value = '';
                savebutton.disabled = true;
                toastr["error"](`${error}`);
            });
@@ -446,7 +446,7 @@
                                                    ${value[0]}% Verified By ${key}
                                                  </small></div>`)
                                  }
-                                 
+
                              });
                              const ownerfilter = subgrid.datagrid('getFilterComponent','Owner');
                              ownerfilter.combobox('reload');
@@ -459,7 +459,7 @@
                         onBeforeUnselect:function(index,row){
                             console.log(row);
                         }
-       
+
                    }).datagrid('enableFilter', [
                        {
                            field:'Owner',
@@ -581,19 +581,22 @@
                      sortable: true,
                      width: 160,
                      formatter:function(value){
-                      if(value){
-                          const word = value.split(',');
-                          let label ='';
-                          for(i=0;i<word.length;i++){
+                         if(value){
+                            const word = value.split(',');
+                            let label ='';
+                            if(word.length==1) {
+                                return word[0];
+                            }
+                            for(i=0;i<word.length;i++){
                               if(i==0){
-                                  label =`<span style="text-decoration: underline!important;">${word[i]}</span>`
+                                  label =`<span style="text-decoration: underline!important;" title="leading team">${word[i]}</span>`
                               } else {
                                   label+= `, <small>${word[i]}</small>`
                               }
-                          }
-                          return label;
+                            }
+                            return label;
+                         }
                       }
-                  }
                    },
                    { field: 'LegacySystem', title: '@_localizer["Location"]', sortable: true, width: 180 },
                    { field: 'Name',
@@ -681,7 +684,7 @@
                            sortable: true,
                            width: 140,
                        }
-                       
+
             ];
             row.FieldParameters.map((item,index)=>{
                columns.push({
@@ -699,7 +702,7 @@
                            width: 160,
                        }
                        );
-          
+
           return columns;
        }
 
@@ -813,7 +816,7 @@
                    },
                    callback: function (result) {
                        if (result) {
-                         
+
                            axios.post('@Url.Page("/ResultMappings/Overview")?handler=DeleteChecked',{id:checkedId}).then(res => {
                                toastr["info"](`@_localizer["Deleted ${checkedId.length} rows"]`);
                                reloadData();
@@ -846,7 +849,7 @@
                    return false;
                }
                const userid='@User.GetUserId()';
-       
+
                if(selected.filter(x=>x.Owner != userid).length>0){
                    bootbox.alert({
                       message: "@_localizer["Please select your owner record"]"
@@ -982,12 +985,12 @@
                         }
 
                     } else {
-                        toastr["error"](`@_localizer["Export fail"]`);
+                        toastr["error"](`@_localizer["Download fail"]`);
                     }
                 })
 
 
-        
+
        }
        var onDownload=(index)=>{
             const item = $dg.datagrid('getRows')[index];
@@ -1022,7 +1025,7 @@
                 })
 
 
-        
+
        }
        var getFileName = (disposition) => {
           const utf8FilenameRegex = /filename\*=UTF-8''([\w%\-\.]+)(?:; ?|$)/;
