@@ -123,48 +123,76 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
             return (buffer, mappingvalue);
         }
         var dt = new DataTable();
-        foreach (var row in datatable.Descendants().Where(x => x.Name.LocalName == "Row").Skip(4).ToList())
+        var index = 0;
+        foreach (var row in datatable.Descendants().Where(x => x.Name.LocalName == "Row").Skip(3).ToList())
         {
+            index++;
             var cells = row.Descendants().Where(x => x.Name.LocalName == "Cell").ToList();
-            var fieldcount=cells.Count();
-            switch (fieldcount)
+            if (index == 1)
             {
-                case 2:
-                    mappingvalue.Add(new FieldMappingValue() {
-                        Legacy1=cells[0].Value,
-                        NewValue=cells[1].Value,
-                        });
-                    break;
-                case 3:
-                    mappingvalue.Add(new FieldMappingValue()
-                    {
-                        Legacy1 = cells[0].Value,
-                        Legacy2 = cells[1].Value,
-                        NewValue = cells[2].Value,
-                    });
-                    break;
-                case 4:
-                    mappingvalue.Add(new FieldMappingValue()
-                    {
-                        Legacy1 = cells[0].Value,
-                        Legacy2 = cells[1].Value,
-                        Legacy3 = cells[2].Value,
-                        NewValue = cells[3].Value
-                    });
-                    break;
-                case 5:
-                    mappingvalue.Add(new FieldMappingValue()
-                    {
-                        Legacy1 = cells[0].Value,
-                        Legacy2 = cells[1].Value,
-                        Legacy3 = cells[2].Value,
-                        Legacy4 = cells[3].Value,
-                        NewValue = cells[4].Value
-                    });
-                    break;
+                foreach (var cell in cells)
+                {
+                    dt.Columns.Add(cell.Value);
+                }
             }
-            row.Remove();
+            else
+            {
+                var dr = dt.Rows.Add();
+                var c1 = 0;
+                foreach (var cell in cells)
+                {
+                    dr[c1] = cell.Value;
+                    c1++;
+                }
+                row.Remove();
+            }
+            
         }
+        if (dt.Rows.Count > 0) {
+            foreach (DataRow row in dt.Rows)
+            {
+                var fieldcount = dt.Columns.Count;
+                switch (fieldcount)
+                {
+                    case 2:
+                        mappingvalue.Add(new FieldMappingValue()
+                        {
+                            Legacy1 = row[0].ToString(),
+                            NewValue = row[1].ToString(),
+                        });
+                        break;
+                    case 3:
+                        mappingvalue.Add(new FieldMappingValue()
+                        {
+                            Legacy1 = row[0].ToString(),
+                            Legacy2 = row[1].ToString(),
+                            NewValue = row[2].ToString(),
+                        });
+                        break;
+                    case 4:
+                        mappingvalue.Add(new FieldMappingValue()
+                        {
+                            Legacy1 = row[0].ToString(),
+                            Legacy2 = row[1].ToString(),
+                            Legacy3 = row[2].ToString(),
+                            NewValue = row[3].ToString()
+                        });
+                        break;
+                    case 5:
+                        mappingvalue.Add(new FieldMappingValue()
+                        {
+                            Legacy1 = row[0].ToString(),
+                            Legacy2 = row[1].ToString(),
+                            Legacy3 = row[2].ToString(),
+                            Legacy4 = row[3].ToString(),
+                            NewValue = row[4].ToString(),
+                        });
+                        break;
+                }
+            }
+        }
+
+           
         expandedRowCount.Value = "5";
         using (TextWriter writer = new StringWriter())
         {
