@@ -34,8 +34,15 @@ public class UploadService : IUploadService
             var dbPath = Path.Combine(folderName, fileName);
             if (File.Exists(dbPath))
             {
-                dbPath = NextAvailableFilename(dbPath);
-                fullPath = NextAvailableFilename(fullPath);
+                if (!request.Overwrite)
+                {
+                    dbPath = NextAvailableFilename(dbPath);
+                    fullPath = NextAvailableFilename(fullPath);
+                }
+                else
+                {
+                    File.Delete(dbPath);
+                }
             }
             using (var stream = new FileStream(fullPath, FileMode.Create))
             {

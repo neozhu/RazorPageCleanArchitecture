@@ -191,5 +191,11 @@ namespace AdminLTE.WebUI.Pages.MappingRules
             return new JsonResult(result);
         }
 
+
+        public async Task<IActionResult> OnPostDownloadZipArchive([FromBody]DownloadZipArchiveMappingValueFileCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return File(result, "application/zip", $"valuemapping_{DateTime.Now.ToString("MMddHH")}.zip");
+        }
     }
 }

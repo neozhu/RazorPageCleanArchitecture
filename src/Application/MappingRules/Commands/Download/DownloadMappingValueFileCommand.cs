@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using Ionic.Zip;
 
 namespace CleanArchitecture.Razor.Application.MappingRules.Commands.Download;
 
@@ -9,7 +10,13 @@ public class DownloadMappingValueFileCommand : IRequest<byte[]>
     public int MappingRuleId { get; set; }
 }
 
+public class DownloadZipArchiveMappingValueFileCommand : IRequest<byte[]>
+{
+    public int[] MappingRuleId { get; set; }
+}
+
 public class DownloadMappingValueFileCommandHandler :
+     IRequestHandler<DownloadZipArchiveMappingValueFileCommand, byte[]>,
      IRequestHandler<DownloadMappingValueFileCommand, byte[]>
 {
     private readonly IApplicationDbContext _context;
@@ -26,8 +33,16 @@ public class DownloadMappingValueFileCommandHandler :
 
     public async Task<byte[]> Handle(DownloadMappingValueFileCommand request, CancellationToken cancellationToken)
     {
-        var mappingrule = await _context.MappingRules.FirstAsync(x => x.Id == request.MappingRuleId);
-        var values = await _context.FieldMappingValues.Where(x => x.MappingRuleId == request.MappingRuleId).ToListAsync();
+        (var buffer, var filename)= await GenerateXml(request.MappingRuleId);
+        return buffer;
+    }
+
+    private async Task<(byte[],string)> GenerateXml(int id)
+    {
+        var mappingrule = await _context.MappingRules.FirstAsync(x => x.Id == id);
+        var fi = new FileInfo(mappingrule.TemplateFile);
+        var fileName = fi.Name;
+        var values = await _context.FieldMappingValues.Where(x => x.MappingRuleId == id).ToListAsync();
         var path = Path.Combine(Directory.GetCurrentDirectory(), mappingrule.TemplateFile);
         if (!File.Exists(path))
         {
@@ -37,7 +52,7 @@ public class DownloadMappingValueFileCommandHandler :
         if (values.Count > 0)
         {
             var xmlstr = Encoding.UTF8.GetString(buffer).Trim();
-            var xdoc = XDocument.Parse(xmlstr,LoadOptions.PreserveWhitespace);
+            var xdoc = XDocument.Parse(xmlstr, LoadOptions.PreserveWhitespace);
             var namespaces = xdoc.Root.Attributes().
                              Where(a => a.IsNamespaceDeclaration).
                                  GroupBy(a => a.Name.Namespace == XNamespace.None ? String.Empty : a.Name.LocalName,
@@ -65,7 +80,7 @@ public class DownloadMappingValueFileCommandHandler :
                                    new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy1?.Trim())
                                ),
                               "\r\n",
-                               new XElement( namespaces.First().Value + "Cell",
+                               new XElement(namespaces.First().Value + "Cell",
                                    new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.NewValue?.Trim())
                                ),
                                "\r\n"
@@ -116,7 +131,7 @@ public class DownloadMappingValueFileCommandHandler :
                                    new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.NewValue?.Trim())
                                ),
                                "\r\n"
-                          ),"\r\n");
+                          ), "\r\n");
                     }
 
                     break;
@@ -127,17 +142,37 @@ public class DownloadMappingValueFileCommandHandler :
                 xdoc.Save(writer, SaveOptions.DisableFormatting);
                 var output = writer.ToString();
                 // replace default namespace prefix:<ss:
-                string result = Regex.Replace(Regex.Replace(output, "<ss:", "<"), "</ss:", "</");
-                _logger.LogInformation("Download the value mapping file:{@Request}",request);
-                return Encoding.UTF8.GetBytes(result);
+                var result = Regex.Replace(Regex.Replace(output, "<ss:", "<"), "</ss:", "</");
+                _logger.LogInformation("Download the value mapping file:{@Request}", fileName);
+                return (Encoding.UTF8.GetBytes(result),fileName);
             }
         }
         else
         {
-            return buffer;
+            return (buffer, fileName);
         }
-
     }
+
+    public async Task<byte[]> Handle(DownloadZipArchiveMappingValueFileCommand request, CancellationToken cancellationToken)
+    {
+        using (var zip = new ZipFile())
+        {
+            zip.AlternateEncodingUsage = ZipOption.AsNecessary;
+            foreach(var id in request.MappingRuleId)
+            {
+                (var buffer, var filename) = await GenerateXml(id);
+                zip.AddEntry(filename, buffer);
+            }
+            
+            
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                zip.Save(memoryStream);
+                return memoryStream.ToArray();
+            }
+        }
+    }
+
     public class Utf8StringWriter : StringWriter
     {
         public override Encoding Encoding { get { return Encoding.UTF8; } }

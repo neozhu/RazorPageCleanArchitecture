@@ -84,7 +84,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="mappingrules_modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="mappingrules_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -243,7 +243,7 @@
         <div class="modal-content">
             <div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i><div class="pt-2 pl-2 text-gray">Waiting...</div></div>
             <div class="modal-header">
-                <h5 class="modal-title h4" id="valuemapping-title">Add Value Mapping</h5>
+                <h5 class="modal-title h5" id="valuemapping-title">Add Value Mapping</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
                 </button>
@@ -438,7 +438,7 @@
                         field: 'Legacy1',
                         title: `${currentMappingRuleItem.LegacyField1}(Legacy)<br><small>${currentMappingRuleItem.LegacyDescription1??''}</small>`,
                         sortable: true,
-                        width: 220,
+                        width: 200,
                         editor: { type: 'textbox', options: { required: true }},
                         formatter:blankformatter
                     });
@@ -448,7 +448,7 @@
                         field: 'Legacy2',
                          title: `${currentMappingRuleItem.LegacyField2}(Legacy)<br><small>${currentMappingRuleItem.LegacyDescription2??''}</small>`,
                         sortable: true,
-                        width: 220,
+                        width: 200,
                         editor: { type: 'textbox', options: { required: true }},
                         formatter:blankformatter
                     });
@@ -458,7 +458,7 @@
                         field: 'Legacy3',
                         title: `${currentMappingRuleItem.LegacyField3}(Legacy)<br><small>${currentMappingRuleItem.LegacyDescription3??''}</small>`,
                         sortable: true,
-                        width: 220,
+                        width: 200,
                         editor: { type: 'textbox', options: { required: true } },
                         formatter:blankformatter
                     });
@@ -468,7 +468,7 @@
                         field: 'NewValue',
                         title: `${currentMappingRuleItem.NewValueField}(New)<br><small>${currentMappingRuleItem.NewValueFieldDescription??''}</small>`,
                         sortable: true,
-                        width: 220,
+                        width: 200,
                         editor: { type: 'textbox', options: { required: true } },
                         formatter:blankformatter
                     });
@@ -477,14 +477,14 @@
                         field: 'CreatedBy',
                         title: '@_localizer["Created By"]',
                         sortable: true,
-                        width: 160,
+                        width: 150,
                     }
                     );
        columns.push({
                         field: 'LastModifiedBy',
                         title: '@_localizer["Modified By"]',
                         sortable: true,
-                        width: 160,
+                        width: 150,
                     }
                     );
                     return columns;
@@ -1140,9 +1140,12 @@
                       if(value){
                           const word = value.split(',');
                           let label ='';
+                          if(word.length==1){
+                              return word[0];
+                          }
                           for(i=0;i<word.length;i++){
                               if(i==0){
-                                  label =`<span style="text-decoration: underline!important;" title="Leader team">${word[i]}</span>`
+                                  label =`<span style="text-decoration: underline!important;" title="leading team">${word[i]}</span>`
                               } else {
                                   label+= `, <small>${word[i]}</small>`
                               }
@@ -1352,6 +1355,12 @@
         //})
         initdatagrid();
     })
+    var ondropfile=(e)=>{
+        e.preventDefault();
+        const file=e.dataTransfer.files[0];
+        uploadtemplatefileinput.files=e.dataTransfer.files;
+        uploadtemplatefileinput.dispatchEvent(new Event('change'));
+    }
     var popupmodal = (document) => {
         $('#mappingrules_modal').modal('toggle');
         $('#mappingrules_modal .modal-title').html('@_localizer["New Value Mapping Rule"]');
@@ -1361,14 +1370,13 @@
             uploadtemplatebutton.disabled = false;
             uploadtemplatefileinput.required = false;
             $('#mappingrules_modal .modal-title').html('@_localizer["Edit Value Mapping Rule"]');
-
+            console.log(document)
             $('#mappingrule_form').jsonToForm(document, {
-
                 TemplateDescription:function(value){
                      $('#Input_TemplateDescription').val(value)
                 },
                 TemplateFile: function (value) {
-                    const description= $('#Input_TemplateDescription').val();
+                    const description= document.TemplateDescription;
                     $('#Input_TemplateFile').val(value)
                     if (value && value.length > 0) {
                         uploadtemplatefilename.innerHTML = `
@@ -1472,9 +1480,9 @@
             $('#Input_LegacySystem').val(null).change();
             $('#Input_Team').val(null).change();
             $('#Input_Active').val('Inactive');
-            uploadtemplatefilename.innerHTML =`<div class="alert alert-danger mt-2 mb-2" role="alert">
-                                    <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a value mapping template file."].
-                         </div>`
+            uploadtemplatefilename.innerHTML =`<div ondrop="ondropfile(event)" ondragover="return false" class="alert alert-danger mt-2 mb-2" role="alert">
+                                                  <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload or drop a value mapping template file."]
+                                               </div>`
         }
     }
 
@@ -1625,26 +1633,26 @@
         currentMappingRuleId = item.Id;
         currentMappingRuleName = item.Name;
 
-        $('#valuemapping-title').text(`${item.MigrationApproach??''} - ${item.Name}`)
+        $('#valuemapping-title').html(`${item.MigrationApproach??''} - ${item.Name}<small class="mb-0 mt-0">${item.Comments}</small>`)
         $('.default-example-modal-right-lg').modal('toggle')
     }
 
     var onDownloadTemplateFile = ()=> {
-        const items = $dg.datagrid('getChecked');
-        if(items.length==0){
+        const items = $dg.datagrid('getChecked').filter(x=>x.Active=='Active');
+        if(items.length==0) {
              bootbox.alert({
-               message: "@_localizer["Please select the records to download."]"
+               message: "@_localizer["Please select the active records to download."]"
              });
+             return;
         }
-        items.map(item=>{
-            if(item.Active=='Active') {
-              axios.get('@Url.Page("/MappingRules/Index")?handler=DownloadData&MappingRuleId=' + item.Id +'&MappingRuleName=' + item.Name ,
+        const id = items.map(x=>x.Id);
+        axios.post('@Url.Page("/MappingRules/Index")?handler=DownloadZipArchive',{MappingRuleId:id},
               {
                  responseType: "blob"
               })
               .then(response => {
                     const filename = getFileName(response.headers['content-disposition']);
-                    const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }));
+                    const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/zip' }));
                     const link = document.createElement('a');
                     link.href = url;
                     link.setAttribute('download', filename );
@@ -1659,10 +1667,8 @@
                   })
 
                 })
-             } else {
-                  toastr["warning"](`${item.Name} is Inactive.`);
-             }
-        });
+ 
+       
     }
 
 </script>

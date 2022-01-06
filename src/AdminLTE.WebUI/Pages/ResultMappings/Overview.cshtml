@@ -734,7 +734,7 @@
                         $('#Input_TemplateDescription').val(value)
                    },
                    TemplateFile: function (value) {
-                       const description= $('#Input_TemplateDescription').val();
+                       const description= document.TemplateDescription;
                        $('#Input_TemplateFile').val(value)
                        if (value && value.length > 0) {
                            uploadresultmappingfilename.innerHTML = `

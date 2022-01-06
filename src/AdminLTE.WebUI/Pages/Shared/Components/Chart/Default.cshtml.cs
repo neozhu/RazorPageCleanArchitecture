@@ -4,5 +4,6 @@ namespace AdminLTE.WebUI.Pages.Shared.Components.Chart;
 
 public class DefaultModel
 {
-  public string data { get; set; }
+  public string ruledata { get; set; }
+  public string resultdata { get; set; }
 }

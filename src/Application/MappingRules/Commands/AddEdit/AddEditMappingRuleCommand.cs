@@ -54,10 +54,22 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
             item = _mapper.Map(request, item);
             if (request.UploadRequest != null && request.UploadRequest.Data != null)
             {
-                var buffer = RemoveDataIfExists(request.UploadRequest.Data);
+                (var buffer, var mappingvalues) = RemoveDataIfExists(request.UploadRequest.Data);
                 request.UploadRequest.Data= buffer;
+                request.UploadRequest.Overwrite = true;
                 var result = await _uploadService.UploadAsync(request.UploadRequest);
                 item.TemplateFile = result;
+                if (mappingvalues.Count() > 0)
+                {
+                    foreach (var value in mappingvalues)
+                    {
+                        value.MappingRuleId = item.Id;
+                        value.MappingRule = item;
+                        await _context.FieldMappingValues.AddAsync(value, cancellationToken);
+                    }
+                    item.Status = "Ongoing";
+                    item.Active = "Active";
+                }
             }
             var hasdata = await _context.FieldMappingValues.AnyAsync(x => x.MappingRuleId == item.Id);
             if (hasdata && item.Status== "Not started")
@@ -73,10 +85,23 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
             var item = _mapper.Map<MappingRule>(request);
             if (request.UploadRequest != null && request.UploadRequest.Data != null)
             {
-                var buffer = RemoveDataIfExists(request.UploadRequest.Data);
+                (var buffer,var mappingvalues) = RemoveDataIfExists(request.UploadRequest.Data);
                 request.UploadRequest.Data = buffer;
+                request.UploadRequest.Overwrite = true;
                 var result = await _uploadService.UploadAsync(request.UploadRequest);
                 item.TemplateFile = result;
+
+                if (mappingvalues.Count() > 0)
+                {
+                    foreach (var value in mappingvalues)
+                    {
+                        value.MappingRuleId= item.Id;
+                        value.MappingRule = item;
+                        await _context.FieldMappingValues.AddAsync(value, cancellationToken);
+                    }
+                    item.Status = "Ongoing";
+                    item.Active = "Active";
+                }
             }
             _context.MappingRules.Add(item);
             await _context.SaveChangesAsync(cancellationToken);
@@ -84,7 +109,7 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
         }
 
     }
-    private byte[] RemoveDataIfExists(byte[] buffer)
+    private (byte[],IEnumerable<FieldMappingValue>) RemoveDataIfExists(byte[] buffer)
     {
         var xmlstring = System.Text.Encoding.UTF8.GetString(buffer).Trim();
         var xdoc = XDocument.Parse(xmlstring, LoadOptions.PreserveWhitespace);
@@ -92,13 +117,52 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
         var datatable = data.Descendants().Where(x => x.Name.LocalName == "Table");
         var expandedRowCount = datatable.Attributes().Where(x => x.Name.LocalName == "ExpandedRowCount").First();
         var count = Convert.ToInt32(expandedRowCount.Value);
+        var mappingvalue = new List<FieldMappingValue>();
         if (count == 5)
         {
-            return buffer;
+            return (buffer, mappingvalue);
         }
         var dt = new DataTable();
         foreach (var row in datatable.Descendants().Where(x => x.Name.LocalName == "Row").Skip(4).ToList())
         {
+            var cells = row.Descendants().Where(x => x.Name.LocalName == "Cell").ToList();
+            var fieldcount=cells.Count();
+            switch (fieldcount)
+            {
+                case 2:
+                    mappingvalue.Add(new FieldMappingValue() {
+                        Legacy1=cells[0].Value,
+                        NewValue=cells[1].Value,
+                        });
+                    break;
+                case 3:
+                    mappingvalue.Add(new FieldMappingValue()
+                    {
+                        Legacy1 = cells[0].Value,
+                        Legacy2 = cells[1].Value,
+                        NewValue = cells[2].Value,
+                    });
+                    break;
+                case 4:
+                    mappingvalue.Add(new FieldMappingValue()
+                    {
+                        Legacy1 = cells[0].Value,
+                        Legacy2 = cells[1].Value,
+                        Legacy3 = cells[2].Value,
+                        NewValue = cells[3].Value
+                    });
+                    break;
+                case 5:
+                    mappingvalue.Add(new FieldMappingValue()
+                    {
+                        Legacy1 = cells[0].Value,
+                        Legacy2 = cells[1].Value,
+                        Legacy3 = cells[2].Value,
+                        Legacy4 = cells[3].Value,
+                        NewValue = cells[4].Value
+                    });
+                    break;
+            }
             row.Remove();
         }
         expandedRowCount.Value = "5";
@@ -108,7 +172,7 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
             var output = writer.ToString();
             // replace default namespace prefix:<ss:
             string result = Regex.Replace(Regex.Replace(output, "<ss:", "<"), "</ss:", "</");
-            return Encoding.UTF8.GetBytes(result);
+            return (Encoding.UTF8.GetBytes(result), mappingvalue.DistinctBy(x=>new { x.Legacy1, x.Legacy2, x.Legacy3,x.Legacy4 }));
         }
 
     }

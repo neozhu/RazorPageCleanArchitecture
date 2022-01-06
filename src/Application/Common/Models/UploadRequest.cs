@@ -10,4 +10,6 @@ public class UploadRequest
     public UploadType UploadType { get; set; }
     public string Folder { get; set; }
     public byte[] Data { get; set; }
+
+    public bool Overwrite { get; set; } = false;
 }

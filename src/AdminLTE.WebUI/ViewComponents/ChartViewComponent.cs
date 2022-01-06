@@ -16,7 +16,8 @@ public class ChartViewComponent : ViewComponent
     }
     public IViewComponentResult Invoke()
     {
-        var result = new List<dataitem>();
+        var resultdata1 = new List<dataitem>();
+        var resultdata2 = new List<dataitem>();
         var data1 = _context.MappingRules.Where(x => x.Team != null)
                  .GroupBy(x => new { x.Team, x.Status })
                  .Select(x => new { x.Key.Team, x.Key.Status, Total= x.Count() });
@@ -30,7 +31,7 @@ public class ChartViewComponent : ViewComponent
                 var teamarray=item.Team.Split(',', StringSplitOptions.RemoveEmptyEntries);
                 foreach(var t in teamarray)
                 {
-                    var dataitem = result.Where(x => x.Status == item.Status && x.Team == t.Trim()).FirstOrDefault();
+                    var dataitem = resultdata1.Where(x => x.Status == item.Status && x.Team == t.Trim()).FirstOrDefault();
                     if (dataitem == null)
                     {
                         dataitem = new dataitem()
@@ -40,7 +41,7 @@ public class ChartViewComponent : ViewComponent
                             Total = item.Total,
                             Percent = item.Total
                         };
-                        result.Add(dataitem);
+                        resultdata1.Add(dataitem);
                     }
                     else
                     {
@@ -51,7 +52,7 @@ public class ChartViewComponent : ViewComponent
             }
             else
             {
-                var dataitem = result.Where(x => x.Status == item.Status && x.Team == item.Team.Trim()).FirstOrDefault();
+                var dataitem = resultdata1.Where(x => x.Status == item.Status && x.Team == item.Team.Trim()).FirstOrDefault();
                 if (dataitem == null)
                 {
                     dataitem = new dataitem()
@@ -61,7 +62,7 @@ public class ChartViewComponent : ViewComponent
                         Total = item.Total,
                         Percent = item.Total
                     };
-                    result.Add(dataitem);
+                    resultdata1.Add(dataitem);
                 }
                 else
                 {
@@ -77,7 +78,7 @@ public class ChartViewComponent : ViewComponent
                 var teamarray = item.Team.Split(',', StringSplitOptions.RemoveEmptyEntries);
                 foreach (var t in teamarray)
                 {
-                    var dataitem = result.Where(x => x.Status == item.Status && x.Team == t.Trim()).FirstOrDefault();
+                    var dataitem = resultdata2.Where(x => x.Status == item.Status && x.Team == t.Trim()).FirstOrDefault();
                     if (dataitem == null)
                     {
                         dataitem = new dataitem()
@@ -87,7 +88,7 @@ public class ChartViewComponent : ViewComponent
                             Total = item.Total,
                             Percent = item.Total
                         };
-                        result.Add(dataitem);
+                        resultdata2.Add(dataitem);
                     }
                     else
                     {
@@ -98,7 +99,7 @@ public class ChartViewComponent : ViewComponent
             }
             else
             {
-                var dataitem = result.Where(x => x.Status == item.Status && x.Team == item.Team.Trim()).FirstOrDefault();
+                var dataitem = resultdata2.Where(x => x.Status == item.Status && x.Team == item.Team.Trim()).FirstOrDefault();
                 if (dataitem == null)
                 {
                     dataitem = new dataitem()
@@ -108,7 +109,7 @@ public class ChartViewComponent : ViewComponent
                         Total = item.Total,
                         Percent = item.Total
                     };
-                    result.Add(dataitem);
+                    resultdata2.Add(dataitem);
                 }
                 else
                 {
@@ -117,8 +118,9 @@ public class ChartViewComponent : ViewComponent
                 }
             }
         }
-        var resultstr = JsonSerializer.Serialize(result);
-        return View( new AdminLTE.WebUI.Pages.Shared.Components.Chart.DefaultModel() {data= resultstr });
+        var resultstr1 = JsonSerializer.Serialize(resultdata1);
+        var resultstr2 = JsonSerializer.Serialize(resultdata2);
+        return View( new AdminLTE.WebUI.Pages.Shared.Components.Chart.DefaultModel() {ruledata= resultstr1,resultdata= resultstr2 });
     }
 
     internal class dataitem

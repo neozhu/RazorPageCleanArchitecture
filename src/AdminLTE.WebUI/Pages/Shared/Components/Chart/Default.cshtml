@@ -1,19 +1,43 @@
 @model AdminLTE.WebUI.Pages.Shared.Components.Chart.DefaultModel
 
+<div class="col-6">
 <div class="card">
+    <div class="card-header ui-sortable-handle" style="cursor: move;">
+                <h3 class="card-title">
+                  <i class="fas fa-chart-pie mr-1"></i>
+                  Value Mapping Rule Progress
+                </h3>
+              </div>
    <div class="card-body">
          <div class="chartjs-size-monitor">
-             <div id="chart-container" data-item="@Model.data"></div>
+             <div id="chart-container" data-item="@Model.ruledata"></div>
          </div>
    </div>
 </div>
-
+</div>
+<div class="col-6">
+    <div class="card">
+    <div class="card-header ui-sortable-handle" style="cursor: move;">
+                <h3 class="card-title">
+                  <i class="fas fa-chart-pie mr-1"></i>
+                  Verify Migration Result Progress
+                </h3>
+              </div>
+   <div class="card-body">
+         <div class="chartjs-size-monitor">
+             <div id="chart-container-result" data-item="@Model.resultdata"></div>
+         </div>
+   </div>
+</div>
+</div>
 <script>
  const { Bar } = G2Plot;
- var elem = document.getElementById('chart-container');
- const data = JSON.parse(elem.getAttribute('data-item'));
-const barPlot = new Bar('chart-container', {
-  data,
+ var elem1 = document.getElementById('chart-container');
+ const data1 = JSON.parse(elem1.getAttribute('data-item'));
+ var elem2 = document.getElementById('chart-container-result');
+ const data2 = JSON.parse(elem2.getAttribute('data-item'));
+const barPlot1 = new Bar('chart-container', {
+  data:data1,
   xField: 'Percent',
   yField: 'Team',
   seriesField: 'Status',
@@ -31,6 +55,26 @@ const barPlot = new Bar('chart-container', {
     },
   },
 });
+barPlot1.render();
+const barPlot2 = new Bar('chart-container-result', {
+  data:data2,
+  xField: 'Percent',
+  yField: 'Team',
+  seriesField: 'Status',
+  isPercent: true,
+  isStack: true,
+  /** 自定义颜色 */
+  // color: ['#2582a1', '#f88c24', '#c52125', '#87f4d0'],
+  label: {
+    position: 'middle',
+    content: (item) => {
+      return item.Total;
+    },
+    style: {
+      fill: '#fff',
+    },
+  },
+});
+barPlot2.render();
 
-barPlot.render();
 </script>
