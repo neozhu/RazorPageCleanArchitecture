@@ -237,3 +237,4 @@ _Pvt_Extensions
 /.mfractor
 **/Files/*
 src/SmartAdmin.WebUI/logs/*
+src/AdminLTE.WebUI/logs/*

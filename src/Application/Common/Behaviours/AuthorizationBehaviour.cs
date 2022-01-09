@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace CleanArchitecture.Razor.Application.Common.Behaviours;
 
-public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
+public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
     private readonly ICurrentUserService _currentUserService;
     private readonly IIdentityService _identityService;

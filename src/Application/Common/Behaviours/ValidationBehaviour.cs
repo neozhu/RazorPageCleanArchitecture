@@ -6,7 +6,7 @@ using ValidationException = CleanArchitecture.Razor.Application.Common.Exception
 namespace CleanArchitecture.Razor.Application.Common.Behaviours;
 
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
- where TRequest : notnull
+where TRequest : IRequest<TResponse>
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 

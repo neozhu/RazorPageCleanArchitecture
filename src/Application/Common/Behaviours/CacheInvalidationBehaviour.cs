@@ -6,7 +6,7 @@ using LazyCache;
 namespace CleanArchitecture.Razor.Application.Common.Behaviours;
 
 public class CacheInvalidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-     where TRequest   : ICacheInvalidator 
+      where TRequest : IRequest<TResponse>,ICacheInvalidator 
 {
     private readonly IAppCache _cache;
     private readonly ILogger<CacheInvalidationBehaviour<TRequest, TResponse>> _logger;

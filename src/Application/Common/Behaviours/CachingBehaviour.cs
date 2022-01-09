@@ -6,7 +6,7 @@ using LazyCache;
 namespace CleanArchitecture.Razor.Application.Common.Behaviours;
 
 public class CachingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-     where TRequest : ICacheable
+    where TRequest : IRequest<TResponse> ,ICacheable
 {
     private readonly IAppCache _cache;
     private readonly ILogger<CachingBehaviour<TRequest, TResponse>> _logger;

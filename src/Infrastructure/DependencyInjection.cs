@@ -36,7 +36,10 @@ public static class DependencyInjection
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseInMemoryDatabase("CleanArchitecture.RazorDb")
-                ); 
+                );
+
+            // enable workflow core
+            services.AddWorkflow();
         }
         else
         {
@@ -47,7 +50,11 @@ public static class DependencyInjection
 
                 );
             services.AddDatabaseDeveloperPageExceptionFilter();
+            // enable workflow core
+            services.AddWorkflow(x => x.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), true, true));
         }
+
+        
         services.Configure<CookiePolicyOptions>(options =>
         {
             // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -140,23 +147,6 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddWorkflow(this IServiceCollection services, IConfiguration configuration)
-    {
-        if (configuration.GetValue<bool>("UseInMemoryDatabase"))
-        {
-            services.AddWorkflow();
-        }
-        else
-        {
-            services.AddWorkflow(x => x.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), true, true));
-        }
-        return services;
-    }
-    public static IApplicationBuilder UseWorkflow(this IApplicationBuilder app)
-    {
-        var host = app.ApplicationServices.GetService<IWorkflowHost>();
-        host.RegisterWorkflow<DocmentApprovalWorkflow, ApprovalData>();
-        host.Start();
-        return app;
-    }
+
+ 
 }

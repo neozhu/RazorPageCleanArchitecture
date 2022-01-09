@@ -12,13 +12,7 @@ using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.ConfigureKestrel((context, options) =>
-{
-    options.Listen(IPAddress.Any, 5001, listenOptions =>
-    {
-        listenOptions.UseHttps();
-    });
-});
+
 
 builder.WebHost.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration)
@@ -36,8 +30,8 @@ builder.WebHost.UseSerilog((context, configuration) =>
 
 
 builder.Services.AddInfrastructure(builder.Configuration)
-        .AddApplication()
-        .AddWorkflow(builder.Configuration);
+        .AddApplication();
+   
 
 var app = builder.Build();
 
