@@ -3,8 +3,8 @@ using CleanArchitecture.Razor.Domain.Entities;
 using FluentAssertions;
 using NUnit.Framework;
 using System.Threading.Tasks;
-using CleanArchitecture.Razor.Application.KeyValues.Commands.SaveChanged;
-using CleanArchitecture.Razor.Application.KeyValues.DTOs;
+using CleanArchitecture.Razor.Application.Features.KeyValues.Commands.SaveChanged;
+using CleanArchitecture.Razor.Application.Features.KeyValues.DTOs;
 
 namespace CleanArchitecture.Application.IntegrationTests.KeyValues.Commands
 {

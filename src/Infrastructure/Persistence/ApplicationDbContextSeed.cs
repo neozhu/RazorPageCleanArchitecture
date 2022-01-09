@@ -2,10 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Razor.Application.Common.Extensions;
-using CleanArchitecture.Razor.Infrastructure.Constants.ClaimTypes;
-using CleanArchitecture.Razor.Application.Constants.Permission;
 using CleanArchitecture.Razor.Infrastructure.Constants.Role;
-using CleanArchitecture.Razor.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using System.Reflection;
 

@@ -2,27 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Reflection;
-using CleanArchitecture.Razor.Application.Common.Interfaces;
-using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
-using CleanArchitecture.Razor.Application.Settings;
-using CleanArchitecture.Razor.Application.Workflow.Approval;
-using CleanArchitecture.Razor.Domain.Entities.Worflow;
-using CleanArchitecture.Razor.Infrastructure.Configurations;
-using CleanArchitecture.Razor.Infrastructure.Constants.ClaimTypes;
-using CleanArchitecture.Razor.Infrastructure.Constants.Localization;
-using CleanArchitecture.Razor.Application.Constants.Permission;
-using CleanArchitecture.Razor.Infrastructure.Identity;
-using CleanArchitecture.Razor.Infrastructure.Middlewares;
-using CleanArchitecture.Razor.Infrastructure.Persistence;
-using CleanArchitecture.Razor.Infrastructure.Services;
-using CleanArchitecture.Razor.Infrastructure.Services.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using WorkflowCore.Interface;
 using Microsoft.AspNetCore.Http;
 using FluentValidation.AspNetCore;
 
@@ -38,8 +23,7 @@ public static class DependencyInjection
                 options.UseInMemoryDatabase("CleanArchitecture.RazorDb")
                 );
 
-            // enable workflow core
-            services.AddWorkflow();
+         
         }
         else
         {
@@ -50,8 +34,6 @@ public static class DependencyInjection
 
                 );
             services.AddDatabaseDeveloperPageExceptionFilter();
-            // enable workflow core
-            services.AddWorkflow(x => x.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), true, true));
         }
 
         

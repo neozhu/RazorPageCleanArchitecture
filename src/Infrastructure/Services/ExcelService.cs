@@ -3,9 +3,7 @@
 
 using Microsoft.Extensions.Localization;
 using System.Data;
-using CleanArchitecture.Razor.Application.Common.Interfaces;
 using ClosedXML.Excel;
-using CleanArchitecture.Razor.Application.Common.Models;
 
 namespace CleanArchitecture.Razor.Infrastructure.Services;
 

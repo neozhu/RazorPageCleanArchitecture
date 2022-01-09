@@ -23,20 +23,5 @@ public static class DependencyInjection
         services.AddLazyCache();
         return services;
     }
-    public static IServiceCollection AddWorkflowSteps(this IServiceCollection services, Func<Type, bool> predicate, params Assembly[] assemblies)
-    {
-        if (assemblies.Length == 0)
-        {
-            assemblies = new[] { Assembly.GetCallingAssembly() };
-        }
-        assemblies
-           .SelectMany(x => x.GetExportedTypes()
-           .Where(y => y.IsClass && !y.IsAbstract && !y.IsGenericType && !y.IsNested))
-           .Where(predicate)
-           .ToList()
-           .ForEach(type =>
-                    services.Add(new ServiceDescriptor(type, type, ServiceLifetime.Transient))
-           );
-        return services;
-    }
+   
 }

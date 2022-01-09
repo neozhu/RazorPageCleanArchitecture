@@ -1,5 +1,5 @@
 using CleanArchitecture.Razor.Application.Common.Exceptions;
-using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
+using CleanArchitecture.Razor.Application.Features.Customers.Commands.AddEdit;
 using CleanArchitecture.Razor.Domain.Entities;
 using FluentAssertions;
 using NUnit.Framework;

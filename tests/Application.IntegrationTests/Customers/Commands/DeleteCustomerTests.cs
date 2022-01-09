@@ -2,9 +2,9 @@
 using FluentAssertions;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using CleanArchitecture.Razor.Application.Customers.Commands.Delete;
+using CleanArchitecture.Razor.Application.Features.Customers.Commands.Delete;
 using CleanArchitecture.Razor.Application.Common.Exceptions;
-using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
+using CleanArchitecture.Razor.Application.Features.Customers.Commands.AddEdit;
 using CleanArchitecture.Razor.Domain.Entities;
 
 namespace CleanArchitecture.Application.IntegrationTests.Customers.Commands

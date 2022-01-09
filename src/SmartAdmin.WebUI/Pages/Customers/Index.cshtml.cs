@@ -1,10 +1,10 @@
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
-using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
-using CleanArchitecture.Razor.Application.Customers.Commands.Delete;
-using CleanArchitecture.Razor.Application.Customers.Commands.Import;
-using CleanArchitecture.Razor.Application.Customers.Queries.Export;
-using CleanArchitecture.Razor.Application.Customers.Queries.PaginationQuery;
+using CleanArchitecture.Razor.Application.Features.Customers.Commands.AddEdit;
+using CleanArchitecture.Razor.Application.Features.Customers.Commands.Delete;
+using CleanArchitecture.Razor.Application.Features.Customers.Commands.Import;
+using CleanArchitecture.Razor.Application.Features.Customers.Queries.Export;
+using CleanArchitecture.Razor.Application.Features.Customers.Queries.PaginationQuery;
 using CleanArchitecture.Razor.Application.Constants.Permission;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

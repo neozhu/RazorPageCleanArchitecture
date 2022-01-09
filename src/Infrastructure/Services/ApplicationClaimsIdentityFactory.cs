@@ -2,8 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Security.Claims;
-using CleanArchitecture.Razor.Infrastructure.Constants.ClaimTypes;
-using CleanArchitecture.Razor.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 

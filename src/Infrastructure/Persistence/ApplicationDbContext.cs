@@ -1,14 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Domain.Common;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Entities.Audit;
 using CleanArchitecture.Razor.Domain.Entities.Log;
-using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using CleanArchitecture.Razor.Domain.Enums;
-using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Persistence.Extensions;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -46,7 +43,7 @@ public class ApplicationDbContext : IdentityDbContext<
     public DbSet<Document> Documents { get; set; }
 
     public DbSet<KeyValue> KeyValues { get; set; }
-    public DbSet<ApprovalData> ApprovalDatas { get; set; }
+
     public DbSet<Product> Products { get; set; }
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
@@ -198,7 +195,7 @@ public class ApplicationDbContext : IdentityDbContext<
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CleanArchitecture.RazorDb;Trusted_Connection=True;MultipleActiveResultSets=true;");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CleanArchitecture.Slim;Trusted_Connection=True;MultipleActiveResultSets=true;");
         }
     }
 }

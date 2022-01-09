@@ -15,3 +15,6 @@ global using CleanArchitecture.Razor.Application.Common.Models;
 global using CleanArchitecture.Razor.Application.Common.Extensions;
 global using CleanArchitecture.Razor.Application.Common.Interfaces;
 global using CleanArchitecture.Razor.Application.Common.Interfaces.Caching;
+global using CleanArchitecture.Razor.Domain.Entities.Audit;
+global using CleanArchitecture.Razor.Domain.Entities.Log;
+global using CleanArchitecture.Razor.Application.Common.Specification;

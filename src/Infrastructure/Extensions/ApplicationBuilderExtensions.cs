@@ -1,15 +1,12 @@
 using CleanArchitecture.Razor.Application.Hubs;
 using CleanArchitecture.Razor.Application.Hubs.Constants;
-using CleanArchitecture.Razor.Application.Workflow.Approval;
-using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Serilog;
 using Serilog.Context;
-using WorkflowCore.Interface;
+
 
 namespace CleanArchitecture.Razor.Infrastructure.Extensions;
 
@@ -56,10 +53,7 @@ public static class ApplicationBuilderExtensions
             endpoints.MapHub<SignalRHub>(SignalR.HubUrl);
         });
 
-        // enable workflow core
-        var host = app.ApplicationServices.GetService<IWorkflowHost>();
-        host.RegisterWorkflow<DocmentApprovalWorkflow, ApprovalData>();
-        host.Start();
+ 
 
         return app;
     }
