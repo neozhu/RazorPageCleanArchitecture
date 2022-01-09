@@ -1,11 +1,11 @@
 using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Mappings;
-using CleanArchitecture.Razor.Application.Customers.DTOs;
-using CleanArchitecture.Razor.Application.Documents.DTOs;
-using CleanArchitecture.Razor.Application.DocumentTypes.DTOs;
+using CleanArchitecture.Razor.Application.Features.Customers.DTOs;
+using CleanArchitecture.Razor.Application.Features.Documents.DTOs;
+using CleanArchitecture.Razor.Application.Features.DocumentTypes.DTOs;
 using CleanArchitecture.Razor.Application.Features.ApprovalDatas.DTOs;
 using CleanArchitecture.Razor.Application.Features.Products.DTOs;
-using CleanArchitecture.Razor.Application.KeyValues.DTOs;
+using CleanArchitecture.Razor.Application.Features.KeyValues.DTOs;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using NUnit.Framework;

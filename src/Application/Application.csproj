@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Customers\Import\**" />
-    <EmbeddedResource Remove="Customers\Import\**" />
-    <None Remove="Customers\Import\**" />
+    <Compile Remove="Features\Customers\Import\**" />
+    <EmbeddedResource Remove="Features\Customers\Import\**" />
+    <None Remove="Features\Customers\Import\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,11 +38,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Documents\Commands\Import\" />
+    <Folder Include="Features\Documents\Commands\Import\" />
     <Folder Include="Features\ApprovalDatas\EventHandlers\" />
     <Folder Include="Resources\Documents\Commands\Import\" />
     <Folder Include="Resources\Features\ApprovalDatas\Commands\Import\" />
-    <Folder Include="Workflow\Approval\Data\" />
+    <Folder Include="Features\Workflow\Approval\Data\" />
   </ItemGroup>
 
   <ItemGroup>

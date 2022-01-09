@@ -4,48 +4,48 @@
 using CleanArchitecture.Razor.Application.Features.ApprovalDatas.DTOs;
 using CleanArchitecture.Razor.Domain.Entities.Worflow;
 
-namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Queries.Export
+namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Queries.Export;
+
+public class ExportApprovalDatasQuery : IRequest<byte[]>
 {
-    public class ExportApprovalDatasQuery : IRequest<byte[]>
+    public string filterRules { get; set; }
+    public string sort { get; set; } = "Id";
+    public string order { get; set; } = "desc";
+}
+
+public class ExportApprovalDatasQueryHandler :
+     IRequestHandler<ExportApprovalDatasQuery, byte[]>
+{
+    private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
+    private readonly IExcelService _excelService;
+    private readonly IStringLocalizer<ExportApprovalDatasQueryHandler> _localizer;
+
+    public ExportApprovalDatasQueryHandler(
+        IApplicationDbContext context,
+        IMapper mapper,
+        IExcelService excelService,
+        IStringLocalizer<ExportApprovalDatasQueryHandler> localizer
+        )
     {
-        public string filterRules { get; set; }
-        public string sort { get; set; } = "Id";
-        public string order { get; set; } = "desc";
+        _context = context;
+        _mapper = mapper;
+        _excelService = excelService;
+        _localizer = localizer;
     }
 
-    public class ExportApprovalDatasQueryHandler :
-         IRequestHandler<ExportApprovalDatasQuery, byte[]>
+    public async Task<byte[]> Handle(ExportApprovalDatasQuery request, CancellationToken cancellationToken)
     {
-        private readonly IApplicationDbContext _context;
-        private readonly IMapper _mapper;
-        private readonly IExcelService _excelService;
-        private readonly IStringLocalizer<ExportApprovalDatasQueryHandler> _localizer;
-
-        public ExportApprovalDatasQueryHandler(
-            IApplicationDbContext context,
-            IMapper mapper,
-            IExcelService excelService,
-            IStringLocalizer<ExportApprovalDatasQueryHandler> localizer
-            )
-        {
-            _context = context;
-            _mapper = mapper;
-            _excelService = excelService;
-            _localizer = localizer;
-        }
-
-        public async Task<byte[]> Handle(ExportApprovalDatasQuery request, CancellationToken cancellationToken)
-        {
-            var filters = PredicateBuilder.FromFilter<ApprovalData>(request.filterRules);
-            var data = await _context.ApprovalDatas
-                .Where(x => x.Status == "Finished")
-                .Where(filters)
-                .OrderBy($"{request.sort} {request.order}")
-                .ProjectTo<ApprovalDataDto>(_mapper.ConfigurationProvider)
-                .ToListAsync(cancellationToken);
-            var result = await _excelService.ExportAsync(data,
-                new Dictionary<string, Func<ApprovalDataDto, object>>()
-                {
+        var filters = PredicateBuilder.FromFilter<ApprovalData>(request.filterRules);
+        var data = await _context.ApprovalDatas
+            .Where(x => x.Status == "Finished")
+            .Where(filters)
+            .OrderBy($"{request.sort} {request.order}")
+            .ProjectTo<ApprovalDataDto>(_mapper.ConfigurationProvider)
+            .ToListAsync(cancellationToken);
+        var result = await _excelService.ExportAsync(data,
+            new Dictionary<string, Func<ApprovalDataDto, object>>()
+            {
                     //{ _localizer["Id"], item => item.Id },
                     { _localizer["Workflow Name"], item => item.WorkflowName },
                     { _localizer["Status"], item => item.Status },
@@ -57,10 +57,9 @@ namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Queries.Exp
                     { _localizer["Outcome"], item => item.Outcome },
                     { _localizer["Comments"], item => item.Comments },
                     { _localizer["Approved DateTime"], item => item.ApprovedDateTime?.ToString("yyyy-MM-dd HH:mm:ss") }
-                }, _localizer["ApprovalHistories"]
-                );
-            return result;
-        }
+            }, _localizer["ApprovalHistories"]
+            );
+        return result;
     }
 }
 

@@ -1,14 +1,13 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Update
+namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Update;
+
+public class UpdateApprovalDataCommandValidator : AbstractValidator<UpdateApprovalDataCommand>
 {
-    public class UpdateApprovalDataCommandValidator : AbstractValidator<UpdateApprovalDataCommand>
+    public UpdateApprovalDataCommandValidator()
     {
-        public UpdateApprovalDataCommandValidator()
-        {
-           //TODO:Implementing UpdateApprovalDataCommandValidator method 
-           throw new System.NotImplementedException();
-        }
+        //TODO:Implementing UpdateApprovalDataCommandValidator method 
+        throw new System.NotImplementedException();
     }
 }

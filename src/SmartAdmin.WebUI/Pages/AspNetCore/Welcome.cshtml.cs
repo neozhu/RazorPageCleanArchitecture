@@ -23,15 +23,7 @@ namespace SmartAdmin.WebUI.Pages.AspNetCore
 
         public void OnGet()
         {
-            _logger.LogInformation("new163@163.com".ToMD5());
             _logger.LogInformation("Welcome.");
-            _logger.LogInformation("Home Page");
-            _logger.LogError("Error");
-            _logger.LogWarning("Warning");
-            _logger.LogDebug("Debug");
-            _logger.LogCritical("Critical");
-            _logger.LogTrace("Trace");
-            
             _diagnosticContext.Set("IndexCallCount", Interlocked.Increment(ref _callCount));
         }
     public  Task<JsonResult> OnGetFilter(string input)

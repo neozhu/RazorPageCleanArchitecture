@@ -1,12 +1,12 @@
-using CleanArchitecture.Razor.Application.Documents.Commands.AddEdit;
-using CleanArchitecture.Razor.Application.Documents.Commands.Delete;
-using CleanArchitecture.Razor.Application.Documents.Queries.Export;
-using CleanArchitecture.Razor.Application.Documents.Queries.PaginationQuery;
+using CleanArchitecture.Razor.Application.Features.Documents.Commands.AddEdit;
+using CleanArchitecture.Razor.Application.Features.Documents.Commands.Delete;
+using CleanArchitecture.Razor.Application.Features.Documents.Queries.Export;
+using CleanArchitecture.Razor.Application.Features.Documents.Queries.PaginationQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
-using CleanArchitecture.Razor.Application.DocumentTypes.Queries.PaginationQuery;
+using CleanArchitecture.Razor.Application.Features.DocumentTypes.Queries.PaginationQuery;
 using Microsoft.AspNetCore.Authorization;
 using CleanArchitecture.Razor.Application.Constants.Permission;
 using Microsoft.AspNetCore.Mvc.Rendering;

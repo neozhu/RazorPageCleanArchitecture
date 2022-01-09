@@ -1,14 +1,13 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Delete
+namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Delete;
+
+public class DeleteApprovalDataCommandValidator : AbstractValidator<DeleteApprovalDataCommand>
 {
-    public class DeleteApprovalDataCommandValidator : AbstractValidator<DeleteApprovalDataCommand>
+    public DeleteApprovalDataCommandValidator()
     {
-        public DeleteApprovalDataCommandValidator()
-        {
-           //TODO:Implementing DeleteApprovalDataCommandValidator method 
-           throw new System.NotImplementedException();
-        }
+        //TODO:Implementing DeleteApprovalDataCommandValidator method 
+        throw new System.NotImplementedException();
     }
 }

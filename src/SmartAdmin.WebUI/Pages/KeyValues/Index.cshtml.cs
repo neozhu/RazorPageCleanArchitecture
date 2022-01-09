@@ -1,8 +1,8 @@
-using CleanArchitecture.Razor.Application.KeyValues.Commands.Delete;
-using CleanArchitecture.Razor.Application.KeyValues.Commands.Import;
-using CleanArchitecture.Razor.Application.KeyValues.Commands.SaveChanged;
-using CleanArchitecture.Razor.Application.KeyValues.Queries.Export;
-using CleanArchitecture.Razor.Application.KeyValues.Queries.PaginationQuery;
+using CleanArchitecture.Razor.Application.Features.KeyValues.Commands.Delete;
+using CleanArchitecture.Razor.Application.Features.KeyValues.Commands.Import;
+using CleanArchitecture.Razor.Application.Features.KeyValues.Commands.SaveChanged;
+using CleanArchitecture.Razor.Application.Features.KeyValues.Queries.Export;
+using CleanArchitecture.Razor.Application.Features.KeyValues.Queries.PaginationQuery;
 using CleanArchitecture.Razor.Application.Constants.Permission;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
