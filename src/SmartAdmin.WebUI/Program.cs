@@ -7,7 +7,6 @@ using Serilog.Events;
 using CleanArchitecture.Razor.Infrastructure;
 using CleanArchitecture.Razor.Application;
 using CleanArchitecture.Razor.Infrastructure.Extensions;
-using System.Net;
 
 
 var builder = WebApplication.CreateBuilder(args);
