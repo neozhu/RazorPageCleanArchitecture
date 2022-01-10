@@ -77,11 +77,11 @@ public class DownloadMappingValueFileCommandHandler :
                            new XAttribute(namespaces["ss"] + "AutoFitHeight", 0),
                                "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy1?.Trim())
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy1)
                                ),
                               "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.NewValue?.Trim())
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.NewValue)
                                ),
                                "\r\n"
                           ), "\r\n");
@@ -94,15 +94,15 @@ public class DownloadMappingValueFileCommandHandler :
                            new XAttribute(namespaces["ss"] + "AutoFitHeight", 0),
                               "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy1?.Trim())
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy1)
                                ),
                                "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy2?.Trim())
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy2)
                                ),
                                "\r\n",
                               new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.NewValue?.Trim())
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.NewValue)
                                ),
                               "\r\n"
                           ), "\r\n");
@@ -116,19 +116,19 @@ public class DownloadMappingValueFileCommandHandler :
                            new XAttribute(namespaces["ss"] + "AutoFitHeight", 0),
                                "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy1?.Trim())
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy1)
                                ),
                                "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy2?.Trim())
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy2)
                                ),
                               "\r\n",
                               new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy3?.Trim())
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy3)
                                ),
                                "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.NewValue?.Trim())
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.NewValue)
                                ),
                                "\r\n"
                           ), "\r\n");

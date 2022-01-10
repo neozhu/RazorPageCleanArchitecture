@@ -206,6 +206,7 @@ public class ImportFieldMappingValuesCommandHandler :
             if (dt.Rows.Count > 0)
             {
 
+
                 if (!dt.Columns.Contains(mappingrule.ImportParameterField1))
                 {
                     errors.Add($"Not found import parameter 1:{mappingrule.ImportParameterField1}");
@@ -266,14 +267,14 @@ public class ImportFieldMappingValuesCommandHandler :
                         {
                             if(!string.IsNullOrEmpty(d.Legacy2) && !string.IsNullOrEmpty(d.Legacy3))
                             {
-                                errors.Add($"Duplicate values with Legacy1:{(string.IsNullOrEmpty(d.Legacy1) ? "<BLANK>" : d.Legacy1)},Legacy2:{d.Legacy2},Legacy3:{d.Legacy3}.");
+                                errors.Add($"Duplicate values with Legacy1:{(string.IsNullOrWhiteSpace(d.Legacy1) ? "<BLANK>" : d.Legacy1)},Legacy2:{d.Legacy2},Legacy3:{d.Legacy3}.");
                             }else if (!string.IsNullOrEmpty(d.Legacy2))
                             {
-                                errors.Add($"Duplicate values with Legacy1:{(string.IsNullOrEmpty(d.Legacy1) ? "<BLANK>" : d.Legacy1)},Legacy2:{d.Legacy2}.");
+                                errors.Add($"Duplicate values with Legacy1:{(string.IsNullOrWhiteSpace(d.Legacy1) ? "<BLANK>" : d.Legacy1)},Legacy2:{d.Legacy2}.");
                             }
                             else
                             {
-                                errors.Add($"Duplicate values with Legacy1:{(string.IsNullOrEmpty(d.Legacy1)? "<BLANK>" : d.Legacy1)}.");
+                                errors.Add($"Duplicate values with Legacy1:{(string.IsNullOrWhiteSpace(d.Legacy1)? "<BLANK>" : d.Legacy1)}.");
                             }
                           
                         }

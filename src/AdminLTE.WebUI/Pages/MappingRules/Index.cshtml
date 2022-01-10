@@ -119,7 +119,6 @@
                     <input type="hidden" asp-for="Input.IsMock" />
                     <div class="form-row">
                         <div class="col-md-12">
-                            <label class="form-label" for=""></label>
                             <input type="file" asp-for="TemplateFile" style="display:none" required accept="text/xml" />
                             <div class="">
                                 <button name="uploadtemplatebutton" type="button" class="btn btn-primary btn-icon waves-effect waves-themed mr-2">
@@ -214,12 +213,12 @@
                             <span class="invalid-feedback" asp-validation-for="Input.Team">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6 mb-2">
-                            <label class="form-label" for="MigrationApproach">@_localizer["Migration Approach"] </label>
+                            <label class="form-label" for="MigrationApproach">@_localizer["Migration Approach"] <span class="text-danger">*</span></label>
 
                             <select type="text" asp-for="Input.MigrationApproach" class="select2bs4" asp-dictionaries-for="MigrationApproach" data-placeholder="Choose Migration Approach" data-dropdown-css-class="select2-purple" style="width: 100%;">
                             </select>
 
-                            <span class="invalid-feedback" asp-validation-for="Input.Team">Sorry, you missed this one.</span>
+                            <span class="invalid-feedback" asp-validation-for="Input.MigrationApproach">Sorry, you missed this one.</span>
                         </div>
                         <div class="col-md-6 mb-2">
                             <label class="form-label" for="LegacySystem">@_localizer["Legacy System"] </label>
@@ -1107,7 +1106,7 @@
                                  </a>
                                  <div class="dropdown-menu dropdown-menu-animated" aria-labelledby="commandbtngroup">
                                    <button class="dropdown-item" onclick="onEdit(${index})" > @_localizer["Edit Value Mapping Rule"]</button>
-                                   <button class="dropdown-item" onclick="onShowMappingValues(${index})" > @_localizer["Add Value Mapping"]</button>
+                                   <button class="dropdown-item" onclick="onShowMappingValues(${index})" > @_localizer["Maintenance Value Mapping"]</button>
                                    <button class="dropdown-item" onclick="onDownload(${index})" > @_localizer["Download Value Mapping"]</button>
                                  </div>
                               </div>`;
@@ -1126,7 +1125,7 @@
                     }
                 },
                 { field: 'Active',
-                  title: '@_localizer["Active"]',
+                  title: '@_localizer["Is Active"]',
                   sortable: true,
                   width: 100
                 },

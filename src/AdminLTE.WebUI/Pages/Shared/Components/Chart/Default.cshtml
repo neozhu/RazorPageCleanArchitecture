@@ -36,7 +36,7 @@
  const data1 = JSON.parse(elem1.getAttribute('data-item'));
  var elem2 = document.getElementById('chart-container-result');
  const data2 = JSON.parse(elem2.getAttribute('data-item'));
-const barPlot1 = new Bar('chart-container', {
+ const barPlot1 = new Bar('chart-container', {
   data:data1,
   xField: 'Percent',
   yField: 'Team',
@@ -55,7 +55,7 @@ const barPlot1 = new Bar('chart-container', {
     },
   },
 });
-barPlot1.render();
+
 const barPlot2 = new Bar('chart-container-result', {
   data:data2,
   xField: 'Percent',
@@ -75,6 +75,10 @@ const barPlot2 = new Bar('chart-container-result', {
     },
   },
 });
-barPlot2.render();
+document.addEventListener('DOMContentLoaded', (event) => {
+    barPlot1.render();
+    barPlot2.render();
+});
+
 
 </script>

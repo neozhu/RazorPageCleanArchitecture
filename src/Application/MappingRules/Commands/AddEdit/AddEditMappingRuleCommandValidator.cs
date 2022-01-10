@@ -17,6 +17,9 @@ public class AddEditMappingRuleCommandValidator : AbstractValidator<AddEditMappi
         RuleFor(v => v.NewValueField)
               .MaximumLength(256)
               .NotEmpty();
+        RuleFor(v => v.MigrationApproach)
+              .MaximumLength(256)
+              .NotEmpty();
 
     }
 }

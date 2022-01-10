@@ -109,7 +109,6 @@
                     <input type="hidden" asp-for="Input.TemplateDescription" />
                     <div class="form-row">
                         <div class="col-md-12">
-                            <label class="form-label" for=""></label>
                             <input type="file" asp-for="ResultMappingFile" style="display:none" required accept="text/xml" />
                             <div class="">
                                 <button name="uploadresultmappingbutton" type="button" class="btn btn-primary btn-icon waves-effect waves-themed mr-2">
@@ -377,22 +376,26 @@
                pageList: [10, 15, 30, 50, 100, 1000],
                view: detailview,
                detailFormatter:function(index,row){
-                 const width = window.screen.width-380;
+                 const width = window.screen.width-385;
                  const container=`<div class="p-3" style="height:680px;width:${width}px;position:relative;"><div class="card card-primary card-outline direct-chat direct-chat-primary">
                  <div class="card-header">
                    <h3 class="card-title">${row.Name}</h3>
                    <div class="card-tools">
+                   <a href="javascript:onRefresh(${row.Id})" class="ml-2 btn btn-sm  btn-outline-primary">
+                     <span class="@(Settings.Theme.IconPrefix) fa-sync mr-1"></span>
+                     @_localizer["Refresh"]
+                   </a>
                    <a href="javascript:onSetScope(${row.Id})" class="ml-2 btn btn-sm  btn-outline-danger">
                      <span class="@(Settings.Theme.IconPrefix) fa-flag mr-1"></span>
-                     Select/Unselect scope
+                     @_localizer["Select/Unselect scope"]
                    </a>
                    <a href="javascript:onVerify(${row.Id})" class="ml-2 btn btn-sm  btn-outline-primary">
                      <span class="@(Settings.Theme.IconPrefix) fa-calendar-check mr-1"></span>
-                     Verify/Unverified
+                     @_localizer["Verify/Unverified"]
                    </a>
                    <a href="javascript:onDownloadWithDatagrid(${row.Id},${index})" class="ml-2 btn btn-sm  btn-outline-primary">
                      <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
-                     Download Data
+                     @_localizer["Download Data"]
                    </a>
                    </div>
                    <div  class="d-flex progress-container " >
@@ -853,7 +856,10 @@
 
            }
        }
-
+       var onRefresh =(id)=>{
+          $(`#datatable_${id}`).datagrid('reload');
+          $(`#datatable_${id}`).datagrid('uncheckAll');
+       }
        var onVerify =(id)=>{
            var selected=$(`#datatable_${id}`).datagrid('getChecked');
            if(selected.length>0) {
