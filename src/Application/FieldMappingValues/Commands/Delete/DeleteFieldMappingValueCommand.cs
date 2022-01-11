@@ -44,12 +44,13 @@ public class DeleteFieldMappingValueCommandHandler :
             if (hasdata)
             {
                 ruleitem.Active = "Active";
+                ruleitem.Status = "Ongoing";
             }
             else
             {
                 ruleitem.Active = "Inactive";
+                ruleitem.Status = "Not started";
             }
-            ruleitem.Status = "Ongoing";
             _context.MappingRules.Update(ruleitem);
         }
         await _context.SaveChangesAsync(cancellationToken);
@@ -73,12 +74,14 @@ public class DeleteFieldMappingValueCommandHandler :
             if (hasdata)
             {
                 ruleitem.Active = "Active";
+                ruleitem.Status = "Ongoing";
             }
             else
             {
                 ruleitem.Active = "Inactive";
+                ruleitem.Status = "Not started";
             }
-            ruleitem.Status = "Ongoing";
+            
             _context.MappingRules.Update(ruleitem);
         }
         await _context.SaveChangesAsync(cancellationToken);

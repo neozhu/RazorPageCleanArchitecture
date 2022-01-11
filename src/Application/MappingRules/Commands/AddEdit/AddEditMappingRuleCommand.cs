@@ -56,11 +56,13 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
             {
                 (var buffer, var mappingvalues) = RemoveDataIfExists(request.UploadRequest.Data);
                 request.UploadRequest.Data= buffer;
-                request.UploadRequest.Overwrite = true;
+                request.UploadRequest.Overwrite = false;
                 var result = await _uploadService.UploadAsync(request.UploadRequest);
                 item.TemplateFile = result;
                 if (mappingvalues.Count() > 0)
                 {
+                    var items = await _context.FieldMappingValues.Where(x => x.MappingRuleId == item.Id).ToListAsync();
+                    _context.FieldMappingValues.RemoveRange(items);
                     foreach (var value in mappingvalues)
                     {
                         value.MappingRuleId = item.Id;
@@ -71,11 +73,7 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
                     item.Active = "Active";
                 }
             }
-            var hasdata = await _context.FieldMappingValues.AnyAsync(x => x.MappingRuleId == item.Id);
-            if (hasdata && item.Status== "Not started")
-            {
-                item.Status = "Ongoing";
-            }
+   
             await _context.SaveChangesAsync(cancellationToken);
             return Result<int>.Success(item.Id);
         }
@@ -83,11 +81,12 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
         {
            
             var item = _mapper.Map<MappingRule>(request);
+            item.Status = "Not started";
             if (request.UploadRequest != null && request.UploadRequest.Data != null)
             {
                 (var buffer,var mappingvalues) = RemoveDataIfExists(request.UploadRequest.Data);
                 request.UploadRequest.Data = buffer;
-                request.UploadRequest.Overwrite = true;
+                request.UploadRequest.Overwrite = false;
                 var result = await _uploadService.UploadAsync(request.UploadRequest);
                 item.TemplateFile = result;
 
@@ -211,8 +210,7 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
         x.LegacyField2 == legacyField2 &&
         x.LegacyField3 == legacyField3 &&
         x.NewValueField == newValueField &&
-        x.LegacySystem ==legacySystem &&
-        x.MigrationApproach== migrationApproach);
+        x.LegacySystem ==legacySystem);
     }
 }
 

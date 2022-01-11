@@ -729,10 +729,18 @@
        }
 
        $(() => {
-            $('.select2bs4').select2({
+           $('.select2bs4').select2({
                theme: 'bootstrap4',
                dropdownParent: $('#resultmapping_modal')
            })
+           $(".select2bs4").on("select2:select", function (evt) {
+               var element = evt.params.data.element;
+               var $element = $(element);
+
+               $element.detach();
+               $(this).append($element);
+               $(this).trigger("change");
+            });
            initdatagrid();
        })
 

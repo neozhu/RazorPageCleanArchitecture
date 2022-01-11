@@ -1,4 +1,3 @@
-using System.DirectoryServices.AccountManagement;
 using CleanArchitecture.Razor.Application.Hubs;
 using CleanArchitecture.Razor.Application.Hubs.Constants;
 using Microsoft.AspNetCore.Builder;

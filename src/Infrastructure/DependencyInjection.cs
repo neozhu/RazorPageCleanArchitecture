@@ -1,16 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Reflection;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
 using CleanArchitecture.Razor.Application.Settings;
-using CleanArchitecture.Razor.Application.Workflow.Approval;
-using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using CleanArchitecture.Razor.Infrastructure.Configurations;
-using CleanArchitecture.Razor.Infrastructure.Constants.ClaimTypes;
 using CleanArchitecture.Razor.Infrastructure.Constants.Localization;
-using CleanArchitecture.Razor.Application.Constants.Permission;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Middlewares;
 using CleanArchitecture.Razor.Infrastructure.Persistence;
@@ -22,13 +17,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using WorkflowCore.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
 using CleanArchitecture.Razor.Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Localization;
-using CleanArchitecture.Razor.Infrastructure.Extensions;
 
 namespace CleanArchitecture.Razor.Infrastructure;
 
@@ -123,23 +116,5 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddWorkflow(this IServiceCollection services, IConfiguration configuration)
-    {
-        if (configuration.GetValue<bool>("UseInMemoryDatabase"))
-        {
-            services.AddWorkflow();
-        }
-        else
-        {
-            services.AddWorkflow(x => x.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), true, true));
-        }
-        return services;
-    }
-    public static IApplicationBuilder UseWorkflow(this IApplicationBuilder app)
-    {
-        var host = app.ApplicationServices.GetService<IWorkflowHost>();
-        host.RegisterWorkflow<DocmentApprovalWorkflow, ApprovalData>();
-        host.Start();
-        return app;
-    }
+   
 }

@@ -167,9 +167,7 @@ public class ImportFieldMappingValuesCommandHandler :
             var savedfile = await _uploadService.UploadAsync(uploadrequest);
             var errors = new List<string>();
             var mappingrule = await _context.MappingRules.FirstAsync(x => x.Id == request.MappingRuleId);
-            mappingrule.Status = "Ongoing";
-            mappingrule.Active = "Active";
-            _context.MappingRules.Update(mappingrule);
+          
 
             var xmlstring = System.Text.Encoding.UTF8.GetString(request.Data).Trim();
 
@@ -236,7 +234,7 @@ public class ImportFieldMappingValuesCommandHandler :
                     var items = await _context.FieldMappingValues.Where(x => x.MappingRuleId == mappingrule.Id).ToListAsync();
                     _context.FieldMappingValues.RemoveRange(items);
                     var list = new List<FieldMappingValue>();
-                     foreach (DataRow row in dt.Rows)
+                    foreach (DataRow row in dt.Rows)
                     {
                         var newitem = new FieldMappingValue();
                         newitem.Comments = savedfile;
@@ -281,6 +279,9 @@ public class ImportFieldMappingValuesCommandHandler :
                         return Result.Failure(errors.ToArray());
 
                     }
+                    mappingrule.Status = "Ongoing";
+                    mappingrule.Active = "Active";
+                    _context.MappingRules.Update(mappingrule);
                     await _context.FieldMappingValues.AddRangeAsync(list, cancellationToken);
                     await _context.SaveChangesAsync(cancellationToken);
                 }

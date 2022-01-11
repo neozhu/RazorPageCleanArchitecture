@@ -34,8 +34,9 @@ builder.WebHost.UseSerilog((context, configuration) =>
     );
 
 builder.Services.AddInfrastructure(builder.Configuration)
-        .AddApplication()
-        .AddWorkflow(builder.Configuration); ;
+        .AddApplication();
+
+       
  
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();

@@ -66,12 +66,13 @@ public class AcceptChangesFieldMappingValuesCommandHandler : IRequestHandler<Acc
             if (hasdata)
             {
                 item.Active = "Active";
+                item.Status = "Ongoing";
             }
             else
             {
                 item.Active = "Inactive";
+                item.Status = "Not started";
             }
-            item.Status = "Ongoing";
             _context.MappingRules.Update(item);
         }
         await _context.SaveChangesAsync(cancellationToken);

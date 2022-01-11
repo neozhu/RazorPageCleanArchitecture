@@ -46,7 +46,6 @@
     <Folder Include="Features\ApprovalDatas\EventHandlers\" />
     <Folder Include="Resources\Documents\Commands\Import\" />
     <Folder Include="Resources\Features\ApprovalDatas\Commands\Import\" />
-    <Folder Include="Workflow\Approval\Data\" />
   </ItemGroup>
 
   <ItemGroup>

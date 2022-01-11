@@ -3,7 +3,6 @@
 
 using System.Security.Claims;
 using CleanArchitecture.Razor.Infrastructure.Constants.ClaimTypes;
-using System.DirectoryServices.AccountManagement;
 using System.Security.Principal;
 using System.DirectoryServices;
 

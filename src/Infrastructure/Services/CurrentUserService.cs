@@ -2,11 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Razor.Application.Common.Interfaces;
-using Duende.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Http;
 using System.DirectoryServices;
-using System.DirectoryServices.AccountManagement;
-using System.Security.Claims;
 using System.Security.Principal;
 
 namespace CleanArchitecture.Razor.Infrastructure.Services;
