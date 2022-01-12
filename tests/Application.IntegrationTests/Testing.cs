@@ -43,7 +43,7 @@ public class Testing
 
         services.AddSingleton(Mock.Of<IWebHostEnvironment>(w =>
             w.EnvironmentName == "Development" &&
-            w.ApplicationName == "SmartAdmin.WebUI"));
+            w.ApplicationName == "AdminLTE.WebUI"));
 
         services.AddInfrastructure(_configuration)
                 .AddApplication();
@@ -70,7 +70,7 @@ public class Testing
             TablesToIgnore = new[] { "__EFMigrationsHistory" }
         };
 
-        EnsureDatabase();
+        //EnsureDatabase();
     }
 
     private static void EnsureDatabase()
@@ -171,7 +171,12 @@ public class Testing
 
         return await context.Set<TEntity>().CountAsync();
     }
-
+    public static  Task<T> GetRequiredService<T>()
+    {
+        using var scope = _scopeFactory.CreateScope();
+        var service= scope.ServiceProvider.GetRequiredService<T>();
+        return Task.FromResult(service);
+    }
     [OneTimeTearDown]
     public void RunAfterAnyTests()
     {
