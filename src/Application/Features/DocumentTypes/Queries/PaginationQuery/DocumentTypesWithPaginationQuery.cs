@@ -12,7 +12,7 @@ public class DocumentTypesWithPaginationQuery : PaginationRequest, IRequest<Pagi
 {
     public string CacheKey => $"{nameof(DocumentTypesWithPaginationQuery)},{this}";
 
-    public MemoryCacheEntryOptions Options => DocumentTypeCacheTokenSource.MemoryCacheEntryOptions;
+    public MemoryCacheEntryOptions Options => DocumentTypeCacheKey.MemoryCacheEntryOptions;
 }
 public class DocumentTypesQueryHandler : IRequestHandler<DocumentTypesWithPaginationQuery, PaginatedData<DocumentTypeDto>>
 {

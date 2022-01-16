@@ -6,4 +6,10 @@ namespace CleanArchitecture.Razor.Application.Features.DocumentTypes.Caching;
 public static class DocumentTypeCacheKey
 {
     public const string GetAllCacheKey = "all-documenttypes";
+    static DocumentTypeCacheKey()
+    {
+        ResetCacheToken = new CancellationTokenSource();
+    }
+    public static CancellationTokenSource ResetCacheToken { get; private set; }
+    public static MemoryCacheEntryOptions MemoryCacheEntryOptions => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(ResetCacheToken.Token));
 }
