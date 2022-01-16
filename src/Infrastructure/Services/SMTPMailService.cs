@@ -3,6 +3,7 @@
 
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Settings;
+using CleanArchitecture.Razor.Infrastructure.Configurations;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;

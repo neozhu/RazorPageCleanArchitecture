@@ -4,7 +4,7 @@
 using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Identity.DTOs;
 using CleanArchitecture.Razor.Application.Common.Models;
-using CleanArchitecture.Razor.Application.Settings;
+using CleanArchitecture.Razor.Infrastructure.Configurations;
 using CleanArchitecture.Razor.Infrastructure.Constants.ClaimTypes;
 using CleanArchitecture.Razor.Infrastructure.Extensions;
 using CleanArchitecture.Razor.Infrastructure.Identity;

@@ -14,9 +14,9 @@ public class CustomersByMeQueryQuery : PaginationRequest, IRequest<PaginatedData
     public string UserId { get; set; }
 
 
-    public string CacheKey => $"CustomersByMeQueryQuery,userid:{UserId},{this.ToString()}";
+    public string CacheKey => $"{nameof(CustomersByMeQueryQuery)},userid:{UserId},{this.ToString()}";
 
-    public MemoryCacheEntryOptions Options => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(CustomerCacheTokenSource.ResetCacheToken.Token));
+    public MemoryCacheEntryOptions Options => CustomerCacheTokenSource.MemoryCacheEntryOptions;
 }
 public class ByMeCustomersQueryHandler : IRequestHandler<CustomersByMeQueryQuery, PaginatedData<CustomerDto>>
 {

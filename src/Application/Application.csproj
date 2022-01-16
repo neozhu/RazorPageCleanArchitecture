@@ -38,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Common\Settings\" />
     <Folder Include="Features\Documents\Commands\Import\" />
     <Folder Include="Features\ApprovalDatas\EventHandlers\" />
     <Folder Include="Resources\Documents\Commands\Import\" />

@@ -4,9 +4,6 @@
 using System.Reflection;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
-using CleanArchitecture.Razor.Application.Settings;
-using CleanArchitecture.Razor.Application.Workflow.Approval;
-using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using CleanArchitecture.Razor.Infrastructure.Configurations;
 using CleanArchitecture.Razor.Infrastructure.Constants.ClaimTypes;
 using CleanArchitecture.Razor.Infrastructure.Constants.Localization;
@@ -22,7 +19,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using WorkflowCore.Interface;
 using Microsoft.AspNetCore.Http;
 using FluentValidation.AspNetCore;
 
