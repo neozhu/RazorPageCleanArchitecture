@@ -10,4 +10,10 @@ public static class KeyValueCacheKey
     {
         return $"{name}-keyvalues";
     }
+    static KeyValueCacheKey()
+    {
+        ResetCacheToken = new CancellationTokenSource();
+    }
+    public static CancellationTokenSource ResetCacheToken { get; private set; }
+    public static MemoryCacheEntryOptions MemoryCacheEntryOptions => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(ResetCacheToken.Token));
 }

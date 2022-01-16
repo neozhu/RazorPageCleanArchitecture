@@ -12,7 +12,7 @@ public class CustomersWithPaginationQuery : PaginationRequest, IRequest<Paginate
 {
     public string CacheKey => CustomerCacheKey.GetPaginationCacheKey(this.ToString());
 
-    public MemoryCacheEntryOptions Options => CustomerCacheTokenSource.MemoryCacheEntryOptions;
+    public MemoryCacheEntryOptions Options => CustomerCacheKey.MemoryCacheEntryOptions;
 
 }
 public class CustomersWithPaginationQueryHandler : IRequestHandler<CustomersWithPaginationQuery, PaginatedData<CustomerDto>>

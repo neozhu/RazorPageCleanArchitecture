@@ -10,4 +10,10 @@ public static class CustomerCacheKey
     {
         return $"CustomersWithPaginationQuery,{parameters}";
     }
+    static CustomerCacheKey()
+    {
+        ResetCacheToken = new CancellationTokenSource();
+    }
+    public static CancellationTokenSource ResetCacheToken { get; private set; }
+    public static MemoryCacheEntryOptions MemoryCacheEntryOptions => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(ResetCacheToken.Token));
 }

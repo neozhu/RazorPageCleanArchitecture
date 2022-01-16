@@ -12,7 +12,7 @@ public class GetAllCustomersQuery : IRequest<IEnumerable<CustomerDto>>, ICacheab
 {
     public string CacheKey => CustomerCacheKey.GetAllCacheKey;
 
-    public MemoryCacheEntryOptions Options => CustomerCacheTokenSource.MemoryCacheEntryOptions;
+    public MemoryCacheEntryOptions Options => CustomerCacheKey.MemoryCacheEntryOptions;
 }
 
 public class GetAllCustomersQueryQueryHandler :
