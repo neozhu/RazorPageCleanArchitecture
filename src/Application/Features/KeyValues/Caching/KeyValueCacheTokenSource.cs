@@ -10,4 +10,5 @@ public sealed class KeyValueCacheTokenSource
         ResetCacheToken = new CancellationTokenSource();
     }
     public static CancellationTokenSource ResetCacheToken { get; private set; }
+    public static MemoryCacheEntryOptions MemoryCacheEntryOptions => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(ResetCacheToken.Token));
 }

@@ -10,9 +10,9 @@ namespace CleanArchitecture.Razor.Application.Features.DocumentTypes.Queries.Pag
 
 public class DocumentTypesWithPaginationQuery : PaginationRequest, IRequest<PaginatedData<DocumentTypeDto>>, ICacheable
 {
-    public string CacheKey => $"DocumentTypesWithPaginationQuery,{this.ToString()}";
+    public string CacheKey => $"{nameof(DocumentTypesWithPaginationQuery)},{this}";
 
-    public MemoryCacheEntryOptions Options => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(DocumentTypeCacheTokenSource.ResetCacheToken.Token));
+    public MemoryCacheEntryOptions Options => DocumentTypeCacheTokenSource.MemoryCacheEntryOptions;
 }
 public class DocumentTypesQueryHandler : IRequestHandler<DocumentTypesWithPaginationQuery, PaginatedData<DocumentTypeDto>>
 {

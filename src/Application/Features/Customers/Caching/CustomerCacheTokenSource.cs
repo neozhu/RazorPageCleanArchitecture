@@ -1,6 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+
+
 namespace CleanArchitecture.Razor.Application.Features.Customers.Caching;
 
 public sealed class CustomerCacheTokenSource
@@ -10,4 +12,5 @@ public sealed class CustomerCacheTokenSource
         ResetCacheToken = new CancellationTokenSource();
     }
     public static CancellationTokenSource ResetCacheToken { get; private set; }
+    public static MemoryCacheEntryOptions MemoryCacheEntryOptions => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(ResetCacheToken.Token));
 }
