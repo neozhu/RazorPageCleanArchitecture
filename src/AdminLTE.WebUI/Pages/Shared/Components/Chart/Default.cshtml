@@ -44,7 +44,17 @@
   isPercent: true,
   isStack: true,
   /** 自定义颜色 */
-  // color: ['#2582a1', '#f88c24', '#c52125', '#87f4d0'],
+  //color: ['#388E3C',  '#D32F2F','#FFB300'],
+  colorField: 'Status', // 部分图表使用 seriesField
+  color:({Status}) => {
+    if(Status === 'Not started'){
+      return '#D32F2F';
+    }else if(Status === 'Ongoing'){
+     return '#FFB300';
+    }else{
+        return '#388E3C';
+    }
+  },
   label: {
     position: 'middle',
     content: (item) => {
@@ -53,7 +63,17 @@
     style: {
       fill: '#fff',
     },
+    formatter:(text, item, index) => {
+        console.log(text, item, index)
+    }
   },
+  xAxis: {
+      label:{
+        formatter:(text, item, index) => {
+           return numeral(item.value).format('0 %')
+        }   
+      }
+  }
 });
 
 const barPlot2 = new Bar('chart-container-result', {
@@ -64,7 +84,16 @@ const barPlot2 = new Bar('chart-container-result', {
   isPercent: true,
   isStack: true,
   /** 自定义颜色 */
-  // color: ['#2582a1', '#f88c24', '#c52125', '#87f4d0'],
+  colorField: 'Status', // 部分图表使用 seriesField
+  color:({Status}) => {
+    if(Status === 'Not started'){
+      return '#D32F2F';
+    }else if(Status === 'Ongoing'){
+     return '#FFB300';
+    }else{
+        return '#388E3C';
+    }
+  },
   label: {
     position: 'middle',
     content: (item) => {
@@ -74,6 +103,13 @@ const barPlot2 = new Bar('chart-container-result', {
       fill: '#fff',
     },
   },
+  xAxis: {
+      label:{
+        formatter:(text, item, index) => {
+           return numeral(item.value).format('0 %')
+        }   
+      }
+  }
 });
 document.addEventListener('DOMContentLoaded', (event) => {
     barPlot1.render();

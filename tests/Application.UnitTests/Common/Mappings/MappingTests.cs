@@ -3,11 +3,9 @@ using CleanArchitecture.Razor.Application.Common.Mappings;
 using CleanArchitecture.Razor.Application.Customers.DTOs;
 using CleanArchitecture.Razor.Application.Documents.DTOs;
 using CleanArchitecture.Razor.Application.DocumentTypes.DTOs;
-using CleanArchitecture.Razor.Application.Features.ApprovalDatas.DTOs;
 using CleanArchitecture.Razor.Application.Features.Products.DTOs;
 using CleanArchitecture.Razor.Application.KeyValues.DTOs;
 using CleanArchitecture.Razor.Domain.Entities;
-using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using NUnit.Framework;
 using System;
 using System.Runtime.Serialization;
@@ -37,7 +35,6 @@ namespace CleanArchitecture.Application.UnitTests.Common.Mappings
         }
         
         [Test]
-        [TestCase(typeof(ApprovalData), typeof(ApprovalDataDto))]
         [TestCase(typeof(DocumentType), typeof(DocumentTypeDto))]
         [TestCase(typeof(Document), typeof(DocumentDto))]
         [TestCase(typeof(Customer), typeof(CustomerDto))]

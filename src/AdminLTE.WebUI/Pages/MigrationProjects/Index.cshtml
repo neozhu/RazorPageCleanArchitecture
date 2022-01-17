@@ -225,7 +225,13 @@
                    
                 ]]
             })
-                .datagrid('enableFilter', [{
+                .datagrid('enableFilter', [
+                    {
+                         field:'Progress',
+                         op:['equal','notequal','less','greater'],
+                         type:'numberbox'
+                    },
+                    {
                     field:'MappingRuleId',
                     type:'combobox',
                     options:{

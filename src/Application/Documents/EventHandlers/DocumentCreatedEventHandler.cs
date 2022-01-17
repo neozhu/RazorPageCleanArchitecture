@@ -2,8 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 
-using CleanArchitecture.Razor.Domain.Entities.Worflow;
-using WorkflowCore.Interface;
 
 namespace CleanArchitecture.Razor.Application.Documents.EventHandlers
 {
@@ -14,8 +12,7 @@ namespace CleanArchitecture.Razor.Application.Documents.EventHandlers
 
         public DocumentCreatedEventHandler(
             IApplicationDbContext context,
-            ILogger<DocumentCreatedEventHandler> logger,
-            IWorkflowHost  workflowHost
+            ILogger<DocumentCreatedEventHandler> logger
             )
         {
             _context = context;

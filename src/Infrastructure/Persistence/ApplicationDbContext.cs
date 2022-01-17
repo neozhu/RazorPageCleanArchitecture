@@ -6,7 +6,6 @@ using CleanArchitecture.Razor.Domain.Common;
 using CleanArchitecture.Razor.Domain.Entities;
 using CleanArchitecture.Razor.Domain.Entities.Audit;
 using CleanArchitecture.Razor.Domain.Entities.Log;
-using CleanArchitecture.Razor.Domain.Entities.Worflow;
 using CleanArchitecture.Razor.Domain.Enums;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Persistence.Extensions;
@@ -48,7 +47,6 @@ public class ApplicationDbContext : IdentityDbContext<
     public DbSet<Document> Documents { get; set; }
 
     public DbSet<KeyValue> KeyValues { get; set; }
-    public DbSet<ApprovalData> ApprovalDatas { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<MigrationObject> MigrationObjects { get; set; }
     public DbSet<ObjectField> ObjectFields { get; set; }

@@ -3,7 +3,7 @@
 
 using CleanArchitecture.Razor.Domain.Entities.Audit;
 using CleanArchitecture.Razor.Domain.Entities.Log;
-using CleanArchitecture.Razor.Domain.Entities.Worflow;
+
 
 namespace CleanArchitecture.Razor.Application.Common.Interfaces;
 
@@ -15,7 +15,7 @@ public interface IApplicationDbContext
     DbSet<DocumentType> DocumentTypes { get; set; }
     DbSet<Document> Documents { get; set; }
     DbSet<KeyValue> KeyValues { get; set; }
-    DbSet<ApprovalData> ApprovalDatas { get; set; }
+
 
     DbSet<Product> Products { get; set; }
     DbSet<MigrationObject> MigrationObjects { get; set; }
