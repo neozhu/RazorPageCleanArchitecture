@@ -87,15 +87,7 @@ public static class ApplicationDbContextSeed
 
         }
 
-        if (!context.DocumentTypes.Any())
-        {
-            context.DocumentTypes.Add(new Domain.Entities.DocumentType() { Name = "Document", Description = "Document" });
-            context.DocumentTypes.Add(new Domain.Entities.DocumentType() { Name = "PDF", Description = "PDF" });
-            context.DocumentTypes.Add(new Domain.Entities.DocumentType() { Name = "Image", Description = "Image" });
-            context.DocumentTypes.Add(new Domain.Entities.DocumentType() { Name = "Other", Description = "Other" });
-            await context.SaveChangesAsync();
-      
-        }
+     
         if (!context.KeyValues.Any())
         {
             context.KeyValues.Add(new Domain.Entities.KeyValue() { Name = "LegacySystem", Value = "AP1", Text = "AP1", Description = "Legacy System" });
@@ -123,10 +115,6 @@ public static class ApplicationDbContextSeed
 
      
         }
-        if (!context.Customers.Any())
-        {
-            context.Customers.Add(new Domain.Entities.Customer() { Name = "SmartAdmin", AddressOfEnglish = "https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0", GroupName = "SmartAdmin", Address = "https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0", Sales = "GotBootstrap", RegionSalesDirector = "GotBootstrap", Region = "CNC", NameOfEnglish = "SmartAdmin", PartnerType = Domain.Enums.PartnerType.TP, Contact = "GotBootstrap", Email = "drlantern@gotbootstrap.com" });
-            await context.SaveChangesAsync();
-        }
+       
     }
 }

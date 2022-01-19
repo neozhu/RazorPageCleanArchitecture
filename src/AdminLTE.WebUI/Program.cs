@@ -26,7 +26,7 @@ builder.WebHost.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration)
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
                 .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Error)
-                .MinimumLevel.Override("Serilog", LogEventLevel.Error)
+                .MinimumLevel.Override("Serilog", LogEventLevel.Fatal)
           .Enrich.FromLogContext()
           .Enrich.WithClientIp()
           .Enrich.WithClientAgent()

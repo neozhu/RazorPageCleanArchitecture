@@ -1,7 +1,6 @@
 using CleanArchitecture.Razor.Application.Common.Behaviours;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Common.Interfaces.Identity;
-using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
@@ -12,14 +11,14 @@ namespace CleanArchitecture.Application.UnitTests.Common.Behaviours
 {
     public class RequestLoggerTests
     {
-        private readonly Mock<ILogger<AddEditCustomerCommand>> _logger;
+
         private readonly Mock<ICurrentUserService> _currentUserService;
         private readonly Mock<IIdentityService> _identityService;
 
 
         public RequestLoggerTests()
         {
-            _logger = new Mock<ILogger<AddEditCustomerCommand>>();
+   
 
             _currentUserService = new Mock<ICurrentUserService>();
 
@@ -31,9 +30,7 @@ namespace CleanArchitecture.Application.UnitTests.Common.Behaviours
         {
             _currentUserService.Setup(x => x.UserId).Returns("Administrator");
 
-            var requestLogger = new LoggingBehaviour<AddEditCustomerCommand>(_logger.Object, _currentUserService.Object, _identityService.Object);
-
-            await requestLogger.Process(new AddEditCustomerCommand { Id=1, Name="New Customer" }, new CancellationToken());
+          
 
             _identityService.Verify(i => i.GetUserNameAsync(It.IsAny<string>()), Times.Once);
         }
@@ -41,9 +38,7 @@ namespace CleanArchitecture.Application.UnitTests.Common.Behaviours
         [Test]
         public async Task ShouldNotCallGetUserNameAsyncOnceIfUnauthenticated()
         {
-            var requestLogger = new LoggingBehaviour<AddEditCustomerCommand>(_logger.Object, _currentUserService.Object, _identityService.Object);
-
-            await requestLogger.Process(new AddEditCustomerCommand { Id = 1, Name = "New Customer" }, new CancellationToken());
+            
 
             _identityService.Verify(i => i.GetUserNameAsync(null), Times.Never);
         }

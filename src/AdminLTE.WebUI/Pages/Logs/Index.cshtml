@@ -31,7 +31,7 @@
     <div class="col-sm-12 col-md-12" style="position: relative;height:160px">
         <canvas id='timebar' style="height: 100%;"></canvas>
     </div>
-  
+
 </div>
 
 <div id="js-page-content-demopanels" class="card mb-g">
@@ -41,18 +41,18 @@
             <small>&nbsp;</small>
         </h4>
         <div class="ml-auto">
-      
-                <button class="btn btn-sm btn-outline-primary " id="searchbutton">
-                    <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
-                    @_localizer["Search"]
-                </button>
-        
-            
-                <button class="btn btn-sm btn-outline-primary " id="exportbutton">
-                    <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
-                    @_localizer["Export Excel"]
-                </button>
-           
+
+            <button class="btn btn-sm btn-outline-primary " id="searchbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-search mr-1"></span>
+                @_localizer["Search"]
+            </button>
+
+
+            <button class="btn btn-sm btn-outline-primary " id="exportbutton">
+                <span class="@(Settings.Theme.IconPrefix) fa-download mr-1"></span>
+                @_localizer["Export Excel"]
+            </button>
+
 
         </div>
     </div>
@@ -81,12 +81,7 @@
 <script src="~/lib/jquery-form/jquery.jsonToForm.js"></script>
 <script>
     $(async () => {
-
-         
-
         var linedata = (await axios.get('@Url.Page("/Logs/Index")?handler=LogsTimeLineData')).data;
-        console.log(linedata)
-        console.log(linedata.filter(item => item.level == 'Information').map(item => { return { time: item.time, total: item.total } } ))
         var ctx = document.getElementById('timebar').getContext('2d');
         var delayed = false;
         var barchart = new Chart(ctx, {
@@ -277,7 +272,20 @@
                                },
                                </text>
                             }
-                            ]
+                            ],
+                            onChange: function (item) {
+                             if(item){
+                               $dg.datagrid('addFilterRule', {
+                                  field: 'Level',
+                                  op: 'equal',
+                                  value: item
+                               });
+                               $dg.datagrid('doFilter');
+                             }else{
+                               $dg.datagrid('removeFilterRule', 'Level'	                          );
+                               $dg.datagrid('doFilter');
+                             }
+                          }
                         }
                     }
                 ])

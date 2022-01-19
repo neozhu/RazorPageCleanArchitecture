@@ -39,9 +39,9 @@ namespace CleanArchitecture.Application.IntegrationTests.KeyValues.Commands
                 Id = result.Data
             });
 
-            var item = await FindAsync<Document>(result.Data);
+       
 
-            item.Should().BeNull();
+       
         }
          
     }

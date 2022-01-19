@@ -167,7 +167,7 @@ public class ImportFieldMappingValuesCommandHandler :
             var savedfile = await _uploadService.UploadAsync(uploadrequest);
             var errors = new List<string>();
             var mappingrule = await _context.MappingRules.FirstAsync(x => x.Id == request.MappingRuleId);
-          
+
 
             var xmlstring = System.Text.Encoding.UTF8.GetString(request.Data).Trim();
 
@@ -177,6 +177,7 @@ public class ImportFieldMappingValuesCommandHandler :
             var datatable = data.Descendants().Where(x => x.Name.LocalName == "Table");
             var index = 0;
             var dt = new DataTable();
+            var fieldcount = 0;
             foreach (var row in datatable.Descendants().Where(x => x.Name.LocalName == "Row").Skip(3).ToList())
             {
                 index++;
@@ -187,6 +188,7 @@ public class ImportFieldMappingValuesCommandHandler :
                     {
                         dt.Columns.Add(cell.Value);
                     }
+                    fieldcount = cells.Count;
                 }
                 else
                 {
@@ -194,22 +196,30 @@ public class ImportFieldMappingValuesCommandHandler :
                     var c1 = 0;
                     foreach (var cell in cells)
                     {
+                        var cindex = cell.Attributes().FirstOrDefault(x => x.Name.LocalName == "Index");
+                        if (cindex != null)
+                        {
+                            c1 =Convert.ToInt32(cindex.Value) - 1;
+                        }
                         dr[c1] = cell.Value;
                         c1++;
                     }
+
                     //dt.Rows.Add(dr);
                 }
                 Console.WriteLine(row);
             }
+            if (errors.Count > 0)
+            {
+                return Result.Failure(errors);
+            }
             if (dt.Rows.Count > 0)
             {
-
-
                 if (!dt.Columns.Contains(mappingrule.ImportParameterField1))
                 {
                     errors.Add($"Not found import parameter 1:{mappingrule.ImportParameterField1}");
                 }
-                
+
                 if (!string.IsNullOrEmpty(mappingrule.ImportParameterField2)
                     &&
                     !dt.Columns.Contains(mappingrule.ImportParameterField2)
@@ -251,7 +261,7 @@ public class ImportFieldMappingValuesCommandHandler :
                             newitem.Legacy3 = row[mappingrule.ImportParameterField3].ToString();
                         }
                         list.Add(newitem);
-                       
+
                     }
                     // remove duplicates
                     //var inputlist = list.DistinctBy(x => new { x.Legacy1, x.Legacy2, x.Legacy3 });
@@ -259,22 +269,23 @@ public class ImportFieldMappingValuesCommandHandler :
                                          .Where(g => g.Count() > 1)
                                          .Select(g => g.Key)
                                          .ToArray();
-                    if (duplicates.Count()>0)
+                    if (duplicates.Count() > 0)
                     {
-                        foreach(var d in duplicates)
+                        foreach (var d in duplicates)
                         {
-                            if(!string.IsNullOrEmpty(d.Legacy2) && !string.IsNullOrEmpty(d.Legacy3))
+                            if (!string.IsNullOrEmpty(d.Legacy2) && !string.IsNullOrEmpty(d.Legacy3))
                             {
                                 errors.Add($"Duplicate values with Legacy1:{(string.IsNullOrWhiteSpace(d.Legacy1) ? "<BLANK>" : d.Legacy1)},Legacy2:{d.Legacy2},Legacy3:{d.Legacy3}.");
-                            }else if (!string.IsNullOrEmpty(d.Legacy2))
+                            }
+                            else if (!string.IsNullOrEmpty(d.Legacy2))
                             {
                                 errors.Add($"Duplicate values with Legacy1:{(string.IsNullOrWhiteSpace(d.Legacy1) ? "<BLANK>" : d.Legacy1)},Legacy2:{d.Legacy2}.");
                             }
                             else
                             {
-                                errors.Add($"Duplicate values with Legacy1:{(string.IsNullOrWhiteSpace(d.Legacy1)? "<BLANK>" : d.Legacy1)}.");
+                                errors.Add($"Duplicate values with Legacy1:{(string.IsNullOrWhiteSpace(d.Legacy1) ? "<BLANK>" : d.Legacy1)}.");
                             }
-                          
+
                         }
                         return Result.Failure(errors.ToArray());
 
@@ -283,6 +294,20 @@ public class ImportFieldMappingValuesCommandHandler :
                     mappingrule.Active = "Active";
                     _context.MappingRules.Update(mappingrule);
                     await _context.FieldMappingValues.AddRangeAsync(list, cancellationToken);
+                    await _context.SaveChangesAsync(cancellationToken);
+
+                    var total = await _context.FieldMappingValues.CountAsync(x => x.MappingRuleId == mappingrule.Id);
+                    var compeleted = await _context.FieldMappingValues.CountAsync(x => x.MappingRuleId == mappingrule.Id && x.NewValue != "");
+                    if (total > 0)
+                    {
+                        var mappingCompletion = Convert.ToDecimal(compeleted) / Convert.ToDecimal(total);
+                        mappingrule.MappingCompletion = mappingCompletion;
+                    }
+                    else
+                    {
+                        mappingrule.MappingCompletion = null;
+                    }
+                    _context.MappingRules.Update(mappingrule);
                     await _context.SaveChangesAsync(cancellationToken);
                 }
                 else
@@ -294,11 +319,11 @@ public class ImportFieldMappingValuesCommandHandler :
             }
             else
             {
-                return Result.Failure(new string[] {$"Not found data" });
+                return Result.Failure(new string[] { $"Not found data" });
             }
 
-           
-          
+
+
 
             return Result.Success();
         }

@@ -1,9 +1,5 @@
 using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Mappings;
-using CleanArchitecture.Razor.Application.Customers.DTOs;
-using CleanArchitecture.Razor.Application.Documents.DTOs;
-using CleanArchitecture.Razor.Application.DocumentTypes.DTOs;
-using CleanArchitecture.Razor.Application.Features.Products.DTOs;
 using CleanArchitecture.Razor.Application.KeyValues.DTOs;
 using CleanArchitecture.Razor.Domain.Entities;
 using NUnit.Framework;
@@ -35,11 +31,9 @@ namespace CleanArchitecture.Application.UnitTests.Common.Mappings
         }
         
         [Test]
-        [TestCase(typeof(DocumentType), typeof(DocumentTypeDto))]
-        [TestCase(typeof(Document), typeof(DocumentDto))]
-        [TestCase(typeof(Customer), typeof(CustomerDto))]
+
         [TestCase(typeof(KeyValue), typeof(KeyValueDto))]
-        [TestCase(typeof(Product), typeof(ProductDto))]
+  
         public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
         {
             var instance = GetInstanceOf(source);

@@ -12,7 +12,7 @@ public class ImportKeyValuesCommand : IRequest<Result>, ICacheInvalidator
     public byte[] Data { get; set; }
     public string CacheKey => KeyValueCacheKey.GetAllCacheKey;
 
-    public CancellationTokenSource ResetCacheToken => KeyValueCacheTokenSource.ResetCacheToken;
+    public CancellationTokenSource ResetCacheToken => KeyValueCacheKey.ResetCacheToken;
 }
 public class CreateKeyValueTemplateCommand : IRequest<byte[]>
 {

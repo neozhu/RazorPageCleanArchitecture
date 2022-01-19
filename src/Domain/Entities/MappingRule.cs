@@ -40,4 +40,6 @@ public class MappingRule : AuditableEntity, IAuditTrial, IProjectId
     public string MigrationApproach{get;set;}
 
     public string ObjectName { get; set; }
+
+    public decimal? MappingCompletion { get; set; }
 }

@@ -10,7 +10,7 @@ public class AddEditKeyValueCommand : KeyValueDto, IRequest<Result<int>>, ICache
 {
     public string CacheKey => KeyValueCacheKey.GetAllCacheKey;
 
-    public CancellationTokenSource ResetCacheToken => KeyValueCacheTokenSource.ResetCacheToken;
+    public CancellationTokenSource ResetCacheToken => KeyValueCacheKey.ResetCacheToken;
 }
 
 public class AddEditKeyValueCommandHandler : IRequestHandler<AddEditKeyValueCommand, Result<int>>

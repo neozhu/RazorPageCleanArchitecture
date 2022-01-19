@@ -1,14 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-namespace CleanArchitecture.Razor.Application.KeyValues.Commands.Import
+namespace CleanArchitecture.Razor.Application.KeyValues.Commands.Import;
+
+public class ImportKeyValuesCommandValidator : AbstractValidator<ImportKeyValuesCommand>
 {
-    public class ImportKeyValuesCommandValidator : AbstractValidator<ImportKeyValuesCommand>
+    public ImportKeyValuesCommandValidator()
     {
-        public ImportKeyValuesCommandValidator()
-        {
-            RuleFor(x => x.Data).NotNull().NotEmpty();
-        }
+        RuleFor(x => x.Data).NotNull().NotEmpty();
     }
-   
 }

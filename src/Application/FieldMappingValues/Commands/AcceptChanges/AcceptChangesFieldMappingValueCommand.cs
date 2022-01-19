@@ -59,9 +59,22 @@ public class AcceptChangesFieldMappingValuesCommandHandler : IRequestHandler<Acc
 
         await _context.SaveChangesAsync(cancellationToken);
 
+    
+
         var mappingrules = await _context.MappingRules.Where(x => array_id.Contains(x.Id)).ToListAsync();
         foreach(var item in mappingrules)
         {
+            var total =  await _context.FieldMappingValues.CountAsync(x=>x.MappingRuleId==item.Id);
+            var compeleted = await _context.FieldMappingValues.CountAsync(x => x.MappingRuleId == item.Id && x.NewValue!="");
+            if (total > 0)
+            {
+                var mappingCompletion =  Convert.ToDecimal(compeleted) / Convert.ToDecimal(total);
+                item.MappingCompletion = mappingCompletion;
+            }
+            else
+            {
+                item.MappingCompletion = null;
+            }
             var hasdata = await _context.FieldMappingValues.AnyAsync(x => x.MappingRuleId == item.Id);
             if (hasdata)
             {

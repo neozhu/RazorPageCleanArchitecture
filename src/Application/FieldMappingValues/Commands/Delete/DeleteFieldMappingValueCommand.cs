@@ -40,6 +40,18 @@ public class DeleteFieldMappingValueCommandHandler :
         var mappingrules = await _context.MappingRules.Where(x => x.Id == item.MappingRuleId).ToListAsync();
         foreach (var ruleitem in mappingrules)
         {
+            var total = await _context.FieldMappingValues.CountAsync(x => x.MappingRuleId == ruleitem.Id);
+            var compeleted = await _context.FieldMappingValues.CountAsync(x => x.MappingRuleId == ruleitem.Id && x.NewValue != "");
+            if (total > 0)
+            {
+                var mappingCompletion = Convert.ToDecimal(compeleted) / Convert.ToDecimal(total);
+                ruleitem.MappingCompletion = mappingCompletion;
+            }
+            else
+            {
+                ruleitem.MappingCompletion = null;
+            }
+
             var hasdata = await _context.FieldMappingValues.AnyAsync(x => x.MappingRuleId == ruleitem.Id);
             if (hasdata)
             {
@@ -70,6 +82,18 @@ public class DeleteFieldMappingValueCommandHandler :
         var mappingrules = await _context.MappingRules.Where(x => array_id.Contains(x.Id)).ToListAsync();
         foreach (var ruleitem in mappingrules)
         {
+            var total = await _context.FieldMappingValues.CountAsync(x => x.MappingRuleId == ruleitem.Id);
+            var compeleted = await _context.FieldMappingValues.CountAsync(x => x.MappingRuleId == ruleitem.Id && x.NewValue != "");
+            if (total > 0)
+            {
+                var mappingCompletion = Convert.ToDecimal(compeleted) / Convert.ToDecimal(total);
+                ruleitem.MappingCompletion = mappingCompletion;
+            }
+            else
+            {
+                ruleitem.MappingCompletion = null;
+            }
+
             var hasdata = await _context.FieldMappingValues.AnyAsync(x => x.MappingRuleId == ruleitem.Id);
             if (hasdata)
             {

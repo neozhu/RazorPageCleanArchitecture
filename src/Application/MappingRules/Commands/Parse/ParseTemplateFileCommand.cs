@@ -11,8 +11,9 @@ public class ParseTemplateFileCommand : IRequest<Result<MappingRuleDto>>
 }
 
 
-public class ParseTemplateFileCommandHandler:
-     IRequestHandler<ParseTemplateFileCommand, Result<MappingRuleDto>>{
+public class ParseTemplateFileCommandHandler :
+     IRequestHandler<ParseTemplateFileCommand, Result<MappingRuleDto>>
+{
     private readonly IApplicationDbContext _context;
 
     public ParseTemplateFileCommandHandler(
@@ -30,10 +31,11 @@ public class ParseTemplateFileCommandHandler:
         try
         {
             var xdoc = XDocument.Parse(xmlstring);
-            var mappingruledto = new MappingRuleDto() {
+            var mappingruledto = new MappingRuleDto()
+            {
                 Name = filename.Remove(filename.LastIndexOf("."))
             };
-            var objectname= xdoc.Descendants().Where(x => x.Name.LocalName == "Object_name").First().Value;
+            var objectname = xdoc.Descendants().Where(x => x.Name.LocalName == "Object_name").First().Value;
             mappingruledto.ObjectName = objectname;
             var signature = xdoc.Descendants().Where(x => x.Name.LocalName == "Worksheet" && x.FirstAttribute.Value == "Signature").First();
             var signaturetable = signature.Descendants().Where(x => x.Name.LocalName == "Table");
@@ -55,7 +57,7 @@ public class ParseTemplateFileCommandHandler:
                 var header = datatable.Descendants().Where(x => x.Name.LocalName == "Row").Skip(3).First();
                 var cells = header.Descendants().Where(x => x.Name.LocalName == "Data").ToList();
                 var first = cells.First();
-                var last=cells.Last();
+                var last = cells.Last();
                 var fielddescription1 = await _context.ObjectFields.FirstOrDefaultAsync(x => x.Name == first.Value);
                 mappingruledto.LegacyField1 = first.Value;
                 mappingruledto.ImportParameterField1 = first.Value;
@@ -126,8 +128,8 @@ public class ParseTemplateFileCommandHandler:
                     }
                 }
             }
-            var exists = await _context.MappingRules.AnyAsync(x=>
-                      x.LegacyField1== mappingruledto.LegacyField1
+            var exists = await _context.MappingRules.AnyAsync(x =>
+                      x.LegacyField1 == mappingruledto.LegacyField1
                       && x.LegacyField2 == mappingruledto.LegacyField2
                       && x.LegacyField3 == mappingruledto.LegacyField3
                       && x.NewValueField == mappingruledto.NewValueField
@@ -141,12 +143,12 @@ public class ParseTemplateFileCommandHandler:
             {
                 return Result<MappingRuleDto>.Success(mappingruledto);
             }
-           
+
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return Result<MappingRuleDto>.Failure(new string[] { $"{filename} is not a valid SAP template file." });
         }
-            
-        }
+
+    }
 }

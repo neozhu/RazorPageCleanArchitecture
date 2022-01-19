@@ -11,21 +11,13 @@ public interface IApplicationDbContext
 {
     DbSet<Logger> Loggers { get; set; }
     DbSet<AuditTrail> AuditTrails { get; set; }
-    DbSet<Customer> Customers { get; set; }
-    DbSet<DocumentType> DocumentTypes { get; set; }
-    DbSet<Document> Documents { get; set; }
     DbSet<KeyValue> KeyValues { get; set; }
-
-
-    DbSet<Product> Products { get; set; }
     DbSet<MigrationObject> MigrationObjects { get; set; }
     DbSet<ObjectField> ObjectFields { get; set; }
     DbSet<MigrationTemplateFile> MigrationTemplateFiles { get; set; }
-
     DbSet<MigrationProject> MigrationProjects { get; set; }
     DbSet<MappingRule> MappingRules { get; set; }
     DbSet<FieldMappingValue> FieldMappingValues { get; set; }
-
     DbSet<ResultMapping> ResultMappings { get; set; }
     DbSet<ResultMappingData> ResultMappingDatas { get; set; }
 

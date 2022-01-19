@@ -3,51 +3,50 @@
 
 using CleanArchitecture.Razor.Application.KeyValues.Caching;
 
-namespace CleanArchitecture.Razor.Application.KeyValues.Commands.Delete
+namespace CleanArchitecture.Razor.Application.KeyValues.Commands.Delete;
+
+public class DeleteKeyValueCommand : IRequest<Result>, ICacheInvalidator
 {
-    public class DeleteKeyValueCommand: IRequest<Result>, ICacheInvalidator
-    {
-        public int Id { get; set; }
-        public string CacheKey => KeyValueCacheKey.GetAllCacheKey;
+    public int Id { get; set; }
+    public string CacheKey => KeyValueCacheKey.GetAllCacheKey;
 
-        public CancellationTokenSource ResetCacheToken => KeyValueCacheTokenSource.ResetCacheToken;
+    public CancellationTokenSource ResetCacheToken => KeyValueCacheKey.ResetCacheToken;
+}
+public class DeleteCheckedKeyValuesCommand : IRequest<Result>, ICacheInvalidator
+{
+    public int[] Id { get; set; }
+    public string CacheKey => KeyValueCacheKey.GetAllCacheKey;
+
+    public CancellationTokenSource ResetCacheToken => KeyValueCacheKey.ResetCacheToken;
+}
+
+public class DeleteKeyValueCommandHandler : IRequestHandler<DeleteKeyValueCommand, Result>,
+    IRequestHandler<DeleteCheckedKeyValuesCommand, Result>
+{
+    private readonly IApplicationDbContext _context;
+
+    public DeleteKeyValueCommandHandler(
+        IApplicationDbContext context
+        )
+    {
+        _context = context;
     }
-    public class DeleteCheckedKeyValuesCommand : IRequest<Result>, ICacheInvalidator
+    public async Task<Result> Handle(DeleteKeyValueCommand request, CancellationToken cancellationToken)
     {
-        public int[] Id { get; set; }
-        public string CacheKey => KeyValueCacheKey.GetAllCacheKey;
-
-        public CancellationTokenSource ResetCacheToken => KeyValueCacheTokenSource.ResetCacheToken;
+        var item = await _context.KeyValues.FindAsync(new object[] { request.Id }, cancellationToken);
+        _context.KeyValues.Remove(item);
+        await _context.SaveChangesAsync(cancellationToken);
+        return Result.Success();
     }
 
-    public class DeleteKeyValueCommandHandler : IRequestHandler<DeleteKeyValueCommand, Result>,
-        IRequestHandler<DeleteCheckedKeyValuesCommand, Result>
+    public async Task<Result> Handle(DeleteCheckedKeyValuesCommand request, CancellationToken cancellationToken)
     {
-        private readonly IApplicationDbContext _context;
-
-        public DeleteKeyValueCommandHandler(
-            IApplicationDbContext context
-            )
+        var items = await _context.KeyValues.Where(x => request.Id.Contains(x.Id)).ToListAsync(cancellationToken);
+        foreach (var item in items)
         {
-            _context = context;
-        }
-        public async Task<Result> Handle(DeleteKeyValueCommand request, CancellationToken cancellationToken)
-        {
-            var item =await _context.KeyValues.FindAsync(new object[] { request.Id }, cancellationToken);
             _context.KeyValues.Remove(item);
-            await _context.SaveChangesAsync(cancellationToken);
-            return Result.Success();
         }
-
-        public async Task<Result> Handle(DeleteCheckedKeyValuesCommand request, CancellationToken cancellationToken)
-        {
-            var items = await _context.KeyValues.Where(x => request.Id.Contains(x.Id)).ToListAsync(cancellationToken);
-            foreach(var item in items)
-            {
-                _context.KeyValues.Remove(item);
-            }
-            await _context.SaveChangesAsync(cancellationToken);
-            return Result.Success();
-        }
+        await _context.SaveChangesAsync(cancellationToken);
+        return Result.Success();
     }
 }

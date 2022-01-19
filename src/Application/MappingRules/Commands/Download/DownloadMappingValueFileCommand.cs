@@ -77,11 +77,11 @@ public class DownloadMappingValueFileCommandHandler :
                            new XAttribute(namespaces["ss"] + "AutoFitHeight", 0),
                                "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy1)
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), string.IsNullOrEmpty(item.Legacy1)?" ":item.Legacy1)
                                ),
                               "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.NewValue)
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), string.IsNullOrEmpty(item.NewValue)?" ":item.NewValue)
                                ),
                                "\r\n"
                           ), "\r\n");
@@ -94,15 +94,15 @@ public class DownloadMappingValueFileCommandHandler :
                            new XAttribute(namespaces["ss"] + "AutoFitHeight", 0),
                               "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy1)
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), string.IsNullOrEmpty(item.Legacy1) ? " " : item.Legacy1)
                                ),
                                "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy2)
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), string.IsNullOrEmpty(item.Legacy2) ? " " : item.Legacy2)
                                ),
                                "\r\n",
                               new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.NewValue)
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), string.IsNullOrEmpty(item.NewValue) ? " " : item.NewValue)
                                ),
                               "\r\n"
                           ), "\r\n");
@@ -116,19 +116,19 @@ public class DownloadMappingValueFileCommandHandler :
                            new XAttribute(namespaces["ss"] + "AutoFitHeight", 0),
                                "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy1)
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), string.IsNullOrEmpty(item.Legacy1) ? " " : item.Legacy1)
                                ),
                                "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy2)
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), string.IsNullOrEmpty(item.Legacy2) ? " " : item.Legacy2)
                                ),
                               "\r\n",
                               new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.Legacy3)
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), string.IsNullOrEmpty(item.Legacy3) ? " " : item.Legacy3)
                                ),
                                "\r\n",
                                new XElement(namespaces.First().Value + "Cell",
-                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), item.NewValue)
+                                   new XElement(namespaces.First().Value + "Data", new XAttribute(namespaces["ss"] + "Type", type), string.IsNullOrEmpty(item.NewValue) ? " " : item.NewValue)
                                ),
                                "\r\n"
                           ), "\r\n");

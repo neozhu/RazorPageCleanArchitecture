@@ -42,20 +42,13 @@ public class ApplicationDbContext : IdentityDbContext<
     }
     public DbSet<Logger> Loggers { get; set; }
     public DbSet<AuditTrail> AuditTrails { get; set; }
-    public DbSet<Customer> Customers { get; set; }
-    public DbSet<DocumentType> DocumentTypes { get; set; }
-    public DbSet<Document> Documents { get; set; }
-
     public DbSet<KeyValue> KeyValues { get; set; }
-    public DbSet<Product> Products { get; set; }
     public DbSet<MigrationObject> MigrationObjects { get; set; }
     public DbSet<ObjectField> ObjectFields { get; set; }
     public DbSet<MigrationTemplateFile> MigrationTemplateFiles { get; set; }
-
     public DbSet<MigrationProject> MigrationProjects { get; set; }
     public DbSet<MappingRule> MappingRules { get; set; }
     public DbSet<FieldMappingValue> FieldMappingValues { get; set; }
-
     public DbSet<ResultMapping> ResultMappings { get; set; }
     public DbSet<ResultMappingData> ResultMappingDatas { get; set; }
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

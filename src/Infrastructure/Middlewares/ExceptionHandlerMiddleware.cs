@@ -66,7 +66,7 @@ internal class ExceptionHandlerMiddleware : IMiddleware
                     responseModel = await Result.FailureAsync(new string[] { exception.Message });
                     break;
             }
-            _logger.LogError(exception,$"Request failed with Status Code {response.StatusCode} and Error Id {errorId}.");
+            //_logger.LogError(exception,$"Request failed with Status Code {response.StatusCode} and Error Id {errorId}.");
             await response.WriteAsync(System.Text.Json.JsonSerializer.Serialize(responseModel));
         }
     }

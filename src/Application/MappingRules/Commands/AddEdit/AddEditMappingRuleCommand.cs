@@ -123,12 +123,15 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
         }
         var dt = new DataTable();
         var index = 0;
+        var fieldcount = 0;
+        var errors = new List<string>();
         foreach (var row in datatable.Descendants().Where(x => x.Name.LocalName == "Row").Skip(3).ToList())
         {
             index++;
             var cells = row.Descendants().Where(x => x.Name.LocalName == "Cell").ToList();
             if (index == 1)
             {
+                fieldcount = cells.Count;
                 foreach (var cell in cells)
                 {
                     dt.Columns.Add(cell.Value);
@@ -140,6 +143,11 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
                 var c1 = 0;
                 foreach (var cell in cells)
                 {
+                    var cindex = cell.Attributes().FirstOrDefault(x => x.Name.LocalName == "Index");
+                    if (cindex != null)
+                    {
+                        c1 = Convert.ToInt32(cindex.Value) - 1;
+                    }
                     dr[c1] = cell.Value;
                     c1++;
                 }
@@ -150,7 +158,6 @@ public class AddEditMappingRuleCommandHandler : IRequestHandler<AddEditMappingRu
         if (dt.Rows.Count > 0) {
             foreach (DataRow row in dt.Rows)
             {
-                var fieldcount = dt.Columns.Count;
                 switch (fieldcount)
                 {
                     case 2:
