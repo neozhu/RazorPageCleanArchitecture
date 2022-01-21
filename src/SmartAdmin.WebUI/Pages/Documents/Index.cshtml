@@ -114,12 +114,12 @@
                         <div class="col-md-12">
                             <label class="form-label" for=""></label>
 
-                            <input type="file" asp-for="UploadedFile" style="display:none" required />
+                            <input type="file" asp-for="DocumentUploadedFile" style="display:none" required />
                             <div class="">
-                                <button name="uploadbutton" type="button" class="btn btn-primary btn-icon waves-effect waves-themed mr-2">
+                                <button name="uploaddocumentbutton" type="button" class="btn btn-primary btn-icon waves-effect waves-themed mr-2">
                                     <i class="fal fa-paperclip"></i>
                                 </button><span class="text-danger">*</span>
-                                <div id="uploadfilename">
+                                <div id="uploaddocumentname">
                                     <div class="alert alert-danger mt-2 mb-2" role="alert">
                                         <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a file"].
                                     </div>
@@ -183,7 +183,7 @@
                 event.stopPropagation();
                 var request = $('#document_form').serialize();
                 var formData = new FormData(form);
-                formData.append("UploadedFile", uploadfileinput.files[0]);
+                formData.append("DocumentUploadedFile", uploaddocumentfileinput.files[0]);
                 axios({
                     url: '@Url.Page("/Documents/Index")',
                     method: 'post',
@@ -200,16 +200,16 @@
             event.preventDefault();
             event.stopPropagation();
         })
-        var uploadfilename = document.querySelector("#uploadfilename");
-        var uploadbutton = document.querySelector("button[name='uploadbutton']");
-        var uploadfileinput = document.getElementById("UploadedFile");
+        var uploaddocumentname = document.querySelector("#uploaddocumentname");
+        var uploaddocumentbutton = document.querySelector("button[name='uploaddocumentbutton']");
+        var uploaddocumentfileinput = document.getElementById("DocumentUploadedFile");
         var savebutton = document.querySelector("button[name='savebutton']");
-        uploadbutton.addEventListener('click', (e) => {
-            uploadfileinput.click();
+        uploaddocumentbutton.addEventListener('click', (e) => {
+            uploaddocumentfileinput.click();
         })
-        uploadfileinput.onchange = () => {
-            fileName = uploadfileinput.value.split('\\').pop();
-            uploadfilename.innerHTML = `
+        uploaddocumentfileinput.onchange = () => {
+            fileName = uploaddocumentfileinput.value.split('\\').pop();
+            uploaddocumentname.innerHTML = `
               <div class="alert alert-info alert-dismissible fadeup show mb-2 mt-2" role="alert">
                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                          <span aria-hidden="true"><i class="@(Settings.Theme.IconPrefix) fa-times"></i></span>
@@ -225,8 +225,8 @@
              </div>
         `
             savebutton.disabled = false;
-            $('#uploadfilename .alert').on('closed.bs.alert', (e) => {
-                uploadfileinput.value = null;
+            $('#uploaddocumentname .alert').on('closed.bs.alert', (e) => {
+                uploaddocumentfileinput.value = null;
                 savebutton.disabled = true;
             })
         };
@@ -304,16 +304,16 @@
         $(() => {
             initdatagrid();
         })
-        var popupmodal = (document) => {
+        var popupmodal = (item) => {
             $('#document_modal').modal('toggle');
             $('#document_modal .modal-title').html('@_localizer["Add Document"]');
             $('#document_form').clearForm();
             $('#document_form')[0].reset();
-            if (document) {
-                uploadbutton.disabled = true;
-                uploadfileinput.required = false;
+            if (item) {
+                uploaddocumentbutton.disabled = true;
+                uploaddocumentfileinput.required = false;
                 $('#document_modal .modal-title').html('@_localizer["Edit Document"]');
-                uploadfilename.innerHTML = `
+                uploaddocumentname.innerHTML = `
                   <div class="alert alert-info alert-dismissible fadeup show mb-2 mt-2" role="alert">
                          <div class="d-flex align-items-center">
 							<div class="alert-icon">
@@ -325,7 +325,7 @@
 					</div>
                 </div>
                 `
-                $('#document_form').jsonToForm(document, {
+                $('#document_form').jsonToForm(item, {
                     IsPublic: function (value) {
                         if (value == true) {
                             $('#document_form [name*="IsPublic"]').prop('checked', true);
@@ -335,10 +335,10 @@
                     }
                 })
             } else {
-                uploadbutton.disabled = false;
-                uploadfileinput.required = true;
+                uploaddocumentbutton.disabled = false;
+                uploaddocumentfileinput.required = true;
                 $('#document_form #Input_Id').val(0);
-                uploadfilename.innerHTML =`<div class="alert alert-danger mt-2 mb-2" role="alert">
+                uploaddocumentname.innerHTML =`<div class="alert alert-danger mt-2 mb-2" role="alert">
                                         <i class="fal fa-exclamation-triangle mr-2"></i>   @_localizer["Please upload a file"].
                              </div>`
             }
