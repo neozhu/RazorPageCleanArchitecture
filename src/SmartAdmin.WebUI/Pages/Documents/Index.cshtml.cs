@@ -20,7 +20,7 @@ namespace SmartAdmin.WebUI.Pages.Documents
         [BindProperty]
         public AddEditDocumentCommand Input { get; set; }
         [BindProperty]
-        public IFormFile UploadedFile { get; set; }
+        public IFormFile DocumentUploadedFile { get; set; }
         public SelectList DocumentTypes { get; set; }
 
         private readonly ISender _mediator;
@@ -49,13 +49,13 @@ namespace SmartAdmin.WebUI.Pages.Documents
         public async Task<IActionResult> OnPostAsync()
         {
 
-            if (UploadedFile != null)
+            if (DocumentUploadedFile != null)
             {
                 Input.UploadRequest = new  UploadRequest();
-                Input.UploadRequest.FileName = UploadedFile.FileName;
+                Input.UploadRequest.FileName = DocumentUploadedFile.FileName;
                 Input.UploadRequest.UploadType = CleanArchitecture.Razor.Domain.Enums.UploadType.Document;
                 var stream = new MemoryStream();
-                UploadedFile.CopyTo(stream);
+                DocumentUploadedFile.CopyTo(stream);
                 Input.UploadRequest.Data = stream.ToArray();
             }
             var result = await _mediator.Send(Input);
