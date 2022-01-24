@@ -433,8 +433,17 @@
                 filterRules:[],
                 pageList: [10, 15, 30, 50, 100, 1000],
                 onBeforeLoad: function () {
-                    editIndex = undefined;
-                    $('#deletebutton').prop('disabled', true);
+                    
+                    if (onEndEditing() && $(this).datagrid("getChanges").length) {
+                        bootbox.alert({
+                                message: "@_localizer["There are unsaved changes data, please save it before continuing!"]",
+                         });
+                         return false;
+                    } else {
+                      editIndex = undefined;
+                      $('#deletebutton').prop('disabled', true);
+                      return true;
+                    }
                 },
                 onCheckAll: function (rows) {
                     const checked = $(this).datagrid('getChecked').length > 0;

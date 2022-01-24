@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Razor.Application.FieldMappingValues.DTOs;
+using System.Linq.Dynamic.Core;
 
 namespace CleanArchitecture.Razor.Application.FieldMappingValues.Commands.AcceptChanges;
 
@@ -23,12 +24,29 @@ public class AcceptChangesFieldMappingValuesCommandHandler : IRequestHandler<Acc
         _context = context;
         _mapper = mapper;
     }
+
+    private string concatErrorMessage(MappingRule rule, FieldMappingValueDto dto)
+    {
+        var error = $"{rule.LegacyField1}: {(string.IsNullOrWhiteSpace(dto.Legacy1)?"Blank":dto.Legacy1)}";
+        if (!string.IsNullOrEmpty(rule.LegacyField2))
+        {
+            error += $", {rule.LegacyField2}: {(string.IsNullOrWhiteSpace(dto.Legacy2) ? "Blank" : dto.Legacy2)}";
+        }
+        if (!string.IsNullOrEmpty(rule.LegacyField3))
+        {
+            error += $", {rule.LegacyField3}: {(string.IsNullOrWhiteSpace(dto.Legacy3) ? "Blank" : dto.Legacy3)}";
+        }
+        error += " already exists.";
+        return error;
+    }
+
     public async Task<Result> Handle(AcceptChangesFieldMappingValuesCommand request, CancellationToken cancellationToken)
     {
         var array_id = request.Items.Select(x => x.MappingRuleId).Distinct().ToArray();
         var isexists = false;
         foreach (var item in request.Items.DistinctBy(x => new {x.Legacy1,x.Legacy2,x.Legacy3,x.NewValue }))
         {
+            var rule = await _context.MappingRules.FirstAsync(x => x.Id == item.MappingRuleId);
             switch (item.TrackingState)
             {
                 case TrackingState.Added:
@@ -44,7 +62,7 @@ public class AcceptChangesFieldMappingValuesCommandHandler : IRequestHandler<Acc
                     }
                     else
                     {
-                        throw new InvalidOperationException($"Legacy1:{(string.IsNullOrWhiteSpace(item.Legacy1) ? "Blank":item.Legacy1)},Legacy2:{(string.IsNullOrWhiteSpace(item.Legacy2) ? "Blank" : item.Legacy2)} and Legacy3:{(string.IsNullOrWhiteSpace(item.Legacy3) ? "Blank" : item.Legacy3)} have existed.");
+                        throw new InvalidOperationException(concatErrorMessage(rule,item));
                     }
                     break;
                 case TrackingState.Deleted:
@@ -52,7 +70,7 @@ public class AcceptChangesFieldMappingValuesCommandHandler : IRequestHandler<Acc
                     _context.FieldMappingValues.Remove(delitem);
                     break;
                 case TrackingState.Modified:
-                    isexists = await _context.FieldMappingValues.AnyAsync(x => x.MappingRuleId == item.MappingRuleId &&
+                    isexists = await _context.FieldMappingValues.AnyAsync(x => x.MappingRuleId == item.MappingRuleId && x.Id != item.Id &&
                                                                               (x.Legacy1 == item.Legacy1 || (string.IsNullOrWhiteSpace(item.Legacy1) && string.IsNullOrEmpty(x.Legacy1))) &&
                                                                               (x.Legacy2 == item.Legacy2 || (string.IsNullOrWhiteSpace(item.Legacy2) && string.IsNullOrEmpty(x.Legacy2))) &&
                                                                               (x.Legacy3 == item.Legacy3 || (string.IsNullOrWhiteSpace(item.Legacy3) && string.IsNullOrEmpty(x.Legacy3)))
@@ -60,7 +78,7 @@ public class AcceptChangesFieldMappingValuesCommandHandler : IRequestHandler<Acc
                     if (isexists)
                     {
 
-                        throw new InvalidOperationException($"Legacy1:{(string.IsNullOrWhiteSpace(item.Legacy1) ? "Blank" : item.Legacy1)},Legacy2:{(string.IsNullOrWhiteSpace(item.Legacy2) ? "Blank" : item.Legacy2)} and Legacy3:{(string.IsNullOrWhiteSpace(item.Legacy3) ? "Blank" : item.Legacy3)} have existed.");
+                        throw new InvalidOperationException(concatErrorMessage(rule, item));
                     }
                     var edititem = await _context.FieldMappingValues.FindAsync(new object[] { item.Id }, cancellationToken);
                     edititem = _mapper.Map(item, edititem);
