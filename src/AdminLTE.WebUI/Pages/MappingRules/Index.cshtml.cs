@@ -23,6 +23,8 @@ using CleanArchitecture.Razor.Application.MappingRules.Commands.ChangeStatus;
 using CleanArchitecture.Razor.Application.ResultMappings.DTOs;
 using CleanArchitecture.Razor.Application.MappingRules.Queries.GetAll;
 using CleanArchitecture.Razor.Application.FieldMappingValues.Commands.Delete;
+using CleanArchitecture.Razor.Application.Common.Interfaces.ToDo;
+using CleanArchitecture.Razor.Application.Common.Interfaces.ToDo.DTOs;
 
 namespace AdminLTE.WebUI.Pages.MappingRules
 {
@@ -46,17 +48,20 @@ namespace AdminLTE.WebUI.Pages.MappingRules
         public SelectList MigrationProjects { get; set; }
         public SelectList DataElements { get; set; }
 
+        private readonly IToDoService _toDo;
         private readonly ICurrentUserService _currentUserService;
         private readonly ISender _mediator;
         private readonly IStringLocalizer<IndexModel> _localizer;
         public  IEnumerable<ObjectFieldDto> FieldList { get; set; }
         public List<StatusSummarizingDto> Summarizing { get; set; }
         public IndexModel(
+            IToDoService toDo,
             ICurrentUserService currentUserService,
                 ISender mediator,
             IStringLocalizer<IndexModel> localizer
             )
         {
+            _toDo = toDo;
             _currentUserService = currentUserService;
             _mediator = mediator;
             _localizer = localizer;
@@ -196,6 +201,27 @@ namespace AdminLTE.WebUI.Pages.MappingRules
         {
             var result = await _mediator.Send(command);
             return File(result, "application/zip", $"valuemapping_{DateTime.Now.ToString("MMddHH")}.zip");
+        }
+
+        public async Task<IActionResult> OnGetToDoList(int mappringruleid)
+        {
+            var result = await _toDo.GetValueMappingToDoList(mappringruleid, CancellationToken.None);
+            return new JsonResult(result);
+        }
+        public async Task<IActionResult> OnPostAddToDoItem([FromBody] RequestMappingRuleToDoItem item)
+        {
+            var result = await _toDo.AddItem(item, CancellationToken.None);
+            return new JsonResult(result);
+        }
+        public async Task<IActionResult> OnGetDeleteToDoItem( int id)
+        {
+            var result = await _toDo.Delete(id, CancellationToken.None);
+            return new JsonResult(result);
+        }
+        public async Task<IActionResult> OnGetDoneToDoItem(int id)
+        {
+            var result = await _toDo.Done(id, CancellationToken.None);
+            return new JsonResult(result);
         }
     }
 }

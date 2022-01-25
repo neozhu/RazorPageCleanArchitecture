@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Razor.Application.Common.Behaviours;
+using CleanArchitecture.Razor.Application.Common.Interfaces.ToDo;
+using CleanArchitecture.Razor.Application.Common.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -21,6 +23,8 @@ public static class DependencyInjection
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheInvalidationBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
         services.AddLazyCache();
+
+        services.AddTransient<IToDoService, ToDoService>();
         return services;
     }
     

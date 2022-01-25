@@ -20,6 +20,6 @@ public interface IApplicationDbContext
     DbSet<FieldMappingValue> FieldMappingValues { get; set; }
     DbSet<ResultMapping> ResultMappings { get; set; }
     DbSet<ResultMappingData> ResultMappingDatas { get; set; }
-
+    DbSet<ToDoItem> ToDoItems { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

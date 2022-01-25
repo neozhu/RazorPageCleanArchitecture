@@ -32,6 +32,7 @@
     <Folder Include="wwwroot\lib\slimScroll\" />
     <Folder Include="wwwroot\plugins\bootbox.js\" />
     <Folder Include="wwwroot\plugins\g2plot\" />
+    <Folder Include="wwwroot\plugins\Sortable\" />
   </ItemGroup>
 
 </Project>

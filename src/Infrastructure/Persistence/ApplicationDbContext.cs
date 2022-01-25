@@ -51,6 +51,7 @@ public class ApplicationDbContext : IdentityDbContext<
     public DbSet<FieldMappingValue> FieldMappingValues { get; set; }
     public DbSet<ResultMapping> ResultMappings { get; set; }
     public DbSet<ResultMappingData> ResultMappingDatas { get; set; }
+    public DbSet<ToDoItem> ToDoItems { get; set; }
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
         var auditEntries = OnBeforeSaveChanges(_currentUserService.UserId);

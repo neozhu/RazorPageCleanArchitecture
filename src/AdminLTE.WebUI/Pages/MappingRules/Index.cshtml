@@ -50,6 +50,9 @@
         .select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice {
             margin-top: calc(0.375rem + 1px) !important;
         }
+        .direct-chat-messages{
+            height:150px !important;
+        }
 </style>
 }
 <div id="js-page-content-demopanels" class="card mb-g">
@@ -276,15 +279,50 @@
                            style="display:none">
                 </div>
                 <div class="d-flex flex-row mt-2 mb-2">
-                    <div class="flex-fill">
+                    <div class="flex-fill" id="table-container">
                     </div>
                 </div>
+                <div class="d-flex justify-content-end mt-2 mb-2">
+                    <div class="">
+                        <button type="button" id="savedatabutton" class="btn   btn-primary mr-1">@_localizer["Save"] </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="flex-fill">
+                        <!-- TO DO List -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="ion ion-clipboard mr-1"></i>
+                                    To Do List
+                                </h3>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="savedatabutton" class="btn   btn-primary mr-1">@_localizer["Save"] </button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">@_localizer["Close"]</button>
+                                <div class="card-tools">
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <div class="direct-chat-messages">
+                                <ul class="todo-list" data-widget="todo-list" >
+                                </ul>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer clearfix">
+       
+                                    <div class="input-group">
+                                        <input type="text" name="message" id="todoitem" placeholder="Task ..." class="form-control">
+                                        <span class="input-group-append">
+                                            <button type="button" onclick="addtodoItem()" class="btn btn-primary">Add Task</button>
+                                        </span>
+                                    </div>
+                              
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
             </div>
         </div>
     </div>
@@ -313,8 +351,88 @@
 <script src="~/lib/easyui/plugins/datagrid-detailview.js"></script>
 <!-- Select2 -->
 <script src="~/plugins/select2/js/select2.full.min.js"></script>
-
+<script src="~/plugins/Sortable/Sortable.min.js"></script>
+<script src="~/plugins/timeago/timeago.min.js"></script>
 <script>
+    var createtodolist=()=>{
+        var el=document.querySelector('.todo-list');
+        var sortable = new Sortable(el, {
+            });
+        document.querySelector('#todoitem').addEventListener('keyup', e => {
+           e.preventDefault();
+           if (e.which === 13) {
+               addtodoItem();
+           }
+        });
+    }
+    createtodolist();
+    var addtodoItem = () => {
+        var item=$('#todoitem').val();
+        var todolist=$('.todo-list');
+        var count=$('.todo-list > li').length;
+        const url='@Url.Page("/MappingRules/Index")?handler=AddToDoItem';
+        if(item.length>0){
+            axios.post(url,{Title:item,MappingRuleId:currentMappingRuleItem.Id}).then(res=>{
+                 todolist.prepend(`<li>
+                                        <span class="handle">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </span>
+                                        <div class="icheck-primary d-inline ml-2">
+                                            <input onchange="onchangetodo(this,${res.data.Id})" type="checkbox" value="" name="todo2" id="todoCheck1-${count+1}" >
+                                            <label for="todoCheck1-${count+1}"></label>
+                                        </div>
+                                        <span class="text">${item}</span>
+                                        <small class="badge badge-info"><i class="far fa-clock"></i> ${timeago.format(res.data.CreatedBy,'mini')} </small>
+                                        <small class="badge badge-success"><i class="far fa-user"></i> ${res.data.CreatedBy} </small>
+                                        <div class="tools" onclick="deletetodoItem(this,${res.data.Id})">
+                                            <i class="fas fa-trash"></i>
+                                        </div>
+                             </li>`);
+                 $('.direct-chat-messages').scrollTop(0);
+                $('#todoitem').val('');
+            })
+           
+        }
+    }
+    var onchangetodo = (e,id) =>{
+         const url='@Url.Page("/MappingRules/Index")?handler=DoneToDoItem&id=' + id;
+         axios.get(url).then(result =>{});
+
+    }
+    var deletetodoItem = (e,id) => {
+        const url='@Url.Page("/MappingRules/Index")?handler=DeleteToDoItem&id=' + id;
+        axios.get(url).then(result =>{
+            $(e).closest ('li').remove();
+        });
+    }
+    var loadtodolist = (id) => {
+       const url='@Url.Page("/MappingRules/Index")?handler=ToDoList&mappringruleid=' + currentMappingRuleItem.Id;
+       const todolist=$('.todo-list');
+       todolist.empty();
+       axios.get(url).then(result =>{
+          result.data.map(item=>{
+              todolist.append(`<li class="${item.IsDone?'done':''}">
+                                        <span class="handle">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </span>
+                                        <div class="icheck-primary d-inline ml-2">
+                                            <input onchange="onchangetodo(this,${item.Id})" type="checkbox" value="" ${item.IsDone?'checked':''} name="todo-${item.Id}" id="todoCheck-${item.Id}" >
+                                            <label for="todoCheck-${item.Id}"></label>
+                                        </div>
+                                        <span class="text">${item.Title}</span>
+                                        <small class="badge badge-info"><i class="far fa-clock"></i> ${timeago.format(item.Created, 'twitter-now')} </small>
+                                        <small class="badge badge-success"><i class="far fa-user"></i> ${item.CreatedBy} </small>
+                                        <div class="tools" onclick="deletetodoItem(this,${item.Id})">
+                                            <i class="fas fa-trash"></i>
+                                        </div>
+                             </li>`);
+          })
+       })
+    }
+
+
     var uploaddatainput = document.getElementById("uploaddatafile");
     const rightmodalcontent= document.querySelector("#mappingvalue-modal-right-lg > div > .modal-content");
     const rightoverlay = document.querySelector("#mappingvalue-modal-right-lg > div > .modal-content > .overlay");
@@ -373,7 +491,7 @@
     })
      var $fieldmappingvalues_dg ={};
       $('.default-example-modal-right-lg').on('shown.bs.modal', function () {
-          $('.default-example-modal-right-lg .flex-fill').html('<table id="fieldmappingvalues_dg"></table>')
+          $('.default-example-modal-right-lg #table-container').html('<table id="fieldmappingvalues_dg"></table>')
       });
       var confirmed=false;
      $('.default-example-modal-right-lg').on('hide.bs.modal', function () {
@@ -399,12 +517,12 @@
                                  $(".default-example-modal-right-lg").modal("hide");
                              }
                              ,100)
-                            
+
                         }
                      }
-                   
+
                    });
-             
+
            return false;
          } else {
            return true;
@@ -416,9 +534,10 @@
      })
     $('.default-example-modal-right-lg').on('shown.bs.modal', function () {
          confirmed=false;
+         loadtodolist();
          const suburl='@Url.Page("/MappingRules/Index")?handler=FieldMappingValues&MappingRuleId=' + currentMappingRuleItem.Id;
          $fieldmappingvalues_dg=$('#fieldmappingvalues_dg').datagrid({
-                height: 700,
+                height: 530,
                 method: 'GET',
                 rownumbers: false,
                 singleSelect: true,
@@ -429,11 +548,11 @@
                 remoteFilter: true,
                 sortName: 'Id',
                 sortOrder:'desc',
-                pageSize: 15,
-                filterRules:[],
+                pageSize: 10,
+                filterRules: [],
                 pageList: [10, 15, 30, 50, 100, 1000],
                 onBeforeLoad: function () {
-                    
+
                     if (onEndEditing() && $(this).datagrid("getChanges").length) {
                         bootbox.alert({
                                 message: "@_localizer["There are unsaved changes data, please save it before continuing!"]",
@@ -470,7 +589,7 @@
                     onEndEdit(index,row)
                 },
                 onLoadSuccess:function() {
-                        const td= $('.flex-fill tr.datagrid-filter-row > td').eq(0);
+                        const td= $('#table-container tr.datagrid-filter-row > td').eq(0);
                        td.html('<i class="ml-2 fal fa-filter"></i>')
                     },
                 columns: [getcolumns()]
