@@ -1,11 +1,15 @@
 @model AdminLTE.WebUI.Pages.Shared.Components.LanguageSelector.DefaultModel
-<div class="dropdown-menu">
+<li class="nav-item dropdown">
+    <a class="nav-link" data-toggle="dropdown" href="#" role="button">
+        <i class="fas fa-language"></i>
+    </a>
+    <div class="dropdown-menu">
         @foreach (var culture in Model.SupportedCultures)
         {
-           <form method="GET">
-             <input type="hidden" name="culture" value="@culture.Name" />
-             <a href="javascript:void()" onclick="this.parentElement.submit();" class="dropdown-item" >@culture.DisplayName</a>
-           </form>
+            <form method="GET">
+                <input type="hidden" name="culture" value="@culture.Name" />
+                <a href="javascript:void()" onclick="this.parentElement.submit();" class="dropdown-item">@culture.DisplayName</a>
+            </form>
         }
-</div>
-
+    </div>
+</li>

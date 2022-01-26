@@ -30,6 +30,7 @@ public class ToDoService : IToDoService
         };
         await _context.ToDoItems.AddRangeAsync(item);
         await _context.SaveChangesAsync(cancellationToken);
+        _logger.LogInformation($"Add Value Mapping Comments: {dto.Title}, {dto.MappingRuleId}");
         return new ToDoItemDto() { Created = item.Created, CreatedBy = item.CreatedBy, Id = item.Id, IsDone = item.IsDone, Title = item.Title };
     }
 
@@ -42,6 +43,7 @@ public class ToDoService : IToDoService
         };
         await _context.ToDoItems.AddRangeAsync(item);
         await _context.SaveChangesAsync(cancellationToken);
+        _logger.LogInformation($"Add Result Mapping Comments: {dto.Title}, {dto.ResultMappingId}");
         return new ToDoItemDto() { Created = item.Created, CreatedBy = item.CreatedBy, Id = item.Id, IsDone = item.IsDone, Title = item.Title };
     }
 

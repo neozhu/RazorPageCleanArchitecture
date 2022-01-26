@@ -295,7 +295,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">
                                     <i class="ion ion-clipboard mr-1"></i>
-                                    To Do List
+                                    @_localizer["Comments"]
                                 </h3>
 
                                 <div class="card-tools">
@@ -312,9 +312,9 @@
                             <div class="card-footer clearfix">
        
                                     <div class="input-group">
-                                        <input type="text" name="message" id="todoitem" placeholder="Task ..." class="form-control">
+                                        <input type="text" name="message" id="todoitem" placeholder="@_localizer["Message ..."]" class="form-control">
                                         <span class="input-group-append">
-                                            <button type="button" onclick="addtodoItem()" class="btn btn-primary">Add Task</button>
+                                            <button type="button" onclick="addtodoItem()" class="btn btn-primary">@_localizer["Add"]</button>
                                         </span>
                                     </div>
                               
@@ -354,6 +354,19 @@
 <script src="~/plugins/Sortable/Sortable.min.js"></script>
 <script src="~/plugins/timeago/timeago.min.js"></script>
 <script>
+    $(()=>{
+        $('[data-widget="notification"]').on('click',function(e){
+            const rulename = $(e.currentTarget).attr('data-notification-name');
+            $dg.datagrid('addFilterRule', {
+                               field: 'Name',
+                               op: 'equal',
+                               value: rulename
+                             });
+                             $dg.datagrid('doFilter');
+       })
+    })
+    
+
     var createtodolist=()=>{
         var el=document.querySelector('.todo-list');
         var sortable = new Sortable(el, {

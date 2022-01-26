@@ -1,0 +1,30 @@
+@model AdminLTE.WebUI.Pages.Shared.Components.Notification.DefaultModel
+<li class="nav-item dropdown mr-2">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-comments"></i>
+          @if (Model.Count > 0)
+          {
+            <span class="badge badge-danger navbar-badge">@Model.Count</span>
+          }
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        @foreach(var item in Model.List)
+        {
+            <a href="#" class="dropdown-item" data-widget="notification" data-notification-name="@item.Name">
+            <!-- Message Start -->
+            <div class="media">
+              <div class="media-body">
+                <p class="text-sm" title="@item.Name" style="font-weight:600;text-overflow:ellipsis !important">
+                  @item.Name
+                </p>
+                <p class="text-sm" title="@item.Title" >@item.Title</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> @item.TimeAgo <i class="far fa-user ml-1 mr-1"></i> @item.CreatedBy</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+        }
+        </div>
+      </li>
+

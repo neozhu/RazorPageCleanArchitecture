@@ -7,36 +7,34 @@
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-       
-         <vc:project-selector />
-   
+
+        <vc:project-selector />
+
     </ul>
-    
+
 
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        
-        <!-- Notifications Dropdown Menu -->
-        @*<li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#" role="button">
-                <i class="fas fa-language"></i>
-            </a>
-            <vc:language-selector />
 
-        </li>*@
-        @if(Context.Request.Host.Host!="kunx0590" && Context.Request.Host.Host!="kunx0590.euro1.voith.net") {
-           <li class="nav-item">
-            <a class="nav-link"  href="#" role="button"><div class="text-danger"><strong>TEST @(Settings.Version)</strong></div></a>
-           </li>
+        <!-- multi-language Dropdown Menu -->
+        @*<vc:language-selector />*@
+        <!-- End -->
+      
+        @if (Context.Request.Host.Host != "kunx0590" && Context.Request.Host.Host != "kunx0590.euro1.voith.net")
+        {
+            <li class="nav-item">
+                <a class="nav-link" href="#" role="button"><div class="text-danger"><strong>TEST @(Settings.Version)</strong></div></a>
+            </li>
         }
-       <li class="nav-item" style="border-left: 1px solid #DDDDDD;">
-        <a class="nav-link "  href="#" role="button">
-         <div style="font-weight:900;font-size: large; ">
-            <span class="brand-text text-primary">@(Settings.Company)</span>
-        </div>
-        </a>
-      </li>
+        <vc:Notification />
+        <li class="nav-item" style="border-left: 1px solid #DDDDDD;">
+            <a class="nav-link " href="#" role="button">
+                <div style="font-weight:900;font-size: large; ">
+                    <span class="brand-text text-primary">@(Settings.Company)</span>
+                </div>
+            </a>
+        </li>
     </ul>
 </nav>
 

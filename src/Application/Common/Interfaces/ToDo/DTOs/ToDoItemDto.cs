@@ -13,6 +13,8 @@ public class ToDoItemDto
     public bool IsDone { get; set; }
     public DateTime Created { get; set; }
     public string CreatedBy { get; set; }
+    public string Name { get; set; }
+    public string TimeAgo { get; set; }
 }
 
 public class RequestMappingRuleToDoItem
