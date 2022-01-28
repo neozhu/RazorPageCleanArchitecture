@@ -15,6 +15,7 @@ public class ToDoItemDto
     public string CreatedBy { get; set; }
     public string Name { get; set; }
     public string TimeAgo { get; set; }
+    public string Tag { get; set; }
 }
 
 public class RequestMappingRuleToDoItem

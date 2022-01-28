@@ -188,6 +188,24 @@
 <script src="~/plugins/select2/js/select2.full.min.js"></script>
 
 <script type="text/javascript">
+
+    $(()=>{
+        $('[data-widget="notification"]').on('click',function(e){
+            const rulename = $(e.currentTarget).attr('data-notification-r');
+            if(rulename){
+              $dg.datagrid('addFilterRule', {
+                               field: 'Name',
+                               op: 'equal',
+                               value: rulename
+                             });
+                             $dg.datagrid('doFilter');
+            }else{
+                $dg.datagrid('removeFilterRule',  'Name');
+                             $dg.datagrid('doFilter');
+            }
+       })
+    })
+
        var uploadresultmappingbutton = document.querySelector("button[name='uploadresultmappingbutton']");
        var uploadresultmappingfilename = document.querySelector("#uploadresultmappingfilename");
        var resultmappingfileinput = document.getElementById("ResultMappingFile");

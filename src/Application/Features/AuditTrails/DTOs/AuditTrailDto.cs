@@ -28,4 +28,5 @@ public class AuditTrailDto : IMapFrom<AuditTrail>
     public string NewValues { get; set; }
     public string AffectedColumns { get; set; }
     public string PrimaryKey { get; set; }
+
 }

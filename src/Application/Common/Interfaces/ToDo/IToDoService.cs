@@ -9,6 +9,7 @@ namespace CleanArchitecture.Razor.Application.Common.Interfaces.ToDo;
 
 public interface IToDoService:IService
 {
+    Task<IEnumerable<ToDoItemDto>> GetToDoList(CancellationToken cancellationToken);
     Task<IEnumerable<ToDoItemDto>> GetValueMappingToDoList(int mappingruleid, CancellationToken cancellationToken);
     Task<IEnumerable<ToDoItemDto>> GetResultMappingToDoList(int resultmappingid, CancellationToken cancellationToken);
     Task<ToDoItemDto> AddItem(RequestMappingRuleToDoItem item, CancellationToken cancellationToken);

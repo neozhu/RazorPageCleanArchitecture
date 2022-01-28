@@ -356,13 +356,18 @@
 <script>
     $(()=>{
         $('[data-widget="notification"]').on('click',function(e){
-            const rulename = $(e.currentTarget).attr('data-notification-name');
-            $dg.datagrid('addFilterRule', {
+            const rulename = $(e.currentTarget).attr('data-notification-m');
+            if(rulename){
+              $dg.datagrid('addFilterRule', {
                                field: 'Name',
                                op: 'equal',
                                value: rulename
                              });
                              $dg.datagrid('doFilter');
+            }else{
+                $dg.datagrid('removeFilterRule',  'Name');
+                             $dg.datagrid('doFilter');
+            }
        })
     })
     

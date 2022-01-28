@@ -67,9 +67,34 @@ public class ScopedResultMappingStatusCommandHandler :
         }
         _context.ResultMappings.Update(mapping);
         await _context.SaveChangesAsync(cancellationToken);
-
+        await CreateToDoItemStatus(mapping.Id,cancellationToken);
         _logger.LogInformation("select/unselect the verify status:{@Request}", request);
         return Result.Success();
 
+    }
+
+
+    private async Task CreateToDoItemStatus(int resultid, CancellationToken cancellationToken)
+    {
+        var userId = _userService.UserId;
+        var todoitem = await _context.ToDoItems.Where(x => x.ResultMappingId == resultid && x.CreatedBy == userId && x.IsDone==false).FirstOrDefaultAsync();
+        var scount = await _context.ResultMappingDatas.CountAsync(x => x.ResultMappingId == resultid && x.Owner == userId && x.Verify == "Selected");
+      
+        if (scount > 0 && todoitem == null)
+        {
+            todoitem = new ToDoItem()
+            {
+                IsDone=false,
+                ResultMappingId = resultid,
+                Title= "data verify in progress.",
+            };
+            await _context.ToDoItems.AddAsync(todoitem, cancellationToken);
+            _logger.LogInformation($"add the new verify task");
+        }else if(scount==0 && todoitem != null)
+        {
+            _context.ToDoItems.Remove(todoitem);
+            _logger.LogInformation($"removed one verify task, {todoitem.Id}");
+        }
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }
