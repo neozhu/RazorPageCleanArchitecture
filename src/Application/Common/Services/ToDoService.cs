@@ -32,8 +32,9 @@ public class ToDoService : IToDoService
             MappingRuleId = dto.MappingRuleId
         };
         await _context.ToDoItems.AddRangeAsync(item);
+        var mappingrule = await _context.MappingRules.FindAsync(dto.MappingRuleId);
         await _context.SaveChangesAsync(cancellationToken);
-        _logger.LogInformation($"Add Value Mapping Comments: {dto.Title}, {dto.MappingRuleId}");
+        _logger.LogInformation($"Add Value Mapping Comments: {dto.Title}, {mappingrule?.Name}");
         return new ToDoItemDto() { Created = item.Created, CreatedBy = item.CreatedBy, Id = item.Id, IsDone = item.IsDone, Title = item.Title };
     }
 
@@ -45,8 +46,9 @@ public class ToDoService : IToDoService
             ResultMappingId = dto.ResultMappingId
         };
         await _context.ToDoItems.AddRangeAsync(item);
+        var resultmapping = await _context.MappingRules.FindAsync(dto.ResultMappingId);
         await _context.SaveChangesAsync(cancellationToken);
-        _logger.LogInformation($"Add Result Mapping Comments: {dto.Title}, {dto.ResultMappingId}");
+        _logger.LogInformation($"Add Result Mapping Comments: {dto.Title}, {resultmapping?.Name}");
         return new ToDoItemDto() { Created = item.Created, CreatedBy = item.CreatedBy, Id = item.Id, IsDone = item.IsDone, Title = item.Title };
     }
 
@@ -92,7 +94,7 @@ public class ToDoService : IToDoService
         var currentuser = _currentUser.UserId;
         var data = await _context.ToDoItems.Where(x =>
          (
-            (x.MappingRuleId!=null && (x.MappingRule.CreatedBy == currentuser || x.MappingRule.LastModifiedBy == currentuser))
+            (x.MappingRuleId!=null && (x.MappingRule.CreatedBy == currentuser || x.MappingRule.LastModifiedBy== currentuser))
          || (x.ResultMappingId!=null && (x.ResultMapping.CreatedBy == currentuser || x.LastModifiedBy==currentuser))
          )
          && x.IsDone == false)
