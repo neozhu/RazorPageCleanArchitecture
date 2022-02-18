@@ -12,7 +12,7 @@ public static class KeyValueCacheKey
     }
     static KeyValueCacheKey()
     {
-        ResetCacheToken = new CancellationTokenSource();
+        ResetCacheToken = new CancellationTokenSource(new TimeSpan(1, 0, 0));
     }
     public static CancellationTokenSource ResetCacheToken { get; private set; }
     public static MemoryCacheEntryOptions MemoryCacheEntryOptions => new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(ResetCacheToken.Token));
