@@ -12,7 +12,7 @@ public class SaveChangedKeyValuesCommand : IRequest<Result>, ICacheInvalidator
 
     public string CacheKey => KeyValueCacheKey.GetAllCacheKey;
 
-    public CancellationTokenSource ResetCacheToken => KeyValueCacheKey.ResetCacheToken;
+    public CancellationTokenSource ResetCacheToken => KeyValueCacheKey.SharedExpiryTokenSource();
 }
 
 public class SaveChangedKeyValuesCommandHandler : IRequestHandler<SaveChangedKeyValuesCommand, Result>

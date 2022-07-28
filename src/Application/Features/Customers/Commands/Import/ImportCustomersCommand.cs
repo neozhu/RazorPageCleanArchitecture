@@ -13,7 +13,7 @@ public class ImportCustomersCommand : IRequest<Result>, ICacheInvalidator
     public byte[] Data { get; set; }
     public string CacheKey => CustomerCacheKey.GetAllCacheKey;
 
-    public CancellationTokenSource ResetCacheToken => CustomerCacheKey.ResetCacheToken;
+    public CancellationTokenSource ResetCacheToken => CustomerCacheKey.SharedExpiryTokenSource();
 }
 public class CreateCustomerTemplateCommand : IRequest<byte[]>
 {

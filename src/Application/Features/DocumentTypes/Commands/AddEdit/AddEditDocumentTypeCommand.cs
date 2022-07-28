@@ -10,7 +10,7 @@ public class AddEditDocumentTypeCommand : DocumentTypeDto, IRequest<Result<int>>
 {
     public string CacheKey => string.Empty;
 
-    public CancellationTokenSource ResetCacheToken => DocumentTypeCacheKey.ResetCacheToken;
+    public CancellationTokenSource ResetCacheToken => DocumentTypeCacheKey.SharedExpiryTokenSource();
 }
 
 public class AddEditDocumentTypeCommandHandler : IRequestHandler<AddEditDocumentTypeCommand, Result<int>>

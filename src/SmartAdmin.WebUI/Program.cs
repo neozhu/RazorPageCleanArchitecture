@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
-builder.WebHost.UseSerilog((context, configuration) =>
+builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration)
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
                 .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Error)
@@ -33,6 +33,25 @@ builder.Services.AddInfrastructure(builder.Configuration)
    
 
 var app = builder.Build();
+
+
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    app.UseMigrationsEndPoint();
+}
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    // app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+
+app.UseInfrastructure(builder.Configuration);
 
 using (var scope = app.Services.CreateScope())
 {
@@ -62,21 +81,4 @@ using (var scope = app.Services.CreateScope())
         throw;
     }
 }
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-    app.UseMigrationsEndPoint();
-}
-else
-{
-    app.UseExceptionHandler("/Home/Error");
-    // app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-
-
-app.UseInfrastructure(builder.Configuration);
 app.Run();

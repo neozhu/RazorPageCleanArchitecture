@@ -10,14 +10,14 @@ public class DeleteCustomerCommand : IRequest<Result>, ICacheInvalidator
     public int Id { get; set; }
     public string CacheKey => CustomerCacheKey.GetAllCacheKey;
 
-    public CancellationTokenSource ResetCacheToken => CustomerCacheKey.ResetCacheToken;
+    public CancellationTokenSource ResetCacheToken => CustomerCacheKey.SharedExpiryTokenSource();
 }
 public class DeleteCheckedCustomersCommand : IRequest<Result>, ICacheInvalidator
 {
     public int[] Id { get; set; }
     public string CacheKey => CustomerCacheKey.GetAllCacheKey;
 
-    public CancellationTokenSource ResetCacheToken => CustomerCacheKey.ResetCacheToken;
+    public CancellationTokenSource ResetCacheToken => CustomerCacheKey.SharedExpiryTokenSource();
 }
 
 public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommand, Result>,

@@ -10,7 +10,7 @@ public class AddEditCustomerCommand : CustomerDto, IRequest<Result<int>>, IMapFr
 {
     public string CacheKey => CustomerCacheKey.GetAllCacheKey;
 
-    public CancellationTokenSource ResetCacheToken => CustomerCacheKey.ResetCacheToken;
+    public CancellationTokenSource ResetCacheToken => CustomerCacheKey.SharedExpiryTokenSource();
 }
 
 public class AddEditCustomerCommandHandler : IRequestHandler<AddEditCustomerCommand, Result<int>>
