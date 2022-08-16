@@ -50,7 +50,7 @@ public class AcceptChangesProductsCommand:IRequest<Result>
             }
             
             await _context.SaveChangesAsync(cancellationToken);
-            return Result.Success();
+            return await Result.SuccessAsync();
 
         }
     }

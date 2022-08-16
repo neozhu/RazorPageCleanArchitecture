@@ -35,14 +35,14 @@ public class AddEditDocumentTypeCommandHandler : IRequestHandler<AddEditDocument
             var documentType = await _context.DocumentTypes.FindAsync(new object[] { request.Id }, cancellationToken);
             documentType = _mapper.Map(request, documentType);
             await _context.SaveChangesAsync(cancellationToken);
-            return Result<int>.Success(documentType.Id);
+            return await Result<int>.SuccessAsync(documentType.Id);
         }
         else
         {
             var documentType = _mapper.Map<DocumentType>(request);
             _context.DocumentTypes.Add(documentType);
             await _context.SaveChangesAsync(cancellationToken);
-            return Result<int>.Success(documentType.Id);
+            return await Result<int>.SuccessAsync(documentType.Id);
         }
 
 

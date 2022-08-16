@@ -57,7 +57,7 @@ public class SaveChangedKeyValuesCommandHandler : IRequestHandler<SaveChangedKey
         }
 
         await _context.SaveChangesAsync(cancellationToken);
-        return Result.Success();
+        return await Result.SuccessAsync();
 
     }
 }

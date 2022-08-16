@@ -36,7 +36,7 @@ public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerComman
         var item = await _context.Customers.FindAsync(new object[] { request.Id }, cancellationToken);
         _context.Customers.Remove(item);
         await _context.SaveChangesAsync(cancellationToken);
-        return Result.Success();
+        return await Result.SuccessAsync();
     }
 
     public async Task<Result> Handle(DeleteCheckedCustomersCommand request, CancellationToken cancellationToken)
@@ -47,6 +47,6 @@ public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerComman
             _context.Customers.Remove(item);
         }
         await _context.SaveChangesAsync(cancellationToken);
-        return Result.Success();
+        return await Result.SuccessAsync();
     }
 }

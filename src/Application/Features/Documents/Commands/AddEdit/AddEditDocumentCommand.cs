@@ -41,7 +41,7 @@ public class AddEditDocumentCommandHandler : IRequestHandler<AddEditDocumentComm
             document.Description = request.Description;
             document.IsPublic = request.IsPublic;
             await _context.SaveChangesAsync(cancellationToken);
-            return Result<int>.Success(document.Id);
+            return await Result<int>.SuccessAsync(document.Id);
         }
         else
         {
@@ -52,7 +52,7 @@ public class AddEditDocumentCommandHandler : IRequestHandler<AddEditDocumentComm
             document.DomainEvents.Add(createdevent);
             _context.Documents.Add(document);
             await _context.SaveChangesAsync(cancellationToken);
-            return Result<int>.Success(document.Id);
+            return await Result<int>.SuccessAsync(document.Id);
         }
 
 

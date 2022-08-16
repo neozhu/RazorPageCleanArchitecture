@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Razor.Application.Features.Products.DTOs;
@@ -34,7 +34,7 @@ namespace CleanArchitecture.Razor.Application.Features.Products.Commands.Update;
                 item = _mapper.Map(request, item);
                 await _context.SaveChangesAsync(cancellationToken);
            }
-           return Result.Success();
+           return await Result.SuccessAsync();
         }
     }
 

@@ -28,7 +28,7 @@ public class DeleteKeyValueCommandHandler : IRequestHandler<DeleteKeyValueComman
         var item = await _context.KeyValues.FindAsync(new object[] { request.Id }, cancellationToken);
         _context.KeyValues.Remove(item);
         await _context.SaveChangesAsync(cancellationToken);
-        return Result.Success();
+        return await Result.SuccessAsync();
     }
 
     public async Task<Result> Handle(DeleteCheckedKeyValuesCommand request, CancellationToken cancellationToken)
@@ -39,6 +39,6 @@ public class DeleteKeyValueCommandHandler : IRequestHandler<DeleteKeyValueComman
             _context.KeyValues.Remove(item);
         }
         await _context.SaveChangesAsync(cancellationToken);
-        return Result.Success();
+        return await Result.SuccessAsync();
     }
 }

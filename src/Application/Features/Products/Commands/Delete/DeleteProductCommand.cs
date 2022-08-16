@@ -35,7 +35,7 @@ public class DeleteProductCommand: IRequest<Result>
            var item = await _context.Products.FindAsync(new object[] { request.Id }, cancellationToken);
             _context.Products.Remove(item);
             await _context.SaveChangesAsync(cancellationToken);
-            return Result.Success();
+            return await Result.SuccessAsync();
         }
 
         public async Task<Result> Handle(DeleteCheckedProductsCommand request, CancellationToken cancellationToken)
@@ -47,7 +47,7 @@ public class DeleteProductCommand: IRequest<Result>
                 _context.Products.Remove(item);
             }
             await _context.SaveChangesAsync(cancellationToken);
-            return Result.Success();
+            return await Result.SuccessAsync();
         }
     }
 

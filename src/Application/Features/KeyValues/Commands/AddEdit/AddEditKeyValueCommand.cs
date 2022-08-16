@@ -32,7 +32,7 @@ public class AddEditKeyValueCommandHandler : IRequestHandler<AddEditKeyValueComm
             var keyValue = await _context.KeyValues.FindAsync(new object[] { request.Id }, cancellationToken);
             keyValue = _mapper.Map(request, keyValue);
             await _context.SaveChangesAsync(cancellationToken);
-            return Result<int>.Success(keyValue.Id);
+            return await Result<int>.SuccessAsync(keyValue.Id);
         }
         else
         {
@@ -41,7 +41,7 @@ public class AddEditKeyValueCommandHandler : IRequestHandler<AddEditKeyValueComm
             keyValue.DomainEvents.Add(createevent);
             _context.KeyValues.Add(keyValue);
             await _context.SaveChangesAsync(cancellationToken);
-            return Result<int>.Success(keyValue.Id);
+            return await Result<int>.SuccessAsync(keyValue.Id);
         }
 
 

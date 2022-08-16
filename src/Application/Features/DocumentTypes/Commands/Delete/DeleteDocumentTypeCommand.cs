@@ -38,7 +38,7 @@ public class DeleteDocumentTypeCommandHandler : IRequestHandler<DeleteDocumentTy
         var item = await _context.DocumentTypes.FindAsync(new object[] { request.Id }, cancellationToken);
         _context.DocumentTypes.Remove(item);
         await _context.SaveChangesAsync(cancellationToken);
-        return Result.Success();
+        return await Result.SuccessAsync();
     }
 
     public async Task<Result> Handle(DeleteCheckedDocumentTypesCommand request, CancellationToken cancellationToken)
@@ -49,6 +49,6 @@ public class DeleteDocumentTypeCommandHandler : IRequestHandler<DeleteDocumentTy
             _context.DocumentTypes.Remove(item);
         }
         await _context.SaveChangesAsync(cancellationToken);
-        return Result.Success();
+        return await Result.SuccessAsync();
     }
 }

@@ -34,7 +34,7 @@ public class AddEditCustomerCommandHandler : IRequestHandler<AddEditCustomerComm
             var customer = await _context.Customers.FindAsync(new object[] { request.Id }, cancellationToken);
             customer = _mapper.Map(request, customer);
             await _context.SaveChangesAsync(cancellationToken);
-            return Result<int>.Success(customer.Id);
+            return await Result<int>.SuccessAsync(customer.Id);
         }
         else
         {
@@ -43,7 +43,7 @@ public class AddEditCustomerCommandHandler : IRequestHandler<AddEditCustomerComm
             customer.DomainEvents.Add(createevent);
             _context.Customers.Add(customer);
             await _context.SaveChangesAsync(cancellationToken);
-            return Result<int>.Success(customer.Id);
+            return await Result<int>.SuccessAsync(customer.Id);
         }
 
 
