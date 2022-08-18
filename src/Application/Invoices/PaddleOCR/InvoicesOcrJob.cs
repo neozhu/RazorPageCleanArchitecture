@@ -11,6 +11,7 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Hubs;
@@ -53,13 +54,13 @@ namespace CleanArchitecture.Razor.Application.Invoices.PaddleOCR
             }
 
         }
-        public void Recognition(int id)
+        public async Task Recognition(int id, CancellationToken cancellationToken)
         {
             using (var client = _httpClientFactory.CreateClient("ocr"))
             {
                 var invoice = _context.Invoices.Find(id);
                 invoice.Status = "Processing";
-                _context.SaveChangesAsync(default).Wait();
+                await   _context.SaveChangesAsync(default);
                 
                 var imgfile = Path.Combine(Directory.GetCurrentDirectory(), invoice.AttachmentUrl);
                 
@@ -68,7 +69,7 @@ namespace CleanArchitecture.Razor.Application.Invoices.PaddleOCR
                 var response = client.PostAsJsonAsync<dynamic>("", new { images = new string[] { base64string } }).Result;
                 if(response.StatusCode== System.Net.HttpStatusCode.OK)
                 {
-                    var result = response.Content.ReadAsStringAsync().Result;
+                    var result =await response.Content.ReadAsStringAsync();
                     var ocr_result = JsonSerializer.Deserialize<ocr_result>(result);
                     var ocr_status = "";
                     invoice.Status = "Done";
@@ -128,8 +129,8 @@ namespace CleanArchitecture.Razor.Application.Invoices.PaddleOCR
                         ocr_status = ocr_result.status;
                        
                     }
-                    _context.SaveChangesAsync(default).Wait();
-                    _hubContext.Clients.All.SendAsync(SignalR.OCRTaskCompleted, new { invoiceNo = invoice.InvoiceNo  });
+                   await _context.SaveChangesAsync(cancellationToken);
+                   await  _hubContext.Clients.All.SendAsync(SignalR.OCRTaskCompleted, new { invoiceNo = invoice.InvoiceNo  },cancellationToken);
 
 
 

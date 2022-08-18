@@ -5,12 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CleanArchitecture.Razor.Application.Invoices.PaddleOCR
 {
     public interface IInvoicesOcrJob
     {
-        void Recognition(int id);
+        Task Recognition(int id, CancellationToken cancellationToken);
     }
 }

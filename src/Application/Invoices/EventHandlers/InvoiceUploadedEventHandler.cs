@@ -33,10 +33,10 @@ namespace CleanArchitecture.Razor.Application.Invoices.EventHandlers
         {
             var domainEvent = notification.DomainEvent;
             var id = domainEvent.Item.Id;
-            var item =await _context.Invoices.FindAsync(id);
+            var item =await _context.Invoices.FindAsync(new object[] { id }, cancellationToken);
             item.Status = "Queuing";
             await _context.SaveChangesAsync(cancellationToken);
-            BackgroundJob.Enqueue(()=> _ocr.Recognition(domainEvent.Item.Id));
+            BackgroundJob.Enqueue(()=> _ocr.Recognition(domainEvent.Item.Id, cancellationToken));
 
            
         }
