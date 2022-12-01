@@ -69,7 +69,7 @@ namespace CleanArchitecture.Razor.Infrastructure
             services.Configure<IdentityOptions>(options =>
             {
                 // Default SignIn settings.
-                options.SignIn.RequireConfirmedEmail = true;
+                options.SignIn.RequireConfirmedEmail = false;
                 options.SignIn.RequireConfirmedPhoneNumber = false;
                 // Default Lockout settings.
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
@@ -77,12 +77,13 @@ namespace CleanArchitecture.Razor.Infrastructure
                 options.Lockout.AllowedForNewUsers = true;
             });
             services.ConfigureApplicationCookie(options => {
+                options.ExpireTimeSpan = TimeSpan.FromHours(1);
+                options.SlidingExpiration = true;
                 options.LoginPath = "/Identity/Account/Login";
                 options.LogoutPath = "/Identity/Account/Logout";
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
             });
-            services.Configure<DataProtectionTokenProviderOptions>(opt =>
-                    opt.TokenLifespan = TimeSpan.FromHours(2));
+            services.Configure<DataProtectionTokenProviderOptions>(options => options.TokenLifespan = TimeSpan.FromHours(1));
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("CanPurge", policy => policy.RequireRole("Administrator"));
