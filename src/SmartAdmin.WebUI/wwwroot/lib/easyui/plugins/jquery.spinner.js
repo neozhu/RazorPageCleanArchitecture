@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.10.0
+ * EasyUI for jQuery 1.10.8
  * 
- * Copyright (c) 2009-2021 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2022 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -16,8 +16,8 @@ if(_4.spinAlign=="left"||_4.spinAlign=="right"){
 _4.spinArrow=true;
 _4.iconAlign=_4.spinAlign;
 var _6={iconCls:"spinner-button-updown",handler:function(e){
-var _7=$(e.target).closest(".spinner-arrow-up,.spinner-arrow-down");
-_13(e.data.target,_7.hasClass("spinner-arrow-down"));
+var _7=$(e.target).closest(".spinner-button-top,.spinner-button-bottom");
+_13(e.data.target,_7.hasClass("spinner-button-bottom"));
 }};
 if(_4.spinAlign=="left"){
 _5.unshift(_6);
@@ -70,8 +70,8 @@ if(_4.spinArrow){
 var _10=_3.spinner.find(".spinner-button-updown");
 _10.append("<span class=\"spinner-arrow spinner-button-top\">"+"<span class=\"spinner-arrow-up\"></span>"+"</span>"+"<span class=\"spinner-arrow spinner-button-bottom\">"+"<span class=\"spinner-arrow-down\"></span>"+"</span>");
 }else{
-var _11=$("<a href=\"javascript:;\" class=\"textbox-button spinner-button\"></a>").addClass(_4.clsLeft).appendTo(_3.spinner);
-var _12=$("<a href=\"javascript:;\" class=\"textbox-button spinner-button\"></a>").addClass(_4.clsRight).appendTo(_3.spinner);
+var _11=$("<a href=\"javascript:;\" class=\"textbox-button spinner-button\" tabindex=\"-1\"></a>").addClass(_4.clsLeft).appendTo(_3.spinner);
+var _12=$("<a href=\"javascript:;\" class=\"textbox-button spinner-button\" tabindex=\"-1\"></a>").addClass(_4.clsRight).appendTo(_3.spinner);
 _11.linkbutton({iconCls:_4.reversed?"spinner-button-up":"spinner-button-down",onClick:function(){
 _13(_2,!_4.reversed);
 }});

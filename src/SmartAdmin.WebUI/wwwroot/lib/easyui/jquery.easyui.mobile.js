@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.10.0
+ * EasyUI for jQuery 1.10.8
  * 
- * Copyright (c) 2009-2021 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2022 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -76,7 +76,7 @@ $.mobile._back();
 }
 });
 },nav:function(_c,to,_d,_e){
-if(window.WebKitAnimationEvent){
+if(window.WebKitAnimationEvent||window.AnimationEvent){
 _d=_d!=undefined?_d:$.mobile.defaults.animation;
 _e=_e!=undefined?_e:$.mobile.defaults.direction;
 var _f="m-"+_d+(_e?"-"+_e:"");

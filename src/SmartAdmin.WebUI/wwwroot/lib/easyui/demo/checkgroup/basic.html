@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Basic CheckGroup - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+</head>
+<body>
+	<h2>Basic CheckGroup</h2>
+	<form id="ff">
+		<div class="easyui-panel" style="width:100%;max-width:400px;padding:10px;">
+			<div class="easyui-checkgroup" data-options="name:'check1',data:groupData"></div>
+		</div>
+		<div class="easyui-panel" style="width:100%;max-width:400px;padding:10px;margin-top:10px">
+			<div class="easyui-checkgroup" data-options="name:'check2',data:groupData,dir:'v'"></div>
+		</div>
+	</form>
+	<script>
+		var groupData = [{
+			value:'1',
+			label:'Item1'
+		},{
+			value:'2',
+			label:'Item2',
+			disabled:true
+		},{
+			value:'3',
+			label:'Item3'
+		},{
+			value:'4',
+			label:'Item4'
+		},{
+			value:'5',
+			label:'Item5'
+		}]
+	</script>
+</body>
+</html>

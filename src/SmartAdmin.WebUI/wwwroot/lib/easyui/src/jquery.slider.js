@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.10.0
+ * EasyUI for jQuery 1.10.8
  * 
- * Copyright (c) 2009-2021 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2022 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -179,10 +179,18 @@
 		function setPos(pos, handle){
 			var value = pos2value(target, pos);
 			var s = Math.abs(value % opts.step);
-			if (s < opts.step/2){
-				value -= s;
+			if (value >= 0){
+				if (s < opts.step/2){
+					value -= s;
+				} else {
+					value = value - s + opts.step;
+				}
 			} else {
-				value = value - s + opts.step;
+				if (s < opts.step/2){
+					value += s;
+				} else {
+					value = value + s - opts.step;
+				}
 			}
 			value = fixVal(value);
 			if (opts.range){

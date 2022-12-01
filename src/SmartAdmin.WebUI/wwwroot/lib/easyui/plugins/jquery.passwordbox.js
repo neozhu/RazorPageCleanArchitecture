@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.10.0
+ * EasyUI for jQuery 1.10.8
  * 
- * Copyright (c) 2009-2021 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2022 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -74,7 +74,7 @@ var _16=t.data("passwordbox");
 var _17=t.data("passwordbox").options;
 _16.checking=true;
 _16.value=t.passwordbox("getText");
-(function(){
+(function f(){
 if(_16.checking){
 var _18=t.passwordbox("getText");
 if(_16.value!=_18){
@@ -89,7 +89,7 @@ _7(_15,t.passwordbox("getText"),true);
 _16.lastTimer=undefined;
 },_17.lastDelay);
 }
-setTimeout(arguments.callee,_17.checkInterval);
+setTimeout(f,_17.checkInterval);
 }
 })();
 };

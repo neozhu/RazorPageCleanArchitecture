@@ -317,6 +317,15 @@
 .window .window-footer{
 	top: 0;
 }
+.window.inline{
+	position: absolute;
+}
+.window-mask.inline{
+	position: absolute;
+}
+.drawer.inline{
+	position: absolute;
+}
 .dialog-toolbar{
 	border-width: 0 0 1px 0;
 }

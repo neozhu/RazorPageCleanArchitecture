@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.10.0
+ * EasyUI for jQuery 1.10.8
  * 
- * Copyright (c) 2009-2021 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2022 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -170,10 +170,10 @@ _26.panel("resize",{width:(_27.panelWidth?_27.panelWidth:_25._outerWidth()),heig
 _26.panel("panel").hide();
 _26.panel("open");
 }
-(function(){
+(function f(){
 if(_28.comboTarget==_23&&_26.is(":visible")){
 _26.panel("move",{left:_29(),top:_2a()});
-setTimeout(arguments.callee,200);
+setTimeout(f,200);
 }
 })();
 function _29(){
@@ -334,7 +334,7 @@ _4b(this);
 };
 $.fn.combo.methods={options:function(jq){
 var _53=jq.textbox("options");
-return $.extend($.data(jq[0],"combo").options,{width:_53.width,height:_53.height,disabled:_53.disabled,readonly:_53.readonly});
+return $.extend($.data(jq[0],"combo").options,{width:_53.width,height:_53.height,disabled:_53.disabled,readonly:_53.readonly,editable:_53.editable});
 },cloneFrom:function(jq,_54){
 return jq.each(function(){
 $(this).textbox("cloneFrom",_54);

@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.10.0
+ * EasyUI for jQuery 1.10.8
  * 
- * Copyright (c) 2009-2021 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2022 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -128,10 +128,18 @@ return parseFloat(_21.toFixed(_22));
 function _1f(pos,_23){
 var _24=_25(_18,pos);
 var s=Math.abs(_24%_1a.step);
+if(_24>=0){
 if(s<_1a.step/2){
 _24-=s;
 }else{
 _24=_24-s+_1a.step;
+}
+}else{
+if(s<_1a.step/2){
+_24+=s;
+}else{
+_24=_24+s-_1a.step;
+}
 }
 _24=_20(_24);
 if(_1a.range){

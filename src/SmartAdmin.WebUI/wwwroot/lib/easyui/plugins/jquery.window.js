@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.10.0
+ * EasyUI for jQuery 1.10.8
  * 
- * Copyright (c) 2009-2021 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2022 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -56,7 +56,7 @@ _1(_d);
 function _13(_14){
 var _15=$.data(_14,"window");
 var _16=_15.options;
-var win=$(_14).panel($.extend({},_15.options,{border:false,doSize:true,closed:true,cls:"window "+(!_16.border?"window-thinborder window-noborder ":(_16.border=="thin"?"window-thinborder ":""))+(_16.cls||""),headerCls:"window-header "+(_16.headerCls||""),bodyCls:"window-body "+(_16.noheader?"window-body-noheader ":" ")+(_16.bodyCls||""),onBeforeDestroy:function(){
+var win=$(_14).panel($.extend({},_15.options,{border:false,hasResized:false,doSize:true,closed:true,cls:"window "+(!_16.border?"window-thinborder window-noborder ":(_16.border=="thin"?"window-thinborder ":""))+(_16.cls||""),headerCls:"window-header "+(_16.headerCls||""),bodyCls:"window-body "+(_16.noheader?"window-body-noheader ":" ")+(_16.bodyCls||""),onBeforeDestroy:function(){
 if(_16.onBeforeDestroy.call(_14)==false){
 return false;
 }

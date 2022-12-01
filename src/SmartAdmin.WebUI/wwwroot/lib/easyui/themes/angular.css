@@ -93,6 +93,10 @@
 .f-animate{
     transition: all .3s;
 }
+.f-field{
+	width: 12em;
+	height: 30px;
+}
 
 .scroll-body{
 	overflow: auto;
@@ -567,10 +571,6 @@ eui-menu> .menu-container{
 	position: relative;
 }
 
-.f-field{
-	width: 12em;
-	height: 30px;
-}
 eui-tagbox{
 	width: 12em;
 	height: auto;

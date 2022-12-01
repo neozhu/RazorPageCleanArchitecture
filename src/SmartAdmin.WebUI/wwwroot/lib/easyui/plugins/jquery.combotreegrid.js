@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.10.0
+ * EasyUI for jQuery 1.10.8
  * 
- * Copyright (c) 2009-2021 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2022 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -265,7 +265,7 @@ _1(this);
 };
 $.fn.combotreegrid.methods={options:function(jq){
 var _38=jq.combo("options");
-return $.extend($.data(jq[0],"combotreegrid").options,{width:_38.width,height:_38.height,originalValue:_38.originalValue,disabled:_38.disabled,readonly:_38.readonly});
+return $.extend($.data(jq[0],"combotreegrid").options,{width:_38.width,height:_38.height,originalValue:_38.originalValue,disabled:_38.disabled,readonly:_38.readonly,editable:_38.editable});
 },grid:function(jq){
 return $.data(jq[0],"combotreegrid").grid;
 },setValues:function(jq,_39){
