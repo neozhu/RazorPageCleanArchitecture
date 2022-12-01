@@ -1,6 +1,7 @@
 using System.IO;
 using CleanArchitecture.Razor.Application.Hubs;
 using CleanArchitecture.Razor.Application.Hubs.Constants;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -45,8 +46,8 @@ public static class ApplicationBuilderExtensions
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
-
-        //app.UseWorkflow();
+        app.UseHangfireDashboard("/hangfire/index");
+        app.UseWorkflow();
 
 
         app.UseEndpoints(endpoints =>

@@ -13,6 +13,20 @@ public static class ConfigureServices
         services.AddHealthChecks();
         services.AddDatabaseDeveloperPageExceptionFilter();
         services.AddControllers();
+        services.AddRazorPages(options => {
+            options.Conventions.AddPageRoute("/AspNetCore/Welcome", "");
+        })
+     .AddMvcOptions(options =>
+     {
+         options.Filters.Add<ApiExceptionFilterAttribute>();
+     })    
+    .AddViewLocalization()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;
+
+    })
+    .AddRazorRuntimeCompilation();
         services.AddSignalR();
         return services;
     }

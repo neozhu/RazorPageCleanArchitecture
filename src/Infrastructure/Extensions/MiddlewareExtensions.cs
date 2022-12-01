@@ -10,8 +10,8 @@ internal static class MiddlewareExtensions
 {
     public static IApplicationBuilder UseMiddlewares(this IApplicationBuilder app)
     {
-        app.UseMiddleware<LocalizationCookiesMiddleware>();
-        app.UseMiddleware<ExceptionHandlerMiddleware>();
+        //app.UseMiddleware<LocalizationCookiesMiddleware>();
+        //app.UseMiddleware<ExceptionHandlerMiddleware>();
         return app;
     }
 }

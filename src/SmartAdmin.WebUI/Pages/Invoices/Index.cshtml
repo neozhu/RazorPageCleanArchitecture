@@ -710,7 +710,7 @@
           
         }
     document.addEventListener("DOMContentLoaded", function () {
-
+        console.log(connection);
         if (connection) {
             connection.on("@SignalR.OCRTaskCompleted", function (item) {
                 toastr["info"](`${item.invoiceNo} : @_localizer["OCR job completed."]`);

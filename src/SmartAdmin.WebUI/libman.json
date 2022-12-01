@@ -78,6 +78,16 @@
         "papaparse.js",
         "papaparse.min.js"
       ]
+    },
+    {
+      "library": "@microsoft/signalr@7.0.0",
+      "destination": "wwwroot/lib/microsoft/microsoft/signalr/",
+      "files": [
+        "dist/browser/signalr.js",
+        "dist/browser/signalr.js.map",
+        "dist/browser/signalr.min.js",
+        "dist/browser/signalr.min.js.map"
+      ]
     }
   ]
 }
