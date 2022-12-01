@@ -1,7 +1,7 @@
  <img align="left" width="116" height="116" src="https://raw.githubusercontent.com/jasontaylordev/CleanArchitecture/main/.github/icon.png" />
  
- # Clean Architecture Solution For Razor Pages
-![.NET Core](https://github.com/jasontaylordev/CleanArchitecture/workflows/.NET%20Core/badge.svg) [![Clean.Architecture.Solution.Template NuGet Package](https://img.shields.io/badge/nuget-1.1.1-blue)](https://www.nuget.org/packages/Clean.Architecture.Solution.Template) [![NuGet](https://img.shields.io/nuget/dt/Clean.Architecture.Solution.Template.svg)](https://www.nuget.org/packages/Clean.Architecture.Solution.Template) [![Twitter Follow](https://img.shields.io/twitter/follow/jasontaylordev.svg?style=social&label=Follow)](https://twitter.com/new163cn)
+ # Clean Architecture Solution For Razor Pages .net 7
+
 
 <br/>
 
@@ -9,7 +9,7 @@ This is a solution template for creating a Razor Page App with ASP.NET Core foll
 
 ## Learn about Clean Architecture
 
-[![Clean Architecture with ASP.NET Core 3.0 • Jason Taylor • GOTO 2019](https://img.youtube.com/vi/dK4Yb6-LxAk/0.jpg)](https://www.youtube.com/watch?v=dK4Yb6-LxAk)
+[![Clean Architecture with ASP.NET Core 7.0 • Jason Taylor • GOTO 2019](https://img.youtube.com/vi/dK4Yb6-LxAk/0.jpg)](https://www.youtube.com/watch?v=dK4Yb6-LxAk)
 
 ## Demonstration(http://razor.i247365.net/)
 
@@ -20,8 +20,8 @@ This is a solution template for creating a Razor Page App with ASP.NET Core foll
 ![](/doc/screenshot/result2.png/)
 ## Technologies
 
-* [ASP.NET Core 5](https://devblogs.microsoft.com/aspnet/announcing-asp-net-core-in-net-5/)
-* [Entity Framework Core 5](https://docs.microsoft.com/en-us/ef/core/)
+* [ASP.NET Core 7](https://devblogs.microsoft.com/aspnet/announcing-asp-net-core-in-net-7/)
+* [Entity Framework Core 7](https://docs.microsoft.com/en-us/ef/core/)
 * [SmartAdmin - Responsive WebApp](https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0/)
 * [Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-5.0&tabs=visual-studio)
 * [Jquery EasyUI](https://www.jeasyui.com/)
@@ -39,7 +39,7 @@ Github Sourcecode: https://github.com/neozhu/CleanArchitectureCodeGenerator
 
 The easiest way to get started is to install the [NuGet package](https://www.nuget.org/packages/Clean.Architecture.Solution.Template) and run `dotnet new ca-sln`:
 
-1. Install the latest [.NET 5 SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
+1. Install the latest [.NET 7 SDK](https://dotnet.microsoft.com/download/dotnet/7.0)
 2. Run `dotnet new --install Clean.Architecture.Solution.Template` to install the project template
 3. Create a folder for your solution and cd into it (the template will use it as project name)
 4. Run `dotnet new ca-sln` to create a new project
