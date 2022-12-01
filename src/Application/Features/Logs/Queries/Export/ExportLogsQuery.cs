@@ -1,16 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using CleanArchitecture.Razor.Application.Common.Extensions;
-using CleanArchitecture.Razor.Application.Common.Interfaces;
-using System.Linq.Dynamic.Core;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper.QueryableExtensions;
-using Microsoft.Extensions.Localization;
 using CleanArchitecture.Razor.Application.Features.Logs.DTOs;
 using CleanArchitecture.Razor.Domain.Entities.Log;
 

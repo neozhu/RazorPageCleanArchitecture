@@ -1,14 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using CleanArchitecture.Razor.Application.Common.Interfaces;
-using CleanArchitecture.Razor.Application.Common.Mappings;
-using CleanArchitecture.Razor.Application.Common.Models;
-using CleanArchitecture.Razor.Application.Invoices.DTOs;
-using CleanArchitecture.Razor.Domain.Entities;
-using CleanArchitecture.Razor.Domain.Events;
-using MediatR;
-using Microsoft.Extensions.Localization;
+﻿using CleanArchitecture.Razor.Application.Invoices.DTOs;
 
 namespace CleanArchitecture.Razor.Application.Invoices.Commands.Update
 {

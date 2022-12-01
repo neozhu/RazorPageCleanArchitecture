@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace CleanArchitecture.Razor.Application.Invoices.Commands.Update
+﻿namespace CleanArchitecture.Razor.Application.Invoices.Commands.Update
 {
     public class UpdateInvoiceCommandValidator : AbstractValidator<UpdateInvoiceCommand>
     {

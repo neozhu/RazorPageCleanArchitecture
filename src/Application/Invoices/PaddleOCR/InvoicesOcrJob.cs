@@ -1,23 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-using CleanArchitecture.Razor.Application.Common.Interfaces;
 using CleanArchitecture.Razor.Application.Hubs;
 using CleanArchitecture.Razor.Application.Hubs.Constants;
-using CleanArchitecture.Razor.Domain.Entities;
 using Microsoft.AspNetCore.SignalR;
+using System.Drawing;
 
 namespace CleanArchitecture.Razor.Application.Invoices.PaddleOCR
 {

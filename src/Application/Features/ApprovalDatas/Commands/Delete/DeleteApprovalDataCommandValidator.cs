@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Delete
+﻿namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Delete
 {
     public class DeleteApprovalDataCommandValidator : AbstractValidator<DeleteApprovalDataCommand>
     {

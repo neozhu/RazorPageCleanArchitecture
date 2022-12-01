@@ -1,10 +1,11 @@
-﻿using CleanArchitecture.Razor.Application.Settings;
-using System.Threading.Tasks;
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
-namespace CleanArchitecture.Razor.Application.Common.Interfaces
+using CleanArchitecture.Razor.Application.Settings;
+
+namespace CleanArchitecture.Razor.Application.Common.Interfaces;
+
+public interface IMailService
 {
-    public interface IMailService
-    {
-        Task SendAsync(MailRequest request);
-    }
+    Task SendAsync(MailRequest request);
 }

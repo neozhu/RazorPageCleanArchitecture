@@ -1,8 +1,3 @@
-using System;
-using AutoMapper;
-using CleanArchitecture.Razor.Application.Common.Mappings;
-using CleanArchitecture.Razor.Domain.Entities;
-
 namespace CleanArchitecture.Razor.Application.Invoices.DTOs
 {
     public class InvoiceDto:IMapFrom<Invoice>

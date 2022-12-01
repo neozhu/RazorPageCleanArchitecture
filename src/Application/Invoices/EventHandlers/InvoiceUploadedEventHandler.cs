@@ -1,14 +1,4 @@
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using CleanArchitecture.Razor.Application.Common.Interfaces;
-using CleanArchitecture.Razor.Application.Common.Models;
-using CleanArchitecture.Razor.Domain.Events;
-using MediatR;
-using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
 using Hangfire;
-using System;
 using CleanArchitecture.Razor.Application.Invoices.PaddleOCR;
 
 namespace CleanArchitecture.Razor.Application.Invoices.EventHandlers

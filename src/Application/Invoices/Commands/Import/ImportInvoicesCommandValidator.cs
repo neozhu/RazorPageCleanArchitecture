@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace CleanArchitecture.Razor.Application.Invoices.Commands.Import
+﻿namespace CleanArchitecture.Razor.Application.Invoices.Commands.Import
 {
     public class ImportInvoicesCommandValidator : AbstractValidator<ImportInvoicesCommand>
     {

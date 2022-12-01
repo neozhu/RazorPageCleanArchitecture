@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.AddEdit
+﻿namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.AddEdit
 {
     public class AddEditApprovalDataCommandValidator : AbstractValidator<AddEditApprovalDataCommand>
     {

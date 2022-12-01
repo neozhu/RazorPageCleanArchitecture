@@ -36,7 +36,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Persistence
             _domainEventService = domainEventService;
             _dateTime = dateTime;
         }
-        public DbSet<Serilog> Serilogs { get; set; }
+        public DbSet<Domain.Entities.Log.Serilog> Serilogs { get; set; }
         public DbSet<AuditTrail> AuditTrails { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<DocumentType> DocumentTypes { get; set; }

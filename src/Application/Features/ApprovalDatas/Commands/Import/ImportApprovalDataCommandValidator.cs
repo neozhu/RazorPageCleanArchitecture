@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Import
+﻿namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Import
 {
     public class ImportApprovalDataCommandValidator : AbstractValidator<ImportApprovalDataCommand>
     {

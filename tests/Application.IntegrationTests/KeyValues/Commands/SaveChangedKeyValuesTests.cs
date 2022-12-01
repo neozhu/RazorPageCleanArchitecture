@@ -1,13 +1,9 @@
 using CleanArchitecture.Razor.Application.Common.Exceptions;
-using CleanArchitecture.Razor.Application.KeyValues.Commands.AddEdit;
-using CleanArchitecture.Razor.Application.DocumentTypes.Commands.AddEdit;
 using CleanArchitecture.Razor.Domain.Entities;
 using FluentAssertions;
 using NUnit.Framework;
-using System;
 using System.Threading.Tasks;
 using CleanArchitecture.Razor.Application.KeyValues.Commands.SaveChanged;
-using System.Collections.Generic;
 using CleanArchitecture.Razor.Application.KeyValues.DTOs;
 
 namespace CleanArchitecture.Application.IntegrationTests.KeyValues.Commands

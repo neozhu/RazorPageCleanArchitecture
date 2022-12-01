@@ -1,29 +1,17 @@
-using AutoMapper;
 using CleanArchitecture.Razor.Application.Common.Behaviours;
-using CleanArchitecture.Razor.Application.Common.Interfaces;
-using CleanArchitecture.Razor.Application.Customers.Commands.AddEdit;
-using CleanArchitecture.Razor.Application.Workflow.Approval.Steps;
-using FluentValidation;
-using Hangfire;
-using MediatR;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
 using System.Reflection;
-using WorkflowCore.Interface;
-using WorkflowCore.Models;
-using Hangfire.MemoryStorage;
 using CleanArchitecture.Razor.Application.Invoices.PaddleOCR;
-using Polly;
 using System.Net.Http.Headers;
+using Hangfire;
+using Polly;
+using Hangfire.MemoryStorage;
 
 namespace CleanArchitecture.Razor.Application
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services)
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
@@ -53,7 +41,6 @@ namespace CleanArchitecture.Razor.Application
                 c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             })
             .AddTransientHttpErrorPolicy(policy => policy.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(1000))); ;
-
             return services;
         }
         public static IServiceCollection AddWorkflowSteps(this IServiceCollection services, Func<Type, bool> predicate, params Assembly[] assemblies)

@@ -1,5 +1,3 @@
-using FluentValidation;
-
 namespace CleanArchitecture.Razor.Application.Invoices.Commands.Delete
 {
     public class DeleteInvoiceCommandValidator : AbstractValidator<DeleteInvoiceCommand>

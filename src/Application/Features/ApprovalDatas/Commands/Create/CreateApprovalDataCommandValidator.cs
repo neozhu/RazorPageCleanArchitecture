@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Create
+﻿namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Create
 {
     public class CreateApprovalDataCommandValidator : AbstractValidator<CreateApprovalDataCommand>
     {

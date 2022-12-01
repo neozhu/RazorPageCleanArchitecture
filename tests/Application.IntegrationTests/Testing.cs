@@ -1,4 +1,7 @@
+using CleanArchitecture.Razor.Application;
 using CleanArchitecture.Razor.Application.Common.Interfaces;
+using CleanArchitecture.Razor.Infrastructure;
+using CleanArchitecture.Razor.Infrastructure.Extensions;
 using CleanArchitecture.Razor.Infrastructure.Identity;
 using CleanArchitecture.Razor.Infrastructure.Persistence;
 using MediatR;
@@ -10,7 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using NUnit.Framework;
 using Respawn;
-using SmartAdmin.WebUI;
 using System;
 using System.IO;
 using System.Linq;
@@ -21,11 +23,11 @@ public class Testing
 {
     private static IConfigurationRoot _configuration;
     private static IServiceScopeFactory _scopeFactory;
-    private static Checkpoint _checkpoint;
+    private static Respawner _checkpoint;
     private static string _currentUserId;
 
     [OneTimeSetUp]
-    public void RunBeforeAnyTests()
+    public async void RunBeforeAnyTests()
     {
         var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
@@ -34,17 +36,21 @@ public class Testing
 
         _configuration = builder.Build();
 
-        var startup = new Startup(_configuration);
+        //var startup = new Startup(_configuration);
 
         var services = new ServiceCollection();
 
+
         services.AddSingleton(Mock.Of<IWebHostEnvironment>(w =>
             w.EnvironmentName == "Development" &&
-            w.ApplicationName == "CleanArchitecture.WebUI"));
+            w.ApplicationName == "AdminLTE.WebUI"));
 
-        services.AddLogging();
+        services.AddInfrastructure(_configuration)
+                .AddApplication();
 
-        startup.ConfigureServices(services);
+        //services.AddLogging();
+
+        //startup.ConfigureServices(services);
 
         // Replace service registration for ICurrentUserService
         // Remove existing registration
@@ -59,12 +65,12 @@ public class Testing
 
         _scopeFactory = services.BuildServiceProvider().GetService<IServiceScopeFactory>();
 
-        _checkpoint = new Checkpoint
+        _checkpoint = await Respawner.CreateAsync(_configuration.GetConnectionString("DefaultConnection"), new RespawnerOptions
         {
-            TablesToIgnore = new[] { "__EFMigrationsHistory" }
-        };
+            TablesToIgnore = new Respawn.Graph.Table[] { "__EFMigrationsHistory" }
+        });
 
-        EnsureDatabase();
+        //EnsureDatabase();
     }
 
     private static void EnsureDatabase()
@@ -131,7 +137,7 @@ public class Testing
 
     public static async Task ResetState()
     {
-        await _checkpoint.Reset(_configuration.GetConnectionString("DefaultConnection"));
+        await _checkpoint.ResetAsync(_configuration.GetConnectionString("DefaultConnection"));
         _currentUserId = null;
     }
 
@@ -165,7 +171,12 @@ public class Testing
 
         return await context.Set<TEntity>().CountAsync();
     }
-
+    public static  Task<T> GetRequiredService<T>()
+    {
+        using var scope = _scopeFactory.CreateScope();
+        var service= scope.ServiceProvider.GetRequiredService<T>();
+        return Task.FromResult(service);
+    }
     [OneTimeTearDown]
     public void RunAfterAnyTests()
     {

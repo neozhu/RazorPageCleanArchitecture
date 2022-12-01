@@ -1,14 +1,3 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using CleanArchitecture.Razor.Application.Common.Interfaces;
-using CleanArchitecture.Razor.Application.Common.Models;
-using CleanArchitecture.Razor.Domain.Entities;
-using CleanArchitecture.Razor.Domain.Events;
-using MediatR;
-using Microsoft.Extensions.Localization;
-
 namespace CleanArchitecture.Razor.Application.Invoices.Commands.Upload
 {
     public class UploadInvoicesCommand: IRequest<Result>
@@ -42,7 +31,7 @@ namespace CleanArchitecture.Razor.Application.Invoices.Commands.Upload
         public async Task<Result> Handle(UploadInvoicesCommand request, CancellationToken cancellationToken)
         {
             var imgbase64string = Convert.ToBase64String(request.Data);
-            var result =await _uploadService.UploadAsync(new Models.UploadRequest() { Data = request.Data, FileName = request.FileName, UploadType= Domain.Enums.UploadType.Invoice });
+            var result =await _uploadService.UploadAsync(new UploadRequest() { Data = request.Data, FileName = request.FileName, UploadType= Domain.Enums.UploadType.Invoice });
             var invoice = new Invoice()
             {
                 AttachmentUrl = result,

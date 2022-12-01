@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace CleanArchitecture.Razor.Application.Invoices.Commands.Create
+﻿namespace CleanArchitecture.Razor.Application.Invoices.Commands.Create
 {
     public class CreateInvoiceCommandValidator : AbstractValidator<CreateInvoiceCommand>
     {

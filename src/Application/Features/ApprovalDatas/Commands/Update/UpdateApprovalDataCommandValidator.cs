@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Update
+﻿namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Update
 {
     public class UpdateApprovalDataCommandValidator : AbstractValidator<UpdateApprovalDataCommand>
     {

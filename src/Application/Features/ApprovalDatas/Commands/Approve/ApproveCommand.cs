@@ -1,16 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using CleanArchitecture.Razor.Application.Common.Interfaces;
-using CleanArchitecture.Razor.Application.Common.Mappings;
-using CleanArchitecture.Razor.Application.Common.Models;
-using CleanArchitecture.Razor.Application.Features.ApprovalDatas.DTOs;
-using CleanArchitecture.Razor.Domain.Entities;
-using CleanArchitecture.Razor.Domain.Events;
-using MediatR;
-using Microsoft.Extensions.Localization;
 using WorkflowCore.Interface;
 
 namespace CleanArchitecture.Razor.Application.Features.ApprovalDatas.Commands.Approve

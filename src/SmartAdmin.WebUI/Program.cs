@@ -1,72 +1,131 @@
-using System;
-using System.IO;
-using System.Threading.Tasks;
+using System.Configuration;
+using CleanArchitecture.Razor.Application;
+using CleanArchitecture.Razor.Application.Hubs;
+using CleanArchitecture.Razor.Application.Hubs.Constants;
+using CleanArchitecture.Razor.Infrastructure;
 using CleanArchitecture.Razor.Infrastructure.Identity;
+using CleanArchitecture.Razor.Infrastructure.Localization;
 using CleanArchitecture.Razor.Infrastructure.Persistence;
-using Microsoft.AspNetCore.Hosting;
+using FluentValidation.AspNetCore;
+using Hangfire;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.FileProviders;
 using Serilog;
+using Serilog.Events;
+using SmartAdmin.WebUI;
+using SmartAdmin.WebUI.Filters;
 
-namespace SmartAdmin.WebUI
-{
-    public class Program
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, configuration) =>
+            configuration.ReadFrom.Configuration(context.Configuration)
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
+                .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Error)
+                .MinimumLevel.Override("Serilog", LogEventLevel.Error)
+          .Enrich.FromLogContext()
+          .Enrich.WithClientIp()
+          .Enrich.WithClientAgent()
+          .WriteTo.Console()
+    );
+
+
+builder.Services.AddRazorPageServices(builder.Configuration);
+builder.Services.AddInfrastructureServices(builder.Configuration)
+                .AddApplicationServices()
+                .AddWorkflow(builder.Configuration);
+
+builder.Services.AddRazorPages(options => { 
+        options.Conventions.AddPageRoute("/AspNetCore/Welcome", "");
+     })
+     .AddMvcOptions(options =>
+     {
+         options.Filters.Add<ApiExceptionFilterAttribute>();
+     })
+    .AddFluentValidation(fv =>
     {
-        public static async Task Main(string[] args)
+        fv.DisableDataAnnotationsValidation = true;
+        fv.ImplicitlyValidateChildProperties = true;
+        fv.ImplicitlyValidateRootCollectionElements = true;
+    })
+    .AddViewLocalization()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;
+
+    })
+    .AddRazorRuntimeCompilation();
+
+var app = builder.Build();
+var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Files");
+if (!Directory.Exists(filePath))
+{
+    Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), @"Files"));
+}
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        try
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Files");
-            if (!Directory.Exists(filePath))
+            var context = services.GetRequiredService<ApplicationDbContext>();
+
+            if (context.Database.IsSqlServer())
             {
-                Directory.CreateDirectory(filePath);
-            }
-            var host = CreateHostBuilder(args).Build();
-          
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-
-                try
-                {
-                    var context = services.GetRequiredService<ApplicationDbContext>();
-
-                    if (context.Database.IsSqlServer())
-                    {
-                        context.Database.Migrate();
-                    }
-
-                    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-                    var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
-
-                    await ApplicationDbContextSeed.SeedDefaultUserAsync(userManager, roleManager);
-                    await ApplicationDbContextSeed.SeedSampleDataAsync(context);
-                }
-                catch (Exception ex)
-                {
-                    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-
-                    logger.LogError(ex, "An error occurred while migrating or seeding the database.");
-
-                    throw;
-                }
+                context.Database.Migrate();
             }
 
-            await host.RunAsync();
+            var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+            var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
+
+            await ApplicationDbContextSeed.SeedDefaultUserAsync(userManager, roleManager);
+            await ApplicationDbContextSeed.SeedSampleDataAsync(context);
         }
+        catch (Exception ex)
+        {
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .UseSerilog((context, services, configuration) => configuration
-                    .ReadFrom.Configuration(context.Configuration)
-                    .ReadFrom.Services(services)
-                    .Enrich.FromLogContext()
-                    .WriteTo.Console()
-                    )
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+            logger.LogError(ex, "An error occurred while migrating or seeding the database.");
+
+            throw;
+        }
     }
 }
+else
+{
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Files")),
+    RequestPath = new PathString("/Files")
+});
+app.UseSerilogRequestLogging(options =>
+{
+    options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
+    {
+        diagnosticContext.Set("UserName", httpContext.User?.Identity?.Name ?? string.Empty);
+    };
+});
+app.UseRequestLocalization();
+app.UseRequestLocalizationCookies();
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseWorkflow();
+app.UseHangfireDashboard("/hangfire/index");
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapRazorPages();
+    endpoints.MapHub<SignalRHub>(SignalR.HubUrl);
+});
+
+
+await app.RunAsync();

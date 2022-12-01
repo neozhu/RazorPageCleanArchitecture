@@ -1,5 +1,3 @@
-using System;
-
 namespace SmartAdmin.WebUI.Models
 {
     public class Theme
