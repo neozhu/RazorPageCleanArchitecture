@@ -45,8 +45,8 @@ public class Testing
             w.EnvironmentName == "Development" &&
             w.ApplicationName == "AdminLTE.WebUI"));
 
-        services.AddInfrastructure(_configuration)
-                .AddApplication();
+        services.AddInfrastructureServices(_configuration)
+                .AddApplicationServices();
 
         //services.AddLogging();
 
@@ -130,7 +130,7 @@ public class Testing
             return _currentUserId;
         }
 
-        var errors = string.Join(Environment.NewLine, result.ToApplicationResult().Errors);
+        var errors = string.Join(',',Environment.NewLine, result.ToApplicationResult().Errors);
 
         throw new Exception($"Unable to create {userName}.{Environment.NewLine}{errors}");
     }
