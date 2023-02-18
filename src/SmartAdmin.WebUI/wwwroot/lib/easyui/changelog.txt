@@ -3,10 +3,14 @@ Version 1.10.x
 * Bug
  * slider: The step size is ignored for negative values. fixed.
  * mobile: The animation does not work on some browsers. fixed.
+ * form: The 'dirty' property does not work with check and radio components. fixed.
+ * drawer: The 'onBeforeCollapse' event doesn't fire while collapsing it. fixed.
 * Improvement
  * compatible with strict mode.
  * textbox: Add 'show' and 'hide' methods.
  * textbox: Add 'setEditable' method.
+ * form: Add 'focusOnValidate' property.
+ * menu: Add 'navItems' and 'findItems' methods.
 * New Plugins
  * radiogroup: A set of radio buttons, where no more than one of the buttons can be checked at a time.
  * checkgroup: A set of checkbox components, where one or more options can be checked at a time.

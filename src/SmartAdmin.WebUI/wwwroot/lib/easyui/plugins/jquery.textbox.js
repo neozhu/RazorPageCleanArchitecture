@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.10.8
+ * EasyUI for jQuery 1.10.15
  * 
- * Copyright (c) 2009-2022 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2023 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -573,7 +573,7 @@ $($(this).textbox("label")).hide();
 }};
 $.fn.textbox.parseOptions=function(_70){
 var t=$(_70);
-return $.extend({},$.fn.validatebox.parseOptions(_70),$.parser.parseOptions(_70,["prompt","iconCls","iconAlign","buttonText","buttonIcon","buttonAlign","label","labelPosition","labelAlign",{multiline:"boolean",iconWidth:"number",labelWidth:"number"}]),{value:(t.val()||undefined),type:(t.attr("type")?t.attr("type"):undefined)});
+return $.extend({},$.fn.validatebox.parseOptions(_70),$.parser.parseOptions(_70,["prompt","iconCls","iconAlign","buttonText","buttonIcon","buttonAlign","label","labelPosition","labelAlign","width","height",{multiline:"boolean",iconWidth:"number",labelWidth:"number"}]),{value:(t.val()||undefined),type:(t.attr("type")?t.attr("type"):undefined)});
 };
 $.fn.textbox.defaults=$.extend({},$.fn.validatebox.defaults,{doSize:true,width:"auto",height:"auto",cls:null,prompt:"",value:"",type:"text",multiline:false,icons:[],iconCls:null,iconAlign:"right",iconWidth:26,buttonText:"",buttonIcon:null,buttonAlign:"right",label:null,labelWidth:"auto",labelPosition:"before",labelAlign:"left",inputEvents:{blur:function(e){
 var t=$(e.data.target);

@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.10.8
+ * EasyUI for jQuery 1.10.15
  * 
- * Copyright (c) 2009-2022 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2023 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -381,8 +381,31 @@
 		}
 	}
 	
-	function findItem(target, param){
-		var result = null;
+	// function findItem(target, param){
+	// 	var result = null;
+	// 	var fn = $.isFunction(param) ? param : function(item){
+	// 		for(var p in param){
+	// 			if (item[p] != param[p]){
+	// 				return false;;
+	// 			}
+	// 		}
+	// 		return true;
+	// 	}
+	// 	function find(menu){
+	// 		menu.children('div.menu-item').each(function(){
+	// 			var opts = $(this).data('menuitem').options;
+	// 			if (fn.call(target, opts) == true){
+	// 				result = $(target).menu('getItem', this);
+	// 			} else if (this.submenu && !result){
+	// 				find(this.submenu);
+	// 			}
+	// 		});
+	// 	}
+	// 	find($(target));
+	// 	return result;
+	// }
+
+	function findItems(target, param){
 		var fn = $.isFunction(param) ? param : function(item){
 			for(var p in param){
 				if (item[p] != param[p]){
@@ -391,18 +414,32 @@
 			}
 			return true;
 		}
-		function find(menu){
+		var result = [];
+		navItems(target, function(item){
+			if (fn.call(target, item) == true){
+				result.push(item);
+			}
+		});
+		return result;
+	}
+
+	function navItems(target, cb){
+		var done = false;
+		function nav(menu){
 			menu.children('div.menu-item').each(function(){
-				var opts = $(this).data('menuitem').options;
-				if (fn.call(target, opts) == true){
-					result = $(target).menu('getItem', this);
-				} else if (this.submenu && !result){
-					find(this.submenu);
+				if (done){
+					return;
+				}
+				var item = $(target).menu('getItem', this);
+				if (cb.call(target, item) == false){
+					done = true;
+				}
+				if (this.submenu && !done){
+					nav(this.submenu);
 				}
 			});
 		}
-		find($(target));
-		return result;
+		nav($(target));
 	}
 	
 	function setDisabled(target, itemEl, disabled){
@@ -560,13 +597,22 @@
 			});
 		},
 		findItem: function(jq, text){
+			var result = jq.menu('findItems', text);
+			return result.length ? result[0] : null;
+		},
+		findItems: function(jq, text){
 			if (typeof text == 'string'){
-				return findItem(jq[0], function(item){
+				return findItems(jq[0], function(item){
 					return $('<div>'+item.text+'</div>').text() == text;
 				});
 			} else {
-				return findItem(jq[0], text);
+				return findItems(jq[0], text);
 			}
+		},
+		navItems: function(jq, cb){
+			return jq.each(function(){
+				navItems(this, cb);
+			});
 		},
 		/**
 		 * append menu item, the param contains following properties:

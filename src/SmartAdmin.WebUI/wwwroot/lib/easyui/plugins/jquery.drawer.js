@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.10.8
+ * EasyUI for jQuery 1.10.15
  * 
- * Copyright (c) 2009-2022 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2023 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -23,6 +23,9 @@ _6(_2);
 };
 function _7(_8){
 var _9=$.data(_8,"drawer").options;
+if(_9.onBeforeExpand.call(_8)==false){
+return;
+}
 var _a=$(_8).dialog("dialog").width();
 var _b=$(_8).data("window").mask;
 $(_b).show();
@@ -34,6 +37,9 @@ _9.onExpand.call(_8);
 };
 function _6(_c){
 var _d=$.data(_c,"drawer").options;
+if(_d.onBeforeCollapse.call(_c)==false){
+return;
+}
 var _e=$(_c).dialog("dialog").width();
 $(_c).show().css({display:""}).dialog("dialog").animate({left:_d.region=="east"?"auto":-_e,right:_d.region=="east"?-_e:"auto"},function(){
 $(this).addClass("layout-collapsed");

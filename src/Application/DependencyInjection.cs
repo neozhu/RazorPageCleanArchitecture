@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using Hangfire;
 using Polly;
 using Hangfire.MemoryStorage;
+using MediatR.Pipeline;
 
 namespace CleanArchitecture.Razor.Application
 {
@@ -15,13 +16,19 @@ namespace CleanArchitecture.Razor.Application
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheInvalidationBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
+            services.AddMediatR(config => {
+                config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+                config.AddOpenBehavior(typeof(RequestExceptionProcessorBehavior<,>));
+                config.AddOpenBehavior(typeof(UnhandledExceptionBehaviour<,>));
+                config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
+                config.AddOpenBehavior(typeof(AuthorizationBehaviour<,>));
+                config.AddOpenBehavior(typeof(CachingBehaviour<,>));
+                config.AddOpenBehavior(typeof(CacheInvalidationBehaviour<,>));
+                config.AddOpenBehavior(typeof(PerformanceBehaviour<,>));
+                
+
+            });
+
             services.AddLazyCache();
             services.AddTransient<IInvoicesOcrJob, InvoicesOcrJob>();
             services.AddHangfire(options =>
