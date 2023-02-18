@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.10.8
+ * EasyUI for jQuery 1.10.15
  * 
- * Copyright (c) 2009-2022 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2023 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -33,6 +33,14 @@
 			$.map(opts.dirtyFields, function(f){
 				if ($(f).hasClass('textbox-f')){
 					$(f).next().find('.textbox-value').each(function(){
+						ff.push(this);
+					});
+				} else if ($(f).hasClass('checkbox-f')){
+					$(f).next().find('.checkbox-value').each(function(){
+						ff.push(this);
+					});
+				} else if ($(f).hasClass('radiobutton-f')){
+					$(f).next().find('.radiobutton-value').each(function(){
 						ff.push(this);
 					});
 				} else {
@@ -387,10 +395,14 @@
 	
 	function validate(target){
 		if ($.fn.validatebox){
+			var opts = $.data(target, 'form').options;
 			var t = $(target);
 			t.find('.validatebox-text:not(:disabled)').validatebox('validate');
 			var invalidbox = t.find('.validatebox-invalid');
-			invalidbox.filter(':not(:disabled):first').focus();
+			if (opts.focusOnValidate){
+				invalidbox.filter(':not(:disabled):first').focus();
+			}
+			
 			return invalidbox.length == 0;
 		}
 		return true;
@@ -479,6 +491,7 @@
 		        'datetimespinner','timespinner','numberspinner','spinner',
 		        'slider','searchbox','numberbox','passwordbox','filebox','textbox','switchbutton','radiobutton','checkbox'],
 		novalidate: false,
+		focusOnValidate: true,
 		ajax: true,
 		iframe: true,
 		dirty: false,

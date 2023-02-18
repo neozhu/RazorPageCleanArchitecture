@@ -91,7 +91,7 @@ namespace CleanArchitecture.Razor.Infrastructure.Services
 
                     foreach (var value in result)
                     {
-                        ws.Cell(rowIndex, colIndex++).Value = value;
+                        ws.Cell(rowIndex, colIndex++).Value = value == null ? Blank.Value : value.ToString();
                     }
                 }
                 using (var stream = new MemoryStream())

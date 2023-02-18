@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.10.8
+ * EasyUI for jQuery 1.10.15
  * 
- * Copyright (c) 2009-2022 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2023 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -27,7 +27,19 @@ $(f).next().find(".textbox-value").each(function(){
 ff.push(this);
 });
 }else{
+if($(f).hasClass("checkbox-f")){
+$(f).next().find(".checkbox-value").each(function(){
+ff.push(this);
+});
+}else{
+if($(f).hasClass("radiobutton-f")){
+$(f).next().find(".radiobutton-value").each(function(){
+ff.push(this);
+});
+}else{
 ff.push(f);
+}
+}
 }
 });
 _7=$(_2).find("input[name]:enabled,textarea[name]:enabled,select[name]:enabled").filter(function(){
@@ -335,40 +347,43 @@ $.data(_47,"form",{options:$.extend({},$.fn.form.defaults,$.fn.form.parseOptions
 };
 function _4a(_4b){
 if($.fn.validatebox){
+var _4c=$.data(_4b,"form").options;
 var t=$(_4b);
 t.find(".validatebox-text:not(:disabled)").validatebox("validate");
-var _4c=t.find(".validatebox-invalid");
-_4c.filter(":not(:disabled):first").focus();
-return _4c.length==0;
+var _4d=t.find(".validatebox-invalid");
+if(_4c.focusOnValidate){
+_4d.filter(":not(:disabled):first").focus();
+}
+return _4d.length==0;
 }
 return true;
 };
-function _45(_4d,_4e){
-var _4f=$.data(_4d,"form").options;
-_4f.novalidate=_4e;
-$(_4d).find(".validatebox-text:not(:disabled)").validatebox(_4e?"disableValidation":"enableValidation");
+function _45(_4e,_4f){
+var _50=$.data(_4e,"form").options;
+_50.novalidate=_4f;
+$(_4e).find(".validatebox-text:not(:disabled)").validatebox(_4f?"disableValidation":"enableValidation");
 };
-$.fn.form=function(_50,_51){
-if(typeof _50=="string"){
+$.fn.form=function(_51,_52){
+if(typeof _51=="string"){
 this.each(function(){
 _46(this);
 });
-return $.fn.form.methods[_50](this,_51);
+return $.fn.form.methods[_51](this,_52);
 }
 return this.each(function(){
-_46(this,_50);
+_46(this,_51);
 _42(this);
 });
 };
 $.fn.form.methods={options:function(jq){
 return $.data(jq[0],"form").options;
-},submit:function(jq,_52){
+},submit:function(jq,_53){
 return jq.each(function(){
-_1(this,_52);
+_1(this,_53);
 });
-},load:function(jq,_53){
+},load:function(jq,_54){
 return jq.each(function(){
-_20(this,_53);
+_20(this,_54);
 });
 },clear:function(jq){
 return jq.each(function(){
@@ -397,18 +412,18 @@ return jq.each(function(){
 $(this).form("options").dirtyFields=[];
 });
 }};
-$.fn.form.parseOptions=function(_54){
-var t=$(_54);
-return $.extend({},$.parser.parseOptions(_54,[{ajax:"boolean",dirty:"boolean"}]),{url:(t.attr("action")?t.attr("action"):undefined)});
+$.fn.form.parseOptions=function(_55){
+var t=$(_55);
+return $.extend({},$.parser.parseOptions(_55,[{ajax:"boolean",dirty:"boolean"}]),{url:(t.attr("action")?t.attr("action"):undefined)});
 };
-$.fn.form.defaults={fieldTypes:["tagbox","combobox","combotree","combogrid","combotreegrid","datetimebox","datebox","timepicker","combo","datetimespinner","timespinner","numberspinner","spinner","slider","searchbox","numberbox","passwordbox","filebox","textbox","switchbutton","radiobutton","checkbox"],novalidate:false,ajax:true,iframe:true,dirty:false,dirtyFields:[],url:null,queryParams:{},onSubmit:function(_55){
+$.fn.form.defaults={fieldTypes:["tagbox","combobox","combotree","combogrid","combotreegrid","datetimebox","datebox","timepicker","combo","datetimespinner","timespinner","numberspinner","spinner","slider","searchbox","numberbox","passwordbox","filebox","textbox","switchbutton","radiobutton","checkbox"],novalidate:false,focusOnValidate:true,ajax:true,iframe:true,dirty:false,dirtyFields:[],url:null,queryParams:{},onSubmit:function(_56){
 return $(this).form("validate");
-},onProgress:function(_56){
-},success:function(_57){
-},onBeforeLoad:function(_58){
-},onLoadSuccess:function(_59){
+},onProgress:function(_57){
+},success:function(_58){
+},onBeforeLoad:function(_59){
+},onLoadSuccess:function(_5a){
 },onLoadError:function(){
-},onChange:function(_5a){
+},onChange:function(_5b){
 }};
 })(jQuery);
 
