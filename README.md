@@ -2,7 +2,8 @@
  
  # Clean Architecture Solution For Razor Pages .net 7
 
-
+[![.NET](https://github.com/neozhu/RazorPageCleanArchitecture/actions/workflows/dotnetcore.yml/badge.svg)](https://github.com/neozhu/RazorPageCleanArchitecture/actions/workflows/dotnetcore.yml)
+[![CodeQL](https://github.com/neozhu/RazorPageCleanArchitecture/actions/workflows/codeql.yml/badge.svg)](https://github.com/neozhu/RazorPageCleanArchitecture/actions/workflows/codeql.yml)
 <br/>
 
 This is a solution template for creating a Razor Page App with ASP.NET Core following the principles of Clean Architecture. Create a new project based on this template by clicking the above **Use this template** button or by installing and running the associated NuGet package (see Getting Started for full details). 
