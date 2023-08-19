@@ -26,7 +26,6 @@ builder.Host.UseSerilog((context, configuration) =>
                 .MinimumLevel.Override("Serilog", LogEventLevel.Error)
           .Enrich.FromLogContext()
           .Enrich.WithClientIp()
-          .Enrich.WithClientAgent()
           .WriteTo.Console()
     );
 
