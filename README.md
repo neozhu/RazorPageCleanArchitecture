@@ -16,8 +16,8 @@ This is a solution template for creating a Razor Page App with ASP.NET Core foll
 
 https://commercial.blazorserver.com/
 
-userName: Demo
-Password: 123456
+- userName: Demo
+- Password: 123456
 
 [![Clean Architecture Solution For Razor Page Development](https://github.com/neozhu/RazorPageCleanArchitecture/blob/main/doc/screenshot/2021-08-11_19-28-59.png?raw=true)](https://www.youtube.com/watch?v=RzyctNiJ6gk)
 ![](/doc/screenshot/upload.png)
