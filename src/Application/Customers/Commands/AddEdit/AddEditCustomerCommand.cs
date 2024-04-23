@@ -10,7 +10,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.AddEdit
     {
         public string CacheKey => CustomerCacheKey.GetAllCacheKey;
 
-        public CancellationTokenSource ResetCacheToken => CustomerCacheTokenSource.ResetCacheToken;
+        public CancellationTokenSource SharedExpiryTokenSource => CustomerCacheTokenSource.ResetCacheToken;
     }
 
     public class AddEditCustomerCommandHandler : IRequestHandler<AddEditCustomerCommand, Result<int>>

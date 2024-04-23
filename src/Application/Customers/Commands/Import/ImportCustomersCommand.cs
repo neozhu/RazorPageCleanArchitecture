@@ -13,7 +13,7 @@ namespace CleanArchitecture.Razor.Application.Customers.Commands.Import
         public byte[] Data { get; set; }
         public string CacheKey => CustomerCacheKey.GetAllCacheKey;
 
-        public CancellationTokenSource ResetCacheToken => CustomerCacheTokenSource.ResetCacheToken;
+        public CancellationTokenSource SharedExpiryTokenSource => CustomerCacheTokenSource.ResetCacheToken;
     }
     public class CreateCustomerTemplateCommand : IRequest<byte[]>
     {
