@@ -1,6 +1,6 @@
  <img align="left" width="116" height="116" src="https://raw.githubusercontent.com/jasontaylordev/CleanArchitecture/main/.github/icon.png" />
  
- # Clean Architecture Solution For Razor Pages .net 7
+ # Clean Architecture Solution For Razor Pages .net 8.0
 
 [![.NET](https://github.com/neozhu/RazorPageCleanArchitecture/actions/workflows/dotnetcore.yml/badge.svg)](https://github.com/neozhu/RazorPageCleanArchitecture/actions/workflows/dotnetcore.yml)
 [![CodeQL](https://github.com/neozhu/RazorPageCleanArchitecture/actions/workflows/codeql.yml/badge.svg)](https://github.com/neozhu/RazorPageCleanArchitecture/actions/workflows/codeql.yml)
