@@ -10,7 +10,7 @@ namespace CleanArchitecture.Razor.Application.DocumentTypes.Commands.AddEdit
     {
         public string CacheKey => string.Empty;
 
-        public CancellationTokenSource ResetCacheToken => DocumentTypeCacheTokenSource.ResetCacheToken;
+        public CancellationTokenSource SharedExpiryTokenSource => DocumentTypeCacheTokenSource.ResetCacheToken;
     }
 
     public class AddEditDocumentTypeCommandHandler : IRequestHandler<AddEditDocumentTypeCommand, Result<int>>

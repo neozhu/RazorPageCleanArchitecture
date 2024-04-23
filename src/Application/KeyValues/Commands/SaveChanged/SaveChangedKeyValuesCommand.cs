@@ -12,7 +12,7 @@ namespace CleanArchitecture.Razor.Application.KeyValues.Commands.SaveChanged
 
         public string CacheKey => KeyValueCacheKey.GetAllCacheKey;
 
-        public CancellationTokenSource ResetCacheToken => KeyValueCacheTokenSource.ResetCacheToken;
+        public CancellationTokenSource SharedExpiryTokenSource => KeyValueCacheTokenSource.ResetCacheToken;
     }
 
     public class SaveChangedKeyValuesCommandHandler : IRequestHandler<SaveChangedKeyValuesCommand, Result>

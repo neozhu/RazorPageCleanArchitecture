@@ -11,7 +11,7 @@ namespace CleanArchitecture.Razor.Application.DocumentTypes.Commands.Delete
 
         public string CacheKey => DocumentTypeCacheKey.GetAllCacheKey;
 
-        public CancellationTokenSource ResetCacheToken => DocumentTypeCacheTokenSource.ResetCacheToken;
+        public CancellationTokenSource SharedExpiryTokenSource => DocumentTypeCacheTokenSource.ResetCacheToken;
     }
     public class DeleteCheckedDocumentTypesCommand : IRequest<Result>, ICacheInvalidator
     {
@@ -19,7 +19,7 @@ namespace CleanArchitecture.Razor.Application.DocumentTypes.Commands.Delete
 
         public string CacheKey => DocumentTypeCacheKey.GetAllCacheKey;
 
-        public CancellationTokenSource ResetCacheToken => DocumentTypeCacheTokenSource.ResetCacheToken;
+        public CancellationTokenSource SharedExpiryTokenSource => DocumentTypeCacheTokenSource.ResetCacheToken;
     }
 
     public class DeleteDocumentTypeCommandHandler : IRequestHandler<DeleteDocumentTypeCommand, Result>,
